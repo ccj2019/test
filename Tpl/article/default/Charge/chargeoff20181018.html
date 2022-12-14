@@ -1,0 +1,75 @@
+<script type="text/javascript">var bankimg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";</script>
+<script type="text/javascript">var Himg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Home/";</script>
+<script  type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/recharge.js"></script>
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理体现银行卡-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>线下充值</span>
+                </div>
+                <div class="addyhk zxcz">
+                	<form action="__APP__/Pay/offline" method="post" name="offlinePay" id="offlinePay">
+						<div class="addybox jine">
+							<label for="">充值金额：</label>
+							<input id="money_off" name="money_off" class="text_input" type="text">
+						</div>
+						<div class="clear"></div>
+						<div class="addybox jine">
+							<label for="">入帐银行：</label>
+							<select id="off_bank" name="off_bank" >
+				            <!--<volist name="bank" id="bank">-->
+				          		<option value="{$bank}">{$bank}</option>
+				 			<!--</volist>-->
+				 			</select>
+								(指您往网站指定的哪个银行进行了汇款)
+						</div>
+						<div class="clear"></div>
+						<div class="addybox jine">
+							<label for="">账单流水号：</label>
+							<input id="tran_id" name="tran_id" class="text_input" type="text">
+						</div>
+						<div class="clear"></div>
+						<div class="addybox jine">
+							<label for="">充值方式：</label>
+							<input id="off_way" name="off_way" class="text_input" type="text">(如网银转帐，柜台汇款,汇款人等)
+						</div>
+						<div class="clear"></div>
+					</form>
+					<div class="addybox sub subtxcz" style="margin-top: 50px;">
+                      	<label for=""></label>
+                      	<a href="javascript:void(0)" id="btn_set" onclick="ckoffline()" class="button_input" style="width:100px;">提交充值</a>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+function ckoffline(){
+	var money = parseInt($("#money_off").val());
+	var tran_id = $("#tran_id").val();
+	if(!(money>0)){
+		layer.msg('充值金额必须大于0！');
+		return;
+	}
+	if(tran_id==""){
+		layer.msg('帐单流水号不能为空！');
+		return;
+	}
+	$("#offlinePay").submit();
+}
+</script>

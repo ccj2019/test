@@ -1,0 +1,122 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理我的体验金-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="mytyj">
+                    <div class="title1">
+                        <span>我的体验金</span>
+                    </div>
+                    <div class="tyj1">
+                        <ul>
+                            <li>
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon68.png" alt="">
+                                <div class="lir">
+                                    <span>体验金余额</span> {$money_experience|default="0.00"}
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon69.png" alt="">
+                                <div class="lir">
+                                    <span>体验金总额</span> {$money_experience|default="0.00"}
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon70.png" alt="">
+                                <div class="lir">
+                                    <span>待收利息</span> 0.00
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon71.png" alt="">
+                                <div class="lir">
+                                    <span>已收利息</span> 0.00
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="title1">
+                        <span>我投资的体验标</span>
+                    </div>
+                    <div class="tyj2">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>项目</th>
+                                <th>万元回报</th>
+                                <th>期限</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>还款时间</th>
+                            </tr>
+                        </table>
+                        <notempty name="expborlist">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <volist name="expborlist" id="vo">
+                                <tr>
+                                    <td>{$vo.borrow_name}</td>
+                                    <td>{$vo.borrow_interest_rate}</td>
+                                    <td>{$vo.borrow_duration}天</td>
+                                    <td>{$vo.investor_capital}</td>
+                                    <td><if condition="$vo.status eq 1">投资中<elseif condition="$vo.status eq 4" />出售中<elseif condition="$vo.status eq 5"/>已回款</else></if></td>
+                                    <td><if condition="$vo.deadline neq 0">{$vo.deadline|date="Y-m-d H:i:s",###}</if></td>
+                                </tr>
+                                </volist>
+                            </table>
+                        <else />   
+                            <div class="zanwu">
+                                <p>暂无记录</p>
+                                <a href="/invest/">去投体验标</a>
+                            </div>
+                        </notempty>
+                    </div>
+                    <div class="title1">
+                        <span>体验金领取记录</span>
+                    </div>
+                    <div class="tyj2">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>体验金类型</th>
+                                <th>金额</th>
+                                <th>有效时间（起）</th>
+                                <th>有效时间（止）</th>
+                            </tr>
+                        </table>
+                        <notempty name="experienctList">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <volist name="experienctList" id="vo">
+                                <tr>
+                                    <td>{$typeArr[$vo['type']]}</td>
+                                    <td>{$vo.money_experience}</td>
+                                    <td>{$vo.start_time|date="Y-m-d H:i:s",###}</td>
+                                    <td>{$vo.end_time|date="Y-m-d H:i:s",###}</td>
+                                </tr>
+                                </volist>
+                            </table>
+                        <else />   
+                            <div class="zanwu">
+                                <p>暂无记录</p>
+                            </div>
+                        </notempty>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

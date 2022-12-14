@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户注册-- {$glo.web_name}</title>
+<include file="default:Public:_header_common" group="Home"/>
+<include file="default:Public:_header_common" group="Member"/>
+<script type="text/javascript">
+var imgpath="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";
+var curpath="__URL__";
+</script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/Validform_min.js"></script>
+</head>
+<body>
+<include file="default:Public:_header_main" group="Home"/>
+<div style="clear:both;"></div>
+<div class="mem21">
+   <div class="mem21-1">
+    <span class="mem_spec103">账户注册</span>
+    <span class="mem_spec104">已有帐号?<a href="/member/common/login/">立即登录</a></span>
+   </div>   
+   <div class="mem21-5">
+      <ul>
+          <li><span style="color:#ff7200;">填写账户信息</span></li>
+            <li><span style="padding-left:100px;color:#ff7200;">验证账户信息</span></li>
+            <li style="text-align:right;color:#ff7200;width:100px !important; margin-left:170px;">注册账户成功</li>
+            <div style="clear:both;"></div>
+        </ul>
+   </div>
+   <div class="mem21-3">
+      <form action="" method="get">
+          <table border="0" cellspacing="0" cellpadding="0" width="100%" height="120">
+              <tr>
+                <td width="43%" rowspan="2" align="right"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/mem34.jpg" /></td>
+                <td width="57%" class="mem_spec117">{$Think.session.u_user_name},恭喜您注册成功！</td>
+                
+              </tr>
+              <tr>
+                <td><span class="mem_spec118"><a href="{:U('charge/index')}#chip-1">立即充值</a></span><span class="mem_spec119"><a href="/Member">进入我的账户</a></span>&nbsp;&nbsp;<span class="mem_spec119"><a href="/member/verify?id=1#chip-3">实名认证</a></span>&nbsp;&nbsp;<span class="mem_spec119"><a href="/Member/vip/index.html#chip-1">申请VIP</a></span></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="mem_spec120">您的信息通过加密保护，传输安全</td>
+              </tr>
+            </table>
+        </form>
+   </div>
+</div>
+<include file="default:Public:_footer" group="Home"/>
+</body>
+</html>

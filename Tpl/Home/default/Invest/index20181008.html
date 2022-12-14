@@ -1,0 +1,98 @@
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<div class="zczq">
+    <div class="zczqtop">
+        <div class="container">
+            <div class="zcbox">
+                <div class="zcbl">项目类型：</div>
+                <div class="zcbr">
+                    <a href="{$strUrl}&borrow_type=0" class="borrow_type0">全部</a>
+                      <volist name=":getProCat()" id="vo">
+                          <a href="{$strUrl}&borrow_type={$vo.id}"  class="borrow_type{$vo.id}">{$vo.type_name}</a>
+                      </volist>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="zcbox">
+                <div class="zcbl">所属行业：</div>
+                <div class="zcbr">
+                    <a href="{$strUrl}&borrow_hy=0" class="act">全部</a>
+                    <a href="{$strUrl}&borrow_hy=1">农资</a>
+                    <a href="{$strUrl}&borrow_hy=2">农副产品</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="zcbox">
+                <div class="zcbl">项目状态：</div>
+                <div class="zcbr">
+                    <a  href="{$strUrl}&borrow_status=0" class="borrow_status0">全部</a>
+                    <a  href="{$strUrl}&borrow_status=1" class="borrow_status1">预热中</a>
+                    <a  href="{$strUrl}&borrow_status=2" class="borrow_status2">众筹中</a>
+                    <a  href="{$strUrl}&borrow_status=6" class="borrow_status6">已成功</a>
+                    <a  href="{$strUrl}&borrow_status=7" class="borrow_status7">已分红</a> 
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="zczqbot">
+        <div class="container">
+            <!-- <volist name="list.list" id="vb"> -->
+            <div class="zcqbox">
+                <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+                    <h2>{$vb.borrow_name|cnsubstr=###,16}</h2>
+                    <div class="con">
+                        <p>目标众筹：￥{$vb.borrow_money|getMoneyFormt=###}元</p>
+                        <p>已筹金额：￥{$vb.has_borrow|getMoneyFormt=###}元</p>
+                    </div>
+                    <div class="proce">
+                        <div class="pro">
+                            <div class="prow" style="width:{$vb.progress}%"></div>
+                        </div>
+                        <div class="prob">
+                            众筹进度<span>{$vb.progress}%</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="prob">
+                            万元回报收益<span>{$vb.borrow_interest_rate}</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="prob">
+                            项目期限<span>{$vb.borrow_duration}天</span>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                    <div class="time">发标时间：{$vb.add_time|date='Y-m-d',###}</div>
+                    <div class="zt">
+                        <if condition="$vb.start_time gt time()">                         
+                            预热中
+                        <elseif condition="$vb.borrow_status eq 2" />
+                            立即支持              
+                        <else />
+                            项目完成               
+                        </if> 
+                    </div>
+                </a>
+            </div>
+            <!-- </volist> -->
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="number" style="background:none">
+        {$list.page}
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){      
+      $(".borrow_type{$borrow_type|default=0}").addClass("act");      
+      $(".borrow_status{$borrow_status|default=0}").addClass("act");
+      $(".orderby{$orderby|default=''}").addClass("act");
+    });
+</script>

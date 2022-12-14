@@ -1,0 +1,145 @@
+<include file="Public:headern" />
+<script type="text/javascript" src="/Public/new/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/tfgg/tfInvst.css?v=123" />
+<div class="tfBannerBox" style="margin-top: 0;">
+	<volist name=":get_ad(37)" id='voa' key="i">
+		<a href="{$voa.url}"><img src="../{$voa.img}" class='tfBanner <if condition="$i eq 1">active</if>'></a>
+	</volist>
+
+	<div class="tfBannerDianBox">
+		<volist name=":get_ad(37)" id='voa' key="i">
+			<div class='tfBannerDian <if condition="$i eq 1">active</if>'></div>
+		</volist>
+	</div>
+</div>
+<div class="tfInvstBox1">
+	<a href="__URL__/xmlist/type/1.html">
+	<div class="tfInvstBox1Div3" style="width: 295px;     margin-right: 23px;background: url(__PUBLIC__/cpublic/image/ycyz.jpg);">
+		渔场养殖
+	</div></a>
+	<div class="tfInvstBox1Div2">
+		<div class="tfInvstBox1Div2Title1">SEARCH</div>
+		<div class="tfInvstBox1Div2Title1" style="position: relative;">POPULAR ITEMS</div>
+		<div class="tfInvstBox1Div2SearchBox">
+			<input type="search" name="search" placeholder="搜索项目">
+		</div>
+		<img class="sousuojiantou" id="ss" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAZCAYAAAA14t7uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGySURBVHgBrZU/UsJAFMbfC/inUTlCRnDGEm4AJ1B0KOj0BlBI7AglWMANsBaY4AnQG1haOLhHyFgBIXm+3UlmGAbBJfma7G7efPnyy9sNgIYeh9lna5id/KfWAA0RwhVfitYgZ++q1TMOsKUGSE02L26rRdCUNTrvcvQaAbiY8gvtshCb6rQSSx0bAaemD06UoaXh1PpmJhHjVlm44B2W+V1dRMwfnRrNRIyl2tVPAQGW1YSxNAbntUSMlXnl642QbDVBbD68XORX72t/vHWFfV3kThHzn6DQu2dUECNxpOOUL5EIRmIenqT60bpKbDmmCTFEi1Qe09AHggw/oMWYbLRGWblwB0mKsCRRZCBxLc/SsDio04E3hjhCMpHQDmfjdkW8xu4KKcbpMM5rZiDAC0rtqhCxu0KddMoU3MhUrqchhhrDrEwZbmmyI1OpvVFYzqUJgTfhtCYR9TqVaX31/v4oQlPJdd10b2Pexr3IVHLdVKONojHK1ZCoK8eB4RefbsR7bGPF1fe+5ViebJ3baeuvWj0U/sIJR+NtplJ7tJviWt9VpWfMv6T5bOZGZ+42/QIuO69PwtrpDwAAAABJRU5ErkJggg==">
+	</div>
+<a href="__URL__/xmlist/type/2.html">
+	<div class="tfInvstBox1Div3" style="width: 313px;background: url(__PUBLIC__/cpublic/image/hymc.jpg);">
+		海洋牧场
+	</div>
+</a>
+	<a href="__URL__/xmlist/type/3.html">
+	<div class="tfInvstBox1Div4" style="background: url(__PUBLIC__/cpublic/image/hsyc.jpg);">
+		海上渔船
+	</div></a>
+	<div class="tfInvstBox1Div5"></div>
+	<a href="__URL__/xmlist/type/4.html">
+	<div class="tfInvstBox1Div6"  style="background: url(__PUBLIC__/cpublic/image/hxsg.jpg);">
+		海鲜收购
+	</div>
+	</a>
+</div>
+<div class="tfInvstBox2">
+	<div class="tfInvstBox2Bg"></div>
+</div>
+<div class="tfInvstBox2ListBox">
+<volist name="yzlist" id="vo">
+
+
+	<a href="__APP__/invest/detail/id/{$vo.id}.hmtl">
+	<div class="tfInvstBox2ListBoxList">
+		<if condition="$vo.borrow_status eq 2">
+			<div class="fenleiBoxtf hong">热销</div>
+			<div class="shangpinSuoLue tflistimgsuolue" style="background-image: url({$vo.borrow_img});">
+				<div class="dajiliBox">距结束
+					<span class="cui-timer" data-config = '["endtime":"{$vo.endtimes|date="Y-m-d H:i:s",###}","msec":false]'></span></div>
+			</div>
+
+		</if>
+		<if condition="$vo.borrow_status eq 1">
+			<div class="fenleiBoxtf huang">预热</div>
+			<div class="shangpinSuoLue tflistimgsuolue" style="background-image: url({$vo.borrow_img});">
+				<div class="dajiliBox">距开始
+					<span class="cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'></span>
+				</div>
+			</div>
+		</if>
+
+
+		<div class="tfInvstBox2ListBoxListMain">
+			<div class="tfInvstBox2ListBoxListMainTitle1">
+		   {$vo.borrow_name}
+			</div>
+			<div class="tfInvstBox2ListBoxListMainTitle2">周期 {$vo.borrow_duration}个月</div>
+			<div style="margin-top: 10px;">
+				<div class="tfInvstBox2ListBoxListMainTitle3">可购买{$vo.fenshu}份</div>
+			</div>
+			<div class="tfInvstBox2ListBoxListMainTitle4">
+				<div style="color: #FF1A1A;">￥<span style="font-size: 40px;">{$vo.borrow_min}</span></div>
+				<if condition="$vo.borrow_status eq 1">
+					<div class="tfInvstBox2Button">去预览</div>
+				</if>
+				<if condition="$vo.borrow_status eq 2">
+					<div class="tfInvstBox2Button qianggou">
+						<div style="line-height: 34px;">去抢购</div>
+						<div class="tfJinDuTiaoBox">
+							<div class="tfjinduKeZi">
+								<div class="tfjinduNei" style="width: {$vo.progress}%;"></div>
+							</div>
+							{$vo.progress}%
+						</div>
+					</div>
+				</if>
+			</div>
+		</div>
+	</div>
+	</a>
+</volist>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+
+	$(function(){
+		$('.cui-timer').Cuitimer();
+	});
+
+	var tfBannerIndex = 0;
+	var tfBannerStatus = true;
+	//鼠标经过切换轮播图
+	$('.tfBannerDianBox').on('mouseover', '.tfBannerDian', function() {
+		tfBannerStatus = false;
+		$('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq($(this).index()).addClass(
+			'active');
+		$('body').find('.tfBanner').removeClass('active').eq($(this).index()).addClass('active');
+		tfBannerIndex = $(this).index()
+	})
+	$('.tfBannerDianBox').on('mouseout', '.tfBannerDian', function() {
+		tfBannerStatus = true;
+	})
+	//定时轮播Banner
+	setInterval(function() {
+		if (tfBannerStatus) {
+			tfBannerIndex++;
+			if (tfBannerIndex + 1 > $('body').find('.tfBanner').length) {
+				tfBannerIndex = 0
+			}
+			$('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq(tfBannerIndex).addClass(
+				'active');
+			$('body').find('.tfBanner').removeClass('active').eq(tfBannerIndex).addClass('active');
+		}
+	}, 5000)
+
+	$('#ss').on('click',function(){
+		var search = $('input[name="search"]').val();//搜索的文字
+		location.href = '__URL__/xmlist?name='+search;
+	})
+
+</script>
+<include file="Public:footern" />

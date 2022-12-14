@@ -1,0 +1,174 @@
+<include file="default:Public:header" />
+<!--内容部分-->
+<div class="box navls">
+	<span>
+		<a href="{:U('/member')}">
+			会员中心
+		</a>
+	</span>
+    <span>
+		&gt;
+	</span>
+    <span>
+		<a href="{:U('withdraw/withdraw')}">
+			我的提现
+		</a>
+	</span>
+</div>
+<div class="box clearfix">
+    <include file="default:Public:_left" />
+    <div class="tabvbox">
+        <div class="tabv clearfix">
+            <div class="on">
+                <a href="__APP__/Member/withdraw/withdraw">
+					<span>
+						我要提现
+					</span>
+                </a>
+            </div>
+            <div>
+                <a href="__APP__/member/withdraw/withdrawlog">
+					<span>
+						提现记录
+					</span>
+                </a>
+            </div>
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <!--充值记录-->
+                <div class="bgbx">
+                    <div class="Czhi">
+                        <p>
+							<span>
+							</span>
+                            请输入您要提现的金额，以及正确无误的银行帐号信息。
+                        </p>
+                        <p>
+							<span>
+							</span>
+                            我们将在3个工作日（双休日和法定节假日除外）之内，将钱转入您指定的银行帐号 。
+                        </p>
+                        <p>
+							<span>
+							</span>
+                            在双休日和法定节假日期间，用户可申请取现，但暂不处理，需要等恢复正常上班之后才进行处理。不便之处，请多多谅解！
+                        </p>
+                    </div>
+                    <!--付款部分-->
+                    <div class="myzil" style="width: 450px;">
+                        <ul>
+                            <li>
+								<span>
+									账户余额：
+								</span>
+                                <p>
+                                    {$va}元
+                                </p>
+                            </li>
+                            <li>
+								<span>
+									提现金额：
+								</span>
+                                <input type="text" id="money" name="money" value="" placeholder="请输入提现金额"
+                                />
+                                <p class="tixj">
+                                    提现后可用余额
+                                    <span id="zeng">
+										¥{$va}
+									</span>
+                                </p>
+                            </li>
+                            <li>
+								<span>
+									开户行：
+								</span>
+                                <p>
+                                    {$vo.bank_name}
+                                </p>
+                            </li>
+                            <li>
+								<span>
+									开户名：
+								</span>
+                                <p>
+                                    {$vo.real_name}
+                                </p>
+                            </li>
+                            <li>
+								<span>
+									卡号：
+								</span>
+                                <p>
+                                    {$vo.bank_num|hidecard=###,3,''}
+                                </p>
+                            </li>
+                            <li>
+								<span>
+									支付密码：
+								</span>
+                                <input type="password" name="pwd" id="pwd" />
+                                <p class="tixj1">
+                                    忘记密码？
+                                    <a href="##">
+                                        点这里
+                                    </a>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="tixj">
+                                    <button class="bcxsz1 isbutton">
+                                        申请提现
+                                    </button>
+                                </p>
+                            </li>
+                            <!--投资类型-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".isbutton").click(function() {
+        var money = $('#money').val();
+        var pwd = $('#pwd').val();
+        $.ajax({
+            url: "/index.php/Member/withdraw/actwithdraw",
+            type: "post",
+            dataType: "json",
+            data: {
+                "amount": money,
+                "pwd": pwd,
+            },
+            success: function(data) {
+                layer.msg(data.message, {
+                        shift: -1
+                    },
+                    function() {
+                        window.location.reload();
+                    });
+                console.log(data.status);
+            },
+            error: function(e) { // alert("网络错误，请重试！！");  		       }   		 });	 })
+
+</script>
+<script>
+    $('#money').bind('input propertychange',
+        function() {
+            var vara = Number({
+                $va
+            }) - Number($('#money').val());
+            if (vara > 0) {
+                $("#zeng").text(vara.toFixed(2));
+            } else {
+                $("#money").val({
+                    $va
+                });
+                $("#zeng").text(0);
+                layer.msg("你的提现金额超出了您的余额")
+            }
+        });
+</script>
+<include file="default:Public:footer" />

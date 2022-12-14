@@ -1,0 +1,670 @@
+<include file="Public:header" />
+<script type="text/javascript" src="/Public/new/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+<style type="text/css">
+	.tfBox {
+		width: 940px;
+		margin: 50px auto;
+		min-width: 940px;
+	}
+	body {
+		background: #fff;
+	}
+	.tfDetailTopBox{
+		overflow: hidden;
+	}
+	.tfDetailTopBoxLeftImgBox{
+		width:400px;
+		float: left;
+	}
+	.tfDetailTopBoxRightBox{
+		width: 499px;
+		float: right;
+	}
+	.tfDetailTopBoxLeftImgBoxImg{
+		background-size: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.tfDetailTopBoxLeftImgBoxViewImg1{
+		width: 400px;
+		height: 400px;
+	}
+	.tfDetailTopBoxLeftImgBoxViewImg2{
+		width: 50px;
+		height: 50px;
+	}
+	.tfDetailTopBoxLeftImgBoxImgBBox{
+		overflow: hidden;
+		margin-top: 20px;
+		padding-left: 25px;
+		box-sizing: border-box;
+	}
+	.tfDetailTopBoxLeftImgBoxViewImg2{
+		border: 1px solid #fff;
+		margin-right: 11px;
+		float: left;
+	}
+	.tfDetailTopBoxLeftImgBoxViewImg2.active{
+		border: 1px solid #4969F2;
+	}
+	.tfDetailTopBoxRightBoxTitle1{
+		font-size: 18px;
+		line-height: 25px;
+		height: 25px;
+		color: #333333;
+	}
+	.tfDetailTopBoxRightBoxTitle2{
+		margin-top: 10px;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999999;
+	}
+	.jindutiaoBox{
+		background-color: #f1f1f1;
+		background-image: url('data:image/png;base64,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');
+		width: 100%;
+		height: 60px;
+		background-size: 100% 100%;
+		margin-top: 20px;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+	.yishengBox{
+		padding: 0 10px;border-radius: 50px;background-color: rgba(73, 105, 242, 0.41);color: #fff;
+	}
+	.jindutiao{
+		width: 146px;
+		height: 6px;
+		border-radius: 50px;
+		overflow: hidden;
+		background-color: #fff;
+		margin-right: 12px;
+	}
+	.jindutiaonei{
+		height: 6px;
+		width: 50%;
+		background: linear-gradient(321.69deg, #4481EB 0%, #04BEFE 100%);
+		border-radius: 10px;
+	}
+	.daojishiBox{
+		font-size: 14px;
+		line-height: 20px;
+		color: #4969F2;
+		margin-right: 30px;
+	}
+	.daojishiBox>span{
+		background: linear-gradient(321.69deg, #4481EB 0%, #04BEFE 100%);
+		border-radius: 2px;
+		color: #fff;
+		margin: 0 2px;
+		padding: 0 2px;
+	}
+	.tfDetailTopBoxRightBoxTitle3{
+		margin-top: 21px;
+		left: 22px;
+	}
+	.yujishuangheng{
+		margin-top: 21px;
+		height: 50px;
+		line-height: 50px;
+		box-sizing: border-box;
+		font-size: 14px;
+		color: #939494;
+		border-top: 1px solid #EEEEEE;
+		border-bottom: 1px solid #EEEEEE;
+	}
+	.yujishuangheng>div{
+		margin-left: 60px;
+		float: left;
+	}
+	.tfDetailTopBoxRightBoxTitle4Box{
+		font-size: 14px;
+		line-height: 25px;
+		letter-spacing: -0.408px;
+		color: #939494;
+		margin-top: 41px;
+	}
+	.tfDetailTopBoxRightBoxTitle4Box span{
+		padding: 0 10px;
+		color: #969696;
+		border: 1px solid #939494;
+		box-sizing: border-box;
+		margin-left: 10px;
+		margin-right: 2px;
+	}
+	.lijigoumai{
+		width: 230px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		color: #fff;
+		font-size: 18px;
+		letter-spacing: -0.408px;
+		background: linear-gradient(321.69deg, #4481EB 0%, #04BEFE 100%);
+		margin-top: 37px;
+		cursor: pointer;
+		-moz-user-select:none; /*火狐*/
+		-webkit-user-select:none; /*webkit浏览器*/
+		-ms-user-select:none; /*IE10*/
+		-khtml-user-select:none; /*早期浏览器*/
+		user-select:none;
+	}
+	.lijigoumai:hover{
+		background: linear-gradient(321.69deg, #04BEFE 0%, #4481EB 100%);
+	}
+	.tfBottomBox{
+		width: 100%;
+		border: 1px solid #C4C4C4;
+		box-sizing: border-box;
+		margin-top: 67px;
+	}
+	.tfBottomBoxMenuBox{
+		height: 50px;
+		display: flex;
+		align-items: center;
+	}
+	.tfBottomBoxMenuBox>div{
+		width: 110px;
+		line-height: 50px;
+		position: relative;
+		padding-left: 24px;
+		box-sizing: border-box;
+		margin-right: 60px;
+		cursor: pointer;
+	}
+	.tfBottomBoxMenuBox>div::before{
+		content: '';
+		height: 18px;
+		width: 1px;
+		background-color: #000;
+		position: absolute;
+		top: 50%;
+		right: -20px;
+		transform: translateY(-50%);
+	}
+	.tfBottomBoxMenuBox>div.active{
+		color: #4969F2;
+	}
+	.tfBottomBoxMenuBox>div.active::after{
+		content: '';
+		position: absolute;
+		bottom: 0;
+		top: auto;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background-color: #4969F2;
+		transform: translateY(0);
+	}
+	.tfNeirongBox{
+		display: none;
+		overflow: hidden;
+	}
+	.l-Xmzchi{
+		width: 210px;
+		height: 80px;
+		background: #FFFFFF;
+		border: 1px solid #DADADA;
+		box-sizing: border-box;
+		border-radius: 4px;
+		margin-right: 8px;
+		font-size: 12px;
+		padding: 8px;
+		line-height: 20px;
+	}
+	.l-Xmzchi img{
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		margin-right: 9px;
+	}
+	.tfNeirongBox img{
+		max-width:100%
+	}
+</style>
+<?php $borrow_img=explode(',',$binfo['content_img'])?>
+<div class="tfBox">
+	<div class="tfDetailTopBox">
+		<div class="tfDetailTopBoxLeftImgBox">
+			<div class="tfDetailTopBoxLeftImgBoxImg  tfDetailTopBoxLeftImgBoxViewImg1" style="background-image: url({$borrow_img[0]});"></div>
+			<div class="tfDetailTopBoxLeftImgBoxImgBBox">
+				<volist name="borrow_img" id="vo" key="key">
+					<div class="tfDetailTopBoxLeftImgBoxImg  tfDetailTopBoxLeftImgBoxViewImg2 <?php echo $key == 1?'active':''; ?>" style="background-image: url({$vo});"></div>
+				</volist>
+			</div>
+		</div>
+		<div class="tfDetailTopBoxRightBox">
+			<div class="tfDetailTopBoxRightBoxTitle1">{$binfo.borrow_name}</div>
+			<div class="tfDetailTopBoxRightBoxTitle2">周期 {$binfo.borrow_duration} 个月</div>
+			<div class="jindutiaoBox">
+				<div style="color: #333;font-size: 14px;">
+					<if condition="$binfo.borrow_status eq 2">
+					正在热销中
+					<span class="yishengBox">还剩{$binfo.fenshu}份</span>
+					<span style="color: #4969F2;float: right;margin-right: 56px;">距结束仅剩</span>
+
+					<else/>
+						<span class="yishengBox">还剩{$binfo.fenshu}份</span>
+					</if>
+
+				</div>
+				<div style="display: flex;align-items: center;color: #4969F2;font-size: 14px;margin-top: 5px;justify-content: space-between;">
+					<div class="jindutiao">
+						<div class="jindutiaonei" style="width: {$binfo.progress}%;"></div>
+					</div>
+					<div style="flex: 1;">已购{$binfo.progress}%</div>
+					<div class="daojishiBox">
+						<!-- 1天<span>23</span>时<span>49</span>分<span>01</span>秒 -->
+						<if condition="$binfo.borrow_status eq 2">
+							<span class="cui-timer" data-config = '["endtime":"{$binfo.endtimes|date="Y-m-d H:i:s",###}","msec":false]'></span>
+						<else/>
+							{$binfo.zhuangtai}
+						</if>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="tfDetailTopBoxRightBoxTitle3">
+				价格：<span style="color: rgb(255,26,26);">￥<font style="font-size: 22px;">{$binfo.borrow_min}</font> <span style="font-size: 12px;">认购价</span></span>
+			</div>
+			<div class="yujishuangheng">
+				<div>预计销售价：<font style="color: rgb(255,154,20);">￥{$binfo.borrow_min}/份</font></div>
+				<div>预计收购时间：<font style="color: rgb(255,154,20);">{$binfo.sg_time|date="Y-m-d",###} </font></div>
+			</div>
+			<if condition="$binfo.is_huodong eq 1">
+				<div class="yujishuangheng" style="border-top: none;margin-top: 0px;">
+					<div>赠品：{$binfo.zpname},认购满{$binfo.huodongnum}元送一份 </div>
+				</div>
+			</if>
+
+
+			<div class="tfDetailTopBoxRightBoxTitle4Box">
+				预计总份数<span>{$binfo.zongfenshu}</span>份
+			</div>
+<if condition="$binfo.borrow_status eq 2">
+	<a href="/invest/is_order?id={$binfo.id}&money={$binfo.borrow_min}"><div class="lijigoumai">立即购买</div></a>
+</if>
+			<if condition="$binfo.borrow_status eq 6">
+				<a href="javascript:;"><div class="lijigoumai">认购结束</div></a>
+			</if>
+
+
+		</div>
+	</div>
+	<div class="tfBottomBox">
+		<div class="tfBottomBoxMenuBox">
+			<div class="active">商品详情</div>
+			<div>购买明细</div>
+			<div>商品动态</div>
+			<div>订购合同</div>
+		</div>
+		<div style="padding: 20px;box-sizing: border-box;display: block;" class="tfNeirongBox">
+			{$binfo.borrow_info}
+		</div>
+
+		<div style="padding: 20px;box-sizing: border-box;" class="tfNeirongBox">
+			<div style="padding: 20px 0 20px 15px;background: #F8F8F8;overflow: hidden;">
+				<volist name="investinfo" id="vi">
+					<div class="l-Xmzchi">
+						<img src="{$vi.user_img|default='/public/wap/img/w-car-con.jpg'}" alt="" />
+						<div>
+							<div>
+								{$vi.user_name|mb_substr=###,0,1,'utf-8'}***
+							</div>
+							<div style="color: #999999;"><span style="color: red;">{$vi.investor_capital|Fmoney=###}</span></div>
+							<div style="color: #999999;"> <span style="color: #000;">
+								{$vi.add_time|date="Y-m-d H:i:s",###}
+								<!--{$vi['investor_capital']/$binfo['borrow_min']|default='1'}份-->
+
+							</span></div>
+						</div>
+					</div>
+				</volist>
+			</div>
+		</div>
+
+		<div style="padding: 20px;box-sizing: border-box;" class="tfNeirongBox">
+
+
+			<style type="text/css">
+				.SlideIcon{
+					margin-top: 25px;
+					width: 750px;
+				}
+				.SlideIcon .swiper-slide{
+					width: 100%;
+					display: block;
+					height: 100%;
+				}
+				.SlideIcon .swiper-slide a{
+					display: block;
+				}
+				.SlideIcon .swiper-slide a img{
+					width: 100%;
+					display: block;
+				}
+			</style>
+
+
+				<volist name="dynamiclist" id="vb">
+				<div class="clearfix l-a1">
+					<div class="l-Xmtime">
+						<p>{$vb.add_time|date='Y-m-d',###}</p>
+						<p>{$vb.add_time|date='H:i:s',###}</p>
+						<if condition="$vb.uid eq $UID">
+
+							<p><br>
+								<a href="__URL__/delxmjd/id/{$vb.id}"  onClick="return confirm('确定删除?');" style="color:#00a0ea;">删除</a>
+								<a href="__URL__/detailxg/id/{$vb.id}" style="color:#00a0ea;">修改</a>
+							</p>
+
+						</if>
+					</div>
+					<div class="l-Xmut">
+						<span class="l_Yuan"><img src="__PUBLIC__/web/img/xiangmu/quan1.png" alt="" />{$vb.typename}</span>
+						<p>{$vb.dycomment}</p>
+
+						<?php if(!empty($vb['imgs'])){   ?>
+
+						<div class="SlideIcon">
+							<div class="swiper-container tz-gallery"  id="swiper1">
+								<div class="swiper-wrapper" id="swiper-wrapper">
+
+									<?php
+                                    $volistimg=explode(",",$vb['imgs']);
+                                    foreach($volistimg as $k=>$v){
+									?>
+									<div class="swiper-slide">
+										<a href="{$v}">
+											<img src="{$v}" class="ToImg" alt="Park">
+
+										</a>
+									</div>
+
+									<?php }?>
+
+								</div>
+								<div class="swiper-button-prev"></div>
+
+								<div class="swiper-button-next"></div>
+
+							</div>
+
+
+						</div>
+						<?php }?>
+						
+						</div>
+					</div>
+
+
+				</volist>
+
+
+				<script>
+					baguetteBox.run('.tz-gallery');
+					var mySwiper = new Swiper('.l-Xmut .SlideIcon .swiper-container', {
+
+						observer:true,//修改swiper自己或子元素时，自动初始化swiper
+						observeParents:true,
+						navigation: {
+							nextEl: '.l-Xmut .SlideIcon .swiper-button-next',
+							prevEl: '.l-Xmut .SlideIcon .swiper-button-prev',
+						},
+						slidesPerView : 5,
+						spaceBetween : 20,
+					});
+				</script>
+				<if condition="$binfo.borrow_uid eq $UID">
+					<!--增加弹窗-->
+					<div class="clearfix l-a2">
+						<div class="btn-Gxdt">
+							更新动态
+						</div>
+					</div>
+				</if>
+
+		</div>
+
+		<div style="padding: 20px;box-sizing: border-box;" class="tfNeirongBox">
+				{$article_category.art_content}
+		</div>
+		</div>
+	</div>
+	<script>
+		var interval;
+		var time = new Date('2020/12/20 10:10:10').getTime()*1 - new Date().getTime()*1;//结束时间
+		// 鼠标经过切换大图
+		$('.tfDetailTopBoxLeftImgBoxViewImg2').on('mouseover',function(){
+			$('.tfDetailTopBoxLeftImgBoxViewImg2').removeClass('active').eq($(this).index()).addClass('active');
+			$('.tfDetailTopBoxLeftImgBoxViewImg1')[0].style.backgroundImage=this.style.backgroundImage
+		})
+		//点击切换详情、明细、合同
+		$('.tfBottomBoxMenuBox>div').on('click',function(){
+			$('.tfNeirongBox').hide().eq($(this).index()).show();
+			$('.tfBottomBoxMenuBox>div').removeClass('active').eq($(this).index()).addClass('active')
+		})
+		// 倒计时转换
+		function getDuration(my_time) {  
+		  var days    = my_time / 1000 / 60 / 60 / 24;
+		  var daysRound = Math.floor(days);
+		  var hours = my_time / 1000 / 60 / 60 - (24 * daysRound);
+		  var hoursRound = Math.floor(hours);
+		  var minutes = my_time / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound);
+		  var minutesRound = Math.floor(minutes);
+		  var seconds = my_time / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound);
+		  return [
+			  parseInt(daysRound)>=0?parseInt(daysRound):0,
+			  parseInt(hoursRound)>=0?parseInt(hoursRound):0,
+			  parseInt(minutesRound)>=0?parseInt(minutesRound):0,
+			  parseInt(seconds)>=0?parseInt(seconds):0
+		  ];
+		}
+		// function daojishi(e){
+		// 	interval = setInterval(function(){
+		// 		var arr = getDuration(time);
+		// 		$('.daojishiBox').html(arr[0]+'天<span>'+(arr[1]>=10?arr[1]:'0'+arr[1])+'</span>时<span>'+(arr[2]>=10?arr[2]:'0'+arr[2])+'</span>分<span>'+(arr[3]>=10?arr[3]:'0'+arr[3])+'</span>秒');
+		// 		time-=1000
+		// 	},1000)
+		// }
+		// daojishi(time);
+	</script>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('.cui-timer').Cuitimer();
+	});
+</script>
+<div class="dome-1" style="background:#fff; z-index: 9999;">
+	<form action="" method="get">
+		<div class="dome-2">
+			<div class="dome-2bt">
+				<span>更新动态 </span><img src="__PUBLIC__/web/img/xiangmu/guanb.png" class="l-hide"/>
+			</div>
+			<div class="dome-3">
+				<p>
+					<span>动态内容:</span><textarea name="dycomment" id="dycomment" rows="" cols=""></textarea>
+				</p>
+				<div>
+					<span style="float: left;">动态图片：</span><div  id="btn1"style="background: url(/Public/web/img/l-tupianshangc.png) center center / 100% 100% no-repeat;
+    background-size: 100% 100%;   width: 60px;
+    height: 60px;
+    resize: none;
+    outline: none;
+    border: 1px solid #DEDEDE;
+    border-radius: 5px;float: left;margin-left: 350px;"></div>
+					<div id="ul_pics1" style="clear:left"></div>
+					<div  style="clear:left"></div>
+				</div>
+
+
+				<p>
+					<span>项目阶段:</span>
+					<select name="typename" id="typename">
+						<option value="货款发放" selected="selected">货款发放</option>
+						<option value="产品动态">产品动态</option>
+						<option value="商户回购">商户回购</option>
+						<option value="交易完成">交易完成</option>
+					</select>
+				</p>
+				<div style="margin: 0 auto; display: table; padding-top: 30px;">
+					<div class="btn-Gxdt1" onclick="subdynamic()">保存</div>
+					<div class="btn-Gxdt2">取消</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__PUBLIC__/web/js/plupload/plupload.full.min.js"></script>
+<script type="text/javascript">
+
+
+	var uploader2 = new plupload.Uploader({
+		runtimes: 'html5,flash,silverlight,html4',
+		browse_button: 'btn1',
+		url:  "/Borrow/zhao",
+		flash_swf_url: '__PUBLIC__/web/js/plupload/Moxie.swf',
+		silverlight_xap_url: '__PUBLIC__/web/js/plupload/Moxie.xap',
+		filters: {
+			max_file_size: '5000kb',
+		},
+		multi_selection: false,
+		init: {
+			FilesAdded: function(up, files) {
+
+
+				var li = '';
+				plupload.each(files, function(file) {
+					li += "<div id='b2" + file['id'] + "' style='float:left;padding-left: 10px;padding-right: 10px;'></div>";
+				});
+				$("#ul_pics1").append(li);
+				uploader2.start();
+
+
+
+
+			},
+			UploadProgress: function(up, file) {
+				layer.load();
+			},
+			FileUploaded: function(up, file, info) {
+				layer.closeAll();
+				var data = eval("(" + info.response + ")");
+				if (data.error == 1) {
+					layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+						time:2000,
+						end:function(){
+							//$(".dome-1").hide();
+							//  location.reload();
+						}
+					});
+				} else {
+					$("#b2" + file.id).css('width','100px').html("<img height='100' width='100' src='" + data.pic + "'/><input name='imgs[]' class='imgs' type='hidden' value='" + data.pic + "'/>");
+				}
+			},
+			Error: function(up, err) {
+				layer.closeAll();
+				layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+					time:2000,
+					end:function(){
+						//$(".dome-1").hide();
+						// location.reload();
+					}
+				});
+			}
+		}
+	});
+	uploader2.init();
+</script>
+<script type="text/javascript">
+
+	function subcomment(){
+
+		//2.通过jq获得input数组
+		var $inputArr = $('.imgs');//length = 3
+		//3.循环处理input,并定义结果集
+		var result = [];
+		var srt = '';
+		$inputArr.each(function(){
+			//4.将每个input的值放进结果集
+			result.push($(this).val());
+			srt+=$(this).val()+',';
+		});
+
+		//5.打印结果
+		console.log(srt);
+
+		var comment = $("#comment").val();
+		var borrow_id = {$binfo.id};
+		if(comment == ''){
+			layer.msg('评论内容不能为空');
+			return false;
+		}
+		$.ajax({
+			url: "__URL__/addcomment",
+			data: {"comment":comment,"tid":borrow_id},
+			timeout: 5000,
+			cache: false,
+			type: "post",
+			dataType: "json",
+			success: function (d, s, r) {
+				if(d){
+					if(d.status==1){
+						layer.alert('发表成功', 1,!1);
+					}else{
+						layer.msg(d.message);
+					}
+				}
+			}
+		});
+	}
+	function subdynamic(){
+		var $inputArr = $('.imgs');//length = 3
+		//3.循环处理input,并定义结果集
+		var result = [];
+		var srt = '';
+		var srtzz=1
+		$inputArr.each(function(){
+			//4.将每个input的值放进结果集
+			result.push($(this).val());
+			if(srtzz==1){
+				srt+=$(this).val();
+			}else{
+				srt+=','+$(this).val();
+			}
+
+			srtzz++
+		});
+
+		var dycomment = $("#dycomment").val();
+		var typename = $("#typename").val();
+		var borrow_id = {$binfo.id};
+		if(dycomment == ''){
+			layer.msg('动态内容不能为空');
+			return false;
+		}
+		$.ajax({
+			url: "__URL__/adddynamic",
+			data: {"dycomment":dycomment,"tid":borrow_id,"typename":typename,imgs:srt},
+			timeout: 5000,
+			cache: false,
+			type: "post",
+			dataType: "json",
+			success: function (d, s, r) {
+				if(d){
+					if(d.status==1){
+						layer.alert('更新成功',4,function(){
+							window.location.reload();
+						});
+					}else{
+						layer.msg(d.message);
+					}
+				}
+			}
+		});
+	}
+	</script>
+<!--底部-->
+<include file="Public:footer" />

@@ -1,0 +1,80 @@
+<include file="default:Public:header" />
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+	.queren-btn{
+		margin-top: 10px;background: #ff6520; border-radius: 10px;
+	}
+	
+</style>
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+<!-- 引入组件 -->
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+<!--导航结束-->
+<div class="box l-a4 clearfix">
+	<div class="fl-box" style="margin-left: 20px">
+		{$vo.art_content}
+	</div>
+	<div class="fr-box" id="la4">
+		<div class="fr-box1" style="margin-right: 20px">	
+			<!--/Public/upload/1542805128_72.jpeg-->
+			<img src="{$vo.art_img}"/>
+			<h3>{$vo.title}</h3>
+			<p>所属类别：{$vo.type_name}</p>
+			<div class="clearfix">
+				<p class="fl">所需积分：{$vo.art_jifen} 积分/份</p>
+		        <div class="fr">	
+		        	<a>	
+			         	<van-stepper v-model="value" />
+			         </a>
+		        </div>					
+			</div>
+			<p>兑换人数：{:getbuynum($vo["id"])}人</p>
+			<p>余量：{$vo.art_writer}份</p>
+			<div class="queren-btn" onclick="doSubmitForm()" style="margin-top: 10px;background: #ff6520; border-radius: 10px;">
+				立即兑换
+			</div>
+		<script>
+			function doSubmitForm(){
+				var num=$('.van-stepper__input').val();
+				//再次修改input内容
+				if({$vo.art_writer}>num){
+				    	window.location.href="/Shop/shop_is_order?id={$vo.id}&sun="+num;
+				}else{
+				    alert("库存余量不足");
+				}
+			
+				//form.submit();
+			}
+		</script>
+		</div>	
+
+		<!--热门好礼-->
+		<div class="lRmhaol">		
+           	<p>	热门好礼</p>
+           	<volist name="buylist" id="vb">
+	           	<div class="lRmhaol2">
+		           	<a href="/Shop/shop_show?id={$vo['id']}">
+		           		<img src="{$vo.art_img}" alt="" />
+		           	</a>
+		        </div>
+		    </volist>
+		</div>
+		
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" />
+<script>
+	var step = new Vue({
+		data: {
+			value: 0
+		},
+		menthods: {
+
+		}
+	}).$mount('#la4')
+</script>

@@ -1,0 +1,308 @@
+ 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<script type="text/javascript">var bankimg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";</script>
+<script type="text/javascript">var Himg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Home/";</script>
+<script  type="text/javascript" src="/Public/wap/js/recharge.js"></script>
+
+      <!--  <link rel="stylesheet" href="/Public/wap/css/layer.css">
+        <script type="text/javascript" src="/Public/wap/js/layer.js"></script> -->
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:history.back();"  class="l-fanhui on">&lt;返回</a><span>扫码付</span>
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a><!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+		<span style="font-size: .35rem;">充值流程：填写金额>><b style="color:red;">扫码充值</b>>>提交回单</span>
+</div>
+		
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">充值金额&nbsp;&nbsp;&nbsp;¥{$money_off}</p>
+			    <?php $u_id = session("u_id") ;?>
+				 
+			<input  name="user_id" type="hidden" class="je2-1" value="{$u_id}" />
+
+			<p class="l-yhp2">
+</p>
+
+<p class="l-yhp1">
+			
+							保存付款码用支付宝、微信、农行app识别<br> <br> 
+
+
+
+			</p> 
+
+	<img src="__PUBLIC__/cpublic/image/smf.jpg" style="width:80%; margin-left:10%; float:none;">
+			<p class="l-yhp1">
+				
+<br> 
+温馨提示：<br> 
+
+<span  style="color:red;font-size:0.35rem;"> 1.充值金额必须与扫码付金额相同，否则会导致充值金额无法到账<br> </span>
+2. 扫码充值时间日9:00-17:30，审核到账时间约为5分钟。<br> 
+3. 非工作时间扫码充值的，工作人员将在工作时间统一处理到您账户。<br> 
+4. 非工作时间请尽量使用在线支付和线下支付。<br> 
+5. 使用微信、支付宝扫码支付，关于充值上限请联系微信、支付宝客服详询。<br> 
+6. 如有疑问，请联系在线客服。
+
+
+
+			</p> 
+
+
+<form action="__URL__/dosaoma" method="post" name="smfline" id="smfline" enctype="multipart/form-data">
+<input  name="money_off" type="hidden" value="{$money_off}" />
+<input  name="yz" type="hidden" value="{$yz}" />
+<div class="l_imgboxup">
+<p>上传充值凭证</p>
+			
+		<div class="l-imgup">
+			  <input type=file name="doc" id="doc" onchange="imgChange1('z_photo','z_file');"  >
+<!-- 
+        <input type=file  name="doc" id="doc" onchange="javascript:setImagePreview();">-->
+        <img id="fileIMg" src="/Public/wap/img/l-tupianshangc.png"/>
+    	<img id="fileIMgHiddeen" style="display: none" src="/Public/wap/img/loading.gif"/>
+        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+	
+		</div>			 
+    	<p class="l-fr l-imgboxp">支持jpg、jpeg、png、gif格式
+大小不超过2.0MB，点击图片替换</p>	 
+
+
+				
+			</div>
+
+<div class="l-qurena" id="sub1" style="margin-top: .2rem;margin-bottom: .5rem;">
+			 确认 
+</div>
+
+</form>
+
+<form action="__URL__/dosaomawx" method="post" name="smflinewx" id="smflinewx"  enctype="multipart/form-data">
+
+<input  name="money_off" type="hidden" value="{$money_off}" />
+<input  name="yz" type="hidden" value="{$yz}" />
+<div class="l_imgboxup">
+<p>上传充值凭证</p>
+			
+		<div class="l-imgup">
+		
+	<!-- 	<input type=file name="doc" id="doc"  class="uploadImage"> -->
+		<!--    <button class="uploadImage" type="button" id="vote_pic"></button> -->
+      <!--   <img id="fileIMg" src="/Public/wap/img/l-tupianshangc.png" /> -->
+        <img id="tupian" src="/Public/wap/img/l-tupianshangc.png">
+    
+        <div id="localImag"><img  class="uploadImage" id="preview" width=-1 height=-1 style="diplay:none" /></div>
+	
+		</div>			 
+    	<p class="l-fr l-imgboxp">支持jpg、jpeg、png、gif格式
+大小不超过2.0MB，点击图片替换</p>	 
+
+
+		<input id="way_img" type="hidden" name="serverId" class="a2">
+
+			</div>
+
+<div class="l-qurena" id="sub1wx" style="margin-top: .2rem;margin-bottom: .5rem;">
+			 确认 
+</div>
+
+</form>
+
+
+		</div>	
+		
+<script type="text/javascript">
+	var browser = {
+    versions: function () {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {         //移动终端浏览器版本信息
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+            iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+        };
+    }(),
+    language: (navigator.browserLanguage || navigator.language).toLowerCase()
+}
+
+
+  if (browser.versions.mobile) {
+          var ua = navigator.userAgent.toLowerCase();
+          if (ua.match(/MicroMessenger/i) == "micromessenger"){
+
+			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+			  	$("#smfline").css("display","block");
+           		$("#smflinewx").css("display","none");
+			} else if (/(Android)/i.test(navigator.userAgent)) {   //判断Android
+
+				$("#smfline").css("display","none");
+	           	$("#smflinewx").css("display","block");
+	           	wx.config({
+			        //debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			        appId: '{$signPackage.appId}',// 必填，公众号的唯一标识
+			        timestamp: {$signPackage.timestamp}, // 必填，生成签名的时间戳
+			        nonceStr: '{$signPackage.nonceStr}',// 必填，生成签名的随机串
+			        signature: '{$signPackage.signature}',// 必填，签名
+			        jsApiList: [
+			            'chooseImage',
+			            'previewImage',
+			            'uploadImage',
+			            'downloadImage'
+			        ]// 必填，需要使用的JS接口列表
+			    });
+
+			    wx.ready(function () {
+			      $(".uploadImage").click(function(){
+			            wx.chooseImage({
+			                count: 1, // 默认9
+			                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			                success: function (res) {
+			                    
+						    	var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			                    $("#tupian").attr("src",localIds.toString())
+
+			                    setTimeout(function(){
+			                        wx.uploadImage({
+			                            localId: localIds.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+			                            isShowProgressTips: 1, // 默认为1，显示进度提示
+			                            success: function (res) {
+			                                var serverId = res.serverId; // 返回图片的服务器端ID
+			                               // $("#tupian").attr("src",serverId)
+			                                // $(".a1").val(localIds);
+			                                $(".a2").val(serverId);
+			                            }
+			                        });
+			                    },100);
+
+						    // } 
+			                }
+			            });
+			        })
+
+			        $('#sub1wx').click(function() {
+						this.disabled = true;
+				 		//borrow_img
+				 
+				 		if($('#way_img').val()==""){
+				 			alert("你未提交图片")
+							this.disabled = false;
+				 			return false;
+				 		}
+				 		//alert(2);
+				 		// if($('#money_off').val()<100){
+				 		// 	alert("充值金额不能小于100")
+							// this.disabled = false;
+				 		// 	return false;
+				 		// }
+				 		//return false;
+				 		$('#smflinewx').submit();
+				 	})
+			    });
+			}
+          }else{
+           	$("#smfline").css("display","block");
+           	$("#smflinewx").css("display","none");
+          }
+  }else{
+  	    $("#smfline").css("display","block");
+        $("#smflinewx").css("display","none");
+        // alert("请在微信打开链接！");
+  }
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+	$('#sub1').click(function() {
+		this.disabled = true;
+ 		//borrow_img
+ 		if(typeof($('#way_img').val())==="undefined"){
+ 			alert("你未提交图片")
+			this.disabled = false;
+ 			return false;
+ 		}
+ 		// if($('#money_off').val()<100){
+ 		// 	alert("充值金额不能小于100")
+			// this.disabled = false;
+ 		// 	return false;
+ 		// }
+ 		//return false;
+ 		$('#smfline').submit();
+ 	})
+
+		function imgChange1() {
+        	 
+        	
+      			 var form = new FormData(document.getElementById("smfline"));  
+      			 var stv ='<div class="clear" id="localImag"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+      			 	 
+      			 $("#fileIMg").css("display","none");
+      			 $("#fileIMgHiddeen").css("display","block");
+//					()
+			      $.ajax({  
+			      url:"/Wap/Borrow/zhao",  
+			      type:"post",  
+			      data:form,  
+			      cache: false,  
+			      processData: false,  
+			      contentType: false, 
+			      //async: false,
+			      success:function(data){ 
+						console.log(data);
+			 
+			 		  data=	JSON.parse(data);
+						console.log(data);
+						
+					if(data.status==1){
+						var stv2 =' <input class="fl borrow_img" type="hidden" id="way_img" name="way_img" value="'+data.message+'">'
+						$("#fileIMgHiddeen").css("display","none");
+						$("#fileIMg").css("display","block");
+						$("#way_img").remove();
+							$("#fileIMg").attr("src",data.message);
+							$("#fileIMg").addClass("delete");
+							 $("#smfline").append(stv2);
+			           		 
+			           		}else{
+						alert(data.message);
+					}
+						
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });
+			      		
+        	 
+				 
+      	  	}  
+
+</script>
+
+
+
+	
+	</body>
+      
+
+</html>

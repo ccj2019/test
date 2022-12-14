@@ -1,0 +1,840 @@
+<script src="/Public/web/js/rili.js"></script>
+<style type="text/css">
+	.opt .tt {
+		border-bottom: 1px solid #D2D2D2;
+		padding-bottom: 15px;
+	}
+	.changeImage {
+	    position: relative;
+	}
+	.Calendar {
+    padding-bottom: 40px;
+	    
+	}
+	.changeImage i{
+	   position: absolute;
+	   width: 27px;
+	   height: 27px;
+	   top: -6px;
+       right: -5px;
+	 
+	   background: url(/Public/web/img/dgimg.png) no-repeat right top;
+    background-size: 20px;
+	}
+</style>
+<style>
+    body {
+        background: #f8f8f8;
+    }
+    .bgxmlis>div{
+        width:25% !important;
+        text-align: center;
+        padding-left: 0px !important;
+        margin-left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:48px;
+    }
+    .tou1>span{
+        width:25% !important;
+        text-align: center;
+        padding-left: 0px;
+        margin-left: 0px !important;
+    }
+</style>
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>签到</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabvbox2">
+			<div class="opt">
+				<div class="tt clearfix">
+					<div class="tx fl">
+						<img src="{$minfo.user_img|default='/public/web/img/zuixinzixun/tx.png'}" alt="">
+					</div>
+					<div class="med fl clearfix">
+						<div class="name">
+							<p>尊敬的<span>{$Think.session.u_user_name}</span>，您好~</p>
+						</div>
+						<div class="phone">
+							<ul class="clearfix">
+								{$minfo.id|getVerify=###}
+							</ul>
+						</div>
+					</div>
+					<div class="cz fl">
+							<a href="{:U('charge/index')}">充值</a>
+					</div>
+					<div class="qd fl">
+						<a href="__APP__/member/capital/qiandao">
+							签到</a>
+					</div>
+				</div>
+				<!--标记-->
+				<div class="HkBji clearfix">		
+				   	<ul>
+					   	<li><span class="lisp1"></span>已回款</li>
+					   	<li><span class="lisp2"></span>待回款</li>
+					   	<li><span class="lisp3"></span>选中日期</li>
+					   	<li><span class="lisp4"></span>今日日期</li>
+				   	</ul>
+				</div>
+				<!--签到-->
+				<div class="Calendar">
+					<div id="toyear" class="flex flex-pack-center">
+						<div id="idCalendarPre">&lt;</div>
+						<div class="year-month">
+							<span id="idCalendarYear">{:date('Y')}</span>年<span id="idCalendarMonth">{:date('m')}</span>月
+						</div>
+						<div id="idCalendarNext">&gt;</div>
+					</div>
+					<table border="1px" cellpadding="0" cellspacing="0">
+						<thead>
+							<tr class="tou">
+								<td>日</td>
+								<td>一</td>
+								<td>二</td>
+								<td>三</td>
+								<td>四</td>
+								<td>五</td>
+								<td>六</td>
+							</tr>
+						</thead>
+						<tbody id="idCalendar">
+						</tbody>
+					</table>
+				</div>
+				<div id="signIn">	
+				   {$yi}
+				</div>
+				<!--进度tioa-->	
+				<!--签到进度条-->
+				<div class="clearfix l_qdtxt">
+					<div class="fl l_qdjbimg"><img src="/Public/web/img/huiyuan/zhanghu/liwu.png"/>签到福利</div>
+					<div class="fr l_qdjbimg1">
+					  	<?php echo date("m",time());?>月已签到<span id="sign-count">1</span>天
+					</div> 			
+				</div>
+				<div>
+					<ul class="l_libox clearfix" style="padding: 0;">
+						<li>1元优惠券</li>
+						<li>2000积分</li>
+						<li>8元优惠券</li>
+						<li>10000积分</li>
+						<li>20元优惠券</li>
+						
+					</ul>
+				</div>
+				<!--
+				myday.length
+				-->
+				
+			
+				<div class="l_jdbox clearfix">
+					<div class="l_jindut">
+						<div class="l_jindut on"></div>
+						<img src="/Public/web/img/huiyuan/tu1.png" alt="" />
+					</div>
+				</div>
+				<div class="clearfix">
+					<ul class="l_libox" style="padding: 0;">
+						<!--<li>   <if condition="$ling eq 1"> -->
+      <!--			<span class="qdao1z">领取</span>-->
+      <!--			<elseif condition="$ling gt 1"/>-->
+      <!--			<span class="已领取">已领取</span>-->
+      <!--				<else/>-->
+      <!--				01天-->
+      <!--    </if>-->
+          	
+          <!--<span class="领取">已领取</span>--></li>
+      <!--		<li> <if condition="$ling eq 7"> -->
+      <!--				<span class="qdao1z">领取</span>-->
+      <!--			<elseif condition="$ling gt 7"/>-->
+      <!--			<span class="领取">已领取</span>-->
+      <!--			<else/>-->
+      <!--			 07天-->
+      <!--    </if></li>-->
+      <!--		<li> <if condition="$ling eq 14"> -->
+      <!--				<span class="qdao1z">领取</span>-->
+      <!--			<elseif condition="$ling gt 14"/>-->
+      <!--			<span class="领取">已领取</span>-->
+      <!--				<else/>-->
+      <!--				14天-->
+      <!--    </if> </li>-->
+      <!--		<li> <if condition="$ling eq 21"> -->
+      <!--				<span class="qdao1z">领取</span>-->
+      <!--			<elseif condition="$ling gt 21"/>-->
+      <!--			<span class="领取">已领取</span>-->
+      <!--			<else/>-->
+      <!--			21天-->
+      <!--    </if></li>-->
+      <!--		<li> <if condition="$ling eq 30">-->
+      <!--				<span class="qdao1z">领取</span>-->
+      <!--			<elseif condition="$ling gt 30"/>-->
+      <!--			<span class="领取">已领取</span>-->
+      <!--				<else/>30天-->
+      <!--    </if></li>-->
+      			<li>   
+      		    <if condition="$ling1 eq 1"> 
+          			<span class="qdao1z ling1">领取</span>
+          			<elseif condition="$ling1 eq 2"/>
+          			<span class="已领取">已领取</span>
+          				<else/>
+          				1天
+                </if>
+          	</li>
+      		<li>  
+      		<if condition="$ling2 eq 1"> 
+      			<span class="qdao1z ling2">领取</span>
+      			<elseif condition="$ling2 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/> 7天
+          </if>
+          </li>
+      		<li>  
+      		<if condition="$ling3 eq 1"> 
+      			<span class="qdao1z ling3">领取</span>
+      			<elseif condition="$ling3 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/>
+      				14天
+          </if> </li>
+      		<li> 
+      		<if condition="$ling4 eq 1"> 
+      			<span class="qdao1z  ling4">领取</span>
+      			<elseif condition="$ling4 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/>
+      			21天
+          </if></li>
+      		<li>  
+      			    <if condition="date('m',time()) eq 2"> 
+      		    <if condition="$ling5 eq 1"> 
+      		    	<span class="qdao1z  ling5">领取</span>
+      			<elseif condition="$ling5 eq 2"/>
+      			    <span class="已领取">已领取</span> 
+                <else/>28天 
+                </if> 
+      				<else/> <if condition="$ling5 eq 1"> 
+                  			<span class="qdao1z  ling5">领取</span>
+                  			<elseif condition="$ling5 eq 2"/>
+                  			<span class="已领取">已领取</span> 
+                  				<else/>30天
+                                  </if>
+                      </if>
+          </li>
+      		
+					</ul>
+				</div>
+				<!--外置-->
+				<div class="czbox clearfix">
+					<div class="cz">
+						<p class="p1">已返本金</p>
+						<p class="p2" id="sumreceive_interests">{$tpl_var.receive_interests|default="0.00" }</p>
+						
+					</div>
+					<div class="cz">
+						<p class="p1">已返利润</p>
+						<p class="p2" id="sumshouyi">{:getFloatvalue($tpl_var['shouyi'],2)}</p>
+						
+					</div>
+					<div class="cz">
+						<p class="p1">待返本金</p>
+						<p class="p2" id="suminvestor_capital">{$tpl_var.investor_capital|default="0.00"}</p>
+						
+					</div>
+				</div>
+                <div class="tabv2box">
+
+                    <!--回款日历-->
+                    <div class="dd">
+                        <if condition="empty($tenlist) neq true">
+                        <div class="tabv2 show">
+                            <div class="bgbx">
+                                <div class="tou1">
+                                    <span>项目名称</span>
+                                    <span>回款时间</span>
+                                    <span>状态</span>
+                                    <span>投资金额</span>
+                                </div>
+                                <volist name="tenlist" id="ten">
+                                    <div class="bgxmlis">
+                                        <div class="bt" style="width:25% !important;">
+                                            <a target="_self" href="{$ten.id|getInvestUrl}" title="{$ten.borrow_name}"><div style="width:100%;text-align: center"><img style="float: none" src="{$ten.borrow_img}" alt="" /></div>{$ten.borrow_name|cnsubstr=10}</a>
+                                        </div>
+                                        <div>
+                                            <if condition="$ten.lead_time neq ''">{$ten.lead_time_c|date="Y-m-d",###}</if>
+                                        </div>
+                                        <div>
+                                            <if condition="$ten.bstatus eq '7'">
+                                                已回款
+                                            <elseif condition="$ten.bstatus eq '6'"/>
+                                                已成功<br/>等待发放收益
+                                            <else />
+                                                生产中
+                                            </if>
+                                        </div>
+                                        <div class="zijin">
+                                            {$ten.investor_capital|Fmoney}
+                                        </div>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+                        </if>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+	<style type="text/css"> .l-dtc {
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, .5);
+	    position: fixed;
+	    top: 0;
+	    display: none;
+	    z-index: 999;
+	}
+	.l-dtc1 {
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, .5);
+	    position: fixed;
+	    top: 0;
+	    display: none;
+	    z-index: 200;
+	}
+	.l-tanchubox1 {
+	    position: fixed;
+	    left: 0;
+	    top: 20%;
+	    right: 0;
+	    z-index: 999;
+	    width: 250px;
+	    display: none;
+	    padding: 20px 0;
+	    margin: 0 auto;
+	    margin-top: 200px;
+	    background: #FFFFFF;
+	    border-radius: 5px;
+	    text-align: center;
+	    background: linear-gradient(#fff, #a7f1fe);
+	}
+	.l-tanchubox1 p {
+	    font-size: 20px;
+	    line-height: 25px;
+	}
+	.l-tanchubox1 p img{
+		display: inline;
+	}
+	.l-tanchubox1 button {
+	    border: 0;
+	    background: #00A0E9;
+	    height: 30px;
+	    border-radius: 5px;
+	    background-size: 100% 100%;
+	    width: 100px;
+	    color: #FFFFFF;
+	}
+	</style>
+	<!--礼包 <button class="tcccc">点我</button>-->
+<div class="l-dtc1  oc guanbi"></div>
+<div class="l-tanchubox1 on">
+    <p class="l_lb1">
+        <img src="/Public/wap/img/yaoqing/lb.png" />
+    </p>
+    <p class="l_lb2">累计签到<?php if($ling==0||$ling==7||$ling==14||$ling==21||$ling==30){echo $ling;}else{echo $ling;}?>天</p>
+    <p class="l_lb3">送你优惠大礼包</p>
+    <p style="text-align: center;">
+        <button class="l-btnc">立即领取</button>
+    </p>
+</div>
+ 
+<!--底部-->
+<!--底部-->
+<include file="default:Public:footer" group="Home" />
+	<script type="text/javascript">
+ 	$('.guanbi').click(function() {
+	  	$('.l-dtc1 ').hide();   
+	  	$('.l-tanchubox1').hide(); 
+	  	    window.location.reload()
+	})
+	var qiandaobonuszz='';
+		$('.ling3').click(function() {
+		  qiandaobonuszz=14;
+			$('.l-qdao1 .p1').text('已签到');
+			$('.l-qdao1 .p2').text('+10');
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-tanchubox1').show();
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling1').click(function() {
+		  qiandaobonuszz=1;
+				$('.l-qdao1 .p1').text('已签到');
+				
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-tanchubox1').show();
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling2').click(function() {
+		  qiandaobonuszz=7;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-tanchubox1').show();
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling4').click(function() {
+		  qiandaobonuszz=21;
+		$('.l-qdao1 .p1').text('已签到');
+		
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-tanchubox1').show();
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+   <?php if(date('m',time()) == 2){ ?>
+ 	$('.ling5').click(function() {
+		  qiandaobonuszz=28;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})
+      			 <?php  }else{ ?>  
+      				 
+    			  		$('.ling5').click(function() {
+		  qiandaobonuszz=30;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})
+                    <?php } ?> 
+	var yuetianshu=30;
+	  $('.l-btnc').click(function() {
+	    window.location.href="__APP__/member/capital/qiandaobonus?date="+qiandaobonuszz;
+    	});
+// 			$('.qdao1z').click(function() {
+// 			$('.l-qdao1 .p1').text('已签到');
+// 			$('.l-qdao1 .p2').text('+10');
+// 			$('.l-qdao1').css("background-color", "#8de2f5");
+// 			$('.l-tanchubox1').show();
+// 			$('.l-dtc1.oc').show();
+// //			console.log(2)
+
+// 		})
+		$('.l-qdao1').click(function() {
+		})
+		$('.l-btnc').click(function() {
+			$('.l-dtc1').hide();
+		});
+		var isSign = false;
+			var myday = new Array(); //已签到的数组
+        <?php
+         	$i=0;
+         	foreach($volist as $k=>$v){
+        ?>
+            myday[<?php echo $i; ?>] = <?php echo empty($v['sign_time'])?"":$v['sign_time']; ?>;
+        <?php $i++; } ?>
+        // myday["0"] = 1541624400;
+        // myday["3"] = 1541174400;
+        //  myday["4"] = 1541274400;
+        //  myday["5"] = 1541374400;
+			var cale = new Calendar("idCalendar", {
+				qdDay: myday,
+				// rpDay: repaymentsday,
+				onToday: function(o) {
+
+					o.className = "onToday";
+				},
+				// Repayments: function(o) {
+
+				// 	o.className = "Repayments";
+				// },
+				onSignIn: function (){
+					$('.l-qdao1 .p1').text('已签到');
+				},
+				onFinish: function() {
+			 		$('.l_qdjbimg1 span').text(myday.length);
+
+			     <?php if(date('m',time()) == 2){ ?>
+
+                        if(myday.length<=0){
+                            var valength=myday.length/30*100;
+                        }
+    			  		else if(myday.length<=7){
+    			 		    	var valength=myday.length/30*100+6;
+    			 		}else if(myday.length<=14){
+    			 		    	var valength=myday.length/30*100+5;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else if(myday.length<=28){
+    			 		      yuetianshu=28;
+    			 		    	var valength=myday.length/28*100+2;
+    			 		}else{
+    			 		    	var valength=myday.length/30*100;
+    			 		}
+      			 <?php  }else{ ?>
+
+                        if(myday.length<=0){
+                            var valength=myday.length/30*100;
+                        }
+    			  		else if(myday.length<=7){
+    			 		    	var valength=myday.length/30*100+6;
+    			 		}else if(myday.length<=14){
+    			 		    	var valength=myday.length/30*100+5;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else{
+    			 		    	var valength=myday.length/30*100;
+    			 		}
+                    <?php } ?>
+
+			 		$('.l_jindut.on').css("width",valength+"%");
+					$$("sign-count").innerHTML = myday.length //已签到次数
+
+					$$("idCalendarYear").innerHTML = this.Year;
+					$$("idCalendarMonth").innerHTML = this.Month; //表头年份
+				}
+			});
+
+
+			$$("idCalendarPre").onclick = function() {
+				cale.PreMonth();
+                $(".dd").empty();
+                var zstr= $$("idCalendarYear").innerHTML;
+                zstr+="-"+($$("idCalendarMonth").innerHTML);
+
+                $.ajax({
+                    type: "post",
+                    url: "__APP__/member/capital/zindexapi",
+                    data: {"date":zstr},
+                    cache: false,
+                    async : false,
+                    dataType: "json",
+                    success: function (data)
+                    {
+                        if(data.sum.receive_interests==""||data.sum.receive_interests==null){
+                            $$("sumreceive_interests").innerHTML = "0.00";
+                        }else{
+                            $$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+                        }
+                        if(data.sum.shouyi==""||data.sum.shouyi==null){
+                            $$("sumshouyi").innerHTML = "0.00";
+                        }else{
+                            $$("sumshouyi").innerHTML = data.sum.shouyi;
+                        }
+                        if(data.sum.investor_capital==""||data.sum.investor_capital==null){
+                            $$("suminvestor_capital").innerHTML = "0.00";
+                        }else{
+                            $$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+                        }
+                        var str="";
+                        if(data.tenlist.length > 0){
+                            str+='<div class="tabv2 show">'+
+                                '<div class="bgbx">'+
+                                '<div class="tou1">'+
+                                '<span>项目名称</span>'+
+                                '<span>回款日期</span>'+
+                                '<span>状态</span>'+
+                                '<span>投资金额</span>'+
+                                '</div>';
+                        }
+                        $.each(data.tenlist, function(i,val){
+                                str+='<div class="bgxmlis">'+
+                                    '<div class="bt" style="width:25% !important;">'+
+                                    '<a style="width: 100%" target="_self" href="__APP__/invest/detail/id/'+val.borrow_id+'.html" title="'+val.borrow_name+'"><div style="width:100%;text-align: center"><img src="'+val.borrow_img+'" alt="" style="float: none;"/></div><div style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%">'+val.borrow_name+'</div></a>'+
+                                    '</div>'+
+                                    '<div>';
+                                if(val.lead_time != ''){
+                                    var date = new Date(val.lead_time*1000);
+                                    str+=date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                                }
+                                str+='</div>'+
+                                    '<div>';
+                                if(val.bstatus == 7){
+                                    str+='已回款';
+                                }else if(val.bstatus == 6){
+                                    str+='已成功<br/>等待发放收益';
+                                }else{
+                                    str+='购买中';
+                                }
+                                str+='</div>'+
+                                    '<div class="zijin">';
+                                str+='¥'+val.investor_capital;
+                                str+='</div>'+
+                                    '</div>';
+                        });
+                        if(data.tenlist.length > 0) {
+                            str+='</div> ' +
+                                '</div>';
+                        }
+                        $('.dd').append(str);
+                    },
+                    error:function () {
+                        alert("请求失败！");
+                    }
+                });
+            }
+			$$("idCalendarNext").onclick = function() {
+				cale.NextMonth();
+                $(".dd").empty();
+                var zstr= $$("idCalendarYear").innerHTML;
+                zstr+="-"+($$("idCalendarMonth").innerHTML);
+
+                $.ajax({
+                    type: "post",
+                    url: "__APP__/member/capital/zindexapi",
+                    data: {"date":zstr},
+                    cache: false,
+                    async : false,
+                    dataType: "json",
+                    success: function (data)
+                    {
+                        if(data.sum.receive_interests==""||data.sum.receive_interests==null){
+                            $$("sumreceive_interests").innerHTML = "0.00";
+                        }else{
+                            $$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+                        }
+                        if(data.sum.shouyi==""||data.sum.shouyi==null){
+                            $$("sumshouyi").innerHTML = "0.00";
+                        }else{
+                            $$("sumshouyi").innerHTML = data.sum.shouyi;
+                        }
+                        if(data.sum.investor_capital==""||data.sum.investor_capital==null){
+                            $$("suminvestor_capital").innerHTML = "0.00";
+                        }else{
+                            $$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+                        }
+                        var str="";
+                        if(data.tenlist.length > 0){
+                            str+='<div class="tabv2 show">'+
+                                '<div class="bgbx">'+
+                                '<div class="tou1">'+
+                                '<span>项目名称</span>'+
+                                '<span>回款日期</span>'+
+                                '<span>状态</span>'+
+                                '<span>回款资金</span>'+
+                                '</div>';
+                        }
+                        $.each(data.tenlist, function(i,val){
+                            str+='<div class="bgxmlis">'+
+                                '<div class="bt" style="width:25% !important;">'+
+                                '<a style="width: 100%" target="_self" href="/invest/detail/id/'+val.borrow_id+'.html" title="'+val.borrow_name+'"><div style="width:100%;text-align: center"><img src="'+val.borrow_img+'" alt="" style="float: none;"/></div><div style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%">'+val.borrow_name+'</div></a>'+
+                                '</div>'+
+                                '<div>';
+                            if(val.lead_time != ''){
+                                var date = new Date(val.lead_time*1000);
+                                str+=date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                            }
+                            str+='</div>'+
+                                '<div>';
+                            if(val.bstatus == 7){
+                                str+='已回款';
+                            }else if(val.bstatus == 6){
+                                str+='已成功<br/>等待发放收益';
+                            }else{
+                                str+='众筹中';
+                            }
+                            str+='</div>'+
+                                '<div class="zijin">';
+                            str+='¥'+val.investor_capital;
+                            str+='</div>'+
+                                '</div>';
+                        });
+                        if(data.tenlist.length > 0) {
+                            str+='</div> ' +
+                                '</div>';
+                        }
+                        $('.dd').append(str);
+                    },
+                    error:function () {
+                        alert("请求失败！");
+                    }
+                });
+			}
+			//添加今天签到
+			$$("signIn").onclick = function() {
+	    if (isSign == false) {
+	        var res = cale.SignIn();
+	        if (res == '1') {
+	            $('.l-qdao1 .p1').text('已签到');
+	            $$("sign-count").innerHTML = parseInt($$("sign-count").innerHTML) + 1;
+	            $.ajax({
+	                url: "__APP__/member/capital/qiandaodong",
+	                type: "post",
+	                data: {
+	                    "url": "1"
+	                },
+
+	                success: function(data) {
+	                    var dataarr = $.parseJSON(data);
+	                    console.log(dataarr.status);
+	                    if (dataarr.status == 1 &&($$("sign-count").innerHTML==1||$$("sign-count").innerHTML==7||$$("sign-count").innerHTML==14||$$("sign-count").innerHTML==21||$$("sign-count").innerHTML==yuetianshu) ) {
+	                        	  qiandaobonuszz=({$ling}+1);
+	                        	//  alert(qiandaobonuszz);
+	                        $('.l_lb2').text('累计签到'+({$ling}+1)+'天');
+	                        $('.l-qdao1').css("background-color", "#8de2f5");
+	                        $('.onToday').find("span").addClass("changeImage");
+	                        $('.l-tanchubox1').show();
+	                        $('.l-dtc1.oc').show();
+	                    }else{
+	                         window.location.reload()
+	                    }
+	                },
+	                error: function(e) {
+	                    //alert("网络错误，请重试！！");  
+	                }
+	            });
+	            isSign = true;
+	        } else if (res == '2') {
+	            layer.alert('今天已经签到了')
+	        }
+	    } else {
+	        layer.alert('今天已经签到了')
+	    }
+	}
+	$('#idCalendarPre').click(function(){
+		drawAgain();
+	});
+	$('#idCalendarNext').click(function(){
+		drawAgain();
+	});
+
+  
+  
+	
+
+
+
+
+function drawAgain()
+
+{
+
+		// 待回
+
+		//var dates11 = {$dhktime};
+
+var dates={$dhktime};
+
+
+
+var ddc={$dhk};
+
+//	var dates = ["2019-6-28","2019-6-20","2018-11-21","2018-11-22"];
+
+//console.log(dates);
+
+
+
+if(dates){
+
+		$.each(dates, function(i,n) {
+
+			$('#' + n).css({'border':'2px solid #a6f0fd','background-color':'#A6F0FD','color':'#fff'});
+
+      $('#' + n).attr("dd",ddc[n]);
+
+		});
+
+}
+
+		// 已回
+
+//		var dates1 = {$hktime};
+
+var dates1={$hktime};
+
+// var tmp = null; 
+
+// if (!tmp && typeof(tmp)!="undefined" && tmp!=0){ 
+
+
+
+//console.log(dates1);
+
+var ddb={$hkt};
+
+var dhkid=11;
+
+if(dates1){
+
+          	$.each(dates1, function(i,n) {
+
+			$('#' + n).css({'border':'2px solid #dedede','background-color':'#DEDEDE','color':'#000'});
+
+      dhkid= $('#' + n).attr("dd");
+
+      if(typeof(dhkid)!="undefined"){
+
+        //console.log($('#' + n).attr("dd"));
+
+        $('#' + n).attr("dd",dhkid+','+ddb[n]);
+
+      }else{
+
+        $('#' + n).attr("dd",ddb[n]);
+
+      }
+
+      
+
+		});
+
+}
+
+//		var dates1 =  ["2018-11-1","2018-11-2","2018-11-3","2018-11-4",];
+
+		
+
+	
+
+
+
+}
+
+
+	drawAgain();
+	</script>

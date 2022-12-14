@@ -1,0 +1,57 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理我的体验金-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="muhb">
+                    <div class="title1">
+                        <span>加息券领取记录</span>
+                    </div>
+                    <div class="hbtop">
+                        <ul>
+                            <li><a href="{:U('memberinterest/memberinterest',array('status'=>1))}">未使用</a></li>
+                            <li><a href="{:U('memberinterest/memberinterest',array('status'=>2))}">已使用</a></li>
+                            <li><a href="{:U('memberinterest/memberinterest',array('status'=>4))}">已过期</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="hbbot">
+                        <div class="hbcon">
+                            <volist name="memberinterestList" id="vo">
+                                <div class="hbox <if condition="$vo.status eq 2"> gq </if>">
+                                    <a href="/invest/index.html">
+                                        <div class="hbl">加息券</div>
+                                        <div class="hbm">
+                                            <strong>{$vo.interest_rate}%</strong>
+                                            <span>有效期：{$vo.start_time|date="Y-m-d",###} 至 {$vo.end_time|date="Y-m-d",###}</span>
+                                        </div>
+                                        
+                                        <if condition="$vo.status eq 1"><div class="hbr">未 使 用</div>
+                                        <elseif condition="$vo.status eq 2"/><div class="hbr">已 使 用</div>
+                                        <elseif condition="$vo.status eq 4"/><div class="hbr">已 过 期</div>
+                                        <else/><div class="hbr" style="padding: 5px 0;">不 可 使 用</div>
+                                        </if>
+                                        
+                                        <div class="clear"></div>
+                                    </a>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

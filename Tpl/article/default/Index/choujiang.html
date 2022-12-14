@@ -1,0 +1,348 @@
+{__NOLAYOUT__}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$glo.web_name}</title>
+    <link href="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/style/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/style/layer.css">
+    <script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/js/awardRotate.js"></script>
+    <script src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/js/jquery.superslide.2.1.1.js"></script>
+    <script src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/js/layer.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="headertop">
+            <div class="container">
+                <div class="htl">
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/phone.png" alt=""> 服务热线<span>{$glo.botttom_phone}</span>
+                    <a href="/" class="wx"></a>
+                    <a href="/" class="qq"></a>
+                </div>
+                <div class="htr">
+                    <if condition="$UID gt '0'">
+                        <a href="{:U('/member/index')}" ><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/yh.png" alt=""> {$UNAME}</a> <a href="{:U('/member/common/actlogout')}">退出</a>
+                    <else />
+                    <!--未登录状态-->
+                        <a href="{:U('/member/common/login')}">登录</a> |
+                        <a href="{:U('/member/common/register')}" >注册</a>
+                    </if>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="naver">
+            <div class="container">
+                <a href="/" class="logo"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/logo.png" alt=""></a>
+                <div class="nav">
+                    <ul>
+                        <li class="navhome"><a href="/">首页</a></li>
+                        <li class="navinvest"><a href="/invest/index.html">众筹专区</a></li>
+                        <li class="navarticle35"><a href="/article/index/cid/35.html">帮助我们</a></li>
+                        <li class="navarticle18"><a href="/article/index/cid/18.html">关于我们</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    if ('{$glomodulename}' == 'index') {
+        $('.navhome').addClass('act').siblings().removeClass('act');
+    }else if('{$glomodulename}' == 'article'){
+        $(".nav{$glomodulename}{$_GET['cid']}").addClass('act').siblings().removeClass('act');
+    }else{
+        
+        $('.nav{$glomodulename}').addClass('act').siblings().removeClass('act');
+    }
+    </script>
+<div class="clear"></div>
+    <!-- <volist name=":get_ad(30)"  offset="0" length='1' id='vo'> -->
+    <img src="/{$vo.img}" alt="">
+    <!-- </volist> --> 
+    <div class="zhuanp">
+        <div class="container">
+            <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/1h0.jpg" alt="">
+            <div class="zpcon">
+                <div class="zpcl">
+                    <div class="bann">
+                        <div class="turnplate">
+                            <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+                            <img class="pointer" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/turnplate-pointer.png" />
+                        </div>
+                    </div>
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/1.png" id="shan-img" style="display:none;" />
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/2.png" id="sorry-img" style="display:none;" />
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/3.png" id="iphone-img" style="display:none;" />
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/4.png" id="xianjin-img" style="display:none;" />
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/7.png" id="hb-img" style="display:none;" />
+                </div>
+                <div class="zpcr">
+                    <div class="tt"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/zp/images/6.png" alt=""></div>
+                    <div class="picMarquee-top">
+                        <div class="bd">
+                            <ul class="picList">
+
+                                <volist name="list_win" id="vo">
+                                <li>
+                                    <div class="pic">
+                                        <table>
+                                            <tr>
+                                                <td>{$vo.user_name}</td>
+                                                <td>{$vo.prize_title}</td>
+                                                <td>{$vo.add_time|date="Y-m-d",###}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <!-- <volist name=":get_ad(30)" offset="1" length='1' id='vo'> -->
+    <div class="jp">
+        <div class="container">
+            <img src="/{$vo.img}" alt="">
+        </div>
+    </div>
+    <!-- </volist> --> 
+    <!-- <volist name=":get_ad(30)"  offset="2" length='1' id='vo'> -->
+    <div class="jp1">
+        <div class="container">
+            <img src="/{$vo.img}" alt="">
+        </div>
+    </div>
+    <!-- </volist> --> 
+    <script type="text/javascript">
+        var turnplate = {
+            restaraunts: [], //大转盘奖品名称
+            colors: [], //大转盘奖品区块对应背景颜色
+            outsideRadius: 192, //大转盘外圆的半径
+            textRadius: 155, //大转盘奖品位置距离圆心的距离
+            insideRadius: 68, //大转盘内圆的半径
+            startAngle: 0, //开始角度
+            bRotate: false //false:停止;ture:旋转
+        };
+
+        $(document).ready(function() {
+            //动态添加大转盘的奖品与奖品区域背景颜色
+            turnplate.restaraunts = {$jpname};
+            turnplate.colors = {$jpys};
+            var a = turnplate.colors;
+
+            var rotateTimeOut = function() {
+                $('#wheelcanvas').rotate({
+                    angle: 0,
+                    animateTo: 2160,
+                    duration: 8000,
+                    callback: function() {
+                        alert('网络超时，请检查您的网络设置！');
+                    }
+                });
+            };
+
+            //旋转转盘 item:奖品位置; txt：提示语;
+            var rotateFn = function(item, txt) {
+                var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length * 2));
+                if (angles < 270) {
+                    angles = 270 - angles;
+                } else {
+                    angles = 360 - angles + 270;
+                }
+                $('#wheelcanvas').stopRotate();
+                $('#wheelcanvas').rotate({
+                    angle: 0,
+                    animateTo: angles + 1800,
+                    duration: 8000,
+                    callback: function(e) {
+                        // alert(txt);
+                        // layer.alert(txt);
+                        $.ajax({
+                            url: "__URL__/winning/",
+                            data: {'title':txt},
+                            timeout: 5000,
+                            cache: false,
+                            type: "post",
+                            dataType: "json",
+                            success: function (d, s, r) {
+                                if(d.state == 1){
+                                    layer.alert(d.info, function(){location.href="/member"});
+                                }
+                            }
+                        });
+                        turnplate.bRotate = !turnplate.bRotate;
+                        turnplate.colors[item - 1] = '#fac63c';
+                        console.log(turnplate.colors);
+                        drawRouletteWheel();
+                    }
+                });
+            };
+
+            $('.pointer').click(function() {
+                turnplate.colors = {$jpys};
+                drawRouletteWheel();
+                if (turnplate.bRotate) return;
+                turnplate.bRotate = !turnplate.bRotate;
+                //获取随机数(奖品个数范围内)
+                // var item = rnd(1, turnplate.restaraunts.length);
+                var item = parseInt('{$ratelenth}');
+                //奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
+                rotateFn(item, turnplate.restaraunts[item-1]);
+                /* switch (item) {
+                    case 1:
+                        rotateFn(252, turnplate.restaraunts[0]);
+                        break;
+                    case 2:
+                        rotateFn(216, turnplate.restaraunts[1]);
+                        break;
+                    case 3:
+                        rotateFn(180, turnplate.restaraunts[2]);
+                        break;
+                    case 4:
+                        rotateFn(144, turnplate.restaraunts[3]);
+                        break;
+                    case 5:
+                        rotateFn(108, turnplate.restaraunts[4]);
+                        break;
+                    case 6:
+                        rotateFn(72, turnplate.restaraunts[5]);
+                        break;
+                    case 7:
+                        rotateFn(36, turnplate.restaraunts[6]);
+                        break;
+                    case 8:
+                        rotateFn(360, turnplate.restaraunts[7]);
+                        break;
+                    case 9:
+                        rotateFn(324, turnplate.restaraunts[8]);
+                        break;
+                    case 10:
+                        rotateFn(288, turnplate.restaraunts[9]);
+                        break;
+                } */
+                console.log(item);
+            });
+        });
+
+        function rnd(n, m) {
+            var random = Math.floor(Math.random() * (m - n + 1) + n);
+            return random;
+
+        }
+
+
+        //页面所有元素加载完毕后执行drawRouletteWheel()方法对转盘进行渲染
+        window.onload = function() {
+            drawRouletteWheel();
+        };
+
+        function drawRouletteWheel() {
+            var canvas = document.getElementById("wheelcanvas");
+            if (canvas.getContext) {
+                //根据奖品个数计算圆周角度
+                var arc = Math.PI / (turnplate.restaraunts.length / 2);
+                var ctx = canvas.getContext("2d");
+                //在给定矩形内清空一个矩形
+                ctx.clearRect(0, 0, 422, 422);
+                //strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式  
+                ctx.strokeStyle = "#11b3c2";
+                //font 属性设置或返回画布上文本内容的当前字体属性
+                ctx.font = '14px Microsoft YaHei';
+                for (var i = 0; i < turnplate.restaraunts.length; i++) {
+                    var angle = turnplate.startAngle + i * arc;
+                    ctx.fillStyle = turnplate.colors[i];
+                    ctx.beginPath();
+                    //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）    
+                    ctx.arc(211, 211, turnplate.outsideRadius, angle, angle + arc, false);
+                    ctx.arc(211, 211, turnplate.insideRadius, angle + arc, angle, true);
+                    ctx.stroke();
+                    ctx.fill();
+                    //锁画布(为了保存之前的画布状态)
+                    ctx.save();
+
+                    //----绘制奖品开始----
+                    ctx.fillStyle = "#fff";
+                    var text = turnplate.restaraunts[i];
+                    var line_height = 15;
+                    //translate方法重新映射画布上的 (0,0) 位置
+                    ctx.translate(211 + Math.cos(angle + arc / 2) * turnplate.textRadius, 211 + Math.sin(angle + arc / 2) * turnplate.textRadius);
+
+                    //rotate方法旋转当前的绘图
+                    ctx.rotate(angle + arc / 2 + Math.PI / 2);
+
+                    /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
+                    if (text.indexOf("M") > 0) { //流量包
+                        var texts = text.split("M");
+                        for (var j = 0; j < texts.length; j++) {
+                            ctx.font = j == 0 ? 'bold 16px Microsoft YaHei' : '14px Microsoft YaHei';
+                            if (j == 0) {
+                                ctx.fillText(texts[j] + "M", -ctx.measureText(texts[j] + "M").width / 2, j * line_height);
+                            } else {
+                                ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+                            }
+                        }
+                    } else if (text.indexOf("M") == -1 && text.length > 8) { //奖品名称长度超过一定范围 
+                        text = text.substring(0, 6) + "||" + text.substring(6);
+                        var texts = text.split("||");
+                        for (var j = 0; j < texts.length; j++) {
+                            ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+                        }
+                    } else {
+                        //在画布上绘制填色的文本。文本的默认颜色是黑色
+                        //measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
+                        ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+                    }
+
+                    //添加对应图标
+                    if (text.indexOf("红包") >= 0) {
+                        var img = document.getElementById("xianjin-img");
+                        img.onload = function() {
+                            ctx.drawImage(img, -15, 20);
+                        };
+                        ctx.drawImage(img, -15, 20);
+                    } else if (text.indexOf("体验金") >= 0) {
+                        var img = document.getElementById("xianjin-img");
+                        img.onload = function() {
+                            ctx.drawImage(img, -15, 20);
+                        };
+                        ctx.drawImage(img, -15, 20);
+                    } else if (text.indexOf("加息券") >= 0) {
+                        var img = document.getElementById("hb-img");
+                        img.onload = function() {
+                            ctx.drawImage(img, -15, 20);
+                        };
+                        ctx.drawImage(img, -15, 20);
+                    } else {
+                        var img = document.getElementById("sorry-img");
+                        img.onload = function() {
+                            ctx.drawImage(img, -15, 20);
+                        };
+                        ctx.drawImage(img, -15, 20);
+                    }
+                    //把当前画布返回（调整）到上一个save()状态之前 
+                    ctx.restore();
+                    //----绘制奖品结束----
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        jQuery(".picMarquee-top").slide({
+            mainCell: ".bd ul",
+            autoPlay: true,
+            effect: "topMarquee",
+            vis: 7,
+            interTime: 50,
+            trigger: "click"
+        });
+    </script>
+</body>
+
+</html>

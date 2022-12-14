@@ -1,0 +1,63 @@
+ 
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+<body>
+        <div class="header ">
+                <div class="w-header w-content flex">
+                    <a href="javascript:window.history.back();" class="w-header-left">
+                        < 返回</a>
+                            <h3>{$nowCategory.type_name}</h3>
+                           <if condition="$UID gt '0'">
+				  <a href="/Wapmember/" style="text-align: right;">会员中心</a> 
+                    <!--   <a href="/Wapmember">铭万众筹</a>-->
+                    <else />
+                    <!--未登录状态-->
+                    	 
+                                <a href="/Wapmember/common/login.html" style="text-align: right;" class="w-header-right">登录</a>
+                    </if>
+                </div>
+            </div>
+   
+<!-- 活动内容  start -->
+
+<div class="w-act-warpper">
+    <div class="w-act">
+        <div class="act-bg">
+            <!--<img src="/{$article.art_img}" alt="">-->
+        </div>
+        <div class="act-text">
+                {$article.art_content}
+          <!--  <h3>九月活动公告</h3>
+            
+            
+            <div>
+                <h4>尊敬的新老顾客：</h4>
+                <h4>您好</h4>
+                <div class="act-text-txt" style="text-indent: 0">
+                    九月来临我们告别夏季的炎热，迎来一个秋高气爽的天气。
+                    同时迎来了教师的节日，在这特别的日子里，铭万推出九月活动，
+                    与您一起共庆教师节，感念师恩。
+                </div>
+            </div>
+            <div>
+                    <h4>活动一 教师节活动</h4>
+                    
+                    <div class="act-text-txt">
+                        九月来临我们告别夏季的炎热，迎来一个秋高气爽的天气。
+                        同时迎来了教师的节日，在这特别的日子里，铭万推出九月活动，
+                        与您一起共庆教师节，感念师恩。
+                    </div>
+                </div>
+       
+        --></div>
+
+    </div>
+</div>
+<!-- 活动内容 end -->
+
+  
+ 

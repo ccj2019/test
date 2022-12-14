@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'vote_uid', 2 => 'borrow_id', 3 => 'add_time', 4 => 'status', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'vote_uid' => 'int(11)', 'borrow_id' => 'int(11)', 'add_time' => 'varchar(11)', 'status' => 'varchar(1)', ), ); ?>

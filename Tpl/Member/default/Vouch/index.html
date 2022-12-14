@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的账户-- {$glo.web_name}</title>
+<include file="default:Public:_header_common" group="Home"/>
+<include file="default:Public:_header_common" group="Member"/>
+
+</head>
+<body>
+<include file="default:Public:_header_main" group="Home"/>
+<div style="clear:both;"></div>
+<div class="content">
+  <div class="box3">
+    <table width="1006" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><include file="Public:_left" />
+          <div class="box3_right">
+            <div id="rotate">
+              <ul class="tab_menu ajaxdata">
+               <li><a href="#chip-1" ajax_href="__URL__/summary/">担保总表</a></li>
+                        <li><a id="mx2" href="#chip-2" ajax_href="__URL__/vouching/">担保中的投资</a></li>
+                        <li><a id="mx3" href="#chip-3" ajax_href="__URL__/vouchrepaymenting/">还款中的担保标</a></li>
+                        <li><a id="mx4" href="#chip-4" ajax_href="__URL__/vouchrepaymented/">已还完的担保</a></li>
+                        <li><a id="mx5" href="#chip-5" ajax_href="__URL__/vouchfail/">失败的担保</a></li>
+              </ul>
+              <div class="contentright">
+					<div id="fragment-1" style="display:none">
+						<!--升级会员-->
+					</div>
+					<div id="fragment-2" style="display:none">
+						<!--升级会员-->
+					</div>
+					<div id="fragment-3" style="display:none">
+						<!--升级会员-->
+					</div>
+					<div id="fragment-4" style="display:none">
+						<!--升级会员-->
+					</div>
+					<div id="fragment-5" style="display:none">
+						<!--升级会员-->
+					</div>
+				</div>
+            </div>
+          </div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div style="clear:both;"></div>
+<include file="default:Public:_footer" group="Home"/>
+</body>
+</html>

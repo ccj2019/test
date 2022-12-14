@@ -1,0 +1,3 @@
+<?php
+//000012960000a:2:{s:7:"ad_type";s:1:"1";s:7:"content";a:3:{i:0;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20190319/20190319162311_29103.jpg";s:4:"info";s:0:"";s:3:"url";s:56:"https://www.rzmwzc.com/article/index/cid/37/id/1808.html";}i:1;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20190227/20190227173152_10571.jpg";s:4:"info";s:0:"";s:3:"url";s:58:"http://www.rzmwzc.com/article/newsshow/cid/54/id/1836.html";}i:2;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20190319/20190319162510_53662.jpg";s:4:"info";s:0:"";s:3:"url";s:55:"http://www.rzmwzc.com/article/index/cid/37/id/1808.html";}}}
+?>

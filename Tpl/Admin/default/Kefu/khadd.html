@@ -1,0 +1,57 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<tagLib name="htmlA" />
+<style type="text/css">
+.sel_fs{width:110px}  
+  .search_member{margin: 0px 10px;display: inline-block;padding: 5px;cursor: pointer;border: 1px solid #ABCDEF;border-radius: 3px;}
+</style>
+<div class="so_main">
+<div class="page_tit">发放加息券</div>
+<div class="page_tab"><span data="tab_1" class="active">基本信息</span></div>
+<div class="form2">
+	<form method="post" id="form" action="{:U('doadd')}">	
+	<div id="tab_1">
+	<dl class="lineD"><dt>客服：</dt><dd>
+		 <select name="kfid" class="select">
+    <option value="">请选择</option>
+          <volist name="kflist" id="vo">
+                    <option value="{$vo.id}" <if condition='$vo.id eq $kfid'>selected</if>>{$vo.name}</option>
+          </volist>
+  </select> 
+
+ </dd></dl> 
+	<dl class="lineD"><dt>客户：</dt><dd>
+    	<input type="hidden" class="spec81" name="borrow_uid" id="borrow_uid" value="{$vo.recommend_id}" />
+    	<htmlA:input id="borrow_username" value="{:user_name($vo['recommend_id'])}" />
+		<span class="search_member" onclick="showurl('{:U('admin/members/ajaxsearch')}','搜索会员');">搜索</span>
+                (<span style="color:red" id="_day_lilv">点击“搜索”查找会员</span>) 
+    </dd></dl> 
+
+
+	</div><!--tab1-->
+	<div class="page_btm">
+	  <input type="button" onclick="doadd()" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+function doadd(){
+	var kfid=$(".select option:selected").val();
+	if(kfid==''){
+		alert("请选择客服！");
+		return false;
+	}
+	
+	if($("#borrow_username").val()=='无'){
+		alert("请选择客户！");
+		return false;
+	}
+	$("#form").submit();
+
+}
+function showurl(url,Title){
+  ui.box.load(url, {title:Title});
+}
+</script>
+</div>
+<include file="Public:_footer" />

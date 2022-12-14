@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html style="height: 100vh;">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<style type="text/css">
+	body{
+		background: url(/Public/wap/img/tu33.png) no-repeat  ;
+		background-size:120% ;
+		height:100vh; 
+		overflow-y:scroll;
+	}
+	#Validform_msg{display: none;}
+</style>
+	<body>
+		<div class="l-loginbox">
+			<div>
+				
+				<div class="l-fh"><a href="<?php echo $_SERVER['HTTP_REFERER'] ;?>" class="l-fanhui" >&lt;返回</a><span>微信绑定</span><a href="/wapmember/common/login" class="l-fanhui1" >登录</a></div>
+				<div class="l-logoto">
+					<img src="/Public/wap/img/logo.png"/>
+				</div>
+	 <form  id="reg_form" method="get">
+	 	 <input id="openid" type="hidden" name="openid" value="{$openid}"    />   
+	 	 
+	 	 <input id="user_name" type="hidden" name="user_name" value="{$nickname}"    />   
+	 			<div class="l-loginform">
+	 				<!--openid-->
+					<span><img src="/Public/wap/img/shouji.png"/></span>
+					 <input id="txtPhone" name="txtPhone" placeholder="输入手机号码"  datatype="m" bakajaxurl="/member/common/ckphone/" sucmsg="手机验证通过" nullmsg="输入手机号码" errormsg="手机格式不正确"  class="mem_spec109" />   
+				</div>
+				<!--<div class="l-loginform">
+					<span><img src="/Public/wap/img/mima.png"/></span>
+					<input type="password" class="mem_spec109" id="txtPwd" name="txtPwd" placeholder="密码范围在4~16位之间"  nullmsg="密码范围在4~16位之间" datatype="*6-15" errormsg="密码范围在4~16位之间！" />
+				</div>
+				<div class="l-loginform">
+					<span><img src="/Public/wap/img/mima.png"/></span>
+					<input type="password" id="txtRepwd" name="txtRepwd"  placeholder="确认您输入的密码"  class="mem_spec109"  nullmsg="您两次输入的账号密码不一致"   datatype="*" recheck="txtPwd" errormsg="您两次输入的账号密码不一致"/>
+				</div>-->
+  <input type="hidden" value="{$invite}" id="txtIncode" name="txtIncode"  />
+				 <div class="l-loginform">
+					<span><img src="/Public/wap/img/anquan.png"/></span>
+					<input id="code" style="width: 46%;" name="code" maxlength="4" class="mem_spec110" placeholder="验证码" />
+              <input id="mobile" name="mobile"class="mem_spec114" type="hidden" />
+      
+					<div class="l-yanzhengm" id="Img1" >获取验证码</div>
+				</div> 
+				 <!--       <input  class="btn2" value="获取验证码" id="Img1" style="text-align:center" readonly/> style="width: 46%;" 
+					<input type="text"  placeholder="请输入验证码" style="width: 46%;"/>-->
+				<!--<div class="l-loginform clearfix">
+					<span class="l-wjmm fl"><a href="##">忘记密码？</a> </span>
+					<span class="l-wjmm1 fr"><a href="##">立即注册</a></span>
+				</div>-->
+				<button id="Img12" type="button" style="display: block;border: 0px;" class="l-loginbtn">
+					绑定
+                </button>
+				</form>
+            </div>
+		</div>
+	</body>
+</html>
+<?php
+if(isset($reg_code_time)&&!empty($reg_code_time)){
+echo "<script type='text/javascript'>var zz=".$reg_code_time." </script>";
+echo "<script type='text/javascript'>var aa=".time()." </script>";
+}else{
+echo "<script type='text/javascript'>var zz=0 </script>";
+echo "<script type='text/javascript'>var aa=60 </script>";
+}
+?>
+<!--<div style="clear:both;"></div>-->
+<!--< script type="text/javascript" src="/Public/default/Member/js/Validform_min.js">< /script>
+< script type="text/javascript" src="/Public/default/Member/js/reg.js">< /script> -->
+<script type="text/javascript">
+// alert(aa-zz);
+
+  $("#Img12").click(function() {
+
+    var user = $("#txtUser").val();
+    var user_name = $("#user_name").val();
+    var phone = $("#txtPhone").val();
+//  var pass = $("#txtPwd").val();
+     var openid = $("#openid").val();
+    var code = $("#code").val();
+     var txtIncode = $("#txtIncode").val();
+    
+ 
+
+     if(phone == ""){
+      alert('手机号不能为空');
+      return false;
+    }
+      if(code == ""){
+      alert('验证码不能为空');
+      return false;
+    } 
+    $.ajax({
+      url: "/Wapmember/common/weixinregaction/",
+      type: "post",
+      dataType: "json",
+      data: {"txtUser":phone,"txtPhone":phone,"code":code,'txtIncode':txtIncode,"openid":openid,"user_name":user_name},
+      success: function(d) {
+        if(d.status == "c"){
+             alert(d.info);
+             return false;
+          }else if(d.status == "n"){
+             alert(d.info);
+             return false;
+          }
+          else{
+           alert(d.info,{icon: 1});
+            window.location.href='/';
+            return false;
+          }
+      }
+    }); 
+  });   
+	
+	
+	  $("#Img1").click(function() {
+    var phone = $("#txtPhone").val();
+ 
+    if(phone == ""){
+      alert('手机号不能为空');
+      return false;
+    }else{
+    settime() 
+    }
+
+  });
+  var zc=aa-zz;
+  if(zc>=60){
+   var countdown=60; 
+  }else{
+   var countdown=zc; 
+  }
+//     var countdown=60; 
+     function settime() 
+        { 
+        	
+        	 var openid = $("#openid").val();
+            var phone = $("#txtPhone").val();
+ 
+      if (countdown == 60)
+            {
+            	//alert(1);return;
+    $.ajax({
+      url: "/wapmember/common/sendcode1/",
+      type: "post",
+      dataType: "json",
+      data: {"phone":phone,"openid":openid,"type":3},
+      success: function(d) {
+        if(d.status == "p"){
+            alert(d.info);
+             return false;
+          }else if(d.status == "m"){
+            alert(d.info);
+             return false;
+          }
+          else if(d.status == "f"){
+            alert(d.info);
+             return false;
+          }else{
+           alert(d.info,{icon: 1});
+            return false;
+          }
+      }
+    });
+      }
+            if (countdown == 0) 
+            { 
+                $("#Img1").removeAttr("disabled");    
+                $("#Img1").html("获取验证码"); 
+                countdown = 60; 
+            } 
+            else 
+            { 
+                $("#Img1").attr("disabled","disabled");
+                $("#Img1").html("重新发送(" + countdown + ")"); 
+                countdown--; 
+            } 
+            var dxtimer = setTimeout(function() { if (countdown == 60){clearTimeout(dxtimer);}else{settime();} },1000) 
+            }
+function strLength(as_str){
+    return as_str.replace(/[^\x00-\xff]/g, 'xx').length;
+}; 
+</script>
+
+
+
+
+
+
+
+
+
+
+

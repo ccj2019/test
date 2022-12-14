@@ -1,0 +1,125 @@
+<include file="Public:_header" />
+
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<tagLib name="htmlA" />
+
+<script type="text/javascript">
+
+	var delUrl = '__URL__/doDel';
+
+	var addUrl = '__URL__/add';
+
+	var isSearchHidden = 1;
+
+	var searchName = "搜索/筛选";
+
+</script>
+
+<div class="so_main">
+
+  <div class="page_tit">记录列表</div>
+
+<!--搜索/筛选会员-->
+
+  <include file="search" />
+
+<!--搜索/筛选会员-->
+
+
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right"></div>
+
+    <!-- <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选" style="search_action" />
+
+    <htmlA:commonBtn type="href" action="__URL__/export?{$query}" value="将当前条件下数据导出为Excel"/> -->
+
+  </div>
+
+  
+
+  <div class="list">
+
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+
+    <!-- <th style="width:30px;">
+    
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+    
+        <label for="checkbox"></label>
+    
+    </th> -->
+
+    
+    <th class="line_l">编号</th>
+    <th class="line_l">用户名</th>
+    <th class="line_l">奖品</th>
+    <th class="line_l">抽奖时间</th>
+    <th class="line_l">状态</th>
+    <th class="line_l">操作</th>    
+  </tr>
+
+      <foreach name="list_lottery" item="vo">
+      <tr overstyle='on' id="list_{$key}">
+    <!--     <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value=""></td> -->
+    
+        <td class="line_l">{$vo.id}</td>
+        <td class="line_l"><htmlA:user id="vo.uid" uname="vo.user_name" /></td>
+        <td class="line_l">{$vo.prize}</td>
+        <td class="line_l">{$vo.add_time|date='Y-m-d H:i:s',###}</td>        
+        <td class="line_l">
+          <if condition="$vo.status eq 0">待处理
+            <elseif condition="$vo.status eq 1"/>
+            审核通过
+            <else />
+            审核未通过
+          </if>
+        </td>
+        <td class="line_l">
+          <if condition="$vo.status eq 0">
+          <a href="__URL__/edit?lid={$vo.id}">编辑</a>
+          <else />
+            --
+          </if>
+        </td>
+      </tr>
+      </foreach>
+
+  </table>
+
+
+
+  </div>
+
+  
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+
+    <!-- <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选会员" style="search_action" />
+
+    <htmlA:commonBtn type="href" action="__URL__/export?{$query}" value="将当前条件下数据导出为Excel"/> -->
+<div style="clear:both;"></div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+function showurl(url,Title){
+
+	ui.box.load(url, {title:Title});
+
+}
+
+</script>
+
+
+
+<include file="Public:_footer" />

@@ -1,0 +1,75 @@
+
+<if condition="$cid eq 35">
+<div class="help">
+    <div class="help-search">
+        <div class="container">
+            <div class="search-box">
+                <form action="{:U('article/search')}" method="get">
+                    <div class="search">
+                        <input type="text" name="key" placeholder="请输入问题关键词" />
+                        <input type="submit" class="sub" value="搜索" />
+                    </div>
+                    <div class="key">
+                        <a href="/article/search.html?key=充值">充值</a>
+                        <a href="/article/search.html?key=提现">提现</a>
+                        <a href="/article/search.html?key=手续费">手续费</a>
+                        <a href="/article/search.html?key=借款">借款</a>
+                        <a href="/article/search.html?key=收益">收益</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="help-list">
+        <div class="container">
+            <div class="list-li">
+                <h2>关于充值与提现</h2>
+                <ul>
+
+                    <!-- <foreach name="czlist.list" item="vo"> -->
+                    <li>
+                        <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}</a>
+                    </li>
+                    <!-- </foreach> -->
+                </ul>
+            </div>
+            <div class="list-li">
+                <h2>名词解释</h2>
+                <ul>
+                    <!-- <foreach name="mclist.list" item="vo"> -->
+                    <li>
+                        <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}</a>
+                    </li>
+                    <!-- </foreach> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<elseif condition="$cid eq 39" />
+<link href="__PUBLIC__/{:C('DEFAULT_THEME')}/home/huodong/css/style.css" rel="stylesheet" />
+<div class="clear"></div>
+
+    <div class="active-banner">
+      <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/huodong/images/active-banner.jpg" alt="" />
+    </div>
+    <div class="container active-content">
+    <!-- <foreach name="list.list" item="vo">   -->
+      <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">
+        <img src="{$vo.art_img}" alt="" />
+        <h2>{$vo.title}</h2>
+      </a>
+      <!-- </foreach> -->
+      <div class="clear"></div>
+    </div>
+<div class="page_div navslis">{$list.page}</div>
+<style type="text/css">  
+/*分页*/
+.page_div{ margin:auto; text-align:center;padding: 10px;height:31px; cursor:pointer; line-height:31px; margin-right:5px; }
+
+.page_div a{height:31px; cursor:pointer; line-height:31px; margin-right:5px; overflow:hidden; vertical-align:middle; display:inline-block;}
+.page_div .current{background:url(/skin/web/v1.0/images/invest_icon.png) no-repeat -301px 0;height:31px; cursor:pointer; line-height:31px; margin-right:5px; overflow:hidden; vertical-align:middle; display:inline-block; }
+
+</style>
+</if>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+	<body>
+		<div class="l-huiyuan">
+			<div>
+				
+				<div class="l-fh l-on"><a href="/wapmember" class="l-fanhui on" >&lt;返回</a><span>我的钱包</span><div  class="l-fanhui1" ><a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a></div></div>
+				
+				<div class="l-hymain">
+					<div class="l-hybj">
+						<div class="l-wdtoux">
+							<div class="l-wdtoux1">
+							<img src="{$minfo.user_img|default='/Public/wap/img/default-avatar.png'}" alt="" />
+                                								
+							</div>
+							<p> <span><a href="##"><if condition="!empty($minfo['nick_name'])"> {$minfo['nick_name']}<else/>{$minfo.user_name}</if></a></span>
+								<span class="l-spank">|</span> 
+								<span><a href="##"> {$minfo.id|getVerifywap=###}</a></span>
+							</p>
+							
+						</div>
+						<div class="l-mysitu clearfix">
+					<ul>    
+									<li>
+									<a href="{:U('charge/index')}">
+									<img src="/Public/wap/img/huiyuan/chongzhi.png"/>
+									<p>充值</p>
+								</a>
+                                </li>
+                                <li>
+									<a href="{:U('withdraw/withdraw')}">
+									<img src="/Public/wap/img/huiyuan/tixian.png"/>
+									<p>提现</p>
+								</a>
+                                </li><li>
+									<a href="/wapmember/capital/qiandao">
+									<img src="/Public/wap/img/huiyuan/qiandao3.png"/>
+									<p>签到</p>
+								</a>
+                                </li><li>
+									<a href="{:U('verify/index')}">
+									<img src="/Public/wap/img/huiyuan/renzheng.png"/>
+									<p>认证</p>
+								</a>
+                                </li>
+							</ul>
+							
+						</div>
+					</div>
+						<div class="l-jifen clearfix">
+					<a href="/wapmember/Credit/index"> 
+						<span class="fl"><img src="/Public/wap/img/l-zuanshi.png"/>积分:
+						<span class="l-redcolor">
+						{$minfo['credits']}
+					</span></span></a>
+				<a href="/wapmember/capital/"> 
+					<span class="fr"><img src="/Public/wap/img/l-zuanshi1.png"/>可用余额:
+						<span class="l-redcolor">
+						¥{:getFloatvalue($minfo['account_money'],2)}
+					</span></span></a>
+				</div>
+				</div>
+			</div>
+			
+			
+        <div>	
+           
+        </div>
+        
+      
+              
+              
+              <!--安全信息-->
+             <div class="l-mybiaoti">我的钱包</div>
+              <div class="l-luganquan clearfix">
+                 <ul><a href="/Wapmember">	
+                    <li>
+                    	
+                    		 <img src="/Public/wap/img/huiyuan/shangyiji.png" alt="" />
+                    		<p>返回上一级</p>
+                    	
+                    </li></a><a href="/Wapmember/charge/chargelog">
+                    <li>
+                    	
+                    		 <img src="/Public/wap/img/huiyuan/chongzhi1.png" alt="" />
+                    		<p>充值记录</p>
+                    	
+                    </li></a>	<a href="/Wapmember/withdraw/withdrawlog">
+                    <li>
+                    
+                    		 <img src="/Public/wap/img/huiyuan/tixian1.png" alt="" />
+                    		<p>提现记录</p>
+                    	
+                    </li></a><a href="/wapmember/capital/detail">
+                    <li>
+                    	
+                    		 <img src="/Public/wap/img/huiyuan/shouzhi.png" alt="" />
+                    		<p>收支明细</p>
+                    	
+                    </li></a><a href="/wapmember/tendout/zidong">
+                    <li>
+                    	
+                    		 <img src="/Public/wap/img/huiyuan/zhitou.png" alt="" />
+                    		<p>智投项目</p>
+                    	
+                    </li></a>		<a href="/wapmember/Experience/index">
+                     <li>
+                    
+                    		 <img src="/Public/wap/img/huiyuan/tiyanjin.png" alt="" />
+                    		<p>体验金</p>
+                    
+                    </li>	</a>
+                    
+                 </ul>
+              	
+                
+              </div>
+		</div>
+		<!--底部-->
+		
+				<!--底部-->
+<include file="Public:footer"/>

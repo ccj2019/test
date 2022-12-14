@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/ldy.css" />
+	<!--<link rel="stylesheet" type="text/css" href="/public/wap/css/FlexoCalendar.css" />-->
+
+	<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/public/wap/js/qiandao.js"></script>
+	<script type="text/javascript" src="/public/wap/js/ldy.js"></script>
+
+	<style>
+		@charset "utf-8";
+		blockquote,
+		body,
+		button,
+		caption,
+		dd,
+		div,
+		dl,
+		dt,
+		fieldset,
+		figure,
+		form,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		html,
+		input,
+		legend,
+		li,
+		menu,
+		ol,
+		p,
+		pre,
+		.flexoCalendar,
+		td,
+		textarea,
+		th,
+		ul {
+			margin: 0;
+			padding: 0
+		}
+		
+		.calendar-wrapper {
+			position: relative;
+			margin-bottom: 20px;
+			width: 80%;
+			margin: 15px auto;
+			background: #fff;
+			min-height: 155px;
+			margin-top: -23px;
+		}
+		
+		.calendar-wrapper .flexoCalendar {
+			margin: 0 auto;
+			border-collapse: separate;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+		}
+		
+		.flexoCalendar td,
+		.flexoCalendar th {
+			border: 0 none;
+			height: 27px;
+			text-align: center;
+			width: 32px;
+			font-size: 12px;
+			cursor: pointer
+		}
+		
+		.flexoCalendar tr th .icon-arrow-left {
+			display: inline-block;
+			height: 16px;
+			line-height: 16px;
+			margin-top: 4px;
+			vertical-align: text-top;
+			width: 12px;
+			cursor: pointer
+		}
+		
+		.flexoCalendar tr th .icon-arrow-right {
+			display: inline-block;
+			height: 16px;
+			line-height: 16px;
+			margin-top: 4px;
+			vertical-align: text-top;
+			width: 12px;
+			cursor: pointer
+		}
+		
+		.icon-arrow-left:before {
+			content: '<';
+			font-style: normal;
+		}
+		
+		.icon-arrow-right:before {
+			content: '>';
+			font-style: normal;
+		}
+		
+		.flexoCalendar thead tr {
+			height: 25px;
+			color: #fff;
+		}
+		
+		.flexoCalendar thead tr:first-child th {
+			cursor: pointer
+		}
+		/*.flexoCalendar thead tr:first-child th:hover{background:#3dbaf0}*/
+		
+		.flexoCalendar tr td.other-month {
+			color: #aaa
+		}
+		
+		.flexoCalendar thead,
+		.flexoCalendar th {
+			background-color: #FFFFFF;
+			font-weight: normal;
+			color: #3dbaf0;
+			width: 14.2%;
+		}
+		
+		.flexoCalendar tr th.current-year {
+			width: 60%;
+			font-size: .35rem;
+		}
+		/*.flexoCalendar td.selected-day span{color:  #3dbaf0;}*/
+		
+		.flexoCalendar tr td .day {
+			display: block;
+			width: 30px;
+			height: 25px;
+			line-height: 22px;
+			text-align: center;
+			margin: 1px;
+			border: 1px solid transparent;
+		}
+		
+		.flexoCalendar tr td.current-day>div,
+		.flexoCalendar td.current-day>span {
+			border: 1px solid #3dbaf0!important;
+			border-radius: 4px;
+			color: #3dbaf0;
+			background: #fff;
+		}
+		
+		.flexoCalendar tr td.selected>div,
+		.flexoCalendar tr td.selected>span,
+		.flexoCalendar tr td.selected>div span {
+			border: 1px solid #3dbaf0;
+			border-radius: 4px;
+			background-color: #3dbaf0;
+			color: #fff!important
+		}
+		
+		#calendar-weekly .calendar-hd,
+		#calendar-monthly .calendar-hd,
+		#calendar-weekly tbody td {
+			height: 30px;
+		}
+		
+		#calendar-weekly tr td div {
+			margin-bottom: 2px;
+		}
+		
+		#calendar-weekly tr td .week {
+			width: 100%;
+			height: 100%;
+			line-height: 30px;
+			color: #565656;
+			text-align: center;
+		}
+		
+		#calendar-weekly tr td .process {
+			color: #999;
+			margin-left: 20px;
+			display: inline-block;
+			width: 57px;
+			text-align: left;
+		}
+		
+		#calendar-monthly td.tmonth .month {
+			display: block;
+			width: 55px;
+			height: 30px;
+			line-height: 30px;
+			margin: 1px;
+			text-align: center;
+			border-radius: 4px;
+			color: #565656;
+			border: 1px solid transparent;
+		}
+		
+		#calendar-monthly td.current-month .month {
+			border: 1px solid #3dbaf0;
+		}
+		
+		#calendar-weekly tr td.week1 div,
+		.tmonth.month1 span,
+		.tmonth.month2 span,
+		.tmonth.month3 span,
+		.tmonth.month4 span {
+			margin-top: 10px!important;
+		}
+		
+		#calendar {
+			box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+		}
+		
+		.l-fh {
+			border-bottom: 3px solid #EEF1F8;
+		}
+		
+		.l-tanchubox {
+			width: 80%;
+			padding: .3rem .2rem;
+			margin: 2rem auto;
+			background: #FFFFFF;
+			border-radius: 5px;
+			text-align: left;
+		}
+		
+		.l-tanchubox p {
+			padding: .2rem 0;
+			font-size: .3rem;
+			padding-bottom: 0;
+		}
+		
+		.l-tanchubox p:nth-child(1) {
+			font-size: .3rem;
+			text-align: center;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="javascript:history.go(-1);" class="l-fanhui on">&lt;返回</a><span>签到中心</span>
+			<div class="l-fanhui1">
+				<a href="/wapmember">会员中心</a>
+			</div>
+		</div>
+		<div class="l-qdao">
+			<div class="qiandbtn cc">
+				签到规则<img src="/public/wap/img/yaoqing/qdwenh.png" alt="" />
+			</div>
+			<div class="l-qdao1 cc1">
+				<p class="p1">点击 </p>
+				<p class="p2">签到</p>
+			</div>
+			<div class="l-qdjf">
+				<p class="p1">
+					积分 <span>220</span>
+				</p>
+				<p>已签到<span>10</span>天</p>
+			</div>
+		</div>
+		<!--签到-->
+		<div class="calendar-wrapper" id="0">
+			<div id="calendar"></div>
+		</div>
+		
+		
+		<!--签到进度条-->
+		<div class="clearfix l_qdtxt">
+		<div class="fl l_qdjbimg"><img src="/public/wap/img/yaoqing/lb.png"/>签到福利</div>
+        <div class="fr l_qdjbimg1">
+          	10月已签到<span> 1 </span>天
+        </div> 			
+		</div>
+      <div >
+      	<ul class="l_libox" style="padding: 0;">
+      		<li>1元优惠卷</li>
+      		<li>200积分</li>
+      		<li>8元优惠卷</li>
+      		<li>1000积分</li>
+      		<li>20元优惠卷</li>
+      		
+      	</ul>
+      </div>
+		<div class="l_jdbox">
+			<div class="l_jindut">
+		<div class="l_jindut on"></div>
+			<img src="/public/wap/img/yaoqing/t1.png" alt="" />
+		</div>
+
+		</div>
+		<div >
+      	<ul class="l_libox" style="padding: 0;">
+      		<li><span>已领取</span></li>
+      		<li>07天</li>
+      		<li>14天</li>
+      		<li>21天</li>
+      		<li>30天</li>
+      		
+      	</ul>
+      </div>
+		
+		<!--积分兑换-->
+		<div class="l-jfduh">
+			<p>
+				<span>积分兑换</span> <span class="l-span1"><a href="##">查看更多&gt;&gt;</a></span>
+			</p>
+
+		</div>
+		<div class="l-imggd clearfix">
+			<div>
+				<a href="##">
+					<img src="/public/wap/img/yaoqing/l-ckgd.png" />
+				</a>
+			</div>
+			<div>
+				<a href="##">
+					<img src="/public/wap/img/yaoqing/l-ckgd1.png" />
+				</a>
+			</div>
+
+		</div>
+
+		<!--底部-->
+		<div class="l-di"></div>
+
+		<div class="footer">
+			<ul>
+				<li class="home on">
+					<a href="##"><img src="/public/wap/img/zhuye.png"><img src="/public/wap/img/zhuye1.png"><span>主页</span></a>
+				</li>
+				<li class="home">
+					<a href="##"><img src="/public/wap/img/faqi.png"><img src="/public/wap/img/faqi1.png"><span>发起</span></a>
+				</li>
+				<li class="home">
+					<a href="##"><img src="/public/wap/img/shangcheng.png"><img src="/public/wap/img/shangcheng1.png"><span>商城</span></a>
+				</li>
+
+				<li class="home">
+					<a href="##"><img src="/public/wap/img/wode.png"><img src="/public/wap/img/wode1.png"><span>我的</span></a>
+				</li>
+			</ul>
+		</div>
+
+		<!--弹出-->
+
+		<div class="l-dtc l-btnc">
+
+			<div class="l-tanchubox">
+				<p>—————签到规则—————</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参v与</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参与</p>
+
+				<p style="text-align: center;"> <button class="l-btnc">确定</button></p>
+			</div>
+		</div>
+
+		<!--礼包-->
+
+		<div class="l-dtc1 l-btnc oc">
+
+			<div class="l-tanchubox1 on">
+				<img src="/public/wap/img/yaoqing/gbbtn.png" class="l_gbbtn" />
+				<p class="l_lb1"><img src="/public/wap/img/yaoqing/lb.png" /></p>
+				<p class="l_lb2">连续签到7天</p>
+				<p class="l_lb3">送你优惠大礼包</p>
+				<p style="text-align: center;"> <button class="l-btnc">立即领取</button></p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$('.l-qdao1').click(function() {
+			$('.l-qdao1 .p1').text('已签到');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+			console.log(2)
+
+		})
+		$('.l-btnc').click(function() {
+			console.log(2)
+
+			$('.l-dtc1').hide();
+
+		});
+
+		$('.calendar-wrapper').attr('id', '1');
+		times('a');
+
+		function times(jud) {
+
+			console.log(jud + '2')
+			var myDate = new Date;
+			var year = myDate.getFullYear(); //获取当前年
+			var yue = myDate.getMonth() + 1; //获取当前月
+			var date = myDate.getDate(); //获取当前日
+			var h = myDate.getHours(); //获取当前小时数(0-23)
+			var m = myDate.getMinutes(); //获取当前分钟数(0-59)
+			var s = myDate.getSeconds(); //获取当前秒
+			console.log(year)
+			// $('.calendar-wrapper').show();
+			$("#calendar").flexoCalendar({
+				setYear: year,
+				setMonth: yue,
+				selectDate: 'each-each-each',
+				onselect: function(res) {
+					var id = $('.calendar-wrapper').attr('id');
+					if(id == 1) {
+						console.log('q');
+						$('#start').val(res);
+					} else {
+						console.log('w')
+						$('#end').val(res);
+					}
+
+					// $('.calendar-wrapper').hide();
+					console.log(res)
+
+				}
+			});
+
+		}
+	</script>
+
+</html>

@@ -1,0 +1,65 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var editUrl = '__URL__/edit';
+	var editTitle = '修改会员类型';
+	var isSearchHidden = 1;
+	var searchName = "搜索/筛选会员";
+</script>
+<div class="so_main">
+  <div class="page_tit">红包规则</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>  
+   <htmlA:commonBtn type="href" action="__URL__/rules_add" value="添加规则"/>
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>    
+    <th class="line_l">ID</th>
+    <th class="line_l">规则类型</th>
+    <th class="line_l">红包金额</th>  
+    <th class="line_l">积分</th> 
+    <th class="line_l">使用规则</th>
+    <th class="line_l">有效天数</th>
+    <th class="line_l">发放规则</th>
+    <th class="line_l">规则有效（起）</th>
+    <th class="line_l">规则失效（止）</th>        
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="rList">
+      <tr overstyle='on' id="list_{$vo.id}">        
+        <td>{$vo.id}</td>
+        <td><if condition="$vo.type eq 3">投资红包<elseif condition="$vo.type eq 1"/>签到<elseif condition="$vo.type eq 4"/>全部发放规则<else/>注册红包</if></td>            
+        <td><if condition="$vo.money_type eq 2">{$vo.money_bonus}</if></td>
+        <td><if condition="$vo.money_type eq 1">{$vo.money_bonus}</if></td>
+        <td><if condition="$vo.money_type neq 1">{$vo.money_bonus}最低投资<font color="#009900">{$vo.bonus_invest_min}</font>元可用<else/>请在积分商城兑换</if></td>                
+        <td><if condition="$vo.money_type neq 1">{$vo.expired_day}<else/>长期有效</if></td>
+        <td><if condition="$vo.type eq 3">投资<font color="#009900">{$vo.invest_money}</font>元以上<elseif condition="$vo.type eq 1"/>签到<?php echo intval($vo['invest_money']);?>天<elseif condition="$vo.type eq 4"/>全部发放规则<else/>注册成功后</if></td>            
+        <td>{$vo.start_time|date="Y-m-d H:i:s",###}</td>
+        <td>{$vo.end_time|date="Y-m-d H:i:s",###}</td>                
+        <td>    
+        	<if condition="$vo.type eq 4" >  <a href="{:U('rules_edit')}?id={$vo.id}&rules_addpubBonus=1">全部发放</a> |  </if>
+          <a href="{:U('rules_edit')}?id={$vo.id}">修改</a> |       
+          <a href="{:U('rules_del')}?id={$vo.id}">删除</a>
+        </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+ 
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

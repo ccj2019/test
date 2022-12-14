@@ -1,0 +1,504 @@
+ 
+<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+<link rel="stylesheet" href="/public/wap/css/index.css">
+
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+<!-- 引入组件 -->
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+
+
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:history.go(-1);" class="w-header-left">
+                < 返回 </a>
+                    <h3>项目详情</h3>
+                    <a href="##" class="w-header-right">
+                        <!--<img src="/public/wap/img/w-Share.png" style="width: 32%;
+                        margin: 22% 0 0 57%;" alt="">-->
+                    </a>
+        </div>
+    </div>
+
+
+    <!-- 项目详情  start -->
+
+
+
+ 
+ 
+        <div class="w-probro-bg">
+            <img src="{$binfo.borrow_img}" alt="">
+        </div>
+
+ 
+
+ 
+            <div class="w-item">
+            <div class="w-itemcon">
+                <h3>{$binfo.borrow_name}</h3>
+                <ul class="w-itemcon-ul">
+                    <li class="flex first">
+                        <div>
+                       
+                            <p>已筹金额</p>
+                        </div>
+                        <div>
+                            <span>{:count($investinfo)}</span>
+                            <p>支持人数</p>
+                        </div>
+                        <div>
+                            <span>{$binfo.borrow_duration}天</span>
+                            <p>剩余时间</p>
+                        </div>
+                    </li>
+                    <li class="jindu">
+                        <!-- 进度条 w为变量 -->
+                        <div class="wq-div" w="90">
+
+                        </div>
+                    </li>
+                    <li class="flex last">
+                        <div>
+                            目标金额：
+                            <span>{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}</span>
+                        </div>
+                        <div>
+                            达成率：
+                            <span>{$binfo.progress}%</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-itemcon">
+
+                <ul class="w-itemcon-ul">
+                    <li class="flex first">
+                        <div>
+                            <span>2.37%</span>
+                            <p>项目收益率</p>
+                        </div>
+                        <div>
+                            <span>1.5个月</span>
+                            <p>收益周期</p>
+                        </div>
+                        <div>
+                            <span>1期</span>
+                            <p>收益期数</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+
+             
+
+
+
+        </div>
+        <div class="w-proret">
+            <div class="date">
+                此项目必须在{$binfo.endtimes|date="Y-m-d",###}之前众筹{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}才算成功
+            </div>
+        </div>
+
+        <div class="w-proret">
+    
+            <div class="car-top flex">
+               
+                    <a href="##">
+                        <span class="zi">
+                                项目详情
+                        </span>
+                        <span class="span">|</span>
+
+                    </a>
+                   
+                
+                    <a href="##" >
+                            <span class="zi w-proret-active">选择回报</span> 
+                        <span class="span">|</span>
+                    </a>
+                   
+              
+              
+                    <a href="##">
+                            <span class="zi">支持人数</span>
+                            <span class="span">|</span>
+                        </a>
+                   
+                
+              
+                    <a href="##">
+                            <span class="zi">项目合同</span> 
+                            <!-- <span class="span" style="opacity: 0;">|</span> -->
+                    </a>
+                
+            </div>
+            <div class="car">
+                        <!-- 详情 -->
+                <div class="car-con car-det"  >
+             
+                	{$binfo.borrow_info} 
+                	   	{$binfo.content_img} 
+                   <!--<div>
+                       <img src="/public/wap/img/w-car-det1.jpg" alt="">
+                   </div>
+                   <div>
+                        <img src="/public/wap/img/w-car-det2.jpg" alt="">
+                    </div>
+                    <div>
+                            <img src="/public/wap/img/w-car-det3.jpg" alt="">
+                        </div>-->
+                </div>
+                <!-- 回报 -->
+                <div class="car-con" style="display: block">
+                    <div class="car-con-txt">
+                        <div class="car-con-top flex">
+                            <a href="##">支持：¥ {$binfo.borrow_min}</a>
+
+                            <!-- w-proret-active-bg   选中变蓝色  -->
+                            <a href="##" class="bg w-proret-active-bg">
+                                <img src="/public/wap/img/w-dui.png" alt="">
+                            </a>
+                        </div>
+                        <div class="car-con-center">
+                           {$binfo.return_info}
+                        </div>
+                        <div class="car-con-bottom flex">
+                            <a href="##" class="flex">
+                                <img src="/public/wap/img/w-renqun.png" alt="">
+                             		<span>{:count($investinfo)}</span>位支持者 
+                            </a>
+                            <a href="##" class="shouqi">
+                                收起
+                            </a>
+                        </div>
+                    </div>
+                    <!--<div class="car-con-txt">
+                        <div class="car-con-top flex">
+                            <a href="##">支持：¥100</a>
+                            <a href="##" class="bg">
+                                <img src="/public/wap/img/w-dui.png" alt="">
+                            </a>
+                        </div>
+                        <div class="car-con-center">
+                            众筹成功后回款周期不超过45天，售出金额与众筹金额差价的30%作为平台费用，70%按投资人的投资比例进行分配，如果45天未成功售出，则由东盛澜按众筹价格的年利率15%回购海产品置入自己冷库，由东盛澜公司自己完成销售。如在众筹期内众筹失败，则退回资金至铭万平台个人账户，期间无任何收益
+                            .
+                        </div>
+                        <div class="car-con-bottom flex">
+                            <a href="##" class="flex">
+                                <img src="/public/wap/img/w-renqun.png" alt="">
+                                <span>31</span>位支持者
+                            </a>
+                            <a href="##" class="shouqi">
+                                展开
+                            </a>
+                        </div>
+                    </div>
+                    <div class="car-con-txt">
+                        <div class="car-con-top flex">
+                            <a href="##">支持：¥100</a>
+                            <!-- w-proret-active-bg   选中变蓝色  -->
+                            <!--<a href="##" class="w-proret-active-bg bg">
+                                <img src="/public/wap/img/w-dui.png" alt="">
+                            </a>
+                        </div>
+                        <div class="car-con-center">
+                            众筹成功后回款周期不超过45天，售出金额与众筹金额差价的30%作为平台费用，70%按投资人的投资比例进行分配，如果45天未成功售出，则由东盛澜按众筹价格的年利率15%回购海产品置入自己冷库，由东盛澜公司自己完成销售。如在众筹期内众筹失败，则退回资金至铭万平台个人账户，期间无任何收益
+                            .
+                        </div>
+                        <div class="car-con-bottom flex">
+                            <a href="##" class="flex">
+                                <img src="/public/wap/img/w-renqun.png" alt="">
+                                <span>6</span>位支持者
+                            </a>
+                            <a href="##" class="shouqi">
+                                展开
+                            </a>
+                        </div>
+                    </div>--> 
+                </div>
+<!-- 人数 -->
+                <ul class="car-con car-nump">
+                	
+                 <!-- <volist name="investinfo" id="vi"> -->
+                                    <tr>
+                                    	<li >
+                        <a href="##" class="flex">
+                            <div class="car-left">
+                                <img src="/public/wap/img/w-car-con.jpg" alt="">
+                            </div>
+                            <div class="car-right">
+                                <div>{$vi.user_name|hidecard=###,5}</div>
+                                <div>支持此项目
+                                    <span>¥{:getFloatvalue($vi['investor_capital'],2)}</span>
+                                </div>
+                                <div>支持数：
+                                    <span>{:count($investinfo)}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+<!--                	
+                                      <td align="center">{$vi.user_name|hidecard=###,5}</td>
+                                      <if condition="$vi.bonus_id neq 0">
+                                        <td>{:getFloatvalue($vi['investor_capital']-(bounsmoney($vi['bonus_id'])),2)}</td>                    
+                                      <else/>
+                                        <td>{:getFloatvalue($vi['investor_capital'],2)}</td>                    
+                                      </if>
+                                      <td>
+                                        <if condition="$vi.member_interest_rate_id neq 0">加息券：{:intestrate($vi['member_interest_rate_id'])}%<br /></if>
+                                        <if condition="$vi.bonus_id neq 0">红包{:bounsmoney($vi['bonus_id'])}</if>
+                                      </td>                    
+                                      <td><if condition="$vi.investor_way eq 1">PC<else />APP</if></td>                    
+                                      <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+                                    </tr>-->
+                                <!-- </volist> -->	
+                	
+                    <!--<li >
+                        <a href="##" class="flex">
+                            <div class="car-left">
+                                <img src="/public/wap/img/w-car-con.jpg" alt="">
+                            </div>
+                            <div class="car-right">
+                                <div>日出</div>
+                                <div>支持此项目
+                                    <span>¥10,000.00</span>
+                                </div>
+                                <div>支持数：
+                                    <span> 5</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li >
+                            <a href="##" class="flex">
+                                <div class="car-left">
+                                    <img src="/public/wap/img/w-car-con.jpg" alt="">
+                                </div>
+                                <div class="car-right">
+                                    <div>日出</div>
+                                    <div>支持此项目
+                                        <span>¥10,000.00</span>
+                                    </div>
+                                    <div>支持数：
+                                        <span> 5</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li >
+                                <a href="##" class="flex">
+                                    <div class="car-left">
+                                        <img src="/public/wap/img/w-car-con.jpg" alt="">
+                                    </div>
+                                    <div class="car-right">
+                                        <div>日出</div>
+                                        <div>支持此项目
+                                            <span>¥10,000.00</span>
+                                        </div>
+                                        <div>支持数：
+                                            <span> 5</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li >
+                                    <a href="##" class="flex">
+                                        <div class="car-left">
+                                            <img src="/public/wap/img/w-car-con.jpg" alt="">
+                                        </div>
+                                        <div class="car-right">
+                                            <div>日出</div>
+                                            <div>支持此项目
+                                                <span>¥10,000.00</span>
+                                            </div>
+                                            <div>支持数：
+                                                <span> 5</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li >
+                                        <a href="##" class="flex">
+                                            <div class="car-left">
+                                                <img src="/public/wap/img/w-car-con.jpg" alt="">
+                                            </div>
+                                            <div class="car-right">
+                                                <div>日出</div>
+                                                <div>支持此项目
+                                                    <span>¥10,000.00</span>
+                                                </div>
+                                                <div>支持数：
+                                                    <span> 5</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>-->
+                </ul>
+                <div class="car-con">
+                {$article_category.type_content}
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w-end flex">
+            <a href="##">分享项目</a>
+           <a  href="/wap/invest/is_order?id={$binfo.id}" class="w-end-active w-end-a">立即支持</a>
+            <!-- href="/wap/invest/is_order?id={$binfo.id}"-->
+        </div>
+<!-- 购物弹窗 -->
+<!--
+
+
+        <div class="l-spxztc" id="lsp" >
+							<van-actionsheet v-model="show">
+						<div class="clear l-fd">
+							<div class="l-tc1">
+								<img src="/public/wap/img/w-itemdet.jpg"/>
+							</div>
+							<div class="l-tc2">
+								<p class="l-swzp2 in"> 
+			                            第122期海鲜项目（梭子蟹）
+			                            <br>
+			                            体验标
+			                    </p>
+								<p class="l-swzp2 on">已选择：100元</p>
+							</div>
+						</div>
+						<div class="l-spguige">
+							<p>规格</p>
+							<div class="clear">
+								<div class="l_spxz on">100元</div>
+					 <div class="l_spxz">2斤装</div> 
+							</div>
+						</div>
+						<div class="l-spguige">
+							<p>数量</p>
+							<van-stepper v-model="ddc" />
+						</div>
+						<div class="l-qurena" @click="asHide">
+			                确认
+			            </div>
+						</van-actionsheet>
+        </div>	
+        -->
+       
+    
+    
+<style>
+	.footer{display: none;}
+	.w-item {
+	    background: #eff3f9;
+	    padding: 0.1rem 0;
+	}
+	.w-proret {
+    box-sizing: border-box;
+    width: 100%;
+    padding: .1rem 2%;
+    border-bottom: .1rem solid #eff3f9;
+}
+</style>
+
+
+    <script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/public/wap/js/index.js"></script>
+    <script>
+        $(function () {
+
+            var a = "#00a0e9";
+            var b = "#dedede";
+            var w = "100%";
+            var h = "5px";
+            var wq0div = $(".wq-div");
+            var barb = function () {
+                wq0div.each(function () {
+                    var width = $(this).attr('w');
+                    // width = parseFloat($('.w-porper-div2 .first>span').text())
+                    var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+                    $(this).append(barbox);
+                })
+            }
+
+            var amimeat = function () {
+                $(".charts").each(function (i, item) {
+                    var wi = parseInt($(this).attr("w"));
+                    $(item).animate({ width: wi + "%" }, 1000, function () {
+
+                    });
+                });
+            }
+            var barbCss = function (a, b) {
+                $(".barbox").css({
+                    "height": h,
+                    "line-height": h,
+                    "text-align": "center",
+                    "color": "#fff",
+                })
+                $(".barbox>dd").css({
+                    "float": "left"
+                })
+                $(".barline").css({
+                    "width": w,
+                    "background": b,
+                    "height": h,
+                    "overflow": "hidden",
+                    "display": "inline",
+                    "position": "relative",
+                    "border-radius": "8px",
+                })
+                $(".barline>d").css({
+                    "position": "absolute",
+                    "top": "0px",
+                })
+                $(".charts").css({
+                    "background": a,
+                    "height": h,
+                    "width": "0px",
+                    "overflow": "hidden",
+                    // "border-radius": "2px"
+                })
+            }
+            barb();
+            amimeat();
+            barbCss(a, b);
+        })
+
+          // 项目详情   弹窗（购物车）
+
+
+//
+//      var lsp = new Vue({
+//          data: {
+//              ddc: 1,
+//              show: false
+//          },
+//          methods: {
+//              asHide() {
+//                  this.show = false
+//                  //TODO
+//                  
+//window.location.href="/wap/invest/is_order";
+//                  //alert(this.ddc)
+//              }
+//          }
+//      }).$mount('#lsp');
+//      $('.w-end-a').click(function () {
+//          lsp.show = true
+//      });
+    </script>
+
+
+</body>
+
+</html>

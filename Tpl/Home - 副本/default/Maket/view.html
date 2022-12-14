@@ -1,0 +1,214 @@
+<include file="Public:_header_common" />
+<title>{$glo.index_title}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<meta property="wb:webmaster" content="37afd1196b6d28b7" />
+<script  type="text/javascript" src="__ROOT__/Style/H/js/backtotop.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/jquery.jslides.js"></script>
+<script type="text/javascript">
+var imgpath="__ROOT__/Style/M/";
+var curpath="Member/common";
+</script>
+<script type="text/javascript" src="__ROOT__/Style/M/js/login.js"></script>
+<script>
+<!--
+/*第一种形式 第二种形式 更换显示样式*/
+
+function invest(id){
+	money=$("#jinebox"+id+" input").attr("money");
+	$.jBox("get:/invest/ajax_invest?id="+id+"&money="+money, {
+		title: "立即投标--{$glo.web_name}",
+		width: "auto",
+		buttons: {'关闭': true }
+	});
+}
+
+function vouch(id){
+	$.jBox("get:/invest/ajax_vouch?id="+id, {
+		title: "立即担保--{$glo.web_name}",
+		width: "auto",
+		buttons: {'关闭': true }
+	});
+}
+
+
+$(document).ready(function(){
+	$(".jines .jian").click(function(){
+		input=$(this).parent().find("input");
+		money=input.attr("money");
+		minmoney=input.attr("minmoney");
+		maxmoney=input.attr("maxmoney");
+		jianmoney=parseInt(money)-50;
+		if(jianmoney<minmoney){
+			$.jBox.tip("最小投资额度为："+minmoney+"元",'tip');	
+			return;
+		}
+		input.attr("money",jianmoney);
+		input.val(jianmoney+"元");
+  	});
+	$(".jines .jia").click(function(){
+		input=$(this).parent().find("input");
+		money=input.attr("money");
+		minmoney=input.attr("minmoney");
+		maxmoney=input.attr("maxmoney");
+		jianmoney=parseInt(money)+50;
+		if(jianmoney>maxmoney && maxmoney!=0){
+			$.jBox.tip("最大投资额度为："+maxmoney+"元",'tip');
+			return;
+		}
+		input.attr("money",jianmoney);
+		input.val(jianmoney+"元");
+  	});
+});
+//-->
+</script>
+<include file="Public:_header_main" />
+<!--中部开始-->
+<div class="clear10"></div>
+<div class="jifen_shop">
+	
+    <div class="jifen_left">
+    	<h1>我的商城</h1>
+        <div class="my_lists">
+        	<a href="/member/order#fragment-1" target="_blank">我的兑换记录</a>
+        </div>
+        <div class="clear10"></div>
+        {:get_ad(8)}
+        <div class="clear10"></div>
+        <h2><a href="/help/ddd.html">更多></a>新闻动态</h2>
+        <ul>
+        	 <php>$xlist = getArticleList(array("type_id"=>array('in','338,336'),"pagesize"=>7)); foreach($xlist['list'] as $kx => $va){</php>
+        	<li><a href="{$va.arturl}" title="{$va.title}">{$va.title|cnsubstr=###,16}</a></li>
+              <php>};$xlist=NULL;</php>
+        </ul>
+    </div>
+    
+    
+    <div class="jifen_right">
+    	<h1 class="j_title">积分商城</h1>
+        
+        <div class="jpro_cont">
+        
+        	<div class="pro_x">
+            	<dl>
+                	<dd><img src="/{$vo.art_img}" /></dd>
+                    <dt class="jt">{$vo.title}</dt>
+                    <dt>兑换价格：<font>￥{$vo.art_jiage}元+{$vo.art_jifen}积分</font></dt>
+                    <dt>商品状态：<if condition="$vo.art_set eq 0"> 在售 <else/> <font>已售完</font> </if></dt>
+                    <dt>商品风格：{$vo.art_fengge}</dt>
+                    <dt>商品描述：{$vo.art_miaoshu}</dt>
+                    <dt><a href="/mall/order?id={$vo.id}" class="buy">立即兑换</a></dt>
+                </dl>
+            </div>
+            <div class="clear10"></div>
+        
+        </div>
+        <h1 class="j_title jjs2">商品详情</h1>
+        <div class="jpro_cont">
+        
+        	{$vo.art_content}
+        	
+        </div>
+        <div class="clear10"></div>
+    </div>
+    
+</div>
+
+
+<div class="clear10"></div>
+<!--中部结束-->
+<script type="text/javascript">
+var investmoney = 0;
+var borrowidMS = 0;
+var borrow_min = 0;
+var borrow_max = 0;
+function PostData(id) {
+  var tendValue = parseFloat($("#invest_money").val());
+  var pin = $("#pin").val();
+  var borrow_pass = (typeof $("#borrow_pass").val()=="undefined")?"":$("#borrow_pass").val();
+  var borrow_id = $("#borrow_id").val();
+  	  tendValue = isNaN(tendValue)?0:tendValue;
+  if(pin==""){
+	$.jBox.tip("请输入支付密码");  
+	return false;
+  }
+  if(tendValue<borrow_min){
+	$.jBox.tip("本标最低投标金额为"+borrow_min+"元，请重新输入投标金额");  
+	return false;
+  }else if(tendValue>borrow_max && borrow_max!=0){
+	$.jBox.tip("本标最大投标总金额为"+borrow_max+"元，请重新输入投标金额");  
+	return false;
+  }
+  $.ajax({
+	  url: "/invest/investcheck",
+	  type: "post",
+	  dataType: "json",
+	  data: {"money":tendValue,'pin':pin,'borrow_id':borrow_id,"borrow_pass":borrow_pass},
+	  success: function(d) {
+			  if (d.status == 1) {
+				  investmoney = tendValue;
+				  $.jBox.confirm(d.message, "会员投标提示", isinvest, { buttons: { '确认投标': true, '暂不投标': false},top:'40%' });
+			  }
+			  else if(d.status == 2)// 无担保贷款多次提醒
+			  {
+				  $.jBox.confirm(d.message, "会员投标提示", ischarge, { buttons: { '去冲值': true, '暂不冲值': false},top:'40%' });
+			  }
+			  else if(d.status == 3)// 无担保贷款多次提醒
+			  {
+				  $.jBox.alert(d.message, '会员投标提示',{top:'40%'});
+			  }else{
+				  $.jBox.tip(d.message);  
+			  }
+	  }
+  });
+}
+
+function ischarge(d){
+	if(d===true) window.location.href="/member/charge#fragment-1";
+}
+function isinvest(d){
+	if(d===true) document.forms.investForm.submit();
+}
+function PostDataVouch(id) {
+  var tendValue = parseFloat($("#vouch_money").val());
+  var pin = $("#pin").val();
+  	  tendValue = isNaN(tendValue)?0:tendValue;
+  if(pin==""){
+	$.jBox.tip("请输入支付密码");  
+	return false;
+  }
+  if(tendValue<50){
+	$.jBox.tip("最低担保额度50元");  
+	return false;
+  }
+
+  $.ajax({
+	  url: "/index/vouchcheck",
+	  type: "post",
+	  dataType: "json",
+	  data: {"vouch_money":tendValue,'pin':pin},
+	  success: function(d) {
+			  if (d.status == 1) {
+				  investmoney = tendValue;
+				  $.jBox.confirm(d.message, "会员投标提示", isvouch, { buttons: { '确认担保': true, '暂不担保': false},top:'40%' });
+			  }
+			  else if(d.status == 2)// 无担保贷款多次提醒
+			  {
+				  $.jBox.confirm(d.message, "会员投标提示", isapply, { buttons: { '去申请额度': true, '暂不申请额度': false},top:'40%' });
+			  }else{
+				  $.jBox.tip(d.message);  
+			  }
+	  }
+  });
+}
+
+function isapply(d){
+	if(d===true) window.location.href="/member/moneylimit#fragment-1";
+}
+function isvouch(d){
+	if(d===true) document.forms.vouchForm.submit();
+}
+
+
+</script>
+<include file="Public:_footer" />

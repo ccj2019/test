@@ -1,0 +1,58 @@
+<div class="jfsc">
+	<div class="add">
+    	 <form action="/mall/post_order" class="duihuan_form" method="post">
+         <input type="hidden" name="gid" id="gid" value="{$vo.id}" />
+        	<p class="add_spec1">填写兑换信息</p>
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tr>
+                    <td width="30%" class="add_spec2">商品金额：</td>
+                    <td width="70%" class="add_spec5">{$vo.art_jifen}积分/个</td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">您的积分：</td>
+                    <td class="add_spec5">{$vminfo.credits|default=0}积分</td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">购买数量：</td>
+                    <td><input name="num"  id="num" value="1"  onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" class="add_spec3" style="width:100px; text-align:center;" /></td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">收货地址：</td>
+                    <td><input  name="address"  id="address" value="{$vou.address}" type="text" class="add_spec3" /><span class="add_spec6"><span>*</span>为了您能正确收到商品，请正确填写收货地址</span></td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">收货人：</td>
+                    <td><input name="real_name"  id="real_name" value="{$vou.real_name}" type="text" class="add_spec3" /><span class="add_spec6"><span>*</span>为了您能正确收到商品，请正确填写收件人姓名</span></td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">联系电话：</td>
+                    <td><input name="cell_phone"  id="cell_phone" value="{$vou.user_mobile}" type="text" class="add_spec3" /><span class="add_spec6"><span>*</span>为了您能正确收到商品，请正确填写联系电话</span></td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">联系邮箱：</td>
+                    <td><input name="email"  id="email" value="{$memberinfo.user_email}" type="text" class="add_spec3" /></td>
+                </tr>
+                <tr>
+                    <td class="add_spec2">订单备注：</td>
+                    <td><textarea  id="beizhu" name="beizhu" cols="" rows="" class="add_spec4">&nbsp;</textarea><span class="add_spec6"><span>*</span>特殊说明请在此处填写</span></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><span class="add_spec7"><a href="javascript:void(0)" class="sub_duihuan">提交</a></span><span class="add_spec8"><a href="/mall/view?id={$vo.id}">返回</a></span></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".sub_duihuan").click(function(){
+		if($("#num").val()==""){alert("兑换数量不能为空");return false;}
+		if($("#real_name").val()==""){alert("收货人不能为空");return false;}
+		if($("#address").val()==""){alert("收货地址不能为空");return false;}
+		if($("#cell_phone").val()==""){alert("联系电话不能为空");return false;}
+		if($("#email").val()==""){alert("联系邮箱不能为空");return false;}
+		$(".duihuan_form").submit();
+	})	
+})
+</script>

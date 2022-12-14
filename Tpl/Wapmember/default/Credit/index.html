@@ -1,0 +1,96 @@
+     <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" /><link rel="stylesheet" href="/Public/wap/css/index.css"><script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<body>    
+<div class="header ">        
+<div class="w-header w-content flex">         
+   <a href="javascript:window.history.back();" class="w-header-left">
+      < 返回 </a>                    <h3>积分明细</h3>           
+          <a href="/Wapmember/Memberinfo#chip-1">
+<img src="/Public/wap/img/huiyuan/shezhi.png" alt="" style="width: 0.4rem;    padding-top: 0.3rem;float: right;"  /></a>
+   </div>    </div>
+    <!-- 积分明细1  start -->
+    <div class="w-int">        
+<div class="w-int-top-warpper">          
+  <div class="int-top">                
+<div class="int-top-center">                
+    <p>积分</p>            
+        <span>{$meinfo['credits']}</span>    
+            </div>           
+     <div class="int-bottom clear"> 
+                       <!--<a href="##" class="int-bottom-left fl">
+                            <img src="./img/w-zuanshi.png" class="fl" alt="">
+                            <span class="fl">历史积分：{$meinfo['credits']}</span>
+                        </a>-->                        <!--<a href="##" class="int-bottom-right fr">
+                            <img src="/Public/wap/img/w-rili.png" class="fl" alt="">
+                            <span class="fl">历史积分：{$meinfo['credits']}</span>
+                        </a>-->            
+        </div>        
+    </div>              
+             </div>      
+  <div class="int-list-warpper">      
+          <h3>积分历史详单</h3>    
+            <div class="int-list">                
+						<volist name="volist" id="vo">                		
+							<a class="clear">                       
+							<div class="int-list-left fl">
+								<img src="/Public/wap/img/w-int (2).jpg" style="height: auto;" alt=""> 
+							</div>                       
+							<div class="int-list-right fr">                          
+							<h6> {$vo.info}</h6>                           
+							<p>类型：<span><?php if($vo['type']==13){echo("增加");}else{
+							//echo strpos($vo['affect_credits'],'-');
+								if(strpos($vo['affect_credits'],'-') === false){
+									echo("增加");
+								}else{
+									echo("减少");
+								}
+							}
+							?></span></p>                         
+							<div class="clear">                             
+							<span href="##" class="fl first"><?php if($vo['add_time']>1355737552){	?>
+								{$vo.add_time|date='Y-m-d H:i:s',###}
+							<?php }else{?> 2016-06-20 <?php }
+							?></span>                             
+							<span href="##" class="fr last">{$vo.affect_credits}</span>        
+							</div>                      
+							</div>                   
+							</a>              
+						</volist>                	                	                    <!--<a class="clear">
+                        <div class="int-list-left fl">
+                            <img src="./img/w-int (1).jpg" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> 即食海鲜鱼片鳕鱼片250g兑换成功</h6>
+                            <p>类型：<span>减少</span></p>
+                            <div class="clear">
+                                <span href="##" class="fl first">2018-09-05  12:53:26</span>
+                                <span href="##" class="fr last">-36000</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="clear">
+                            <div class="int-list-left fl">
+                                <img src="./img/w-int (2).jpg" alt="">
+                            </div>
+                            <div class="int-list-right fr">
+                                <h6>  精选日照绿茶1斤装兑换成功</h6>
+                                <p>类型：<span>减少</span></p>
+                                <div class="clear">
+                                    <span href="##" class="fl first">2018-09-05  12:53:26</span>
+                                    <span href="##" class="fr last">-1000000</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="clear">
+                                <div class="int-list-left fl">
+                                    <img src="./img/w-int (3).jpg" alt="">
+                                </div>
+                                <div class="int-list-right fr">
+                                    <h6>  第11期工厂化联合养殖购买成功</h6>
+                                    <p>类型：<span>增加</span></p>
+                                    <div class="clear">
+                                        <span href="##" class="fl first">2018-09-05  12:53:26</span>
+                                        <span href="##" class="fr last">+100000</span>
+                                    </div>
+                                </div>
+                            </a>-->                        </div>            </div>    </div>    <!-- 积分明细1 end -->  
+                            <include file="Public:footer"/>

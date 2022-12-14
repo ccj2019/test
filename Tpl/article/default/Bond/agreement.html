@@ -1,0 +1,52 @@
+<div style="clear:both;"></div>
+<div class="jc10-2">
+    <div class="hzjg3">
+        <div class="jbxx">债权转让协议</div>
+        <div class="jbxx_info2">
+        	<p>债权转让协议号： #{$Bond.serialid}<br>
+    转让人（甲方）：{$Bond.user_name}<br>
+    受让人（乙方）： {$buy_user}<br>
+    签订日期： {$Bond.buy_time|date='Y-m-d',###}<br>
+    <br>
+    本协议各方为达到转让债权之目的，经友好协商，达成约定如下： <br>
+    第一条 债权转让内容<br>
+    1.1 甲方同意按本协议的条款和条件向乙方转让债权，乙方同意按本协议的条款和条件从甲方受让该债权。<br>
+    1.2 该转让债权为：【{$Bond.borrow_name}】第{$Bond.total}期。<br>
+    第二条 债权转让价款及支付<br>
+    2.1 甲乙双方约定债权转让价款为{$Bond.transfer_price}元。<br>
+   <table  width="980" border="1px" bordercolor="#EEEEEE" cellspacing="0px" style="border-collapse:collapse;margin-top:20px;margin-left:10px;">
+        <tr class="ageement_tab">
+          <td width="196" height="40" align="center" valign="middle">投标标题</td>
+          <td width="96" height="40" align="center" valign="middle">利率 </td>
+          <td width="196" height="40" align="center" valign="middle">待还期数/总期数</td>
+          <td width="156" height="40" align="center" valign="middle">待收本息</td>
+          <td width="96" height="40" align="center" valign="middle">转让价格</td>
+          <td width="196" height="40" align="center" valign="middle">转让时间</td>
+          <td width="196" height="40" align="center" valign="middle">购买人</td>
+        </tr>
+        <tr class="ageement_tab_ite">
+          <td width="196" height="40" align="center" valign="middle">{$Bond.borrow_name}</td>
+          <td width="96" height="40" align="center" valign="middle">{$Bond.borrow_interest_rate}%</td>
+          <td width="196" height="40" align="center" valign="middle">{$Bond['total']-$Bond['has_pay']}期/{$Bond.total}期</td>
+          <td width="156" height="40" align="center" valign="middle">￥{$Bond_total['capital']+$Bond_total['interest']}</td>
+          <td width="96" height="40" align="center" valign="middle">￥{$Bond.transfer_price}</td>
+          <td width="196" height="40" align="center" valign="middle">{$Bond.buy_time|date='Y-m-d H:i:s',###}</td>
+          <td width="196" height="40" align="center" valign="middle">{$buy_user}</td>
+        </tr>
+      </table>
+    第三条 陈述、保证和承诺 <br>
+    3.1甲方承诺并保证其依法设立并有效存续，有权实施本协议项下的债权转让并能够独立承担民事责任。其转让的债权系合法、有效的债权。<br>
+    3.2乙方承诺并保证：其依法设立并有效存续，有权受让本协议项下的债权并能独立承担民事责任；其受让本协议项下的债权已经获得其内部相关权力机构的授权或批准。<br>
+    第四条 违约责任 <br>
+    各方同意，如果一方违反其在本协议中所作的陈述、保证、承诺或任何其他义务，致使其他方遭受或发生损害、损失、索赔、处罚、诉讼仲裁、费用、义务和/或责任，违约方须向另一方作出全面赔偿并使之免受其害。<br>
+    第五条 其他规定<br>
+    5.1 对本协议所作的任何修改及补充必须采用书面形式并由各方合法授权代表签署。<br>
+    5.2在本协议履行过程中发生的纠纷，双方应友好协商解决；协商不成的，任何一方均有权向有管辖权的人民法院提起诉讼。<br>
+
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    
+    <div style="clear:both;"></div>
+</div>
+<div style="clear:both;"></div>

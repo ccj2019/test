@@ -1,0 +1,65 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var addTitle = '添加分类';
+</script>
+<div class="so_main">
+  <div class="page_tit">赠品管理</div>
+
+  <form action='__URL__/index' id='searinfo' method='get'>
+    <div class="text-c">
+      <input type="text" name="title" id="" value="{$title}" placeholder=" 赠品名称" style="width:250px ;   line-height: 25px;" class="input-text">
+      <button name="" id="" class="btn btn-success" type="submit" style="line-height: 25px;">搜索</button>
+    </div>
+  </form>
+
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="{:U('/admin/zengpin/add')}" value="添加赠品"/>
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除赠品" />
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">名称</th>
+    <th class="line_l">价格</th>
+    <th class="line_l">折现价格</th>
+    <th class="line_l">添加时间</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td>{$vo.title}</td>
+        <td>{$vo.price}</td>
+        <td>{$vo.zxprice}</td>
+        <td>{$vo.add_time|date='Y-m-d',###}</td>
+        <td>
+            <a href="__URL__/edit?id={$vo['id']}">编辑</a> 
+            <a href="javascript:void(0);" onclick="del({$vo['id']});">删除</a>  
+        </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="{:U('/admin/zengpin/add')}" value="添加赠品"/>
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除赠品" />
+  </div>
+</div>
+
+
+<include file="Public:_footer" />

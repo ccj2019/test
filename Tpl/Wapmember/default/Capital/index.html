@@ -1,0 +1,246 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script src="/Public/wap/js/date.js"></script>
+<style type="text/css">
+	.l_ldian{
+		background: #a5f0fd;
+		width: .3rem;
+    height: .3rem;
+    display: block;
+    float: left;
+    border-radius: 50%;
+    margin-top: .06rem;
+    margin-right: .1rem;
+	}
+	body{
+		display: table;
+	}
+</style>
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:history.back(-1);" class="w-header-left">
+                < 返回 </a>
+                    <h3>资产明细</h3>
+               <a href="/Wapmember/Memberinfo#chip-1" style="    width: 6%;"><img src="/Public/wap/img/huiyuan/shezhi.png" alt=""  style="    width: .4rem;margin-top: .3rem;"/></a>
+        </div>
+    </div>
+
+
+    <!-- 资产总额 start -->
+    <div class="w-total">
+        <h3>资产总额</h3>
+        <!--<p>{:getFloatValue($minfo['account_money']+$minfo['back_money']+$minfo['money_collect']+$minfo['money_freeze'],2)}</p>-->
+        <p>{:getFloatValue($minfo['account_money']+$minfo['back_money']+$minfo['money_collect']+$minfo['money_freeze'],2)}</p>
+        <table>
+            <tr>
+                <th class="clear">
+                    <img class="fl" src="/Public/wap//img/w-total.jpg" alt="">
+                    <span class="fr">可用余额</span>
+                </th>
+                <th class="clear">
+                    <img class="fl" src="/Public/wap//img/w-total.jpg" alt="">
+                    <span class="fr">在投金额</span>
+                </th>
+                <th class="clear">
+                    <img class="fl" src="/Public/wap//img/w-total.jpg" alt="">
+                    <span class="fr">提现中</span>
+                    <!--<span class="fr">冻结金额</span>-->
+                </th>
+            </tr>
+            <tr>
+                <td>{:getFloatValue($minfo['account_money']+$minfo['back_money'],2)}</td>
+                <td>{$mx|default="0.00"}</td>
+                <td>{$member_withdraw|Fmoney=###}</td>
+              <!-- <td>
+                   {:getFloatValue($minfo['money_freeze'],2)}
+               </td>-->
+            </tr>
+        </table>
+        <img class="s" src="/Public/wap//img/w-s.jpg" alt="">
+        <ul class="w-total-look w-look">
+            <li>
+                <table class="clear radio">
+
+                    <tr>
+                        <td class="clear">
+                            
+                           <span class="l_ldian"></span>
+                            <span class="fl">联合养殖</span>
+                        </td>
+                        <td class="clear">
+                          
+                           <span class="l_ldian"></span>
+                           
+                            <span class="fl">联合销售
+                            </span>
+                        </td>
+                        <td class="clear">
+                            
+                           <span class="l_ldian"></span>
+                           
+                            <span class="fl">共建项目
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=>
+                           {$mx1|default="0.00"}
+                        </td>
+                        <td class=>
+                            {$mx2|default="0.00"}
+                        </td>
+                        <td class=>
+                           {$mx3|default="0.00"}
+                        </td>
+                    </tr>
+
+                </table>
+                <a href="/wapmember/capital/xiangqing" class="w-total-sckipt">
+                    查看详情 >
+                </a>
+            </li>
+
+        </ul>
+    </div>
+	 <!-- 资产总额 start -->
+    <div class="w-total">
+        <h3>资产收益</h3>
+        <p>{$ms}</p>
+        
+        
+        <ul class="w-total-look w-look">
+            <li>
+                <table class="clear radio">
+
+                    <tr>
+                        <td class="clear">
+                           <span class="l_ldian"></span>
+                          
+                            <span class="fl">联合养殖</span>
+                        </td>
+                        <td class="clear">
+                           <span class="l_ldian"></span>
+                           
+                            <span class="fl">联合销售
+                            </span>
+                        </td>
+                        <td class="clear">
+                           <span class="l_ldian"></span>
+                           
+                            <span class="fl">共建项目
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=>
+                            {$ms1|default="0.00"}
+                        </td>
+                        <td class=>
+                            {$ms2|default="0.00"}
+                        </td>
+                        <td class=>
+                            {$ms3|default="0.00"}
+                        </td>
+                    </tr>
+
+                </table>
+                <a href="/wapmember/capital/xiangqing" class="w-total-sckipt">
+                    查看详情 >
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+	<!--
+    <div class="w-total">
+        <ul class="w-total-look w-look-h">
+            <li>
+                <table class="clear radio">
+
+                    <tr>
+                        <td class="clear">
+                            <input class="fl" type="radio" name="pay" id="pay1">
+                            <label class="fl" for="pay4"></label>
+                            <span class="fl">联合养殖</span>
+                        </td>
+                        <td class="clear">
+                            <input class="fl" type="radio" name="pay" id="pay2">
+                            <label class="fl" for="pay5"></label>
+                            <span class="fl">联合销售
+                            </span>
+                        </td>
+                        <td class="clear">
+                            <input class="fl" type="radio" name="pay" id="pay3">
+                            <label class="fl" for="pay6"></label>
+                            <span class="fl">共建销售
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=>
+                            0.00
+                        </td>
+                        <td class=>
+                            0.00
+                        </td>
+                        <td class=>
+                            0.00
+                        </td>
+                    </tr>
+
+                </table>
+                <a href="##" class="w-total-sckipt">
+                    查看详情 >
+                </a>
+            </li>
+
+        </ul>
+    </div>--> 
+    
+    <!-- 资产总额 end --> 
+
+    <div class="w-total-end">
+        <p>{$minfo.reg_time|date="Y-m-d",###}日注册，加入铭万众筹
+            <span><?php echo ceil((time()-$minfo['reg_time'])/60/60/24);?></span>
+            </span>天</p>
+
+        <ul >
+           <li class="flex">
+                <div>
+                        <p>联合养殖</p>
+                        <span>	<?php echo $mx1+$ms1;?></span>
+                        <a href="/wapmember/capital/xiangqing"></a>
+                    </div>
+                    <div>
+                        <p>联合销售</p>
+                        <span>	<?php echo $mx2+$ms2;?></span>
+                        <a href="/wapmember/capital/xiangqing"></a>
+                    </div>
+           </li>
+           <li class="flex">
+                <div>
+                        <p>共建项目</p>
+                        <span>	<?php echo $mx3+$ms3;?></span>
+                        <a href="/wapmember/capital/xiangqing">查看详情 ></a>
+                      
+                    </div>
+                    <div>
+                        <p>资产投资和收益</p>
+                        <span>	<?php echo $mx+$ms;?></span>
+                        <a href="/wapmember/capital/xiangqing">查看详情 ></a>
+                    </div>
+           </li>
+        </ul>
+    </div>
+
+<include file="Public:footer"/>
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+    <script src="/Public/wap//js/index.js"></script>
+  
+</body>
+ 

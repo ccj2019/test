@@ -1,0 +1,56 @@
+<include file="default:Public:header" />
+<style type="text/css">
+	body{
+		background: #f8f8f8;
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a>站内通知</a></span>
+</div>
+<div class="box clearfix">
+    <include file="default:Public:_left" />
+    <div class="tabvbox">
+        <div class="tabv clearfix">
+            <div class="on">
+                <span>项目动态</span>
+            </div>
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <!--项目明细-->
+                <div class="t-object_move">
+                    <ul class="ul1 clearfix">
+                        <li>动态内容</li>
+                        <li>更新时间</li>
+                        <li>操作</li>
+                    </ul>
+                    <volist name="list" id="vo">
+                        <ul class="ul2 clearfix">
+                            <li>
+                                <img src="__PUBLIC__/web/img/zuixinzixun/move.png">
+                                <p>{$vo.dycomment}</p>
+                            </li>
+                            <li>{$vo.add_time|date="Y-m-d",###}</li>
+                            <li>
+                                <a href="/member/msg/promsg?idarr={$vo.id}"  style="color: #fff;">删除</a>
+                            </li>
+                        </ul>
+                    </volist>
+                    
+                    <!--分页-->
+                    <div class="aFye clearfix">
+                         <p>
+                             {$pagebar}
+                         </p>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

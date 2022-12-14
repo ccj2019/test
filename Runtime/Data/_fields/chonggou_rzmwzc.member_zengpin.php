@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'investor_id', 2 => 'uid', 3 => 'status', 4 => 'zpid', 5 => 'num', 6 => 'allnum', 7 => 'add_time', 8 => 'borrow_id', 9 => 'type', 10 => 'znum', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'investor_id' => 'int(11)', 'uid' => 'int(11)', 'status' => 'varchar(10)', 'zpid' => 'int(10)', 'num' => 'int(10)', 'allnum' => 'int(10)', 'add_time' => 'varchar(20)', 'borrow_id' => 'int(11)', 'type' => 'varchar(10)', 'znum' => 'int(11)', ), ); ?>

@@ -1,0 +1,146 @@
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    document.documentElement.style.fontSize = document.documentElement.clientWidth /750*100 + 'px';</script>
+<link rel="stylesheet" type="text/css" href="/Public/zpublic/css/scstyle.css" />
+<div class="top">
+    <div class="header">
+        <p> <span> <a style="color:#fff;" href="/Wap"><返回</a></span><span>积分商城</span>
+
+
+<if condition="$UID gt '0'">
+
+            <a href="/Wapmember"><img src="/Public/zpublic/img/login.png"/></a>
+
+     <else />
+            <span><a style="color:#fff;" href="/Wapmember/common/login.html"> 登录</a></span>
+
+
+</if>
+
+        </p>
+    </div>
+    <div class="major">
+        <volist name=":get_ad(33)" id='vo' offset="0" length='1'>  
+                   <a href="{$vo.url}" <img src="/{$vo.img}/"> </a>
+        </volist> 
+    </div>
+</div>
+<!-- <div style="height:3.8rem;"> </div> -->
+<if condition="$UID gt '0'">
+<div class="all">
+        <ul>
+            <li><img src="/Public/zpublic/img/jf_1.png"/><p> <a href="/wapmember/Credit/index"  style="color:#000;"> 积分&nbsp;  {$meinfo['credits']}</a></p>
+            </li>
+            <li><img src="/Public/zpublic/img/jf_2.png"/><p> <a href="/wap/invest/index"  style="color:#000;">赚积分</a></p>
+            </li>
+            <li><img src="/Public/zpublic/img/jf_3.png"/><p><a href="/Wapmember/shoporder" style="color:#000;">兑换记录</a></p>
+            </li>
+        </ul>
+</div>
+<else/>
+    
+    <div class="all">
+        <ul>
+            <li><img src="/Public/zpublic/img/jf_1.png"/><p> <a href="/wapmember/Credit/index"  style="color:#000;"> 积分&nbsp;  </a></p>
+            </li>
+            <li><img src="/Public/zpublic/img/jf_2.png"/><p> <a href="/wap/invest/index"  style="color:#000;">赚积分</a></p>
+            </li>
+            <li><img src="/Public/zpublic/img/jf_3.png"/><p><a href="/Wapmember/shoporder" style="color:#000;">兑换记录</a></p>
+            </li>
+        </ul>
+</div>
+
+</if>
+<div style="widht:100%;height:0.2rem; background:#fff;"></div>
+<div class="all1">
+    <ul>
+        <volist name=":get_ad(40)" id='vo' offset="0" length='3' key="i">  
+                <li>
+
+<a href="{$vo.url}"><img src="/{$vo.img}"/></a>
+                  
+                </li>
+        </volist> 
+
+    </ul>
+</div>
+<div class="all2">
+    <volist name=":get_ad(40)" id='vo' offset="3" length='1'>  
+         <a href="{$vo.url}"><img src="/{$vo.img}"/></a>
+    </volist>
+</div>
+<div class="all3">
+    <p>&#47;&#47;<span>火热推荐</span>&#47;&#47;</p>
+    <ul>
+         <volist id="vo" name="list.tlist">
+    
+
+        <li> <a href="/wap/Shop/shop_show?id={$vo['id']}">
+                    <img src="{$vo.art_img}"/>
+                    <p>{$vo.title|cnsubstr=###,8}</p>
+                    <p>{$vo.art_jifen}</p>
+                    <p>剩余{$vo.art_writer}份</p> </a>
+                </li>
+           
+        </volist>   
+
+
+    </ul>
+</div>
+<div class="all4"><p>海鲜精选</p></div>
+<ul class="all5" id="fixPara">
+    <li><a href="/wap/shop/index?type_id=0" <if condition="$type_id eq 0">class="hove"</if>>全部商品</a></li><li>
+    <a href="/wap/shop/index?type_id=56"<if condition="$type_id eq 56">class="hove"</if>>自养海鲜</a></li><li>
+    <a href="/wap/shop/index?type_id=57"<if condition="$type_id eq 57">class="hove"</if>>海鲜干货</a></li><li style="border-right:none;">
+    <a href="/wap/shop/index?type_id=58"<if condition="$type_id eq 58">class="hove"</if>>旅游船票</a></li>
+
+</ul>
+<div class="all6" id="fixPar">
+    <ul>
+        <volist id="vo" name="list.list">
+           
+                <li> <a  href="/wap/Shop/shop_show?id={$vo['id']}">
+                    <img src="{$vo.art_img}"/>
+                    <p>{$vo.title|cnsubstr=###,10}</p>
+                    <p>{$vo.art_jifen}</p>
+                    <p>剩余{$vo.art_writer}份</p> </a>
+                </li>
+           
+        </volist>   
+
+    </ul>
+</div>
+
+
+
+
+<script>
+    window.onload=
+        function(){
+            var oDiv = document.getElementById("fixPara"),
+                H =-document.documentElement.clientWidth /750*100*3.9,
+                Y = oDiv
+            while (Y) {
+                H += Y.offsetTop;
+                Y = Y.offsetParent;
+            }
+            window.onscroll = function()
+            {
+                var s = document.body.scrollTop || document.documentElement.scrollTop
+                if(s>H) {
+                    oDiv.style = "position:fixed;top:3.9rem;"
+                    document.getElementById("fixPar").style="margin-top:1.04rem;"
+                } else {
+                    oDiv.style = ""
+                    document.getElementById("fixPar").style= ""
+                }
+            }
+        }
+
+
+// 	alert(1);
+
+$zindex=2;
+    
+
+</script>

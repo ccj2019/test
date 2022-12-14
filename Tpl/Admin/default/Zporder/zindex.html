@@ -1,0 +1,71 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var addTitle = '添加分类';
+    var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">赠品管理</div>
+  <include file="search" />
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选" style="search_action" />
+    <htmlA:commonBtn type="href" action="__URL__/export1?{$query}" value="将当前条件下数据导出为Excel"/>
+
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">订单编号</th>
+    <th class="line_l">项目名称</th>
+    <th class="line_l">会员名称</th>
+    <th class="line_l">名称</th>
+    <th class="line_l">折现单价</th>
+    <th class="line_l">数量</th>
+    <th class="line_l">折现金额</th>
+    <th class="line_l">项目类型</th>
+    <th class="line_l">添加时间</th>
+
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td>{$vo.ordernum}</td>
+        <td>{$vo.borrow_name}</td>
+        <td>{$vo.user_name}</td>
+        <td>{$vo.title}</td>
+        <td>{$vo.zxprice}</td>
+        <td>{$vo.num}</td>
+        <td>{$vo.money}</td>
+        <td>
+          <if condition="$vo.ztype eq 1">常规项目</if>
+          <if condition="$vo.ztype eq 2">预购商品</if>
+        </td>
+
+        <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+
+
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除" />
+  </div>
+</div>
+
+
+<include file="Public:_footer" />

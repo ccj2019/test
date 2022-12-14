@@ -1,0 +1,178 @@
+<include file="Public:_header_common" />
+<title>如何借入-{$glo.index_title}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<script  type="text/javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<script  type="text/javascript" src="__ROOT__/Style/H/js/backtotop.js"></script>
+<script type="text/javascript">
+
+//tab封装
+function tabs(tid, cid, tag1, tag2, addclass, theevent) {
+    var checkNav = "", checkWrap = "";
+    var o1 = document.getElementById(tid),
+    o2 = document.getElementById(cid),
+    ElementNav = new Array();
+    ElementWrap = new Array();
+    chk = function (e, n) {
+        var v = eval("/" + n + "/gi");
+        if (v == undefined) {
+            return true
+        }
+        else if (v.test(e.className)) {
+            return true
+        };
+    }
+    function ser(e, arr, g, n) {
+        var tags = e.getElementsByTagName(g), v = 0;
+        for (i = 0; i < tags.length; i++) {
+            if (chk(tags[i], n) == true) { arr[v] = tags[i]; v++; };
+        }
+    }
+    function Start(e, f) {
+        var s = e.length;
+        for (i = 0; i < s; i++) {
+            switch (theevent) {
+                case "onclick":
+                    {
+                        e[i].onclick = function () { EV(this) }
+                    }
+                    break;
+
+                default:
+                    {
+                        e[i].onmouseover = function () { EV(this) }
+                    }
+                    break;
+            }
+        }
+        function EV(obj) {
+            for (var i = 0; i < s; i++) {
+                f[i].style.display = "none";
+                e[i].className = "";
+            }
+            for (var i = 0; i < s; i++) {
+                if (e[i] == obj) { f[i].style.display = "block"; e[i].className = addclass }
+            }
+        }
+    }
+    ser(o1, ElementNav, tag1, checkNav);
+    ser(o2, ElementWrap, tag2, checkWrap);
+    Start(ElementNav, ElementWrap)
+}
+</script>
+<include file="Public:_header_main" />
+<!--中部开始-->
+<div class="invest_top">
+  <div><img src="__ROOT__/Style/H/images/s1.png" /><a href="/invest/index.html?borrow_status=9">&nbsp;</a><a href="/invest/index.html?borrow_status=7" class="xz1">&nbsp;</a></div>
+</div>
+<div class="clear10"></div>
+<div class="ruhejieru">
+  <div class="w_bg">
+    <div class="fl" style="width: 726px; display:table; float:left">
+                <div class="rhjc_banner"><img src="__ROOT__/Style/H/images/ruhe.jpg" width="726" height="208"></div>
+                <div class="rhjc_con">
+                    <div class="rhjc_con_t">
+                        <div class="rhjc_con_t_c f_14">
+                            达达贷借款优势</div>
+                    </div>
+                    <div class="rhjc_con_c">
+                    <php> echo danye(379);</php>
+                    </div>
+                </div>
+                <div class="rhjc_con">
+                    <div class="rhjc_con_t">
+                        <div class="rhjc_con_t_c f_14">
+                            贷款品种齐全</div>
+                    </div>
+                    <div class="rhjc_con_c">
+   <php> echo danye(380);</php>
+                    </div>
+                </div>
+                <div class="rhjc_con">
+                    <div class="rhjc_con_t">
+                        <div class="rhjc_con_t_c f_14">
+                            五步获得贷款</div>
+                    </div>
+                    <div class="rhjc_con_c">
+                       <php> echo danye(381);</php>
+                        <p style="padding: 10px 0 10px 25px;">
+                           <a href="/member/common/register/" title="成为借出人"><img src="__ROOT__/Style/H/img/btn_jieruren.gif" width="142" height="42"></a></p>
+                    </div>
+                </div>
+            </div>
+    <!--右侧 新闻列表-->
+    <div class="right_news">
+      <div class="news_item">
+        <div class="tab"> <span class="sign"></span>
+          <div class="middle">
+            <dl id="news_tab_33_11" class="tab_t">
+              <dd class="current"> <a title="点击查看更多" href="/help/notice.html"> 网站公告</a></dd>
+              <dd class=""> <a title="点击查看更多" href="/about/dadanews.html"> 达达动态</a></dd>
+            </dl>
+          </div>
+          <span class="more"></span> </div>
+        <div id="news_33_11_list" class="tab_con">
+          <ul style="display: block;">
+          
+           <php>$xlist = getArticleList(array("type_id"=>array('in','321,336'),"pagesize"=>7)); foreach($xlist['list'] as $kx => $va){</php>
+        	<li><a href="{$va.arturl}" title="{$va.title}">{$va.title|cnsubstr=###,25}</a></li>
+              <php>};$xlist=NULL;</php>
+            <li class="more"><a target="_blank" href="/help/notice.html">更多&gt;&gt;</a></li>
+          </ul>
+          <ul style="display: none;">
+           <php>$xlist = getArticleList(array("type_id"=>array('in','361,336'),"pagesize"=>7)); foreach($xlist['list'] as $kx => $va){</php>
+        	<li><a href="{$va.arturl}" title="{$va.title}">{$va.title|cnsubstr=###,20}</a></li>
+              <php>};$xlist=NULL;</php>
+            <li class="more"><a target="_blank" href="/about/dadanews.html">更多&gt;&gt;</a></li>
+          </ul>
+        </div>
+        <script type="text/javascript">
+        tabs("news_tab_33_11", "news_33_11_list", "dd", "ul", "current", "onmouseover");
+    </script>
+      </div>
+      <!--视频播报-->
+      <div class="news_item">
+        <div class="tab"> <span class="sign"></span>
+          <div class="middle">
+            <dl id="news_tab_video" class="tab_t">
+              <dd class="current"> <a href="/help/ddd.html" target="_blank" title="点击查看更多">行业新闻</a></dd>
+            </dl>
+          </div>
+          <span class="more"></span> </div>
+        <div class="tab_con">
+          <ul>
+    <php>$xlist = getArticleList(array("type_id"=>array('in','338,336'),"pagesize"=>7)); foreach($xlist['list'] as $kx => $va){</php>
+        	<li><a href="{$va.arturl}" title="{$va.title}">{$va.title|cnsubstr=###,20}</a></li>
+              <php>};$xlist=NULL;</php>
+            <li class="more"><a target="_blank" href="/help/ddd.html">更多&gt;&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--视频播报-->
+      <div class="news_item">
+        <div class="tab"> <span class="sign"></span>
+          <div class="middle">
+            <dl id="news_tab_hot_28" class="tab_t">
+              <dd class="current"> <a title="点击查看更多" href="/about/dadanews.html"> 最新资讯</a></dd>
+            </dl>
+          </div>
+          <span class="more"></span> </div>
+        <div id="news_hot_28_list" class="tab_con">
+          <ul style="display: block;">
+           <php>$xlist = getArticleList(array("type_id"=>array('in','321,338,361,336'),"pagesize"=>7)); foreach($xlist['list'] as $kx => $va){</php>
+        	<li><a href="{$va.arturl}" title="{$va.title}">{$va.title|cnsubstr=###,20}</a></li>
+              <php>};$xlist=NULL;</php>
+            <li class="more"><a target="_blank" href="/about/dadanews.html">更多&gt;&gt;</a></li>
+          </ul>
+        </div>
+        <script type="text/javascript">
+        tabs("news_tab_hot_28", "news_hot_28_list", "dd", "ul", "current", "onmouseover");
+    </script>
+      </div>
+      <!--热门点击&行业新闻end-->
+    </div>
+  </div>
+</div>
+<div class="clear10"></div>
+<!--中部结束-->
+<include file="Public:_footer" />

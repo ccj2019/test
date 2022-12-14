@@ -1,0 +1,212 @@
+ 
+<include file="default:Public:mheader" />
+	<!--<body>-->
+		<!--header-->
+	<!--	<div class="topbox">-->
+	<!--		<div class="mytop">-->
+	<!--			<div class="my1 clearfix">-->
+	<!--				<div class="mytime fl">-->
+	<!--					客服热线：400-1100-216 在线时间：周一~周六 9:00~18：00-->
+	<!--				</div>-->
+	<!--				<div class="login fr">-->
+	<!--					<span><a href="##">登录</a></span>-->
+	<!--					<span><a href="##">/注册</a></span>-->
+	<!--				</div>-->
+
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--		<div class="mynav">-->
+	<!--			<div class="box clearfix">-->
+	<!--				<div class="navlogo fl">-->
+	<!--					<img src="img/guanyu/logo2.png" />-->
+	<!--				</div>-->
+	<!--				<div class="navbox fl">-->
+	<!--					<span><a href="##">首页</a></span>-->
+	<!--					<span><a href="##">项目浏览</a></span>-->
+	<!--					<span><a href="##">最新资讯</a></span>-->
+	<!--					<span><a href="##">积分商城</a></span>-->
+	<!--					<span><a href="##">视频直播</a></span>-->
+	<!--					<span><a href="##">活动公告</a></span>-->
+	<!--					<span class="on"><a href="##">关于我们</a></span>-->
+	<!--					<span><a href="##">会员中心</a></span>-->
+	<!--				</div>-->
+	<!--				<div class="l_myxm fr">-->
+	<!--					<a href="##">发起项目</a>-->
+	<!--				</div>-->
+	<!--			</div>-->
+
+	<!--		</div>-->
+	<!--	</div>-->
+
+		<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a >快捷购买</a></span>
+
+</div>
+
+		<div class="box clearfix">
+		   <include file="default:Public:_left"/>
+		 
+		 	<div class="tabvbox">
+				<div class="tabv clearfix" style="position: relative;">
+					
+					<div class="on" >
+						<span>快捷购买</span>
+
+					</div>
+					<a href="__URL__/zidong/type/5.html" class="ccdd" style="color:#fff;">去购买</a>
+					<style type="text/css">
+		body {
+			background: #f8f8f8;
+		}
+		.ccdd{
+			position: absolute;
+			right: 70px;
+			top: 10px;
+			width: 100px;
+			background: #00A0EA;
+			height: 30px;
+			line-height: 30px;
+			border-radius: 10px;
+			text-align: center;
+		}
+		.mrwidth{
+			width: 85px;
+			text-align: center;
+			display: block;
+			padding-left: 15px;
+		}
+		.mrwidthx{
+			width: 85px;
+			text-align: center;
+			display: block;
+			padding-left: 0px;
+		}
+		.tou1 span {
+			margin-left: 0px;
+			width: 85px;
+		}
+		.bgxmlis>div {
+			padding-left: 0px;
+		}
+	</style>	
+					
+				</div>
+				<div class="tabv2box">
+				
+					<div class="tabv2 show">
+					     <!--充值记录-->
+						<div class="bgbx">
+							<div class="tou1">	
+							     <span style="width: 290px;">项目名称</span>
+							     <span class="mrwidthx">购买时间</span>	
+							     <span>类型</span>	
+							     <span>购买鱼币</span>	
+							     <span>状态</span>	
+							     <span>操作</span>	 
+							</div>
+								<volist name="list" id="vo">
+							<div class="bgxmlis">
+								<div class="bt"  style="width: 290px;">
+							<img src="{$vo.borrow_img}" alt="" />
+							<p>
+							<a target="_blank" href="/invest/detail/id/{$vo.borrow_id}.html" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,10}</a></p>
+
+								</div>
+
+								<div class="mrwidthx">
+								{$vo.add_time|date='Y-m-d H:i:s',###}
+								</div>
+
+								<div class="mrwidth">
+									{$vo.leixing}
+								</div>
+
+								<div class="zijin mrwidth">
+									¥{$vo.bespeak_money}
+								</div>
+
+								<div class=" mrwidth">
+										{$vo.status}
+						
+								</div>
+
+								<div class=" mrwidth">
+									
+									<a href="/invest/detail/id/{$vo.borrow_id}.html" target="_blank"> 项目详情 </a>
+								</div>
+							</div>   
+				 
+                    </volist>
+							<!--
+							<div class="bgxmlis">
+								<div class="bt">
+									<img src="img/huiyuan/tu.png" alt="" />
+									<p>第122期海鲜项目（梭子蟹）体验标</p>
+								</div>
+								<div>
+									2018-19-20
+								</div>
+								<div>
+									联合养殖
+								</div>
+								<div class="zijin">
+									¥50,000.00
+								</div>
+								<div class="cg">
+									<p>	已成功 </p>
+									
+								</div>
+								<div class="xqing">
+									<!--<p> <a href="##">继续发起</a></p> 
+									<a href="##">取消关注</a>
+
+								</div>
+							</div>
+							-->
+						</div>
+						<!--分页-->
+	<div class="aFye clearfix">
+		 <p>
+		         {$page}
+		     </p>
+	</div>
+					</div>
+                     
+                      
+                     
+				</div>
+			</div>
+		</div>
+<script>
+    function addGuanzhu(bid){
+	var tid = bid;
+	$.ajax({
+		url: "/invest/addguanzhu",
+		data: {"tid":tid},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					$(".addr"+tid).remove();
+					layer.alert(d.message, 1,!1);
+					location.reload() 
+					
+				}else{
+					layer.msg(d.message);
+					location.reload() 
+				}
+			}
+		}
+	});
+		
+}
+</script>
+		<!--底部-->
+ 
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,381 @@
+<include file="default:Public:header" />
+<!--内容-->
+<style>
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    
+}
+</style>
+		<style>  
+	 
+		</style>
+<?php $times=time();?>
+<div class="l-omg1">
+	<div class="l-mlogin1">
+		<div class="l-mlg1">
+			<div class="shiming">
+				注册  <div class="mylgon1"><span>已有账号？</span>
+			<span><a href="{:U('/member/common/login')}">立即登录</a></span>
+		</div>
+			</div>
+			<div class="l-lebox clearfix">
+				<div class="l-le">
+					<img src="/Public/web/img/yindao/29.jpg" />
+				</div>
+				<div class="l-le bg">
+					<form  id="reg_form" method="get">
+						<div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/shouji-5.png"/></span>
+								<input type="text"  id="txtPhone" name="txtPhone"   autocomplete="off"   placeholder="请输入手机号" /><span style="color:#f00;float: right;border:0px">*</span>
+							</div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/mima-5.png"/></span>
+								<input id="txtPwd" name="txtPwd" type="password"  autocomplete="off"   placeholder="请输入密码" /><span style="color:#f00;float: right;border:0px">*</span>
+							</div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/mima-5.png"/></span>
+								<input type="password" id="txtRepwd" name="txtRepwd" autocomplete="off"   placeholder="请确认密码" /><span style="color:#f00;float: right;border:0px">*</span>
+						
+							</div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/yaoqing-1.png"/></span>
+								<input type="text" placeholder="请输入邀请码" name="invite" id="invite" value="{$invite}" />
+							</div> 
+							<style>
+							    .t-verify{
+							        width: 340px;
+							    }
+							</style>
+					 
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+<!--
+							<div class="clearfix  yanzhengchajian">
+								<div class="inp-box">
+									<span><img src="/Public/web/img/yindao/anquan.png"></span>
+									 
+        <div  id="TencentCaptcha" data-appid="2024559842" data-cbfn="callback" >验证</div>
+ 
+								</div>
+								 
+							</div>
+					-->
+       
+  
+							<!--
+							<div class="clearfix">
+								<div class="inp-box yz">
+									<span><img src="/Public/web/img/yindao/anquan.png"/></span>
+									<input id="vazvcode{$times}"  name="vazvcode{$times}"  type="text" placeholder="请输入验证码" /><span style="color:#f00;float: right;border:0px">*</span>
+								</div>
+								<div class="yanz-btn"  >
+									 <img src="__URL__/verify"  alt="点击换一个校验码" id="imVcode" onclick="this.src=this.src+'?t='+Math.random()"  style="width: 100%;height: 40px;" />
+								</div>
+							</div> 
+							
+							-->
+							<div class="clearfix">
+								<div class="inp-box yz">
+									<span><img src="/Public/web/img/yindao/anquan.png"/></span>
+									<input id="code"  name="code"  type="text" placeholder="请输入验证码" /><span style="color:#f00;float: right;border:0px">*</span>
+								</div>
+								<div class="yanz-btn"  id="TencentCaptcha" data-appid="2024559842" data-cbfn="callback">
+									获取验证码
+								</div>
+							</div>
+						</div>
+						<div class="queren-btn" id="Img12" style="margin-top: 10px">
+							立即注册
+						</div>
+						<p class="l-tyhet"> <label>
+							<input name="checkbox" type="checkbox" value=""  checked="checked" id="xieyi"/>
+						<a href="javascript:;" id="fengxian">	同意《日照铭万网络科技有限公司服务条款》</a> </label> </p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="fengxianbox">
+	<div class="f-close"><img src="__PUBLIC__/web/img/close.png" alt=""></div>
+	<div class="f-title">《日照铭万网络科技有限公司服务条款》</div>
+	<div class="f-content">
+	{$article.type_content}
+	</div>
+</div> 
+		<style>  
+ 
+			body>div{
+			    min-width: auto;
+			}
+	div#tcaptcha_transform{
+	    width: 360px !important;
+	    
+	}
+			.tcaptcha-transform{
+			    width:360px !important;
+			    background: none !important;
+			    border:none !important;
+			}
+				#tcaptcha_transform{
+			    width:360px !important;
+			    background: none !important;
+			    border:none !important;
+			}
+		</style>
+<style type="text/css">
+	.fengxianbox {
+		display: none;
+		position: relative;
+	}
+	.fengxianbox .f-close {
+		position: absolute;
+		top: -30px;
+		right: -30px;
+		cursor: pointer;
+	}
+	.fengxianbox .f-title {
+		font-size: 20px;
+		color: #ff7800;
+		padding: 20px 0;
+		text-align: center;
+	}
+	.fengxianbox .f-content {
+		width: 1000px;
+		height: 415px;
+		padding: 0 20px 20px 20px;
+		font-size: 14px;
+		overflow: auto;
+	}
+	.company{
+		display: none;
+	}
+	.layui-layer-page .layui-layer-content {
+		overflow: inherit!important;
+	}
+</style>
+<script type="text/javascript">
+	$('#fengxian').click(function(){
+		var fengxian = layer.open({
+			type: 1,
+			title: '',
+			area: ['1040px', '505px'],
+			closeBtn: 0,
+			shadeClose: true,
+			shade: 0.8,
+			content: $('.fengxianbox')
+		})
+		$('.f-close').on('click', function() {
+			layer.close(fengxian)
+		})
+	})
+</script>
+<?php
+if(isset($reg_code_time)&&!empty($reg_code_time)){
+echo "<script type='text/javascript'>var zz=".$reg_code_time." </script>";
+echo "<script type='text/javascript'>var aa=".time()." </script>";
+}else{
+echo "<script type='text/javascript'>var zz=0 </script>";
+echo "<script type='text/javascript'>var aa=60 </script>";
+}
+?>
+
+<script type="text/javascript">
+ 
+        	var vazvcode;
+        	
+        	var vazvcodedata;
+        	
+            window.callback = function(res){ 
+              res=res; 
+                if(res.ret === 0){ 
+                     
+         $.ajax({
+
+             type: "POST",
+
+             url: "/Member/Common/curl",
+
+             data: {ticket:res.ticket, randstr:res.randstr},
+
+             dataType: "json",
+
+             success: function(data){ 
+                //  vazvcodedata=data
+                  zmembersuser()
+                vazvcode=1;       
+                          //    console.log(data);
+             }
+
+         }); 
+                }
+            } 
+	$("#Img12").click(function() {
+		var user = $("#txtUser").val();
+		var phone = $("#txtPhone").val();
+		var pass = $("#txtPwd").val();
+		var Repwd = $("#txtRepwd").val();
+		var code = $("#code").val();
+		var invite = $("#invite").val();
+		var strlen = strLength(pass);
+		if (strlen < 6 || strlen>16) {
+		alert('密码长度请输入6-16位字符');
+		return false;
+		}
+		if (pass=="") {
+		alert('密码不能为空');
+		return false;
+		}
+		if (pass!=Repwd) {
+		alert('密码不一致');
+		return false;
+		}
+		if(!$("#xieyi").is(':checked')){
+			alert('请同意注册协议');
+			return false;
+		}
+	
+
+		$.ajax({
+		url: "__URL__/regaction/",
+		type: "post",
+		dataType: "json",
+		data: {"txtUser":phone,"txtPhone":phone,"txtPwd":pass,"code":code,"invite":invite},
+		beforeSend:function(){
+	        $('#Img12').css("pointer-events","none")
+	    },
+		success: function(d) {
+		if(d.status == "c"){
+		     layer.msg(d.info);
+		     $('#Img12').css("pointer-events","auto")
+		     return false;
+		  }else if(d.status == "n"){
+		     layer.msg(d.info);
+		     $('#Img12').css("pointer-events","auto")
+		     return false;
+		  }
+		  else{
+		   layer.msg(d.info,{icon: 1});
+		    window.location.href='__URL__/login/';
+		    return false;
+		  }
+		}
+		}); 
+	});   
+
+
+  function zmembersuser(){
+      var phone = $("#txtPhone").val();
+		var user = $("#txtUser").val();
+		var Repwd = $("#txtRepwd").val();
+	
+		var pass = $("#txtPwd").val();
+
+
+		var myreg=/^1\d{10}$/;
+ 
+		if(!myreg.test(phone)){
+			alert("手机号错误！");
+			return false;
+		}
+		$.ajax({
+		url: "/Member/Common/zmembersuser",
+		type: "post",
+		dataType: "json",
+		data: {"phone":phone}, 
+		success: function(d) {
+    		   if(d==1){
+    		         alert('该手机已被注册');
+    	        	return false;
+    		    }else if(phone == ""){
+            		alert('手机号不能为空');
+            		return false;
+            	}else if(user == ""){
+            		alert('用户名不能为空');
+            		return false;
+            	}else if(pass == ""){
+            		alert('密码不能为空');
+            		return false;
+            	}else if (pass!=Repwd) {
+            		alert('密码不一致');
+            		return false;
+            	}else  if (vazvcode==""||vazvcode==undefined||vazvcode==null) {
+            		alert('图形验证码不能为空');
+            		return false;
+            	} else if (pass!=Repwd) {
+            		alert('密码不一致');
+            		return false;
+            	} else{
+            	settime() 
+            	}
+			}
+		});  
+  }
+  
+       
+
+ 
+var zc=aa-zz;
+if(zc>=60){
+var countdown=60; 
+}else{
+var countdown=zc; 
+}
+//     var countdown=60; 
+function settime() 
+{ 
+    var phone = $("#txtPhone").val();
+ 
+	if (countdown == 60)
+    {
+		$.ajax({
+		url: "__URL__/sendcode/",
+		type: "post",
+		dataType: "json",
+		data: {"phone":phone},
+		success: function(d) {
+			if(d.status == "p"){
+			    alert(d.info);
+			     return false;
+			  }else if(d.status == "m"){
+			    alert(d.info);
+			     return false;
+			  }
+			  else if(d.status == "f"){
+			    alert(d.info);
+			     return false;
+			  } else if(d.status == "vfa"){
+			    alert(d.info);
+			     return false;
+			  }else{
+			   alert(d.info,{icon: 1});
+			    return false;
+			  }
+			}
+		});
+	}
+    if (countdown == 0) 
+    { 
+        $("#TencentCaptcha").removeAttr("disabled");    
+        $("#TencentCaptcha").html("获取验证码"); 
+        countdown = 60; 
+    } 
+    else 
+    { 
+        $("#TencentCaptcha").attr("disabled","disabled");
+        $("#TencentCaptcha").html("重新发送(" + countdown + ")"); 
+        countdown--; 
+    } 
+    var dxtimer = setTimeout(function() { if (countdown == 60){clearTimeout(dxtimer);}else{settime();} },1000) 
+}
+function strLength(as_str){
+	return as_str.replace(/[^\x00-\xff]/g, 'xx').length;
+};
+</script>
+<include file="default:Public:footer" group="Home" />
+
+
+
+
+
+

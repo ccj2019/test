@@ -1,0 +1,63 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<style type="text/css">
+.sel_fs{width:110px}
+</style>
+<!--调试内容开始-->
+<!--<pre><php>var_dump($_SERVER);</php></pre>-->
+<!--调试内容结束-->
+<div class="so_main">
+
+<div class="page_tit">审核资料</div>
+<div class="page_tab"><span data="tab_1" class="active">审核资料</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/doEdit" onsubmit="return subcheck();">
+	<input type="hidden" name="id" value="{$uid}" />
+	<div id="tab_1">
+    <dl class="lineD"><dt>用户名：</dt><dd>{$minfo.user_name}</dd></dl>
+    <dl class="lineD"><dt>邮箱：</dt><dd>{$minfo.user_email}</dd></dl>
+    <dl class="lineD"><dt>手机：</dt><dd>{$minfo.user_phone}</dd></dl>
+    <dl class="lineD"><dt>真实姓名：</dt><dd>{$user.real_name}</dd></dl>
+    <dl class="lineD"><dt>身份证正面：</dt><dd>
+    <if condition="$user.card_img eq ''">
+    未上传
+    <else/>
+    <img src="__ROOT__/{$user.card_img}" height="100px" />
+    </if>
+    
+    </dd></dl>
+    <dl class="lineD"><dt>身份证反面：</dt><dd>
+    <if condition="$user.card_img eq ''">
+    未上传
+    <else/>
+     <img src="__ROOT__/{$user.card_back_img}" height="100px" />
+    </if>
+    </dd></dl>
+	<dl class="lineD"><dt>是否通过：</dt><dd><htmlA:radio id="status" default="1|是,0|否"/></dd></dl>
+	<dl class="lineD"><dt>奖励积分：</dt><dd><htmlA:input id="deal_credits" value="0" tip="如不奖励积分则不用填"/></dd></dl>
+	<dl class="lineD"><dt>处理说明：</dt><dd><htmlA:text id="deal_info" value="{$vo.deal_info}" tip="*"/></dd></dl>
+	</div><!--tab1-->
+
+	<!--银行卡信息-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+function subcheck(){
+	if($("input[name='status']:checked").val()!=1 && $("input[name='status']:checked").val()!=0){
+		ui.error("请选择审核结果");
+		return false;
+	}
+	
+	var deal_info = $("#deal_info").val();
+	if(deal_info ==""){
+		//ui.error("处理说明不能为空！");
+		//return false;
+	}
+	return true;
+}
+</script>
+</div>
+<include file="Public:_footer" />

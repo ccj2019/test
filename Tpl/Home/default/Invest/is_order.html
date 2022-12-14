@@ -1,0 +1,438 @@
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="/Public/biaoindex.css" />
+<!-- 引入组件 -->
+<style type="text/css">
+.tfShangpinBox {
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.tfbottomXian{
+	height: 1px;
+	background-color: #DADADA;
+	width: 100%;
+	margin-top: 16px;
+}
+.tfShangpinBox .tfshangpinTu {
+  flex-shrink: 0;
+  width: 135px;
+  height: 135px;
+  margin-right: 22px;
+  border-radius: 2px;
+}
+.tfShangpinBox .tfShangpinBoxTitle1 {
+  font-size: 24px;
+  line-height: 34px;
+  color: #333333;
+}
+.tfShangpinBox .tfShangpinBoxTitle2 {
+  font-size: 14px;
+  line-height: 20px;
+  color: #999999;
+}
+.bottomBoxListBox {
+  width: 765px;
+  padding: 0 0 0 20px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+  margin-left: 155px;
+}
+.bottomBoxListBox .listBox {
+  height: 83px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #333;
+  position: relative;
+  box-sizing: border-box;
+  padding-right: 247px;
+  border-bottom: 1px solid #EEEEEE;
+}
+.bottomBoxListBox .listBox .listBoxLeft {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+.bottomBoxListBox .listBox .listBoxLeft img {
+  width: 25px;
+  height: 25px;
+  display: block;
+  margin-right: 5px;
+}
+.bottomBoxListBox .listBox .indicator {
+  display: flex;
+  justify-content: end;
+  flex-flow: row nowrap;
+}
+.bottomBoxListBox .listBox .indicator .button,
+.bottomBoxListBox .listBox .indicator i,
+.bottomBoxListBox .listBox .indicator input {
+  display: inline-block;
+  width: 28px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 0rem;
+  text-align: center;
+  border: 1px solid #DADADA;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 0;
+  font-style: normal;
+  color: #5B5B5B;
+  font-size: 14px;
+  -moz-user-select:none; /*火狐*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -ms-user-select:none; /*IE10*/
+  -khtml-user-select:none; /*早期浏览器*/
+  user-select:none;
+  cursor: pointer;
+}
+.bottomBoxListBox .listBox .indicator input{
+	border-left: 0;
+	border-right: 0;
+  cursor:  auto;
+}
+.bbbtox {
+  width: 100%;
+  padding-left: 210px;
+  line-height: 40px;
+  color: #333;
+  font-size: 14px;
+  box-sizing: border-box;
+  border-radius: 0.16rem;
+  background-color: #fff;
+  margin: 0.2rem auto;
+}
+.box{
+	width: 940px;
+	min-width: 940px;
+	margin: 50px auto;
+	border: 1px solid #C4C4C4;
+	box-sizing: border-box;
+	padding-bottom: 51px;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+select{
+	position: absolute;
+	top: 25px;
+	height: 30px;
+	right: 247px;
+	opacity: 0;
+	width: 100px;
+	cursor: pointer;
+}
+.tijiaodingdanBox{
+	height: 116px;
+	background: #F8F8F8;
+	box-sizing: border-box;
+	padding: 0 30px;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: #333333;
+	justify-content: flex-end;
+	margin-left: 155px;
+	margin-right: 20px;
+	border-top: 1px solid #EEEEEE;
+}
+.tijiao{
+	width: 166px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	margin-left: 35px;
+	cursor: pointer;
+	background: linear-gradient(321.69deg, #4481EB 0%, #04BEFE 100%);
+	transition: all 0.3s;
+	-moz-user-select:none; /*火狐*/
+	-webkit-user-select:none; /*webkit浏览器*/
+	-ms-user-select:none; /*IE10*/
+	-khtml-user-select:none; /*早期浏览器*/
+	user-select:none;
+}
+.tijiao:hover{
+	background: linear-gradient(321.69deg, #04BEFE 0%, #4481EB 100%);
+}
+	#zengpin span{
+		color: #3f6eda;
+	}
+</style>
+<!--内容部分-->
+
+<div class="box l-a3" style="background: #FFFFFF;">
+	<form class="layui-form" action="javascript:;">
+		<div class="tfShangpinBox">
+			<img src="{$binfo.borrow_img}" class="tfshangpinTu">
+			<div style="flex: 1;">
+				<div class="tfShangpinBoxTitle1">
+					{$binfo.borrow_name}
+				</div>
+				<div class="tfShangpinBoxTitle2">
+					周期 {$binfo.borrow_duration}个月
+				</div>
+				<div class="tfShangpinBoxTitle2">
+					<!--预计收购时间 2020/12/12-->
+				</div>
+				<div style="font-size: 14px;color: #FF1A1A;margin-top: 27px;">
+					￥<span style="font-size: 24px;">{$binfo.borrow_min}</span>
+				</div>
+			</div>
+			<div class="tfbottomXian"></div>
+		</div>
+		<div class="bottomBoxListBox">
+			<div class="listBox">
+				<div class="listBoxLeft">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAILSURBVHgBrVStWmQxDE3LFStn32BW7TOsG7Pft3YdjuE1QAAfCoVEwitgsCAROB6AcUhQzBU3CUnTppkBHL0//Ul7enqSNC35cgbrvAdIMyKC7Q+8rc0JpAKa2jjWOTKYcTWOdD3kt3ROiEsUIzMDIZWaAxiT9bWuyHWM3abrdhLdDYi0bJOJDcxAGrMG1sYMhHyzMI95MXAwdIa2I1WmFMD0mJuA3MDKmsENjRl3/WwSus0WQidQNzAdbc5A28wCWGHlLLXGD8yo6MriU1uTxD+w+3wx13ocyx+stNqao/02Ld63xv2fs1VSMOTpydiYds6IIxvsDhJSqFJEfXXwB80HxWfK9WgVJHibsAFzd4A7MR4dIa8TDErVWTDGsFjd/D74BZ+UxcPhrdgX0Zm6LmcBVN1SNrDuuRrEX5SWBDF8ig5y2sqwxhZacDeP/ns8XUzTBProq0XbjDwzDU2OAi7arxGgaEi0YyHBHDNiLmO30pMdk/yxhkggoGBOQgwZjCHXrKCNHO1MrQ9b8RdynO1L8mQNobJT0I+C59pipHDEBhYTAalIMmhIJuIPuRsvAa+bI7jnLrGlnfbVwR42McX6kXrQOhhu3jLNXjRMYKn39/HkRSbXCxZdx3jR+kIMDvE5NvaG+NMYTrTPCY6ExQyap50VVL0qa+FQYpZNQ3AZ4Hj1/+oVvru8A8Z8vb9VzXi4AAAAAElFTkSuQmCC">
+					渠道收购
+				</div>
+				<div>
+					<div class="indicator">
+						<div class="button" onclick="change_quantity(this,-1)">-</div>
+						<input type="number" value="0" id="sg" oninput="value=value.replace(/[^\d]/g,'')" onchange="jisuan()" >
+						<div class="button" onclick="change_quantity(this,1)">+</div>
+					</div>
+				</div>
+			</div>
+			<div class="listBox">
+				<div class="listBoxLeft">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJNSURBVHgBlZRfbhMxEMa/2YT39ATkJg1cgCuEx0go7RapLzxk84AqgWATlSgPSISegN6A5gYcYblBhVAFydrDeGzvH7TQdKVdez2ez+Pxb0y45+HNegjYDSwK7JI5TSbF/+bTv4U2A+AukylTGCZYlkH30gK8X9IkLQ4W5M1qLJZcohrI64Vcq6Lu30VbppSm13/7Juh+jmFUjFXEiKJxrVhKdu8Q1HvW5djvlIvRWLdVjchvWfsUbBaHC3IUbIirkHW2EDUeIFiGXNmGMMu2rUQax5n4cEGDcKLB0VpqLeBT0Hmg3Yey28/l+9UfgvV5NCGPRv5LeyP95b2CvM6HvLr8guTRMb2YPoUxzxWReusFer0RvUqfYIcBZ3nOs3zY1NCwFeKfP05FfyqOR5p4xpWEMxfWCn67nKnonXVRDSSMjaRkVC1kMKeLl5kK8koghn0vxqMQBXtcKogXur1fuEXCmVaOx0kWDVhpH98l3xnxh0urE9yQKzFQhJlqbOzYOyeftDVRjKKoB1/6/bpOESCOQhWH3Dj5CDj5cqzmegpkob5iUdcq1ZVAvuQibXt3hA3YW5w6DUVLIowrmggzc7ViLDlu8ol25bjto05PX7lSI8KtQtS6WUx0jqLhGmseIKPqJ9J81kk2RKA3izNWebtB+XsL3gnMtvCO8NuMOTRBGHbhObwQOI2wZTDS1X3hO+eMXp9dteA/ezOWceGSHntBLc0tDKX08fxbqx559k7woBOZeC2gL2kxv0XHw6f5AGV54nGiMa3Pt9H2B25Gy6RPEal4AAAAAElFTkSuQmCC">
+					自提销售
+				</div>
+				<div>
+					<div class="indicator">
+						<div class="button" onclick="change_quantity(this,-1)">-</div>
+						<input type="number" value="0" id="zt" oninput="value=value.replace(/[^\d]/g,'')" onchange="jisuan()" >
+						<div class="button" onclick="change_quantity(this,1)">+</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="listBox">
+				<div class="listBoxLeft">
+					购买金额合计
+				</div>
+				<div>
+					￥<span class="tfheji">0.00</span>
+				</div>
+
+			</div>
+			<div class="listBox">
+				<div class="listBoxLeft">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHnSURBVHgBpVRZTgJBEK1qlyg/jn/GJRlPIJxAPIHcwHgC9QRyA/UE6g3wBAw3mBvQJGzha0gIS1ja1z0LswAqVtJQ01316nVVdTFtEHV+XsTfFSmV9zeUJCFq3Gw663w4A2JZFuVyj8T8AABrjZ/E+uR2u7wRUJ2c2GBQhWrT70TSYnHD3a7MAG4BthJURNvbgZHxga9JVQioTk/LtB3YEjSXe9AKB4B1CgF1JYmKRp/PC/it086Ol4EQ4hhXfUHxisGOR8Ph5a66uCjB0Y4MmR1UrxEEyiOAx51OYwWrBs5l7Nuig4P8LsCuEmbxVhGiT4NBPwB/R7AaTace93qVCCQuzLeC0rljLsH52eiLxZEB0x2glI3vOwRxgwDappTytQStFjtieHh4hBxa2tis8MzXMyJw4KWu7CC5T0afzRSNRn1utVzY3YPhI/rNMXitlrappPCk0G8zRVuy5/lB9vaODUMfwAVYLQWQJDOfuwLXcRIskauwScFIaoa0QoyNzmscfDKphX2oE1ym/4hSr2ivJ78o+/tvQUNvCyax3rS6HA5nZ3rmVTeMrHXiITWFzHAwldRP7S9MtS1zYnwl+tAcKHUD9YN+ZlVGwQqGSBxjbXB/cl8jQDFqYrxrLJfG46+otVLyDbNs4ge6ypBNAAAAAElFTkSuQmCC">
+					优惠券抵扣
+				</div>
+				<div style="color: #999999;">
+					<span>
+						<font style="color: #FF1A1A;" id="youhuijineText">不使用优惠券</font>>
+					</span>
+					<!-- <span>
+						<font style="color: #333;">不使用优惠券</font>
+					</span> -->
+				</div>
+				<select name="city" id="syyhq" lay-verify="required" onchange="selectChange(this)">
+				  <option value="0" money_bonus="0" man="0">不使用优惠券</option>
+				  <volist name="bonus_list" id="bonus_line">
+					<option value="{$bonus_line.id}" id="bonus{$bonus_line.id}"  money_bonus="{$bonus_line.money_bonus}" man="{$bonus_line.bonus_invest_min}" disabled="disabled">
+						优惠券{$bonus_line.money_bonus}元（满{$bonus_line.bonus_invest_min}元可用）到期时间：{$bonus_line.end_time|date="Y-m-d",###}
+					</option>
+				  </volist>
+					<!--<option value="{$bonus_line.id}" id="bonus{$bonus_line.id}"  money_bonus="{$bonus_line.money_bonus}">优惠券{$bonus_line.money_bonus}元</option>-->
+					<!--<option value="{$bonus_line.id}" disabled="disabled">（满{$bonus_line.bonus_invest_min}元可用）</option>-->
+				</select>
+			</div>
+			<div class="listBox">
+				<div class="listBoxLeft">
+					优惠后金额
+				</div>
+				<div style="color: #FF1A1A;">
+					<span class="youhuihou"></span>
+				</div>
+			</div>
+
+			<if condition="$binfo.is_huodong eq 1">
+				<div class="listBox">
+					<div class="listBoxLeft" style="width: 350px;">
+						赠品
+					</div>
+					<div id="zhengpin" style="line-height: 23px;">
+						再购买{$binfo.yt_ms}元可获赠赠品[ {$zengpin.title} ]1份(手机端领取)
+					</div>
+				</div>
+			</if>
+
+
+		</div>
+		<div class="bbbtox">
+			<if condition="$binfo.is_huodong eq 1">
+				<div>备注：赠品可自行提货或折现，若项目结束后未进行操作，则默认为赠品折现</div></if>
+
+			<div>认购方式说明： </div>
+			<div>1.认购：商品养殖完成后可选择在寻渔记平台进行售卖，如到期有未售出的商品将由渠道商进行收购； </div>
+			<div>2.自提：商品养殖完成后将会采取寄送的方式交付到您的手中，由您自行销售，请您知悉。</div>
+		</div>
+		<div class="tijiaodingdanBox">
+			<div style="font-size: 16px;">
+				<span style="font-size: 14px;">共<span style="color:red" class="zongfen"></span>份</span>
+				,实付款：<span class="youhuihou" style="color: red;"></span>
+			</div>
+			<if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+			    <div class="tijiao" onclick="tijiaoNext()">提交订单</div>
+			<else />
+				<div class="tijiao">新用户专享</div>
+			</if>
+		</div>
+		
+	</form>
+</div>
+<script>
+	var jiage = {$binfo.borrow_min},//单价
+		zt = 0,//自提数量
+	    sg = 0,//收购数量
+
+		heji = jiage * (zt + sg),//合计
+		youhui = 0;//优惠券抵扣
+	//加减数量
+	function change_quantity(e,act){
+		switch (act) {
+		  case 1:
+		      $(e).parents('.indicator').find('input').val($(e).parents('.indicator').find('input').val()*1+1);
+		    break;
+		  case -1:
+		    if ($(e).parents('.indicator').find('input').val()*1 > 0) {
+		      $(e).parents('.indicator').find('input').val($(e).parents('.indicator').find('input').val()*1-1);
+		    }
+		    break;
+		  default:
+		    break;
+		}
+		jisuan();
+	}
+	
+	//选择优惠券
+	function selectChange(e){
+		var yhmoney = $(e).find("option:selected").attr("money_bonus");
+		youhui = yhmoney;
+		if(yhmoney>0){
+
+			$('#youhuijineText').text('-'+yhmoney+'元')
+		}else{
+
+			$('#youhuijineText').text('不使用优惠券')
+		}
+		jisuan('changeYH')
+	}
+	//计算各个数据
+	function jisuan(eeee){
+		var jiage2 = {$binfo.borrow_min};//单价
+		zt = $('#zt').val()*1;//自提数量
+		sg = $('#sg').val()*1;//收购数量
+		var zp="{$zengpin.title}";
+		var yhmin = $("#syyhq").find("option:selected").attr("man");
+		var heji2 = jiage2 * (zt + sg);	//合计
+		if(eeee!='changeYH'){
+
+			if(heji2<yhmin){
+				$("#syyhq").attr("value",0);
+				$('#youhuijineText').text('不使用优惠券')
+				youhui=0;
+			}else{
+			<?php $json_bonus_list = json_encode($bonus_list); ?>
+				var youhuiquanList = {$json_bonus_list};
+				var index2 = 'no';//优惠券的索引
+				var manzuList = [];
+				youhuiquanList.forEach((item,index)=>{
+					if(item.bonus_invest_min <= heji2){
+						manzuList.push({index:index,val:item.money_bonus,end_time:item.end_time*1})
+					}
+				})
+				// manzuList.sort(function(a,b){return b['val']-a['val']});
+				manzuList.sort(function(a,b){return a['end_time']-b['end_time']});
+				var manzuList2 = [];
+				manzuList.forEach((item,index)=>{
+					if(item.end_time==manzuList[0].end_time){
+						manzuList2.push(item)
+					}
+				})
+				manzuList2.sort(function(a,b){return b['val']-a['val']});
+				if(manzuList2.length>0){
+					index2 = manzuList2[0].index;
+				}
+				if(heji2==0){
+					var youhuiquanIndex = 99999;
+				}else{
+					var youhuiquanIndex = (index2=='no'?99999:index2);
+				}
+				if(youhuiquanIndex!=99999){
+					$('#syyhq').val(youhuiquanList[youhuiquanIndex].id);
+					var yhmoney = $('#syyhq').find("option:selected").attr("money_bonus");
+					youhui = yhmoney;
+					if(yhmoney>0){
+						$('#youhuijineText').text('-'+yhmoney+'元')
+					}else{
+						$('#youhuijineText').text('不使用优惠券')
+					}
+				}
+			}
+		}
+		var youhuiObj = $('select').find("option").map(function(index,item){
+			return $(item).attr("man");
+		})
+		var	youhui2 = youhui;//优惠券抵扣
+		$.each(youhuiObj,function(index,item){
+			if(item*1>heji2*1){
+				$('select').find("option").eq(index).attr("disabled",true);
+			}else{
+				$('select').find("option").eq(index).attr("disabled",false);
+			}
+		})
+		var is_huodong={$binfo.is_huodong|default=0};
+		var hdnum={$binfo.huodongnum|default=0};
+
+		var heji3=heji2+{$binfo.yt_money|default=0};
+		if(is_huodong==1){
+			var zs=Math.floor(heji3/hdnum);
+			var zengpin="";
+			var zaigou=hdnum;
+			if(zs==0){
+				zaigou=hdnum-heji3;
+				zengpin="再购买"+zaigou+"元可获赠赠品[ "+zp+" ]1份";
+			}else{
+				zaigou=(1+zs)*hdnum-heji3;
+				zengpin="可获赠品[ "+zp+" ]"+zs+"份，再购买"+zaigou+"元可再获赠1份";
+			}
+			$('#zhengpin').text(zengpin+"(手机端领取)");
+		}
+
+		$('.zongfen').text(zt + sg);
+		$('.tfheji').text(heji2||'0.00');
+		$('.youhuihou').text('￥'+(heji2*1-youhui2*1));
+	}
+	// setInterval(function(){
+	// 	jisuan()
+	// },50)
+
+	//提交下一页面
+	function tijiaoNext(){
+		if((zt*1 + sg*1)!=0){
+			var yhid = $('select').val();
+			location.href=`/invest/is_order_confirm?id={$binfo.id}&zt=${zt}&sg=${sg}&yhid=${yhid}&youhui=${youhui}`
+		}else{
+			layer.msg('请选择数量')
+		}
+	}
+</script>
+<!--底部-->
+<include file="Public:footer" />

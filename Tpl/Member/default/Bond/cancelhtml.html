@@ -1,0 +1,65 @@
+{__NOLAYOUT__}
+<style>
+/*填写金额窗口*/
+.ajax-invest{ width:410px; height:auto; float:left; margin:40px;}
+.ajax-invest .item{ width:100%; height:auto; float:left;}
+.ajax-invest .item li{ width:100%; height:auto; float:left; margin-bottom:20px;}
+.ajax-invest .item li h6{ width:100px; height:30px; line-height:30px; font-size:12px; font-weight:normal; text-align:center; float:left;}
+input.paypass{ width:200px; height:30px; float:left; border:1px solid #CBCBCB; padding:0 3px; border-radius:3px;}
+.center{ width:auto; height:40px; line-height:40px; color:#fff; float:left; padding:0 20px; background:#067BCE; border-radius:5px;}
+.center{ margin-left:110px; _display:none;}
+.center{ margin-left:160px; _display:none;}
+.ajax-invest .item li a:hover{ background:#128BDE;}
+.ajax-invest .item li b{height:30px; line-height:30px; font-size:12px; font-weight:normal; text-align:center; float:left;}
+</style><table style=" margin:10px; font-size:12px; text-align:left; line-height:34px;" width="400" id="tips">
+<tbody>
+<tr>
+    <td><font style="font-size: 14px; color: red;">债权转让只能转让3次，3次后将不能在进行转让。</font></td>
+</tr>
+<tr>
+    <td>支付密码:<input type="password" name="paypass"  id="paypass" class="paypass" />&nbsp;<font color="red">*</font></td>
+</tr>
+
+<tr>
+    <td>
+    <input type="hidden" name="invest_id" id="invest_id" value="{$invest_id}">
+    <input type="button" name="dosubmit" id="dosubmit" class="btnselall center" value="确认转让">
+    
+    </td>
+</tr>
+</tbody></table>
+<script type="text/javascript">
+
+$("#dosubmit").click(function(){
+    var paypass = $("#paypass").val();
+    var invest_id = $("#invest_id").val();
+    if(!invest_id){
+        layer.msg("缺少参数，请与管理员联系！");
+        return false;
+    }
+    if(!paypass){
+        layer.msg("请输入支付密码！");
+        return false;
+    }
+    if(confirm('你确定撤销债权转让吗?')){
+        $.ajax({
+            url: "__URL__/cancel/",
+            data: {"paypass":paypass, "invest_id":invest_id},
+            timeout: 4000,
+            cache: false,
+            type: "post",
+            dataType: "json",
+            success: function (d, s, r) {
+                    if(d.status==1){
+                       	layer.alert(d.message, 1,!1);
+                    }else{
+                        layer.msg(d.message);
+                    }
+            },
+            complete:function(XMLHttpRequest, textStatus){
+                   
+            }
+        });
+    }
+})
+</script>

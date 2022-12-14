@@ -1,0 +1,94 @@
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $tab_li = $('#tab2 ul li');
+	$tab_li.hover(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+		var index = $tab_li.index(this);
+		$('div.tab_box2 > div').eq(index).show().siblings().hide();
+	});	    
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $tab_li = $('#tab3 ul li');
+	$tab_li.hover(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+		var index = $tab_li.index(this);
+		$('div.tab_box3 > div').eq(index).show().siblings().hide();
+	});	
+});
+</script>
+
+<div style="clear:both;"></div>
+<div class="tjsj1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/tj1.jpg" width="100%" /></div>
+<div style="clear:both;"></div>
+<div class="tjsj2">
+	<p class="tj_spec1">平台统计数据</p>
+    <div class="tjsj2-1">
+    	<a href="#data2">投资记录</a><a href="#data3">理财排行榜</a>
+    </div>
+    <div class="tjsj2-2" id="data2">
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="tj_spec4">
+          <tr class="tj_spec2">
+            <td width="14%">财主</td>
+            <td width="26%">项目标题</td>
+            <td width="21%">认购金额（￥）</td>
+            <td width="16%">认购时间</td>
+            <td width="15%">状态</td>
+            <td width="8%">&nbsp;</td>
+          </tr>
+          <foreach name="Investlist" item="vo">
+              <tr class="tj_spec3">
+                <td align="center">{$vo.user_name|cnsubstr=###,3}</td>
+                <td>{$vo.borrow_name|cnsubstr=###,18}</td>
+                <td align="center">{$vo.investor_capital|Fmoney=###}</td>
+                <td align="center">{$vo.add_time|date='Y-m-d',###}</td>
+                <td align="center"><if condition="$vo.borrow_status eq 3"><a href="javascript:void(0)"class="spec60">已流标</a>
+                        <elseif condition="$vo.borrow_status eq 4"/>
+                        <a href="javascript:void(0)" class="spec60">等待审核</a>
+                        <elseif condition="$vo.borrow_status eq 6"/>
+                        <a href="javascript:void(0)" class="spec60">还款中</a>
+                        <elseif condition="$vo.borrow_status gt 6"/>
+                        <a href="javascript:void(0)" class="spec60">已完成</a>
+                        <else/>
+                        投标中
+                      </if></td>
+                <td align="center" class="tj_spec5"><a href="{:U('invest/detail',array('id'=>$vo['borrow_id']))}">详细</a></td>
+              </tr>
+          </foreach>            
+        </table>
+    </div>
+    <div class="tjsj2-2" id="data3">
+    <table border="1" cellspacing="0" bordercolor="#dfdfdf" cellpadding="0" width="100%" style="border-collapse:collapse;">
+          <tr class="tj_spec6">
+            <td>排名</td>
+            <td>财主</td>
+            <td>理财总额</td>
+            <td>排名</td>
+            <td>财主</td>
+            <td>理财总额</td>
+            <td>排名</td>
+            <td>财主</td>
+            <td>理财总额</td>
+          </tr>
+        </table>
+        <ul class="rankList">
+            <foreach name="InvestmentRanking" item="vo">
+                <li>
+                    <span style="width:100px;">第{$key+1}名</span>
+                    <span style="width:90px;">{$vo.user_name|cnsubstr=###,3,0,'utf-8','**'}</span>
+                    <span style="width:180px;">{$vo.moeny|Fmoney=###}元</span>
+                </li>
+            </foreach>
+        </ul>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="tjsj3" style="display:none">
+	<span class="tj_spec9"><a href="#">日</a></span>
+    <span class="tj_spec10"><a href="#">周</a></span>
+    <span class="tj_spec11"><a href="#">月</a></span>
+</div>
+

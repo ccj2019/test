@@ -1,0 +1,66 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+
+<!--投资管理分红的众筹-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>资金流水</span>
+                    <select class="zjlx" id="status">
+                            <option value="">请选择</option>
+                        <volist name="log_type" id="vo">
+                            <option value="{$key}">{$vo}</option>
+                        </volist>
+                    </select>
+                </div>
+                <style type="text/css">
+                .zjlx{padding: 10px 0;padding-left: 15px;padding-right: 4px;color: #454545;font-size: 18px;}
+                </style>
+                <script type="text/javascript">
+                    $("select#status").change(function(){
+                        console.log($(this).val());
+                        var log_type =$(this).val();
+                        url = "__URL__/detail?log_type="+log_type;
+                        window.location.href=url;
+                    });
+                </script>
+                <div class="fhzc">
+                    <table border="0" cellspacing="1" cellpadding="0">
+                        <tr>
+                            <th width="94">类型</th>
+                            <th width="94">可用金额</th>
+                            <th width="80">发生金额</th>
+                            <th width="320">备注</th>
+                            <th width="165">时间</th>
+                        </tr>
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo.type}</td>
+                                <td>{$vo['account_money']+$vo['back_money']}</td>
+                                <td><if condition="$vo.affect_money lt 0"><font color="#FF0000"><else/><font color="#009900"></if>{$vo.affect_money}</font></td>
+                                <td>{$vo.info}</td>
+                                <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+                            </tr>
+                        </volist>
+                        
+                    </table>
+                    <div class="number" style="background:none">
+                        {$pagebar}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

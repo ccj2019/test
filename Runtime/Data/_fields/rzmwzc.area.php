@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'reid', 2 => 'name', 3 => 'sort_order', 4 => 'is_open', 5 => 'domain', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'smallint(5) unsigned', 'reid' => 'smallint(5) unsigned', 'name' => 'varchar(120)', 'sort_order' => 'smallint(5) unsigned', 'is_open' => 'tinyint(3) unsigned', 'domain' => 'varchar(10)', ), ); ?>

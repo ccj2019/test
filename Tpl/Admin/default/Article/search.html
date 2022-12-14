@@ -1,0 +1,33 @@
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<script type="text/javascript">
+  var searchName = "搜索/筛选借款";
+</script>
+  <div id="search_div" style="display:none">
+    <div class="page_tit"><script type="text/javascript">document.write(searchName);</script> [ <a href="javascript:void(0);" onclick="dosearch();">隐藏</a> ]</div>
+  
+  <div class="form2">
+  <form method="get" action="__URL__">    
+   <dl class="lineD">
+      <dt>文章标题：</dt>
+      <dd>
+        <input name="title" style="width:190px" id="title" type="text" value="{$search.title}">
+        <span>不填则不限制</span>
+      </dd>
+    </dl>
+    <dl class="lineD">
+      <dt>所属栏目：</dt>
+      <dd>
+        <select name="type_id" class="c_select">
+          <!-- <volist name="catlist" id="foo"> -->
+                <option value="{$foo.id}" <if condition="$search['type_id'] eq $foo['id']">selected</if> >{$foo.html}|--{$foo.type_name}</option>            
+                <!-- </volist> -->
+        </select>        
+        <span>不填则不限制</span>
+      </dd>
+    </dl>
+    <div class="page_btm">
+      <input type="submit" class="btn_b" value="确定" />
+    </div>
+  </form>
+  </div>
+  </div>

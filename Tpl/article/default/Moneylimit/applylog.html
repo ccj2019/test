@@ -1,0 +1,119 @@
+{__NOLAYOUT__}<tagLib name="htmlA" />
+<div class="page_info">
+  <div class="page_tips">
+    <p>请准确填写您的申请金额和申请说明！</p>
+  </div>
+  <div class="m_page_right_box">
+    <form action="__APP__/Pay/offline" method="post" name="offlinePay" id="offlinePay">
+      <table style=" padding: 0px; height:200px;border-collapse: collapse; text-align: left;" id="formTb" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td class="tdTitle" width="80px"> 申请类型： </td>
+            <td class="tdContent" width="500px"><htmlA:radio id="apply_type" datakey="aType" class="text_input"/></td>
+            <td id="dv_company" class="tdTip"></td>
+          </tr>
+          <tr>
+            <td class="tdTitle"> 申请金额： </td>
+            <td class="tdContent"><htmlA:input id="apply_money"  class="text_input"/>
+              元 </td>
+            <td id="dv_company" class="tdTip"></td>
+          </tr>
+          <tr>
+            <td class="tdTitle"> 申请说明： </td>
+            <td class="tdContent"><htmlA:text style="height:50px; width:90%" id="apply_info"  class="text_input"/></td>
+            <td id="dv_company" class="tdTip"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><a href="javascript:void(0)" id="btn_set" onclick="apply()" class="button_input" style="width:100px;">提交申请</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>提交时间</td>
+        <td>申请类型</td>
+        <td>申请金额</td>
+        <td>审核状态</td>
+        <td>处理意见</td>
+        <td>授信额度</td>
+      </tr>
+      <volist name="list" id="vo">
+        <tr>
+          <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+          <td>{$aType[$vo['apply_type']]}</td>
+          <td>{$vo.apply_money|Fmoney=###}</td>
+          <td>{$vo.status}</td>
+          <td>{$vo.deal_info|default="--"}</td>
+          <td>{$vo.credit_money|Fmoney|default="0.00"}元</td>
+        </tr>
+      </volist>
+      <tr><td colspan="6"><div id="pager" data="info6" class="yahoo2 ajaxpagebar" style="text-align: right; padding-left:0px; padding-right:0px; height: 36px;width: 100%;text-indent: 0px;">{$pagebar}</div></td></tr>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+function apply(){
+	p = makevar(['apply_type','apply_money','apply_info']);
+	p['_tps'] = "post";
+	if(typeof p.apply_money =="undefined"){
+		layer.msg("申请金额不能为空")
+		return;	
+	}
+	if(typeof p.apply_info =="undefined"){
+		layer.msg("申请说明不能为空")
+		return;	
+	}
+	$.ajax({
+		url: "__URL__/apply/",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert(d.message, 1,!1);
+					updatelog();
+				}
+				else  layer.msg(d.message);
+			}
+		}
+	});
+}
+function updatelog(){
+        $.ajax({
+            url: "__URL__/applylog/",
+            data: {},
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#info8").html(d.content);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.content);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

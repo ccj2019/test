@@ -1,0 +1,38 @@
+<div class="mxzs">
+	<div class="mxzs1">
+    	<ul>
+            <volist name="articleList" id="vo">
+        	<li>
+            	<div class="mxzs_left">
+                	<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/ff_first.png" class="png" />
+                    <p>皇冠项目</p>
+                </div>
+                <div class="mxzs_center"><a href="{:U('detail',array('id'=>$vo['id']))}"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/ff_img14.jpg" /></a></div>
+                <div class="mxzs_right">
+                	<p><a href="{:U('detail',array('id'=>$vo['id']))}">项目名称：{$vo.title}</a></p>
+                    行业类型：{$vo.type_name}<br />
+                    项目简介：{$vo.art_content|cnsubstr=###,50}<a href="{:U('detail',array('id'=>$vo['id']))}">查看详情>></a>
+                </div>
+                <div class="clear"></div>
+            </li>
+            </volist>
+            <script type="text/javascript">
+            	$(document).ready(function(){
+					$(".mxzs1 ul li .wydz").click(function(){
+					 if($(this).next(".wydz_info").is(":visible")){
+					  $(this).next(".wydz_info").hide();
+					  $(this).text("我要点赞");
+					  $(this).removeClass("shouqi");
+					  }
+					  else{
+					  $(this).next(".wydz_info").show();
+					  $(this).text("收起");
+					  $(this).addClass("shouqi");
+					  }
+					});
+					});
+            </script>
+        </ul>
+<div class="ff_page">{$page}</div>
+    </div>
+</div>

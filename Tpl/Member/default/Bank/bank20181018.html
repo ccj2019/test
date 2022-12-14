@@ -1,0 +1,190 @@
+<tagLib name="htmlA" />
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+<style>
+    body {
+        background: #f1f1f1;
+    }
+    .zt1box label{width: 200px !important;}
+</style>
+<!--账户管理安全中心-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>提现银行卡</span>
+                </div>
+                <div class="zdtb">
+                	<div class="zdt2">
+                        <div class="con">
+                            <p>尊敬的{$voinfo.real_name}先生/女士，提现操作涉及您的资金安全，敬请仔细操作！</p>
+                        </div>
+                    </div>
+                    <div class="zdt1">
+                        <div class="zdt1con">
+                            <form action="__APP__/Pay/offline" method="post" name="offlinePay" id="offlinePay">
+                                <div class="zt1box">
+                                    <label for="">您当前的银行账号：</label>
+                                    <div class="zt1b">
+                                        {$vobank.bank_num|hidecard=###,3,'还没有登记您的银行账号'}
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="zt1box">
+                                    <label for="">您当前的银行名称：</label>
+                                    <div class="zt1b">
+                                    <htmlA:select id="bank_name" value="key|vobank.bank_name" datakey='bank_list' class="inp" addstr='style="width: 110px;"' tip="*" />
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="zt1box">
+                                    <label for="">您银行账户户主姓名：</label>
+                                    <div class="zt1b">
+                                    {:cnsubstr($voinfo['real_name'],1,0,'utf-8',false).str_repeat("*",strlen($voinfo['real_name'])-1)}
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="zt1box" <empty name="vobank['bank_num']">style="display: none"</empty> >
+                                    <label for="">输入您的当前的银行帐号：</label>
+                                    <input class="inp" id="txt_oldaccount" type="text" maxlength="19">
+									<span class="font666" style="width: auto;">(为了您的资金安全，请输入您当前的银行账号)</span>
+                                    <div class="clear"></div>
+                                </div>
+  								<div class="zt1box">
+                                    <label for="">输入您新的银行帐号：</label>
+                                    <input class="inp" id="txt_account" type="text" maxlength="19">
+									<span class="font666" style="width: auto;">(信用卡帐号无法提现，请不要误填)</span>
+                                    <div class="clear"></div>
+                                </div>
+  								<div class="zt1box">
+                                    <label for="">确认您新的银行帐号：</label>
+                                    <input class="inp" id="txt_confirmaccount" type="text" maxlength="19">
+									<span class="font666" style="width: auto;">(请再次确认您添加的银行账号)</span>
+                                    <div class="clear"></div>
+                                </div>
+  								<div class="zt1box">
+                                    <label for="">开户银行所在省份：</label>
+                                    <select name="selectp" id="province" style="width: 110px;" class="inp">
+									  	<option value="0">请选择省份 </option>
+									</select>
+                                    <div class="clear"></div>
+                                </div>
+  								<div class="zt1box">
+                                    <label for="">开户银行所在市：</label>
+                                    <select name="selectc" id="city" style="width: 110px;" class="inp">
+										<option value="0">请选择城市</option>
+									</select>
+									<select name="selectc" id="district" style="width: 110px; display:none" class="inp">
+										<option value="0">请选择地区</option>
+									</select>
+                                    <div class="clear"></div>
+                                </div>
+  								
+                                <div class="zt1box">
+                                    <label for="">输入开户行支行名称：</label>
+                                    <input name="txt_bankName" id="txt_bankName" value="{$vobank.bank_address}" class="inp" type="text">
+									<span class="font666" style="width: auto;">(如不能确定，请拨打开户行的客服热线咨询)</span>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="zt1box">
+                                    <label for=""></label>
+                                    <a href="javascript:void(0)" id="btn_set" class="btn" style="width:100px;">提交</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	var newTitle = '{$glo.web_name}提醒您：';
+	$(function() {
+		$("#btn_set").click(function() {
+			if ($("#bank_name").val()=="") {
+				layer.msg('请选择开户行！');
+				return false;
+			}
+			if ($("#txt_account").val().length < 7) {
+				layer.msg('请正确输入您的银行帐号！');
+				return false;
+			}
+			if ($("#txt_account").val().length > 19) {
+				layer.msg('请正确输入您的银行帐号！');
+				return false;
+			}
+			if ($("#txt_bankName").val().length < 1) {
+				layer.msg('请输入开户支行名称！');
+				return false;
+			}
+			if ($("#province").val()=="") {
+				layer.msg('请选择开户行所在省份！');
+				return false;
+			}
+			if ($("#city").val()=="") {
+				layer.msg('请选择开户行所在市！');
+				return false;
+			}
+			if ($("#txt_confirmaccount").val() != $("#txt_account").val()) {
+				layer.msg('更新失败。两次输入银行账号不一致，请重新输入！');
+				$("#txt_confirmaccount").val("");
+				$("#txt_confirmaccount").focus();
+				return false;
+			}
+			$.ajax({
+				url: "__URL__/bindbank",
+				type: "post",
+				dataType: "json",
+				data: {
+					account: $("#txt_account").val(), oldaccount: $("#txt_oldaccount").val(),
+					province: $("#province").find("option:selected").text(),cityName: $("#city").find("option:selected").text(),
+					bankaddress: $("#txt_bankName").val(), bankname: $("#bank_name").val()
+					
+				},
+				success: function(d) {
+					if (d.status == 1) {
+                        layer.msg('恭喜，您的银行卡更新成功',1, function(){
+                            window.location.reload();
+                        });
+						// layer.alert('恭喜，您的银行卡更新成功', 1,!1);
+						// window.loaction.reload();
+					}
+					else if (d.status == 0) {
+						layer.msg(d.message);
+					}
+				}
+			});
+
+		});
+		var ops = '添加';
+		if (ops == '添加') {
+			$("#trOldAccount").css("display", "none")
+		}
+		$("#bankname").html($("#" + 'sel_bankList2' + " :selected").html());
+		$("#txt_account").bind("keyup", function() {
+			$this = $(this);
+			$this.val($this.val().toString().replace(/[^\d]+/, ""));
+		});
+	});
+	function checkSub() {
+		$("input[type='text']").each(function() {
+			if ($(this).val().length < 1)
+				return false;
+		});
+		return true;
+	}
+</script>
+<script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>

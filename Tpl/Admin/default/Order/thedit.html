@@ -1,0 +1,112 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+<div class="so_main">
+
+<div class="page_tit">编辑商品</div>
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2" style="display:none">高级设置</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/thorerupdate" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$vo.id}" />
+	<div id="tab_1">
+	
+      <volist name="vo['goods']" id="voe">
+            <dl class="lineD"><dt>商品名称：</dt><dd>{$voe.title}</dd></dl>
+            <dl class="lineD"><dt>单价：</dt><dd>￥{$voe.art_jiage}元</dd></dl>
+            <dl class="lineD"><dt>数量：</dt><dd>{$voe.num}</dd></dl>
+            <dl class="lineD" style="background-color: aliceblue;">&nbsp;</dl>
+      </volist>
+
+      <dl class="lineD"><dt>购买金额：</dt><dd>￥{$vo.jine}元+{$vo.jifen}积分</dd></dl>
+
+      <dl class="lineD"><dt>收货人：</dt><dd>{$vo.real_name}</dd></dl>  
+      <dl class="lineD"><dt>收货地址：</dt><dd>{$vo.address}</dd></dl>
+      <dl class="lineD"><dt>联系电话：</dt><dd>{$vo.cell_phone}</dd></dl>
+      <dl class="lineD"><dt>联系邮箱：</dt><dd>{$vo.email}&nbsp;</dd></dl>
+      <dl class="lineD"><dt>下单时间：</dt><dd>{$vo.add_time|date='Y年m月d日H时',###}</dd></dl>
+      <dl class="lineD"><dt>支付时间：</dt><dd>{$vo.pay_time|date='Y年m月d日H时',###}</dd></dl>  
+      <dl class="lineD"><dt>订单备注：</dt><dd>{$vo.beizhu}&nbsp;</dd></dl>
+
+
+      <dl class="lineD"><dt>快递：</dt><dd>{$vo.yijian}</dd></dl>
+
+        <dl class="lineD"><dt>退款金额：</dt><dd>{$info.refund.money}&nbsp;</dd></dl>
+        <dl class="lineD"><dt>退款原因：</dt><dd>{$vo.refund.yuanyin}&nbsp;</dd></dl>
+        <dl class="lineD"><dt>退款说明：</dt><dd>{$vo.refund.shuoming}&nbsp;</dd></dl>
+        <dl class="lineD"><dt>退款方式：</dt><dd>
+
+            <select name="fangshi" class="select">
+                <volist name="vo['fslist']" id="vo"  key="i">
+                    <option value="{$i}" <if condition="$shxx['fangshi'] eq ($i)">selected</if>>{$vo}</option>
+                </volist>
+            </select>
+
+        </dd>
+        </dl>
+
+        <dl class="lineD"><dt>退款凭证：</dt><dd>
+            <volist name="shxx['images']" id="vo1">
+               <a href="{$vo1}" target="_blank"> <img src="{$vo1}" style="max-width: 150px; max-height: 150px;"></a>
+            </volist>
+            &nbsp;</dd>
+        </dl>
+        <dl class="lineD"><dt>售后时间： </dt><dd>{$shxx.add_time|date="Y-m-d H:i:s",###}&nbsp;</dd></dl>
+
+        <dl class="lineD"><dt>退货物流：</dt><dd>{$shxx.wuliu}：{$shxx.danhao}&nbsp;</dd></dl>
+
+
+      <dl class="lineD"><dt>同意退款：</dt><dd>
+
+          <if condition="$action eq '5'">
+              <select name="action" class="select">
+                  <option value="5" <if condition="$action eq 5">selected</if>>申请中</option>
+                  <option value="6" <if condition="$action eq 6">selected</if>>同意退款</option>
+                  <option value="8" <if condition="$action eq 8">selected</if>>拒绝退款</option>
+                  <option value="4" <if condition="$action eq 4">selected</if>>退款</option>
+                  <option value="10" <if condition="$action eq 10">selected</if>>已处理</option>
+              </select>
+          </if>
+
+          <if condition="$action eq '6' ||$action eq '7' ">
+              <select name="action" class="select">
+                  <option value="4" <if condition="$action eq 4">selected</if>>退款</option>
+              </select>
+          </if>
+
+          <if condition="$action eq '8'">
+              拒绝退款
+          </if>
+          <if condition="$action eq '9'">
+              已取消
+          </if>
+          <if condition="$action eq '4'">
+              已退款
+          </if>
+
+          <if condition="$action eq '10'">
+              已处理
+          </if>
+
+      </dd></dl>
+        <if condition="$action eq '5'">
+      <dl class="lineD"><dt>驳回原因： </dt><dd><htmlA:text id="bhyuanyin" value="{$info['refund']['bhyuanyin']}"/>&nbsp;</dd></dl>
+
+
+        </if>
+        <if condition="$action eq '8'">
+
+            <dl class="lineD"><dt>驳回原因： </dt><dd>{$info['refund']['bhyuanyin']}</dd></dl>
+        </if>
+
+      <br />
+	</div><!--tab1-->
+	<!--tab2-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+        <input type="bottom" class="btn_b" style="text-align: center;" onclick='javascript:history.go(-1)' value="返回" />
+	</div>
+	</form>
+</div>
+
+</div>
+<include file="Public:_footer" />

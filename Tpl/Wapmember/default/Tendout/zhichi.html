@@ -1,0 +1,497 @@
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+    </head>
+    <link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/wap/css/mobileSelect.css" />
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+
+<script src="/Style/file/layer/layer.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/web/js/layer.js"></script>
+<style type="text/css">
+    .l-leix{
+        color: #737373;
+    }
+    .l-leir a{
+        color: #313131;
+    }
+    .l-leir input {
+    border: 0;
+
+    
+    outline: none;
+    color: #313131;
+    height: .42rem;
+    font-size: .3rem;
+}
+    #trigger1{
+        padding-left: .5rem;
+    }
+#l-shiming ul li {
+    padding: .3rem 0;
+     color: #FFFFFF; 
+    border-bottom:3px solid #EFF3FC;
+}
+input{
+    height: .6rem;
+
+}
+
+</style>
+  <style>
+     
+        .bg-fff {
+            background: #fff;
+            width: 96%;
+            height: auto;
+            margin: 0 auto; 
+        }
+         
+         .hotBank-list{
+             border-bottom: none !important;
+         }
+         .hotBank-list-ico {
+             text-align: center;
+         }
+        .table {
+            width: 100%;
+            max-width: 100%;
+        }
+        .table {
+            border-collapse: collapse !important;
+        }
+         
+        table {
+            background-color: transparent;
+        }
+         
+        .form_td {
+            width: 20%;
+            text-align: center;
+            font-size:16px;
+        }
+       
+        .border-none {
+            border: none !important;
+        }
+        .position-rel {
+            position: relative;
+        }
+        .position-rel {
+            position: relative;
+        }
+        .form-control {
+            display: block;
+            width: 80%;
+            height: 34px;
+            font-size: 15px;
+            line-height: 1.43;
+            text-indent: .25rem;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            /*border: 1px solid #ccc;*/
+            /*border-radius: 3px;*/
+            border: none;
+            outline:none;
+            padding-left: 5px;
+        }
+        .bank_xljt {
+            position: absolute;
+            right: 2%;
+            top: 1px;
+            width: 30px;
+            height: 33px;
+            line-height: 33px;
+            text-align: center;
+            /*border-left: 1px solid #ccc;*/
+        }
+        .jt_xz {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+        }
+         
+    
+         
+        img {
+            border: 0;
+        }
+        .bank_xljt1 {
+            height: 32px;
+            position: absolute;
+            width: 80%;
+            top: 0px;
+        }
+        .bank_xl {
+           width: 100%;
+    height: 4rem;
+    border: 1px solid #ccc;
+    /* border-top: 0px; */
+    /* border-bottom: 0px; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: #ffffff;
+        }
+        .bank_xl ul {
+           height: 4rem;
+    overflow: auto;
+    list-style: none;
+          
+        }
+        .bank_xl>ul>li {
+            padding-top: 4px;
+            padding-bottom: 3px;
+            /*border-bottom: 1px solid #ccc;*/
+            padding-left: 5px;
+            height: 30px;
+            list-style: none;
+            line-height:30px;
+        }
+        .bank_xl>ul>li>a {
+            display: block;
+            width: 100%;
+            color: #555;
+        text-decoration: none;
+        }
+        .border-none{
+            color: #737373;
+        }
+        </style>
+
+    <body>
+        
+
+                <div class="l-fh l-on">
+            <a href="/wapmember/tendout/zidong"  class="l-fanhui on">&lt;返回</a><span>智投项目</span>
+            <div class="l-fanhui1">
+                <a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a>
+            </div>
+        </div>
+<style>
+.zd_yue{
+
+    font-size: 0.3rem;
+    color: #e61717;
+}
+
+</style>
+                <form action="" method="post" id="l-shiming" class="clearfix">
+                 <input type="hidden" name="form_id" value="{$from_id}" id="form_id">
+                <ul>
+<!--
+    <input type="hidden" value="{:cnsubstr($voinfo['real_name'],1,0,'utf-8',false).str_repeat('*',strlen($voinfo['real_name'])-1)}" />-->
+                    <!--                <input type="hidden" id="txt_bankName" value="{$voinfo['txt_bankName']}" />-->
+                        <li>
+                            <div class="l-leix fl">
+                                投标选择：
+                            </div>
+                            <div class="l-leir fl">
+                              
+                              <select name="borrow_name" id="borrow_name" class="c_select spec89" style="width: 4.6rem; height:0.4rem;">
+    <volist name="zdlist" id="vo">
+            <option value="{$vo.id}|{$vo.borrow_min}|{$vo.shengyu}">{$vo.borrow_name}</option> 
+    </volist>
+                                
+                                </select>
+                               <input type="hidden" name="borrow_id" id="borrow_id" value="0">
+
+                            </div>
+                        </li> 
+
+                        <li>
+                            <div class="l-leix fl">
+                                可投金额：
+                            </div>
+                            <div class="l-leir fl">
+                                
+                               <span class="zd_yue" id="shengyu">  </span>
+                                <input type="hidden" name="shengyu" id="shengyun" value="0">
+
+                            </div>
+                        </li> 
+
+                        <li>
+                            <div class="l-leix fl">
+                                数量：
+                            </div>
+                            <div class="l-leir fl">
+                              
+<a href="javascript:void(0);" style="width: 0.2rem; color:#737373;float: left;" class="fs_jian">-</a>
+
+<input type="text" name="borrow_num" id="borrow_num" value="1"  maxlength=6 oninput="value=value.replace(/[^\d]/g,'')" onBlur="jisuan()" style="background: #f8f8f8; margin-left: 0.1rem;border: 1px solid #d2d2d2;width: 1rem;float: left; text-align: center;color:#737373;">
+
+
+
+<a href="javascript:void(0);" style="width: 0.2rem; color:#737373; float: left;"  class="fs_jia">&nbsp;&nbsp;+</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="l-leix fl">
+                                实付金额：
+                            </div>
+                            <div class="l-leir fl">
+                                <span class="zd_yue" id="shifu"></span>
+                                 <input type="hidden" name="money" id="shifun" value="0">
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="l-leix fl">
+                                支付方式：
+                            </div>
+                            <div class="l-leir fl">
+                               <span class="zd_yue" style="color:#737373;" id="shifu">余额支付</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l-leix fl">
+                                剩余余额：
+                            </div>
+                            <div class="l-leir fl">
+                                <span class="zd_yue">￥{$account_money}</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l-leix fl">
+                                支付密码：
+                            </div>
+                            <div class="l-leir fl">
+                                <input type="password" name="pin" id="zhifu" value="" />
+
+
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+                        <div id="btn_set" class="l-qurena">
+                         <a>确认智投</a>    
+                     </div>
+                </form>
+    <script>
+        // $(function(){
+        // //        下拉银行卡
+        //     $(".hotBank-list-ico").bind('click',function(){
+        //       $('#chose_input').val($(this).attr('title'));
+        //         $('.bank_xl').hide();
+        //         $("#chose_bank").parent('div').find('a').addClass('jt_xz');
+        //     });
+        //     $("#chose_bank").click(function(){
+        //         $('.bank_xl').show();
+        //         $("#chose_bank").parent('div').find('a').removeClass('jt_xz');
+        //     });
+        // //        下拉银行卡
+        // })
+        </script>
+        
+        <!--弹出-->
+        <!--省市-->
+        <div id="l-citiy">
+            <van-actionsheet v-model="show">
+                <van-area :area-list="areaList" columns-num="2" @confirm="confirm" @cancel="show=!show"/>
+            </van-actionsheet>
+
+        </div>
+        <div id="lyh">
+            <van-actionsheet v-model="show1">
+                <van-picker show-toolbar  :columns="columns" @cancel="show1=!show1" @confirm="confirm"/>
+            </van-actionsheet>
+        
+        </div>
+   <script>
+function getxm(){
+    var num=$("#borrow_name").val();
+    if(num==null){
+        layer.msg('暂时没有可以自动投的项目，请核对！');
+    }else{
+        var arr=num.split('|');
+        //console.log(arr);
+        var num=Number($("#borrow_num").val());
+        $("#shifu").html(num*Number(arr[1]));
+        $("#shengyu").html(Number(arr[2]));
+        $("#borrow_id").val(arr[0]);
+
+        $("#shifun").val(num*Number(arr[1]));
+        $("#shengyun").val(Number(arr[2]));
+    }
+    
+}
+getxm();
+
+function jisuan(){
+
+
+        var num=$("#borrow_num").val();
+        //var newn = Number(num)+Number(1);
+        $("#borrow_num").val(num);
+        getxm();
+    
+}
+
+$(function() {
+    $(".fs_jia").click(function() {
+        var num=$("#borrow_num").val();
+        var newn = Number(num)+Number(1);
+        $("#borrow_num").val(newn);
+        getxm();
+
+    });
+
+    $(".fs_jian").click(function() {
+        var num=Number($("#borrow_num").val());
+        if(num>1){
+            var newn =num-Number(1);
+            $("#borrow_num").val(newn);
+        }else{
+            alert("支持份数不能小于1份！");
+        }
+        getxm();
+    });
+    $("#borrow_name").change(function() {
+        var num=$("#borrow_name").val();
+        var arr=num.split('|');
+        console.log(arr);
+        var num=Number($("#borrow_num").val());
+        $("#shifu").html(num*Number(arr[1]));
+        $("#shengyu").html(Number(arr[2]));
+        $("#borrow_id").val(arr[0]);
+        
+    });
+
+
+
+
+    $("#btn_set").click(function() {
+        var shengyu=Number($("#shengyu").html());
+        var shifu=Number($("#shifu").html());
+        var borrow_id=$("#borrow_id").val();
+        var zhifu= $("#zhifu").val();
+        var form_id=$("#form_id").val();
+
+        if (borrow_id == "0") {
+            layer.msg('请选项智投项目！');
+            return false;
+        }
+
+        if ((shengyu-shifu)<0) {
+         layer.msg('剩余金额为'+shengyu+'，请核对！');
+         return false;
+        }
+        if ($("#zhifu").val()=='') {
+            layer.msg('请输入支付密码！');
+            return false;
+        }
+
+layer.confirm('智投订单不可取消，请核对各项信息正确后进行确定提交', 
+            {
+              btn: ['确定','取消'], title: "智投确认" //按钮
+            },function () {
+        $.ajax({
+        url: "__APP__/Member/guanzhu/doadd",
+        type: "post",
+        dataType: "json",
+        data: $("form").serialize(),
+        success: function(data) {
+            $("#form_id").val('');
+        
+            if(data.status==1){
+            
+                layer.msg(data.message, {
+                  icon: 1,
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                  window.location.href="__APP__/Wapmember/tendout/zidong";
+                });   
+
+            }else if(data.status==0){
+          
+                layer.msg(data.message, {
+                  icon: 0,
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                  window.location.href="__APP__/Wapmember/tendout/zhichi.html";
+                });   
+
+            }else if(data.status==4){
+          
+                layer.msg(data.message, {
+                  icon: 0,
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                  window.location.href="__APP__/wap/invest/index.html";
+                });   
+
+            }else if(data.status==12){
+          
+                layer.msg(data.message, {
+                  icon: 0,
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                  window.location.href="__APP__/wapmember/user/pinpass.html";
+                });   
+
+            }else{
+        
+                layer.msg(data.message, {
+                  icon: 0,
+                  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                  window.location.href="__APP__/Wapmember/tendout/zhichi.html";
+                });   
+            }           
+        }
+      });
+});
+
+
+    });
+});
+
+
+function showtime(t){ 
+    // document.form.getyzm.disabled=true; 
+    for(i=1;i<=t;i++) { 
+        window.setTimeout("update_p(" + i + ","+t+")", i * 1000); 
+    } 
+    
+} 
+
+function update_p(num,t) { 
+    if(num == t) { 
+        $(".getyzm").html(" 重新发送 "); 
+        // document.form.getyzm.disabled=false; 
+    } 
+    else { 
+        printnr = t-num; 
+        $(".getyzm").html(" (" + printnr +")秒后重新发送"); 
+        // document.form.getyzm.value = " (" + printnr +")秒后重新发送"; 
+    } 
+}
+</script>
+<div style="height:1.6rem"></div>
+    <!-- 我的项目 -->
+
+<include file="Public:footer"/>
+
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+    <script src="/Public/wap/js/index.js"></script>
+    
+ <script> var str = $(".navslis").html(); var m =str.length; var n = str.indexOf("条记录"); var j = str.substring(n+1,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(s+"记录", "")); var m =str.length; var n = str.indexOf("尾页</a>"); var j = str.substring(n+6,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(j, "")); for (var i=4;i<$(".navslis a").length-1;i++) { $(".navslis a").eq(i).hide(); } </script>
+</body>
+
+</html>

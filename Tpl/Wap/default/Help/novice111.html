@@ -1,0 +1,95 @@
+﻿<div class="clear"></div>
+<div class="novice">
+<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/ban.png">
+
+</div>
+
+<div class="container">
+<div class="center part1">
+    <div class="pa1left float_l">
+        <h1>魔方车是什么？</h1>
+        <p>魔方车致力于打造众筹行业垂直领域的金牌二手车众筹平台，为投融资双方提供开放、公平、高收益的一站式金融产品服务。</p>
+    </div>
+    <div class="pa2rig float_r"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/p1.png"/></div>
+    <div class="clear"></div>
+
+</div>
+
+<div class="part2">
+    <div class="center">
+        <h1>专业二手车质量检测</h1>
+        <p>准确评估二手车价值</p>
+        <ul>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/p2_1.png"/>
+                <h1>大型二手车交易市场 </h1>
+                <p>集合区域内知名车商，车辆众筹更有保障</p>
+            </li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/p2_2.png"/>
+                <h1>专业二手车评估风控 </h1>
+                <p>多年二手车评估经验，确保车辆估值精准</p>
+            </li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/p2_3.png"/>
+                <h1>优质二手车优先众筹 </h1>
+                <p>渠道优质二手车，确保投资人众筹车辆更具价值</p>
+            </li>
+            <div class="clear"></div>
+        </ul>
+        
+    </div>
+</div>
+
+<div class="part3">
+    <div class="center">
+    <h1>如何确保投资安全</h1>
+    <p>众筹资金全部存入汇潮支付的备付金账户，按合同规定金额提取购买车辆，确保众筹车辆资金专款专用。众筹资金购买车辆所属权归投资人所有，如有违约可优先处置车辆。</p>
+    </div>
+    
+</div>
+
+<div class="part4">
+<div class="center part1" >
+    <div class="pa1left float_l">
+        <h1>完善的投后管理制度</h1>
+        <p>车辆众筹成功后，投资人的个人中心里会生成合同，确保投资人众筹二手车辆真实可靠。车辆众筹成功后的各个处置阶段，客服会及时与投资人进行沟通同时也会在网站上做出提示，让投资人获得第一手车辆动态信息。</p>
+    </div>
+    <div class="pa2rig float_r"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/p2.png"/></div>
+    <div class="clear"></div>
+
+</div>
+</div>
+
+<div class="part5">
+    <div class="sb_tab center">
+        <h1>魔方车认购流程</h1>
+        <div class="sb_t">
+            <div class="sb_tc sbxly">注册</div>
+            <div class="sb_tc">实名认证</div>
+            <div class="sb_tc">选定项目</div>
+            <div class="sb_tc">绑定银行卡/充值</div>
+            <div class="sb_tc">投标/坐等收益</div>
+            <div class="clear"></div>
+        </div>
+        <div class="sbcon">
+            <div class="sbxly" id="box"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/zhuc.png"/></div>
+            <div class="sbxly hide" id="box hide"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/zhuc.png"/></div>
+           <div class="sbxly hide" id="box hide"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/zhuc.png"/></div>
+           <div class="sbxly hide" id="box hide"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/zhuc.png"/></div>
+           <div class="sbxly hide" id="box hide"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/zhuc.png"/></div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function() {
+    
+    $(".sb_tab .sb_t .sb_tc").click(function(){
+        $(this).addClass("sbxly").siblings().removeClass("sbxly");
+        var bb=$(".sb_tab .sb_t .sb_tc").index($(this));
+        $(".sbcon .sbxly") .eq(bb) .show() .siblings() .hide();
+        })  
+        
+});     
+</script>
+
+
+</div>
+
+</div>

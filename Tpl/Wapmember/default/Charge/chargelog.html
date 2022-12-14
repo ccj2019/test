@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+   <style type="text/css">
+   	.l-fh.l-on{
+   		border-bottom: 5px solid #eff3f9;
+   	}
+   </style>
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>充值记录</span>
+			<div class="l-fanhui1">
+			 <a href="/Wapmember/Memberinfo#chip-1"  ><img src="/Public/wap/img/huiyuan/shezhi.png" alt=""   /></a>
+			</div>
+		</div>
+		                        <volist name="list" id="vo">
+              
+                       
+	     <div class="l_tixian ">	
+	       <div class="d1 clearfix">
+	       	<span class="fl"><if condition="$vo.way eq 'off'">线下充值<else />在线充值</if></span> <span class="fr">+ {$vo.money}</span>
+	       </div>
+	       <div class="d2 clearfix">
+	   
+	       	
+	       	<span class="fl">{$vo.add_time|date="m-d H:i",###}</span> 
+	       	<if condition="$vo.status eq '0'">
+	       		<span class="fr c1">
+	       	<elseif condition="$vo.status eq '1'"/>
+	       		<span class="fr ">
+	       	<else />
+	       	<span class="fr c1">
+	       	</if>
+	       		
+	       		{$vo.status_c}</span>
+	       </div>
+	     </div>
+	      </volist>
+	      <!--
+	     <div class="l_tixian ">	
+	       <div class="d1 clearfix">
+	       	<span class="fl">充值</span> <span class="fr">+ 2863.00</span>
+	       </div>
+	       <div class="d2 clearfix">
+	       	<span class="fl">09-30 12:20</span> <span class="fr c1">审核中</span>
+	       </div>
+	     </div>
+	     <div class="l_tixian ">	
+	       <div class="d1 clearfix">
+	       	<span class="fl">充值</span> <span class="fr">+ 2863.00</span>
+	       </div>
+	       <div class="d2 clearfix">
+	       	<span class="fl">09-30 12:20</span> <span class="fr c2">交易失败</span>
+	       </div>
+	     </div>  
+	     <div class="l_tixian ">	
+	       <div class="d1 clearfix">
+	       	<span class="fl">充值</span> <span class="fr">+ 2863.00</span>
+	       </div>
+	       <div class="d2 clearfix">
+	       	<span class="fl">09-30 12:20</span> <span class="fr">交易成功</span>
+	       </div>
+	     </div>  -->
+	<!--底部-->
+		<div class="l-di navslis">
+			   {$pagebar}
+		</div>
+ 
+ <script> var str = $(".navslis").html(); var m =str.length; var n = str.indexOf("条记录"); var j = str.substring(n+1,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(s+"记录", "")); var m =str.length; var n = str.indexOf("尾页</a>"); var j = str.substring(n+6,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(j, "")); for (var i=4;i<$(".navslis a").length-1;i++) { $(".navslis a").eq(i).hide(); } </script>
+<include file="Public:footer"/>

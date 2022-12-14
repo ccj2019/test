@@ -1,0 +1,1675 @@
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+<!-- 引入样式 -->
+
+<!--<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">-->
+
+<!-- 引入组件 -->
+
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+
+<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
+
+<style type="text/css">
+
+    .van-circle{
+
+        display: table;float: left;
+
+        margin: 0 2%;
+
+        background: url(/Public/wap/img/proret1.jpg) no-repeat center center;
+
+        background-size:100% 100% ;
+
+    }
+
+    .text{
+
+        display: table-cell;
+
+        vertical-align: middle;
+
+    }
+
+    #app{
+
+
+
+        margin: 0 auto;
+
+        width:95%;
+
+
+
+    }
+
+</style>
+<style type="text/css">
+    /*进度条样式*/
+    .kdu {
+        position: relative;
+        height: 8.5px;
+        background: #ececec;
+        border-radius: 30px;
+        margin: 10px;
+    }
+    .kdu1{
+        float: left;
+        position: absolute;
+        height: 8.5px;
+        background: linear-gradient(to right, 	#ff8c00,#ff6421);
+        border-radius: 30px;
+    }
+    .kdu2{
+        float: left;
+        position: absolute;
+        height: 8.5px;
+        background: linear-gradient(to right, #06a5e9,#74fded);
+        border-radius: 30px;
+    }
+</style>
+
+<body>
+
+<div class="header ">
+
+    <div class="w-header w-content flex">
+
+        <a href="javascript:window.history.back();" class="w-header-left">
+
+            < 返回 </a>
+
+        <h3>项目详情</h3>
+
+        <a href="##" class="w-header-right">
+
+            <!--<img src="/public/wap/img/w-Share.png" style="width: 32%;
+
+            margin: 22% 0 0 57%;" alt="">-->
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- 项目详情  start -->
+
+
+
+<div class="w-probro-bg">
+
+
+
+
+
+    <div class="swiper-container">
+
+        <div class="swiper-wrapper">
+
+            <?php $borrow_img=explode(',',$binfo['content_img']);?>
+
+            <!--<div class="swiper-slide"><img src="{$binfo.borrow_img}" alt=""></div>-->
+
+            <volist name="borrow_img" id="vo">
+
+                <div class="swiper-slide"><img src="{$vo}" alt=""></div>
+
+            </volist>
+
+
+
+        </div>
+
+        <!-- 如果需要分页器 -->
+
+        <div class="swiper-pagination"></div>
+
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<div class="w-proret w-proret1">
+
+
+
+    <h3>{$binfo.borrow_name}</h3>
+
+
+
+    <div class="mubiao flex">
+
+        <!--<a class="a1" href="##">
+
+            <span>{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}</span>
+
+            <p> 目标金额</p>
+
+        </a>
+
+        <a class="a2" href="##">
+
+            <span>{$binfo.has_borrow|getfloatvalue=###,0|Fmoney=###}</span>
+
+
+
+            <p> 已筹金额</p>
+
+        </a>
+
+        <a class="a3" href="##">
+
+            <span>{:getLeftTimes($binfo['collect_time'])} </span>
+
+
+
+            <p> 剩余天数</p>
+
+        </a>-->
+
+        <div id="app">
+
+            <van-circle  v-model="currentRate1"   :rate="rate1" size="1.8rem"  :speed="100" color="#64c3ed"
+
+            ><div class="text">
+
+                <div style="color:red">{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}</div>
+
+                <div style="color:#737373"> 目标金额</div>
+
+            </div>
+
+            </van-circle>
+
+            <van-circle  v-model="currentRate2"  :rate="rate2"  size="1.8rem"  :speed="1000" color="#64c3ed"
+
+            ><div class="text">
+
+                <div style="color:red">{$binfo.has_borrow|getfloatvalue=###,0|Fmoney=###} </div>
+
+                <div style="color:#737373">已筹金额</div>
+
+            </div>
+
+            </van-circle>
+
+
+
+            <van-circle  v-model="currentRate3"  :rate="rate3"  size="1.8rem"  :speed="100" color="#64c3ed"
+
+            ><div class="text">
+
+                <div style="color:red" >
+
+                    <if condition="$binfo.start_time gt time()"> 预热中
+
+                        <elseif condition="$binfo.borrow_status eq 2" /> {:getLeftTimes($binfo['start_time'] + ($binfo['collect_day']*60*60*24))}
+
+                        <elseif condition="$binfo.borrow_status eq 6" />0天
+
+                        <elseif condition="$binfo.borrow_status eq 7" />0天
+
+                        <else/> 0天
+
+                    </if>
+                </div>
+
+                <div style="color:#737373"> 剩余天数</div>
+
+            </div>
+
+            </van-circle>
+
+        </div>
+
+    </div>
+
+
+
+    <!--<div class="w-proret-jd-num clear">-->
+
+    <!--&lt;!&ndash; 进度条变量 &ndash;&gt;-->
+
+    <!--<div class="num fr">-->
+
+    <!--{$binfo.progress}%-->
+
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div class="w-proret-jd clear">-->
+
+
+
+    <!--<div class="pao" style="width:{$binfo.progress}%;">-->
+
+    <!--<img src="/Public/wap/img/w-chuan.png" alt="">-->
+
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <div class="kdu">
+        <present name="binfo.bespeak_progress">
+		<if condition="$binfo.start_time + $binfo.bespeak_days * 60 * 60 * 24 gt time()">
+            		<div class="kdu1" style="width: {$binfo.bespeak_progress|floatval|min=100}%">
+            		</div>
+		</if>
+        </present>
+        <div class="kdu2" style="width: {$binfo.progress|floatval|min=100}%">
+        </div>
+    </div>
+    <div style="width: 100%; overflow: auto;margin: 15px 0px;">
+        <present name="binfo.bespeak_progress">
+		<if condition="$binfo.start_time + $binfo.bespeak_days * 60 * 60 * 24 gt time()">
+            		<div style=" float: left; line-height: 25px;padding: 0 10px;">
+                		<span style="color:#737373;font-size: .26rem;">已预约：</span><span style="color: #ff6421"> {$binfo.bespeak_progress|floatval}%</span>
+            		</div>
+		</if>
+        </present>
+        <div style="float: left; line-height: 25px;padding: 0 10px;">
+            <span style="color:#737373;font-size: .26rem;">已筹资：</span><span style="color: #00a6e4">{$binfo.progress|floatval}%</span>
+        </div>
+    </div>
+
+    <div class="shouyi flex">
+
+        <a href="##">
+
+            <span>{$binfo.borrow_interest_rate}%</span>
+
+            <p>项目收益率</p>
+
+        </a>
+
+        <a href="##">
+
+            <span>{$binfo.borrow_duration}个月</span>
+
+            <p>项目周期</p>
+
+        </a>
+
+        <a href="##">
+
+            <span>{$binfo.total}期</span>
+
+            <p>项目期数</p>
+
+        </a>
+
+    </div>
+
+
+
+    <!--
+
+               borrow_duration,total,borrow_time
+
+    -->
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+<div class="w-proret">
+
+    <div class="date">
+
+        此项目必须在{$binfo.endtimes|date="Y-m-d",###}之前众筹{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}才算成功
+
+    </div>
+
+</div>
+
+
+
+<div class="w-proret">
+
+
+
+    <div class="car-top flex">
+
+
+
+        <a href="##">
+
+				<span class="zi w-proret-active">
+
+                                项目详情
+
+                        </span>
+
+            <span class="span">|</span>
+
+
+
+        </a>
+
+
+
+        <a href="##">
+
+            <span class="zi ">选择回报</span>
+
+            <span class="span">|</span>
+
+        </a>
+
+
+
+        <a href="##">
+
+            <span class="zi">支持人数</span>
+
+            <span class="span">|</span>
+
+        </a>
+
+
+
+        <a href="##">
+
+            <span class="zi">项目合同</span>
+
+            <!-- <span class="span" style="opacity: 0;">|</span> -->
+
+        </a>
+
+
+
+    </div>
+
+    <div class="car">
+
+        <!-- 详情 -->
+
+        <div class="car-con car-det" style="display: block">
+
+
+
+            {$binfo.borrow_info}
+
+            <!--<?php $borrow_img=explode(',',$binfo['content_img'])?>  -->
+
+            <!--<volist name="borrow_img" id="vo">-->
+
+            <!--    <img src="{$vo}" alt=""> -->
+
+            <!--    </volist>-->
+
+            <!--{$binfo.content_img}-->
+
+            <!--<div>
+
+                   <img src="/public/wap/img/w-car-det1.jpg" alt="">
+
+               </div>
+
+               <div>
+
+                    <img src="/public/wap/img/w-car-det2.jpg" alt="">
+
+                </div>
+
+                <div>
+
+                        <img src="/public/wap/img/w-car-det3.jpg" alt="">
+
+                    </div>-->
+
+        </div>
+
+        <!-- 回报 -->
+
+        <div class="car-con" style="display: none">
+
+            <div class="car-con-txt">
+
+                <div class="car-con-top flex">
+
+                    <a href="##">支持：¥ {$binfo.borrow_min}</a>
+
+
+
+                    <!-- w-proret-active-bg   选中变蓝色  -->
+
+                    <a href="##" class="bg w-proret-active-bg">
+
+                        <img src="/Public/wap/img/w-dui.png" alt="">
+
+                    </a>
+
+                </div>
+
+                <div class="car-con-center">
+
+                    {$binfo.return_info}
+
+                </div>
+
+
+
+
+
+                <div class="car-con-bottom flex">
+
+                    <a href="##" class="flex">
+
+                        <img src="/Public/wap/img/w-renqun.png" alt="">
+
+                        <span style="margin-left:15px;">{:count($investinfo)}</span>位支持者
+
+                    </a>
+
+                    <!--<a href="##" class="shouqi">
+
+                        收起
+
+                    </a>-->
+
+                </div>
+
+            </div>
+
+            <!--<div class="car-con-txt">
+
+                    <div class="car-con-top flex">
+
+                        <a href="##">支持：¥100</a>
+
+                        <a href="##" class="bg">
+
+                            <img src="/public/wap/img/w-dui.png" alt="">
+
+                        </a>
+
+                    </div>
+
+                    <div class="car-con-center">
+
+                        众筹成功后回款周期不超过45天，售出金额与众筹金额差价的30%作为平台费用，70%按投资人的投资比例进行分配，如果45天未成功售出，则由东盛澜按众筹价格的年利率15%回购海产品置入自己冷库，由东盛澜公司自己完成销售。如在众筹期内众筹失败，则退回资金至铭万平台个人账户，期间无任何收益
+
+                        .
+
+                    </div>
+
+                    <div class="car-con-bottom flex">
+
+                        <a href="##" class="flex">
+
+                            <img src="/public/wap/img/w-renqun.png" alt="">
+
+                            <span>31</span>位支持者
+
+                        </a>
+
+                        <a href="##" class="shouqi">
+
+                            展开
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="car-con-txt">
+
+                    <div class="car-con-top flex">
+
+                        <a href="##">支持：¥100</a>
+
+                        <!-- w-proret-active-bg   选中变蓝色  -->
+
+            <!--<a href="##" class="w-proret-active-bg bg">
+
+                            <img src="/public/wap/img/w-dui.png" alt="">
+
+                        </a>
+
+                    </div>
+
+                    <div class="car-con-center">
+
+                        众筹成功后回款周期不超过45天，售出金额与众筹金额差价的30%作为平台费用，70%按投资人的投资比例进行分配，如果45天未成功售出，则由东盛澜按众筹价格的年利率15%回购海产品置入自己冷库，由东盛澜公司自己完成销售。如在众筹期内众筹失败，则退回资金至铭万平台个人账户，期间无任何收益
+
+                        .
+
+                    </div>
+
+                    <div class="car-con-bottom flex">
+
+                        <a href="##" class="flex">
+
+                            <img src="/public/wap/img/w-renqun.png" alt="">
+
+                            <span>6</span>位支持者
+
+                        </a>
+
+                        <a href="##" class="shouqi">
+
+                            展开
+
+                        </a>
+
+                    </div>
+
+                </div>-->
+
+        </div>
+
+        <!-- 人数 -->
+
+        <ul class="car-con car-nump">
+
+
+
+            <!-- <volist name="investinfo" id="vi"> -->
+
+            <tr>
+
+                <li>
+
+                    <a href="##" class="flex">
+
+                        <div class="car-left">
+
+                            <img src="{$vi.user_img|default='/Public/wap/img/default-avatar.png'}" style="    border-radius: 35px;" alt="">
+
+                        </div>
+
+                        <div class="car-right">
+
+                            <div>{$vi.user_name|hidecard=###,5}</div>
+
+                            <div>支持此项目
+
+                                <span>¥{:getFloatvalue($vi['investor_capital'],2)}</span>
+
+                            </div>
+
+                            <div>支持数：
+
+                                <span><?php echo intval($vi['investor_capital'])/intval($binfo['borrow_min']);?></span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </li>
+
+                <!--
+
+                                  <td align="center">{$vi.user_name|hidecard=###,5}</td>
+
+                                  <if condition="$vi.bonus_id neq 0">
+
+                                    <td>{:getFloatvalue($vi['investor_capital']-(bounsmoney($vi['bonus_id'])),2)}</td>
+
+                                  <else/>
+
+                                    <td>{:getFloatvalue($vi['investor_capital'],2)}</td>
+
+                                  </if>
+
+                                  <td>
+
+                                    <if condition="$vi.member_interest_rate_id neq 0">加息券：{:intestrate($vi['member_interest_rate_id'])}%<br /></if>
+
+                                    <if condition="$vi.bonus_id neq 0">红包{:bounsmoney($vi['bonus_id'])}</if>
+
+                                  </td>
+
+                                  <td><if condition="$vi.investor_way eq 1">PC<else />APP</if></td>
+
+                                  <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+
+                                </tr>-->
+
+                <!-- </volist> -->
+
+
+
+                <!--<li >
+
+                    <a href="##" class="flex">
+
+                        <div class="car-left">
+
+                            <img src="/public/wap/img/w-car-con.jpg" alt="">
+
+                        </div>
+
+                        <div class="car-right">
+
+                            <div>日出</div>
+
+                            <div>支持此项目
+
+                                <span>¥10,000.00</span>
+
+                            </div>
+
+                            <div>支持数：
+
+                                <span> 5</span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </li>
+
+                <li >
+
+                        <a href="##" class="flex">
+
+                            <div class="car-left">
+
+                                <img src="/public/wap/img/w-car-con.jpg" alt="">
+
+                            </div>
+
+                            <div class="car-right">
+
+                                <div>日出</div>
+
+                                <div>支持此项目
+
+                                    <span>¥10,000.00</span>
+
+                                </div>
+
+                                <div>支持数：
+
+                                    <span> 5</span>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </li>
+
+                    <li >
+
+                            <a href="##" class="flex">
+
+                                <div class="car-left">
+
+                                    <img src="/public/wap/img/w-car-con.jpg" alt="">
+
+                                </div>
+
+                                <div class="car-right">
+
+                                    <div>日出</div>
+
+                                    <div>支持此项目
+
+                                        <span>¥10,000.00</span>
+
+                                    </div>
+
+                                    <div>支持数：
+
+                                        <span> 5</span>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        </li>
+
+                        <li >
+
+                                <a href="##" class="flex">
+
+                                    <div class="car-left">
+
+                                        <img src="/public/wap/img/w-car-con.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="car-right">
+
+                                        <div>日出</div>
+
+                                        <div>支持此项目
+
+                                            <span>¥10,000.00</span>
+
+                                        </div>
+
+                                        <div>支持数：
+
+                                            <span> 5</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </a>
+
+                            </li>
+
+                            <li >
+
+                                    <a href="##" class="flex">
+
+                                        <div class="car-left">
+
+                                            <img src="/public/wap/img/w-car-con.jpg" alt="">
+
+                                        </div>
+
+                                        <div class="car-right">
+
+                                            <div>日出</div>
+
+                                            <div>支持此项目
+
+                                                <span>¥10,000.00</span>
+
+                                            </div>
+
+                                            <div>支持数：
+
+                                                <span> 5</span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+
+                                </li>-->
+
+        </ul>
+
+        <div class="car-con">
+
+            {$article_category.art_content}
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div style="height: 1rem;">
+
+</div>
+
+<div class="w-end flex">
+
+    <a href="##" style="display: none;">分享项目</a>
+
+
+
+    <if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+        <eq name="binfo.bespeak_able"  value="1">
+            <eq name="binfo.borrow_status" value="1">
+                <lt name="binfo.bespeak_progress" value="100">
+                    <eq name="has_bespeak" value="1">
+                        <a class="w-end-active w-end-a" style="width: 100%;">已预约</a>
+                        <else/>
+                        <a class="w-end-active w-end-a zc" style="width: 100%;">立即预约</a>
+                    </eq>
+                    <else/>
+                    <a class="w-end-active w-end-a  " style="width: 100%;">预约已满</a>
+                </lt>
+                <else/>
+                <if condition="$binfo.start_time gt time()">
+                    <a class="w-end-active w-end-a" style="width: 100%;">预热中</a>
+                    <elseif condition="$binfo.borrow_status eq 2" />
+                    <lt name="binfo.progress" value="100">
+                        <a class="w-end-active w-end-a zc" style="width: 100%;">立即支持</a>
+                        <else/>
+                        <a class="w-end-active w-end-a" style="width: 100%;">投资已满</a>
+                    </lt>
+                    <else/>
+                    <a class="w-end-active w-end-a" style="width: 100%;">已结束</a>
+                </if>
+            </eq>
+            <else/>
+            <if condition="$binfo.start_time gt time()">
+                <a class="w-end-active w-end-a" style="width: 100%;">预热中</a>
+                <elseif condition="$binfo.borrow_status eq 2" />
+                <lt name="binfo.progress" value="100">
+                    <a class="w-end-active w-end-a zc" style="width: 100%;">立即支持</a>
+                    <else/>
+                    <a class="w-end-active w-end-a" style="width: 100%;">投资已满</a>
+                </lt>
+                <else/>
+                <a class="w-end-active w-end-a" style="width: 100%;">已结束</a>
+            </if>
+        </eq>
+        <else/>
+        <a class="w-end-active w-end-a  " style="width: 100%;">新用户专享</a>
+    </if>
+
+
+
+
+    <!-- href="/wap/invest/is_order?id={$binfo.id}"-->
+
+    <!-- href="/wap/invest/is_order?id={$binfo.id}"-->
+
+    <script>
+
+        $zindex = 1;
+
+    </script>
+
+</div>
+
+
+
+<!-- 购物弹窗 -->
+
+
+
+<style>
+
+    .l-spxztc {
+
+        position: fixed;
+
+        bottom: 0;
+
+        background: #fff;
+
+        z-index: 99;
+
+        display: none;
+
+    }
+
+
+
+    #lpz {
+
+        position: fixed;
+
+        width: 100%;
+
+        height: 100%;
+
+        top: 0;
+
+        z-index: 10;
+
+        display: none;
+
+        background: rgba(0, 0, 0, .5);
+
+    }
+
+</style>
+
+
+
+<div id="lpz">
+
+
+
+</div>
+
+
+
+<div class="l-spxztc" id="lsp" style="none">
+
+    <!--<van-actionsheet v-model="show">-->
+
+    <div class="clear l-fd">
+
+        <!--<div class="l-tc1">-->
+
+        <!--	<img src="{$binfo.borrow_img}" />-->
+
+        <!--</div>-->
+
+        <div class="l-tc2">
+
+            <p class="l-swzp2 in">
+
+                {$binfo.borrow_name|cnsubstr=###,8}
+
+                <br>
+
+                <!--{$binfo.borrow_min}元/份-->
+
+                <!-- 体验标-->
+
+            </p>
+
+            <p class="l-swzp2 on">已选择：<span class="yuanqian" id="yuanqian1s">{$binfo.borrow_min}</span>元</p>
+
+        </div>
+
+        <div class="l-tc3" style="float: right;padding: .2rem;"> 关闭</div>
+
+    </div>
+
+    <div class="l-spguige">
+
+        <p>规格</p>
+
+        <div class="clear">
+
+            <div class="l_spxz on"><span>1</span>份</div>
+
+            <volist name="shortcut_c" id="m">
+
+                <div class="l_spxz"><span>{$m|default='10'}</span>份</div>
+
+            </volist>
+
+            <!--<div class="l_spxz">300</div>
+
+                            <div class="l_spxz">500</div>
+
+                            <div class="l_spxz">800</div>
+
+                            <div class="l_spxz">1000</div> -->
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="l-spguige">
+
+        <p>数量</p>
+
+
+
+
+
+        <!--<van-stepper v-model="ddc" />-->
+
+        <div class="van-stepper">
+
+            <button class="van-stepper__minus"></button><input type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"class="van-stepper__input" value="1"><button class="van-stepper__plus"></button>
+
+        </div>
+
+    </div>
+
+    <div class="l-qurena"  > 确认</div>
+
+    <!--</van-actionsheet>-->
+
+</div>
+
+
+
+<style>
+
+    .footer {
+
+        display: none;
+
+    }
+
+
+
+    .w-item {
+
+        background: #eff3f9;
+
+        padding: 0.1rem 0;
+
+    }
+
+
+
+    .w-proret {
+
+        box-sizing: border-box;
+
+        width: 100%;
+
+        padding: .1rem 2%;
+
+        border-bottom: .1rem solid #eff3f9;
+
+    }
+
+</style>
+
+
+
+<script type="text/javascript" src="/Public/wap/js/index.js"></script>
+
+
+
+<script>
+
+    "use strict"
+
+    var app=new Vue({
+
+        data:{
+
+            text:"test",
+
+            currentRate1:0,
+
+            currentRate2:0,
+
+            currentRate3:0,
+
+            rate1:100,
+
+            rate2:0,
+
+            rate3:0
+
+        },
+
+        methods:{
+
+            setRate1(current,max){
+
+                let v1=parseInt(current)
+
+                let v2=parseInt(max)
+
+                this.rate1=parseInt((v1/v2*100).toFixed(0))
+
+            },
+
+            setRate2(current,max){
+
+                let v1=parseInt(current)
+
+                let v2=parseInt(max)
+
+                this.rate2=parseInt((v1/v2*100).toFixed(0))
+
+            },
+
+            setRate3(current,max){
+
+                let v1=parseInt(current)
+
+                let v2=parseInt(max)
+
+                this.rate3=parseInt((v1/v2*100).toFixed(0))
+
+            }
+
+        },
+
+        mounted(){
+
+        }
+
+    }).$mount("#app")
+
+    //例子
+
+    //app.setRate2("{$value1}","{$value2}")
+
+    //当前值 ,最大值
+
+    // {$binfo.has_borrow|getfloatvalue=###,0|Fmoney=###} 已筹金额 ,{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###} 已筹金额,
+
+
+
+    //	{:getLeftTimes($binfo['collect_time'])} 剩余天数 ,$binfo['collect_time']  天数
+
+
+
+    app.setRate2("{$binfo.has_borrow|Fmoney=###}".replace("￥",""),"{$binfo.borrow_money|Fmoney=###}".replace("￥",""))
+
+    //当前值 ,最大值
+
+    app.setRate3("{:getLeftTimes($binfo['collect_time'])}".replace("元",""),{$binfo['collect_time']-$binfo['start_time']}/60/60)
+
+</script>
+
+<script>
+
+
+
+    $(function() {
+
+
+
+
+
+        var a = "#00a0e9";
+
+        var b = "#dedede";
+
+        var w = "100%";
+
+        var h = "5px";
+
+        var wq0div = $(".wq-div");
+
+        var barb = function() {
+
+            wq0div.each(function() {
+
+                var width = $(this).attr('w');
+
+                // width = parseFloat($('.w-porper-div2 .first>span').text())
+
+                var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+
+                $(this).append(barbox);
+
+            })
+
+        }
+
+
+
+        var amimeat = function() {
+
+            $(".charts").each(function(i, item) {
+
+                var wi = parseInt($(this).attr("w"));
+
+                $(item).animate({
+
+                    width: wi + "%"
+
+                }, 1000, function() {
+
+
+
+                });
+
+            });
+
+        }
+
+        var barbCss = function(a, b) {
+
+            $(".barbox").css({
+
+                "height": h,
+
+                "line-height": h,
+
+                "text-align": "center",
+
+                "color": "#fff",
+
+            })
+
+            $(".barbox>dd").css({
+
+                "float": "left"
+
+            })
+
+            $(".barline").css({
+
+                "width": w,
+
+                "background": b,
+
+                "height": h,
+
+                "overflow": "hidden",
+
+                "display": "inline",
+
+                "position": "relative",
+
+                "border-radius": "8px",
+
+            })
+
+            $(".barline>d").css({
+
+                "position": "absolute",
+
+                "top": "0px",
+
+            })
+
+            $(".charts").css({
+
+                "background": a,
+
+                "height": h,
+
+                "width": "0px",
+
+                "overflow": "hidden",
+
+                // "border-radius": "2px"
+
+            })
+
+        }
+
+        barb();
+
+        amimeat();
+
+        barbCss(a, b);
+
+    })
+
+
+
+
+
+    $(function() {
+
+
+
+        $('.clear .l_spxz').click(function() {
+
+            //   	  	alert(1)
+
+            $('.l_spxz').removeClass("on");
+
+            console.log(
+
+                $(this).find("span").text()
+
+
+
+            )
+
+            var guige = $(this).find("span").text();
+
+            $('.van-stepper__input').val(guige)
+
+            $("#yuanqian1s").text(guige * {$binfo.borrow_min});
+
+            $(this).addClass("on");
+
+        });
+
+
+
+        $('.l-qurena').click(function() {
+
+            if(parseInt($('.van-stepper__input').val())>0){
+                if({$binfo.bespeak_able} == 1 && {$binfo.borrow_status} == 1){
+                    window.location.href = "/wap/invest/bespeak_order?id={$binfo.id}&guige=" + {$binfo.borrow_min}+ "&num=" + $('.van-stepper__input').val();
+                } else{
+                    window.location.href = "/wap/invest/is_order?id={$binfo.id}&guige=" + {$binfo.borrow_min}+ "&num=" + $('.van-stepper__input').val();
+                }
+            }else{
+                alert("不能小于等于零");
+
+            }
+
+
+
+        })
+
+        //加值
+
+        $('.van-stepper__plus').click(function() {
+
+            $jia = $('.van-stepper__input').val();
+
+            console.log($jia)
+
+            num = parseInt($jia) + 1;
+
+
+
+            $('.van-stepper__input').val(parseInt($jia) + 1)
+
+            $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+        })
+
+
+
+        $('.van-stepper__input').blur(function() {
+
+            //	alert(1);
+
+            num = $('.van-stepper__input').val();
+
+            $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+        })
+
+        //减值
+
+        $('.van-stepper__minus').click(function() {
+
+
+
+            $jia = $('.van-stepper__input').val();
+
+            if($jia <= 1) {
+
+                $('.van-stepper__input').val(1)
+
+                num = 1;
+
+                $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+            } else {
+
+                $('.van-stepper__input').val(parseInt($jia) - 1)
+
+                num = parseInt($jia) - 1;
+
+                $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+            }
+
+
+
+            console.log($jia)
+
+
+
+        })
+
+    })
+
+</script>
+
+
+
+<script>
+
+    $(".zc").click(function() {
+
+        var uid = {$uid};
+
+        console.log({$uid});
+
+        if(uid >= 1) {
+
+            $('#lsp').show()
+
+            $('#lpz').show()
+
+
+
+            //	$("p").slideToggle();
+
+        } else {
+
+            alert("您还没登录哦");
+
+            window.location.href="/Wapmember/common/login.html" ;
+
+        }
+
+
+
+    });
+
+    $("#lpz").click(function() {
+
+
+
+
+
+
+
+        $('#lsp').hide()
+
+        $('#lpz').hide()
+
+
+
+
+
+    });
+
+    $(".l-tc3").click(function() {
+
+
+
+
+
+
+
+        $('#lsp').hide()
+
+        $('#lpz').hide()
+
+
+
+
+
+    });
+
+    $(function() {
+
+
+
+        var a = "#00a0e9";
+
+        var b = "#dedede";
+
+        var w = "100%";
+
+        var h = "5px";
+
+        var wq0div = $(".wq-div");
+
+        var barb = function() {
+
+            wq0div.each(function() {
+
+                var width = $(this).attr('w');
+
+                // width = parseFloat($('.w-porper-div2 .first>span').text())
+
+                var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+
+                $(this).append(barbox);
+
+            })
+
+        }
+
+
+
+        var amimeat = function() {
+
+            $(".charts").each(function(i, item) {
+
+                var wi = parseInt($(this).attr("w"));
+
+                $(item).animate({
+
+                    width: wi + "%"
+
+                }, 1000, function() {
+
+
+
+                });
+
+            });
+
+        }
+
+        var barbCss = function(a, b) {
+
+            $(".barbox").css({
+
+                "height": h,
+
+                "line-height": h,
+
+                "text-align": "center",
+
+                "color": "#fff",
+
+            })
+
+            $(".barbox>dd").css({
+
+                "float": "left"
+
+            })
+
+            $(".barline").css({
+
+                "width": w,
+
+                "background": b,
+
+                "height": h,
+
+                "overflow": "hidden",
+
+                "display": "inline",
+
+                "position": "relative",
+
+                "border-radius": "8px",
+
+            })
+
+            $(".barline>d").css({
+
+                "position": "absolute",
+
+                "top": "0px",
+
+            })
+
+            $(".charts").css({
+
+                "background": a,
+
+                "height": h,
+
+                "width": "0px",
+
+                "overflow": "hidden",
+
+                // "border-radius": "2px"
+
+            })
+
+        }
+
+        barb();
+
+        amimeat();
+
+        barbCss(a, b);
+
+    })
+
+
+
+
+
+</script>
+
+<script>
+
+    var mySwiper = new Swiper ('.w-probro-bg .swiper-container', {
+
+
+
+        loop: true, // 循环模式选项
+
+
+
+        // 如果需要分页器
+
+        pagination: {
+
+            el: '.w-probro-bg .swiper-pagination',
+
+        },
+
+        autoplay: {
+
+            delay: 3000,//1秒切换一次
+
+        },
+
+
+
+        // 如果需要前进后退按钮
+
+        navigation: {
+
+            nextEl: '.w-probro-bg .swiper-button-next',
+
+            prevEl: '.w-probro-bg .swiper-button-prev',
+
+        },
+
+
+
+
+
+    })
+
+</script>
+
+
+
+</body>
+
+
+
+</html>

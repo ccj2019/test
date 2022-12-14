@@ -1,0 +1,164 @@
+<include file="default:Public:header" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	body{
+		background: #f8f8f8;
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">钱包管理</a></span>
+	<span>&gt;</span>
+	<span><a>提现到钱包</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>提现到钱包</span></div>
+		</div>
+
+		<div class="tabv2box">
+
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+					<div class="Czhi">
+						<p><span></span>请输入您要提现的金额</p>						
+					</div>
+					<!--付款部分-->
+					<div class="myzil" style="width: 450px;">
+
+						<form action="__APP__/Member/qianbao/dotx" method="post" id="l-shiminglc" class="clearfix">
+
+					   	<ul>
+					   		<li>
+					   			<span>可提现金额： </span> <p>{$va}元</p>
+					   		</li>
+					   		<li>
+					   			<span>提现金额： </span><input type="number" id="moneyOrder" AUTOCOMPLETE="off"  name="moneyOrder" />
+					   			<p class="tixj">提现后可用余额 <span id="zeng">¥{$va}</span></p>
+					   		</li>
+							<input id="bank_id" type="hidden" value="{$vobank.id}" />
+					   		<input id="orderNo" type="hidden" value="" name="orderNo" />
+					<!--    <li>
+					   			<span>开户行： </span><p>{$vobank.bank_name}</p>
+					   		</li>
+					   		<li>
+					   			<span>开户名： </span><p>{$vobank.realname}</p>
+					   		</li>
+					   		<li>
+					   			<span>卡号： </span>{$vobank.bank_num|hidecard=###,3,''}<p class="tixj1"><a href="/member/bank/index">选择银行卡</a></p>
+					   		</li>
+ -->
+					   		<li>
+					   			<span>支付密码： </span><input type="password" name="pwd" id="pwd" /><p class="tixj1">忘记密码？ <a href="/member/user/pinpass">点这里</a></p>
+					   		</li>
+					   		<li>	
+					   			<p class="tixj"> <button onclick="return false;" class="bcxsz1 isbutton">提现到钱包</button></p>
+					   		</li>
+							<!--投资类型-->
+					   	</ul></form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(".isbutton").click(function() {
+
+		// $('#l-shiminglc').submit();
+		this.disabled = true;
+ 		var money = $('#moneyOrder').val();
+ 		var pwd = $('#pwd').val();
+ 		var bank_id = $('#bank_id').val();	
+ 			 		if(parseFloat(money)>parseFloat({$va})){
+				 			alert("您的余额已不足，请及时充值");
+							this.disabled = false;
+				 			return false;
+				 	}else if(parseFloat(money)<0||money==""){
+				 			alert("提现金额不得小于0");
+							this.disabled = false;
+				 			return false;
+				 	}
+				 		// else if(bank_id==""){
+				 		// 	alert("未选择银行卡");
+							// this.disabled = false;
+				 		// 		return false;
+				 		// }
+		//alert("充值未投资的提现将扣除提现金额0.2%的手续费，提现手续费最低2元。")     
+		
+ 		$.ajax({  
+		      url:"/Member/Qianbao/dotx",  
+		      type:"post",  
+		      dataType: "json",
+		      data:{
+		      	"amount":money,
+		      	"pwd":pwd,
+		      	"bank_id":bank_id,
+		      },
+		      success:function(data){
+			 	if(data.status==1){ 	
+				    layer.msg(data.message, {
+					    icon: 1,//提示的样式
+					    time: 1500, //2秒关闭（如果不配置，默认是3秒）//设置后不需要自己写定时关闭了，单位是毫秒
+						end:function(){
+							location.href='__APP__/Member/withdraw/withdrawlog';
+						}
+					}); 
+			 	}else{
+
+				    layer.msg(data.message, {
+					    icon: 0,//提示的样式
+					    time: 1500, //2秒关闭（如果不配置，默认是3秒）//设置后不需要自己写定时关闭了，单位是毫秒
+						end:function(){
+							location.href='__APP__/Member/Qianbao/tixian';
+						}
+					}); 
+			 	}
+		      },  
+		     error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+					　　　　alert(XMLHttpRequest.status);
+					　　　　alert(XMLHttpRequest.readyState);
+					 	    alert(XMLHttpRequest.responseText);
+					　　　　alert(textStatus);
+			}
+ 		 });
+	 })
+
+		$("#pwd").focus(function(){
+			if(Number($('#moneyOrder').val()) < 0){
+			// alert(Number($('#moneyOrder').val()));
+			// var money=Number($('#moneyOrder').val()) * 100 / 100;
+			// alert(money);
+			// if(money < 0){
+				
+			  layer.msg("提现金额不得小于0")
+			}
+		});
+</script>
+<script>
+$('#moneyOrder').bind('input propertychange', function() {
+	var vara = Number({$va})-Number($('#moneyOrder').val());
+	// var a=Number({$va})) * 100 / 100;
+	// var b=Number($('#moneyOrder').val()) * 100 / 100
+	// var vara=a-b;
+	//var vara = ({$va}).toFixed(2)-($('#money').val()).toFixed(2);
+	//console.log(vara);
+	if(vara>=0){
+		$("#zeng").text( vara.toFixed(2));
+	}else{
+//		$("#money").val(0);
+		$("#zeng").text({$va});
+		layer.msg("你的提现金额超出了您的余额")
+	}
+});
+</script>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

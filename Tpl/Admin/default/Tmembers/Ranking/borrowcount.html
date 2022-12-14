@@ -1,0 +1,65 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  var delUrl = '__URL__/doDel';
+  var addUrl = '__URL__/add';
+  var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">初审待审核众筹</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选众筹" style="search_action" />
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <!-- 众筹时间，发放时间，上标金额，预计收益，使用优惠券和奖励金额 -->
+    <th class="line_l">ID</th>
+    <th class="line_l">众筹人</th>
+    <th class="line_l">众筹种类</th>
+    <th class="line_l">标题</th>
+
+    <th class="line_l">众筹时间</th>
+    <th class="line_l">发放时间</th>
+    <th class="line_l">上标金额</th>
+    <th class="line_l">预计收益</th>
+    <th class="line_l">使用优惠券</th>
+    <th class="line_l">使用余额金额</th>
+    <!-- <th class="line_l">操作</th> -->
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td><htmlA:user id="vo.borrow_uid" uname="vo.user_name" /></td>
+        <td>{$vo.borrow_type}</td>
+        <td><a href="/invest/detail/id/{$vo.id}.html" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,12}</a></td>
+
+        <td >{$vo.add_time|date="Y-m-d H:i",###}</td>
+        <td >{$vo.lead_time|date="Y-m-d H:i",###}</td>
+        <td>{$vo.has_borrow}</td>
+        <td>{$vo.yuji}</td>
+        <td>{$vo.youhuiquan}</td>
+        <td >{$vo.yue}</td>
+        <!-- <td>
+              <if condition="$vo.borrow_status eq '0'"> <a href="__URL__/edit?id={$vo['id']}">审核</a> <else/>已审核</if> 
+        </td> -->
+      </tr>
+  </volist>
+  </table>
+  </div>
+  
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+  </div>
+</div>
+<include file="Public:_footer" />

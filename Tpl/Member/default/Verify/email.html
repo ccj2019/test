@@ -1,0 +1,160 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理安全中心-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>身份证实名认证</span>
+                </div>
+                <div class="zdtb">
+                   <if condition="$email_status eq '1'">
+                      <div style="overflow: auto; width: 594px; height: auto; text-align:center; padding:20px; font-size:18px" id="mybox2_content"> <span style="font-size:12px;color:#999999;">&nbsp;&nbsp;亲爱的[{:session('u_user_name')}]，您好，您已通过邮箱认证,认证的邮箱为：{$email}<br/>
+                        <br/>
+                        如需修改邮箱，请联系网站管理员！</span> </div>
+                      <else/>
+                      <div style=" width: 600px; height: 460px;text-align:center; padding:20px; " id="mybox1_content">    
+                        <div style="width:100%; height:270px;">
+                          <div style=" height:270px; line-height:30px;font-size:14px;">
+                          <if condition="$email neq ''">
+                              <span style="margin:20px;display:block; text-align:left;">在您注册的时候，我们已经向您的Email<br>
+                            【{$email}】发送了一封激活电子邮件。<br>
+                              请立刻登录您的电子邮箱，完成验证。在验证成功后，点击以下按钮：<a onclick="checkEmailValided();"  class="button_input" href="javascript:;">立即验证</a> <span id="emaillink"></span><br>
+                            </if>
+                            <span style="font-size:12px;color:red; display:none" id="emailtip">验证失败。请确认您已按邮件提示进行邮箱验证。</span><br>
+                            <span style="font-size:12px;color:#999999;">&nbsp;&nbsp;请注意以下事项：</span><br>
+                            <span style="font-size:12px;color:#999999;">1、如果收件箱里没有收到该邮件，请查看垃圾箱，以免被误判为垃圾邮件。</span><br>
+                            <span style="font-size:12px;color:#999999;">2、如果您的邮箱长时间没有收到我们的激活邮件，请点击重新发送激活邮件：<br>
+                            <a  class="button_input" onclick="sendValidEmail1()" href="javascript:;">【重新发送激活邮件】</a></span><br>
+                            <span style="font-size:12px;color:#999999;">3、如果您的邮箱地址输入错误需要更改邮箱来激活邮件，请填写新邮箱：<br>
+                            <input type="text" style="width:173px;height:21px;line-height:21px;font-size:14px;font-weight:bold;margin:5px;" class="text_input" id="email">
+                            <a  class="button_input" onclick="sendValidEmail()" href="javascript:;">【新邮箱发送激活邮件】</a></span><br>
+                            <span style="font-size:12px;color:#999999;">4、如果您在验证过程中，出现任何问题，请联系客服。</span></span></div>
+                        </div>
+                      </div>
+                    </if>
+
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function sendValidEmail1(){
+        $.ajax({
+            url: "__URL__/emailvsend1/",
+            timeout: 8000,
+            cache: false,
+            type: "post",
+            dataType: "json",
+            data: {},
+            success: function (d, s, r) {
+                if(d){
+                    if(d.status==1){
+                        layer.alert('新邮件已经发送成功，请注意查收', 1,!1);
+                        
+                    }else{
+                        layer.msg('发送失败,请重试！');
+                        
+                    }
+                }
+            },
+            complete:function(XMLHttpRequest, textStatus){
+                    //setTimeout('myrefresh()',3000); //指定3秒刷新
+            }
+        });
+    }
+    function sendValidEmail(){
+        var email = $("#email").val();
+        if(email==""){
+            layer.msg('邮箱地址不能为空！');
+            return;
+        }else{
+            var emailreg = new RegExp("^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$", "i");
+            if(!emailreg.test(email)){
+                layer.msg('请输入正确的邮箱地址！');
+                return;
+            }else{
+                AsyncEmail(email);
+            }
+        }
+        send_email(email);
+        /*$.jBox.tip("邮件发送中......",'loading');
+        $.ajax({
+            url: "__URL__/emailvsend/",
+            timeout: 5000,
+            cache: false,
+            type: "post",
+            dataType: "json",
+            data: {"email":email},
+            success: function (d, s, r) {
+                if(d){
+                    if(d.status==1){
+                        $.jBox.tip('新邮件已经发送成功，请注意查收！');
+                        window.location.reload();
+                    }else{
+                        $.jBox.tip('发送失败,请重试！');
+                        window.location.reload();
+                    }
+                }
+            }
+        });*/
+    }
+    function AsyncEmail(email) {
+    $.ajax({
+            type: "post",
+            async: false,
+            dataType: "json",
+            url: "__URL__/ckemail/",
+            data: {"Email":email},
+            //timeout: 3000,
+            success: function (d, s, r) {
+                if(d){
+                    if(d.status==1){
+                    }else{
+                        layer.msg('邮箱已经在本站注册！');
+                        return false;
+                    }
+                }
+            }
+        });
+    }
+    function send_email(email){
+        $.ajax({
+            url: "__URL__/emailvsend/",
+            data: {"email":email},
+            timeout: 8000,
+            cache: false,
+            type: "post",
+            dataType: "json",
+            success: function (d, s, r) {
+                    if(d.status==1){
+                        layer.alert(d.message, 1,!1);
+                    }else if(d.status==2){
+                        layer.msg(d.message);
+                    }else{
+                        layer.msg(d.message);
+                    }
+            },
+            complete:function(XMLHttpRequest, textStatus){
+                    setTimeout('myrefresh()',3000); //指定3秒刷新
+            }
+        });
+    }
+    function myrefresh()
+    {
+           window.location.reload();
+           window.location.href="/member/verify/email.html";
+    }
+</script>

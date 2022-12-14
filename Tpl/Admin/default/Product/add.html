@@ -1,0 +1,217 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script language="javascript" src="__ROOT__/Style/H/js/borrow.js?v=1" type="text/javascript"></script>
+<script type="text/javascript">
+function makevar(v){
+		var d={};
+		for(i in v){
+			var id = v[i];
+			d[id] = $("#"+id).val();
+			if(!d[id]) d[id] = $("input[name='"+id+"']:checked").val();
+		}
+		return d;
+	}
+</script>
+<script type="text/javascript">
+  $(function(){
+    $(".invest_method").each(function(index, el) {
+      if($(this).is(':checked')){
+          $(".method0").hide();
+          $(".method1").show();
+        }else{
+          $(".method0").show();
+          $(".method1").hide();
+        }
+    });
+    $(".invest_method").click(function(event) {
+        if($(this).is(':checked')){
+          $(".method0").hide();
+          $(".method1").show();
+        }else{
+          $(".method0").show();
+          $(".method1").hide();
+        }
+     });
+  });
+</script>
+
+
+<style type="text/css">
+  /*150105新增*/
+  .blank_line{border-top: 1px dashed #ABCDEF;width: 1004px; margin: 0px auto;height: 1px;clear: both; margin-top: 10px;margin-bottom: 10px;}
+  table{}
+  table tr td{height: 45px;text-align: left;}
+  table tr td input[type=text]{width: 200px;background: #fff;color: #000;border: 1px solid #eee;border-top-color: #999;border-left-color: #999;padding: 1px 3px;vertical-align: middle;height: 25px;line-height: 27px;}
+  table tr td select {width: 207px;background: #fff;color: #000;border: 1px solid #eee;border-top-color: #999;border-left-color: #999;padding: 1px 3px;vertical-align: middle;height: 30px;line-height: 27px;}
+  a.btn_b{background: #1E71B1;border: 0 none;width: 60px;height: 24px;color: #fff;display: inline-block;line-height: 24px;text-align: center;}  
+  .search_member{margin: 0px 10px;display: inline-block;padding: 5px;cursor: pointer;border: 1px solid #ABCDEF;border-radius: 3px;}
+</style>
+<div style="clear:both;height:20px;" ></div>
+<div class="content">
+  <form method="post" action="" onSubmit="return cksubmit();" name="postBorrow" id="postBorrow" enctype="multipart/form-data"	>      
+  <input name="action" type="hidden" value="adddo">      
+    <div class="box4" style="">
+      <div class="jkxx2">
+        <table width="1004" border="0" cellspacing="0" cellpadding="0" >
+          <tr>
+            <td align="right" class="spec80">目标总额：</td>
+            <td><label for="textfield"></label>
+              <input onKeyUp="NumberCheck(this)" type="text" class="spec81" name="borrow_money" title="交易币种均为人民币。众筹成功后,请按时还款 手续费请查看收费规则" /></td>
+            <td align="right" class="spec80" id="_day_rate">所属分类：</td>
+            <td>
+            <label for="select"></label>              
+              <htmlA:select id="borrow_type" vt='id|type_name' datakey='type_list' tip=""/>
+            
+            </td>
+          </tr>
+          <tr  style="display:none">
+            <td align="right" class="spec80">利率：</td>
+            <td>
+            
+            <input onKeyUp="NumberCheck(this)" value="1" type="text" class="spec81" name="borrow_interest_rate" title="填写您提供给投资者的年利率,所填写的利率是您还款的年利率。且只保留小数后最后两位。"/>
+              % (<span style="color:red" id="_day_lilv">利率范围：{$rate_lixt[0]}%-{$rate_lixt[1]}%</span>) 
+            </td>
+            <td align="right" class="spec80">贷款期限：</td>
+            <td>
+               <input type="hidden" id=-"borrow_duration" name="borrow_duration" value="10000" />
+              </td>
+          </tr>
+          <tr>
+            <td align="right" class="spec80">众筹期限：</td>
+            <td><htmlA:select id="borrow_time" datakey="borrow_time" class="spec46" addstr='title="设置此次众筹融资的天数。融资进度达到100%后直接进行网站的复审"'/></td>
+            <td align="right" class="spec80">&nbsp;&nbsp;</td>
+            <td>
+            	<input type="hidden" id=-"repayment_type" name="repayment_type" value="1" />
+            </td>
+          </tr>
+          <tr style="display:none">
+            <td align="right" class="spec80">按份投资：</td>
+            <td colspan="3"><label for="select"></label>
+                <input name="invest_method" class="invest_method" checked="checked" type="checkbox" value="1">是                
+              </td>
+          </tr>
+          <tr class="method0" style="display:none">
+            <td align="right" class="spec80">最低投标金额：</td>
+            <td><htmlA:select id="borrow_min" datakey="borrow_min" class="spec46" addstr='title="允许投资者对一个众筹标的投标总额的限制"'/></td>
+            <td align="right" class="spec80">最多投标总额：</td>
+            <td><htmlA:select id="borrow_max" datakey="borrow_max" class="spec46" nodefalut="true" addstr='title="允许投资者对一个众筹标的投标总额的限制"'/></td>
+          </tr>
+          <tr class="method1">
+            <td align="right" class="spec80">每份金额：</td>
+            <td><label for="select"></label>
+              <input onKeyUp="NumberCheck(this)" type="text" class="spec81" name="each_money"  /></td>
+            <td align="right" class="spec80">单人可投份数：</td>
+            <td>
+              <input onKeyUp="NumberCheck(this)" type="text" class="spec81" name="each_number"  />
+              (<span style="color:red" id="_day_lilv">填‘0’，表示不限制</span>) 
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="spec80">众筹人：</td>
+            <td colspan="3"><label for="select"></label>
+                <input type="hidden" class="spec81" name="borrow_uid" id="borrow_uid" />
+                <input type="text" class="spec81" name="borrow_username" id="borrow_username" /><span class="search_member" onclick="showurl('{:U('admin/members/ajaxsearch')}','搜索会员');">搜索</span>
+                (<span style="color:red" id="_day_lilv">请输入众筹人用户名，您也可以点击“搜索”查找会员</span>) 
+              </td>
+          </tr>
+        </table>
+      </div>
+      
+      <div class="blank_line"></div>
+      <div class="jkxx4" style="height:auto">
+        <table width="1004" border="0" cellspacing="0" cellpadding="0" >          
+          <tr>
+            <td class="spec84">项目标题：</td>
+            <td><input type="text" class="spec46" style="width:300px" name="borrow_name" />
+              </td>
+           </tr>
+           <tr >
+            <td class="spec84">缩略图片：</td>
+            <td><input type="file" class="x_input" style="width:300px" name="borrow_files[]"  /> 宽度:366px 高度:273px
+              </td>
+           </tr>
+           <tr >
+            <td class="spec84">详情大图：</td>
+            <td><input type="file" class="x_input" style="width:300px" name="borrow_files[]" /> 宽度:1583px 高度:534px
+              </td>
+           </tr>
+           <tr>
+            <td class="spec84">视频地址：</td>
+            <td><input type="text" class="spec46" style="width:300px" name="borrow_video" />
+              </td>
+           </tr>
+           <tr>
+            <td class="spec84">项目说明：</td>
+            <td>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+<script>
+$(function(){
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="borrow_info"]', {
+			allowFileManager : true,
+			autoHeightMode : true,
+			afterCreate : function() {
+				this.loadPlugin('autoheight');
+			},
+			afterUpload : function(url) {
+				var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+				var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+				$("#firstimage").append(firstimageoption);
+				$("#images").append(selectoption);
+			},afterBlur: function(){this.sync();}
+		});
+	});
+})
+</script><textarea name="borrow_info" id="borrow_info" style="width:700px;height:200px;visibility:hidden;"></textarea>
+            	
+            </td>
+          </tr>
+          
+          <tr>
+            <td>&nbsp;</td>
+            <td class="spec86"><a href="javascript:void(0);" class="btn_b" id="save_btn">提交众筹</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+<div style="clear:both;"></div>
+<div style="height:20px;"></div>
+
+<script type="text/javascript">
+$(function(){
+	$("#save_btn").click(function(){
+		$("#postBorrow").submit();	
+	})	
+})
+
+
+function setError(tip){
+	layer.msg(tip);
+	return false;
+}
+
+function cksubmit(){
+	var p=makevar(['borrow_money','borrow_interest_rate','borrow_use','borrow_duration','borrow_min','borrow_max','borrow_time','repayment_type','reward_type_1','reward_type_1_value','reward_type_2','reward_type_2_value','vouch_rate','vouch_member','vouch_member','borrow_name','borrow_info']);
+
+	if(p.borrow_money == "") 			return setError("众筹金额不能为空！");
+	if(p.borrow_interest_rate == "") 	return setError("众筹利率不能为空！");	
+	if(p.borrow_use == "") 				return setError("众筹用途不能为空！");
+	if(p.borrow_duration == "" && typeof miao=="undefined") 		return setError("众筹期限不能为空！");	
+	if(p.borrow_time == "") 			return setError("众筹有效时间不能为空！");	
+	if(p.borrow_name == "") 			return setError("众筹标题不能为空！");
+	if(p.borrow_info == "") 			return setError("众筹内容不能为空！");
+
+	return true;
+}
+</script>
+<script type="text/javascript">
+function showurl(url,Title){
+  ui.box.load(url, {title:Title});
+}
+</script>
+<include file="Public:_footer" />

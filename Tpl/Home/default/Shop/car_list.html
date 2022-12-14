@@ -1,0 +1,234 @@
+<include file="default:Public:headern" />
+<div class="gwc">
+	<p class="gwc_1">购物车</p>
+    <div class="gwc_list">
+
+    	<div class="gwc_top">
+        	<span class="gwc_top1">全部商品(<?php echo count($list)?>)</span>
+            <p>已选商品<span id="yxsp1">0.00</span></p>
+            <a href="##"  id="jiesuan1">结算</a>
+        </div>
+
+        <div class="clear"></div>
+
+        	<div class="gwc_tops">
+                <span>
+
+
+                <input type="checkbox" name="quanxuang"  onclick="checkAll(this)" value="0" class="gwc_qx" />全选</span>
+                <label for="checkbox"></label>
+
+                <span style="width:270px;">商品</span>
+                <span>单价</span>
+                <span>数量</span>
+                <span  style="width:150px;">金额</span>
+           		<span  style="width:150px;">操作</span> 
+            </div>
+ 
+<volist name="list" id="vo">
+        <div class="gwc_lists">
+     
+                <span>
+
+                <input type="checkbox"  name="checkbox" onclick="checkon(this)" value="{$vo.id}" class="gwc_qx" />
+               <a href="/Shop/shop_show?id={$vo.good.id}" target=_balnk> <img src="{$vo.good.art_img}" /></a> </span>
+                <span><a href="/Shop/shop_show?id={$vo.good.id}" target=_balnk>{$vo.good.title}</a></span>
+                <span style="width:150px;">￥{$vo.good.art_jiage}</span>
+<span class="zz_sl"  style="padding-top: 7px;width:150px;">
+		<div class="kucun" style="    margin-left: 25px">
+		    	<span id="jian" data='{$vo.id}'>-</span>
+		        <span><input type="text" name="shuliang" id="shuliang{$vo.id}" value="{$vo.num}" readonly /> </span>
+		        <span id="jia" data='{$vo.id}'>+</span>
+		</div>
+
+	</span>
+                <span id="zong{$vo.id}">￥{$vo.good.art_zj}</span>
+           		<span  style="width:150px;"> <a href="/shop/car_del/id/{$vo.id}">删除</a></span> 
+    	<div class="clear"></div>
+        </div>
+     
+</volist>
+        
+    </div>
+<form method="post"  name="do_order" id="do_order" action="__URL__/do_order">
+    <input type="hidden" name="carids" id="carids"> 
+</form>    
+     <div class="gwc_bot">
+        	 <p><input type="checkbox" name="quanxuang"  onclick="checkAll(this)" value="0" class="gwc_qx" />全选 </p>
+        	 <p class="gwc_js">已选商品<span id="yxsl2">0</span>件  <span>合计（含运费）</span> <span id="yxsp2"> ￥0.00</span></p>
+             <a href="##" id="jiesuan2">结算</a>		
+        </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+function checkon(o){
+	var fal=true;
+	$('input[name="checkbox"]').each(function(){
+		if($(this).prop("checked")==false){
+			fal=false;
+		}
+	});
+	if(fal==false){
+		$('input[name="quanxuang"]').removeAttr('checked');
+	}else{
+		$('input[name="quanxuang"]').attr('checked','true');
+	}
+	doprice();
+}
+function checkAll(o){
+        if(o.checked == true ){
+            $('input[name="checkbox"]').attr('checked','true');
+            $('input[name="quanxuang"]').attr('checked','true');
+                  
+        }else{
+            $('input[name="checkbox"]').removeAttr('checked');
+            $('input[name="quanxuang"]').removeAttr('checked');
+
+        }
+        doprice();
+}
+function doprice(){
+	let carids=0;
+	let xz=0;
+    $('input[name="checkbox"]').each(function(){
+		if($(this).prop("checked")==true){
+		    carids +=","+$(this).val();
+			xz++;
+		}
+	});
+    car_price(carids,xz);
+}
+
+function carnum(){
+	   var address=$("#address").val();
+        var id=$("#id").val();
+        var pay_way=$("#pay_way").val();
+        $.ajax({
+            url: "__URL__/post_order",
+            type: "post",
+            dataType: "json",
+            data: {"address":address,"id":id,"pay_way":pay_way},
+            success: function(d) {
+
+               if(d.stats==1){
+                    if(d.pay_way==1){
+                        window.location.href="__URL__/zhifubao/id/"+d.ordernums;
+                    }else if(d.pay_way==2){
+                        window.location.href="__URL__/weixin/id/"+d.ordernums;
+                    }
+               }else{
+                    alert(d.msg);
+               } 
+            }
+        }); 
+
+}
+
+function donum(carid,num){
+     if(num>99){
+        alert("单次下单数量不能超过99");
+    }else{
+        var id=$("#id").val();
+        $.ajax({
+            url: "__URL__/do_car_num",
+            type: "post",
+            dataType: "json",
+            async: false,
+            data: {"num":num,"id":carid},
+            success: function(d) {
+               $("#zong"+carid).html("￥"+d);
+                doprice(); 
+            }
+      });
+
+    }
+}
+
+function car_price(carids,xz){
+    $.ajax({
+        url: "__URL__/car_price",
+        type: "post",
+        dataType: "json",
+        data: {"carids":carids},
+        success: function(d) {
+           $("#yxsp1").html("￥"+d);
+           $("#yxsp2").html("￥"+d);
+           $("#yxsl2").html(xz);
+        }
+  }); 
+}
+
+$(function(){
+	var carid;
+    /*订单数量*/
+    $(".kucun #jia").click(function(){
+    	carid=($(this).attr("data"));
+        var b=Number($(".kucun #shuliang"+carid).val());
+        donum(carid,Number(b)+1);
+        if(b!=99){
+            $(".kucun #shuliang"+carid).val(Number(b)+1);
+        }     
+    }) 
+    $(".kucun #jian").click(function(){
+    	carid=($(this).attr("data"));
+        var b=Number($(".kucun #shuliang"+carid).val());
+        if(b>1){
+            $(".kucun #shuliang"+carid).val(Number(b)-1);
+            donum(carid,Number(b)-1);
+        }
+    })
+    
+
+    $("#jiesuan1").click(function(){
+        let carids=0;
+        let xz=0;
+        $('input[name="checkbox"]').each(function(){
+            if($(this).prop("checked")==true){
+                carids +=","+$(this).val();
+                xz++;
+            }
+        });
+        if(xz==0){
+            alert("请选择商品！");
+        }else{
+            $("#carids").val(carids);
+            $("#do_order").submit();
+           // window.location.reload()
+        }
+    })
+
+    $("#jiesuan2").click(function(){
+        let carids=0;
+        let xz=0;
+        $('input[name="checkbox"]').each(function(){
+            if($(this).prop("checked")==true){
+                carids +=","+$(this).val();
+                xz++;
+            }
+        });
+        if(xz==0){
+            alert("请选择商品！");
+        }else{
+            $("#carids").val(carids);
+            $("#do_order").submit();
+           // window.location.reload()
+        }
+    })
+
+    // $(".sc_gwc").click(function(){
+	   //  $(".sc_gwc").attr('disabled','disabled');
+	   //  $("#add_car").submit();
+    // })
+    // $(".sc_btn").click(function(){
+	   //  $(".sc_btn").attr('disabled','disabled');
+	   //  $("#add_car").attr("action","Shop/goumai");;
+	   //  $("#add_car").submit();
+    // })
+
+})
+</script>
+<!--底部-->
+<include file="default:Public:footern" />

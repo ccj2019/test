@@ -1,0 +1,89 @@
+<include file="default:Public:mheader" />
+
+<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a>邀请记录</a></span>
+</div>
+<style type="text/css">
+    .text_input{
+        background: #f8f8f8;
+        border: #d2d2d2 1px solid;
+        line-height: 25px;
+        padding-left: 10px;
+        color: #737373;
+        float: left;
+    }
+</style>
+<div class="box clearfix">
+    <include file="default:Public:_left" />
+    <div class="tabvbox">
+        <div class="tabv clearfix">
+            <div class="on"><a href="{:U('promotion/index')}"><span>邀请记录</span></a></div>
+            <div><a href="{:U('promotion/promotionlog')}"><span>佣金记录</span></a></div>
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <!--充值记录-->
+                <div class="bgbx">
+
+                    <h1>复制活动邀请链接或邀请码，通过微信或QQ发送给朋友：</h1>
+                    <div class="yqjl">
+                        <ul>
+                            <li>
+                                <span>邀请链接： </span>
+                                <textarea class='txt_code text_input' readonly="readonly" style="width:180px; height:20px;"  id="text">{$url}</textarea>
+                                <button class="bcxsz2"  id='btn_copy'> 复制</button>
+                            </li>
+                            <li>
+                                <span>邀请码： </span>
+                                <textarea class='txt_codes text_input' readonly="readonly" style="width:180px; height:20px;"   id='txt_inv'>{$invitation.incode}</textarea>
+                                <button class="bcxsz2"  id='btn_inv_copy'> 复制</button>
+
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <script type="text/javascript">
+                        $("#btn_copy").click(function () {
+                            var text = $("#text").val();//就是要复制的那个input
+                            $("#text").select();
+                            document.execCommand('copy', false);     
+                            layer.msg("复制成功");  
+                        });
+                        $("#btn_inv_copy").click(function () {
+                            var text = $("#txt_inv").val();//就是要复制的那个input
+                            $("#txt_inv").select();
+                            document.execCommand('copy', false);     
+                            layer.msg("复制成功");  
+                        });
+
+                    </script>
+                    <div class="fanliguiz">
+                        <p><span>总返利：</span> <span> 0积分</span></p>
+                        <p>返利规则：</p>
+                        <p>1、 通过发送会员专属邀请链接，推荐好友注册成为[本平台] 会员。<br />  
+2、好友通过邀请链接访问网站并成功注册成为本站会员。<br />    
+3、每成功邀请一个会员注册，您获得100积分奖励。积分可以抵用金额。</p>
+                    </div>
+                    <div class="tou1 hb3">
+                        <span>邀请的会员名</span>
+                        <span>注册时间</span>
+                    </div>
+                    <volist name="friendlog" id="vb">
+                    <div class="bgxmlis hb3">
+                        <span>{$vb.user_name}</span>
+                        <span>{$vb.reg_time|date="Y-m-d",###}</span>
+                    </div>
+                    </volist>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

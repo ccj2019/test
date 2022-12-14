@@ -1,0 +1,60 @@
+{__NOLAYOUT__}<style type="text/css">
+.pop-tb-con{padding-top:0px}.text-red{color:#cc3300}.mar20{margin:20px 0px}INPUT.btn-action{border-bottom:#cc0000 0px solid;text-align:center;border-left:#cc0000 0px solid;line-height:30px;width:80px;display:inline-block;background:url(../bg/btn-red.jpg) #cc0000 0px 0px;height:30px;color:#fff;border-top:#cc0000 0px solid;border-right:#cc0000 0px solid}.pop-tb{border-bottom:#d5d5d5 1px solid;border-left:#d5d5d5 1px solid;background-color:#fff;margin:20px auto;width:700px;height:310px;border-top:#d5d5d5 1px solid;border-right:#d5d5d5 1px solid}.pop-tb-l{border-bottom:#e5e5e5 0px solid;border-left:#e5e5e5 0px solid;background-color:#fdffe5;width:198px;float:left;height:260px;border-top:#e5e5e5 0px solid;border-right:#e5e5e5 1px solid;padding-top:10px}.pop-tb-l UL LI{line-height:30px;padding-left:20px;height:30px}.pop-tb-l UL LI STRONG{color:#ff0000;font-size:14px}.pop-tb-r{padding-left:20px;width:400px;float:right;padding-top:10px}.pop-tb-r UL LI{line-height:30px;height:30px}.pop-tb-r UL LI A{color:#c30;margin-left:15px}
+.invest_input{border:1px solid #CCC; padding:3px}
+</style>
+<div class="pop-tb-con clearfix" sizset="1" sizcache06741904719221702="1">
+<div class="pop-tb-r">
+<FORM method="post" name="investForm" id="investForm" action="__URL__/investmoney">
+<input type="hidden" name="borrow_id" id="borrow_id" value="{$vo.id}" />
+<input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+<ul>
+<li>您的可用余额： {$account_money|default=0.00} 元 <A target="_blank" href="__APP__/member/charge#chip-1">我要充值</A> </li>
+<li>您的体验余额： {$money_experience|default=0.00} 元</li>
+<li>最少投标金额：{$vo.borrow_min|Fmoney=###}&nbsp;&nbsp;
+最多投标金额：{$vo.borrow_max|default="无限制"}<if condition="$vo.borrow_max neq 0">元</if></li>
+<li>投标金额：<INPUT type="text" id="invest_money" class="invest_input"  size="11" name="money" value="{$vo.toubiao}" />&nbsp;元
+</li>
+
+<if condition="$vo.is_experience eq 1">
+<li>用体验金：<input type="checkbox" id="is_experience" name="is_experience" value="1" onclick="return false;" checked  />&nbsp;<label for="is_experience">是，只允许体验金投资</label></li>
+</if>
+<if condition="$vo.is_bonus eq 1">
+<li>
+	使用红包：
+	<select name="bonus_id" class="sel_bonus_id" id="bonus_id">
+		<option value="0">--请选择红包--</option>
+		<volist name="bonus_list" id="bonus_line">
+			<option value="{$bonus_line.id}" money_bonus="{$bonus_line.money_bonus}">红包{$bonus_line.money_bonus}元</option>
+			<option value="{$bonus_line.id}" disabled="disabled">（满{$bonus_line.bonus_invest_min}元可用）</option>
+		</volist>
+	</select>
+</li>
+</if>
+
+<li>支付密码：<if condition="$has_pin eq 'yes'"><INPUT type="password" class="invest_input" id="pin" name="pin" value="" style="width:106px" />
+<A href="/Member/memberinfo/index.html#chip-3" target="_blank"><FONT color="#ff0000">修改支付密码</FONT></A>
+<else/>
+<A href="/Member/memberinfo/index.html#chip-3" target="_blank"><FONT color="#ff0000">请先设一个支付交易密码</FONT></A></if>
+</li>
+</ul>
+<P class="mar20"><INPUT class="btn-action" type="button" onclick="PostData()" value="支持项目" style="margin-left:100px;" /></P>
+<P></P>
+</FORM>
+</div>
+</div>
+<script type="text/javascript">
+borrow_min = {$vo.borrow_min|default=0};
+borrow_max = {$vo.borrow_max|default=0};
+// $(function(){
+//  $('.sel_bonus_id').change(function(event) {
+//  	var bonus_id = $(this).val();
+//  	if(bonus_id>0){ 		
+// 	 	var money_bonus = $(this).find('option:selected').attr('money_bonus');
+// 	 	$(this).parents('form').find('input#invest_money').val(money_bonus).attr('readonly', 'readonly');
+//  	}else{
+//  		$(this).parents('form').find('input#invest_money').removeAttr('readonly');
+//  	}
+//  });
+// });
+
+</script>

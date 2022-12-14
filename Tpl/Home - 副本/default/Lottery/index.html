@@ -1,0 +1,83 @@
+<style type="text/css">
+#main{width: 1098px;border: 1px solid #ccc;background: #fff;margin: 0px auto;}
+.demo{ width:417px; height:417px; position:relative; margin:50px auto}
+#disk{ width:417px; height:417px; background:url(__PUBLIC__/{:C('DEFAULT_THEME')}/common/lottery/disk.jpg) no-repeat}
+#start{ width:163px; height:320px; position:absolute; top:46px; left:130px;}
+#start img{ cursor:pointer}
+#desc{width: 1060px;margin: 0px auto;text-align: left;padding: 10px 20px 30px 20px;font-size: 14px;line-height: 25px;color: #666}
+#desc dt{font-weight: bold;}
+#desc dl{margin-top: 10px;}
+#desc dd{text-indent: 2em;}
+</style>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/lottery/js/my.js"></script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/lottery/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/lottery/jquery.easing.min.js"></script>
+<script type="text/javascript">
+$(function(){ 
+     $("#startbtn").click(function(){ 
+        lottery();
+    }); 
+}); 
+function lottery(){ 
+    $.ajax({ 
+        type: 'POST', 
+        url: '__URL__/data', 
+        dataType: 'json', 
+        cache: false, 
+        error: function(){ 
+            layer.msg('出错啦，请稍后重试！');
+            return false; 
+        }, 
+        success:function(json){ 
+            if(json.status == 1){                
+                $("#startbtn").unbind('click').css("cursor","default"); 
+                var a = json.angle; //角度 
+                var p = json.prize; //奖项 
+                $("#startbtn").rotate({ 
+                    duration:3000, //转动时间 
+                    angle: 0, 
+                    animateTo:1800+a, //转动角度 
+                    easing: $.easing.easeOutSine, 
+                    callback: function(){ 
+                        layer.alert('恭喜你，获得'+p+'！<br>获得奖品：'+json.rs+'。',1);
+                        $("#startbtn").css("cursor","pointer").click(function(){ 
+                            lottery();
+                        }); 
+                    } 
+                }); 
+            }else{
+                layer.msg(json.msg);
+            }
+        } 
+    }); 
+} 
+</script>
+<div class="lc">
+
+
+<div id="main">   
+   <div class="msg"></div>
+   <div class="demo">
+        <div id="disk"></div>
+        <div id="start"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/lottery/start.png" id="startbtn"></div>
+   </div>   
+       <div id="desc">
+         <if condition="$nowLottery['open'] neq 1">
+            <dl>
+                <dt style="color:red">(当前活动还没有开始！)</dt>
+            </dl>
+           <dl>
+        </if>
+            <dt>活动说明：</dt>
+            <dd>{$nowLottery.desc}</dd>
+           </dl>
+           <dl>
+            <dt>奖项说明：</dt>
+            <dd>单人抽奖次数：{$nowLottery.ptimes}次</dd>
+            <foreach name="nowLottery.prize" item="vo" key="k" >
+            <dd>{$vo.prize}：{$vo.rs}</dd>
+            </foreach>            
+           </dl>
+       </div>
+</div>
+</div>

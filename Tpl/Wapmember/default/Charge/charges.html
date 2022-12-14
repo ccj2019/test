@@ -1,0 +1,101 @@
+ 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<!--	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+<script type="text/javascript">var bankimg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";</script>
+<script type="text/javascript">var Himg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Home/";</script>
+<script  type="text/javascript" src="/Public/wap/js/recharge.js"></script>
+
+         <link rel="stylesheet" href="/Public/wap/css/layer.css">
+        <script type="text/javascript" src="/Public/wap/js/layer.js"></script>
+ -->
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:history.back();"  class="l-fanhui on">&lt;返回</a><span>扫码付</span>
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a><!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+              
+ <!--		url="/member/charge/paydemo";
+ http://www.rzgthy.com/llp/hllp/index.php
+ -->
+ 
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+		<span style="font-size: .35rem;">充值流程：<b style="color:red;">填写金额</b>>>扫码充值>>提交回单</span>
+</div>
+
+<form action="__URL__/chargesq" method="post" name="smfline" id="formid" >
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">充值金额</p>
+			    <?php $u_id = session("u_id") ;?>
+				 
+			<input  name="user_id" type="hidden" class="je2-1" value="{$u_id}" />
+            <input type="hidden" id="yz" value="{$yz}">
+			<p class="l-yhp2">¥ <input  id="t_money" name="money_order" type="text" class="je2-1" placeholder="50元" onkeydown="if(event.keyCode==13)return false;"/>
+</p>
+
+<br>
+<p class="l-yhp1">
+温馨提示：<br> 
+
+<span  style="color:red;font-size:0.35rem;"> 1.充值金额必须与扫码付金额相同，否则会导致充值金额无法到账<br> </span>
+2. 扫码充值时间日9:00-17:30，审核到账时间约为5分钟。<br> 
+3. 非工作时间扫码充值的，工作人员将在工作时间统一处理到您账户。<br> 
+4. 非工作时间请尽量使用在线支付和线下支付。<br> 
+5. 使用微信、支付宝扫码支付，关于充值上限请联系微信、支付宝客服详询。<br> 
+6. 如有疑问，请联系在线客服。
+    
+</div>	
+		
+
+		<div class="l-qurena">
+		<style>
+		.l-qurena button{
+		    width: 100%;
+    /* margin: 0 auto; */
+    /* margin-top: 1rem; */
+    text-align: center;
+    background: #00a0ea;
+    color: #FFFFFF;
+    height: .7rem;
+    font-size: .32rem;
+    border-radius: 5px;
+    margin-bottom: .2rem;
+    border: 0px;
+		}
+		</style>
+		                  <button type="button" onclick="verification()">确认充值</button>
+	</div>
+
+</form>
+	</body>
+        <script>
+            function verification() {
+                let money = $("#t_money").val();
+                money = $.trim(money);
+              
+
+                if(money == '' || money == '0'){
+                    alert("请填写充值金额");
+                   
+                    return false;
+                }
+
+        
+                money = parseFloat(money).toString();
+                if(money == "NaN"){
+                    alert("请填写充值正确金额");
+                    return false;
+                }
+               
+
+document.getElementById("formid").submit();
+   
+            }
+        </script>
+
+</html>

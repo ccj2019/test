@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'uid', 2 => 'add_time', 3 => 'add_ip', 4 => 'apply_status', 5 => 'credits', 6 => 'deal_user', 7 => 'deal_time', 8 => 'deal_info', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(10) unsigned', 'uid' => 'int(10) unsigned', 'add_time' => 'int(10) unsigned', 'add_ip' => 'varchar(16)', 'apply_status' => 'tinyint(3) unsigned', 'credits' => 'int(11)', 'deal_user' => 'int(10) unsigned', 'deal_time' => 'int(10) unsigned', 'deal_info' => 'varchar(50)', ), ); ?>

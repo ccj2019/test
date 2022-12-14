@@ -1,0 +1,104 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+
+<script type="text/javascript">
+
+	var delUrl = '__URL__/doDel';
+
+	var addUrl = '__URL__/add';
+
+	var addTitle = '添加分类';
+
+</script>
+
+<div class="so_main">
+
+  <div class="page_tit">商城类别列表</div>
+
+
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+    <htmlA:commonBtn type="href" action="__URL__/typeadd" value="添加"/>
+
+<!--     <htmlA:commonBtn type="jsfun" action="del();" value="删除商品" /> -->
+
+  </div>
+
+  
+
+  <div class="list">
+
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+
+    <th style="width:30px;">
+
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+
+        <label for="checkbox"></label>
+
+    </th>
+
+    <th class="line_l">ID</th>
+
+    <th class="line_l">分类名称</th>
+
+   <th class="line_l">类别</th>
+
+    <th class="line_l">状态</th>
+
+
+    <th class="line_l">操作</th>
+
+  </tr>
+
+  <volist id="vo" name="list">
+
+      <tr overstyle='on'   id="list_{$vo.id}">
+
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+
+        <td>{$vo.id}</td>
+
+        <td>{$vo.name}</td>
+
+        <td><if condition="$vo.type eq 1">  类别 <else/>类型 </if></td>
+        <td><if condition="$vo.status eq 1">  启用 <else/>关闭 </if></td>
+
+        <td>
+
+            <a href="__URL__/typeedit?id={$vo['id']}">编辑</a> <!-- <a href="javascript:void(0);" onclick="del({$vo['id']});">删除</a>   -->
+
+        </td>
+
+      </tr>
+
+  </volist>
+
+  </table>
+
+
+
+  </div>
+
+  
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+      <htmlA:commonBtn type="href" action="__URL__/typeadd" value="添加"/>
+  </div>
+
+</div>
+
+
+
+
+
+<include file="Public:_footer" />

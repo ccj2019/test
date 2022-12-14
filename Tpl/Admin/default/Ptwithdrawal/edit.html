@@ -1,0 +1,45 @@
+<include file="Public:_header" />
+
+<!--<tagLib name="htmlA" />-->
+<div class="so_main">
+
+<div class="page_tit">提现信息</div>
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2" style="display:none">高级设置</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/eidtupdate" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$vo.id}" />
+	<div id="tab_1">
+	
+<!--      <volist name="vo['title']" id="voe">-->
+<!--            <dl class="lineD"><dt>商品名称：</dt><dd><a href="/maket/view?id={$vo.gid}" target="_blank" title="点击查看商品详情">{$voe.title}</a></dd></dl>-->
+<!--            <dl class="lineD"><dt>单价：</dt><dd>￥{$voe.art_jiage}元</dd></dl>-->
+<!--            <dl class="lineD"><dt>数量：</dt><dd>{$voe.num}</dd></dl>-->
+<!--            <dl class="lineD" style="background-color: aliceblue;">&nbsp;</dl>-->
+<!--      </volist>-->
+
+      <dl class="lineD"><dt>提现会员：</dt><dd>{$vo.user_name}</dd></dl>
+      <dl class="lineD"><dt>提现金额：</dt><dd>￥{$vo.money}元</dd></dl>
+      <dl class="lineD"><dt>提现手续费：</dt><dd><input name="sxf" type="number" value="{$vo.sxf}"></dd></dl>
+      <dl class="lineD"><dt>到账金额：</dt><dd>{$vo['money'] - $vo['sxf']}</dd></dl>
+      <dl class="lineD"><dt>真实姓名：</dt><dd>{$vo.real_name}</dd></dl>
+      <dl class="lineD"><dt>银行名称：</dt><dd>{$vo.bank_name}&nbsp;</dd></dl>
+      <dl class="lineD"><dt>银行账号：</dt><dd>{$vo.bank_num}</dd></dl>
+<!--      <dl class="lineD"><dt>银行开户行：</dt><dd>{$vo.pay_time|date='Y年m月d日H时',###}</dd></dl>-->
+      <dl class="lineD"><dt>提现状态：</dt><dd><input name="status" type="radio" value="1">审核通过<input name="status" type="radio" value="2">审核驳回</dd></dl>
+      <dl class="lineD"><dt>处理说明：</dt><dd><textarea name="content" id="" cols="30" rows="5"></textarea></dd>
+<!--          <dd><htmlA:radio id="action" default="0|新兑换,2|已发货" value="key|vo.action" tip="订单处理"/></dd>-->
+      </dl>
+<!--      <dl class="lineD"><dt>快递：</dt>-->
+<!--          <dd><htmlA:text id="yijian" value="{$vo.yijian}" tip="快递名称:订单号（顺丰:xxxxxxxxxxxxx）"/></dd>-->
+<!--      </dl>-->
+      <br />
+	</div><!--tab1-->
+	<!--tab2-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="处理订单" />
+	</div>
+	</form>
+</div>
+
+</div>
+<include file="Public:_footer" />

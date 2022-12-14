@@ -1,0 +1,52 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+
+
+<div class="page_tit">编辑商品</div>
+
+
+<div class="form2">
+
+	<form method="post" action="__URL__/doedits" onsubmit="return subcheck();" enctype="multipart/form-data">
+
+	<input type="hidden" name="id" value="{$vo.id}" />
+
+	<div id="tab_1">
+ 
+	<dl class="lineD"><dt>姓名：</dt><dd><htmlA:input id="name" value="{$vo.name}" tip="*"/></dd></dl>
+	<dl class="lineD"><dt>电话：</dt><dd><htmlA:input id="phone" value="{$vo.phone}" tip="*"/></dd></dl>
+
+
+    <dl class="lineD"><dt>状态：</dt><dd><htmlA:radio id="type" value="key|vo.type"  default="0|正常,1|冻结" /></dd></dl>
+
+
+	
+
+	</div><!--tab1-->
+
+	
+
+
+	<div class="page_btm">
+
+	  <input type="submit" class="btn_b" value="确定" />
+
+	</div>
+
+	</form>
+
+</div>
+
+
+
+</div>
+
+<include file="Public:_footer" />

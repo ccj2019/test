@@ -1,0 +1,106 @@
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理安全中心-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>修改绑定手机号</span>
+                </div>
+                <div class="zdtb">
+                    <div class="zdt2">
+                        <div class="con">
+                            <p>您可以通过经常性修改密码更好的保护您的账号安全，以避免您受到意外损失</p>
+                            <p>尊敬的{$glo.web_name}会员，在绑定手机之后，能够提高您的账号安全性，获取相关短信通知。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="addyhk txsq">
+                    <form action="__URL__/changephoneact/" method="post" id="changeform">
+                        <div class="addybox">
+                            <label for="">用户账号：</label>
+                            <div class="addy">{$Think.session.u_user_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">手机号：</label>
+                            <div class="addy">{$phone}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox" style="margin: 15px 0;">
+                            <label for="">原手机号：</label>
+                            <input name="old_phone" id="old_phone" class="text_input" type="text">
+                        </div>
+                        <div class="clear"></div>
+                        <div class="addybox">
+                            <label for="">新手机号：</label>
+                            <input name="new_phone" id="new_phone" class="text_input" style="float: left; margin-top: 5px;" type="text">
+                            <div class="addbut" id="Img1">获取验证码</div>
+                        <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">验证码：</label>
+                            <input name="code" id="code" class="text_input" style="float: left; margin-top: 5px;" type="text">
+                        <div class="clear"></div>
+                        </div>
+                        <div class="addybox sub subtxcz" style="margin-top: 50px;">
+                            <label for=""></label>
+                            <a href="javascript:void(0)" class="button_input" id="btn_set" onclick="changephone()">提交</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#Img1").click(function() {
+        var phone = $("#new_phone").val();
+        if(phone == ""){
+            layer.msg('手机号不能为空', {type : 9});
+            return false;
+        }
+        $.ajax({
+            url: "__URL__/sendphonecodex/",
+            type: "post",
+            dataType: "json",
+            data: {"phone":phone},
+            success: function(d) {
+                layer.msg(d.message);
+                return false;
+            }
+        });
+    });  
+});
+function changephone(){
+    var old_phone=$("#old_phone").val(); 
+    var new_phone=$("#new_phone").val(); 
+    var code=$("#code").val(); 
+    if(old_phone == ""){
+        layer.msg('旧手机号不能为空');
+        return false;
+    }
+    if(new_phone == ""){
+        layer.msg('新手机号不能为空');
+        return false;
+    }
+    if(code == ""){
+        layer.msg('验证码不能为空');
+        return false;
+    }
+    $("#changeform").submit();
+
+}
+</script>

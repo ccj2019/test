@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+ 
+<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+<link rel="stylesheet" href="/public/wap/css/index.css">
+<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:history.go(-1);" class="w-header-left">
+                < 返回</a>
+                    <h3>发起内容</h3>
+                    <a href="javascript:history.go(-1);" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+    <!-- origin start  -->
+    <form action="/wap/borrow/save" method="post"  enctype='multipart/form-data'id="form0">
+ 
+           
+   
+    <div class="w-origin-input-warpper">
+        <div class="w-origin-input ">
+            <div class="origin-input w-content">
+                <label for="">筹款金额</label>
+                <input type="number" name="borrow_money" placeholder="1800000">
+                <span>元</span>
+            </div>
+            <div class="origin-input w-content" style="border:0;">
+                <label for="">筹款天数</label>
+                <input class="number"name="borrow_time" type="number" placeholder="10">
+                <span>天</span>
+            </div>
+        </div>
+
+        <div class="w-origin-input ">
+            <div class="origin-input w-content">
+                <label for="">项目标题</label>
+                <input type="text" name="borrow_name" placeholder="为你写诗">
+
+            </div>
+            <div class="origin-input w-content textarea clear">
+                <label for="" class="fl">项目简介</label>
+                <textarea class="fr" name="borrow_con" id=""></textarea>
+
+            </div>
+            <div class="origin-input w-content textarea clear">
+                <label class="fl" for="">项目正文</label>
+                <textarea class="fr" name="borrow_info" id=""></textarea>
+
+            </div>
+        </div>
+
+
+        <div class="w-origin-input w-origin-input-tt">
+
+
+            <div class="origin-input w-content radio ">
+       	  <input  type="hidden" name="borrow_type"  value="1" >
+ 	  <input  type="hidden" name="repayment_type"  value="1" >
+ 	  
+ 	  <input  type="hidden" name="borrow_model"  value="1" >
+
+                <lable class="lable fl">项目分类</lable>
+                <div class="fl">
+
+
+                    <input class="fl" type="radio" name="pid"  value="1" id="pay1">
+                    <label class="fl" for="pay1"></label>
+                    <span class="fl">联合养殖</span>
+                    <input class="fl" type="radio" value="2"  name="pid" id="pay2">
+                    <label class="fl" for="pay2"></label>
+                    <span class="fl">联合销售
+                    </span>
+                    <input class="fl" type="radio"  value="3"   name="pid" id="pay3">
+                    <label class="fl" for="pay3"></label>
+                    <span class="fl">共建销售
+                    </span>
+                </div>
+            </div>
+
+            <div class="w-container w-content">
+
+                <div class="row main">
+                    <div class="col-md-12">
+                        <h2 class="top_title">
+                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+
+                        </h2>
+
+                        <div class="row w-row">
+                            <span>所在地区</span>
+                            <a href="#" class="btn btn-info btn-lg active" role="button" id="sel_city">山东省 济南市</a>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+</form>
+        <!-- 头像上传 -->
+   <form action="/Wap/Borrow/zhao" method="post"  enctype='multipart/form-data'id="form2">
+   
+        <div class="w-origin-touxiang w-origin-touxiang1">
+            <h3>页面封面</h3>
+            <div class="touxiang clear">
+              <div class="clear">
+              	 <div class="left fl">
+                    <label for="doc">
+                        <div class="img">
+                            <!--<img src="./img/w-jia.jpg" alt="">-->
+                        </div>
+
+                        <!--<div>图片上传</div>-->
+
+
+                    </label>
+                     <input type=file name="doc" id="doc" onchange="imgChange1('z_photo','z_file');" style="display:none">
+     <!--<input type="file" name="image" id="file" value="" accept="image/*" multiple onchange="imgChange1('z_photo','z_file');" style="display: none"
+                        />-->
+ 
+                </div>
+                
+                <div class="right fr zzzzzzzzzzisad">
+                    支持jpg、jpeg、png、gif格式大小不 超过20.0MB，
+                   
+              
+                    <span>最佳尺寸：760px*530px</span>
+                </div>
+                
+              </div> 
+    
+
+            </div>
+        </div>
+       </form>
+    <form action="/Wap/Borrow/zhao" method="post"  enctype='multipart/form-data'id="form1">
+   
+        <div class="w-origin-touxiang">
+            <h3>项目图片
+                <span>(最多上传五张)</span>
+            </h3>
+            <div class="container ">
+                <!--    照片添加    -->
+                <div class="z_photo touxiang  clear">
+                	<div class="clearfix">
+                	 <div class="left fl" >
+                        <label for="file">
+                            <div class="img">
+                               
+                            </div>
+
+                        
+
+
+                        </label>
+                        <input type="file" name="image" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" style="display: none"
+                        />
+
+                    </div>	
+                     <div class="right fr">
+                            支持jpg、jpeg、png、gif格式大小不 超过20.0MB，
+                        <span>最佳尺寸：760px*530px</span>
+                    </div>
+                	</div>
+<!--                   
+                   <div class="z_addImg"><img src="/Public/upload/1539667063_96.jpg"></div>
+                    
+                   <div class="z_addImg"><img src="/Public/upload/1539667063_96.jpg"></div>-->
+
+                </div>
+
+                <!--遮罩层-->
+                <div class="z_mask">
+                    <!--弹出框-->
+                    <div class="z_alert">
+                        <p>确定要删除这张图片吗？</p>
+                        <p>
+                            <span class="z_cancel">取消</span>
+                            <span class="z_sure">确定</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</form>
+
+<!-- 下一步 -->
+<div class="w-origin-xiayibu" id="sub1">
+    下一步
+</div>
+
+        <!-- origin end -->
+   <script>
+// 	alert(1);
+$zindex=1;
+ 	
+ </script>
+ <script type="text/javascript">
+ 	$('#sub1').click(function() {
+ 		$('#form0').submit();
+ 	})
+ </script>
+        <script src="/public/wap/js/picker.min.js"></script>
+        <script src="/public/wap/js/city.js"></script>
+        <script type="text/javascript">
+ 			//放在$(function(){})里才有效 
+ 			
+              
+			$(document).on("click", "#localImag", function(){ 
+			   var 	mask = document.getElementsByClassName("z_mask")[0];
+ 		    	 	mask.style.display = "block";
+ 		    	 	
+				var athis= $(this);
+				var ztr=$(this).find("img").attr("src");
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+                var sure = document.getElementsByClassName("z_sure")[0];
+                
+			//此处的$(this)指$( "#testDiv")，而非$(document) 
+				$("#localImag").find("img").attr("src");
+						       sure.onclick = function () { 
+				$.ajax({  
+			      url:"/Wap/Borrow/zhaodelete",  
+			      type:"post",  
+			   	  data:{"url":ztr},    
+			     
+			      success:function(data){ 
+						console.log(data);
+						if(data==1){
+							mask.style.display = "none";
+							athis.remove();
+							$(".borrow_img").eq(athis.index()).remove();
+							$zv=0;
+						}
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });  
+			    }
+//				 
+			});
+			 var 	mask = document.getElementsByClassName("z_mask")[0];
+			$(".z_cancel").click(function(){ 
+				mask.style.display = "none";
+			})
+			$(document).on("click", ".z_addImg", function(){ 
+				
+						   var 	mask = document.getElementsByClassName("z_mask")[0];
+ 		    	 	mask.style.display = "block";
+ 		    	 	
+				var athis= $(this);
+			 	
+				var ztr=$(this).find("img").attr("src");
+			
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+                var sure = document.getElementsByClassName("z_sure")[0];
+                
+			//此处的$(this)指$( "#testDiv")，而非$(document) 
+				$("#localImag").find("img").attr("src");
+				       sure.onclick = function () {
+                             z_sure(ztr,athis)
+                        };
+                     
+//				$(".z_sure").click(function(){ 
+//					var ztr=athis.find("img").attr("src");
+//					console.log(ztr);	 
+//				$.ajax({  
+//			      url:"/Wap/Borrow/zhaodelete",  
+//			      type:"post",  
+//			   	  data:{"url":ztr},    
+//			     
+//			      success:function(data){ 
+//						console.log(data);
+//						if(data==1){
+//							mask.style.display = "none";
+//							//athis.remove();
+//							$(".content_img").eq(athis.index()-2).remove();
+//							$v--;
+//						}
+//			      },  
+//			      error:function(e){  
+//			          //alert("网络错误，请重试！！");  
+//			       }  
+//			      });  
+//			    })
+ 
+				
+			}); 
+				function z_sure(ztr,athis) {
+					 
+						   var 	mask = document.getElementsByClassName("z_mask")[0];
+ 		    	 	mask.style.display = "block";
+ 		    	 	
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+                var sure = document.getElementsByClassName("z_sure")[0];
+                
+					console.log(ztr);	 
+				$.ajax({  
+			      url:"/Wap/Borrow/zhaodelete",  
+			      type:"post",  
+			   	  data:{"url":ztr},    
+			     
+			      success:function(data){ 
+						console.log(data);
+						if(data==1){
+							mask.style.display = "none";
+							 athis.remove();
+							$(".content_img").eq(athis.index()-2).remove();
+							$v--;
+						}
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });  
+					
+				}
+        	/*
+        			cancel.onclick = function () {
+                            mask.style.display = "none";
+                        };
+                        sure.onclick = function () {
+                            mask.style.display = "none";
+                            t.style.display = "none";
+                        };
+        	*/
+        	$v=0;
+        	function imgChange() {
+        		if($v<5){
+        	
+      			 var form = new FormData(document.getElementById("form1"));  
+      			 var stv ='<div class="z_addImg"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+      			 
+			      $.ajax({  
+			      url:"/Wap/Borrow/zhao",  
+			      type:"post",  
+			      data:form,  
+			      cache: false,  
+			      processData: false,  
+			      contentType: false,  
+			      success:function(data){ 
+						console.log(data);
+					
+						var stv ='<div class="z_addImg"><img src="'+data+'"></div>'
+						var stv2 =' <input class="fl content_img" type="hidden"  name="content_img[]" value="'+data+'">'
+							$(".clearfix").append(stv);
+							 $("#form0").append(stv2);
+			           		$v++;
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });
+			      		
+        		}
+        		else{
+        			alert("只能传五个");
+        		}
+				 
+      	  	} 
+      	  	$zv=0;
+      	  	function imgChange1() {
+        		if($zv<1){
+        	
+      			 var form = new FormData(document.getElementById("form2"));  
+      			 var stv ='<div class="z_addImg"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+      			 
+      			 	 
+      			 
+//					()
+			      $.ajax({  
+			      url:"/Wap/Borrow/zhao",  
+			      type:"post",  
+			      data:form,  
+			      cache: false,  
+			      processData: false,  
+			      contentType: false,  
+			      success:function(data){ 
+						console.log(data);
+			 
+						var stv =' <div class="clear" id="localImag"><img id="preview" style="display: block;" src="'+data+'">     </div>'
+						var stv2 =' <input class="fl borrow_img" type="hidden" name="borrow_img" value="'+data+'">'
+							$(".zzzzzzzzzzisad").append(stv);
+							 $("#form0").append(stv2);
+			           		$zv++;
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });
+			      		
+        		}
+        		else{
+        			alert("只能传五个");
+        		}
+				 
+      	  	} 
+      	  	
+      	  
+        </script>
+
+        <script>
+        	
+            var nameEl = document.getElementById('sel_city');
+
+            var first = []; /* 省，直辖市 */
+            var second = []; /* 市 */
+            var third = []; /* 镇 */
+
+            var selectedIndex = [0, 0, 0]; /* 默认选中的地区 */
+
+            var checked = [0, 0, 0]; /* 已选选项 */
+
+            function creatList(obj, list) {
+                obj.forEach(function (item, index, arr) {
+                    var temp = new Object();
+                    temp.text = item.name;
+                    temp.value = index;
+                    list.push(temp);
+                })
+            }
+
+            creatList(city, first);
+
+            if (city[selectedIndex[0]].hasOwnProperty('sub')) {
+                creatList(city[selectedIndex[0]].sub, second);
+            } else {
+                second = [{ text: '', value: 0 }];
+            }
+
+            if (city[selectedIndex[0]].sub[selectedIndex[1]].hasOwnProperty('sub')) {
+                creatList(city[selectedIndex[0]].sub[selectedIndex[1]].sub, third);
+            } else {
+                third = [{ text: '', value: 0 }];
+            }
+
+            var picker = new Picker({
+                data: [first, second, third],
+                selectedIndex: selectedIndex,
+                title: '地址选择'
+            });
+
+            picker.on('picker.select', function (selectedVal, selectedIndex) {
+                var text1 = first[selectedIndex[0]].text;
+                var text2 = second[selectedIndex[1]].text;
+                var text3 = third[selectedIndex[2]] ? third[selectedIndex[2]].text : '';
+
+                nameEl.innerText = text1 + ' ' + text2 + ' ' + text3;
+            });
+
+            picker.on('picker.change', function (index, selectedIndex) {
+                if (index === 0) {
+                    firstChange();
+                } else if (index === 1) {
+                    secondChange();
+                }
+
+                function firstChange() {
+                    second = [];
+                    third = [];
+                    checked[0] = selectedIndex;
+                    var firstCity = city[selectedIndex];
+                    if (firstCity.hasOwnProperty('sub')) {
+                        creatList(firstCity.sub, second);
+
+                        var secondCity = city[selectedIndex].sub[0]
+                        if (secondCity.hasOwnProperty('sub')) {
+                            creatList(secondCity.sub, third);
+                        } else {
+                            third = [{ text: '', value: 0 }];
+                            checked[2] = 0;
+                        }
+                    } else {
+                        second = [{ text: '', value: 0 }];
+                        third = [{ text: '', value: 0 }];
+                        checked[1] = 0;
+                        checked[2] = 0;
+                    }
+
+                    picker.refillColumn(1, second);
+                    picker.refillColumn(2, third);
+                    picker.scrollColumn(1, 0)
+                    picker.scrollColumn(2, 0)
+                }
+
+                function secondChange() {
+                    third = [];
+                    checked[1] = selectedIndex;
+                    var first_index = checked[0];
+                    if (city[first_index].sub[selectedIndex].hasOwnProperty('sub')) {
+                        var secondCity = city[first_index].sub[selectedIndex];
+                        creatList(secondCity.sub, third);
+                        picker.refillColumn(2, third);
+                        picker.scrollColumn(2, 0)
+                    } else {
+                        third = [{ text: '', value: 0 }];
+                        checked[2] = 0;
+                        picker.refillColumn(2, third);
+                        picker.scrollColumn(2, 0)
+                    }
+                }
+
+            });
+
+            picker.on('picker.valuechange', function (selectedVal, selectedIndex) {
+                console.log(selectedVal);
+                console.log(selectedIndex);
+            });
+
+            nameEl.addEventListener('click', function () {
+                picker.show();
+            });
+        </script>
+        <!--<script>
+  function setImagePreview() {
+
+//              var docObj=document.getElementById("doc");
+//     
+//              var imgObjPreview=document.getElementById("preview");
+//                      if(docObj.files &&    docObj.files[0]){
+//                              //火狐下，直接设img属性
+//                              imgObjPreview.style.display = 'block';
+//                                                
+//                              //imgObjPreview.src = docObj.files[0].getAsDataURL();
+//       
+//            //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+//            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+//       
+//                      }else{
+//                              //IE下，使用滤镜
+//                              docObj.select();
+//                              var imgSrc = document.selection.createRange().text;
+//                              var localImagId = document.getElementById("localImag");
+//                              //必须设置初始大小
+//                              localImagId.style.width = "300px";
+//                              localImagId.style.height = "120px";
+//                              //图片异常的捕捉，防止用户修改后缀来伪造图片
+//      try{
+//                                      localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+//                                      localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+//                              }catch(e){
+//                                      alert("您上传的图片格式不正确，请重新选择!");
+//                                      return false;
+//                              }
+//                              imgObjPreview.style.display = 'none';
+//                              document.selection.empty();
+//                      }
+//                      return true;
+//              }
+        </script>-->
+
+
+
+
+
+        <!-- 多图上传 -->
+
+
+ 

@@ -1,0 +1,238 @@
+<script type="text/javascript">var bankimg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";</script>
+<script type="text/javascript">var Himg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Home/";</script>
+<script  type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/recharge.js"></script>
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理体现银行卡-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>在线充值</span>
+                </div>
+                <div class="addyhk zxcz">
+                    <form action="" method="get">
+                        <if condition="$payConfig['guofubao']['enable'] eq '1'">
+                            <input type="hidden" value="ICBC" id="pd_bank" name="pd_bank">
+                        <else/>
+                            <if condition="$payConfig['ips']['enable'] eq '1'">
+                            <input type="hidden" value="ips" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['baofoo']['enable'] eq '1'"/>
+                            <input type="hidden" value="baofoo" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['shengpay']['enable'] eq '1'"/>
+                            <input type="hidden" value="shengpay" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['tenpay']['enable'] eq '1'"/>
+                            <input type="hidden" value="tenpay" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['ecpss']['enable'] eq '1'"/>
+                            <input type="hidden" value="ecpss" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['sqpay']['enable'] eq '1'"/>
+                            <input type="hidden" value="sqpay" id="pd_bank" name="pd_bank">
+                            <elseif condition="$payConfig['allinpay']['enable'] eq '1'"/>
+                            <input type="hidden" value="allinpay" id="pd_bank" name="pd_bank">
+                            <else/>
+                                <input type="hidden" value="chinabank" id="pd_bank" name="pd_bank">
+                            </if>
+                            <input type="hidden" value="unionpay" id="pd_bank" name="pd_bank">
+                        </if>
+                        <input type="hidden" value="0" id="pa_MP" name="pa_MP">
+                        <div class="addybox">
+                            <label for="">姓名：</label>
+                            <div class="addy">{$minfo.real_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">用户账号：</label>
+                            <div class="addy">{$Think.session.u_user_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox jine">
+                            <label for="">充值金额：</label>
+                            <input  id="t_money" type="text" class="je2-1" placeholder="50元" />
+                        </div>
+                        <div class="addybox errLayer" id="d_money" >
+                          <div class="charge_wrong"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="addybox">
+                            <label for="">充值方式：</label>
+                            <div class="yinhang">
+                                    <if condition="$payConfig['guofubao']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" checked="checked" class="je3-1" onclick="checkbank(this);" data="ICBC" id="r_gsyh" name="mybank">
+                                          <img alt="工商银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/gsyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" onclick="checkbank(this);" data="ABC" id="r_nyyh" name="mybank">
+                                          <img alt="农业银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/nyyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" onclick="checkbank(this);" data="BOC" id="r_zgyh" name="mybank">
+                                          <img alt="中国银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/zgyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" onclick="checkbank(this);" id="r_jsyh" data="CCB" name="mybank">
+                                          <img alt="建设银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/jsyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" onclick="checkbank(this);" data="CMB" id="r_zsyh" name="mybank">
+                                          <img alt="招商银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/zsyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" onclick="checkbank(this);" data="BOCOM" id="r_jtyh" name="mybank">
+                                          <img alt="交通银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/jtyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="PSBC" onclick="checkbank(this);" id="r_ycyh" name="mybank">
+                                          <img alt="邮政储蓄" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/ycyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="CMBC" class="je3-1" onclick="checkbank(this);" id="r_msyh" name="mybank">
+                                          <img alt="民生银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/msyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="GDB" onclick="checkbank(this);" id="r_gfyh" name="mybank">
+                                          <img alt="广发银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/gfyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="SPDB" onclick="checkbank(this);" id="r_pfyh" name="mybank">
+                                          <img alt="浦发银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/pfyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="CEB" onclick="checkbank(this);" id="r_gdyh" name="mybank">
+                                          <img alt="光大银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/gdyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="CITIC" onclick="checkbank(this);" id="r_zxyh" name="mybank">
+                                          <img alt="中信银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/zxyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="CIB" onclick="checkbank(this);" id="r_xyyh" name="mybank">
+                                          <img alt="兴业银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/xyyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="HXBC" onclick="checkbank(this);" id="r_hxyh" name="mybank">
+                                          <img alt="华夏银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/hxyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="PAB" onclick="checkbank(this);" id="r_payh" name="mybank">
+                                          <img alt="平安银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/payh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="BOBJ" onclick="checkbank(this);" id="r_bjyh" name="mybank">
+                                          <img alt="北京银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/bjyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="BOS" onclick="checkbank(this);" id="r_shyh" name="mybank">
+                                          <img alt="上海银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/shyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="SRCB" onclick="checkbank(this);" id="r_shnsyh" name="mybank">
+                                          <img alt="上海农商银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/shnsyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="SDB" onclick="checkbank(this);" id="r_szyh" name="mybank">
+                                          <img alt="深圳发展银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/szyh1.jpg"> </label>
+                                      </li>
+                                      <li>
+                                        <label>
+                                          <input type="radio" class="je3-1" data="TCCB" onclick="checkbank(this);" id="r_tjyh" name="mybank">
+                                          <img alt="天津银行" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/tjyh1.jpg"> </label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['ips']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="ips" title="环迅支付"  onclick="checkbank(this);" id="r_ips" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/ips.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['chinabank']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="chinabank" title="网银在线"  onclick="checkbank(this);" id="r_chinabank" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/chinabank.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['baofoo']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="baofoo" title="宝付"  onclick="checkbank(this);" id="r_baofoo" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/baofoo.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['shengpay']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="shengpay" title="盛付通"  onclick="checkbank(this);" id="r_shengpay" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/shengpay.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['tenpay']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="tenpay" title="财付通"  onclick="checkbank(this);" id="r_tenpay" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/tenpay.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['ecpss']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="ecpss" title="汇潮支付"  onclick="checkbank(this);" id="r_ecpss" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/ecpss.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['sqpay']['enable'] eq '1'">
+                                      <li>
+                                        <label>
+                                          <input type="radio" data="sqpay" title="双乾支付"  onclick="checkbank(this);" id="r_sqpay" name="mybank" class="je3-1" />
+                                          <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/sqpay.jpg" /></label>
+                                      </li>
+                                    </if>
+                                    <if condition="$payConfig['allinpay']['enable'] eq '1'">
+                                        <div class="box">
+                                            <input type="radio" data="allinpay" title="通联支付"  onclick="checkbank(this);" id="r_allinpay" name="mybank" class="je3-1" />
+                                            <label for="yinhang_1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/bank/allinpay.png" /></label>
+                                        </div>
+                                    </if>
+                            </div>
+                        </div>
+                    </form>
+                        <div class="addybox sub subtxcz" style="margin-top: 50px;">
+                          <label for=""></label>
+                          <a href="javascript:void(0);" id="btnReg" onclick="submitform(this)" >立即充值</a>
+                        </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+

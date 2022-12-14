@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" /> 
+    <title>{$glo.web_name}</title>
+    <meta name="keywords" content="{$glo.web_keywords}" />
+    <meta name="description" content="{$glo.web_descript}" />
+        <link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+        <link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />
+
+
+ <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
+
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/tfindex.css" />
+        <script type="text/javascript">
+               function jisuanFontsize(){
+                var winWidth;
+                if (window.innerWidth)
+                winWidth = window.innerWidth;
+                else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+                // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+                if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+                {
+                winWidth = document.documentElement.clientWidth;
+                }
+                if(winWidth<1300){
+                    winWidth=1300
+                }
+                if(winWidth>1920){
+                    winWidth=1920
+                }
+                document.getElementsByTagName('html')[0].style="font-size: calc("+winWidth+"px / 1920 * 100);"
+            }
+            jisuanFontsize();
+            window.onresize = function(){
+                jisuanFontsize()
+            }
+        </script>
+
+
+
+</head>
+
+<body>
+   <a href="/shop/car_list">
+            <div class="car_n">
+                <span id="carnum">{$carnum}</span>
+            </div>
+        </a>
+        <div class="tfggHeaderBox">
+            <div class="tfggHeaderBoxMain">
+                <img src="__PUBLIC__/shop/img/logo.png" class="tfggHeaderBoxMainLogo">
+                <div class="tfggHeaderBoxMainRight">
+                    <div class="tfggHeaderBoxMainRightMenuBox">
+                        <a href="/"  <if condition="$dh eq 1">class="active"</if> >首页</a>
+                        <a href="__APP__/invest">渔业养殖</a>
+                        <!--<a href="__APP__/zhongzhi">联合种植</a>-->
+                        <a href="__APP__/article/video">视频直播</a>
+                        <a href="__APP__/article/active">活动公告</a>
+                        <a href="__APP__/article/about">关于我们</a>
+
+                    </div>
+                    <div class="wechatAppBox">
+                        <div class="wechatAppBoxLi">
+                            微信
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-w.png" />
+                                微信公众号
+                            </div>
+                        </div>
+                        <div class="wechatAppBoxLi">
+                            APP下载
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-app.png" />
+                                APP下载
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tfggHeaderBoxMainRightImgBox">
+                        <a href="__APP__/member/index"><img src="__PUBLIC__/shop/img/tfUser.png"></a>
+                        <a href="__APP__/shop/car_list"><img src="__PUBLIC__/shop/img/tfCart.png" class="tfgouwuche"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tfFenLeiReMaiBox">
+            <div class="tfFenLeiReMaiBoxMain">
+                <img src="__PUBLIC__/shop/img/tfremaituijian.png" class="tfFenLeiReMaiBoxMainRemai">
+                <volist name="tjgoods" id="vo">
+                    <a href="__APP__/Shop/shop_show/id/{$vo.id}.hmtl"> <div class="tfFenLeiReMaiBoxMainRightDiv">
+                    <img src="{$vo.art_img}" >
+                    <div class="tfFenLeiReMaiBoxMainRightDivRight">
+                        <div class="tfFenLeiReMaiBoxMainRightDivRightTitle1">{$vo.title|cnsubstr=###,20}</div>
+                        <div class="tfFenLeiReMaiBoxMainRightDivRightJiage">￥{$vo.art_jiage}</div>
+                        <div class="tfFenLeiReMaiBoxMainRightDivRightAnNiu">立即购买</div>
+                    </div>   </div></a>
+
+                </volist>
+                
+               
+            </div>
+        </div>
+        
+        <div class="tfFenleiMenuFenLeiBox">
+            <div class="tfFenleiMenuFenLeiBoxMain">
+                <div class="tfFenleiMenuFenLeiBoxMainDiv1">
+
+                    <div  class="tfFenleiMenuFenLeiBoxMainDiv1QuanBuShangPin fls" data="0">全部商品</div>
+                    <volist name="tlist" id="vo">
+                        <div  class="tfFenleiMenuFenLeiBoxMainDiv1Menu1 fls <if condition='$vo.id eq $type_id'> active</if>" data="{$vo.id}">{$vo.type_name}</div>
+                    </volist>
+
+                   
+                </div>
+            </div>
+            <div class="tfFenleiMenuFenLeiBoxMainBottom tfFenleiMenuFenLeiBoxMain">
+                
+                <div class="tfFenleiMenuFenLeiBoxMainBottomLeft <if condition='513 eq $type_id'> active</if>"  data="{$vo.id}">
+                        <!-- 当前选中的二级分类需要添加 class "active" -->
+                </div>
+
+
+                <volist name="tlist" id="vo">
+                <!-- 当前选中的一级分类需要添加 class "active" -->
+                    <div class="tfFenleiMenuFenLeiBoxMainBottomLeft <if condition='$vo.id eq $type_id'> active</if>"  data="{$vo.id}">
+                        <!-- 当前选中的二级分类需要添加 class "active" -->
+                        <volist name="vo['zlist']" id="v1">
+                            <div class="tfFenleiMenuFenLeiBoxMainBottomLeftDiv <if condition='$v1.id eq $type_ids'> active</if>" data-id="{$v1.id}">{$v1.type_name}</div>
+                        </volist>
+                    </div>
+                </volist>                
+                <div class="tfFenleiMenuFenLeiBoxMainBottomRight">
+                    <div class="tfFenleiMenuFenLeiBoxMainBottomRightDiv">
+
+                            <div class="tfFenleitfggSousuonaliRightBox">
+                              <!--   <input type="hidden" name="fenlei" value="" /> --><!-- 当前二级分类的id需要赋值到这个input -->
+                                <input type="text" name="search" placeholder="龙利鱼" autocomplete="off" value="{$name}"/>
+                                <div class="tfFenleitfggGoSouguo" > 
+                                    <img  src="__PUBLIC__/shop/img/sousuo222.png" >搜索</div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tfFenLeiYeShangPinBox">
+            <div class="tfIndexChaoZhiTuanGouBox">
+                
+                <volist name="list" id="vo">
+					 <div class="tfIndexChaoZhiTuanGou">
+						 <a href="__APP__/Shop/shop_show/id/{$vo.id}.hmtl">
+							<div class="suolue tfImg" style="background-image: url({$vo.art_img});"></div>
+							<div class="tfShenglue2">{$vo.title|cnsubstr=###,20}</div>
+							<div class="tfIndexChaoZhiTuanGouBottom"><span>￥{$vo.art_jiage}</span>  <img src="__PUBLIC__/shop/img/xiaohongche.png"></div>
+						</a>
+					</div>
+                </volist>
+              
+              
+                
+                
+            </div>
+        </div>
+       
+
+
+<!--底部-->
+<include file="default:Public:footern" />
+<script src="__PUBLIC__/shop/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+   
+
+            //点击全部商品
+        $('.fls').on('click',function(){
+            //页面取消分类高亮
+            $('.tfFenleiMenuFenLeiBoxMainBottomLeftDiv,.tfFenleiMenuFenLeiBoxMainBottomLeft,.tfFenleiMenuFenLeiBoxMainDiv1Menu1').removeClass('active');
+            //携带参数跳转当前页面
+            var search = $('input[name="search"]').val();//搜索的文字
+            var fenlei = $(this).attr("data");//二级分类的ID
+            //alert("1");
+            location.href = '?type_id='+fenlei+'&name='+search;
+         })    
+       
+        
+
+        // $('.tfFenleiMenuFenLeiBoxMainDiv1Menu1').on('click',function(){
+        //     $('.tfFenleiMenuFenLeiBoxMainBottomLeft').removeClass('active').eq($(this).index()-1).addClass('active');
+        // })
+        //点击二级分类
+        $('.tfFenleiMenuFenLeiBoxMainBottomLeftDiv').on('click',function(){
+            //携带参数跳转当前页面
+            var key =  $(this).attr("data-id");//二级分类的ID
+
+            var search = $('input[name="search"]').val();//搜索的文字
+
+            var fenlei =$(this).parent(".tfFenleiMenuFenLeiBoxMainBottomLeft").attr("data");
+            location.href = '?type_id='+key+'&name='+search;
+        })
+
+        
+        $('.tfFenleitfggGoSouguo').on('click',function(){
+             var search = $('input[name="search"]').val();//搜索的文字
+             location.href = '?type_id={$type_id}&name='+search+'&keys={$keys}';
+        })
+    </script>

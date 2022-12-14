@@ -1,0 +1,113 @@
+
+<style type="text/css">
+.mem20{ position:relative}
+	.mem20_left {margin-top:0px;}
+	.topfixed {position:fixed;top:15px;z-index:9000;}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".mem20_left ul li").hover(function(){
+		$(this).siblings('.mem20_left ul li').find(".mem_spec93").hide();
+		$(this).find(".mem_spec93").show();
+		});
+});
+</script>
+<script>
+$(function(){
+  $(window).scroll(function(){
+    if($(this).scrollTop()>215){
+        //$('.mem20_left').addClass('topfixed');} 
+    else {
+       // $('.mem20_left').removeClass('topfixed');
+    }}
+  );     
+})
+ 
+</script>
+
+<div style=" width:100%; padding-top:10px; padding-bottom:10px;background:#ececec;border-top:1px solid #CCC"><div class="mem20">
+	<div class="mem20_left">
+    	<ul>
+         <foreach name="menuList" item="vo">
+            <if condition="!empty($vo['sub'])">
+        	   <li><div class="{$menuList_class[$key]} png" style="cursor:pointer;" ></div><a href="javascript:;">{$vo.type_name}</a>
+            <else />
+                <li><div class="{$menuList_class[$key]} png" style="cursor:pointer;" onclick="location.href='{$vo.linkurl}'"></div><a href="{$vo.linkurl}">{$vo.type_name}</a>
+            </if>
+
+            	
+                    <if condition="!empty($vo['sub'])">
+                    <div class="mem_spec93" <if condition="$key neq 0">style=" display:none;"</if>>
+                    	<div class="mem_spec94">{$vo.type_name}</div>
+                        <div class="mem_spec95">
+                        	<ul>
+                                <li><a href="{$vo.linkurl}">{$vo.type_name}</a></li>                            
+                                <foreach name="vo.sub" item="v">
+                            	<li><a href="{$v.linkurl}">{$v.type_name}</a></li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="mem_spec96"></div>
+                    </div>
+                    </if>
+              
+            </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="mem20_right">
+         <if condition="$isArticle eq 1">
+            <div>
+    	<p class="mem_spec97">{$article.title}</p>
+            <p class="mem_spec98">{$article.art_content}</p>
+            </div>
+        <else />
+            <if condition="$cid eq 444">
+                    <p class="mem_spec97">{$article.title}</p><br />
+                    <div id="firstpane" class="menu_list">
+
+                    <foreach name="list.list" item="vo">
+                        <p class="menu_head">{$vo.title}</p>
+                        <div style="display:none" class=menu_body >
+                            {$vo.art_content}
+                        </div>
+                     </foreach> 
+                    
+                </div>
+                    <script type=text/javascript>
+                $(document).ready(function(){
+					//$()
+					$("#firstpane p.menu_head:eq(0)").addClass("current").next("div.menu_body").slideToggle()
+                    $("#firstpane p.menu_head").click(function(){
+						//$(this).
+                       $(".menu_body").hide();
+					   $(this).addClass("current").next("div.menu_body").slideToggle()
+					   //slideToggle(300).siblings("div.menu_body").slideUp("slow");
+					   
+                       $(this).siblings().removeClass("current");
+                    });
+                   	//$("#secondpane .menu_body:eq(0)").show();
+                    $("#secondpane p.menu_head").mouseover(function(){
+                       // $(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+                       // $(this).siblings().removeClass("current");
+                    });
+                    
+                });
+                </script>
+            <else />
+            <p class="mem_spec97">{$article.title}</p>
+            <div class="mem_spec98">
+                <ul>
+                    <foreach name="list.list" item="vo">
+                    <li ><a href="{:U('help/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}</a></li>
+                    </foreach>                    
+                </ul>
+            </div>
+            </if>
+        </if>
+	
+
+    </div>
+    <div style="clear:both;"></div>
+</div></div>
+

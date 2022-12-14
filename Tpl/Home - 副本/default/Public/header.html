@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" /> 
+	<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+	<meta name="keywords" content="{$glo.web_keywords}" />
+	<meta name="description" content="{$glo.web_descript}" />
+    	<link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+    	<link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />
+	<link rel="stylesheet" href="/Public/web/css/jquery.fullPage.css">
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/swiper-4.3.3.min.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/web/css/baguetteBox.min.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/gallery-grid.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/ltt.css" />
+	
+	<script type="text/javascript" src="/Public/web/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/Public/web/js/swiper-4.3.3.min.js"></script>
+
+ 	<script type="text/javascript" src="/Public/web/js/baguetteBox.min.js"></script> 
+	<script type="text/javascript" src="/Public/web/js/jquery-ui-1.10.3.min.js"></script>
+	<script type="text/javascript" src="/Public/web/js/jquery.fullPage.min.js"></script>
+	<script type="text/javascript" src="/Public/web/js/ldy.js"></script>
+	<script type="text/javascript" src="/Style/file/layer/layer.min.js"></script>
+    <script type="text/javascript" src="/Public/web/js/layer.js"></script>
+
+<style type="text/css">
+		body {
+			background: #f8f8f8;
+		}
+	</style>
+<!-- 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+</head>
+
+<body>
+<!--header-->
+<?php $minfo =getMinfo(session("u_id"),true);?>
+<div class="topbox">
+	<div class="mytop">
+		<div class="my1 clearfix">
+			<div class="mytime fl">
+				客服热线：{$glo.ttxf_call}&nbsp;&nbsp;在线时间：{$glo.kefu1}
+			</div>
+			<div class="login fr">
+				 <if condition="$UID gt '0'"> 
+               <span> <a href="{:U('/member/index')}" ><img src="{$minfo.user_img|default='/Public/wap/img/default-avatar.png'}" alt="" style="width: 20px;
+    height: 20px;"> {$UNAME}/</a></span>
+               	<span><a href="{:U('/member/common/actlogout')}">退出</a></span>
+            <else />
+            <!--未登录状态-->
+               <span> <a href="{:U('/member/common/login')}">登录 /</a></span>
+               <span> <a href="{:U('/member/common/register')}" >注册</a></span>
+            </if>
+			</div>
+		</div>
+	</div>
+	<div class="mynav">
+		<div class="box clearfix">
+			<div class="navlogo fl">
+				<img src="/Public/web/img/guanyu/logo2.png" />
+			</div>
+			<div class="navbox fl">
+				<span><a href="/index/index">首页</a></span>
+				<span class="navinvest"><a href="/invest/index.html">项目浏览</a></span>
+				<span class="navarticle-news_list navarticle-newsshow"><a href="/article/news_list.html">最新资讯</a></span>
+				<span class="navshop"><a href="/shop">积分商城</a></span>
+				<span class="navarticle-video"><a href="{:U('/article/video')}">视频直播</a></span>
+				<span class="navarticle-active"><a href="{:U('/article/active')}">活动公告</a></span>
+				<span class="navarticle-about"><a href="{:U('/article/about')}">关于我们</a></span>
+				<span class="navmember"><a href="{:U('/member/index/index')}">会员中心</a></span>
+			</div>
+			<div class="l_myxm fr">
+				<a href="/Borrow/index">发起项目</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    if ('{$glomodulename}' == 'index') {
+        $('.navmember').addClass('on').siblings().removeClass('on');
+    }else if('{$glomodulename}' == 'article'){
+        $(".nav{$glomodulename}-{$gloactionname}").addClass('on').siblings().removeClass('on');
+    }else{
+        
+        $('.nav{$glomodulename}').addClass('on').siblings().removeClass('on');
+    }
+</script>

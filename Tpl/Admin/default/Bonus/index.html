@@ -1,0 +1,82 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var editUrl = '__URL__/edit';
+	var editTitle = '修改会员类型';
+	var isSearchHidden = 1;
+	var searchName = "搜索/筛选会员";
+</script>
+<div class="so_main">
+  <div class="page_tit">红包列表</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选" style="search_action" />
+  <!--  <htmlA:commonBtn type="jsfun" action="del();" value="删除会员(谨慎操作)" />-->
+   <!-- <htmlA:commonBtn type="href" action="__URL__/export?{$query}" value="将当前条件下数据导出为Excel"/> -->
+
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">用户名</th>
+    <th class="line_l">真实姓名</th>
+    <th class="line_l">红包金额</th>
+    <th class="line_l">最低投资金额</th>          
+    <th class="line_l">有效时间（起）</th>
+    <th class="line_l">有效时间（止）</th>    
+    <th class="line_l">红包类型</th>
+    <th class="line_l">当前状态</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="bonusList">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td><htmlA:user id="vo.uid" uname="vo.user_name" /><if condition="$vo['is_mark'] eq 1"><font color="green">[马甲]</font></if></td>
+        <td>{$vo.real_name|default="&nbsp;"}</td>            
+        <td><font color="#009900">{$vo.money_bonus}</font></td> 
+        <td><font color="#009900">{$vo.bonus_invest_min}</font></td>                               
+        <td>{$vo.start_time|date="Y-m-d H:i:s",###}</td>
+        <td>{$vo.end_time|date="Y-m-d H:i:s",###}</td>        
+        <td>{$typeArr[$vo['type']]}</td>         
+        <td>{$statusArr[$vo['status']]}</td>         
+        <td>
+          <if condition="$vo['status'] eq 0">
+            <a href="{:U('edit')}?id={$vo.id}&status=1">[启用]</a>
+          <elseif condition="$vo['status'] eq 1" /> 
+            <a href="{:U('edit')}?id={$vo.id}&status=0">[停用]</a>
+          <else />
+            --
+          </if>
+        </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选" style="search_action" />
+    <!--<htmlA:commonBtn type="jsfun" action="del();" value="删除会员(谨慎操作)" />-->
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

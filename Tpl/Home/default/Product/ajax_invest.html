@@ -1,0 +1,27 @@
+{__NOLAYOUT__}<style type="text/css">
+.pop-tb-con{padding-top:0px}.text-red{color:#cc3300}.mar20{margin:20px 0px}INPUT.btn-action{border-bottom:#cc0000 0px solid;text-align:center;border-left:#cc0000 0px solid;line-height:30px;width:80px;display:inline-block;background:url(../bg/btn-red.jpg) #cc0000 0px 0px;height:30px;color:#fff;border-top:#cc0000 0px solid;border-right:#cc0000 0px solid}.pop-tb{border-bottom:#d5d5d5 1px solid;border-left:#d5d5d5 1px solid;background-color:#fff;margin:20px auto;width:700px;height:310px;border-top:#d5d5d5 1px solid;border-right:#d5d5d5 1px solid}.pop-tb-l{border-bottom:#e5e5e5 0px solid;border-left:#e5e5e5 0px solid;background-color:#fdffe5;width:198px;float:left;height:260px;border-top:#e5e5e5 0px solid;border-right:#e5e5e5 1px solid;padding-top:10px}.pop-tb-l UL LI{line-height:30px;padding-left:20px;height:30px}.pop-tb-l UL LI STRONG{color:#ff0000;font-size:14px}.pop-tb-r{text-align: center;padding-left:20px;width:400px;float:right;padding-top:10px}.pop-tb-r UL LI{line-height:30px;height:30px}.pop-tb-r UL LI A{color:#c30;margin-left:30px}
+.invest_input{border:1px solid #CCC; padding:3px}
+</style>
+<div class="pop-tb-con clearfix" sizset="1" sizcache06741904719221702="1">
+
+
+<div class="pop-tb-r">
+<FORM method="post" name="investForm" id="investForm" action="__URL__/investmoney">
+<input type="hidden" name="borrow_id" id="borrow_id" value="{$vo.id}" />
+<input type="hidden" name="invest_number" id="invest_number" value="{$vo.invest_number}" />
+<input type="hidden" name="invest_money" id="invest_money" value="{$vo.invest_money}" />
+<input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+<ul>
+
+<li style="">支付密码：<if condition="$has_pin eq 'yes'"><INPUT type="password" class="invest_input" id="pin" name="pin" value="" /><else/>
+<A href="__APP__/member/user#chip-3" target="_blank"><FONT color="#ff0000">请先设一个支付交易密码</FONT></A></if>
+</li>
+<if condition="!empty($vo['password'])">
+<li>密码标密码:<input type="password" class="invest_input" id="borrow_pass" name="borrow_pass" value="" /></li>
+</if>
+</ul>
+<P class="mar20"><INPUT class="btn-action" type="button" onclick="PostData()" value="确认付款" /></P>
+<P></P>
+</FORM>
+</div>
+</div>

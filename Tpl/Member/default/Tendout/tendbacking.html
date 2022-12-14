@@ -1,0 +1,86 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+
+<!--投资管理分红的众筹-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>已成功的众筹</span>
+                </div>
+                <div class="fhzc">
+                    <table border="0" cellspacing="1" cellpadding="0">
+                        <tr>
+                            <td>众筹标号</td>
+                            <td>众筹标题</td>
+                            <td>众筹发起人</td>
+                            <td>我的投资金额</td>
+                            <td>红包奖励</td>
+                            <td>众筹金额</td>
+                            <td>回款时间</td>
+                            <th>电子协议</th>
+                        </tr>
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo.borrow_id}</td>
+                                <td>{$vo.borrow_name|cnsubstr=###,10}</td>
+                                <td>{$vo.borrow_user}</td>
+                                <if condition="$vo.bonus_id neq 0">
+                                    <td>{:getFloatvalue($vo['investor_capital']-(bounsmoney($vo['bonus_id'])),2)}</td>                    
+                                <else/>
+                                    <td>{$vo.investor_capital|Fmoney=###}</td>                    
+                                </if>
+                                <td>
+                                    <if condition="$vo.member_interest_rate_id neq 0">加息券：{:intestrate($vo['member_interest_rate_id'])}%<br /></if>
+                                    <if condition="$vo.bonus_id neq 0">红包{:bounsmoney($vo['bonus_id'])}</if>
+                                </td> 
+                                <td >{$vo.borrow_money}</td>
+                                <!-- <td>{$vo.fh_money}</td> -->
+                                <td><if condition="$vo.hk_time neq ''">{$vo.hk_time|date="Y-m-d",###}</if></td>
+                                <if condition="$mdata.signerId eq '' ">
+                                    <td><a href="__APP__/member/agreement/create">创建用户</a></td>
+                                <elseif condition="$mdata.moulageId eq '' " />
+                                    <td><a href="__APP__/member/agreement/personmoulage">创建印模</a></td>
+                                <else/>
+                                    <if condition="$vo.contractId eq '' ">
+                                        <td><a href="__APP__/member/agreement/templatecontract?id={$vo.id}">生成合同</a></td>
+                                    <else/>
+                                        <if condition="$vo.is_sign eq 0 ">
+                                            <if condition="$vo.step eq 0 ">
+                                                <td><a href="__APP__/member/agreement/addsigner?id={$vo.id}">签署</a></td>
+                                            <elseif condition="$vo.step eq 1 " />
+                                                <td><a href="__APP__/member/agreement/jfsign?id={$vo.id}">签署</a></td>
+                                            <elseif condition="$vo.step eq 2 " />
+                                                <td><a href="__APP__/member/agreement/sign?id={$vo.id}">签署</a></td>
+                                            <elseif condition="$vo.step eq 4 " />
+                                                <td><a href="__APP__/member/agreement/qcsign?id={$vo.id}">签署</a></td>
+                                            </if>
+                                        <else/>
+                                            <td><a href="__APP__/member/agreement/download?id={$vo.id}">合同下载</a></td>
+                                        </if>
+                                    </if>
+                                </if>
+
+                            </tr>
+                        </volist>
+                        
+                    </table>
+                    <div class="number" style="background:none">
+                        {$pagebar}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

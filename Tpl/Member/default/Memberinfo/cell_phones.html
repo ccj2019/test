@@ -1,0 +1,99 @@
+<include file="default:Public:mheader" />
+<!--内容-->
+<div class="l-omg1">
+	<div class="l-mlogin1">
+		<div class="l-mlg1">
+			<div class="shiming">
+				修改手机号
+			</div>
+			<div class="l-lebox clearfix">
+				<div class="l-le">
+					<img src="/Public/web/img/yindao/28.png" />
+				</div>
+				<div class="l-le bg">
+						<form action="__APP__/member/Memberinfo/cell_phones" method="post" id="shiminglc"  name="form"  class="clearfix l-shiming1">
+						<div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/shouji-5.png"/></span>
+									<input type="text" name="old_phone" value="{$member_info.user_phone}" id="old_phone" readonly /></div>
+
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/anquan.png"/></span>
+								<input type="text"  name="idcard" id="idcard"  placeholder="实名认证身份证号" />
+
+							</div>
+
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/idcard2.png"/></span>
+								<input type="text"  name="banknum" id="banknum"  placeholder="默认银行卡后6位" />
+							</div>
+
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/shouji-5.png"/></span>
+								<input type="text"  name="phone" id="phone"  placeholder="新手机号" />
+
+							</div>
+
+
+							<div style="text-align: right;">
+								<a href="__URL__/cell_phone.html" style="color: #666666;"> 手机验证码修改！</a>
+
+							</div>
+
+
+						</div>
+						<div class="queren-btn" onclick="Asubmit()" style="margin-top: 113px;">
+							确认修改
+						</div>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />
+
+<script  type="text/javascript">
+var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"} 
+function isCardID(sId){ 
+    var iSum=0 ;
+    var info="" ;
+    if(!/^\d{17}(\d|x)$/i.test(sId)) return "你输入的身份证长度或格式错误"; 
+    sId=sId.replace(/x$/i,"a"); 
+    if(aCity[parseInt(sId.substr(0,2))]==null) return "你的身份证地区非法"; 
+    sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2)); 
+    var d=new Date(sBirthday.replace(/-/g,"/")) ;
+    if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate()))return "身份证上的出生日期非法"; 
+    for(var i = 17;i>=0;i --) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ;
+    if(iSum%11!=1) return "你输入的身份证号非法"; 
+    //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+    return true;
+} 
+
+	function Asubmit() {
+		
+		var idcard=$("#idcard").val();
+		var banknum=$("#banknum").val();
+		var phone = $("#phone").val();
+
+		if(!/^\d{17}(\d|x)$/i.test(idcard))  {
+			layer.msg("您输入的身份证长度或格式错误！");
+			return false;
+		}
+		if (banknum.length != 6) {
+			layer.msg('请输入默认银行卡后6位');
+			return false;
+		}
+		 if(!(/^1\d{10}$/.test(phone))){ 
+			layer.msg('您输入的新手机号码有误！');
+			return false;
+		}
+
+		$("#shiminglc").submit();
+		
+	}
+</script>

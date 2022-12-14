@@ -1,0 +1,227 @@
+<include file="Public:headern"/>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>	
+<style type="text/css">
+	.tfBannerDian{
+		background-color: rgba(255, 255, 255, 0.4);
+	}
+	.tfBannerDian.active{
+		background-color: #fff;
+	}
+</style>
+<div class="tfBannerBox" style="margin-top: 0;">
+	<volist name=":get_ad(37)" id='voa' key="i"> 
+		<a  href="{$voa.url}"><img src="{$voa.img}" class='tfBanner <if condition="$i eq 1">active</if>'></a>
+	</volist> 
+
+	<div class="tfBannerDianBox">
+		<volist name=":get_ad(37)" id='voa' key="i">  
+			<div class='tfBannerDian <if condition="$i eq 1">active</if>'></div>
+		</volist> 
+	</div>
+</div>
+<div class="yangzhi">
+	<div class="yz_tab">
+    	<li><span class="hover" onmouseover="showTooltip(0)">海上粮仓</span></li>
+        <li><span onmouseover="showTooltip(1)">船老大</span></li>
+        <li style="border-right:none;"><span onmouseover="showTooltip(2)">新手体验</span></li>
+        <a class="yz_tab_a" href="/invest/xmlist/type/0/status/0.html">查看全部></a>
+        <div class="clear"></div>
+    </div>
+
+
+<div class="yz_list xmlab">
+	<volist name="yzlist" id="vo">	
+	    <div class="xsb">
+			<a href="/invest/detail/id/{$vo.id}.html">
+			<div class="xm_title">
+				<span>{$vo.leixing}</span>
+				{$vo.borrow_name|cnsubstr=###,16}
+			</div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_min}元/份</span>
+	            购买成本
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_duration}个月</span>
+	            周期
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_interest_rate}%</span>
+	            销售利润
+	        </div>
+</a>
+
+	        <div class="jidu">
+	        <if condition="$vo.borrow_status eq 1">
+				<span class="jd_ks">离开售时间</span>
+	            <span class="jd_ksd cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'></span>   
+
+	         
+	        <else/>
+				 <div id="process" class="An_wrap">
+				                         <div class="An_num">
+				                             <span class="An_sales">已售</span>
+				                             <span class="An_span_num ng-binding">{$vo.progress}</span><span>%</span>
+				                         </div>
+				                     <div class="An_circle An_clip-auto">
+	                                 <div class="An_percent"></div>
+	                                 <div class="An_percent"></div>
+	                                 </div>
+	        	</div>
+	        </if>
+	        </div>
+			<if condition="$vo.borrow_status eq 1"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a hui">抢先预览</a></if>
+	    	<if condition="$vo.borrow_status eq 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即体验</a></if>
+	    	<if condition="$vo.borrow_status gt 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即查看</a></if> 
+	    </div>
+	</volist>
+ </div>   
+ 
+ <div class="xs_list  xmlab" style="display:none;">
+	<volist name="xslist" id="vo">	
+	    <div class="xsb">
+	    	<a href="/invest/detail/id/{$vo.id}.html">
+			<div class="xm_title">
+				<span>{$vo.leixing}</span>
+				{$vo.borrow_name|cnsubstr=###,16}
+			</div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_min}元/份</span>
+	            购买成本
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_duration}个月</span>
+	            周期
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_interest_rate}%</span>
+	            销售利润
+	        </div>
+</a>
+	        <div class="jidu">
+	        <if condition="$vo.borrow_status eq 1">
+				<span class="jd_ks">离开售时间</span>
+	            <span class="jd_ksd cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'></span>   
+
+	         
+	        <else/>
+				 <div id="process" class="An_wrap">
+				                         <div class="An_num">
+				                             <span class="An_sales">已售</span>
+				                             <span class="An_span_num ng-binding">{$vo.progress}</span><span>%</span>
+				                         </div>
+				                     <div class="An_circle An_clip-auto">
+	                                 <div class="An_percent"></div>
+	                                 <div class="An_percent"></div>
+	                                 </div>
+	        	</div>
+	        </if>
+	        </div>
+			<if condition="$vo.borrow_status eq 1"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a hui">抢先预览</a></if>
+	    	<if condition="$vo.borrow_status eq 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即体验</a></if>
+	    	<if condition="$vo.borrow_status gt 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即查看</a></if> 
+	    </div>
+	</volist>
+ </div>
+
+<div class="xsb xmlab" style="display:none;">
+    	<a href="/invest/idetail/id/1.html" ><img src="/Public/new/images/xs_05.jpg" />
+        <div class="xsb_xx">
+        	<span>8888元/份</span>
+            体验金
+        </div>
+        <div class="xsb_xx">
+        	<span>1天</span>
+            周期
+        </div>
+        <div class="xsb_xx">
+        	<span>24.00%</span>
+            销售利润
+        </div>
+        </a>
+        <a href="/invest/idetail/id/1.html" class="gm_a" style="    top: 80px;
+    right: 40px;">立即体验</a>
+        
+</div>
+
+
+    <div class="hx_shop">
+    	<p class="hx_title"> <span>海鲜商城</span></p>
+        
+        <ul>
+        	<li><img src="/Public/new/images/xs_09.jpg" /><span>鲜活海鲜<a href="/shop">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_11.jpg" /><span>水产干货<a href="/shop">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_13.jpg" /><span>即食零食<a href="/shop">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_16.jpg" /><span>海鲜礼包<a href="/shop">点击查看</a></span></li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+  <div class="huoban">
+    	<p class="hx_title"> <span>合作伙伴</span></p>
+        
+        <ul>
+        	<volist name="hlist" id="vo">
+        	<li><a target="_blank"><img src="/{$vo.art_img}" /></a></li>
+   </volist>
+
+        </ul>
+        <div class="clear"></div>
+  </div>
+<script type="text/javascript">
+var tfBannerIndex = 0;
+var tfBannerStatus = true;
+//鼠标经过切换轮播图
+$('.tfBannerDianBox').on('mouseover', '.tfBannerDian', function() {
+	tfBannerStatus = false;
+	$('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq($(this).index()).addClass(
+		'active');
+	$('body').find('.tfBanner').removeClass('active').eq($(this).index()).addClass('active');
+	tfBannerIndex = $(this).index()
+})
+$('.tfBannerDianBox').on('mouseout', '.tfBannerDian', function() {
+	tfBannerStatus = true;
+})
+//定时轮播Banner
+setInterval(function() {
+	if (tfBannerStatus) {
+		tfBannerIndex++;
+		if (tfBannerIndex + 1 > $('body').find('.tfBanner').length) {
+			tfBannerIndex = 0
+		}
+		$('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq(tfBannerIndex).addClass(
+			'active');
+		$('body').find('.tfBanner').removeClass('active').eq(tfBannerIndex).addClass('active');
+	}
+}, 5000)
+
+
+
+
+
+
+
+$(function(){
+        $('.cui-timer').Cuitimer();
+});
+
+function dh(){
+	$.each($(".An_wrap"),function(){
+		$(this).FnExe1();
+	});
+}
+dh();
+
+function showTooltip(d){
+	$(".yz_tab li span").removeClass("hover").eq(d).addClass("hover");
+	$(".yangzhi .xmlab").css("display","none").eq(d).css("display","block");
+	if(d==2){
+		$(".yz_tab_a").css("display","none");
+	}else{
+		$(".yz_tab_a").attr("href","/invest/xmlist/type/"+d+"/status/0.html")
+		$(".yz_tab_a").css("display","block");
+	}
+}
+
+</script>
+<include file="Public:footern"/>

@@ -1,0 +1,56 @@
+	<a href="#" class="shop_bg" style="background:url(__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/banner_list.jpg) no-repeat center;"></a><!--shop_bg-->
+    <h1 class="m1_title" id="m1_title">分期直通车</h1>
+	<div class="m1_main">
+    	<div class="m1_info">
+        	<a href="#m1_title" class="m1_left"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/href_1.jpg" width="331" height="294" /></a>
+            <div class="m1_right">
+            	<table rules=none cellspacing=0 class="m1_talbe">
+                	<tr>
+                    	<td class="first_td">商品链接：</td>
+                        <td><input name="txt_link" type="text" class="input_1" placeholder="粘贴天猫、京东等商城的链接，如：http://item.jd.com/974401.html"></td>
+                    </tr>
+                    <tr>
+                    	<td class="first_td">商品价格：</td>
+                        <td><input name="txt_price" type="text" class="input_2" placeholder="请填写商品价格">元<b class="b_shoufu">首付金额：</b><input name="txt_shoufu" type="text" class="input_2" placeholder="请填写首付金额"><!-- <select class="select"><option>无</option><option>1000</option><option>1000</option><option>1000</option></select> --></td>
+                    </tr>
+                    <tr>
+                    	<td class="first_td">分期月数：</td>
+                        <td class="sec_td">
+                            <span value="3">3个月</span>
+                            <span value="5">6个月</span>
+                            <span value="6">9个月</span>
+                            <span value="12">12个月</span>
+                            <strong id="yuegongmsg">月供：￥0 (本金: ￥0 + 服务费: ￥0) X 0期</strong>
+                            <input name="txt_yueshu" type="hidden" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td class="first_td">商品备注：</td>
+                        <td><input name="txt_desc" type="text" class="input_1" placeholder="下单时请务必填好商品版本、颜色、型号等具体信息，否则将会影响收货，备注必须超过4个字符！"></td>
+                    </tr>
+                </table>
+                <div class="m1_xuanzhong">
+                    <form>
+                        <input type="checkbox" id="check1" value="1" name="approve">
+                        <label for="check1">我同意<a href="/article/index/cid/504.html" target="_blank">《茂金所商城-分期购购物须知》</a></label>
+                    </form>
+                    <a href="javascript:;" class="m1_well" id="dobuy">我要购买</a>
+                </div><!--m1_xuanzhong-->
+            </div><!--m1_right-->
+        </div>
+    </div><!--m1_main-->
+    <h1 class="m1_title">为何选择茂金所？</h1>
+	<div class="m1_xuanchuan"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/xuanchuan.jpg" width="1100" height="255" /></div><!--m1_xuanchuan-->
+	<div class="m1_xuanze">
+    	<div class="xuanze_list">
+        	<a href="#m1_title" class="list_href"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/xuanze.jpg" width="359" height="232" /></a>
+            <div class="list_right">
+            	<div class="list_right_title"><b>精选商家</b>&emsp;</div>
+                <div class="list_right_main">
+                    <volist name=":get_home_friend(3)" id="vf">
+                        <a href="{$vf.link_href}" target="_blank"><img src="/{$vf.link_img}" width="174" height="85" /></a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div><!--m1_xuanze-->

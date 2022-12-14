@@ -1,0 +1,59 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+  <div class="page_tit">奖品设置</div>
+
+  <div class="page_tab"><span data="tab_1" class="active">奖品设置</span>    
+
+  </div>
+
+  <div class="form2">
+
+    <form method="post" action="" enctype="multipart/form-data">
+      <div id="tab_1">
+        <dl class="lineD">
+          <dt>奖品名：</dt>                    
+            <dd>
+              <input type="text" name="title" value="" class="input" style="" required />
+            </dd>
+        </dl>  
+        <dl class="lineD">
+          <dt>奖品金额：</dt>                    
+            <dd>
+              <input type="text" name="prize" value="" class="input" style="" required />元或%
+            </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>奖品数量：</dt>                    
+            <dd>
+              <input type="text" name="rate" value="" class="input" style="" />数量越大中奖概率越大
+            </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>奖品类型：</dt>                    
+            <dd>
+              <select name="jp_type"  class="input" required>
+                  <option value="0">请选择</option>
+                  <option value="1">红包</option>
+                  <option value="2">体验金</option>
+                  <option value="3">加息券</option>
+                  <option value="4">谢谢惠顾</option>
+              </select>
+            </dd>
+        </dl>  
+
+      </div>
+      <!--tab2-->
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<include file="Public:_footer" />

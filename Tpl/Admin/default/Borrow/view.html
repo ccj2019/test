@@ -1,0 +1,67 @@
+<include file="Public:_header" />
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+
+<style type="text/css">
+.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+  <div class="page_tit">投标记录</div>
+  <div class="page_tab"><span data="tab_4">投标记录</span>
+
+ <a href="__URL__/borrowdc?id=<?php echo $_GET['id']; ?>" >
+  <span data="tab_4">导出excel</span></a>
+
+  </div>
+  <div class="form2">
+      <div id="tab_4" style="" class="list">
+           <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr class="ta_a">
+                              <th>投资人</th>
+                                <th>真实姓名</th>
+                                <th>投资金额</th>
+                                <th>回购金额</th>
+                                <th>收益</th>
+                                <th>差价</th>
+                                <th>投资时间</th>
+                                <th>赠品</th>
+                              <th>转换</th>
+                                <th>操作</th>
+                            </tr>
+                            <volist name="investinfo" id="vi">
+                            <tr>
+                              <td><htmlA:user id="vi.userid" uname="vi.user_name" /></td>
+                              <td><htmlA:user id="vi.userid" uname="vi.real_name" /></td>                              
+                                <td>{$vi.investor_capital|Fmoney=###}元</td>
+                                <td>{$vi.xsinvestor_capital|Fmoney=###}元</td>
+
+                                <td>{$vi.receive_interest|Fmoney=###}元</td>
+                                <td>{$vi.chajia|Fmoney=###}元</td>
+                                <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+
+                                <td>{$vi.zpnum}</td>
+
+
+                                <td>
+                                    <if condition="$vi.ztfenshu neq 0">
+                                        <a href="__URL__/dozhuanhuan?id={$vi.id}">自提转换收购</a>
+                                    </if>
+                                </td>
+                                <if condition="$vi.is_hetong eq 1">
+                                    <td><a href="yunhetong/1/{$vi.contractid}.pdf" target="_blank">合同</a></td>
+                                <elseif condition="$vi.is_hetong eq 2"/>
+                                    <td><a href="{:U('/wap/api/ssqdownContracth')}?id={$vi.contractid}" target="_blank">合同</a></td>
+                                <else/>
+                                    <td>---</td>
+                                </if>
+
+                            </tr>
+                            </volist>
+                        </table>
+      </div>
+      <div class="page_btm">
+      </div>
+  </div>
+</div>
+<include file="Public:_footer" />

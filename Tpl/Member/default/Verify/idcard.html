@@ -1,0 +1,151 @@
+<include file="default:Public:mheader" />
+<!--内容-->
+<div class="l-omg">
+	<div class="l-mlogin">
+		<div class="l-mlg">
+			<div class="shiming">
+				实名认证
+			</div>
+			<form action="" method="post">
+			<div>		
+				<p class="smRZ">
+				<span>会员名称:</span><input type="text" name="user_name" id="user_name" value="{$minfo.user_name}"  readonly="readonly"/>
+				</p>
+				<p class="smRZ">
+				<span>真实姓名:</span><input type="text" name="real_name" id="real_name" value="" />
+				</p>
+				<p class="smRZ">
+				<span>身份证号:</span><input type="text" name="idcard" id="idcard" value="" />
+				</p>
+				<p class="smRZ">
+				<span>性别:</span> 
+				<label><input name="sex" id="sex" type="radio" value="男" />男 </label> 
+                <label><input name="sex" id="sex" type="radio" value="女" />女 </label> 
+				</p>
+				<p class="smRZ">
+				<span>类型:</span>
+				<label><input name="user_type" type="radio" onclick="comp(1)" value="1" />投资者 </label> 
+                <label><input name="user_type" type="radio" onclick="comp(2)" value="2" />创业者</label> 
+				</p>
+				<!--投资类型-->
+				<div class="touzilei clearfix person">
+					<p>符合下列条件之一的自然人投资者</p>
+					<div>
+						<label><input name="riskint" type="radio" value="1" />我的金融资产超过100万元 </label> 
+		                <label><input name="riskint" type="radio" value="2" />我的年收入超过100万元</label> 
+		                <label><input name="riskint" type="radio" value="3" />我是专业的风险投资人 </label> 
+		                <label><input name="riskint" type="radio" value="4" />我不符合上述任一条件</label> 
+					</div>
+				</div>
+				<div class="touzilei clearfix company" style="display: none;">
+					<p>创业者公司信息</p>
+					<p class="smRZ">
+					<span>公司名称:</span><input type="text" name="company_name" id="company_name" value="" />
+					</p>
+					<p class="smRZ">
+					<span>公司证件号:</span><input type="text" name="company_idcard" id="company_idcard" value="" />
+					</p>
+				</div>
+
+			</div>
+			<div class="z-btnbox">
+				<span id="">
+					<a href="javascript:;" onclick="hulue()" style="color: #fff;">忽略</a>
+				</span>
+				<span class="on">
+					<a href="javascript:;" onclick="setIdCard()" style="color: #fff;">下一步</a>
+	            </span>
+			</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function comp(cid){
+		if(cid == 1){
+			$(".person").show();
+			$(".company").hide();
+		}else if(cid == 2){
+			$(".person").hide();
+			$(".company").show();
+		}
+	}
+	function setIdCard(){
+		var realname = $('#real_name').val();
+		var idcard = $('#idcard').val();
+		var sex = $("input[name='sex']:checked").val();
+		var user_type = $("input[name='user_type']:checked").val();
+		var riskint = $("input[name='riskint']:checked").val();
+		var company_name = $('#company_name').val();
+		var company_idcard = $('#company_idcard').val();
+		if(realname == ''){
+			layer.msg("请填写真实姓名");
+			return false;
+		}
+		if(idcard == ''){
+			layer.msg("请填写身份证号");
+			return false;
+		}
+		if(user_type == ''){
+			layer.msg("请选择类型");
+			return false;
+		}
+		if(user_type == 2){
+			if(company_name == ''){
+				layer.msg("请填写公司名称");
+				return false;
+			}
+			if(company_idcard == ''){
+				layer.msg("请填写公司证件号");
+				return false;
+			}
+		}else if(user_type == 1){
+			if(riskint == ''){
+				layer.msg("请选择符合投资人的条件");
+				return false;
+			}
+		}
+		$.ajax({
+			url: "__URL__/saveid/",
+			type: "post",
+			dataType: "json",
+			data: {"realname":realname,"idcard":idcard,"sex":sex,"user_type":user_type,"riskint":riskint,"company_name":company_name,"company_idcard":company_idcard},
+			success: function(result) {
+				if (result.status == "0") {
+					layer.alert(result.message, 1,!1);
+				}
+				else {
+					layer.msg('请先设置支付密码',{shift: -1},function(){
+                        window.location.href='/member/index/setpinpass';
+                    });
+				}
+			},
+			complete:function(XMLHttpRequest, textStatus){
+				// window.location.reload();
+			}
+		});
+
+	}
+	function hulue(){
+
+		$.ajax({
+			url: "/member/index/hulue/",
+			type: "get",
+			dataType: "json",
+			
+			success: function(result) {
+				if (result.status == "0") {
+					layer.alert(result.message, 1,!1);
+				}
+				else {
+					window.location.href='/member/';
+				}
+			},		
+			complete:function(XMLHttpRequest, textStatus){
+				// window.location.reload();
+			}
+		});
+	}
+</script>
+<include file="default:Public:footer" group="Home" />

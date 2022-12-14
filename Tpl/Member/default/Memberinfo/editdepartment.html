@@ -1,0 +1,112 @@
+{__NOLAYOUT__}<tagLib name="htmlA" />
+<table style="width: 850px; float: left;padding: 0px; border-collapse: collapse; text-align: left;" id="formTb" cellpadding="0" cellspacing="0">
+		<tbody><tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				单位名称：
+			</td>
+			<td class="tdContent"  width="500">
+				<htmlA:input id="department_name" value="{$vo.department_name}" class="text_input"/>
+			</td>
+			<td id="dv_company" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="spec87" width="120">
+				电话：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="department_tel" value="{$vo.department_tel}" class="text_input"/>
+			</td>
+			<td id="dv_companytel" class="tdTip">
+			</td>
+		</tr>
+		<tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				地址：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="department_address" value="{$vo.department_address}" class="text_input"/>
+			</td>
+			<td id="dv_companyaddress" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="spec87" width="120">
+				工作年限：
+			</td>
+			<td class="tdContent">
+			<htmlA:radio id="department_year" default="1年以下|1年以下,1-3年|1-3年,3-5年|3-5年,5-10年|5-10年,10年以上|10年以上" value="key|vo.department_year" />
+			</td>
+			<td id="dv_workyear" class="tdTip">
+			</td>
+		</tr>
+		<tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				证明人：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="voucher_name" value="{$vo.voucher_name}" class="text_input"/>
+			</td>
+			<td id="dv_references" class="tdTip">
+			</td>
+		</tr>
+		<tr style=" border-bottom:1px solid #dedede;">
+			<td align="right" class="spec87" width="120">
+				证明人手机：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="voucher_tel" value="{$vo.voucher_tel}" class="text_input"/>
+			</td>
+			<td id="dv_referencestel" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;
+				
+			</td>
+			<td style="height: 50px;padding-left: 10px;" class="tdContent">
+			
+                 <a href="javascript:void(0)" class="button_input" id="btn_set" onclick="editdepartment()">保存继续</a>
+				 <a href="javascript:;" class="button_input"  onclick="$('#xtab').find('a[data=info4]').click();">下一步</a>
+			</td>
+			<td id="Td1" class="tdTip">
+			</td>
+		</tr>
+</tbody></table>
+<script type="text/javascript">
+function editdepartment(){
+	p = makevar(['department_name','department_tel','department_address','voucher_name','voucher_tel','department_year']);
+	p['_tps'] = "post";
+	
+	var mxs = true;
+	$.each(p,function(i){
+		if(typeof p[i] == "undefined"){
+			//mxs=false;
+			//layer.msg("所有项目都不能为空")
+		}
+	});
+	if(mxs===false){
+	  //layer.msg("所有项目都不能为空")
+	 // return;
+	}
+
+	//$.jBox.tip('提交中......','tip');
+	$.ajax({
+		url: "__URL__/editdepartment/",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert(d.message, 1,!1);
+					$('#xtab').find('a[data=info4]').click();
+				}
+				else layer.msg(d.message);
+			}
+		}
+	});
+}
+</script>

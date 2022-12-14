@@ -1,0 +1,612 @@
+ 
+
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+<style type="text/css">
+
+	.right{
+
+		width: 70%;
+
+	}
+
+	.clear.right1{
+
+		line-height: .7rem;
+
+	}
+
+	.w-proaff-con.youhui-bottom{
+
+		border-bottom: 0;
+
+	}
+
+	.w-proaff-con.youhui-top{
+
+		margin-bottom: 0.3rem;
+
+	}
+
+	.zhifu-center.clear{
+
+		border-bottom: 0;
+
+	}
+
+</style>
+
+<body>
+
+    <div class="header ">
+
+        <div class="w-header w-content flex">
+
+            <a href="javascript:window.history.back();" class="w-header-left">
+
+                < 返回 </a>
+
+                    <h3>确认订单</h3>
+
+                    <a href="##" class="w-header-right"></a>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- 项目详情-确认订单 start -->
+
+<form method="post" name="investForm" id="investForm" action="/wap/invest/investmoney">
+
+                <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+
+                    <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+
+                                    <!--                                 <a href="/member/charge/charge.html">充值</a>-->
+
+ 
+
+           
+
+    <div class="w-proaff">
+
+        <ul class="w-proaff-con">
+
+            <li>
+
+                <a href="##" class="flex">
+
+                    <div class="left">
+
+                        <img src="{$binfo.borrow_img}" alt="">
+
+                    </div>
+
+                    <div class="right">
+
+                        <h6>{$binfo.borrow_name}</h6>
+
+                        <div class="clear right1">
+
+                            <div class="fl"> 发起人：
+
+                                <span>{$minfo.user_name}</span>
+
+                            </div>
+
+                          <span class="fr">x{$num}</span>  
+
+                        </div>
+
+
+
+                    </div>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+        <div class="w-proaff-con">
+
+            <div class="you youhui-top clear">
+
+                <div class="fl">
+
+                    应支付金额
+
+                </div>
+
+                 <!--$this->assign("num", $num);  
+
+			  $this->assign("mone", empty($mone)?0:$mone);  
+
+			   $this->assign("guige", $guige);-->
+
+                <div class="fr">
+
+                	 
+
+                                    
+
+                     <?php 
+
+                                    	 $money_bonus=0;
+
+                                    	 $iz=0;
+
+                                    	foreach($bonus_list as $k=>$bonus_line)	{
+
+                                   
+
+                                    		if($bonus_line['bonus_invest_min']<$mone){
+
+                                    			$iz++;
+
+                                    			if($iz==1){
+
+                                    				$money_bonus=$bonus_line['money_bonus']; 
+
+                                    			continue;
+
+                                    			}
+
+                                    		
+
+                                    		}
+
+                                    	} ?>
+
+                    <p> ¥<!--<input type="text" id="invest_money" class="invest_input text_box" value="" disabled="disabled"  size="11" name="money"> --><!--{$mone-$money_bonus}--><span id="mone">{$mone}</span>
+
+                    <input type="hidden" id="invest_money" class="invest_input text_box" value= '{$mone}'   size="11" name="money"> 元</p>
+
+            
+
+                   <!-- <span>免运费</span>-->
+
+                </div>
+
+            </div>
+
+            	<if condition="$binfo.id neq '1'"> 
+
+            		<?php $ik=0;?>
+
+            		<if condition="is_array($bonus_list)">
+				<notpresent name="bespeak">
+
+	            <div class="you youhui-bottom clear" style="border-bottom: 0;">
+
+	                <div class="fl">
+
+	                    已自动为您选择优惠券
+
+	                </div>
+
+	                <a href="##" class="fr"  style="width: 35%;">
+
+	                              <select name="bonus_id" id="bonus_id"  disabled='disabled' style="width: 2rem !important;"> 
+
+	                                    <volist name="bonus_list" id="bonus_line">
+
+	                                       
+
+	                                    	<?php 
+
+	                                    	
+
+	                                    	/*disabled='disabled'*/
+
+	                                    	$izz=0;
+
+	                                    	if($bonus_line['bonus_invest_min']<=$mone){
+
+	                                        	
+
+	                                        
+
+	                                    		echo "<option value='".$bonus_line['id']." 'money_bonus='".$bonus_line['money_bonus']."'>红包".$bonus_line['money_bonus']."元</option>"; 
+
+	                                    		if($izz==0){
+
+	                                            	echo  '<script> document.getElementById("bonus_id").disabled="";  </script>';
+
+	                                            }
+
+	                                        	$izz=1;
+
+	                                    	} else{
+
+	                                    	
+
+	                                    	 
+
+	                                    		echo" <option disabled='disabled' value= '".$bonus_line['id']." 'money_bonus='".$bonus_line['money_bonus']."'>红包".$bonus_line['money_bonus']."元<br/>未满".$bonus_line['bonus_invest_min']."元不能使用</option>"; 
+
+	                                    	}?>
+
+	                                    	
+
+	                                        <!--<option value="{$bonus_line.id}" money_bonus="{$bonus_line.money_bonus}">红包{$bonus_line.money_bonus}元</option>-->
+
+	                                     <!--   <option value="{$bonus_line.id}" disabled="disabled">（满{$bonus_line.bonus_invest_min}元可用）</option>-->
+
+	                                    </volist>
+
+	                                </select>
+
+	                </a>
+
+	            </div>
+
+	            
+
+	            	</notpresent>
+
+	            </if>
+
+            <else/>
+
+               <input type="hidden" name="is_experience" id="is_experience" value="1" />            
+
+            </if>
+
+            
+
+            <!--<div class="youhui-end clear">
+
+                <a href="##" class="fl">
+
+                    优惠券
+
+                </a>
+
+                <div class="fr">
+
+                    -¥6【铭万众筹后台赠送-满100元可用】
+
+                </div>
+
+            </div>-->
+
+        </div>
+
+        <div class="w-proaff-con">
+
+        	       <div class="zhifu-center clear">
+
+                <div class="fl">
+
+                    支付密码:
+
+                </div>
+
+                <div class="fr" style="  width: 75%;">
+
+                    <input type="password" class="invest_input" id="pin" name="pin" style="width: 100%;height: 0.5rem;    margin-top: -.05rem;    background: #f5f5f5;" />
+
+                </div>
+
+
+
+            </div>
+
+        	
+
+            <!--<div class="zhifu-top clear">
+
+                <div class="fl">
+
+                    已支付
+
+                </div>
+
+                <div class="fr">
+
+                    ￥1
+
+                </div>
+
+
+
+            </div>
+
+            <div class="zhifu-center clear">
+
+                <div class="fl">
+
+                    还需支付
+
+                </div>
+
+                <div class="fr">
+
+                    ¥94元
+
+                </div>
+
+
+
+            </div>
+
+            <div class="zhifu-bottom radio">
+
+                <div class="">
+
+                    <input type="radio" name="pay" id="pay1">
+
+                    <label for="pay1"></label>
+
+                    <span>余额支付</span>
+
+                </div>
+
+            </div>-->
+
+        </div>
+
+        <div class="w-proaff-con ">
+
+            <div class="textarea">
+
+                    <label for="12">留言</label>
+
+                    <textarea name="" placeholder="请在此处填写留言内容（200字以内）"></textarea>
+
+            </div>
+
+          
+
+        </div>
+
+
+
+    </div>
+
+
+
+        </form> 
+
+    
+
+    </div>
+
+    <!-- 项目详情-确认订单 end -->
+
+
+
+
+
+    <if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+        <a id="sub1"class="w-queren">确认支付</a>
+    <else />
+        <a href="javascript:void(0);" class="w-queren">新用户专享</a>
+    </if>
+
+<!-- 弹窗 -->
+
+    <!-- <div class="l-dtc" >
+
+            <div class="l-tanchubox">
+
+                <p>支付成功</p>
+
+                <p> <button id="sub1" class="l-btnc">确定</button></p>
+
+            </div>
+
+    </div> --!>
+
+ <script type="text/javascript">
+
+
+     window.onload=function() {
+         let bespeak = "{$bespeak}";
+         let mone = "{$mone}";
+         let point = "{$point}";
+         if (bespeak != null && mone != null) {
+             if (mone > 0) {
+		$("#invest_money").val(mone);
+                $("#mone").text(Number(mone) * (1 - Number(point)));
+             }
+         }
+     };
+
+ 	var date = new Date();
+     var openTime = date.getTime().toString();
+     openTime = openTime.substring(0,openTime.length-3);
+
+ 	$('#sub1').click(function() {
+        	$('#sub1').off("click");
+        	var date = new Date();
+        	var postIime = date.getTime().toString();
+        	postIime = postIime.substring(0,postIime.length-3);
+        	var bespeak_able =  {$binfo['bespeak_able']};
+        	var start_time =  {$binfo['start_time']};
+        	var bespeak_days =  {$binfo['bespeak_days']};
+
+        	if(bespeak_able == 1){
+            		if(start_time + bespeak_days*60*60*24 > openTime && start_time + bespeak_days*60*60*24 < postIime) {
+                		alert("表单已失效，请重试");
+                		window.location.reload();
+                		return;
+            		}
+        	}
+        	$('#investForm').submit();
+ 	})
+
+// 	$("#bonus_id option").click(function(){
+
+//alert($(this).attr("money_bonus"));
+
+////{$mone}
+
+////$("input#input").val($(this).text());
+
+//});
+
+ </script>
+
+    <script>
+
+        $(function () {
+
+
+
+            var a = "#00a0e9";
+
+            var b = "#dedede";
+
+            var w = "100%";
+
+            var h = "5px";
+
+            var wq0div = $(".wq-div");
+
+            var barb = function () {
+
+                wq0div.each(function () {
+
+                    var width = $(this).attr('w');
+
+                    var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+
+                    $(this).append(barbox);
+
+                })
+
+            }
+
+
+
+            var amimeat = function () {
+
+                $(".charts").each(function (i, item) {
+
+                    var wi = parseInt($(this).attr("w"));
+
+                    $(item).animate({ width: wi + "%" }, 1000, function () {
+
+
+
+                    });
+
+                });
+
+            }
+
+            var barbCss = function (a, b) {
+
+                $(".barbox").css({
+
+                    "height": h,
+
+                    "line-height": h,
+
+                    "text-align": "center",
+
+                    "color": "#fff",
+
+                })
+
+                $(".barbox>dd").css({
+
+                    "float": "left"
+
+                })
+
+                $(".barline").css({
+
+                    "width": w,
+
+                    "background": b,
+
+                    "height": h,
+
+                    "overflow": "hidden",
+
+                    "display": "inline",
+
+                    "position": "relative",
+
+                    "border-radius": "8px",
+
+                })
+
+                $(".barline>d").css({
+
+                    "position": "absolute",
+
+                    "top": "0px",
+
+                })
+
+                $(".charts").css({
+
+                    "background": a,
+
+                    "height": h,
+
+                    "width": "0px",
+
+                    "overflow": "hidden",
+
+                    // "border-radius": "2px"
+
+                })
+
+            }
+
+            barb();
+
+            amimeat();
+
+            barbCss(a, b);
+
+        })
+
+
+
+
+
+
+
+                      /* 确定弹出 */
+
+//$('.cc').click(function(){
+
+//			$('.l-dtc').show()
+
+//		});
+
+//		$('.l-btnc').click(function(){
+
+//			console.log(1)
+
+//			$('.l-dtc').hide()
+
+//		});
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>

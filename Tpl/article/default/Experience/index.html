@@ -1,0 +1,86 @@
+ 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+
+	 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<style type="text/css">
+	
+</style>
+	<body>
+		
+			
+			<div class="l-fh l-on"><a href="javascript:window.history.back();" class="l-fanhui on" >&lt;返回</a><span>新手体验金</span><div  class="l-fanhui1" ><a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a></div></div>
+			<div class="L-ca clearfix">
+				<span>新手体验</span>
+				<span>体验金额</span>
+				<span>投标状态</span>
+				<!--<span>操作</span>-->
+				
+			</div>
+		<div class="doc1">
+		<!--88888888888888888888888888888888888888-->
+		     <!--<table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>项目</th>
+                                <th>万元回报</th>
+                                <th>期限</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>还款时间</th>
+                            </tr>
+                        </table>
+                        <notempty name="expborlist">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <volist name="expborlist" id="vo">
+                                <tr>
+                                    <td>{$vo.borrow_name}</td>
+                                    <td>{$vo.borrow_interest_rate}</td>
+                                    <td>{$vo.borrow_duration}天</td>
+                                    <td>{$vo.investor_capital}</td>
+                                    <td><if condition="$vo.status eq 1">投资中<elseif condition="$vo.status eq 4" />出售中<elseif condition="$vo.status eq 5"/>已回款</else></if></td>
+                                    <td><if condition="$vo.deadline neq 0">{$vo.deadline|date="Y-m-d H:i:s",###}</if></td>
+                                </tr>
+                                </volist>
+                            </table>
+                        <else />   
+                            <div class="zanwu">
+                                <p>暂无记录</p>
+                                <a href="/invest/">去投体验标</a>
+                            </div>
+                        </notempty>-->
+		<!--888888888888888888888888888888888888888888-->
+		<volist name="money_experience" id="volist">
+			<div class="L-ca1 clearfix">
+				<span>注册体验</span>
+				<span>{$volist.money_experience}</span>
+				<span><if condition="$volist['paystatus'] eq 1">已投资<elseif condition="$volist['paystatus'] eq 3"/>已收益<else/>未投资 </if></span>
+				<!--<span><a href="##">查看</a></span>-->
+				
+			</div>
+		</volist>
+		<!--<div class="L-ca1 clearfix">
+				<span>注册体验</span>
+				<span>8888.00</span>
+				<span>未投资</span>
+				<span><a href="##">查看</a></span>
+				
+			</div>
+			<div class="L-ca1 clearfix">
+				<span>升级体验</span>
+				<span>8888.00</span>
+				<span>未投资</span>
+				<span><a href="##">查看</a></span>
+				
+			</div>-->
+		</div>
+				
+	
+<!--底部-->
+		<div class="l-di"></div>
+
+<include file="Public:footer"/>

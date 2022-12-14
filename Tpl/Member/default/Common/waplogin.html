@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<script type="text/javascript">
+var imgpath="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";
+var curpath="__URL__";
+</script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/login.js"></script>
+
+	<body>
+		<div class="l-loginbox">
+			<div>
+				
+				 
+ 
+				<div class="l-fh"><a href="##" class="l-fanhui" >&lt;返回</a>会员登录</div>
+				<div class="l-logoto">
+					<img src="/Public/wap/img/logo.png"/>
+				</div>
+			 <form action="" method="get">
+					
+				<div class="l-loginform">
+					
+					<span><img src="/Public/wap/img/shouji.png"/></span>
+					 <input id="txtUser" type="text" class="inp2" placeholder="请输入手机号"/>
+					 <!--<input type="text" placeholder="请输入手机号"/>-->
+				</div>
+				<div class="l-loginform">
+					<span><img src="/Public/wap/img/mima.png"/></span>
+					 <input id="txtPwd" type="password" class="inp2" placeholder="请输入密码"/>
+					<!--<input type="text"  placeholder="请输入密码"/>-->
+				</div>
+				<div class="l-loginform clearfix">
+					<span class="l-wjmm fl">  <a href="/member/common/getpass/">忘记密码？</a> </span>
+					<span class="l-wjmm1 fr"><a href="##">立即注册</a></span>
+				</div>
+				<div onclick="LoginSubmit(this);" id="btnReg"  class="l-loginbtn btn3">
+			 		立即登陆
+                </div>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+function jfun_dogetpass(){
+    var ux = $("#emailname").val();
+    if(ux==""){
+        layer.msg("请输入用户名或者邮箱")
+        return;
+    }
+    $.ajax({
+        url: "__APP__/member/common/dogetpass/",
+        data: {"u":ux},
+        //timeout: 5000,
+        cache: false,
+        type: "post",
+        dataType: "json",
+        success: function (d, s, r) {
+            if(d){
+                if(d.status==1){
+                    layer.alert("发送成功，请去邮箱查收", 1,!1);
+                }else{
+                    layer.msg("发送失败，请重试")
+                }
+            }
+        }
+    });
+
+}
+
+function getPassWord() {
+    
+    $.ajax({
+          url: "__APP__/member/common/getpassword/",
+          timeout: 5000,
+          cache: false,
+          type: "get",
+          dataType: "json",
+          success: function (d, s, r) {
+              if(d.status==0){
+                   layer.msg(d.message);
+              }else{
+                var obj_html=d.content;
+                $.layer({
+                    type: 1,
+                    title: "找回密码",
+                    area: ['450px', '200px'],
+                    shade: [0],
+                    page: {
+                        html: '<div class="jiedai_con">'+obj_html+'</div>'
+                    }, success: function(){
+                        layer.shift('left');
+                    }
+                });
+              }
+          }
+      });
+}
+</script>
+	</body>
+</html> 

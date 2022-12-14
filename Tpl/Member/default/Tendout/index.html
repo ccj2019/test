@@ -1,0 +1,121 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+	.sous input{
+			width: 615px;
+			height: 30px;
+			border: 1px solid #d2d2d2;
+			box-sizing: border-box;
+			float: left;
+			background: none;
+			padding-left: 10px;
+			outline: none;
+		}
+		.sous{
+			display: table;
+			margin: 0 auto;
+			margin-top: 40px;
+			height: 30px;
+			background: #f8f8f8;
+		}
+		.sou_btnc{
+			float: left;
+			width: 130px;
+			height: 30px;
+			cursor: pointer;
+			background: url(/Public/web/img/sou_btnc.png);
+			background-size:100% 100% ;
+		}
+</style>
+<style>
+    .bgxmlis>div{
+        width:15% !important;
+        text-align: center;
+        padding-left: 0px !important;
+        margin-left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:48px;
+    }
+    .tou1>span{
+        width:15% !important;
+        text-align: center;
+        padding-left: 0px;
+        margin-left: 0px !important;
+    }
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>我的项目</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left"/>
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition="$borrow_status eq '' "> class="on" </if> ><span><a href="{$strUrl}">所有订单</a></span></div>
+			<div <if condition="$borrow_status eq '4' "> class="on" </if>><span><a href="{$strUrl}&borrow_status=4">支付成功</a></span></div>
+			<div <if condition="$borrow_status eq '6' "> class="on" </if>><span><a href="{$strUrl}&borrow_status=6">已完成</a></span></div>
+			<div <if condition="$borrow_status eq '7' "> class="on" </if>><span><a href="{$strUrl}&borrow_status=7">已收益</a></span></div>
+		</div>
+		<div class="sous">
+            <input type="text" name="key" id="key" value="{$borrow_name}" />
+            <div class="sou_btnc"></div>
+        </div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<div class="bgbx">
+					<div class="tou1">	
+					     <span style="width: 40% !important;">订单名称</span>
+					     <span>支付时间</span>	
+					     <span>金额</span>
+					     <span>状态</span>	
+					     <span style="width: 6%;">操作</span>
+					</div>
+					<volist name="list" id="vo">
+					<div class="bgxmlis">
+						<div class="bt" style="width: 40% !important;    justify-content: left;">
+                            <img src="{$vo.borrow_img}">
+                            <a target="_self" href="{$vo.borrow_id|getInvestUrl}" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=17}</a>
+						</div>
+						<div>
+							{$vo.invest_time|date="Y-m-d H:i:s",###}
+						</div>
+						<div class="zijin">
+							¥{$vo.investor_capital}
+						</div>
+						<div>
+							<if condition="$vo.borrow_status eq 7">
+								已收益
+							<elseif condition="$vo.borrow_status eq 6"/>
+								已成功<br>
+								等待发放收益
+							<else />
+								认购中
+							</if>
+						</div>
+						<div class="xqing">
+							<a href="{:U('/member/tendout/tendoutdetail',array('id'=>$vo['id'],'type'=>$type))}">查看详情</a>
+						</div>
+					</div>
+					</volist>
+				</div>
+				<!--分页-->
+				<div class="aFye clearfix">
+				 	<p>{$pagebar} 共{$count}条记录</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $(".sou_btnc").on("click", function(){
+        var val =  $("#key").val();
+        window.location.href="{$strUrl}&key="+val;
+    })
+</script>
+
+<include file="default:Public:footer" group="Home" />

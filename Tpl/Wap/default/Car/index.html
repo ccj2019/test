@@ -1,0 +1,127 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{:C('DEFAULT_THEME')}/home/css/car.css">
+<div>    
+    <!-- <volist name=":get_ad(30)" id='vo'> -->            
+    <a href="{$vo.url}" target="_blank"><span class="img_1" style="display: block;height:378px;background:url(/{$vo.img}) no-repeat center top"></span></a>
+      <!-- </volist> -->   
+</div>
+<div class="lccontainer">
+	<div class="lctop">
+    	<div class="lctleft">
+        	<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg1.png" width="166" height="141"/>
+            <p>您有靠谱的二手车源，可以联系我们，我们将联系二手车经销商为您提供一站式收车服务。及时收车热线：0451-82618855，成功收车后二手车经销商将提供给您数额不等的佣金。</p>
+            <div class="clear"></div>
+        </div>
+        <div class="lctrig">
+        	<div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg2.png"/>车源信息电话反馈</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg3.png"/>车辆登记</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg4.png"/>经销商实地验车</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg5.png"/>经销商代办过户</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg6.png"/>获得经销商佣金</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="lctop">
+    	<div class="lctleft">
+        	<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg12.png" width="166" height="141"/>
+            <p>二手车经销商的好车辆，全民都可以卖。魔方车的网站上实时更新经销商库存车辆信息，通过您的渠道成功交易的车辆，经销商将提供给您相应的佣金，佣金将以魔方车账户余额的形式发放，可投资可提现。</p>
+            <div class="clear"></div>
+        </div>
+        <div class="lctrig">
+        	<div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg7.png"/>锁定代卖车源</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg8.png"/>全民代卖</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg9.png"/>买家预约线下看车</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg10.png"/>经销商代办过户</div>
+            <div class="lcrb1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg11.png"/></div>
+            <div class="lcrb"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/lcimg6.png"/>获得经销商佣金</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="lcmid">
+    	<div class="lcfenlei">
+        	<div class="lcfe1">
+            	<span>分类：</span>
+                <div class="lcul">
+                    <a href="{$nowUrl}&type_id=0" class="type_id0">不限</a>
+                        <!-- <foreach name="carCate" item="vo"> -->  
+                          <a href="{$nowUrl}&type_id={$vo.id}" class="type_id{$vo.id}">{$vo.type_name}</a>
+                        <!-- </foreach> -->
+                    <!-- <div class="lcul1">
+                        <a>不限</a><a>大众</a><a>福特</a><a>雪佛兰</a><a>别克</a><a>起亚</a><a>现代</a><a>日产</a><a>标志</a><a>江淮</a><a>比亚迪</a><a>丰田</a>
+                        <div class="clear"></div>
+                    </div> -->
+                </div>
+                <!-- <div class="lcall">全部</div> -->
+                <div class="clear"></div>
+            </div>
+        	<div class="lcfe1">
+            	<span>价格：</span>
+                <div class="lcul">
+                    <a href="{$nowUrl}&selling_price=0" class="selling_price0">不限</a>
+                    <a href="{$nowUrl}&selling_price=1" class="selling_price1">10万以下</a>
+                    <a href="{$nowUrl}&selling_price=2" class="selling_price2">10-20万</a>
+                    <a href="{$nowUrl}&selling_price=3" class="selling_price3">20-30万</a>
+                    <a href="{$nowUrl}&selling_price=4" class="selling_price4">30-40万</a>
+                    <a href="{$nowUrl}&selling_price=5" class="selling_price5">40-50万</a>                    
+                    <a href="{$nowUrl}&selling_price=6" class="selling_price6">50万以上</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <p>注：车辆详细信息请与客服联系，魔方车保证以下车源真实有效。</p>
+        <div class="lccy">
+        	<ul>
+            <!-- <foreach name="list" item="vo"> -->    
+                <li><a href="javascript:;"><div class="lcim1"><img title="{$vo.title}" alt="{$vo.title}" src="/{$vo.art_img}" width="249" height="201"/></div>
+                    <div class="lclc">
+                        <h1 title="{$vo.title}">{$vo.title|cnsubstr=###,18}<span title="{$vo.car_desc}">{$vo.car_desc|cnsubstr=###,20}</span></h1>
+                        <div class="lcimb">
+                            <p>预计售价：<b>{$vo.selling_price|getFloatValue=###,2}万元</b></p>
+                            <span>{$vo.brokerage}佣金</span>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </a></li>
+                <!-- </foreach> -->
+                <div class="clear"></div>
+            </ul>
+            <div class="lcyema">{$page}</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+         $(".lcall").click(function(){
+			if($(".lcul1").is(":hidden")){
+				$(".lcul1").slideDown(0);
+				$(this).css("backgroundPosition","right 10px");
+				$(this).text("收起");
+			}else{
+				$(".lcul1").slideUp(0);
+				$(this).css("backgroundPosition","right -12px");
+				$(this).text("全部");
+			}
+		});
+		$('.lcfe1 a').click(function(){
+			$(this).addClass('lcli1').siblings().removeClass('lcli1');
+			$(this).parent().find('.lcul1 a').removeClass('lcli1');
+			})
+		$('.lcul1 a').click(function(){
+			$(this).addClass('lcli1').parent().siblings().removeClass('lcli1');
+			})
+     </script>
+     <script type="text/javascript">
+        $(function(){      
+          $(".type_id{$type_id|default=0}").addClass("lcli1");      
+          $(".selling_price{$selling_price|default=0}").addClass("lcli1");          
+        });
+    </script>
+
+</div>

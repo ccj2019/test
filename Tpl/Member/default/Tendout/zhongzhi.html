@@ -1,0 +1,147 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+	.sous input{
+			width: 615px;
+			height: 30px;
+			border: 1px solid #d2d2d2;
+			box-sizing: border-box;
+			float: left;
+			background: none;
+			padding-left: 10px;
+			outline: none;
+		}
+		.sous{
+			display: table;
+			margin: 0 auto;
+			margin-top: 40px;
+			height: 30px;
+			background: #f8f8f8;
+		}
+		.sou_btnc{
+			float: left;
+			width: 130px;
+			height: 30px;
+			cursor: pointer;
+			background: url(/Public/web/img/sou_btnc.png);
+			background-size:100% 100% ;
+		}
+</style>
+<style>
+    .bgxmlis>div{
+        width:15% !important;
+        text-align: center;
+        padding-left: 0px !important;
+        margin-left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:48px;
+    }
+    .tou1>span{
+        width:15% !important;
+        text-align: center;
+        padding-left: 0px;
+        margin-left: 0px !important;
+    }
+    
+    .bgxmlis .xqing{
+		display: block;
+    }
+    .xqing a{
+    	display:block;
+    	width:60px;
+    	height:24px;
+    	line-height: 24px;
+    	margin-left: 30px;
+    }
+    .xqing a.zhifu{
+    	background-color: #f66d1c; 
+    	color:#fff;    
+    }
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>我的项目</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left"/>
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition="$status eq '' "> class="on" </if> ><span><a href="{$strUrl}&type=4">所有订单</a></span></div>
+			<div <if condition="$status eq '1' "> class="on" </if>><span><a href="{$strUrl}&status=1&type=4">未支付</a></span></div>
+			<div <if condition="$status eq '2' "> class="on" </if>><span><a href="{$strUrl}&status=2&type=4">已支付</a></span></div>
+			<div <if condition="$status eq '3' "> class="on" </if>><span><a href="{$strUrl}&status=3&type=4">已完成</a></span></div>
+		</div>
+		<div class="sous">
+            <input type="text" name="key" id="key" value="{$borrow_name}" />
+            <div class="sou_btnc"></div>
+        </div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<div class="bgbx">
+					<div class="tou1">	
+					     <span style="width: 40% !important;">订单名称</span>
+					     <span>下单时间</span>	
+					     <span>金额</span>
+					     <span>状态</span>	
+					     <span style="width: 6%;">操作</span>
+					</div>
+					<volist name="list" id="vo">
+					<div class="bgxmlis">
+						<div class="bt" style="width: 40% !important;    justify-content: left;">
+                            <img src="{$vo.images}">
+                            <a target="_self" href="/zhongzhi">{$vo.pinlei}</a>
+						</div>
+						<div>
+							{$vo.add_time|date="Y-m-d H:i:s",###}
+						</div>
+						<div class="zijin">
+							¥{$vo.jine}
+						</div>
+						<div>
+							<if condition="$vo.status eq 1">
+								未付款
+							<elseif condition="$vo.status eq 2"/>
+								已付款
+							<else />
+								已完成
+							</if>
+						</div>
+						<div class="xqing">
+						<if condition="$vo.status eq 1">
+							<if condition="$vo.pay_way eq 1">
+								<a href="/zhongzhi/zhifubao/id/{$vo.ordernums}" class="zhifu">继续支付</a>
+							</if>
+
+							<if condition="$vo.pay_way eq 2">
+								<a href="/zhongzhi/weixin/id/{$vo.ordernums}" class="zhifu">继续支付</a>
+							</if>
+
+						</if>
+
+							<a href="{:U('/member/tendout/zdetail',array('id'=>$vo['oid'],'type'=>'4'))}">查看详情</a>
+						</div>
+					</div>
+					</volist>
+				</div>
+				<!--分页-->
+				<div class="aFye clearfix">
+		
+				 <p>{$page} 共{$count}条记录</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $(".sou_btnc").on("click", function(){
+        var val =  $("#key").val();
+        window.location.href="{$strUrl}&type=4&key="+val;
+    })
+</script>
+
+<include file="default:Public:footer" group="Home" />

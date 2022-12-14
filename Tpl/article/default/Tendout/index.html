@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="/Public/wap/css/FlexoCalendar.css">
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="/Wapmember" class="w-header-left">
+                < 返回 </a>
+                    <h3>我的项目</h3>
+               <a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" style="width: 0.4rem;    padding-top: 0.3rem;float: right;"  /></a>
+        </div>
+    </div>
+
+
+    <!-- 我的项目 -->
+    <div class="w-wo w-int">
+
+        <div class="w-porper">
+            <div class="porper-top flex">
+                <a href="/wapmember/tendout/index?type=0" <if condition="$pid eq 0">class="w-porpertop-active"</if> >全部</a>
+                <a href="/wapmember/tendout/index?type=1" <if condition="$pid eq 1">class="w-porpertop-active"</if>>联合养殖</a>
+                <a href="/wapmember/tendout/index?type=2" <if condition="$pid eq 2">class="w-porpertop-active"</if>>联合销售</a>
+                <a href="/wapmember/tendout/index?type=3" <if condition="$pid eq 3">class="w-porpertop-active"</if>>共建项目</a>
+            </div>
+
+
+
+
+        </div>
+        <ul class="int-list-warpper">
+ <volist name="list" id="vo">
+ 	
+ 	
+  <li class="int-list clear">
+                <a class="clear">
+                    <div class="clear w-wo-title">
+                        <span class="fl"> </span>
+                        <span class="fr">项目        <if condition="($vo.borrow_status eq 1)">预热中
+                                <elseif condition="($vo.borrow_status eq 2)"/>众筹中
+                                <elseif condition="($vo.borrow_status eq 4)"/>复审中
+                                <elseif condition="($vo.borrow_status eq 6)"/>已成功
+                                <elseif condition="($vo.borrow_status eq 7)"/>已分红
+                                </if>
+                                </td>
+</span>
+                    </div>
+                    <!--style="width: 150px;height: auto;max-height:200px ;"-->
+                    <div class="int-list-left fl">
+                            <img src="{$vo.borrow_img}"  alt="">
+                    </div>
+                    <div class="int-list-right fr">
+                        <div class="w-first flex">
+                            <span>{$vo.borrow_name|cnsubstr=###,10}</span>
+                            <span>{:getFloatvalue($vo['investor_capital']-(bounsmoney($vo['bonus_id'])),2)}</span>
+                        </div>
+                        <p>类型：
+                            <span>投资</span>
+                        </p>
+                        <div class="clear wo-last">
+                            <span href="##" class="fl ">{$vo.invest_time|date='Y-m-d',###}</span>
+                            <span href="##" class="fr ">筹集天数：{$vo.borrow_duration}天</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/wapmember/tendout/detail/id/{$vo.borrow_id}.html" class="w-wo-a fr">查看详情</a>
+            </li>
+            
+                        </volist>
+            <!--<li class="int-list clear">
+                <a class="clear">
+                    <div class="clear w-wo-title">
+                        <span class="fl">项目状态：已发布</span>
+                        <span class="fr">项目预热中</span>
+                    </div>
+                    <div class="int-list-left fl">
+                            <img src="./img/w-wo.jpg" alt="">
+                    </div>
+                    <div class="int-list-right fr">
+                        <div class="w-first flex">
+                            <span>为你写诗</span>
+                            <span>￥18000</span>
+                        </div>
+                        <p>类型：
+                            <span>减少</span>
+                        </p>
+                        <div class="clear wo-last">
+                            <span href="##" class="fl ">2018-09-05 12:53:26</span>
+                            <span href="##" class="fr ">筹集天数：10天</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="##" class="w-wo-a fr">查看详情</a>
+            </li>
+            <li class="int-list clear">
+                <a class="clear">
+                    <div class="clear w-wo-title">
+                        <span class="fl">项目状态：已发布</span>
+                        <span class="fr">项目预热中</span>
+                    </div>
+                    <div class="int-list-left fl">
+                        <img src="./img/w-wo.jpg" alt="">
+                    </div>
+                    <div class="int-list-right fr">
+
+                        <div class="w-first flex">
+                            <span>为你写诗</span>
+                            <span>￥18000</span>
+                        </div>
+                        <p>类型：
+                            <span>减少</span>
+                        </p>
+                        <div class="clear wo-last">
+                            <span href="##" class="fl ">2018-09-05 12:53:26</span>
+                            <span href="##" class="fr ">筹集天数：10天</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="##" class="w-wo-a fr">查看详情</a>
+            </li>-->
+
+        </ul>
+    </div>
+<div class=" navslis">{$pagebar}</div>
+ <style type="text/css">
+    .footerg{
+        width: 100%;
+    }
+</style>
+<include file="Public:footer"/>
+
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+    <script src="/Public/wap/js/index.js"></script>
+    
+ <script> var str = $(".navslis").html(); var m =str.length; var n = str.indexOf("条记录"); var j = str.substring(n+1,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(s+"记录", "")); var m =str.length; var n = str.indexOf("尾页</a>"); var j = str.substring(n+6,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(j, "")); for (var i=4;i<$(".navslis a").length-1;i++) { $(".navslis a").eq(i).hide(); } </script>
+</body>
+
+</html>

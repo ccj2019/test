@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'title', 2 => 'images', 3 => 'price', 4 => 'zxprice', 5 => 'content', 6 => 'add_time', 7 => 'guige', 8 => 'zhexian', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'title' => 'varchar(250)', 'images' => 'text', 'price' => 'decimal(10,2)', 'zxprice' => 'decimal(10,2)', 'content' => 'text', 'add_time' => 'varchar(20)', 'guige' => 'varchar(50)', 'zhexian' => 'varchar(10)', ), ); ?>

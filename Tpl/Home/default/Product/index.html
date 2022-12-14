@@ -1,0 +1,79 @@
+<include file="Product:js"/>
+<div class="lc">
+    <div class="lc_sx">
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec3">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">产品分类：</td>
+            <td width="91%" >
+                <span class="px_spec2"><a href="{$strUrl}&borrow_type=0" class="png borrow_type0">全部产品</a></span>
+                <volist name=":getProCat()" id="vo">
+                  <span class="px_spec4"><a href="{$strUrl}&borrow_type={$vo.id}" class="png borrow_type{$i}">{$vo.type_name}</a></span>
+                </volist>
+            </td>
+          </tr>
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">项目期限：</td>
+            <td width="91%">
+                <a href="{$strUrl}&borrow_duration=0" class="borrow_duration0">不限</a>
+              <a href="{$strUrl}&borrow_duration=1" class="borrow_duration1">1-3个月</a>
+              <a href="{$strUrl}&borrow_duration=2" class="borrow_duration2">4-6个月</a>
+              <a href="{$strUrl}&borrow_duration=3" class="borrow_duration3">7-9个月</a>
+              <a href="{$strUrl}&borrow_duration=4" class="borrow_duration4">10-12个月</a>
+              <a href="{$strUrl}&borrow_duration=5" class="borrow_duration5">13-24个月</a>
+              <a href="{$strUrl}&borrow_duration=6" class="borrow_duration6">24个月以上</a> 
+            </td>
+          </tr>
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5">
+          <tr valign="top">
+            <td width="9%" class="px_spec1" style="border-bottom:0px;">项目状态：</td>
+            <td width="91%" style="border-bottom:0px;">
+                <a href="{$strUrl}&borrow_status=0" class="borrow_status0">全部</a>          
+              <a href="{$strUrl}&borrow_status=2" class="borrow_status2">正在认购</a>
+              <a href="{$strUrl}&borrow_status=6" class="borrow_status6">正在还款</a>
+              <a href="{$strUrl}&borrow_status=7" class="borrow_status7">还款完成</a>
+            </td>
+          </tr>
+        </table>
+    </div>
+    <div class="lc_list">
+        <ul>
+            <!-- <volist name="list.list" id="vb"> -->
+            <li>
+                <table border="0" cellspacing="0" cellpadding="0" width="100%" height="75">
+                  <tr>
+                    <td width="4%" align="center"><span class="px_spec6"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon10_hover.png" class="png" /></span></td>
+                    <td colspan="4" class="px_spec7"><a href="{:U('product/detail',array('id'=>$vb['id']))}">{$vb.borrow_name|cnsubstr=###,18}</a></td>
+                    <td width="10%" rowspan="2" class="px_spec10">
+                        <span class="def_progress" data-drive="{$vb.progress}"><span style="margin-left:-8px;">{$vb.progress}%</span></span>
+                    </td>
+                    <!-- <if condition="$vb.borrow_status gt 2"> -->
+                    <td width="14%" rowspan="2" align="center"class="px_spec12"><a>已售磬</a><div class="px_spec15"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/pc_sq.png" class="png" /></div></td>
+                    <!-- <else/> -->
+                    <td width="14%" rowspan="2" align="center"class="px_spec11"><a href="{:U('product/detail',array('id'=>$vb['id']))}">立即投资</a></td>
+                    <!-- </if> -->
+                  </tr>
+                  <tr class="px_spec8">
+                    <td>&nbsp;</td>
+                    <td width="18%">年化收益率<span><b>{$vb.borrow_interest_rate}%</b></span></td>
+                    <td width="23%">项目总额<span>{$vb.borrow_money|Fmoney=###,false}元</span></td>
+                    <td width="18%">起投金额<span>{$vb.borrow_min|default=50}元</span></td>
+                    <td width="17%">理财期限<span class="px_spec9">{$vb.borrow_duration}<if condition="$vb.repayment_type eq 1">天<else/>个月</if></span></td>
+                  </tr>
+                </table>
+
+            </li>
+             <!-- </volist> -->
+        </ul>
+    </div>
+    <div class="px_page navslis">{$list.page}</div>
+</div>
+<script type="text/javascript">
+    $(function(){
+      $(".borrow_type{$borrow_type|default=0}").addClass("sel");
+      $(".borrow_duration{$borrow_duration}").addClass("sel");
+      $(".borrow_status{$borrow_status|default=0}").addClass("sel");      
+    });
+</script>

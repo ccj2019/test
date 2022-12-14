@@ -1,0 +1,221 @@
+<include file="default:Public:headern" />
+
+<div class="gwc">
+    <p class="gwc_1">核对订单</p>
+    <div class="gwc_list">
+        <div class="gwc_dz">
+            <div class="sh_xx">收货人信息 <a href="/member/memberaddress">+新增收货地址</a></div>
+
+            <ul id="admoren" style="display:none;">
+
+            <li>
+          
+
+            </li>
+            </ul> 
+
+
+            <ul id="adlist">
+<volist name="adlist" id="vo">
+    <li data="{$vo.id}" name="{$vo.name}" address="{$vo.address}">
+      <p class="sh_name">{$vo.name}</p><span>{$vo.address}&nbsp;&nbsp;{$vo.main_phone} </span></li>
+</volist>
+            </ul>   <div class="clear"></div>
+            <a href="##" class="shouqi">[收起地址∧]</a>
+
+         </div>
+        <div class="clear"></div>
+        <div class="gwc_topd">
+            确认订单信息 <a href="__URL__/car_list" style="float: right;
+    font-size: 14px;
+    color: #e45126;"><返回购物车修改</a>
+        </div>
+        <div class="clear"></div>
+ <style type="text/css">
+	.gwc_topsd,.gwc_listsd{
+		border-bottom: solid 1px #e7e7e7;
+	}
+	.zz_order{
+		border-bottom: none;
+	}
+
+</style>   
+    <div class="zz_order">
+            <div class="gwc_topsd">
+                <span>&nbsp;</span>
+                <span>商品</span>
+                <span>单价</span>
+                <span>数量</span>
+                <span>金额</span>
+          <div class="clear"></div>
+            </div>
+
+<volist name="list" id="vo">
+        <div class="gwc_listsd">
+                <span><img src="{$vo.art_img}" /> </span>
+                <span>{$vo.title}</span>
+                <span id="dd_danjia">￥{$vo.art_jiage}</span>
+                <span class="zz_sl">
+{$vo.num}
+
+</span>
+        <span id="dd_zongjias">￥{$vo.art_zj}</span>
+       
+        <div class="clear"></div>
+        </div>
+</volist>
+
+
+       </div>
+<!-- <form method="post"  name="post_order" id="post_order" action="__URL__/post_order"> -->
+      <input type="hidden" id="address" name="address"/>
+      <input type="hidden" id="carids" name="carids" value="{$carids}" />
+      <input name="pay_way" type="hidden" id="pay_way" />
+      <input name="jifen" type="hidden" id="jifen" value="0" />
+      <input name="jine" type="hidden" id="jine" value="{$zongjia}"/>
+<!-- </form> -->
+
+      <div class="gwc_liuyan">
+      	<span>给商家留言:</span>
+		<textarea id="liuyan" name="liuyan" class="liuyan" maxlength="150"></textarea>
+		<div class="clear"></div>
+      </div>
+
+<if condition="$jsons.kyjifen gt 0">
+
+
+      <div class="gwc_jifen">
+      	<p><input type="checkbox" id="jifenck" name="jifenck" onclick="checkon(this)">使用{$jsons.shiyong}个积分  
+      		<span id="dixian"  zjf="{$zjf}" wjf="{$zongjia}" syjf="{$jsons.shiyong}">￥-{$jsons.dixian}</span></p>
+		(你有{$jsons.kyjifen}个积分，可用{$jsons.kyjifen}个)
+		<div class="clear"></div>
+      </div>
+</if>
+        
+<!-- <div class="gwc_botd">
+
+          
+
+            优惠券：<select name="yhq" id="yhq" class="yhq">
+              <option>1</option>
+              <option>1</option>
+              <option>2</option>
+              <option>21</option>
+            </select>
+
+ </div> -->
+  
+  
+    </div>
+    
+    
+    <div class="dd_zf">
+        
+        <!--<div class="zffs" data="2">-->
+            <!--<img src="/Public/new/images/dd_17.jpg" /> <p class="zf_fs"> 微信支付</p>-->
+        <!--</div>-->
+        <div class="zffs" data="1">
+            <img src="/Public/new/images/dd_15.jpg" /> <p class="zf_fs">支付宝支付</p>
+        </div>
+        
+        
+        <span>选择支付方式:</span>
+        
+    </div>
+    
+    <div class="dd_xq">
+        <p class="dd_xq_p">实付：<span id="dd_zongjia">￥{$zongjia}</span></p>
+
+        <p><span>寄送至：</span><label id="pd_address">{$adlist[0]['address']}</label></p>
+        <p><span>收货人：</span><label id="pd_ren">{$adlist[0]['name']}</label></p>
+        
+        <a href="javascript:void(0);" onclick="tijiao()" id="zf_btn">立即支付</a>
+    </div>
+  
+</div>
+
+
+<script type="text/javascript">
+
+function checkon(o){
+	let dixian=$("#dixian").attr('zjf');
+	let zongjia=$("#dixian").attr('wjf');
+	let syjf=$("#dixian").attr('syjf');
+	let zj;
+
+	if($("#jifenck").prop("checked")==true){
+		zj=dixian;
+		$("#jifen").val(syjf);
+	}else{
+		zj=zongjia;
+		$("#jifen").val(0);
+	}
+	
+	$("#jine").val(zj);
+	$("#dd_zongjia").html("￥"+zj);
+}
+
+
+function donum(num){
+    var id=$("#id").val();
+    $.ajax({
+    url: "__URL__/do_car_num",
+    type: "post",
+    dataType: "json",
+    data: {"num":num,"id":id},
+    success: function(d) {
+       $("#dd_zongjia").html("￥"+d);
+       $("#dd_zongjias").html("￥"+d);
+    }
+  }); 
+}
+function tijiao(){
+    let address=$("#address").val();
+    let carids=$("#carids").val();
+    let pay_way=$("#pay_way").val();
+    let jifen=$("#jifen").val();
+    let jine=$("#jine").val();
+    let liuyan=$("#liuyan").val();
+    $.ajax({
+            url: "__URL__/post_order",
+            type: "post",
+            dataType: "json",
+            data: {"address":address,"carids":carids,"pay_way":pay_way,"jifen":jifen,"jine":jine,"liuyan":liuyan},
+            success: function(d) {
+               if(d.status==1){
+                    if(d.pay_way==1){
+                        window.location.href="__URL__/zhifubao/id/"+d.ordernums;
+                    }else if(d.pay_way==2){
+                        window.location.href="__URL__/weixin/id/"+d.ordernums;
+                    }else if(d.pay_way==3){
+                        window.location.href="/member/shoporder";
+                    }
+
+               }else{
+                    alert(d.msg);
+               } 
+            }
+    });
+}
+
+$(function(){
+
+    /*订单数量*/
+    $(".kucun #jia").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        $(".kucun #shuliang").val(Number(b)+1)
+        donum(Number(b)+1);
+    })
+    
+    $(".kucun #jian").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        if(b>1){
+            $(".kucun #shuliang").val(Number(b)-1);
+            donum(Number(b)-1);
+        }
+    })
+})
+
+</script>
+<!--底部-->
+<include file="default:Public:footern" />

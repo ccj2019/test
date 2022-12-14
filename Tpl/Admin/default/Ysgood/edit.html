@@ -1,0 +1,240 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/swfupload.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	//swf上传后排序
+	var IS_AD = true;
+	function rightPic(o){
+		var o = $("#albCtok"+o);
+		if( o.next().length > 0) {
+			var tmp = o.clone();
+			var oo = o.next();
+			o.remove();
+			oo.after(tmp);
+		}else{
+			alert("已经是最后一个了");
+		}
+	}
+	//swf上传后排序
+	function leftPic(o){
+		var o = $("#albCtok"+o);
+		if( o.prev().length > 0) {
+			var tmp = o.clone();
+			var oo = o.prev();
+			o.remove();
+			oo.before(tmp);
+		}else{
+			alert("已经是第一个了");
+		}
+	}
+	//swf上传后删除图片start
+	function delPic(id){
+		var imgpath = $("#albCtok"+id).find("input[type='hidden']").eq(0).val();
+		var datas = {'picpath':imgpath,'oid':id};
+		$.post("__URL__/swfupload?delpic", datas, picdelResponse,'json');
+	}
+
+	function picdelResponse(res){
+		var imgdiv = $("#albCtok"+res.data);
+		imgdiv.remove();
+		ui.success(res.info);
+		ui.box.close();
+	}
+	//swf上传后删除图片end
+</script>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+<script>
+	KindEditor.ready(function(K) {
+		var editor = K.editor({
+			allowFileManager : true
+		});
+		K('#J_selectImage').click(function() {
+			editor.loadPlugin('multiimage', function() {
+				editor.plugin.multiImageDialog({
+					clickFn : function(urlList) {
+						var div = K('#J_imageView');
+						div.html('');
+						K.each(urlList, function(i, data) {
+							addImage(data.url,i,data.url)
+							//div.append('<img src="' + data.url + '">');
+						});
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+<style type="text/css">
+	.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+
+	<div class="page_tit">添加预售</div>
+	<div class="page_tab"></div>
+	<div class="form2">
+		<form method="post" action="__URL__/doedit" onsubmit="return subcheck();" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<div id="tab_1">
+				<dl class="lineD"><dt>名称：</dt><dd><htmlA:input id="title" value="{$vo.title}" tip="*"/></dd></dl>
+				<dl class="lineD"><dt>模板：</dt><dd><htmlA:input id="templateid" value="{$vo.templateid}" tip="*"/></dd></dl>
+				<dl class="lineD" style="display:none"><dt>图片：</dt><dd><div style="display: inline; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;"><span id="spanButtonPlaceholder"></span></div><span class="tip">*</span></dd></dl>
+				<dl class="lineD"><dt>图片：</dt><dd> <input type="button" id="J_selectImage" value="批量上传" />
+					<div id="J_imageView"></div></dd></dl>
+				<dl class="lineD"><dt>预览：</dt>
+					<dd>
+						<table cellpadding="0" cellspacing="0" width="100%">
+							<tr id="handfield">
+								<td colspan="4" class="bline" style="background:url(images/albviewbg.gif) #fff 0 20px no-repeat;">
+									<table width='100%' height='160' style="margin:0 0 20px 0">
+										<tr>
+											<td>
+												<div id="thumbnails">
+													<php>$x=1000;foreach(unserialize($vo['images']) as $v){ $x--;</php>
+													<div class="albCt" id="albCtok<php>echo $x;</php>">
+														<!--<php> print("$v"); </php>-->
+														<img width="120" height="120" src="__ROOT__/<php>echo $v['img'];</php>"><a onclick="javascript:delPic(<php>echo $x;</php>)" href="javascript:;">[删除]</a><a onclick="javascript:leftPic(<php>echo $x;</php>)" href="javascript:;">[前移]</a><a onclick="javascript:rightPic(<php>echo $x;</php>)" href="javascript:;">[后移]</a><div style="margin-top:10px">注释：<input type="text" style="width:190px;" value="<php>echo $v['info'];</php>" name="picinfo[]"><input type="hidden" value="__ROOT__/<php>echo $v['img'];</php>" name="swfimglist[]"></div><div style="margin-top:10px">地址：<input type="text" style="width:190px;" value="<php>echo $v['url'];</php>" name="urlinfo[]"></div>
+													</div>
+													<php> } </php>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</dd>
+					<dl class="lineD"><dt>规格：</dt><dd><htmlA:input id="guige" value="{$vo.guige}" tip="*"/></dd></dl>
+					<!--<dl class="lineD"><dt>折现价格：</dt><dd><htmlA:input id="zxprice" value="{$vo.zxprice}" tip="*"/></dd></dl>-->
+					<dl class="lineD"><dt>商品价格：</dt><dd><htmlA:input id="price" value="{$vo.price}" tip="*"/></dd></dl>
+					<dl class="lineD"><dt>收购价格：</dt><dd><htmlA:input id="sgprice" value="{$vo.sgprice}" tip="*"/></dd></dl>
+					<dl class="lineD"><dt>周期：</dt><dd><htmlA:input id="zhouqi" value="{$vo.zhouqi}" tip="*"/></dd></dl>
+
+                    <dl class="lineD"><dt>显示：</dt><dd><htmlA:input id="xianshi" value="{$vo.xianshi}" tip="*"/></dd></dl>
+
+					<dl class="lineD"><dt>预购份数：</dt><dd><htmlA:input id="ygfenshu" value="{$vo.ygfenshu}" tip="*"/></dd></dl>
+					<dl class="lineD"><dt>限购份数：</dt><dd><htmlA:input id="xgfenshu" value="{$vo.xgfenshu}" tip="*"/></dd></dl>
+
+					<if condition="$vo.sx_time neq '' ">
+						<dl class="lineD"><dt>上线时间：</dt><dd>{$vo.sx_time|date='Y-m-d H:i:s',###}</dd></dl>
+					</if>
+
+					<input type="hidden" name="sx_time" value="{$vo.sx_time}" />
+
+
+					<if condition="$vo.js_time neq '' ">
+						<dl class="lineD"><dt>结算时间：</dt><dd>{$vo.js_time|date='Y-m-d H:i:s',###}</dd></dl>
+					</if>
+
+				</dl>
+
+
+				<dl class="lineD"><dt>下线时间：</dt><dd><htmlA:input id="end_time" value="{$vo.end_time|date='Y-m-d H:i:s',###}" tip="*"/></dd></dl>
+				<script type="text/javascript">
+					date = new Date();
+					Calendar.setup({
+						inputField     :    "end_time",
+						ifFormat       :    "%Y-%m-%d %H:%M:%S",
+						showsTime      :    true,
+						timeFormat     :    "24"
+					});
+				</script>
+
+					<!--<dl class="lineD"><dt>赠送分数：</dt><dd><htmlA:input id="fenshu" value="{$vo.fenshu}" tip="*"/></dd></dl>-->
+					<dl class="lineD">
+						<dt>赠品选择：</dt>
+						<dd>
+							<select name="zpid"  class="c_select">
+								<option>--请选择--</option>
+
+								<volist name="zplist" id="v1">
+									<option value="{$v1.id}" <if condition="$v1.id eq $vo['zpid']">  selected="selected" </if> >{$v1.title}</option>
+								</volist>
+							</select>
+							<!--<htmlA:select id="title" value='key|vo.zpid' datakey='zpid' tip=""/>-->
+						</dd>
+					</dl>
+					<dl class="lineD"><dt>满赠：</dt><dd><htmlA:input id="manzeng" value="{$vo.manzeng}" tip="*"/></dd></dl>
+
+				<dl class="lineD">
+					<dt>发布人：</dt>
+					<dd>
+						<select name="uid"  class="c_select">
+							<option value="125609" <if condition="$vo.uid eq 125609">  selected="selected" </if> >项目方东盛澜</option>
+							<option value="1189" <if condition="$vo.uid eq 1189">  selected="selected" </if> >东盛澜</option>
+						</select>
+						<!--<htmlA:select id="title" value='key|vo.zpid' datakey='zpid' tip=""/>-->
+					</dd>
+				</dl>
+
+				<dl class="lineD">
+					<dt>活动：</dt>
+					<dd>
+						<htmlA:radio id="is_huodong" value="key|vo.is_huodong" default="1|是,0|否" />
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>长期项目：</dt>
+					<dd>
+						<htmlA:radio id="changqi" value="key|vo.changqi" default="0|否,1|是" />
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>合同：</dt>
+					<dd>
+						<htmlA:radio id="contract" value="key|vo.contract" default="1|是,0|否" />
+					</dd>
+				</dl>
+
+				<dl class="lineD"><dt>介绍：</dt>
+						<dd>
+							<include file="./Style/Editor/kissy.html" />
+							<htmlA:editor id="content" w='780px' type='kissy'  value="{$vo.content}"/>
+						</dd>
+					</dl>
+				<dl class="lineD">
+					<dt>新手项目：</dt>
+					<dd>
+						<htmlA:radio id="isxinshou" value="key|vo.isxinshou" default="0|否,1|是" />
+					</dd>
+				</dl>
+				<dl class="lineD"><dt>日限购次数：</dt><dd><htmlA:input id="xcishu" value="{$vo.xcishu}" tip="*"/></dd></dl>
+
+				<dl class="lineD"><dt>日限购金额：</dt><dd><htmlA:input id="rxiane" value="{$vo.rxiane}" tip="*"/></dd></dl>
+
+
+				<dl class="lineD">
+					<dt>状态：</dt>
+					<dd>
+						<if condition="in_array($vo['status'],['1','2'])">
+
+							<htmlA:radio id="status" datakey="status" value="key|vo.status" />
+
+							<else/>
+
+							{$status[$vo['status']]}
+
+						</if>
+
+					</dd>
+				</dl>
+
+			</div><!--tab1-->
+
+
+
+			<div class="page_btm">
+				<input type="submit" class="btn_b" value="确定" />
+			</div>
+		</form>
+	</div>
+
+</div>
+<include file="Public:_footer" />

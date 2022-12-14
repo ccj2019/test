@@ -1,0 +1,121 @@
+<include file="default:Public:headern" />
+
+
+
+<div class="banner">
+<a href="#" style=" background-image:url(/Public/new/images/hc_02.jpg)"></a>
+</div>
+<div class="haichan">
+    <div class="hc_shop">
+        <ul>
+        	<li><img src="/Public/new/images/hc_05.jpg" />
+            
+            <span>
+             <b>水产干货</b>
+   	    Aquatic <br />dry goods<a href="#more">Go in</a></span>
+        </li>
+            <li><img src="/Public/new/images/hc_08.jpg" /><span><b>鲜活海鲜</b>
+        Fresh <br />seafood<a href="#more">Go in</a></span></li>
+            <li><img src="/Public/new/images/hc_09.jpg" /><span><b>即食零食</b>
+        Instant <br />snack<a href="#more">Go in</a></span></li>
+            <li><img src="/Public/new/images/hc_11.jpg" /><span><b>海鲜礼包</b>
+          Seafood <br />package<a href="#more">Go in</a></span></li>
+        </ul>
+    </div>
+      <div class="clear"></div>
+    <div class="ch_rm">
+    	<span></span>
+        <span>热销商品</span>
+        <span></span>
+    </div>
+    <div class="clear"></div>
+    <div class="ch_rms">
+    	<ul>
+    	
+    	<volist name="rlist" id="vo">	
+        	<li>
+            	<a href="/Shop/shop_show?id={$vo['id']}"><img src="{$vo.art_img}" />
+                <span class="ch_title">{$vo.title|cnsubstr=###,12}</span>
+                <span class="ch_ms">{$vo.art_miaoshu|cnsubstr=###,15}</span>
+                <span class="ch_price">￥{$vo.art_jiage}</span></a>
+                <a class="goumai" href="javascript:void(0)" onclick="addcar({$vo.id})">
+                	加入购物车
+                </a>
+            </li>
+        </volist>
+
+
+
+
+
+        </ul> <div class="clear"></div>
+    </div>
+    
+    <img class="hc_banner_2" src="/Public/new/images/hc_29.jpg" />
+    
+    <div class="clear"></div>
+    <div class="ch_rm" id="more">
+    	<span></span>
+        <span>更多商品</span>
+        <span></span>
+    </div>
+    
+    <div class="ch_rm_gd">
+    	<ul>
+    		<volist id="vo" name="list.list">
+        	<li>
+            	<a href="/Shop/shop_show?id={$vo['id']}"><img src="{$vo.art_img}" /></a>
+                <span class="ch_title">{$vo.title|cnsubstr=###,20}</span>
+                <span class="ch_price">￥{$vo.art_jiage}</span>
+                <a href="##" onclick="addcar({$vo.id})" class="gwc">
+                	<img src="/Public/new/images/hc_03.png" />
+                </a>
+            </li>
+
+        </volist>
+           
+      </ul>
+      </div>     
+        <div class="clear"></div>    
+    <div class="xpage">{$pagebar}</div>
+</div>
+
+<a href="/shop/car_list">
+<div class="car_n">
+    <span id="carnum">{$carnum}</span>
+</div></a>
+
+<div class="car_al">
+    <a href="##" class="guanbi" onclick="guanbi()">&nbsp;</a>
+    成功加入购物车！
+    <span>您可以<a href="/shop/car_list">去购物车</a>结算</span>
+</div>
+
+<script type="text/javascript">
+
+function addcar(id){
+    $.ajax({
+        url: "__URL__/add_cars",
+        type: "post",
+        dataType: "json",
+        data: {"gid":id},
+        success: function(d) {
+            if(d.status==1){
+                $(".car_al").css("display","block");
+                $("#carnum").html(d.carnum);
+                setTimeout(function(){ guanbi(); }, 3000);
+
+           }else if(d.status==2){
+                window.location.href="/member/common/login?url=/shop/index";
+           }else{
+                alert("操作失败！");
+           }
+        }
+  }); 
+}
+function guanbi(){
+     $(".car_al").css("display","none");
+}
+</script>
+<!--底部-->
+<include file="default:Public:footern" />

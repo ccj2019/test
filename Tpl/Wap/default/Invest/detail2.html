@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+<!-- 引入组件 -->
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+
+<style>
+</style>
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="##" class="w-header-left">
+                < 返回 </a>
+                    <h3>积分明细</h3>
+                    <a href="##" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+
+    <!-- 项目详情  start -->
+
+
+
+
+    <div class="w-item-warpper">
+        <div class="w-probro-bg">
+            <img src="/public/wap/img/w-itemdet.jpg" alt="">
+        </div>
+        <div class="w-item">
+            <div class="w-itemcon">
+                <h3>第122期海鲜项目（梭子蟹）体验标</h3>
+                <ul class="w-itemcon-ul">
+                    <li class="flex first">
+                        <div>
+                            <span>93100</span>
+                            <p>已筹金额</p>
+                        </div>
+                        <div>
+                            <span>53</span>
+                            <p>支持人数</p>
+                        </div>
+                        <div>
+                            <span>5天</span>
+                            <p>剩余时间</p>
+                        </div>
+                    </li>
+                    <li class="jindu">
+                        <!-- 进度条 w为变量 -->
+                        <div class="wq-div" w="90">
+
+                        </div>
+                    </li>
+                    <li class="flex last">
+                        <div>
+                            目标金额：
+                            <span>210000</span>
+                        </div>
+                        <div>
+                            达成率：
+                            <span>53%</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-itemcon">
+
+                <ul class="w-itemcon-ul">
+                    <li class="flex first">
+                        <div>
+                            <span>2.37%</span>
+                            <p>项目收益率</p>
+                        </div>
+                        <div>
+                            <span>1.5个月</span>
+                            <p>收益周期</p>
+                        </div>
+                        <div>
+                            <span>1期</span>
+                            <p>收益期数</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="w-itemcon">
+
+                <h4> 此项目必须在2018-09-11之前众筹¥210000才算成功</h4>
+            </div>
+            <div class="w-item-line">
+                <div>
+
+                </div>
+                <div>选择回报</div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 项目浏览 end -->
+
+
+    <div class="w-end flex">
+        <a href="##">关注项目</a>
+        <a href="##" class="w-end-active w-end-a">立即支持</a>
+    </div>
+    <!-- 购物弹窗 -->
+
+
+
+    <div class="l-spxztc" id="lsp">
+        <van-actionsheet v-model="show">
+            <div class="clear l-fd">
+                <div class="l-tc1">
+                    <img src="/public/wap/img/w-itemdet.jpg" />
+                </div>
+                <div class="l-tc2">
+                    <p class="l-swzp2 in">
+                        第122期海鲜项目（梭子蟹）
+                        <br> 体验标
+                    </p>
+                    <p class="l-swzp2 on">已选择：100元</p>
+                </div>
+            </div>
+            <div class="l-spguige">
+                <p>规格</p>
+                <div class="clear">
+                    <div class="l_spxz on">100元</div>
+                    <!--<div class="l_spxz">2斤装</div>-->
+                </div>
+            </div>
+            <div class="l-spguige">
+                <p>数量</p>
+                <van-stepper v-model="ddc" />
+            </div>
+            <div class="l-qurena" @click="asHide">
+                确认
+            </div>
+        </van-actionsheet>
+    </div>
+
+<style>
+	.footer{display: none;!important }
+</style>
+
+
+    <script src="/public/wap/js/index.js"></script>
+
+    <script>
+        $(function () {
+
+            var a = "#00a0e9";
+            var b = "#dedede";
+            var w = "100%";
+            var h = "5px";
+            var wq0div = $(".wq-div");
+            var barb = function () {
+                wq0div.each(function () {
+                    var width = $(this).attr('w');
+                    // width = parseFloat($('.w-porper-div2 .first>span').text())
+                    var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+                    $(this).append(barbox);
+                })
+            }
+
+            var amimeat = function () {
+                $(".charts").each(function (i, item) {
+                    var wi = parseInt($(this).attr("w"));
+                    $(item).animate({ width: wi + "%" }, 1000, function () {
+
+                    });
+                });
+            }
+            var barbCss = function (a, b) {
+                $(".barbox").css({
+                    "height": h,
+                    "line-height": h,
+                    "text-align": "center",
+                    "color": "#fff",
+                })
+                $(".barbox>dd").css({
+                    "float": "left"
+                })
+                $(".barline").css({
+                    "width": w,
+                    "background": b,
+                    "height": h,
+                    "overflow": "hidden",
+                    "display": "inline",
+                    "position": "relative",
+                    "border-radius": "8px",
+                })
+                $(".barline>d").css({
+                    "position": "absolute",
+                    "top": "0px",
+                })
+                $(".charts").css({
+                    "background": a,
+                    "height": h,
+                    "width": "0px",
+                    "overflow": "hidden",
+                    // "border-radius": "2px"
+                })
+            }
+            barb();
+            amimeat();
+            barbCss(a, b);
+        })
+
+        // 项目详情   弹窗（购物车）
+
+
+
+        var lsp = new Vue({
+            data: {
+                ddc: 1,
+                show: false
+            },
+            methods: {
+                asHide() {
+                    this.show = false
+                    //TODO
+                    alert(this.ddc)
+                }
+            }
+        }).$mount('#lsp');
+        $('.w-end-a').click(function () {
+            lsp.show = true
+        });
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

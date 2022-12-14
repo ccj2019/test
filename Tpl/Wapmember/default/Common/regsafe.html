@@ -1,0 +1,110 @@
+<script type="text/javascript">
+var imgpath="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";
+var curpath="__URL__";
+</script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/Validform_min.js"></script>
+<div style="clear:both;"></div>
+<div class="mem21">
+   <div class="mem21-1">
+   	 <span class="mem_spec103">账户注册</span>
+     <span class="mem_spec104">已有帐号?<a href="/member/common/login">立即登录</a></span>
+   </div> 	
+   <div class="mem21-4">
+   		<ul>
+        	<li><span style="color:#ff7200;">填写账户信息</span></li>
+            <li><span style="padding-left:100px;color:#ff7200;">验证账户信息</span></li>
+            <li style="text-align:right; width:100px !important; margin-left:170px;">注册账户成功</li>
+            <div style="clear:both;"></div>
+        </ul>
+   </div>
+   <div class="mem21-3">
+   		<form action="/member/common/sendcode/" id="reg_form" method="post">
+        	<table border="0" cellspacing="0" cellpadding="0" width="100%" height="120">
+              <tr>
+                <td width="22%" rowspan="2" align="right"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/mem33.jpg" /></td>
+                <td width="16%" class="mem_spec113">手机号码：</td>
+                <td width="25%"><input id="txtPhone" name="txtPhone" placeholder="输入手机号码"  datatype="m" bakajaxurl="/member/common/ckphone/" sucmsg="手机验证通过" nullmsg="输入手机号码" errormsg="手机格式不正确"  class="mem_spec114" /></td>
+                 <td width="37%" class="mem_spec115"><div class="Validform_checktip"></div></td>
+              </tr>
+              
+              <tr>
+                <td>&nbsp;</td>
+                <td class="mem_spec116"><a href="javascript:void(0)" id="Img1">发送验证码</a>
+                  <a href="javascript:void(0)" id="Img1_tmp" style="display:none;"></a>
+                </td>
+                <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+              </tr>
+           
+            </table>
+        </form>
+        
+        <form action="/member/common/changephoneact/" id="reg_form2" method="post" style="display:none">
+        	<table border="0" cellspacing="0" cellpadding="0" width="100%" height="120">
+              <tr>
+                <td width="22%" rowspan="2" align="right">&nbsp;</td>
+                <td width="16%" class="mem_spec113">手机验证码：</td>
+                <td width="25%"><input id="code" name="code" maxlength="4" class="mem_spec114" /><input id="mobile" name="mobile" class="mem_spec114" type="hidden" /></td>
+                 <td width="37%" class="mem_spec115"><div class="Validform_checktip"></div></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="mem_spec116"><a href="javascript:void(0)" id="Img12">提交验证</a></td>
+                <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+              </tr>
+            </table>
+        </form>
+        
+   </div>
+</div>
+<script type="text/javascript">
+  function countDown(secs){             
+     if(--secs>0){     
+      $('#Img1').hide();
+      $('a#Img1_tmp').html(secs+'秒后重试').show();
+        setTimeout("countDown("+secs+")",1000);     
+      }     
+     else{
+        $("#imVcode").click();
+        $("#txtCode").val('');
+        $('#Img1').show().siblings('a#Img1_tmp').hide();         
+    }     
+  }
+$(document).ready(function() {
+  $("#Img1").click(function() {
+    $("#Validform_msg").hide();
+    $("#reg_form").submit();  
+  }); 
+  $("#Img12").click(function() {
+    $("#reg_form2").submit(); 
+  }); 
+    $("#txtUser").focus();
+  $("#reg_form").Validform({
+    tiptype:2,
+    ajaxPost:true,
+    callback:function(data){
+      if(data.status=="y"){
+        countDown(60);
+        $("#reg_form2").show();       
+        $("#mobile").val($("#txtPhone").val());
+      }else{        
+        $("#imVcode").click();
+        $("#txtCode").val('');
+        return false; 
+      }
+    }
+  });
+  $("#reg_form2").Validform({
+    tiptype:2,
+    ajaxPost:true,
+    callback:function(data){
+      if(data.status=="y"){
+        window.location.href="/member/common/regsuccess/";
+      }else{
+        return false; 
+      }
+    }
+  });
+});
+</script>

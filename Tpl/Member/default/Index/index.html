@@ -1,0 +1,98 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<style type="text/css">
+.tabvbox2 .bottom ul li{
+	text-align: left;
+	padding-left: 100px;
+}
+</style>
+<div class="box navls">
+	<span><a href="{:U('/member/index/index')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a href="{:U('/member/index/index')}">账号信息</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox2">
+		<!--会员中心-->
+		<div class="opt">
+			<div class="tt clearfix">
+				<div class="tx fl">
+					<img src="{$minfoz.user_img|default='/public/web/img/zuixinzixun/tx.png'}" alt="" />
+				</div>
+				<div class="med fl clearfix">
+					<div class="name">
+						<p>尊敬的<span>{$Think.session.u_user_name}</span>，您好~</p>
+					</div>
+					<div class="phone">
+						<ul class="clearfix">
+							{$minfoz.id|getVerify=###}
+						</ul>
+					</div>
+				</div>
+				<div class="cz fl">
+					<a href="{:U('charge/index')}">购买</a>
+				</div>
+				<div class="qd fl">
+					<a href="__APP__/member/capital/qiandao">签到</a>
+				</div>
+			</div>
+			<div class="bott">
+				<ul>
+					<li>
+						<p class="p1">资产金额</p>
+						<p class="p2">
+					  ¥{:getFloatvalue($all_money,2)}
+					  <!--
+					  ¥{:getFloatvalue($minfoz['account_money']+$minfoz['money_collect']+$minfoz['money_freeze'],2)}-->
+						</p>
+					</li>
+					<li>
+						<p class="p1">投资收益</p>
+						<p class="p2">
+							￥{:getFloatvalue($minfoz['receive_interests'],2)}
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="bottom">
+			<p class="p1">资产状况</p>
+			<ul>
+				<li>
+					<p>可用金额：<span>{:getFloatvalue($minfoz['account_money'],2)}</span></p>
+					
+					
+					
+					
+					
+				</li>
+				
+				 <li style="margin-bottom:0;">
+					<p>待收本金：<span>{$dsbj|Fmoney=###,false}</span></p>
+				</li> 
+				
+				
+				
+			</ul>
+			<ul style="border: none;">
+				<!-- <li>
+					<p>已收本金：<span>{$zz|default="0.00"}</span></p>
+				</li> -->
+				<li> <p>积分总额：<span>{$minfoz["credits"]|default="0"}</span></p>
+				</li>
+				<li>
+					<p>鱼　　币：<span>{$yubi|default="0"}</span></p>
+				</li>
+				<!--<li>
+					<p>累计充值：<span>{$msummary.ljczje|default="0.00"}</span></p>
+				</li>
+				<li style="margin-bottom:0;">
+					<p>累计提现：<span>{$msummary.ljtxje|default="0.00"}</span></p>
+				</li>-->
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<include file="default:Public:footer" group="Home" />

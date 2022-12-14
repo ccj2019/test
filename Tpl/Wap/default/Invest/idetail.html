@@ -1,0 +1,203 @@
+ 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<style type="text/css">
+	
+</style>
+	<body>
+		
+			
+				
+			<div class="l-fh l-on">
+ 
+			<a href="<?php echo $_SERVER['HTTP_REFERER'] ;?>" class="l-fanhui on">&lt;返回</a><span>新手体验</span>
+			<div class="l-fanhui1">
+				<!--<a href="##">会员中心</a>-->
+			
+			</div>
+		</div>
+				
+	<!--新手体验-->			
+<div class="L-boc">
+	<div class="Bocyuan">
+		50%
+		<!--{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}-->
+	</div>	
+	<div class="Bocx">
+		{$binfo.borrow_name}【1天/到期奖励】
+	</div>
+</div>
+<div class="doc">
+	<div class="clearfix">	
+	   <div class="DC1">	
+	      <p class="p1"><span>{$binfo.borrow_interest_rate}</span>%</p>
+	      <p>年化收益</p>
+	      
+	      
+	   </div>
+	   <div class="DC1">	
+	      <p class="p1"><span>1</span>天</p>
+	      <p>项目周期</p>
+	      
+	      
+	   </div>
+	   <div class="DC1">	
+	      <p class="p1"><span>不限额 </span> </p>
+	      <p>投资金额</p>
+       </div>
+	</div>
+	
+		<div class="clearfix">	
+	   <div class="DC1">	
+	      <p class="p1"><span>不限</span></p>
+	      <p>支持人数</p>
+	      <!--{:count($investinfo)}-->
+ 
+ </div>
+	   <div class="DC1">	
+	      <p class="p1"><span>不限</span></p>
+	      <p>投资期限</p>
+	      
+	      
+	   </div>
+	   <div class="DC1">	
+	      <p class="p1"><span>不限 </span></p>
+	      <p>已筹金额</p>
+       </div>
+        <!--{$binfo.has_borrow}-->
+	</div>
+ 
+	<div class="BclST">
+		<ul>
+			<form method="post" name="investForm" id="investForm" action="/wap/invest/investmoney">
+		<input type="hidden" name="is_experience" id="is_experience" value="1" />
+        <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+        <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+        <input type="hidden" id="invest_money" value="{$binfo.borrow_min}" name="money">  
+     	<input type="hidden" name="is_experience" id="is_experience" value="1" />            
+	 
+ <li>支付密码：	<input type="password"value="" id="pin" name="pin"  /> </li>
+ 
+
+        </form> 
+			<!--<li>注册时间：2018-10-19 16：30：00</li>
+			<li>过期时间：2018-11-19 16：30：00</li>
+			<li>投标时间：2018-11-20 16：18：00</li>-->
+			<li class="clearfix">
+			    <div class="fl Ye1">起投金额:<span>￥8888.00</span><span>元</span></div>
+				<div class="fr Ye2"> 	可投金额:<span>￥8888.00</span><span>元</span></div> 
+				<!--<div class="fl Ye1">-->
+					
+				<!--	可用余额:<span>￥{$money_experience|default='--'}</span><span>元</span>-->
+				<!--</div>-->
+				<!--<div class="fr Ye2">-->
+				<!--	可投资金额:<span>￥{$money_experience|default='--'}</span><span>元</span>-->
+					
+				<!--</div>--> 
+			</li>
+			
+			
+		</ul>
+	</div>
+	
+</div>
+<!--新手标-->
+<div class="Xsb">
+	<div class="XSB clearfix">
+		<div class="on">新手标说明</div>
+		<div >投标记录</div>
+		
+	</div>
+	<div class="XSB1">
+		<div class="s1 on">
+					<h2>新手体验标介绍</h2>
+					<div class="Sblis1">
+						<p>
+							<span>投资期限：</span>
+							<span>
+						新手体验标是铭万众筹平台给新注册用户的专
+                 享福利标，用户可在注册后一个月内投标。
+					</span>
+						</p>
+						<p>
+							<span>投资次数：</span>
+							<span>
+						新手注册体验金每个用户仅限投资一次。
+					</span>
+						</p>
+						<p>
+							<span>投资收益：</span>
+							<span>
+						投资收益在投标结束后发放至用户个人账户，
+                 可提现。
+					</span>
+						</p>
+
+					</div>
+
+				</div>
+		<div class="s1 ">
+			<h2>新手体验标记录</h2>
+			<div class="Sblis">
+						 <volist name="investinfo" id="vi">  
+
+						 
+				<p>
+					<span>{$vi.user_name|hidecard=###,5}</span>
+					<span>体验金</span>
+					<span>￥{:getFloatvalue($vi['investor_capital'],2)}元</span>
+					<span>已收益</span>
+				</p>		 
+				</volist>
+				<!--<p>
+					<span>昵称</span>
+					<span>本金</span>
+					<span>￥{$binfo.borrow_min}元</span>
+					<span>已收益</span>
+				</p>
+				<p>
+					<span>2018-10-18</span>
+					<span>利息</span>
+					<span>￥20元</span>
+					<span>已收益</span>
+				</p>-->
+				
+					
+			</div>
+		
+		</div>
+
+		
+	</div>
+	
+</div>
+<!--tis-->
+
+ 
+<div class="tis  on" style="display: none;">	
+	新手标已收益
+</div>
+      
+      <!--tis-->
+		<div class="tisbox " style="display: block;">
+			<div class="tis1">
+				￥{$binfo.borrow_min}元
+			</div>
+			<div id="sub1" class="tis">
+				立即投标
+			</div>
+ <script type="text/javascript">
+ 	$('#sub1').click(function() {
+ 		$('#investForm').submit();
+ 	})
+ </script>
+		</div>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,65 @@
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+
+<!--账户管理我的红包-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="muhb">
+                    <h2>我的红包</h2>
+                    <div class="hbtop">
+                        <ul>
+                            <li><a href="{:U('bonus/bonus',array('status'=>1))}">可使用</a></li>
+                            <li><a href="{:U('bonus/bonus',array('status'=>2))}">已使用</a></li>
+                            <li><a href="{:U('bonus/bonus',array('status'=>3))}">已过期</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="hbbot">
+                        <div class="hbcon">
+                            <volist name="bonusList" id="vo">
+                                <div class="hbox <if condition="$vo.status eq 3"> gq </if>">
+                                    <a href="/invest/index.html">
+                                        <div class="hbl">红包抵现</div>
+                                        <div class="hbm">
+                                            <strong>{$vo.money_bonus}元</strong>
+                                            <p>抵现{$vo.money_bonus}元 有效次数：1次</p>
+                                            <span>有效期：{$vo.start_time|date="Y-m-d",###} 至 {$vo.end_time|date="Y-m-d",###}</span>
+                                        </div>
+                                        
+                                        <if condition="$vo.status eq 1"><div class="hbr">可 使 用</div>
+                                        <elseif condition="$vo.status eq 2"/><div class="hbr">已 使 用</div>
+                                        <else/><div class="hbr">已 过 期</div>
+                                        </if>
+                                        
+                                        <div class="clear"></div>
+                                    </a>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,202 @@
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+<link rel="stylesheet" href="./css/FlexoCalendar.css">
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+<script src="/Public/wap//js/FlexoCalendar.js"></script>
+
+<body style="    background: #fff;">
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:window.history.back();" class="w-header-left">
+                < 返回 </a>
+                    <h3>项目明细</h3>
+                    <a href="/wapmember" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+
+    <!-- 项目明细 start -->
+    <div class="w-prodet">
+        <div>
+            <label for="">项目名称</label>
+            <input type="text" readonly="readonly" style="width: 50%;" placeholder="{$binfo.borrow_name}">
+            <span></span>
+        </div>
+           <div>
+            <label for="">支持人数</label>
+            <span> </span>
+            <input type="number" readonly="readonly" placeholder="{:count($investinfo)}人">
+
+        </div> 
+         <if condition="$binfo['id'] neq 1 "> 
+        <div>
+            <label for="">众筹金额</label>
+            <span>￥</span>
+            <if condition="$binfo['id'] eq 1 "> <input type="text" placeholder="不限" readonly="readonly"><else/>    <input type="number" readonly="readonly" placeholder="{:getFloatvalue($binfo['borrow_money'],2)}"></if> 
+
+        </div>
+        <div>
+            <label for="">已被投总额</label>
+            <span>￥</span>
+            <if condition="$binfo['id'] eq 1 "> <input type="text" placeholder="不限" readonly="readonly"><else/>   <input type="number" readonly="readonly"placeholder="{:getFloatvalue($binfo['has_borrow'],2)}"></if> 
+         
+
+        </div>
+        
+        <else/>     <div>
+            <label for="">起投金额</label>
+            <span>￥</span>
+            <input type="text" placeholder="8888.00"  readonly="readonly">     
+        </div>
+        <div>
+            <label for="">限投金额</label>
+            <span>￥</span>
+           <input type="text" placeholder="8888.00" readonly="readonly"> 
+         
+
+        </div>
+      </if>
+        <div>
+            <label for="">分红状态</label>
+<if condition="$vb.start_time gt time()">     <input type="text" placeholder="预热中" readonly="readonly">   <elseif condition="$vb.borrow_status eq 2" />  <input type="text" placeholder="众筹中" readonly="readonly">     <else />
+           <input type="text" placeholder="项目完成" readonly="readonly">                                     </if> 
+         
+
+        </div> 
+        <div>
+            <label for="">剩余时间</label>
+
+            <input type="text" placeholder="{:getLeftTimes($binfo['collect_time'])}" readonly="readonly">
+<!--{:getLeftTimes($binfo['collect_time'])}--> 
+        </div> 
+         
+          <div>
+            <label for="">预计收益率</label>
+
+            <input type="text" placeholder="{$binfo.borrow_interest_rate}%" readonly="readonly">
+
+        </div> 
+          <div>
+            <label for="">项目简介</label>
+
+          <if condition="strlen($binfo['borrow_con']) gt 4 ">   {$binfo.borrow_con} <else/><input type="text"    placeholder="暂未找到简介"readonly="readonly"> </if> 
+
+        </div> 
+         <if condition="$binfo['id'] neq 1 "> 
+          <div>
+            <label for="">项目周期</label>
+ <if condition="$binfo['id'] eq 1 "> <input type="text" placeholder="不限" readonly="readonly"><else/><input type="text" placeholder="{$binfo.borrow_duration}个月" readonly="readonly"></if> 
+            
+
+        </div>
+        
+        </if> 
+        <!--<div>
+            <label for="">结束时间</label>
+            <input type="text" id="start" readonly="readonly" placeholder="{$binfo.borrow_time}">-->
+<!--deadline borrow_time
+<!--{$binfo.endtimes|date='Y-m-d H:i:s',###}-->
+
+            <!--<div class="w-deta-warpper">
+                <div class="calendar-wrapper-b">
+
+                    <div class="calendar-wrapper" id="0" style="display:none">
+
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+
+
+            </div>-->
+<!--
+        </div>-->
+        <!--<div class="number">
+            <label for="">分红金额</label>
+            <span>￥</span>
+            <input type="number"  placeholder="0.00">
+            <span>(未发放)</span>
+
+        </div>-->
+        <!--<div>
+            <label for="">支付数量</label>
+            <span>￥</span>
+            <input  type="number" placeholder="1">
+          
+
+        </div>-->
+        <!--<div>
+            <label for="">汇报情况</label>
+            <span>￥</span>
+            <input type="text" readonly="readonly" placeholder="项目成功，回报未发放">
+
+        </div>-->
+    </div>
+
+    <!-- 项目明细 end -->
+<style type="text/css">
+    .footerg{
+        width: 100%;
+    }
+</style>
+   <include file="Public:footer"/>
+
+
+    <script type="text/javascript">
+
+        $('#start').click(function () {
+
+            $('.calendar-wrapper-b').attr('id', '1');
+            times('a');
+
+        })
+
+        $('#end').click(function () {
+
+            $('.calendar-wrapper-b').attr('id', '2');
+            times('b');
+
+        })
+        // $('.calendar-wrapper-b').click(function(){
+        //     $('.calendar-wrapper-b').hide();
+        // })
+        // $(".calendar-wrapper-b th").bind("click",function(event){    event.stopPropagation(); })
+        function times(jud) {
+            console.log(jud + '2')
+            $('.calendar-wrapper').show();
+            $('.calendar-wrapper-b').show();
+            $("#calendar").flexoCalendar({
+                setYear: 2018,
+                setMonth: 5,
+                selectDate: 'each-each-each',
+                onselect: function (res) {
+                    var id = $('.calendar-wrapper-b').attr('id');
+                    if (id == 1) {
+                        
+                        $('#start').val(res);
+                    } else {
+                     
+                        $('#end').val(res);
+                    }
+
+                    $('.calendar-wrapper-b').hide();
+                    console.log(res)
+
+                }
+            });
+
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

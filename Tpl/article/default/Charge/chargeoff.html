@@ -1,0 +1,418 @@
+ 
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+ 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<style type="text/css">
+	.l-fh.l-on{
+		border-bottom: .1rem solid #EEF1F8;
+	}
+</style>
+	<body>
+		
+		<div class="l-fh l-on">
+			<a href="/Wapmember/charge/" class="l-fanhui on">&lt;返回</a><span>线下充值</span>
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a><!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+		
+	<form action="/wap/Pay/offline" method="post" name="offlinePay" id="offlinePay" enctype="multipart/form-data">
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">充值金额&nbsp;<span style="color:#7d7676d6;font-size: .25rem;">充值金额不能小于100</span></p>
+			<p class="l-yhp2">¥
+				<input  type="number" id="money_off"  name="money_off" class="text_input" onkeydown="if(event.keyCode==13)return false;"  onblur="if(this.value<1){this.value='';} " onkeyup="if(this.value<1){this.value='' }" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  placeholder="请输入充值金额" />
+			<!--<input id="money_off"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" name="money_off" class="text_input" type="text">-->
+			</p>
+			<!--<p class="l-yhp1">可用金额 0.00       <span>全部提现</span></p>-->
+		</div>
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<div class="l-xianxiawz">
+				<p>
+					通过以下方式支付完成后提交凭证：
+				</p>
+				<p>
+					公司名称：日照铭万网络科技有限公司
+				</p>
+				<p>
+					公司支付宝账户：18953308695@163.com
+				</p>
+				<p>
+					<br/>
+				</p>
+				<p>
+					公账户：
+				</p>
+				<p>
+					山东省农联社：9110111201842050006751
+				</p>
+				<p>
+					日照银行：810102001421016988
+				</p>
+				<p>
+					<br/>
+				</p>
+			</div>
+			</div>
+			</div>
+			<div class="l_imgboxup">
+				<p>上传充值凭证</p>
+			
+		<div class="l-imgup">
+			  <input type=file name="doc" id="doc" onchange="imgChange1('z_photo','z_file');"  >
+<!-- 
+        <input type=file  name="doc" id="doc" onchange="javascript:setImagePreview();">-->
+        <img id="fileIMg" src="/Public/wap/img/l-tupianshangc.png"/>
+	<img id="fileIMgHiddeen" style="display: none" src="/Public/wap/img/loading.gif"/>
+        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+	
+		</div>			 
+    	<p class="l-fr l-imgboxp">支持jpg、jpeg、png、gif格式
+大小不超过2.0MB，点击图片替换</p>	 
+
+
+        
+				
+			</div>
+
+			<div class="l-qurena" id="sub1"style="margin-top: .2rem;margin-bottom: .5rem;">
+			 确认 
+			</div>
+</form>
+
+<form action="/wap/Pay/offlinewx" method="post" name="offlinePaywx" id="offlinePaywx" enctype="multipart/form-data">
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">充值金额&nbsp;<span style="color:#7d7676d6;font-size: .25rem;">充值金额不能小于100</span></p>
+			<p class="l-yhp2">¥
+				<input  type="number" id="money_off"  name="money_off" class="text_input" onkeydown="if(event.keyCode==13)return false;"  onblur="if(this.value<1){this.value='';} " onkeyup="if(this.value<1){this.value='' }" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  placeholder="请输入充值金额" />
+			<!--<input id="money_off"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" name="money_off" class="text_input" type="text">-->
+			</p>
+			<!--<p class="l-yhp1">可用金额 0.00       <span>全部提现</span></p>-->
+		</div>
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<div class="l-xianxiawz">
+				<p>
+					通过以下方式支付完成后提交凭证：
+				</p>
+				<p>
+					公司名称：日照铭万网络科技有限公司
+				</p>
+				<p>
+					公司支付宝账户：18953308695@163.com
+				</p>
+				<p>
+					<br/>
+				</p>
+				<p>
+					公账户：
+				</p>
+				<p>
+					山东省农联社：9110111201842050006751
+				</p>
+				<p>
+					日照银行：810102001421016988
+				</p>
+				<p>
+					<br/>
+				</p>
+			</div>
+			</div>
+			</div>
+<div class="l_imgboxup">
+<p>上传充值凭证</p>
+			
+		<div class="l-imgup">
+		
+	<!-- 	<input type=file name="doc" id="doc"  class="uploadImage"> -->
+		<!--    <button class="uploadImage" type="button" id="vote_pic"></button> -->
+      <!--   <img id="fileIMg" src="/Public/wap/img/l-tupianshangc.png" /> -->
+        <img id="tupian" src="/Public/wap/img/l-tupianshangc.png">
+    
+        <div id="localImag"><img  class="uploadImage" id="preview" width=-1 height=-1 style="diplay:none" /></div>
+	
+		</div>			 
+    	<p class="l-fr l-imgboxp">支持jpg、jpeg、png、gif格式
+大小不超过2.0MB，点击图片替换</p>	 
+
+
+		<input id="way_img" type="hidden" name="serverId" class="a2">
+
+			</div>
+
+
+			<div class="l-qurena" id="sub1wx"style="margin-top: .2rem;margin-bottom: .5rem;">
+			 确认 
+			</div>
+</form>
+
+
+
+	</body>
+<script type="text/javascript">
+	var browser = {
+    versions: function () {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {         //移动终端浏览器版本信息
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+            iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+        };
+    }(),
+    language: (navigator.browserLanguage || navigator.language).toLowerCase()
+}
+
+
+  if (browser.versions.mobile) {
+          var ua = navigator.userAgent.toLowerCase();
+          if (ua.match(/MicroMessenger/i) == "micromessenger"){
+			if ((/(iPhone|iPad|iPod|iOS)/i).test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+			  	$("#offlinePay").css("display","block");
+           		$("#offlinePaywx").css("display","none");
+			} else if ((/(Android)/i).test(navigator.userAgent)) {   //判断Android
+
+				$("#offlinePay").css("display","none");
+	           	$("#offlinePaywx").css("display","block");
+	           	wx.config({
+			        //debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			        appId: '{$signPackage.appId}',// 必填，公众号的唯一标识
+			        timestamp: {$signPackage.timestamp}, // 必填，生成签名的时间戳
+			        nonceStr: '{$signPackage.nonceStr}',// 必填，生成签名的随机串
+			        signature: '{$signPackage.signature}',// 必填，签名
+			        jsApiList: [
+			            'chooseImage',
+			            'previewImage',
+			            'uploadImage',
+			            'downloadImage'
+			        ]// 必填，需要使用的JS接口列表
+			    });
+
+			    wx.ready(function () {
+			      $(".uploadImage").click(function(){
+			            wx.chooseImage({
+			                count: 1, // 默认9
+			                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			                success: function (res) {
+			                    
+						    	var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			                    $("#tupian").attr("src",localIds.toString())
+
+			                    setTimeout(function(){
+			                        wx.uploadImage({
+			                            localId: localIds.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+			                            isShowProgressTips: 1, // 默认为1，显示进度提示
+			                            success: function (res) {
+			                                var serverId = res.serverId; // 返回图片的服务器端ID
+			                               // $("#tupian").attr("src",serverId)
+			                                // $(".a1").val(localIds);
+			                                $(".a2").val(serverId);
+			                            }
+			                        });
+			                    },100);
+
+						    // } 
+			                }
+			            });
+			        })
+
+			        $('#sub1wx').click(function() {
+						this.disabled = true;
+				 		//borrow_img
+				 
+				 		if($('#way_img').val()==""){
+				 			alert("你未提交图片")
+							this.disabled = false;
+				 			return false;
+				 		}
+				 		//alert(2);
+				 		// if($('#money_off').val()<100){
+				 		// 	alert("充值金额不能小于100")
+							// this.disabled = false;
+				 		// 	return false;
+				 		// }
+				 		//return false;
+				 		$('#offlinePaywx').submit();
+				 	})
+			    });
+			}
+          }else{
+           	$("#offlinePay").css("display","block");
+           	$("#offlinePaywx").css("display","none");
+          }
+  }else{
+  	    $("#offlinePay").css("display","block");
+        $("#offlinePaywx").css("display","none");
+        // alert("请在微信打开链接！");
+  }
+
+
+
+  
+
+
+</script>
+
+
+
+	 <script type="text/javascript">
+ 	$('#sub1').click(function() {
+		this.disabled = true;
+ 		//borrow_img
+ 		
+ 		if(typeof($('#way_img').val())==="undefined"){
+ 			alert("你未提交图片")
+			this.disabled = false;
+ 			return false;
+ 		}
+ 		if($('#money_off').val()==''){
+ 			alert("你未填写金额")
+			this.disabled = false;
+ 			return false;
+ 		}
+ 		if($('#money_off').val()<100){
+ 			alert("充值金额不能小于100")
+			this.disabled = false;
+ 			return false;
+ 		}
+ 		//return false;
+ 		$('#offlinePay').submit();
+ 	})
+ </script>   
+        <script>
+        	 			
+              
+			$(document).on("click", ".delete", function(){ 
+				
+			   var 	mask = document.getElementsByClassName("z_mask")[0];
+ 		    	 	mask.style.display = "block";
+ 		    	 	
+				var athis= $(this);
+				var ztr=$(this).find("img").attr("src");
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+                var sure = document.getElementsByClassName("z_sure")[0];
+                
+			//此处的$(this)指$( "#testDiv")，而非$(document) 
+				$("#localImag").find("img").attr("src");
+						       sure.onclick = function () { 
+				$.ajax({  
+			      url:"/Wap/Borrow/zhaodelete",  
+			      type:"post",  
+			   	  data:{"url":ztr},    
+			     
+			      success:function(data){ 
+						console.log(data);
+						if(data==1){
+							mask.style.display = "none";
+							athis.remove();
+							$(".borrow_img").eq(athis.index()).remove();
+							 
+						}
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });  
+			    }
+//				 
+			});
+      
+      	  	function imgChange1() {
+        	 
+        	
+      			 var form = new FormData(document.getElementById("offlinePay"));  
+      			 var stv ='<div class="clear" id="localImag"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+
+
+
+      			 	 
+      			 $("#fileIMg").css("display","none");
+      			 $("#fileIMgHiddeen").css("display","block");
+//					()
+			      $.ajax({  
+			      url:"/Wap/Borrow/zhao",  
+			      type:"post",  
+			      data:form,  
+			      cache: false,  
+			      processData: false,  
+			      contentType: false, 
+			      //async: false,
+			      success:function(data){ 
+						console.log(data);
+			 
+			 		  data=	JSON.parse(data);
+						console.log(data);
+						
+					if(data.status==1){
+						var stv2 =' <input class="fl borrow_img" type="hidden" id="way_img" name="way_img" value="'+data.message+'">'
+						$("#fileIMgHiddeen").css("display","none");
+						$("#fileIMg").css("display","block");
+						$("#way_img").remove();
+							$("#fileIMg").attr("src",data.message);
+							$("#fileIMg").addClass("delete");
+							 $("#offlinePay").append(stv2);
+			           		 
+			           		}else{
+						alert(data.message);
+					}
+						
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });
+			      		
+        	 
+				 
+      	  	}  
+        </script>
+  <script>
+  
+        function setImagePreview() {
+                var docObj=document.getElementById("doc");
+       
+                var imgObjPreview=document.getElementById("preview");
+                        if(docObj.files &&    docObj.files[0]){
+                                //火狐下，直接设img属性
+                                imgObjPreview.style.display = 'block';
+                                imgObjPreview.style.width = '2rem';
+                                imgObjPreview.style.height = '2rem';                    
+                                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+         
+              //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+              imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+         
+                        }else{
+                                //IE下，使用滤镜
+                                docObj.select();
+                                var imgSrc = document.selection.createRange().text;
+                                var localImagId = document.getElementById("localImag");
+                                //必须设置初始大小
+                                localImagId.style.width = "300px";
+                                localImagId.style.height = "120px";
+                                //图片异常的捕捉，防止用户修改后缀来伪造图片
+        try{
+                                        localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                        localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                                }catch(e){
+                                        alert("您上传的图片格式不正确，请重新选择!");
+                                        return false;
+                                }
+                                imgObjPreview.style.display = 'none';
+                                document.selection.empty();
+                        }
+                        return true;
+                }
+                </script>	
+ 

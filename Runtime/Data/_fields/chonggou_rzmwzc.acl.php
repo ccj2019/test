@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'controller', 1 => 'group_id', 2 => 'groupname', '_autoinc' => true, '_pk' => 'group_id', '_type' => array ( 'controller' => 'text', 'group_id' => 'int(10)', 'groupname' => 'varchar(100)', ), ); ?>

@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  $(function(){
+      $(".ser_btn").click(function(){
+         var url = "/admin/guarantee/ajaxsearch.html";
+         var title = $("#company_title").val();
+		 var type_name = $("#type_name").val();
+         var db_tel = $("#db_tel").val();
+         url = url + '?title='+title+'&db_tel='+db_tel+'&type_name='+type_name;            
+         $("a.close").click();
+         showurl(url,'搜索担保公司');          
+         return false;
+      });
+      $(".Toolbar_inbox a").click(function(){
+          var url = $(this).attr('href');
+          $("a.close").click();
+          showurl(url,'搜索担保公司');          
+          return false;
+      });
+      $(".member_row").click(function(){
+          var danbao_company = $(this).find('.title').val();
+          var company_id = $(this).find('.company_id').val();          
+          $("#danbao").val(company_id);
+          $("#danbao_company").val(danbao_company);
+          $("a.close").click();
+      });
+  });
+</script>

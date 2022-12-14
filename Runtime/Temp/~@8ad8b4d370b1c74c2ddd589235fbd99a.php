@@ -1,0 +1,3 @@
+<?php
+//000000000000a:2:{s:7:"ad_type";s:1:"1";s:7:"content";a:4:{i:0;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20210409/20210409091748_29141.jpg";s:4:"info";s:0:"";s:3:"url";s:38:"https://houtai.rzmwzc.com/m/product/62";}i:1;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20210409/20210409091748_67033.jpg";s:4:"info";s:0:"";s:3:"url";s:38:"https://houtai.rzmwzc.com/m/product/70";}i:2;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20210409/20210409091748_91473.jpg";s:4:"info";s:0:"";s:3:"url";s:38:"https://houtai.rzmwzc.com/m/product/61";}i:3;a:3:{s:3:"img";s:73:"Style/kindeditor/php/../../upload/image/20210409/20210409091748_16488.jpg";s:4:"info";s:0:"";s:3:"url";s:38:"https://houtai.rzmwzc.com/m/product/38";}}}
+?>

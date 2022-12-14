@@ -1,0 +1,47 @@
+<include file="Public:_header" />
+<style type="text/css">
+.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+  <div class="page_tit">编辑信息</div>
+  <div class="page_tab"><span data="tab_1" class="active">基本信息</span></div>
+  <div class="form2">
+    <form method="post" action="" enctype="multipart/form-data">      
+      <div id="tab_1">
+        <dl class="lineD">
+          <dt>用户名：</dt>
+          <dd><htmlA:user id="lottery.uid" uname="lottery.user_name" /></dd>
+        </dl>
+        <dl class="lineD">
+          <dt>所得奖品：</dt>
+          <dd>{$lottery.prize}</dd>
+        </dl>
+        <dl class="lineD">
+          <dt>抽奖时间：</dt>
+          <dd>{$lottery.add_time}</dd>
+        </dl>
+        <dl class="lineD">
+          <dt>抽奖IP地址：</dt>
+          <dd>{$lottery.add_ip}</dd>
+        </dl>
+        <dl class="lineD">
+          <dt>当前状态：</dt>
+          <dd>
+            <select name="status">
+              <option value="0" <if condition="$lottery['status'] eq 0">selected</if> >待处理</option>
+              <option value="1" <if condition="$lottery['status'] eq 1">selected</if>>处理完成</option>
+              <option value="2" <if condition="$lottery['status'] eq 2">selected</if>>审核失败</option>
+            </select>
+            <input name="lid" type="hidden" value="{$lottery.id}">            
+          </dd>
+        </dl>
+      </div>
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+    </form>
+
+  </div>
+</div>
+<include file="Public:_footer" />

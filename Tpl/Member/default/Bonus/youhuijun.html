@@ -1,0 +1,56 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="##">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a href="##">我的红包</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition="($status eq 0) or (empty($status)) ">class="on"   </if>><a href="__APP__/member/bonus/youhuijun?status=0" ><span>我的红包</span></a></div>
+			<div  <if condition="$status eq 1">class="on"   </if>><a href="__APP__/member/bonus/youhuijun?status=1" ><span>未使用</span></a></div>
+			<div  <if condition="$status eq 2">class="on"   </if>><a href="__APP__/member/bonus/youhuijun?status=2" ><span>已使用</span></a></div>
+			<div  <if condition="$status eq 3">class="on"   </if>><a href="__APP__/member/bonus/youhuijun?status=3" ><span>已过期</span></a></div>
+		</div>
+		<div class="tabv2box">
+
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+					<div class="tou1 hb">
+						<span>类型/面值</span>
+						<span>过期时间</span>
+						<span>来源</span>
+						<span>使用限制</span>
+						<span>状态</span>
+					</div>
+					<volist name="bonusList" id="vo">
+					<div class="bgxmlis hb">
+						<span>{$vo.money_bonus}元优惠券</span>
+						<span>{$vo.end_time|date="Y-m-d",###}</span>
+						<span>{$bonus_type[$vo['type']]}</span>
+						<span>支付金额满{$vo.bonus_invest_min}元</span>
+						<if condition="$vo.status eq 1"><span>未使用</span>
+                        <elseif condition="$vo.status eq 2"/><span>已使用</span>
+                        <else/><span>已过期</span>
+                        </if>
+					</div>
+					</volist>
+				</div>
+				<!--分页-->
+				<div class="aFye clearfix">
+					<p>
+						{$pagebar} 
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

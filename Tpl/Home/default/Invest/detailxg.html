@@ -1,0 +1,56 @@
+<include file="Public:header"/>
+  <script src="__PUBLIC__/date/jquery-2.2.3.js" type="text/javascript"></script>
+  <script src="__PUBLIC__/date/WdatePicker.js" type="text/javascript"></script>
+<style type="text/css">
+ .row{
+  margin-top:35px;
+} 
+</style>
+
+<div style="width:600px; margin:40px auto;">
+ <form action="__APP__/Invest/doxmjd" method="post" class="form form-horizontal" id="form-add" name="form-add" enctype="multipart/form-data">
+   <input type="hidden"  value="{$info.id}" placeholder="" id="id" name="id">
+    
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"><!-- <span class="c-red">*</span> -->标题：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        {$info.typename}
+      </div>
+    </div>
+
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"><!-- <span class="c-red">*</span> -->内容：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+         {$info.dycomment}
+      </div>
+    </div>
+    
+  
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">添加日期：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <!-- <input type="date"  onfocus="" name="add_time" value='{$info.add_time|date='Y-m-d H:i:s',###}' style="width:240px;">
+ -->
+           <input type="text" onfocus="" name="add_time" class="input-text Wdate" id="time" onClick="WdatePicker()" 
+    value='{$info.add_time|date='Y-m-d H:i:s',###}' style="
+    line-height: 25px;
+    padding-left: 5px;
+">
+
+      </div>
+    </div> 
+
+
+    
+ 
+
+    <div class="row cl">
+      <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+
+        <button class="btn btn-secondary radius" type="submit"> 保存</button>
+
+      </div>
+    </div>
+  </form>
+</div>
+<include file="Public:footer"/>

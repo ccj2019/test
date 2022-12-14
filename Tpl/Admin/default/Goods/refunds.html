@@ -1,0 +1,47 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+<div class="so_main">
+
+    <div class="page_tit">编辑商品</div>
+    <div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2" style="display:none">高级设置</span></div>
+    <div class="form2">
+        <form method="post" action="__URL__/refundscause" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{$vo.id}" />
+            <div id="tab_1">
+
+                <volist name="vo['title']" id="voe">
+                    <dl class="lineD"><dt>商品名称：</dt><dd><a href="/maket/view?id={$vo.gid}" target="_blank" title="点击查看商品详情">{$voe.title}</a></dd></dl>
+                    <dl class="lineD"><dt>单价：</dt><dd>￥{$voe.art_jiage}元</dd></dl>
+                    <dl class="lineD"><dt>数量：</dt><dd>{$voe.num}</dd></dl>
+                    <dl class="lineD" style="background-color: aliceblue;">&nbsp;</dl>
+                </volist>
+
+                <dl class="lineD"><dt>购买金额：</dt><dd>￥{$vo.money}元+{$vo.hongbao}元</dd></dl>
+                <dl class="lineD"><dt>收货人：</dt><dd>{$vo.real_name}</dd></dl>
+                <dl class="lineD"><dt>收货地址：</dt><dd>{$vo.address}</dd></dl>
+                <dl class="lineD"><dt>联系电话：</dt><dd>{$vo.cell_phone}</dd></dl>
+                <dl class="lineD"><dt>联系邮箱：</dt><dd>{$vo.email}&nbsp;</dd></dl>
+                <dl class="lineD"><dt>下单时间：</dt><dd>{$vo.add_time|date='Y年m月d日H时',###}</dd></dl>
+                <dl class="lineD"><dt>支付时间：</dt><dd>{$vo.pay_time|date='Y年m月d日H时',###}</dd></dl>
+                <dl class="lineD"><dt>订单备注：</dt><dd>{$vo.beizhu}&nbsp;</dd></dl>
+                <dl class="lineD"><dt>退款理由：</dt><dd>{$vo.cause|default=''}&nbsp;</dd></dl>
+                <!-- <dl class="lineD"><dt>订单状态：</dt><dd><htmlA:radio id="action" default="1|同意退款,2|驳回" value="key|vo.action" tip="订单处理"/></dd></dl> -->
+                <!--<dl class="lineD"><dt>商家姓名：</dt><dd><htmlA:text id="name" value="{$vo.name}" /></dd></dl>-->
+                <!--<dl class="lineD"><dt>商家地址：</dt><dd><htmlA:text id="address" value="{$vo.addr}" /></dd></dl>-->
+                <!--<dl class="lineD"><dt>商家手机号：</dt><dd><htmlA:text id="phone" value="{$vo.phone}" /></dd></dl>-->
+                <dl class="lineD"><dt>物流：</dt><dd>{$vo.wuliu}</dd></dl>
+                <dl class="lineD"><dt>快递单号：</dt><dd>{$vo.kuaidi}</dd></dl>
+
+                <!-- <dl class="lineD"><dt>驳回原因：</dt><dd><htmlA:text id="type_cause" value="{$vo.type_cause}" /></dd></dl> -->
+                <br />
+            </div><!--tab1-->
+            <!--tab2-->
+            <div class="page_btm">
+                <input type="submit" class="btn_b" value="退款" />
+            </div>
+        </form>
+    </div>
+
+</div>
+<include file="Public:_footer" />

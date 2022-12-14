@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'borrow_id', 2 => 'bespeak_uid', 3 => 'bespeak_money', 4 => 'bespeak_point', 5 => 'bespeak_status', 6 => 'add_time', 7 => 'yubi', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(10)', 'borrow_id' => 'int(10)', 'bespeak_uid' => 'int(10)', 'bespeak_money' => 'decimal(15,2)', 'bespeak_point' => 'decimal(15,2)', 'bespeak_status' => 'tinyint(2)', 'add_time' => 'int(10)', 'yubi' => 'int(15)', ), ); ?>

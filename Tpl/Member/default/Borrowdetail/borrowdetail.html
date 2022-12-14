@@ -1,0 +1,85 @@
+{__NOLAYOUT__}<tagLib name="htmlA" />
+<div class="page_info">
+	<div class="page_tips">
+  	<p>{$list.name} -- 收益明细</p>
+	</div>
+  <div class="m_page_right_box" align="center">
+     <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>计划还款日期</td>
+        <td>计划还款本金</td>
+        <td>计划还款利息</td>
+        <td>实还本息</td>
+        <td>需还本息</td>
+        <td>还款状态</td>
+        <td>还款</td>
+      </tr>
+      <volist name="list.list" id="vo">
+      <tr>
+        <td>{$vo.deadline|date="Y-m-d H:i",###}</td>
+		<td>{$vo.capital}</td>
+		<td>{$vo.interest}</td>
+		<td>{$vo.paid}</td>
+		<td>{$vo.needpay}</td>
+		<td>{$vo.status}</td>
+		<td><if condition="$vo['needpay'] eq 0">---<else/><a href="javascript:;" onclick="repayment({$vo.borrow_id},{$vo.sort_order})">回报收益</a></if></td>
+      </tr>
+      </volist>
+    </table>
+    <div data="fragment-2" id="pager" style="float: right; text-align: right; width: 700px; padding-right: 8px;margin-right: 24px;" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+function myrefresh()
+{
+	var geturl = $(this).attr('href');
+	var id = $(this).parent().attr('data');
+    window.location.reload();
+	//window.location.href="/member/borrowdetail?id="+id+"#chip-1";
+}
+function repayment(bid,sort_order){	
+	x = {"bid":bid,"sort_order":sort_order};
+	//$.jBox.tip("还款中......",'loading');
+	$.ajax({
+		url: "__URL__/repayment",
+		data: x,
+		timeout: 15000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {			
+			if(d){				
+				if(d.status==1){					
+					layer.alert('还款成功', 1,!1);
+					setTimeout('myrefresh()',1000); 
+				}else{
+					layer.msg(d.message);
+				}
+			}
+		},
+		complete:function(XMLHttpRequest, textStatus){
+			//window.location.reload();
+				//setTimeout('myrefresh()',1000); //指定1秒刷新
+		}
+	});
+}
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

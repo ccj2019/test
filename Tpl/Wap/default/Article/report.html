@@ -1,0 +1,1181 @@
+﻿{__NOLAYOUT__}<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>天农众筹2018年2季度运营报告</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		
+		<script type="text/javascript">
+			function getBrowserInfo() {
+				var agent = navigator.userAgent.toLowerCase();
+
+				var regStr_ie = /msie [\d.]+;/gi;
+				var regStr_ff = /firefox\/[\d.]+/gi
+				var regStr_chrome = /chrome\/[\d.]+/gi;
+				var regStr_saf = /safari\/[\d.]+/gi;
+				//IE
+				if(agent.indexOf("msie") > 0) {
+					return agent.match(regStr_ie);
+				}
+				//firefox
+				if(agent.indexOf("firefox") > 0) {
+					return agent.match(regStr_ff);
+				}
+				//Chrome
+				if(agent.indexOf("chrome") > 0) {
+					return agent.match(regStr_chrome);
+				}
+				//Safari
+				if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+					return agent.match(regStr_saf);
+				}
+
+			}
+
+			var browser = getBrowserInfo();
+			var verinfo = (browser + "").replace(/[^0-9.]/ig, "");
+
+			if(navigator.userAgent.indexOf("MSIE") > 0 && verinfo < 7) {
+				document.write("<span id='tipBrowe'>您正在使用 Internet Explorer 版本过低，在本站页面的显示效果可能有差异。建议您升级到 <a href='http://www.microsoft.com/china/windows/internet-explorer/' target='_blank'>Internet Explorer 8</a>     <span style=\"position:absolute;right:0px;;margin-right:6px\"><a  href=\"javascript:void(0)\" onclick=\"removeSpan()\" >X</a> </span> </span>");
+			}
+
+			function removeSpan() {
+				$("#tipBrowe").remove();
+			}
+		</script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/css/common.css">
+		
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/css/about.css">
+		<link rel="stylesheet" href="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/css/style_1.css"/>
+		<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/js/echarts.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/js/jquery.lazyload.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/js/base.min_1.js"></script>
+		<style>
+			body {
+				font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+				margin: 0;
+				padding: 0;
+				font-size: 16px;
+				min-width: 1200px;
+				background: #f2f7ff;
+			}
+			
+			h3,
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.top {
+				height: 40px;
+				line-height: 40px;
+				width: 100%;
+				left: 0;
+				top: 0;
+				background: #475058;
+				color: #fff;
+				z-index: 9
+			}
+			
+			.top .inner {
+				width: 980px;
+				height: inherit;
+				margin: 0 auto;
+			}
+			
+			.top a:visited {
+				color: #fff;
+			}
+			
+			.top a {
+				float: right;
+				margin-left: 15px;
+				color: #fff;
+				text-decoration: none;
+			}
+			
+			.top a.down {
+				background: #fc9b5e;
+				padding: 0 25px;
+				height: 28px;
+				line-height: 28px;
+				border-radius: 3px;
+				margin-top: 6px;
+			}
+			
+			.img {
+				margin: 0 auto 10px;
+				box-shadow: 0 0 5px #666;
+				-moz-box-shadow: 0 0 5px #666;
+				-webkit-box-shadow: 0 0 5px #666;
+				width: 100%;
+			}
+			
+			.img img {
+				display: block;
+			}
+			/*.chinamapbox {*/
+			/*width: 700px;*/
+			/*height: 700px;*/
+			/*float: left;*/
+			/*opacity: 0*/
+			/*}*/
+			/*.rank-list {*/
+			/*float: right;*/
+			/*width: 340px;*/
+			/*margin: 140px 70px 0 0;*/
+			/*opacity: 0*/
+			/*}*/
+			
+			.rank-list td {
+				border: 1px solid #81cef2;
+				font-size: 18px;
+				height: 38px;
+				vertical-align: middle;
+			}
+			
+			.rank-list td img {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			
+			.rank-list .sec {
+				color: #e4542e;
+			}
+			
+			.rank-list .sec1 {
+				color: #eebc10;
+			}
+			
+			.rank-list .sec2 {
+				color: #14dca1;
+			}
+			
+			.floor_qudao_nm {
+				left: 140px;
+				padding-left: 8px;
+			}
+			
+			.botton_text {
+				font-size: 51px;
+				position: relative;
+				top: 3px;
+			}
+			
+			.botton_text1 {
+				font-size: 76px;
+				position: relative;
+				top: -22px;
+			}
+			
+			.botton_text2 {
+				font-size: 28px;
+			}
+			
+			.botton_text3 {
+				font-size: 51px;
+				position: relative;
+				top: -17px;
+			}
+			
+			.english {
+				font-size: 21px;
+				position: relative;
+				left: -235px;
+				top: -34px;
+			}
+			
+			.silpe {
+				font-size: 103px;
+				margin: auto -36px;
+			}
+			
+			#d-top {
+				position: fixed;
+				float: right;
+				z-index: 10;
+				right: 10px;
+				bottom: 40px;
+			}
+			
+			#d-top img {
+				width: 42px;
+				opacity: 0.3;
+				border: medium none;
+			}
+			
+			.yuqi_div {
+				float: left;
+				font-size: 20px;
+				text-align: left;
+				line-height: 61px;
+				margin-top: 24px;
+			}
+			
+			.yuqi_div span {
+				float: right;
+				margin-left: 65px;
+				color: #999;
+			}
+			
+			table {
+				border-collapse: collapse;
+				margin: 0 auto;
+				
+			}
+			
+			th,
+			td {
+				width: 120px;
+				height: 60px;
+				border: 1px solid #ddd;
+				font-size: 16px;
+				text-align: center;
+				color: #666;
+			}
+
+			/**头部**/
+			.header {
+			  background: #fff;
+			}
+
+			.header .headertop {
+			  height:40px;
+			  line-height: 40px;
+			  background: #f1f1f1;
+			}
+
+			.header .headertop .htl {
+			  float: left;
+			  width: 570px;
+			  color: #909090;
+			  font-size: 14px;
+			}
+
+			.header .headertop .htl img {
+			  margin-right: 5px;
+			  position: relative;
+			  top: 2px;
+			}
+
+			.header .headertop .htl span {
+			  color: #398e57;
+			  margin-left: 10px;
+			}
+
+			.header .headertop .htl .wx {
+			  display: inline-block;
+			  width: 27px;
+			  height: 24px;
+			  background: url(__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/images/wx.png) no-repeat center center;
+			  margin-right: 8px;
+			  position: relative;
+			  top: 3px;
+			}
+
+			.header .headertop .htl .wx:hover {
+			  background: url(__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/images/wx_1.png) no-repeat center center;
+			}
+
+			.header .headertop .htl .qq {
+			  display: inline-block;
+			  width: 27px;
+			  height: 24px;
+			  background: url(__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/images/qq.png) no-repeat center center;
+			  position: relative;
+			  top: 3px;
+			}
+
+			.header .headertop .htl .qq:hover {
+			  background: url(__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/images/QQ_1.png) no-repeat center center;
+			}
+
+			.header .headertop .htr {
+			  float: right;
+			  text-align: right;
+			  color: #909090;
+			  font-size: 18px;
+			}
+
+			.header .headertop .htr img {
+			  margin-right: 8px;
+			  position: relative;
+			  top: 3px;
+			}
+
+			.header .headertop .htr a {
+			  color: #909090;
+			  font-size: 14px;
+			}
+
+			.header .headertop .htr a:hover {
+			  color: #398e57;
+			}
+
+			.header .naver .logo {
+			  float: left;
+			  padding: 30px 0 20px 0;
+			}
+
+			.header .naver .nav {
+			  float: right;
+			  text-align: right;
+			  width: 620px;
+			  padding-top: 22px;
+			}
+
+			.header .naver .nav li {
+			  display: inline-block;
+			  margin-left: 40px;
+			}
+
+			.header .naver .nav li:hover a {
+			  color: #398e57;
+			}
+
+			.header .naver .nav li.act a {
+			  color: #398e57;
+			}
+
+			.header .naver .nav li a {
+			  padding: 10px 0;
+			  display: block;
+			  color: #454545;
+			  font-size: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="headertop">
+				<div class="container">
+					<div class="htl">
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/phone.png" alt=""> 服务热线<span>400-1031-191</span>
+						<a href="http://www.tiannongjinrong.com/" class="wx"></a>
+						<a href="http://www.tiannongjinrong.com/" class="qq"></a>
+					</div>
+					<div class="htr">
+						<!--未登录状态-->
+						<a href="http://www.tiannongjinrong.com/article/video.html">视频专区</a> |
+						<a href="http://www.tiannongjinrong.com/member/common/login.html">登录</a> |
+						<a href="http://www.tiannongjinrong.com/member/common/register.html">注册</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="naver">
+				<div class="container">
+					<a href="http://www.tiannongjinrong.com/" class="logo"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/img/logo.png" alt=""></a>
+					<div class="nav">
+						<ul>
+							<li class="navhome">
+								<a href="http://www.tiannongjinrong.com/">首页</a>
+							</li>
+							<li class="navinvest">
+								<a href="http://www.tiannongjinrong.com/invest/index.html">众筹专区</a>
+							</li>
+							<li class="navarticle39">
+								<a href="http://www.tiannongjinrong.com/article/index/cid/39.html">活动专区</a>
+							</li>
+							<li class="navarticle35">
+								<a href="http://www.tiannongjinrong.com/article/index/cid/35.html">帮助我们</a>
+							</li>
+							<li class="navarticle18">
+								<a href="http://www.tiannongjinrong.com/article/index/cid/18.html">关于我们</a>
+							</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="remplatebox">
+			<div class="floor_1 cur">
+				<div class="topbg">
+					<div class="anitbox"></div>
+				</div>
+
+				<div class="scl">
+					<div class="sclitem rotateone"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/q1.png" /></div>
+					<div class="sclitem rotateone1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/q5.png" /></div>
+					<div class="sclitem rotateone"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/q2.png" /></div>
+					<div class="sclitem rotateone1"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/q3.png" /></div>
+					<div class="sclitem sdong"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/q4.png" /></div>
+					<div class="sclyearsa">
+						<div class="lightSpeedIn"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/2018.png" /></div>
+						<div class="title flipInX">2季度运营报告</div>
+					</div>
+					<div class="scl_fg">
+						<div class="scl_fg_left slideInLeft"></div>
+
+						<div class="scl_fg_right slideInRight"></div>
+						<div class="scl_fg_bgfg slideInshow"></div>
+					</div>
+				</div>
+				<div class="sliders_an sliderstext1  bounceInDown1 ">
+					<a href="#item2">
+						<span>2季度撮合交易量</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j1.png" class="sliders_an_pic" />
+					</a>
+				</div>
+				<div class="sliders_an sliderstext2  bounceInDown2 ">
+					<a href="#yuqi">
+						<span>2季度逾期情况数据</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j3.png" class="sliders_an_pic" />
+					</a>
+				</div>
+				<div class="sliders_an sliderstext3  bounceInDown3 ">
+					<a href="#item4">
+						<span>2季度投资人数</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j2.png" class="sliders_an_pic" />
+					</a>
+				</div>
+				<div class="sliders_an sliderstext4  bounceInDown4 ">
+					<a href="#item5">
+						<span>2季度平台运营数据</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j4.png" class="sliders_an_pic" />
+					</a>
+				</div>
+				<div class="sliders_an sliderstext5  bounceInDown5 ">
+					<a href="#item6">
+						<span>2季度用户数据</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j6.png" class="sliders_an_pic" />
+					</a>
+				</div>
+				<div class="sliders_an sliderstext6  bounceInDown6 ">
+					<a href="#item7">
+						<span>2季度最豪投资人</span>
+						<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/j5.png" class="sliders_an_pic" />
+					</a>
+				</div>
+
+			</div>
+			<div class="item_box1" style="background: #f2f7ff;">
+
+				<div class="floorbox floor_2" id="item1">
+
+					<h3><b style="margin-right: 10px;">—</b>成交额<b style="margin-left: 10px;">—</b></h3>
+					<p class="subtitle">2018年2季度平台总交易额14094万元，累计用户收益达到155.6万元。</p>
+					<ul class="cjl row-fluid" id="cjbox">
+						<li class="f9b401 fadeInLeftBig">
+							<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/cj.png">
+							<p class="cjl_name">累计成交金额</p>
+							<p><span id="counters_a">14094</span>万元</p>
+						</li>
+						<li class="fadeInRightBig">
+							<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/sy.png">
+							<p class="cjl_name">用户收益</p>
+							<p><span id="counters_c">155.6</span>万元</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="item_box2" style="background: #ffffff;">
+				<div class="floorbox floor_2" id="item2">
+
+					<h3><b style="margin-right: 10px;">—</b>本季度撮合交易量<b style="margin-left: 10px;">—</b></h3>
+					<div class="investdaytouzi_chartbox">
+						<div id="investdaytouzi-chart" style="width:1200px;height:400px;margin:40px auto"></div>
+					</div>
+
+				</div>
+			</div>
+			<div class="item_box3" style="background: #f2f7ff; display: none;">
+
+				<div class="floorbox floor_2" id="item3">
+					<!--<h3>单月借款标的数据</h3>
+				<p class="subtitle">2017年4月份平台借款标7笔，全部为房产抵押。</p>
+
+				<div class="sy_p_chart_barbox">
+					<div id="sy_p_chart_bar" style="width:900px;height:550px;margin:40px auto"></div>
+				</div>
+					<h3>1季度成交数据环比增长率</h3>
+				<p class="subtitle">截止至2017年4月30日，2月份平台成交数据137万元，</p>
+				<p class="subtitle">3月份平台成交数据1093万元，4月份平台成交数据648万元。</p>
+				<div class="investdaytouzi_chartbox">
+					<div id="investdaytouzi-chart1" style="width:1200px;height:400px;margin:40px auto"></div>
+				</div>-->
+				</div>
+			</div>
+			<div class="item_box4" style="background: #f2f7ff;">
+
+				<div class="floorbox floor_3" id="item4">
+
+					<h3><b style="margin-right: 10px;">—</b>投资人数<b style="margin-left: 10px;">—</b></h3>
+					<p class="subtitle">截止至2018年6月30日，天农众筹累计投资人数737人 。</p>
+					<p class="subtitle">2季度新增投资人数为<span style="color:#eb4f4f">470人。</span></p>
+
+					<div class="dhbj_all">
+						<p>总投资人数</p>
+						<div class="dhbj_all_a row-fluid">
+							<span class="dhbj_all_ca"></span>
+							<span style="font-size:44px;color:#44c0ef;float:left;padding-left:10px;">737人</span>
+						</div>
+					</div>
+					<div class="dhbj_all">
+						<p>2季度投资人数</p>
+						<div class="dhbj_all_a row-fluid">
+							<span class="dhbj_all_cb"></span>
+							<span style="font-size:44px;color:#44c0ef;float:left;padding-left:10px;">470人</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="item_box5" style="background: #ffffff;">
+				<div class="floorbox floor_4" id="item5">
+					<h3><b style="margin-right: 10px;">—</b>2季度平台运营数据<b style="margin-left: 10px;">—</b></h3>
+					<ul class="cjl row-fluid" style="padding-top:0;">
+						<li>
+							<div id="sy_p_chart_bar_a" style="width:600px;height:400px;margin:40px auto"></div>
+							<div style="position:absolute;top:230px;left:255px;font-size:22px;color: #999;">投资金额</div>
+						</li>
+						<li>
+							<div id="sy_p_chart_bar_b" style="width:600px;height:400px;margin:40px auto"></div>
+							<div style="position:absolute;top:230px;left:255px;font-size:22px;color: #999;">投资期限</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="yuqi_box" style="background: #f2f7ff;">
+
+				<div class="floorbox floor_4" id="yuqi" style="    height: 380px;">
+					<h3><b style="margin-right: 10px;">—</b>逾期情况<b style="margin-left: 10px;">—</b></h3>
+					<div class="cjl row-fluid yuqi_div" style="padding-top:0;    margin-left: 188px;">
+						<p>项目逾期数<span>0个</span></p>
+						<p>项目逾期率<span>0%</span></p>
+						<p>项目金额逾期率<span>0%</span></p>
+						<p>项目坏账率<span>0%</span></p>
+						<p>项目逾期金额<span>0元</span></p>
+					</div>
+					<div class="cjl row-fluid yuqi_div" style="padding-top:0;    margin-left: 234px;">
+						<p>项目代偿金额<span>0元</span></p>
+						<p>项目逾期90天以上笔数<span>0笔</span></p>
+						<p>项目逾期90天以上金额<span>0元</span></p>
+						<p>客户投诉<span>0起</span></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="item_box6" style="background: #ffffff;">
+
+				<div class="floorbox floor_yhsj" id="item6">
+					<h3><b style="margin-right: 10px;">—</b>用户数据<b style="margin-left: 10px;">—</b></h3>
+					<div class="subtitle">2018年2季度新增注册人数为384位。</div>
+					<!--<div class="news_yhsj">
+					<p style="padding-top:100px; font-weight:300;">新增注册</p>
+					<p style="color:#f9b401;font-size:64px;">14</p>
+				</div>-->
+					<div class="yhsj">
+						<p style="font-weight:300;">总注册人数</p>
+						<p style="font-size:70px;color: #333">1432</p>
+					</div>
+				</div>
+			</div>
+			<div class="item_box7" style="background: #f2f7ff;">
+				<div class="floorbox floor_3" id="item7">
+					<h3><b style="margin-right: 10px;">—</b>本季度最壕投资人<b style="margin-left: 10px;">—</b></h3>
+					<table>
+						
+						<tr>
+							
+							<td>qm***妇</td>
+							<td>zh***u</td>
+							<td>lx***1</td>
+							<td>13***5</td>
+							<td>zh***n</td>
+						</tr>
+						<tr>	
+							
+							<td>7950000.00 元</td>
+							<td>4500000.00 元</td>
+							<td>4500000.00元</td>
+							<td>3910000.00元</td>
+							<td>3901199.66 元</td>
+							
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+		
+			
+			<div class="ratio_box" style="background: #fff;">
+				<div class="floorbox floor_4" id="item5">
+					<h3><b style="margin-right: 10px;">—</b>用户比例<b style="margin-left: 10px;">—</b></h3>
+					<ul class="cjl row-fluid" style="padding-top:0;">
+						<li>
+							<div id="sy_p_chart_bar_e" style="width:600px;height:400px;margin:40px auto"></div>
+							<div style="position:absolute;top:230px;left:255px;font-size:22px;color: #999;">年龄比例</div>
+						</li>
+						<li>
+							<div id="sy_p_chart_bar_f" style="width:600px;height:400px;margin:40px auto"></div>
+							<div style="position:absolute;top:230px;left:255px;font-size:22px;color: #999;">男女比例</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="item_box8" style="background: #f2f7ff;">
+				<div class="floorbox floor_4" id="item8">
+
+					<h3><b style="margin-right: 10px;">—</b>企业大事记<b style="margin-left: 10px;">—</b></h3>
+
+					<ul class="cjl row-fluid">
+						<li style="width: 100%;">
+							<a href=" http://www.tiannongjinrong.com/ "><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/tnhz.jpg" /></a>
+
+							<div class="newstextx">为了加深客户对平台业务模式、运营模式、资产端实力等层面的全方位了解，拉近客户同平台之间的距离</br>6月30日成都隆升与客户的交流答谢会如期举行，会议在成都银河王朝大酒店召开。
+							</div>
+						</li>
+						<li style="    width: 1200px;margin-top: 29px;">
+							<div style="overflow: hidden">
+								<a style="float: left;overflow: hidden;" href="###"><img style="width: 296px;margin-left: 271px;" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/tnhz2.jpg"> </a>
+								<a style="float: right;" href="###"><img style="    width: 296px;margin-right: 275px;" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/tnhz3.jpg"> </a>
+							</div>
+							<div class="newstextx">&nbsp;&nbsp;&nbsp;&nbsp;此次会议以“资本助力农业，推动农业经济发展再上新台阶”为主题。
+								</br>从成都隆升自身平台出发，全面解读如何结合线下农业助力农业经济发展。
+								</br>互联网+农业+投资，如何结合？ 传统农业如何优化转型，用资本撬动农业发展的杠杆？这是本次会议讨论的关键问题。
+								</br>成都隆升副总经理张总，兴化农业副总经理于总分别从投资、农业方面阐释，解答大家的疑惑。
+								</br>本次见面会，成都隆升还特意为每位到场的投资客户献上了人手一份的精美礼品。</br>同时还设置了“一名一等奖、二名二等奖、三名三等奖”，通过现场的微信抽奖送出。
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+			<div class="floorbox floor_4" id="item9" style="display: none;">
+
+			</div>
+
+			<div style="text-align: center;margin-bottom:30px;    font-size: 12px; color:#999999;">
+				<p>注：因部分细节算法存在一定滞后性，数据存在小范围波动属正常现象。</p>
+			</div>
+			<div id="d-top" style="display:none;">
+				<a id="d-top-a" href="#" title="回到顶部">
+					<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/returntop.png"></a>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				<div class="fottop">
+					<div class="fotbox">
+						<ul>
+							<li>
+								<h3>关于我们</h3>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/18.html">天农简介</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/5.html">招贤纳士</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/16.html">联系我们</a>
+							</li>
+							<li>
+								<h3>投资安全</h3>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/3.html">合作伙伴</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/34.html">政策法规</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/33.html">隐私保护</a>
+							</li>
+							<li>
+								<h3>帮助中心</h3>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/28.html">用户协议</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/35.html">平台规则</a>
+								<a href="http://www.tiannongjinrong.com/article/index/cid/10.html">合同样本</a>
+							</li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<div class="fotbox1">
+						全国服务热线
+						<h3>400-1031-191</h3>
+						<div class="time"> 工作时间 周一至周五 09：00~17：30</div>
+					</div>
+					<div class="fotbox2">
+						<!--<div class="box">
+                        天农众筹官方微信
+                        <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/wx.jpg" alt="">
+                    </div>-->
+						<div class="box">
+							天农众筹官方微信
+							<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/report/picture/wx.jpg" alt="">
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="fotbot">
+					<a href="http://www.miitbeian.gov.cn/"> © Copyright(c)2016 天农众筹 .All Rights Reserved 天农众筹 粤ICP备17153534号-1 投资有风险 请谨慎投资 </a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script>
+	if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+		$("#menu").hide();
+		tele();
+		myinvestA();
+		//		myinvestA1();
+
+		//		myinvestB();
+
+		myinvestC();
+
+		myinvestD();
+		myinvestE();
+		myinvestF();
+
+		//		myinvestC1();
+		//		myinvestD1();
+
+		$("#cjbox li").css({
+			opacity: "1"
+		});
+		$(".news_yhsj").css({
+			opacity: "1"
+		});
+		$(".floor_qudao li").css({
+			opacity: "1"
+		});
+		$(".floor_xb li").css({
+			opacity: "1"
+		});
+		$(".chinamapbox").css({
+			opacity: "1"
+		});
+		$(".fxj_bg").css({
+			opacity: "1"
+		});
+		$(".fxj_main").css({
+			opacity: "1"
+		});
+		$(".fxj_main_f").css({
+			opacity: "1"
+		});
+		$(".fxj_main_f1").css({
+			opacity: "1"
+		});
+		$(".fxj_main_f2").css({
+			opacity: "1"
+		});
+		$(".rank-list").css({
+			opacity: "1"
+		});
+	} else {
+		pcLoad();
+	}
+	// 近半年平台每月交易额
+	function myinvestA() {
+		var myinvestdaytouzi = echarts.init(document.getElementById('investdaytouzi-chart'));
+		option_touzi = {
+
+			tooltip: {
+				formatter: '{b}</br>{c}万元',
+
+			},
+
+			legend: {
+				data: ['交易额(万元)'],
+				textStyle: {
+					color: "#333"
+				},
+
+			},
+			xAxis: {
+				data: ["4月", "5月", "6月"],
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: '#333'
+					}
+				},
+				splitLine: {
+					show: false
+				},
+			},
+			yAxis: {
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: '#333',
+
+					},
+					formatter: '{value}万元'
+				},
+				splitLine: {
+					show: false
+				},
+
+			},
+			series: [{
+				name: '交易额(万元)',
+				type: 'bar',
+				data: [3967,4545,5581],
+				label: {
+					normal: {
+						show: true,
+						position: 'top'
+					}
+				},
+				barWidth: 45,
+				itemStyle: {
+					normal: {
+						color: '#4892ff'
+					}
+				}
+
+			}]
+		};
+		myinvestdaytouzi.setOption(option_touzi);
+	}
+
+
+	function myinvestC() {
+		var sychart_bara = echarts.init(document.getElementById('sy_p_chart_bar_a'));
+		var option = {
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} {b}: {c}笔 ({d}%)"
+			},
+			legend: {
+				x: 'center',
+				bottom: "10px",
+
+				data: ['1-5万元', '6-10万元', '11-20万元', '21-50万元', '50万元以上'],
+				textStyle: {
+					color: "#333"
+				}
+			},
+			color: ['#f9b401', '#00dda0', '#00a2e6', '#3AD101', '#e96d1a'],
+			series: [{
+				name: '',
+				type: 'pie',
+				radius: ['80', '120'],
+				avoidLabelOverlap: true,
+
+				data: [{
+						value: 1720,
+						name: '1-10万元'
+					},
+					{
+						value: 276,
+						name: '10-20万元'
+					},
+					{
+						value: 110,
+						name: '20-30万元'
+					},
+					{
+						value: 84,
+						name: '30-50万元'
+					},
+					{
+						value: 43,
+						name: '50万元以上'
+					}
+
+				]
+			}]
+		};
+		sychart_bara.setOption(option);
+	}
+	//期限
+	function myinvestD() {
+		var sychart_bar = echarts.init(document.getElementById('sy_p_chart_bar_b'));
+		var option = {
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a}{b}: {c}笔 ({d}%)"
+			},
+			legend: {
+				x: 'center',
+				bottom: "10px",
+				data: ['30天', '50天'],
+				textStyle: {
+					color: "#999"
+				}
+			},
+			color: ['#00dda0', '#00a2e6'],
+			series: [{
+					name: '',
+					type: 'pie',
+					radius: ['80', '120'],
+
+					data: [{
+							value: 1957,
+							name: '30天'
+						},
+						{
+							value: 276,
+							name: '50天'
+						}
+						
+					]
+				}
+
+			]
+		};
+		sychart_bar.setOption(option);
+	}
+	
+	
+	//年龄比例
+	function myinvestE() {
+		var sychart_bar = echarts.init(document.getElementById('sy_p_chart_bar_e'));
+		var option = {
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a}{b}: {c}人 ({d}%)"
+			},
+			legend: {
+				x: 'center',
+				bottom: "10px",
+				data: ['21-30周岁', '31-40周岁', '41-50周岁', '51周岁以上'],
+				textStyle: {
+					color: "#999"
+				}
+			},
+			color: ['#f9b401', '#00dda0', '#00a2e6', '#3AD101'],
+			series: [{
+					name: '',
+					type: 'pie',
+					radius: ['80', '120'],
+
+					data: [
+						{
+							value: 447,
+							name: '21-30周岁'
+						},
+						{
+							value: 514,
+							name: '31-40周岁'
+						},
+						{
+							value: 337,
+							name: '41-50周岁'
+						},
+						{
+							value: 134,
+							name: '51周岁以上'
+						}
+					]
+				}
+
+			]
+		};
+		sychart_bar.setOption(option);
+	}
+	
+	//男女比例
+	function myinvestF() {
+		var sychart_bar = echarts.init(document.getElementById('sy_p_chart_bar_f'));
+		var option = {
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a}{b}: {c}人 ({d}%)"
+			},
+			legend: {
+				x: 'center',
+				bottom: "10px",
+				data: ['男', '女'],
+				textStyle: {
+					color: "#999"
+				}
+			},
+			color: ['#4892ff', '#fb737a'],
+			series: [{
+					name: '',
+					type: 'pie',
+					radius: ['80', '120'],
+
+					data: [{
+							value: 761,
+							name: '男'
+						},
+						{
+							value: 671,
+							name: '女'
+						}
+						
+					]
+				}
+
+			]
+		};
+		sychart_bar.setOption(option);
+	}
+	function tele() {
+		var a = document.getElementsByClassName('sliderstext1')[0];
+		a.style.marginLeft = '-592px';
+		var b = document.getElementsByClassName('sliderstext6')[0];
+		b.style.marginLeft = '280px';
+	}
+
+	var isFirst = true;
+	var isFirst1 = true;
+	var isFirst2 = true;
+	var isFirst3 = true;
+	var isFirst4 = true;
+	var isFirst5 = true;
+	var isFirst6 = true;
+	var isFirst7 = true;
+	var isFirst8 = true;
+	var isFirst9 = true;
+
+	function pcLoad() {
+		$(window).scroll(function() {
+
+			var top = $(document).scrollTop();
+			var itemf = 300;
+			var item1 = $("#item1").offset().top + 300;
+			var item2 = $("#item2").offset().top + 200;
+			var item3 = $("#item3").offset().top + 200;
+			var item4 = $("#item4").offset().top + 200;
+			var item5 = $("#item5").offset().top + 200;
+			var item6 = $("#item6").offset().top + 400;
+			var item7 = $("#item7").offset().top + 300;
+			var item8 = $("#item8").offset().top + 300;
+			var item9 = $("#item9").offset().top + 500;
+			if(top > itemf && isFirst) {
+
+				$("#item1 p.subtitle").addClass("slideInshowM");
+				$("#cjbox").addClass("scrollshow");
+				isFirst = false;
+				var optionsa = {
+					useEasing: true,
+					useGrouping: true,
+					separator: ',',
+					decimal: '.',
+					prefix: '',
+					suffix: ''
+				};
+				//                var demo = new CountUp("counters", 0, 76, 0, 3.5, optionsa);
+				//                var demo1 = new CountUp("counters_a", 0, 8184, 0, 3, optionsa);
+				//                var demo2 = new CountUp("counters_b", 0, 3, 0, 3.5, optionsa);
+				//                var demo3 = new CountUp("counters_c", 0, 2599, 0, 3, optionsa);
+				//                demo.start();
+				//                demo1.start();
+				//                demo2.start();
+				//                demo3.start();
+			}
+			if(top > item1 && isFirst1) {
+				myinvestA();
+
+				isFirst1 = false;
+			}
+			if(top > item2 && isFirst2) {
+				$("#item3 .subtitle").addClass("slideInshowM");
+				//				myinvestB();
+
+				isFirst2 = false;
+			}
+			if(top > item3 && isFirst3) {
+				$("#item4 p.subtitle").addClass("slideInshowM");
+				$(".dhbj_all_ca").addClass("dhbjwidth");
+				$(".dhbj_all_cb").addClass("dhbjwidthA");
+				//				myinvestA1();
+				isFirst3 = false;
+			}
+			if(top > item4 && isFirst4) {
+				myinvestC();
+				myinvestD();
+				myinvestE();
+				myinvestF();
+				//				myinvestC1();
+				//				myinvestD1();
+				isFirst4 = false;
+			}
+			if(top > item5 && isFirst5) {
+				$(".news_yhsj").addClass("bounceIn");
+				$(".yhsj").addClass("fadeInUpBig");
+				isFirst5 = false;
+			}
+			if(top > item6 && isFirst6) {
+				$(".floor_qudao_b").addClass("bounceInDownxb");
+				$(".floor_qudao").addClass("scrollshow");
+
+				isFirst6 = false;
+			}
+			if(top > item7 && isFirst7) {
+				$(".floor_xb_b").addClass("flipInXA");
+				$(".floor_xb_a").addClass("bounceInA");
+				$(".floor_xb_c").addClass("bounceInA");
+				isFirst7 = false;
+			}
+			if(top > item8 && isFirst8) {
+				$("#item9").addClass("scrollshow");
+				//                myinvestE();
+				isFirst8 = false;
+			}
+			if(top > item9 && isFirst9) {
+				$(".fxj_main").addClass("bounceIn");
+				$(".fxj_main_f").addClass("bounceIn1");
+				$(".fxj_main_f1").addClass("bounceIn2");
+				$(".fxj_main_f2").addClass("bounceIn3");
+				$(".fxj_bg").addClass("bounceIn4");
+				isFirst9 = false;
+			}
+
+			if(top > 600) {
+				$("#menu").show();
+			} else {
+				$("#menu").hide();
+			} //定义变量，获取滚动条的高度
+			var menu = $("#menu"); //定义变量，抓取#menu
+			var items = $(".remplatebox").find(".floorbox"); //定义变量，查找.item
+
+			var curId = ""; //定义变量，当前所在的楼层item #id
+
+			items.each(function() {
+				var m = $(this); //定义变量，获取当前类
+				var itemsTop = m.offset().top; //定义变量，获取当前类的top偏移量
+
+				if(top > itemsTop - 350) {
+					curId = "#" + m.attr("id");
+				} else {
+					return false;
+				}
+
+			});
+
+			//给相应的楼层设置cur,取消其他楼层的cur
+			var curLink = menu.find(".cur");
+			if(curId && curLink.attr("href") != curId) {
+				curLink.removeClass("cur");
+				menu.find("[href=" + curId + "]").addClass("cur");
+			}
+
+		});
+
+		$(function() {
+			var d_top = $('#d-top');
+			document.onscroll = function() {
+				var scrTop = (document.body.scrollTop || document.documentElement.scrollTop);
+				if(scrTop > 500) {
+					if(scrTop > 0) {
+						d_top.show();
+					} else {
+						d_top.hide();
+					}
+				}
+
+				$("#d-top-a").click(function() {
+					var speed = 200; //滑动的速度
+					$('html,body').animate({
+						scrollTop: 0
+					}, speed); //去顶部
+					$('html,body').animate({
+						scrollTop: $('#footer').offset().top
+					}, speed); //去底部
+				});
+			}
+		});
+	
+	
+	
+	}
+	
+</script>

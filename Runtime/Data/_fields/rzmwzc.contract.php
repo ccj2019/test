@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'itemid', 2 => 'type', 3 => 'is_hetong', 4 => 'conid', 5 => 'contractid', 6 => 'update_time', 7 => 'add_time', 8 => 'loan_certificate', 9 => 'uid', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'itemid' => 'int(11)', 'type' => 'varchar(10)', 'is_hetong' => 'varchar(10)', 'conid' => 'int(11)', 'contractid' => 'varchar(250)', 'update_time' => 'varchar(10)', 'add_time' => 'varchar(10)', 'loan_certificate' => 'varchar(10)', 'uid' => 'int(11)', ), ); ?>

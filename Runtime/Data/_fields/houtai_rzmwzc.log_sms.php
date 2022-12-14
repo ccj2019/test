@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'content', 2 => 'type', 3 => 'cellphone', 4 => 'add_time', 5 => 'add_ip', 6 => 'uid', 7 => 'aid', 8 => 'status', 9 => 'send_id', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'content' => 'varchar(255)', 'type' => 'tinyint(2)', 'cellphone' => 'varchar(255)', 'add_time' => 'varchar(11)', 'add_ip' => 'varchar(255)', 'uid' => 'int(11)', 'aid' => 'int(11)', 'status' => 'tinyint(1)', 'send_id' => 'int(11)', ), ); ?>

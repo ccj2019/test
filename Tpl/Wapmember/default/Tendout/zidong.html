@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="/Public/wap/css/FlexoCalendar.css">
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="/wapmember/bonus/index" class="w-header-left">
+                < 返回 </a>
+                    <h3>智投订单</h3>
+               <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" style="width: 0.4rem; float:right;padding-top: 0.3rem;"  /></a>
+        </div>
+    </div>
+
+
+    <!-- 我的项目 -->
+    <div class="w-wo w-int">
+
+
+        <ul class="int-list-warpper">
+ <volist name="list" id="vo">
+ 	
+ 	
+  <li class="int-list clear">
+
+                <a class="clear">
+
+ <div class="clear w-wo-title">
+                        <span class="fl"> </span>
+                        <span class="fr">项目 <if condition="($vo.borrow_status eq 1)">预热中
+                                <elseif condition="($vo.borrow_status eq 2)"/>众筹中
+                                <elseif condition="($vo.borrow_status eq 4)"/>复审中
+                                <elseif condition="($vo.borrow_status eq 6)"/>已成功
+                                <elseif condition="($vo.borrow_status eq 7)"/>已分红
+                                </if>
+
+                                </td>
+</span>
+                    </div>
+
+
+
+                    <div class="int-list-left fl">
+                            <img src="{$vo.borrow_img}"  alt="">
+                    </div>
+                    <div class="int-list-right fr">
+                        <div class="w-first flex">
+                            <span style="color: #313131;">{$vo.borrow_name|cnsubstr=###,10}</span>
+                            <span>{$vo.bespeak_money}</span>
+                        </div>
+                        <p>智投状态：
+                            <span style="color:##737373;">{$vo.status}</span>
+                        </p>
+                        <div class="clear wo-last">
+                            <span href="##" class="fl ">时间：{$vo.add_time|date='Y-m-d H:i',###}</span>
+                           <!--  <span href="##" class="fr ">金额：{$vo.bespeak_money}</span> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="/Wap/invest/detail/id/{$vo.borrow_id}.html" class="w-wo-a fr">项目详情</a>
+            </li>
+            
+       </volist> 
+
+        </ul>
+    </div>
+    <if condition="$count gt 10 ">
+<div class=" navslis">{$pagebar}</div>
+</if>
+
+<div style="height: 1.2rem; width: 100%; background-color: #fff; position: fixed; bottom: 1.2rem;">
+ <a style="height: 0.8rem;display: block;width: 96%; text-align: center;background-color: #00a0e9;line-height: 0.8rem; color: #fff;margin: 0 auto;margin-top:0.2rem; border-radius: 10px; font-size: 0.32rem;" href="/wapmember/tendout/zhichi">进入智投</a>
+</div>
+
+ <div style="height:1.6rem"></div>
+    <!-- 我的项目 -->
+
+<include file="Public:footer"/>
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+    <script src="/Public/wap/js/index.js"></script>
+    
+ <script> var str = $(".navslis").html(); var m =str.length; var n = str.indexOf("条记录"); var j = str.substring(n+1,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(s+"记录", "")); var m =str.length; var n = str.indexOf("尾页</a>"); var j = str.substring(n+6,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(j, "")); for (var i=4;i<$(".navslis a").length-1;i++) { $(".navslis a").eq(i).hide(); } </script>
+</body>
+
+</html>

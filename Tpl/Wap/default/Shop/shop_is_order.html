@@ -1,0 +1,169 @@
+ 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<style>
+		.l-tc1 img {
+			width: 67%;
+			padding: .2rem;
+			padding-left: 0;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>确认订单</span>
+			<div class="l-fanhui1">
+				<!--<a href="##"></a>-->
+			</div>
+		</div>
+		<div>
+			
+			 <form action="/wap/Shop/post_order" class="duihuan_form" id="test_form"  method="post">
+         <input type="hidden" name="gid" id="gid" value="{$vo.id}" />
+		
+		<?php if(!empty($va['id'])){?> 
+			<div class="l-userxinxi" style="width: 100%;">
+				<a href="<?php echo '/wap/Shop/madd?id='.$vo['id'].'&sun='.$unm;?>">
+					<p class="l-pc1"> <span><!-- {$va.name}	-->{$va.name}<input  name="real_name" type="hidden" value="{$va.name}"></span> <input  name="cell_phone" type="hidden" value="{$va.main_phone}">{$va.main_phone}</p></a>
+				
+				<a href="<?php echo '/wap/Shop/madd?id='.$vo['id'].'&sun='.$unm;?>">
+					<p class="l-pc2"><span><?php if(!empty($va['province'])){ echo("【默认】");}?></span>
+					<input  name="address" type="hidden" value="{$va.province}省{$va.city}市{$va.district}{$va.address}">
+					 {$va.province}{$va.city}{$va.district}{$va.address}</p></a>
+			
+				<div class="l-pc3"><a href="<?php echo '/wap/Shop/madd?id='.$vo['id'].'&sun='.$unm;?>"><img src="/Public/wap/img/l-yjt.png" /></a></div>
+
+
+ 
+ <input name="email"    value="" type="hidden"  />
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+			<?php }else{?>
+					<a href="/Wapmember/memberaddress/add?id=" style="color: red;"><div class="l-userxinxi" style="    text-align: center;  width: 100%;  padding: 26px 0px;">
+			未填写默认地址 
+				</div>	</a>
+			<?php	}?>
+			<div class="clearfix l-fd" style="position: relative;border-bottom: 5px solid #EEF1F8;">
+				<div class="l-tc1">
+					<img src="{$vo['art_img']}" />
+				</div>
+				<div class="l-tc2" style="width: 49%;">
+					<p class="l-tc2">{$vo['title']}</p>
+			<!--		<p class="l-tc4">规格：1斤装</p>-->
+				</div>
+				<div class="l-pc3" style="top: .4rem;"><input name="num" type="hidden" value="{$unm}">x{$unm}</div>
+			</div>
+			<div class="l-dingdan">
+				<!--<p>运费 <span style="color: #313131;">免邮</span></p>-->
+			</div>
+			<div class="l-dingdan">
+				<p style="height:0.5rem;">商品总价 <span style="color: #fdb000;">	 
+				<?php echo $vo['art_jifen']*$unm;?>&nbsp;积分</p>
+
+			
+
+			</div>
+
+			<div class="l-dingdan">
+				<p style="height:0.5rem; padding:0.2rem; padding-bottom:0rem;">可用积分<span style="color: #fdb000;text-align: right;">	 
+			&nbsp; <?php echo $memberinfo['credits'];?>&nbsp;积分
+			
+
+				</span></p>
+
+<if condition="$yue gt 0">
+				<p style="height:0.5rem; padding:0.2rem; padding-top:0rem;">需余额支付<span style="color: #fdb000;text-align: right;">	 
+			&nbsp; 
+				<?php echo $yue; ?>&nbsp;元 
+			
+	</if>
+				</span></p>
+
+			
+
+			</div>
+
+
+			<div class="l-liuyan">
+				<p> 留言</p>
+				<textarea name="beizhu" rows="" cols="" placeholder="请在此处填写留言内容（200字以内）"></textarea>
+
+				<p>支付密码
+			</p>
+			
+			<input type="password" style="padding-left: 5px;line-height: 0.5rem; width:95%;" name="zhifu" id="zhifu" value="" />
+
+
+				<div onclick='doSubmitForm()' class="l-qurena cc">
+					提交订单
+				</div>
+			</div>
+	
+		 </form>
+		</div>
+
+		<!--弹出-->
+
+		 <!--<div class="l-dtc">
+			<div class="l-tanchubox">
+				<p>支付成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>
+		</div> 
+		 <div class="l-dtc">
+			<div class="l-tanchubox">
+				<p class="l-ppx">对不起，您的积分不足</p>
+				<a href="/wap/Shop/get_points" class="l-btnc"><p class="l-ppx1">点击查看如何获取积分</p></a>
+				
+			</div>
+		</div> -->
+
+	</body>
+	<script>
+		
+		var $zindex=2;
+		function doSubmitForm(){
+
+        if(!$("input[name='address']").val()!=""){
+        	layer.msg('您未添加地址!');
+        	return false;   		
+        }
+if ($("#zhifu").val()=='') {
+			layer.msg('请输入支付密码！');
+			return false;
+}		
+var form = document.getElementById('test_form');
+//再次修改input内容
+
+form.submit();
+}
+
+</script>
+	<script>
+		
+	</script>
+<style type="text/css">
+	.qiao{
+		display: none;
+	}
+</style>
+</html>

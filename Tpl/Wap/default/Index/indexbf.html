@@ -1,0 +1,541 @@
+
+
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/swiper-4.3.3.min.css" />
+	
+	
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/swiper-4.3.3.min.js"></script>
+	
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<style type="text/css">
+.swiper-container {
+    width: 100%;
+    height: 3.2rem;
+}  
+.swiper-container img{
+	width: 100%;
+	height: 3.2rem;
+}	
+.juzh_index{
+    height: 1.10rem;
+    float: left;
+    width: 54%;
+    position: absolute;
+    font-size: 0.4rem;
+    line-height: 1.10rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    /* margin: 0 auto; */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+	</style>
+    <style type="text/css">
+        /*进度条样式*/
+        .kdu {
+            position: relative;
+            height: 5px;
+            background: #ececec;
+            border-radius: 30px;
+            margin-bottom: 10px;
+        }
+        .kdu1{
+            float: left;
+            position: absolute;
+            height: 5px;
+            background: linear-gradient(to right, 	#ff8c00,#ff6421);
+            border-radius: 30px;
+        }
+        .kdu2{
+            float: left;
+            position: absolute;
+            height: 5px;
+            background: linear-gradient(to right, #06a5e9,#74fded);
+            border-radius: 30px;
+        }
+    </style>
+
+	<body>
+		<div class="header">
+			<div class="logo">
+				<a>
+					<img src="/Public/wap/img/logo1.png" />
+
+				</a>
+
+			</div>
+		     <div  class="juzh_index">
+			 {$glo.web_name}
+			</div>
+		
+					<if condition="$UID gt '0'">
+				<div class="" style="float:right;"><a href="/Wapmember/"><img  style="width:0.4rem;padding: .25rem 0.2rem;" src="/Public/wap/img/wode1.png"></a></div>
+                   
+                    <else />
+                    <!--未登录状态-->
+                    	<div class="login">
+                       <a href="/Wapmember/common/login.html" style="font-size: 0.42rem;">登录</a>
+                       </div>
+                    </if>
+				
+			
+		</div>
+	<!--中间内容部分-->
+		<div class="l-main">
+			<div class="l-banner">
+				  
+    
+      	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+		 	  <volist name=":get_ad(39)" id='vo'  >  
+	        <div class="swiper-slide">
+	       
+                        <a href="{$vo.url}" class="img_1" style="background:url() no-repeat center center;"><img src="/{$vo.img}" /></a>
+	        		    
+	        </div>
+			</volist> 
+	       <!-- <div class="swiper-slide">
+	        	  <volist name=":get_ad(31)" id='vo' offset="0" length='1'>  
+	        	  
+                        <a href="{$vo.url}" class="img_1" style="background:url() no-repeat center center;"><img src="/{$vo.img}" /></a>
+	        		  </volist> 
+	        </div>
+	        <div class="swiper-slide">
+	        	  <volist name=":get_ad(31)" id='vo' offset="0" length='1'>  
+	        	
+                        <a href="{$vo.url}" class="img_1" style="background:url() no-repeat center center;"><img src="/{$vo.img}" /></a>
+	        		  </volist> 
+	        </div>-->
+	    </div>
+	    <!-- 如果需要分页器 -->
+	    <div class="swiper-pagination"></div>
+	    
+	    <!-- 如果需要导航按钮 -->
+	    <!--<div class="swiper-button-prev"></div>
+	    <div class="swiper-button-next"></div>-->
+	</div>
+                 
+
+                    
+          
+				   <!--<img src="/Public/wap/img/shouye/banner.png" />--> 
+			</div>
+			<!--5个分类-->
+			<div class="l-listf clearfix">
+				<ul>
+					
+			
+					<li>
+						<a href="/wap/article/index/cid/37.html"><img src="/Public/wap/img/shouye/huodong.png" /></a>
+						<span style="font-size: 0.28rem;">活动中心</span>
+					</li>
+					<li>
+						<a href="/wapmember/capital/qiandao"><img src="/Public/wap/img/shouye/qiandao.png" /></a>
+						<span  style="font-size: 0.28rem;">签到奖励</span>
+					</li>
+					<li>
+						<a href="/wap/article/index/cid/21.html"><img src="/Public/wap/img/shouye/zixun.png" /></a>
+						<span>最新资讯</span>
+					</li>
+					<li>
+						<a href="/wap/article/index/cid/55.html"><img src="/Public/wap/img/shouye/zhibo.png" /></a>
+						<span  style="font-size: 0.28rem;">直播中心</span>
+					</li>
+					<li>
+						<a href="/wap/invest/index"><img src="/Public/wap/img/shouye/xiangmu.png" /></a>
+						<span  style="font-size: 0.28rem;">全部项目</span>
+					</li> 
+				</ul>
+			</div>
+
+		</div>
+		<!--联合养殖-->
+		<div class="l-main">
+			<div class="l-yangzhi">
+				<div class="l-topwz">
+					<span>联合养殖</span>
+					<a href="/wap/invest/index?borrow_type=1">
+						<span class="fr l-ckgd">
+						 查看更多&gt;&gt;
+					    </span>
+					</a>
+				</div>
+				<!---=养殖循环-->
+				
+				<!-- <volist name="list_type1.list" id="vb"> -->
+					
+				<div class="l-intu">
+				 <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+					 	<?php $borrow_img=explode(',',$vb['content_img']); ?>  
+    	 
+                                   <img src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}" alt=""> 
+                              	<!--<img src="{   $vb.borrow_img }" />-->
+						<div class="l-xhdw">
+                             <if condition="$vb.start_time gt time()">
+                                 <img src="/Public/wap/img/shouye/xingzhuang1.png" alt="" />
+                                 <elseif condition="$vb.borrow_status eq 2" />
+                                 <img src="/Public/wap/img/shouye/xingzhuang2.png" alt="" />
+                                 <elseif condition="$vb.borrow_status eq 6" />
+                                 <img src="/Public/wap/img/shouye/xingzhuang4.png" alt="" />
+                                 <elseif condition="$vb.borrow_status eq 7" />
+                                 <img src="/Public/wap/img/shouye/xingzhuang3.png" alt="" />
+                             </if>
+                             <span>
+                                    <if condition="$vb.start_time gt time()">
+                                        预热中
+                                    <elseif condition="$vb.borrow_status eq 2" />
+                                        众筹中
+                                    <elseif condition="$vb.borrow_status eq 6" />
+                                        项目完成
+                                    <elseif condition="$vb.borrow_status eq 7" />
+                                        项目已收益
+                                    </if>
+                                </span>
+                         </div>
+						<div class="l-zbox">
+							<p class="l-zctop">{$vb.borrow_name|cnsubstr=###,16}</p>  <p class="l-zctopner"><?php $var=member_img($vb['borrow_uid']);?>
+							
+							<img src="{$var.user_img}">
+							{$var.real_name}
+							</p>
+						<!--<div class="l-jindu" zz="{$vb.progress}">-->
+							<!--<div class="l-jindu1" style="width: {$vb.progress}%;" zz="{$vb.progress}"></div>-->
+						<!--</div>-->
+						<div class="l-wenben">
+                            <div class="kdu">
+                                <present name="vb.bespeak_progress">
+					<if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div class="kdu1" style="width: {$vb.bespeak_progress|floatval|min=100}%">
+                                    		</div>
+					</if>
+                                </present>
+                                <div class="kdu2" style="width: {$vb.progress|floatval|min=100}%">
+                                </div>
+                            </div>
+                            <div style="width: 100%; overflow: auto;">
+                                <present name="vb.bespeak_progress">
+					<if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div style=" float: left; line-height: 25px;padding: 0 10px;">
+                                        		<span style="color:#737373;font-size: .26rem;">已预约：</span><span style="color: #ff6421"> {$vb.bespeak_progress|floatval}%</span>
+                                    		</div>
+					</if>
+                                </present>
+                                <div style="float: left; line-height: 25px;padding: 0 10px;">
+                                    <span style="color:#737373;font-size: .26rem;">已筹金额：</span><span style="color: #00a6e4">{$vb.progress|floatval}%</span>
+                                </div>
+                            </div>
+							<span class="l-c1">目标:<span class="l-c2">¥{$vb.borrow_money|getMoneyFormt=###}</span></span>
+							<span class="l-c1">剩余时间:<span class="l-c2">
+
+                                      <if condition="$vb.start_time gt time()">预热中
+                                        <elseif condition="$vb.borrow_status eq 2" /> {:getLeftTimes( $vb['start_time'] + ($vb['collect_day']*60*60*24))}
+                                        <elseif condition="$vb.borrow_status eq 6" />0天
+                                        <elseif condition="$vb.borrow_status eq 7" />0天
+                                        <else/> 0
+                                        </if>
+							    <!--{$vb.borrow_duration}-->
+							      </span></span>
+
+						</div>
+
+						</div>
+
+					</a>
+				</div>
+             
+            <!-- </volist> 
+				 -->
+				
+				
+				
+				
+				
+			</div>
+			
+			
+			
+			
+			
+			<div class="l-yangzhi">
+				<div class="l-topwz">
+					<span>联合销售</span>
+					<a href="/wap/invest/index?borrow_type=2">
+						<span class="fr l-ckgd">
+						 查看更多&gt;&gt;
+					    </span>
+					</a>
+				</div>
+				<!---=养殖循环-->
+					<!-- <volist name="list_type2.list" id="vbz"> -->
+					
+				<div class="l-intu">
+				 <a href="{:U('invest/detail',array('id'=>$vbz['id']))}">
+		
+			<?php $borrow_img=explode(',',$vbz['content_img']); ?>  
+    	 
+                                   <img src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}" alt=""> 
+						<!--<img src="{ $vbz.borrow_img }" />-->
+						<div class="l-xhdw">
+                         <if condition="$vbz.start_time gt time()">
+                             <img src="/Public/wap/img/shouye/xingzhuang1.png" alt="" />
+                             <elseif condition="$vbz.borrow_status eq 2" />
+                             <img src="/Public/wap/img/shouye/xingzhuang2.png" alt="" />
+                             <elseif condition="$vbz.borrow_status eq 7" />
+                             <img src="/Public/wap/img/shouye/xingzhuang3.png" alt="" />
+                             <elseif condition="$vbz.borrow_status eq 6" />
+                             <img src="/Public/wap/img/shouye/xingzhuang4.png" alt="" />
+                         </if>
+                         <span>
+                                <if condition="$vbz.start_time gt time()">
+                                    预热中
+                                <elseif condition="$vbz.borrow_status eq 2" />
+                                    众筹中
+                                <elseif condition="$vbz.borrow_status eq 7" />
+                                    项目已收益
+                                <elseif condition="$vbz.borrow_status eq 6" />
+                                    项目完成
+                                </if>
+                            </span>
+                     </div>
+						<div class="l-zbox">
+							<p class="l-zctop">{$vbz.borrow_name|cnsubstr=###,16}</p><p class="l-zctopner"><?php $var=member_img($vbz['borrow_uid']);?>
+							
+							<img src="{$var.user_img}">
+							{$var.real_name}
+							</p>
+						<!--<div class="l-jindu">-->
+							<!--<div class="l-jindu1" style="width:{$vbz.progress}%;"></div>-->
+						<!--</div>-->
+						<div class="l-wenben">
+                            <div class="kdu">
+                                <present name="vbz.bespeak_progress">
+					<if condition="$vbz.start_time + $vbz.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div class="kdu1" style="width: {$vbz.bespeak_progress|floatval|min=100}%">
+                                    		</div>
+					</if>
+                                </present>
+                                <div class="kdu2" style="width: {$vbz.progress|floatval|min=100}%">
+                                </div>
+                            </div>
+                            <div style="width: 100%; overflow: auto;">
+                                <present name="vbz.bespeak_progress">
+					<if condition="$vbz.start_time + $vbz.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div style=" float: left; line-height: 25px;padding: 0 10px;">
+                                        		<span style="color:#737373;font-size: .26rem;">已预约：</span><span style="color: #ff6421"> {$vbz.bespeak_progress|floatval}%</span>
+                                    		</div>
+					</if>
+                                </present>
+                                <div style="float: left; line-height: 25px;padding: 0 10px;">
+                                    <span style="color:#737373;font-size: .26rem;">已筹金额：</span><span style="color: #00a6e4">{$vbz.progress|floatval}%</span>
+                                </div>
+                            </div>
+							<span class="l-c1">目标:<span class="l-c2">¥{$vbz.borrow_money|getMoneyFormt=###}</span></span>
+							  <if condition="$vbz.start_time elt time()">
+							<span class="l-c1">剩余时间:<span class="l-c2">   <if condition="$vbg.start_time gt time()">预热中
+                                        <elseif condition="$vbz.borrow_status eq 2" /> {:getLeftTimes( $vbz['start_time'] + ($vbz['collect_day']*60*60*24))}
+                                        <elseif condition="$vbz.borrow_status eq 7" />0天
+                                        <elseif condition="$vbz.borrow_status eq 6" />0天
+                                        <else/> {:getLeftTimes( $vbz['start_time'] + ($vbz['collect_day']*60*60*24))}
+                                        </if> 
+						  </span></span>
+							    
+							     </if> 
+
+						</div>
+						</div>
+						
+					</a>
+				</div>
+             
+            <!-- </volist> 	 -->
+				
+				
+				
+				
+				
+			</div>
+			
+			
+			<div class="l-yangzhi">
+				<div class="l-topwz">
+					<span>共建项目</span>
+					<a href="/wap/invest/index?borrow_type=3">
+						<span class="fr l-ckgd">
+						 查看更多&gt;&gt;
+					    </span>
+					</a>
+				</div>
+				<!---=养殖循环-->
+						<!-- <volist name="list_type3.list" id="vbg"> -->
+					
+				<div class="l-intu">
+				 <a href="{:U('invest/detail',array('id'=>$vbg['id']))}">
+						<?php $borrow_img=explode(',',$vbg['content_img']); ?>  
+    	 
+                                   <img src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}" alt=""> 
+					
+						<!--<img src="{ $vbg.borrow_img}" />-->
+						<div class="l-xhdw">
+                            <if condition="$vbg.start_time gt time()">
+                                <img src="/Public/wap/img/shouye/xingzhuang1.png" alt="" />
+                                <elseif condition="$vbg.borrow_status eq 2" />
+                                <img src="/Public/wap/img/shouye/xingzhuang2.png" alt="" />
+                                <elseif condition="$vbg.borrow_status eq 7" />
+                                <img src="/Public/wap/img/shouye/xingzhuang3.png" alt="" />
+                                <elseif condition="$vbg.borrow_status eq 6" />
+                                <img src="/Public/wap/img/shouye/xingzhuang4.png" alt="" />
+                            </if>
+                            <span>
+                                <if condition="$vbg.start_time gt time()">
+                                    预热中
+                                <elseif condition="$vbg.borrow_status eq 2" />
+                                    众筹中
+                                <elseif condition="$vbg.borrow_status eq 7" />
+                                    项目已收益
+                                <elseif condition="$vbg.borrow_status eq 6" />
+                                    项目完成
+                                </if>
+                            </span>
+						</div>
+						<div class="l-zbox">
+							<p class="l-zctop">{$vbg.borrow_name|cnsubstr=###,16}</p><p class="l-zctopner"><?php $var=member_img($vbg['borrow_uid']);?>
+							
+							<img src="{$var.user_img}">
+							{$var.real_name}
+							</p>
+
+						<div class="l-wenben">
+                            <!--<div class="l-jindu">-->
+                            <!--<div class="l-jindu1" style="width: {$vbg.progress}%;"></div>-->
+                            <!--</div>-->
+                            <div class="kdu">
+                                <present name="vbg.bespeak_progress">
+					<if condition="$vbg.start_time + $vbg.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div class="kdu1" style="width: {$vbg.bespeak_progress|floatval|min=100}%">
+                                    		</div>
+					</if>
+                                </present>
+                                <div class="kdu2" style="width: {$vbg.progress|floatval|min=100}%">
+                                </div>
+                            </div>
+                            <div style="width: 100%; overflow: auto;">
+                                <present name="vbg.bespeak_progress">
+					<if condition="$vbg.start_time + $vbg.bespeak_days * 60 * 60 * 24 gt time()">
+                                    		<div style=" float: left; line-height: 25px;padding: 0 10px;">
+                                        		<span style="color:#737373;font-size: .26rem;">已预约：</span><span style="color: #ff6421"> {$vbg.bespeak_progress|floatval}%</span>
+                                    		</div>
+					</if>
+                                </present>
+                                <div style="float: left; line-height: 25px;padding: 0 10px;">
+                                    <span style="color:#737373;font-size: .26rem;">已筹金额：</span><span style="color: #00a6e4">{$vbg.progress|floatval}%</span>
+                                </div>
+                            </div>
+							<span class="l-c1">目标:<span class="l-c2">¥{$vbg.borrow_money|getMoneyFormt=###}</span></span>
+						 <if condition="$vbg.start_time elt time()">                         
+                           
+                                    
+                       
+							<span class="l-c1">剩余时间:<span class="l-c2">   <if condition="$vbg.start_time gt time()">预热中
+                                        <elseif condition="$vbg.borrow_status eq 2" /> {:getLeftTimes( $vbg['start_time'] + ($vbg['collect_day']*60*60*24))}
+                                        <elseif condition="$vbg.borrow_status eq 7" />0天
+                                        <elseif condition="$vbg.borrow_status eq 6" />0天
+                                        <else/> {:getLeftTimes( $vbg['start_time'] + ($vbg['collect_day']*60*60*24))}
+                                        </if> </span></span>
+							    
+							     </if> 
+
+						</div>
+						</div>
+						
+					</a>
+				</div>
+             
+            <!-- </volist> 
+				
+				-->
+				
+			   <script>
+// 	alert(1);
+$zindex=0;
+ 	
+ </script>	
+				
+			</div>
+			
+						
+			<div class="l-yangzhi">
+				<div class="l-topwz">
+					<span>新手标</span>
+					 
+				</div>
+				<!---=体验标-->
+					 
+					
+				<div class="l-intu">
+				 <a href="{:U('invest/detail',array('id'=>$tiyanbiao['id']))}">
+						<img src="{$tiyanbiao.borrow_img}" />
+						<div class="l-xhdw">
+						    <img src="/Public/wap/img/shouye/xingzhuang2.png" alt="" />	
+						    <span>新手标</span>
+							<!--<span>   <if condition="$vb.start_time gt time()">                         -->
+       <!--                     预热中-->
+       <!--                 <elseif condition="$vb.borrow_status eq 2" />-->
+       <!--                     众筹中              -->
+       <!--                 <else />-->
+       <!--                     项目完成               -->
+       <!--                 </if> </span>-->
+						</div>
+						<div class="l-zbox">
+							<p class="l-zctop">{$tiyanbiao.borrow_name|cnsubstr=###,16}</p> 
+						<!--<div class="l-jindu">-->
+								<!--<div class="l-jindu1" style="width: {$tiyanbiao.progress}%;"></div>-->
+						<!--</div>-->
+						<div class="l-wenben">
+							<span class="l-c1">支持人数:<span class="l-c2">{$ctiyan}</span></span>
+							<span class="l-c1">目标:<span class="l-c2">不限</span></span>
+							<span class="l-c1">剩余时间:<span class="l-c2">长期</span></span>
+							<!--¥{$mtiyan+5000}-->
+
+						</div>
+						</div>
+						
+					</a>
+				</div>
+             
+             
+ 	
+				
+			</div>
+			
+			
+			
+			
+		</div>
+
+		<script type="text/javascript">
+			 var mySwiper = new Swiper ('.swiper-container', {
+    
+    loop: true, // 循环模式选项
+    autoplay:{
+    delay: 2500,
+    disableOnInteraction: false,
+   },
+//slidesPerView: 4,//一行显示3个   
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+     pagination: {
+      el: '.swiper-pagination',
+    }
+  })        
+		</script>

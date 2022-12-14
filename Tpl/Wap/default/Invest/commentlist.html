@@ -1,0 +1,14 @@
+{__NOLAYOUT__}
+<volist name="commentlist" id="vc">
+<dl class="tab_dl">
+    <dt><span>{$vc.uname|hidecard=###,5}：</span>{$vc.comment}</dt>
+    <dd class="tab_dd_a">评论于 {$vc.add_time|date="Y-m-d H:i:s",###}</dd>
+    <if condition="$vc.deal_info neq ''">
+                                    <dd class="tab_dd_b" style="display:table;">
+                                    	<font style="color:red">回复：</font>{$vc.deal_info}
+                                    </dd>
+                                    </if>
+</dl>
+ </volist>
+<div class="page ajaxpagebar" data="scomment" style="margin-left:10px">{$commentpagebar}</div>
+<script type="text/javascript">bindpage()</script> 

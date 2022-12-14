@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'aid', 1 => 'id', 2 => 'info_log', 3 => 'add_time', 4 => 'type', 5 => 'add_ip', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'aid' => 'int(255)', 'id' => 'int(255)', 'info_log' => 'text', 'add_time' => 'int(255)', 'type' => 'int(255)', 'add_ip' => 'varchar(255)', ), ); ?>

@@ -1,0 +1,63 @@
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理体现银行卡-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>提现银行卡</span>
+                </div>
+                <div class="addyhk">
+                    <form action="">
+                        <div class="addybox">
+                            <label for="">姓名：</label>
+                            <div class="addy">{$voinfo.real_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">用户账号：</label>
+                            <div class="addy">{:session('u_user_name')}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">我的银行卡：</label>
+                            <div class="addy">
+                                <ul>
+                                    <if condition="$vobank['bank_num'] neq ''">
+                                    <li>
+                                        <a href="{:U('bank/bank')}">
+                                            <div class="yhk">
+                                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/backimages/bank_{$vobank.bank_name}.jpg" alt="">
+                                                <p>{$vobank.bank_num|hidecard=###,1,'还没有登记您的银行账号'}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <else />
+                                    <li>
+                                        <a href="{:U('bank/bank')}">
+                                            <div class="tian">
+                                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon59.png" alt="">
+                                            </div>
+                                        </a>
+                                    </li>
+                                    </if>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

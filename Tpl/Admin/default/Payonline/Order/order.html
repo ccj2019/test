@@ -1,0 +1,53 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addTitle = '添加分类';
+</script>
+<div class="so_main">
+  <div class="page_tit">会员兑换记录</div>
+  <div class="Toolbar_inbox" style="display:">
+  	<div class="page right">{$pagebar}</div>
+     <htmlA:commonBtn type="jsfun" action="del();" value="删除订单" />
+  </div>
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">用户名</th>
+    <th class="line_l">兑换日期</th>
+    <th class="line_l">兑换物品</th>
+    <th class="line_l">消耗金额</th>
+    <th class="line_l">兑换数量</th>
+    <th class="line_l">当前状态</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="list">
+       <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td><htmlA:user id="vo.uid" uname="vo.user_name" /></td>
+        <td>{$vo.add_time|date='Y年m月d日H时',###}</td>
+        <td><a href="/maket/view?id={$vo.gid}" target="_blank" title="点击查看商品详情">{$vo.title}</a></td>
+        <td>￥{$vo.jine}元+{$vo.jifen}积分</td>
+        <td>{$vo.num}</td>
+        <td><if condition="$vo.action eq 1"> 已发货<else/> 新兑换 </if></td>
+        <td><a href="__URL__/edit?id={$vo['id']}">详情</a> <a href="javascript:void(0);" onclick="del({$vo['id']});">删除</a>  </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+      <htmlA:commonBtn type="jsfun" action="del();" value="删除订单" />
+  </div>
+</div>
+
+
+<include file="Public:_footer" />

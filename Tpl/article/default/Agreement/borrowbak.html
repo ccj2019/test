@@ -1,0 +1,159 @@
+{__NOLAYOUT__}<style>
+	div{font-size:38px !important; z-index:-1;line-height: 5px;}
+	.title{width:100%;text-align:center;font-size:40px;font-weight: bold;}
+	table td,table,table tr{border-collapse: collapse;}
+	#content td,#content th{border:0 none}
+	.content{line-height: 5px;}
+	.touzilist td{border: 1px solid #ccc;text-align: center;line-height: 14px;}
+	.touzilist tr.first td{background-color: #F3F3F3;line-height: 12px;}
+	.touzilist_content td{font-size: 22px;}
+	.hkjh tr.first td{background-color: #F3F3F3;}
+	.hkjh td{border: 1px solid #ccc;text-align: center;line-height: 8px;}
+	.jkxm{width: 100%;}
+	.jkxm td{border: 1px solid #ccc;text-align: center;line-height: 8px;width: 80%;}
+	td.f_td{width: 20%;background-color: #F3F3F3;}
+	.title_first{font-weight: bold;}
+	*{font-family: '宋体';}
+
+</style>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; &nbsp;甲方（收货方）:{$mBorrow.user_name}</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; &nbsp;乙方（众筹方）:{$member.user_name}</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; &nbsp;身份证号：{$member.idcard}</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp;&nbsp;丙方（平台方）：山东天农网络科技有限公司&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">鉴于：</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1、&nbsp;甲方：目前正是当地化肥销售旺季，为更快更好的占领市场，实现利润最大化，现寻求乙方众筹融资，用于从{$binfo.borrow_sccj}购买化肥。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2、&nbsp;乙方：在丙方山东天农网络科技有限公司众筹网站“天农众筹”注册为会员，通过丙方平台发布项目详情进行参考并为甲方的众筹项目进行众筹。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">众筹项目名称：{$binfo.borrow_name}周期{$binfo.borrow_duration}；预期分红收益率：{$binfo.borrow_interest_rate}；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">众筹金额：{$iinfo.investor_capital}（大写：{$money}）；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">4、&nbsp;丙方，山东天农网络科技有限公司，成功运营“天农众筹”网站，能够为甲方提供较为完备的技术支持，展示甲方的项目。发布融资需求，提供融资宣传和渠道，以期实现互联网便捷融资、投资、管理的目标。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">现甲乙丙三方经协商一致达成《众筹协议》（以下简称“本众筹协议”）如下，以资共同遵守：</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp;&nbsp;为了保证众筹资金的安全及收益，现三方约定如下：丙方负责将乙方在“天农众筹”网站众筹到的资金，按照甲方的需求分批转账至{$binfo.borrow_sccj}生产厂商账户：由{$binfo.borrow_sccj}生产厂商按照丙方的要求分批将化肥发货至甲方；甲方回款后应配合丙方如实制作该项目的财务报表并根据项目要求按照比率分配收益；以及将乙方投资的本金及收益转账至丙方账户；乙方可根据自身资金需求在丙方众筹平台上发起提现；丙方则按照乙方的实际收益情况依据众筹协议进行转账至乙方在平台绑定的银行卡中，则本众筹项目结束。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">（一）各方权利及义务</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1、甲方的权利和义务</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1.1 甲方应按照丙方运营的“天农众筹”众筹网站的规则，支付丙方总众筹金额的3%作为平台的服务费用；众筹成功后，甲方应将该费用如期汇至丙方指定的化肥生厂商账户中。　　</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1.2甲方承诺，在项目推广融资期开始后不得越过丙方与“天农众筹”网站的认证投资人就本众筹协议约定下的项目达成任何形式的合作，否则视为甲方违约，则甲方需向丙方支付融资总额15%的违约金以及在融资过程中发生的中介费用、徽商银行帐户管理费用等。　　</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1.3 甲方承诺，为维持丙方“天农众筹”网站的公信力，众筹成功后，应如实汇报每批化肥的销售情况，以及利润空间，并接受丙方的财务监督。如甲方出现造假信息，则视为甲方违约，丙方有权将在徽商银行上未转账的资金收回并返还给乙方，并有权按照总众筹金额的年化12%的追偿补助追究甲方责任用于补偿乙方的资金的收益。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2乙方的权利义务：</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2.1乙方承诺在“天农众筹”众筹平台所众筹的资金具有合法来源；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2.2乙方应对甲方以及丙方在该项目运作时获得的信息严格保密；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2.3乙方有权查看甲方在该众筹项目的财务报表；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2.4如众筹项目失败，乙方有权要求丙方全额退还投资本金；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3 .丙方权利义务</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3.1 在“天农众筹”网站以适当的方式对甲方进行宣传与推广，通过“天农众筹”网站为甲方寻找适合的投资者；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3.2 “天农众筹”网站与徽商银行合作；丙方收取甲方总众筹金额的3%作为平台费用，该费用包括有偿为甲方提供相关融资资金服务、支付以及有偿为甲方提供法律咨询、尽职调查、方案设计、交易众筹协议等法律文件的起草以及专业的法律服务；　　</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3.3 协助甲方通过相关众筹协议的条款设定，保障甲方的经营管理权限，为甲方规范化管理奠定发展基础；丙方作为 “天农众筹”网站的运营方，有义务保证平台的正常运行。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3.4 丙方有权就甲方的融资事宜收取服务费用。如在双方合作中，甲方违约，丙方有权拒绝为甲方继续提供融资服务。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">(二)声明与承诺</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:24px;"><span style="font-size:32px;">1 、甲方承诺，在委托有效期内遵守“天农众筹”网站的使用规则，维护“天农众筹”网站的公信力，在“天农众筹”网站所申报项目所有信息真实、及时、有效，不存在虚假陈述、重大遗漏及误导性陈述，并且项目信息不存在侵犯他方知识产</span><span style="font-size:32px;">权或其他权利的情形。</span></span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2 、甲方承诺，向“天农众筹”网站提供的为了完成本项委托所需要的涉及经营和财务的重要信息和数据是真实、准确、完整的。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">3、乙方承诺在“天农众筹”众筹平台所众筹的资金具有合法来源；</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">4、丙方承诺，在委托有效期内，勤勉、尽责的履行职责，为甲方提供便利的融资需求，尽最大可能帮助甲方获得融资。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">5、丙方承诺，对于甲方明确的保密内容，没有甲方的许可，不向任何第三方公开。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">（三）文本及生效</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">1 、本众筹协议是三方关于本项委托的最新文本，将取代在此之前达成的任何书面或口头的众筹协议。除非在本众筹协议生效后三方以书面的形式签订补充众筹协议，否则本众筹协议所载条款不能更改。本众筹协议未尽事宜，由三方本着诚信原则友好协商并以签订补充众筹协议的方式处理。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">2、本众筹协议经项目发布众筹成功后方可生效，一式三份，三方各执壹份，具有同等法律效力。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">（四）其他</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">本众筹协议适用中华人民共和国有关法律。凡因本众筹协议所发生的或与之相关的任何争议，三方应友好协商解决；如不能协商解决的，任何一方均可向丙方所在地的人民法院起诉。</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 甲方：{$mBorrow.user_name}</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 签约时间： {$iinfo.add_time|date='Y',###}年{$iinfo.add_time|date='m',###}月{$iinfo.add_time|date='d',###}日</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 乙方（签名）：{$member.user_name}</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 签约时间： {$iinfo.add_time|date='Y',###}年{$iinfo.add_time|date='m',###}月{$iinfo.add_time|date='d',###}日</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp;</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 丙方(盖章)：</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 法定代表人/授权代表人：山东天农网络科技有限公司</span> 
+</p>
+<p>
+	<span style="line-height:2;font-family:Microsoft YaHei;font-size:32px;">&nbsp; 签约时间： {$iinfo.add_time|date='Y',###}年{$iinfo.add_time|date='m',###}月{$iinfo.add_time|date='d',###}日</span> 
+</p>
+
+
+

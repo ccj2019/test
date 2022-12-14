@@ -1,0 +1,66 @@
+ 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<style>
+		.l-fh {
+			border-bottom: 3px solid #EEF1F8;
+		}
+	</style>
+
+	<body>
+ 
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>商品明细</span>
+			<div class="l-fanhui1">
+				<a href="/Wapmember/Memberinfo#chip-1"  ><img src="/Public/wap/img/huiyuan/shezhi.png" alt=""  /></a>
+			</div>
+		</div>
+        <style type="text/css">
+            .l-spmx>ul>li>div{
+                display: flex;
+                align-items: center;
+                height:auto;
+            }
+        </style>
+		<div class="l-spmx">
+
+			<ul>
+				<li>
+					<span>订单编号</span><div>{$list.id}</div>
+				</li>
+				<li>
+					<span>商品名称</span><div>{$list.title}</div>
+				</li>
+				<li>
+					<span>商品总价</span><div>{$list.jifen}积分+{$list.jine}元</div>
+				</li>
+				<li>
+					<span>兑换情况</span><div><if condition="$list.action eq 1 ">已兑换<else /> 待发货</if></div>
+				</li>
+				<li>
+					<span>兑换时间</span><div>{$list.add_time|date='Y-m-d h:i:s',###}</div>
+				</li>
+				<li>
+					<span>收货人</span><div>{$list.real_name}</div>
+				</li>
+				<li>
+					<span>收货电话</span><div>{$list.cell_phone}</div>
+				</li>
+				<li>
+					<span>收货地址</span><div>{$list.address}</div>
+				</li>
+				<li>
+					<span>订单备注</span><div>{$list.beizhu}</div>
+				</li>
+			</ul>
+		</div>
+<!--底部-->
+		<div class="l-di" style="height: 1.7rem;"></div>
+ <!-- 我的项目 -->
+
+<include file="Public:footer"/>

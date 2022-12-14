@@ -1,0 +1,84 @@
+<div class="ly_banner">
+    <div class="main_visual">
+                <div class="flicking_con">
+                    <div class="flicking_inner">
+                     <!-- <volist name=":get_ad(4)" id='vo'> -->                        
+                     <a href="{$vo.url}" target="_blank"><span>1</span></a>
+                      <!-- </volist> -->                     
+                 </div>
+            </div>
+            <div class="main_image">
+                <ul>        
+                <!-- <volist name=":get_ad(4)" id='vo'> -->            
+            <li><a href="{$vo.url}" target="_blank"><span class="img_1" style="background:url({$vo.img}) no-repeat center top"></span></a></li>
+          <!-- </volist> -->                                 
+                </ul>
+                <a href="javascript:;" id="btn_prev" class="png"></a>
+                <a href="javascript:;" id="btn_next" class="png"></a>
+            </div>
+            </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var fwidth = $(".flicking_inner a").width();
+            var fdiv = $(".flicking_con").width();
+            var fnum = $(".flicking_inner a").size();
+            var fleft = (fdiv - fwidth*2*fnum)*0.5;
+            $(".flicking_inner").css("marginLeft",fleft)
+            });
+    </script>
+</div>
+<div class="clear"></div>
+<!--banner end-->
+<div class="center">
+    <div class="boon-top"><h1>会员福利</h1><span></span></div>
+    <ul class="boon-l">
+    <volist id="vo" name="list">
+        <li><img onclick="location.href='{:U('maket/detail',array('id'=>$vo['id']))}'" src="/{$vo.art_img}" width="228px" height="193px" /><h1>{$vo.title}</h1><p><span>所需积分：<i>{$vo.art_jifen}</i></span><span>购买人数：{:getbuynum($vo["id"])}人</span></p><a href="{:U('maket/detail',array('id'=>$vo['id']))}">兑换</a></li>
+    </volist>
+    </ul>
+    <div class="fr">
+        <div class="boon-r">
+            <h1>HI,天空欢迎来到礼品兑换区</h1>
+            <p class="login-2"><a href=""><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon16.png" /><span>登录</span></a><a href=""><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon15.png" /><span>立即注册</span></a></p>
+            <p class="gog"><i>济南资海</i><span>济南资海济南资海济南资海济南资海济南资海济南资海济南资海济南资海济南资海</span></p>
+            <p class="all">
+                <i>平台商品总数：</i>
+                <span>2</span>
+                <span>1</span>
+            </p>
+        </div>
+        <div class="boon-1">
+            <h1>积分兑换动态</h1>
+            <div id="scrollDiv">
+              <ul>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+                <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img11.jpg" /><p><span>用户天空兑换了</span><i>中国联通20元话费</i></p></li>
+              </ul>
+            </div>
+<script type="text/javascript">
+function AutoScroll(obj){
+        $(obj).find("ul:first").animate({
+                marginTop:"-65px"
+        },500,function(){
+                $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+        });
+}
+$(document).ready(function(){
+setInterval('AutoScroll("#scrollDiv")',3000)
+});
+</script>
+        </div>
+        <div class="rwm">
+            <span>分享给好友，邀请好友一起来兑换</span>
+            <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img6.jpg" />
+            <div><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img18.jpg" /></div>
+        </div>
+    </div>
+</div>

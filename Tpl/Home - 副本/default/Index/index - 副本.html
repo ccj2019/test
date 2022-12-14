@@ -1,0 +1,333 @@
+<div class="main_visual">
+            <div class="flicking_con">
+                    <div class="flicking_inner">
+                    <!-- <volist name=":get_ad(4)" id='vo'> -->                        
+                    <a href="{$vo.url}" target="_blank">1</a>
+                      <!-- </volist> --> 
+                 </div>
+            </div>
+            <div class="main_image">
+                <ul>                    
+                    <!-- <volist name=":get_ad(4)" id='vo'> -->            
+            <li><a href="{$vo.url}" target="_blank"><span class="img_1" style="background:url({$vo.img}) no-repeat center top"></span></a></li>
+          <!-- </volist> --> 
+                </ul>
+                <a href="javascript:;" id="btn_prev" class="png"></a>
+                <a href="javascript:;" id="btn_next" class="png"></a>
+            </div>
+            </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".ej_h").removeClass('ej_h');
+        var fwidth = $(".flicking_inner a").width();
+        var fdiv = $(".flicking_con").width();
+        var fnum = $(".flicking_inner a").size();
+        var fleft = (fdiv - fwidth*fnum-10*fnum)*0.5;
+        $(".flicking_inner").css("marginLeft",fleft)
+    });
+</script>
+<div class="ck1">
+    <div class="ck1_left">
+        <div class="ck_gg">
+            <div class="ck_gg_l">公告：</div>
+            <div class="ck_gg_c">
+            <DIV id="Scroll">
+            <DIV id="ScrollMe" style="OVERFLOW: hidden; HEIGHT: 40px">
+            <!-- <volist name=":getArtList(465,10)" id="vo"> -->                 
+             <A href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}</A><BR>
+              <!-- </volist> -->
+            </DIV>
+            </DIV>
+            <SCRIPT>new srcMarquee("ScrollMe",0,1,808,40,40,3000,3000,40)</SCRIPT>
+            </div>
+            <div class="ck_gg_r"><a href="/article/index/cid/465.html">查看更多></a></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="ck1_right">
+        <ul>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon3.png" />累计筹款总额：<span>{:getDataCount(4)}</span>元</li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/icon4.png" />累计支持人数：<span>{:getDataCount(5)}</span>人</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="ck">
+    <div class="line"></div>
+    <div class="ck_kuang"><span>推荐项目</span></div>
+    <div class="ck_en">OUR RECOMMENDED</div>
+    <div class="ck2">
+        <ul>
+        <!-- <volist name="listProduct_top.list" id="vb" offset="0" length='3'>  -->
+            <li>
+                <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+                    <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/img1.jpg" />
+                    <div class="ck_bg"></div>
+                    <div class="ck_bg2">
+                    </div>
+                    <div class="myStat3 tj" data-startdegree="0" data-dimension="126" data-text="" data-info="" data-width="4" data-fontsize="38" data-percent="30" data-fgcolor="#ff7510" data-bgcolor="#fff"></div>
+                    <div class="ck_pro"><span>{$vb.progress}%</span><br />进度</div>
+                    <div class="ck_tit"><p>{$vb.borrow_name|cnsubstr=###,20}</p>h拍照闪光灯，专业氙气闪光专</div>
+                </a>
+            </li>
+        <!-- </volist> -->
+            <div class="clear"></div>
+            <script>
+$( document ).ready(function() {
+    $('.myStat3').circliful();
+    });
+</script>
+        </ul>
+    </div>
+    <div class="ck3">
+        <div class="ck3_left">
+            <script type="text/javascript">
+            $(document).ready(function(){
+                var $tab_li = $('#tab ul li');
+                $tab_li.hover(function(){
+                    $(this).addClass('selected').siblings().removeClass('selected');
+                    var index = $tab_li.index(this);
+                    $('div.tab_box > div').eq(index).show().siblings().hide();
+                }); 
+            });
+            </script>
+            <div id="tab">
+                <ul class="tab_menu">
+                    <li class="selected">新标预告</li>
+                    <li style="border-right:0px; width:269px;">企业动态</li>
+                </ul>
+                <div class="tab_box">
+                    <div>
+                        <ul class="news">
+                        <!-- <volist name=":getArtList(465,4)" id="vo"> -->
+                            <li><span class="dot">.</span><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}<span>{$vo.art_time|date='m-d',###}</span></a></li>
+                        <!-- </volist> -->
+                        </ul>
+                    </div>
+                    <div class="hide">
+                        <ul class="news">
+                            <!-- <volist name=":getArtList(465,4)" id="vo"> -->
+                            <li><span class="dot">.</span><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}<span>{$vo.art_time|date='m-d',###}</span></a></li>
+                        <!-- </volist> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ck3_right">
+            <script type="text/javascript">
+            $(document).ready(function(){
+                var $tab_li = $('#tab2 ul li');
+                $tab_li.hover(function(){
+                    $(this).addClass('selected').siblings().removeClass('selected');
+                    var index = $tab_li.index(this);
+                    $('div.tab_box2 > div').eq(index).show().siblings().hide();
+                }); 
+            });
+            </script>
+            <div id="tab2">
+                <ul class="tab_menu2">
+                    <li class="selected">投票回款</li>
+                    <li style="border-right:0px; width:269px;">活动公告</li>
+                </ul>
+                <div class="tab_box2">
+                    <div>
+                        <ul class="news">
+                            <!-- <volist name=":getArtList(465,4)" id="vo"> -->
+                            <li><span class="dot">.</span><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}<span>{$vo.art_time|date='m-d',###}</span></a></li>
+                            <!-- </volist> -->
+                        </ul>
+                    </div>
+                    <div class="hide">
+                        <ul class="news">
+                            <!-- <volist name=":getArtList(465,4)" id="vo"> -->
+                            <li><span class="dot">.</span><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}<span>{$vo.art_time|date='m-d',###}</span></a></li>
+                        <!-- </volist> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="cks">
+    <div class="line"></div>
+    <div class="ck_kuang"><span style="background:#fff;">预热项目</span></div>
+    <div class="ck_en">OUR RECOMMENDED</div>
+    <div class="ck4">
+        <div style="width:1100px; margin:0 auto">
+            <div class="mr_frbox">
+              <img class="mr_frBtnL prev" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/sina_lef.png" width="29" height="53" />
+              <div class="mr_frUl">
+              <ul>
+              <!-- <volist name="listProduct_pro.list" id="vb" offset="0" length='3'>  -->
+                <li>
+                    <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+                        <div class="ck_spec9"><img src="{$vb.borrow_img}" style="width:260px;height:210px;" /></div>
+                        <P class="ck_spec3">{$vb.borrow_name|cnsubstr=###,14}</P>
+                        <p class="ck_spec4">{$vb.borrow_con|cnsubstr=###,30} ...</p>
+                        <p class="ck_spec5">{$vb.progress}%</p>
+                        <div class="ck_spec6"><div style="width:{$vb.progress}%;"></div></div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" height="50">
+                          <tr class="ck_spec7">
+                            <td style="color:#ff9000;">{$vb.borrow_money|getMoneyFormt=###}</td>
+                            <td>{$vb.has_borrow|getMoneyFormt=###}</td>
+                            <td>{$vb.id|get_pro_invest}</td>
+                          </tr>
+                          <tr class="ck_spec8">
+                            <td>项目总额</td>
+                            <td>已筹金额</td>
+                            <td>支持人数</td>
+                          </tr>
+                        </table>
+
+                    </a>
+               </li>
+               <!-- </volist> -->
+              </ul>
+              </div>
+              <img class="mr_frBtnR next" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/sina_right.png" width="29" height="53" />
+            </div>
+            </div>
+        <script language="javascript">
+        $(".mr_frUl ul li img").hover(function(){ $(this).css("border-color","#A0C0EB");},function(){ $(this).css("border-color","#d8d8d8")});
+        jQuery(".mr_frbox").slide({ titCell:"",mainCell:".mr_frUl ul",autoPage:true,effect:"leftLoop",autoPlay:true,vis:4});
+        </script>
+        <script type="text/javascript">
+            $(".mr_frUl ul li").hover(function(){
+                $(this).find("img").animate({ width:"320px",height:"258px",marginLeft:"-30px",marginTop:"-24px"},300);   
+            },function(){
+                $(this).find("img").animate({ width:"260px",height:"210px",marginLeft:"0px",marginTop:"0px"},300);   
+            });
+        </script>
+    </div>
+    <div class="line"></div>
+    <div class="ck_kuang"><span style="background:#fff;">融资项目</span></div>
+    <div class="ck_en">OUR RECOMMENDED</div>
+    <div class="dw6">
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var $tab_li = $('#tab3 ul li');
+        $tab_li.hover(function(){
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var index = $tab_li.index(this);
+            $('div.tab_box3 > div').eq(index).show().siblings().hide();
+        }); 
+    });
+    </script>
+    <div id="tab3">
+        <ul class="tab_menu3">
+        <volist name="cateList" id="cat" offset="0" length='10'>
+            <li <if condition="$i eq 1 ">class="selected"</if>>{$cat.type_name}</li>
+        </volist>     
+        </ul>
+        <script type="text/javascript">
+            var twidth =(1100-$(".tab_menu3 li").size()*106)*0.5;
+            $(".tab_menu3 li:first").css("marginLeft",twidth);
+        </script>
+        <div class="tab_box3">
+        <!-- <volist name="cateList" id="cat" offset="0" length='10'> -->
+            <div <if condition="$i neq 1 ">class="hide"</if>>
+                <div class="dw_xm">
+                    <ul>
+                    <volist name="cat.borrowList.list" id="vb">
+                        <li>
+                            <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+                                <div class="ck_spec9"><img src="{$vb.borrow_img}" style="width:260px;height:210px;" /></div>
+                                <P class="ck_spec3">{$vb.borrow_name|cnsubstr=###,14}</P>
+                                <p class="ck_spec4">{$vb.borrow_con|cnsubstr=###,30} ...</p>
+                                <p class="ck_spec5">{$vb.progress}%</p>
+                                <div class="ck_spec6"><div style="width:{$vb.progress}%;"></div></div>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" height="50">
+                                  <tr class="ck_spec7">
+                                    <td style="color:#ff9000;">{$vb.borrow_money|getMoneyFormt=###}</td>
+                                    <td>{$vb.has_borrow|getMoneyFormt=###}</td>
+                                    <td>{$vb.id|get_pro_invest}</td>
+                                  </tr>
+                                  <tr class="ck_spec8">
+                                    <td>项目总额</td>
+                                    <td>已筹金额</td>
+                                    <td>支持人数</td>
+                                  </tr>
+                                </table>
+
+                            </a>
+                       </li>
+                    </volist>
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="dw_more"><a href="/invest">浏览更多项目</a></div>
+                </div>
+            </div>
+        <!-- </volist> -->
+        </div>
+    </div>
+    <script type="text/javascript">
+            $(".dw_xm ul li").hover(function(){
+                $(this).find("img").animate({width:"320px",height:"258px",marginLeft:"-30px",marginTop:"-24px"},300);   
+            },function(){
+                $(this).find("img").animate({width:"260px",height:"210px",marginLeft:"0px",marginTop:"0px"},300);   
+            });
+        </script>
+</div>
+    <div class="clear"></div>
+    <div class="line"></div>
+    <div class="ck_kuang"><span style="background:#fff;">成功项目</span></div>
+    <div class="ck_en">OUR RECOMMENDED</div>
+    <!-- <volist name="listProduct_success.list" id="vb" offset="0" length='10'> -->
+    <div class="ck5">
+        <div class="ck5_left"><a href="{:U('invest/detail',array('id'=>$vb['id']))}"><img src="{$vb.borrow_img}" style="width: 390px;height: 270px;" /></a></div>
+        <div class="ck5_right">
+            <p class="ck_spec10"><a href="{:U('invest/detail',array('id'=>$vb['id']))}">{$vb.borrow_name|cnsubstr=###,20}</a></p>
+            <p class="ck_spec4" style="margin:0;">{$vb.borrow_con|cnsubstr=###,40}  ...</p>
+            <p class="ck_spec5" style="width:470px; margin:0;">{$vb.progress}%</p>
+            <div class="ck_spec6" style="margin:10px 0px; width:470px;"><div style="width:{$vb.progress}%;"></div></div>
+            <table width="400" border="0" cellspacing="0" cellpadding="0" height="60">              
+              <tr class="ck_spec7">
+                <td style="color:#ff9000;">{$vb.borrow_money|Fmoney=###}</td>
+                <td>{$vb.has_borrow|Fmoney=###}</td>
+                <td>{$vb.id|get_pro_invest}</td>
+              </tr>
+              <tr class="ck_spec8">
+                <td>项目总额</td>
+                <td>已筹金额</td>
+                <td>支持人数</td>
+              </tr>
+            </table>
+        </div>
+        <div class="ck_ycg">已成功</div>
+        <div class="clear"></div>
+        <div class="ck_more"><a href="/invest">查看更多>></a></div>
+    </div>
+    <!-- </volist> -->
+    <div class="clear"></div>
+    <div class="ck_new">新闻资讯</div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+    <div class="ck_new_con">
+        <div class="ck_new_l">
+        <!-- <volist name=":getArtList(465,10)" id="vo" offset="0" length='1'> -->
+            <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}"><img src="{$vo.art_img}" style="width: 588px;height: 133px;" /></a>
+            <P class="ck_spec11"><a  href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title|cnsubstr=###,30}</a></P>
+            <p>{$vo.art_content|cnsubstr=###,20}</p>
+            <p class="ck_spec12"><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">详情</a></p>
+        <!-- </volist> -->
+        </div>
+        <div class="ck_new_r">
+            <ul>
+                <!-- <volist name=":getArtList(465,10)" id="vo" offset="1" length='3'> -->
+                <li>
+                    <p><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title|cnsubstr=###,20}</a></p>{$vo.art_content|cnsubstr=###,20}
+                </li>
+                <!-- </volist> -->
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="ck_fq"><a href="/borrow">立即发起梦想</a></div>

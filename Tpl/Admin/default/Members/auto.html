@@ -1,0 +1,76 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var editUrl = '__URL__/edit';
+	var editTitle = '修改会员类型';
+	var isSearchHidden = 1;
+	var searchName = "搜索/筛选会员";
+</script>
+<div class="so_main">
+  <div class="page_tit">自动投标设置</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="javascript:void();" value="会员自动投标" style="search_action" />
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+     <th class="line_l">是否开启</th>
+    <th class="line_l">用户名</th>
+    <th class="line_l">真实姓名</th>
+    <th class="line_l">当前队列</th>
+    <th class="line_l">账户余额</th>
+    <td>借款期限</td>
+     <th class="line_l">利率限制(0为不限制)</th>
+     <th class="line_l">最小额度(0为不限制)</th>
+     <th class="line_l">最大额度(0为不限制)</th>
+	<th class="line_l">保留金额(0为不限制)</th>
+   <th class="line_l">还款方式</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+         <td><if condition="$vo.status eq 1"><font color="#00CC00">已开启</font><else/>未开启</if></td>
+        <td>{$vo.user_name}</td>
+        <td><htmlA:user id="vo.uid" uname="vo.real_name" /></td>
+        <td><if condition="$vo.status eq 1">
+    <if condition="auto_next($vo['uid']) neq 0"> 
+      <font style="color:red">{$vo.uid|auto_next}/{$all}</font> 
+    <else/>
+      账户余额不足50元<br />不进入排队队列
+    </if> 
+    <else/>
+     未开启
+    </if></td>
+        <td>{$vo.account_money}</td>
+	<td><if condition="$vo.timelimit_status eq 0">不限制<else/>{$vo.timelimit_month_first}---{$vo.timelimit_month_last}个月</if></td>
+     <td><if condition="$vo.apr_status eq 1">{$vo.apr_first}%-{$vo.apr_last}%<else/>不限制</if></td>
+    <td>{$vo.tender_account}元</td>
+    <td>{$vo.tender_max_account}元</td>
+    <td>{$vo.bao_account}元</td>
+    <td>{$vo.repayment_type}</td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+      <htmlA:commonBtn type="jsfun" action="javascript:void();" value="会员自动投标" style="search_action" />
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

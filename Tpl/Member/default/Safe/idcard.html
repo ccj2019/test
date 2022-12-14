@@ -1,0 +1,30 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>通过身份验证，能够有效的提高资金的安全性！</p>
+    <p>尊敬的{$glo.web_name}会员，通过身份验证，可以为您在{$glo.web_name}的投资和借款提供有效的安全保障。</p>
+  </div>
+  <div class="m_page_right_box">
+	<table style="width: 850px; float: left;padding: 0px; border-collapse: collapse; text-align: left;" id="formTb" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+			<td>
+				温馨提示：你已经完成了身份验证，你的身份信息如下。
+			</td>
+		</tr>
+        <tr>
+			<td>
+				真实姓名：{$vo.real_name}
+			</td>
+		</tr>
+        <tr>
+			<td>
+				身份证号：{$vo.idcard|hidecard=###,1}
+			</td>
+		</tr>
+        <tr>
+			<td style="color:red">
+				* 如果你在公安机关修改了名字，请联系我们的客服，凭有关公安机关改名的核证材料修改您的身份信息。谢谢!
+			</td>
+		</tr>
+	</tbody></table>
+  </div>
+</div>

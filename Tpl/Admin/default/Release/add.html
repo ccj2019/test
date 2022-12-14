@@ -1,0 +1,170 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+
+<style type="text/css">
+  .search_member{margin: 0px 10px;display: inline-block;padding: 5px;cursor: pointer;border: 1px solid #ABCDEF;border-radius: 3px;}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main"> 
+
+  <div class="form2">
+    <div id="tab_1"> 
+
+      
+    </div>
+    <!--tab1-->
+    <form method="post" action="__URL__/save" onSubmit="return cksubmit();" name="postBorrow" id="postBorrow" enctype="multipart/form-data" >
+    <input type="hidden" name="is_houtai" value="1" />
+      <input type="hidden" name="vkey" value="{$vkey}" />
+      <input type="hidden" name="borrow_type" value="{$borrow_type}" />      
+      <div class="box4" style="border:none">
+        <div class="jkxx1"><a href="javascript:void(0)" style=" color:#fff" id="tips">发布{$BORROW_TYPE[$borrow_type]}</a></div>
+        <div class="jkxx2">
+              <dl class="lineD"><dt>众筹标题：</dt><dd>
+              <label for="textfield"></label> 
+                <input type="text" class="input" name="borrow_name"  /></dd>
+              </dl>
+              <dl class="lineD"><dt>众筹总金额：</dt><dd>
+              <label for="textfield"></label> 
+                <input onKeyUp="NumberCheck(this)" type="text" class="input" name="borrow_money" title="交易币种均为人民币。借款成功后,请按时还款 手续费请查看收费规则" /></dd>
+              </dl>     
+                <!--<input type="hidden" id=-"borrow_lx" name="borrow_lx" value="1" />
+              <dl class="lineD" style="display:none"><dt>最低投标金额：</dt><dd>
+             <htmlA:select id="borrow_min" datakey="borrow_min" class="spec46" addstr='title="允许投资者对一个借款标的投标总额的限制"'/></dd></dl>
+             <dl class="lineD" style="display:none"><dt>最多投标总额：</dt><dd>
+              <htmlA:select id="borrow_max" datakey="borrow_max" class="spec46" nodefalut="true" addstr='title="允许投资者对一个借款标的投标总额的限制"'/></dd></dl>-->
+              <dl class="lineD"><dt>有效时间：</dt><dd>
+               <input type="text" id=-"borrow_time" name="borrow_time" value="10" />天
+             </dd></dl>
+             <dl class="lineD"><dt>项目地区：</dt><dd>
+                <htmlA:select id="city" datakey="city" class="spec46" nodefalut="true"/>
+             </dd></dl>              
+             <dl class="lineD"><dt>项目分类：</dt><dd>
+                 <htmlA:select id="pid" value='key|vo.pid' datakey='pid' tip=""/>
+              </dd></dl>
+             <!--<dl class="lineD"><dt>所属行业：</dt><dd>
+                 <select id="borrow_hy" datakey='borrow_hy' tip="">
+                   <option>--- 请选择所属行业 ---</option>
+                   <option value="1">农资</option>
+                   <option value="2">农副产品</option>
+                 </select>
+              </dd></dl>   -->
+             <dl class="lineD"><dt>众筹人：</dt><dd>
+             <input type="hidden" class="spec81" name="borrow_uid" id="borrow_uid" />
+                <input type="text" class="spec81" name="borrow_username" id="borrow_username" /><span class="search_member" onclick="showurl('{:U('admin/members/ajaxsearch')}','搜索会员');">搜索</span>
+                (<span style="color:red" id="_day_lilv">请输入众筹人用户名，您也可以点击"搜索"查找会员</span>) 
+              </dd></dl>
+              
+              
+        </div> 
+              
+      
+<div style="clear:both"></div>
+        <div class="jkxx4" style="height:auto">
+                <dl class="lineD" style="overflow:hidden"><dt>缩略图片：</dt>
+        <dd><input type="file" id="borrow_img" name="borrow_img" style="float:left"/>
+      宽度:570px 高度:370px
+        </dd>
+    <dl class="lineD"><dt>一句话介绍：</dt><dd><!--</td>-->
+                <textarea name="borrow_con" id="borrow_con" style="width:700px;height:40px;"></textarea></dd></dl>
+    <!--<dl class="lineD"><dt>项目生产厂家：</dt><dd>
+              <label for="textfield"></label> 
+                <input type="text" class="input" name="borrow_sccj"  /></dd>
+              </dl>-->
+    <dl class="lineD"><dt>预计万元回报：</dt><dd>
+              <label for="textfield"></label> 
+                <input type="text" class="input" name="borrow_interest_rate"  /></dd>
+              </dl>
+    <dl class="lineD"><dt>预计项目周期：</dt><dd>
+              <label for="textfield"></label> 
+                <input type="text" class="input" name="borrow_duration" onkeyup="value=value.replace(/[^\d]/g,'')" />天</dd>
+              </dl>            
+    <dl class="lineD"><dt>项目详情：</dt><dd><!--</td>-->
+              <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script> 
+                <script>
+                    $(function(){
+                        var editor;
+                        KindEditor.ready(function(K) {
+                            editor = K.create('textarea[name="borrow_info"]', {
+                                allowFileManager : true,
+                                autoHeightMode : true,
+                                afterCreate : function() {
+                                    this.loadPlugin('autoheight');
+                                },
+                                afterUpload : function(url) {
+                                    var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                                    var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                                    $("#firstimage").append(firstimageoption);
+                                    $("#images").append(selectoption);
+                                },afterBlur: function(){this.sync();}
+                            });
+                        });
+                    })
+                    </script>
+                <textarea name="borrow_info" id="borrow_info" style="width:700px;height:200px;visibility:hidden;"></textarea></dd></dl>
+                
+                
+                <dl class="lineD"><dt>支持与退款：</dt><dd><!--</td>-->
+              <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script> 
+                <script>
+                    $(function(){
+                        var editor;
+                        KindEditor.ready(function(K) {
+                            editor = K.create('textarea[name="borrow_tk"]', {
+                                allowFileManager : true,
+                                autoHeightMode : true,
+                                afterCreate : function() {
+                                    this.loadPlugin('autoheight');
+                                },
+                                afterUpload : function(url) {
+                                    var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                                    var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                                    $("#firstimage").append(firstimageoption);
+                                    $("#images").append(selectoption);
+                                },afterBlur: function(){this.sync();}
+                            });
+                        });
+                    })
+                    </script>
+                <textarea name="borrow_tk" id="borrow_tk" style="width:700px;height:200px;visibility:hidden;"></textarea></dd></dl>
+          
+                
+                
+          <dl class="lineD"><dt><input type="submit" class="btn_b" value="确定" /></dt><dd>&nbsp;   </dd></dl>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+  ui.box.load(url, {title:Title});
+}
+//获取会员用户名
+getusername();
+function getusername(){
+    var uid = $("#borrow_uid").val();
+    $(".userinfo").html("加载中...");
+
+    var datas = {'uid':uid};
+    $.post("__URL__/getusername", datas, uidResponse,'json');
+}
+
+function uidResponse(res){
+    $(".userinfo").html(res.uname);
+}
+
+function addone(){
+    var htmladd = '<dl class="lineD"><dt>资料名称：</dt>';
+        htmladd+= '<dd><input type="text" name="updata_name[]" value="" />&nbsp;&nbsp;更新时间:<input type="text" name="updata_time[]" onclick="WdatePicker();" class="Wdate" /></dd>';
+        htmladd+= '</dl>';
+    $(htmladd).appendTo("#tab_3");
+}
+</script> 
+<include file="Public:_footer" />

@@ -1,0 +1,193 @@
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+<link rel="stylesheet" href="/Public/wap/css/FlexoCalendar.css">
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+
+<script src="/Public/wap//js/FlexoCalendar.js"></script>
+
+<body>
+        <div class="w-header w-content flex">
+            <a href="javascript:history.back();"  class="w-header-left">
+                < 返回 </a>
+                    <h3>资产明细</h3>
+                    <a href="/wapmember" class="w-header-right">会员中心</a>
+        </div>
+
+
+    <!-- 资产明细1  start -->
+
+    <div class="w-porper">
+        <div class="porper-top flex">
+            <a href="/wapmember/capital/xiangqing?borrow_status=0" <if condition="$borrow_status eq 0">class="w-porpertop-active"</if>>在线投资</a>
+            <a href="/wapmember/capital/xiangqing?borrow_status=2"<if condition="$borrow_status eq 2">class="w-porpertop-active"</if>>投资收益</a>
+            <a href="/wapmember/capital/chargelog">累计充值</a>
+            <a href="/wapmember/capital/withdrawlog">累计提现</a>
+        </div>
+
+        <!-- 日期部分  start -->
+        <!--<div class="w-porper-date clear">
+            <div class="fl" style=" width:85%;">
+                <span class="fl">时间</span>
+                <div class="input fl">
+                    <input class="fl" type="text" id="start" value="">
+                    <i>></i>
+                </div>
+                <span class="fl">至</span>
+                <div class="input fl">
+                    <input class="fl" type="text" id="end" value="">
+                    <i>></i>
+                </div>
+
+
+              
+            </div>
+
+
+            <a class="fl" href="##">查看</a>
+        </div>-->
+      <div class="w-w">
+        <div class="calendar-wrapper-b">
+
+            <div class="calendar-wrapper" id="0" style="display:none">
+
+                <div id="calendar"></div>
+            </div>
+        </div>
+      </div>
+
+        <div class="w-porper-table">
+            <table>
+                <tr>
+                    <th>投资时间</th>
+                   <if condition="$borrow_status neq '2'"> 
+                       <th>投资金额</th> 
+                   <else/> 
+                       <th>已收利益</th>	
+                   </if>	
+                    <th>投资状态</th>
+                </tr>
+                  <volist name="list" id="vo">
+                            <tr> 
+                            	<td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+                            	<if condition="$vo.borrow_status lt 7">
+                                <td>{$vo['investor_capital']}</td>
+                                 <td>待收益</td>
+                                <else/>								
+                                    		<!--receive_interest			 -->
+                                    		<!--{$borrow_status}-->
+                                    	<if condition="$borrow_status eq 2">
+                                    <td>{$vo['receive_interest']|default=$vo['investor_capital']}</td>
+                                     <td>已收益</td>
+                                    <else/>	<td>{$vo['investor_capital']|default=$vo['investor_capital']}</td>
+                                     <td>已收益</td>
+                                   	</if> 
+                                 <!--account_money-->
+                            	</if>
+                               <!-- <td><if condition="$vo.affect_money lt 0"><font color="#FF0000"><else/><font color="#009900"></if>{$vo.affect_money}</font></td>-->
+                               
+                              
+                            </tr>
+                        </volist>
+                <!--<tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>-->
+                <!--<tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>-->
+                <!--<tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>
+                <tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>
+                <tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>
+                <tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>
+                <tr>
+                    <td>2018-06-18</td>
+                    <td>¥10000.00</td>
+                    <td>已成功</td>
+                </tr>-->
+
+            </table>
+        </div>
+    </div>
+    {$page}
+    <!-- 资产明细1 end -->
+
+
+<include file="Public:footer"/>
+
+    <script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+    <script src="/public/wap//js/index.js"></script>
+    
+
+<script type="text/javascript">
+
+    $('#start').click(function () {
+
+        $('.calendar-wrapper-b').attr('id', '1');
+        times('a');
+
+    })
+
+    $('#end').click(function () {
+
+        $('.calendar-wrapper-b').attr('id', '2');
+        times('b');
+
+    })
+   
+    function times(jud) {
+        console.log(jud + '2')
+        $('.calendar-wrapper').show();
+        $('.calendar-wrapper-b').show();
+        $("#calendar").flexoCalendar({
+            setYear: 2018,
+            setMonth: 5,
+            selectDate: 'each-each-each',
+            onselect: function (res) {
+                var id = $('.calendar-wrapper-b').attr('id');
+                if (id == 1) {
+                    
+                    $('#start').val(res);
+                } else {
+                 
+                    $('#end').val(res);
+                }
+
+                $('.calendar-wrapper-b').hide();
+             
+
+            }
+        });
+
+
+    }
+
+</script>
+
+</body>
+
+</html>

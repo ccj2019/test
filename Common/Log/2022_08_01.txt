@@ -1,0 +1,217 @@
+==  2022-08-01 09:22:52=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:23:18=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:23:52=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:23:55=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:24:18=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:25:07=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:25:30=====================
+array (
+  'ret_code' => 'E104',
+  'ret_msg' => 'agent_bill_time参数错误',
+  'sign' => '0fa60f7ea35c992dccd6c1c0cfe557dd',
+)
+
+==  2022-08-01 09:26:10=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '支付单不存在或已经被处理了',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-428933',
+  'jnet_bill_no' => 
+  array (
+  ),
+  'pay_type' => 
+  array (
+  ),
+  'result' => '0',
+  'pay_amt' => '0',
+  'pay_message' => '订单不存在',
+  'remark' => 
+  array (
+  ),
+  'sign' => '0b7f1fd8eda4f5835844775651efa243',
+)
+
+==  2022-08-01 09:27:05=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '支付单不存在或已经被处理了',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-428933',
+  'jnet_bill_no' => 
+  array (
+  ),
+  'pay_type' => 
+  array (
+  ),
+  'result' => '0',
+  'pay_amt' => '0',
+  'pay_message' => '订单不存在',
+  'remark' => 
+  array (
+  ),
+  'sign' => '0b7f1fd8eda4f5835844775651efa243',
+)
+
+==  2022-08-01 09:27:32=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '查询单据支付完',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-929692',
+  'jnet_bill_no' => 'H22080176075181B',
+  'pay_type' => '22',
+  'result' => '1',
+  'pay_amt' => '0.15',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220801092126',
+  'sign' => 'be53fa8d9bd2c65ed84fc95590166279',
+)
+
+==  2022-08-01 09:27:32=====================
+'**********************************'
+
+==  2022-08-01 09:27:32=====================
+'INSERT INTO `lzh_member_moneylog` (`uid`,`type`,`info`,`target_uid`,`target_uname`,`add_time`,`add_ip`,`affect_money`,`yubi`,`freeze_yubi`,`account_money`,`collect_money`,`freeze_money`,`yongjin`,`experience_money`) VALUES (10851158,27,\'支付宝在线充值\',0,\'\',1659317252,\'127.0.0.1\',0.15,\'0.87\',\'117623.11\',\'2547887.08\',\'5322681.89\',\'-60101.11\',\'0.00\',\'0.00\')'
+
+==  2022-08-01 09:27:32=====================
+27
+
+==  2022-08-01 09:27:32=====================
+'**********************************'
+
+==  2022-08-01 09:27:32=====================
+'zfbbl'
+
+==  2022-08-01 09:28:08=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '查询单据支付完',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-929692',
+  'jnet_bill_no' => 'H22080176075181B',
+  'pay_type' => '22',
+  'result' => '1',
+  'pay_amt' => '0.15',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220801092126',
+  'sign' => 'be53fa8d9bd2c65ed84fc95590166279',
+)
+
+==  2022-08-01 09:28:08=====================
+'**********************************'
+
+==  2022-08-01 09:28:08=====================
+'INSERT INTO `lzh_member_moneylog` (`uid`,`type`,`info`,`target_uid`,`target_uname`,`add_time`,`add_ip`,`affect_money`,`yubi`,`freeze_yubi`,`account_money`,`collect_money`,`freeze_money`,`yongjin`,`experience_money`) VALUES (10851158,27,\'支付宝在线充值\',0,\'\',1659317288,\'127.0.0.1\',0.15,\'1.02\',\'117623.11\',\'2547887.08\',\'5322681.89\',\'-60101.11\',\'0.00\',\'0.00\')'
+
+==  2022-08-01 09:28:08=====================
+27
+
+==  2022-08-01 09:28:08=====================
+'**********************************'
+
+==  2022-08-01 09:28:08=====================
+'zfbbl'
+
+==  2022-08-01 09:28:11=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '查询单据支付完',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-929692',
+  'jnet_bill_no' => 'H22080176075181B',
+  'pay_type' => '22',
+  'result' => '1',
+  'pay_amt' => '0.15',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220801092126',
+  'sign' => 'be53fa8d9bd2c65ed84fc95590166279',
+)
+
+==  2022-08-01 09:28:11=====================
+'**********************************'
+
+==  2022-08-01 09:28:11=====================
+'INSERT INTO `lzh_member_moneylog` (`uid`,`type`,`info`,`target_uid`,`target_uname`,`add_time`,`add_ip`,`affect_money`,`yubi`,`freeze_yubi`,`account_money`,`collect_money`,`freeze_money`,`yongjin`,`experience_money`) VALUES (10851158,27,\'支付宝在线充值\',0,\'\',1659317291,\'127.0.0.1\',0.15,\'1.17\',\'117623.11\',\'2547887.08\',\'5322681.89\',\'-60101.11\',\'0.00\',\'0.00\')'
+
+==  2022-08-01 09:28:11=====================
+27
+
+==  2022-08-01 09:28:11=====================
+'**********************************'
+
+==  2022-08-01 09:28:11=====================
+'zfbbl'
+
+==  2022-08-01 09:28:22=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '支付单不存在或已经被处理了',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220801-428933',
+  'jnet_bill_no' => 
+  array (
+  ),
+  'pay_type' => 
+  array (
+  ),
+  'result' => '0',
+  'pay_amt' => '0',
+  'pay_message' => '订单不存在',
+  'remark' => 
+  array (
+  ),
+  'sign' => '0b7f1fd8eda4f5835844775651efa243',
+)
+

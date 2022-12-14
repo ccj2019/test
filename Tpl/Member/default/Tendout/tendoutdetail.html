@@ -1,0 +1,135 @@
+<include file="default:Public:mheader"/>
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+	.xmmc{
+		float: left;
+		line-height: 30px;
+		
+		min-width: 140px;
+		height: 30px;
+		font-size: 18px;
+		text-align: center;
+		background: #e1f5ff;
+	}
+	.xmmcbox{
+		padding: 20px 0;
+		width: 90%;
+		height: 30px;
+		margin: 0 auto;
+	}
+	.xmmcbox ul li{
+		padding-top: 20px;
+	}
+	.xmmcnr{
+		height: 30px;
+		line-height: 30px;
+		padding-left: 20px;
+		float: left;
+	}
+</style>
+
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>项目明细</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left"/>
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>项目明细</span></div>
+		</div>
+		<div class="tabv2box">
+		
+			<div class="tabv2 show">
+			   <div class="xmmcbox">
+			   	<ul>
+			   		<li>
+					   	<div class="xmmc">项目名称</div>
+					   	<div class="xmmcnr">
+					   		{$name}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">项目类型</div>
+					   	<div class="xmmcnr">
+					   		{:get_pro_name($vo['pid'])}
+					   	</div>
+                    </li>
+                 <!--    <li>
+					   	<div class="xmmc">已支付预约款</div>
+					   	<div class="xmmcnr">
+					   		¥0.00
+					   	</div>
+                    </li> -->
+                    <li>
+					   	<div class="xmmc">应支付总额</div>
+					   	<div class="xmmcnr">
+					   		¥{$vo.investor_capital}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">已支付总额</div>
+					   	<div class="xmmcnr">
+					   		<if condition="$vo.yubi neq 0">{$vo.yubi}鱼币　　</if>
+
+					   		<if condition="$vo.yue neq 0">￥{$vo.yue}余额　　</if>
+
+					   		<if condition="$vo.money_bonus neq ''">{$vo.money_bonus}红包</if>
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">收款情况</div>
+					   	<div class="xmmcnr">
+					   		支付成功	
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">支付时间</div>
+					   	<div class="xmmcnr">
+					   		{$vo.add_time|date="Y-m-d",###}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">支持数量</div>
+					   	<div class="xmmcnr">
+					   		{$vo['investor_capital']/$vo['borrow_min']}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">分红金额</div>
+					   	<div class="xmmcnr">
+					   	¥{$vo['receive_interest']}（<if condition="$vo['borrow_status'] eq 7">
+					   			已发放
+					   		<else />
+					  			未发放
+					   		</if>）
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">回报情况</div>
+					   	<div class="xmmcnr">
+					   		<if condition="$vo['borrow_status'] eq 7">
+					   			回报已发放
+					   		<elseif condition="$vo['borrow_status'] eq 6" />
+					  			项目成功，回报未发放	
+					  		<elseif condition="$vo['borrow_status'] eq 3" />
+					  			项目已流标
+					  		<else/>
+					  			项目未成功，请等待
+					   		</if>
+					   	</div>
+                    </li>
+			   	</ul>
+
+			   </div>
+			</div>
+           
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

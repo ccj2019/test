@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'uid', 2 => 'interest_rate', 3 => 'type', 4 => 'add_time', 5 => 'start_time', 6 => 'end_time', 7 => 'use_time', 8 => 'status', 9 => 'interest_cause', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'uid' => 'int(11)', 'interest_rate' => 'decimal(5,2)', 'type' => 'varchar(1)', 'add_time' => 'varchar(11)', 'start_time' => 'varchar(11)', 'end_time' => 'varchar(11)', 'use_time' => 'varchar(11)', 'status' => 'varchar(1)', 'interest_cause' => 'text', ), ); ?>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的账户-- {$glo.web_name}</title>
+<include file="default:Public:_header_common" group="Home"/>
+<include file="default:Public:_header_common" group="Member"/>
+
+</head>
+<body>
+<include file="default:Public:_header_main" group="Home"/>
+<div style="clear:both;"></div>
+<div class="content">
+  <div class="box3">
+    <table width="1006" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><include file="Public:_left" />
+          <div class="box3_right">
+            <div id="rotate">
+              <ul class="menu ajaxdata">
+						<li><a href="#chip-1" ajax_href="__URL__/friendlist/">好友列表</a></li>
+						<li><a href="#chip-2" ajax_href="__URL__/friendapply/">好友申请</a></li>
+						<li><a href="#chip-3" ajax_href="__URL__/friendmsg/">会员留言</a></li>
+						<li><a href="#chip-4" ajax_href="__URL__/msghistory/">我发出的留言</a></li>
+						<li><a href="#chip-5" ajax_href="__URL__/blockfriend/">黑名单</a></li>
+					</ul>
+              <div class="contentright">
+					<div id="fragment-1" style="display:none">
+						<!--自动投标-->
+					</div>
+					<div id="fragment-2" style="display:none">
+						<!--自动投标-->
+					</div>
+					<div id="fragment-3" style="display:none">
+						<!--自动投标-->
+					</div>
+					<div id="fragment-4" style="display:none">
+						<!--自动投标-->
+					</div>
+					<div id="fragment-5" style="display:none">
+						<!--自动投标-->
+					</div>
+				</div>
+            </div>
+          </div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div style="clear:both;"></div>
+<include file="default:Public:_footer" group="Home"/>
+<script type="text/javascript">
+function checkAll(o,id){
+	if( o.checked == true ){
+		$("#"+id).find('input[name="checkbox"]').attr('checked','true');
+	}else{
+		$("#"+id).find('input[name="checkbox"]').removeAttr('checked');
+	}
+}
+function getChecked(id) {
+	var gids = new Array();
+	$.each($("#"+id).find('input:checked'), function(i, n){
+		if($(n).val()!=0) gids.push( $(n).val() );
+	});
+	return gids;
+}
+function del(id,type) {
+	if(!confirm("删除后不可恢复，确定要删除吗?")) return;
+	aid = getChecked(id);
+	aid = aid.toString();
+	if(aid == '') return false;
+
+	//提交修改
+	var datas = {'idarr':aid,'type':type};
+	$.post("__URL__/delmsg", datas, delResponse,'json');
+}
+function delResponse(d){
+	if(d.status==1){
+		$.jBox.tip("删除成功",'success');
+		aid = d.data.split(',');
+		$.each(aid, function(i,n){
+			$('#msg_'+n).remove();
+		});
+	}else{
+		$.jBox.tip(d.message,'fail');
+	}
+}
+
+function InnerMsg(uid){
+	var uid = uid;
+	$.jBox("get:__URL__/innermsg?uid="+uid, {
+		title: "发送站内信",
+		width: "auto",
+		buttons: {'关闭': true }
+	});
+}
+</script>
+</body>
+</html>

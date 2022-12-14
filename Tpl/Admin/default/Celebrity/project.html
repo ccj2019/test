@@ -1,0 +1,52 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  var delUrl = '__URL__/doDel';
+  var addUrl = '__URL__/edit';
+</script>
+<div class="so_main">
+  <div class="page_tit"></div>
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="__URL__/edit" value="添加"/>
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除" />
+  </div>  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">标题</th>
+    <th class="line_l">行业类型</th>
+    <th class="line_l">入选原因</th>
+    <th class="line_l">获得好出</th>    
+    <th class="line_l">添加时间</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="celeList">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td><a href="/invest/detail/id/{$vo.id}.html" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,12}</a></td>
+        <td>{$vo.type_name}</td>
+        <td>{$vo.yuanyin}</td>
+        <td>{$vo.haochu}</td>        
+        <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+        <td>
+            <a href="__URL__/edit?id={$vo['id']}">编辑</a> 
+            <a href="javascript:void(0);" onclick="del({$vo['id']});">删除</a>  
+        </td>
+      </tr>
+  </volist>
+  </table>
+  </div>
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="__URL__/add" value="添加"/>
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除" />
+  </div>
+</div>
+<include file="Public:_footer" />

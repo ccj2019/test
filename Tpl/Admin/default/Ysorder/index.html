@@ -1,0 +1,106 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var addTitle = '添加分类';
+</script>
+<div class="so_main">
+  <div class="page_tit">预售管理</div>
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+<form action="__URL__/index" id='searinfo' method='get'>
+<input type="hidden" name="id" value="{$id}">
+
+      <input type="hidden" name="gs" value="{$gstatus}">
+      <select name='payway' class="c_select">
+        <option value="">支付方式</option>
+          <option value="1" <if condition="1 eq $payway">selected</if>>余额+鱼币</option>
+          <option value="2" <if condition="2 eq $payway">selected</if>>支付宝</option>
+      </select>
+      <select name='status' class="c_select">
+        <option value="">付款状态</option>
+        <option value="3" <if condition="3 eq $status">selected</if>> 未支付</option>
+        <option value="1" <if condition="1 eq $status">selected</if>> 已付款</option>
+        <option value="2" <if condition="2 eq $status">selected</if>> 已结算</option>
+      </select>
+
+
+    <dl class="lineD"><dt>时间从：</dt><dd><htmlA:timer id="start_time" value="{$start_time}" tip='时间段' arg="{maxDate:'#F{$dp.$D(\\\\'end_time\\\\')||\\\\'2025-10-01\\\\'}',startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"/></dd></dl>
+    <dl class="lineD"><dt>到：</dt><dd><htmlA:timer id="end_time" value="{$end_time}"  tip='时间段' arg="{minDate:'#F{$dp.$D(\\\\'start_time\\\\')}',maxDate:'2025-10-01',startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"/></dd></dl>
+
+
+    <button name="" id="" class="btn btn-success" type="submit">查询</button>
+    </form>
+    <if condition="$gstatus gt 2">
+      <htmlA:commonBtn type="href" action="__URL__/delwzf/id/{$id}" value="未支付清除"/>
+    </if>
+
+<!--{$gstatus}-->
+    <htmlA:commonBtn type="href" action="__URL__/export/p/{$payway}/s/{$status}/oid/{$id}/start_time/{$start_time}/end_time/{$end_time}" value="将当前条件下数据导出为Excel"/>
+    <a href="__URL__/delwzf"></a>
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">用户名</th>
+    <th class="line_l">真实姓名</th>
+    <th class="line_l">手机号</th>
+    <th class="line_l">购买分数</th>
+    <th class="line_l">购买金额</th>
+      <th class="line_l">支付金额</th>
+    <th class="line_l">收益</th>
+    <th class="line_l">赠品分数</th>
+    <th class="line_l">购买时间</th>
+    <th class="line_l">收购时间</th>
+    <th class="line_l">状态</th>
+    <th class="line_l">支付方式</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td>{$vo.user_name}</td>
+        <td>{$vo.real_name}</td>
+        <td>{$vo.user_phone}</td>
+        <td>{$vo.fenshu}</td>
+        <td>{$vo.money}</td>
+          <td>{$vo.sfmoney}</td>
+        <td>{$vo.shouyi}</td>
+        <td>{$vo.zpnum}</td>
+        <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+        <td>{$vo.end_time|date='Y-m-d H:i:s',###}</td>
+        <td>{$vo.zhuangtai}</td>
+        <td>{$vo.zffs}</td>
+        <td>
+          <if condition="$vo.payway eq 2 && $vo.status eq 0 ">
+            <a href="__URL__/dobulu?oid={$vo['ordernum']}">补录验证</a>
+          <else/>
+            -----
+          </if>
+
+        </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="{:U('/admin/zengpin/add')}" value="添加预售"/>
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除预售" />
+  </div>
+</div>
+
+
+<include file="Public:_footer" />

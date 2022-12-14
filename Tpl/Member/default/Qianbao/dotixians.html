@@ -1,0 +1,69 @@
+<include file="default:Public:header" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	body{
+		background: #f8f8f8;
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">钱包管理</a></span>
+	<span>&gt;</span>
+	<span><a>钱包提现</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>钱包提现</span></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+			   	<div class="myzil" style="padding-top:0px; padding-left:0px;">
+			   		
+			   		<form action="https://wallet.lianlianpay.com/llcomponent/usercashout.htm" method="post" id="l-shiminglc" class="clearfix" target="showZip"> 
+
+
+
+			   			<input type="hidden" name="version" id="version" value="{$data.version}" />
+			   			<input type="hidden" name="oidPartner" id="oidPartner" value="{$data.oidPartner}" />
+			   			<input type="hidden" name="timeStamp" id="timeStamp" value="{$data.timeStamp}" />
+
+			   			<input type="hidden" name="signType" id="signType" value="{$data.signType}" />
+			   			<input type="hidden" name="sign" id="sign" value="{$data.sign}" />
+
+			   			<input type="hidden" name="userRequestIp" id="userRequestIp" value="{$data.userRequestIp}" />
+
+			   			<input type="hidden" name="userId" id="userId" value="{$data.userId}" />
+		
+			   			<input type="hidden" name="orderDate" id="orderDate" value="{$data.orderDate}" />
+			   			<input type="hidden" name="moneyOrder" id="moneyOrder" value="{$data.moneyOrder}" />
+			   			<input type="hidden" name="orderNo" id="orderNo" value="{$data.orderNo}" />
+			   			<input type="hidden" name="returnUrl" id="returnUrl" value="{$data.returnUrl}" />
+			   			<input type="hidden" name="notifyUrl" id="notifyUrl" value="{$data.notifyUrl}" /><br>
+
+				
+				      </form>
+
+        <iframe name="showZip" frameborder="0" width="1220" height="1200"></iframe>  
+        </div>
+        <script type="text/javascript">
+
+$(function(){
+  $('#l-shiminglc').submit();
+});
+
+        </script>
+
+
+		
+			</div>
+              
+              	
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,111 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>尊敬的{$glo.web_name}用户，这是您需要回复的众筹约谈</p>  </div>
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+       <td>
+				项目标号
+			</td>
+			<td>
+				标题
+			</td>
+            <td>
+				提问人
+			</td>
+			<td>
+				约谈内容
+			</td>
+            <td>
+				操作/回复内容
+			</td>
+      </tr>
+      <volist name="list" id="vo">
+        <tr class="addr{$vo.id}">
+          <td >{$vo.tid}</td>
+			<td  style="padding:0"><a target="_blank" href="{$vo.tid|getInvestUrl=###}" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,10}</a></td>
+			<td >{$vo.uid|get_user_info}</td>
+            <td >{$vo.comment|cnsubstr=###,10}<a href="javascript:void(0)" class="show_con" acon="{$vo.comment}" style="color:red">查看</a></td>
+            <td>
+            <if condition="$vo.deal_time neq 0">
+            	 <a href="javascript:void(0)" class="show_con" acon="{$vo.deal_info}" style="color:#28cfbd">查看回复</a>
+            <else/>
+            	<a href="javascript:void()" onclick="addYuetan({$vo.id})"> 回复 </a>
+            </if>
+            </td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-2" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<input type="hidden" value="" id="send" />
+<script type="text/javascript">
+$(function(){
+	$(".show_con").click(function(){
+		var con=$(this).attr("acon");	
+		$.layer({
+		type: 1,
+		shade: [1],
+		area: ['auto', 'auto'],
+		title: "查看详情",
+		border: [1],
+		page: {html : '<div style="width:420px; height:auto; padding:10px; border:1px solid #ccc; background-color:#eee;"><p>'+con+'</p></div>'}
+	});
+	})	
+	
+})
+function addYuetan(tid){
+	var tid = tid;
+	$("#send").val(tid);
+	layer.use('extend/layer.ext.js', function(){
+    layer.ext = function(){
+		layer.prompt({title: '回复约谈',type: 3}, function(val){
+			var tid = $("#send").val();
+			var cm = val;
+			if(cm=="") {
+				layer.alert('约谈内容不能为空！');
+			}
+			$.ajax({
+				url: "__URL__/sendyuetan",
+				data: {"comment":cm,"tid":tid},
+				timeout: 5000,
+				cache: false,
+				type: "post",
+				dataType: "json",
+				success: function (d, s, r) {
+					if(d){
+						if(d.status==1){
+							layer.alert('发送成功！', 1,!1);
+						}else{
+							layer.msg(d.message);
+						}
+					}
+				}
+			});
+		});
+		}
+	})
+}
+
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

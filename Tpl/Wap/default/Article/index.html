@@ -1,0 +1,68 @@
+ 
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css?bb=1">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="/wap" class="w-header-left">
+                < 返回</a>
+                    <h3 style="width: 42%;
+    text-align: center;">活动中心</h3>
+                    
+                    	<if condition="$UID gt '0'">
+				  <a href="/Wapmember/" style="text-align: right;">会员中心</a> 
+                    <!--   <a href="/Wapmember">铭万众筹</a>-->
+                    <else />
+                    <!--未登录状态-->
+                    	 
+                                <a href="/Wapmember/common/login.html" style="text-align: right;" class="w-header-right">登录</a>
+                    </if>
+          
+        </div>
+    </div>
+
+
+    <!-- 活动内容1  start -->
+
+    <div class="w-act-warpper w-act-warpper1">
+        <div class="w-act">
+        	<!--<if condition="empty($list['list'])"> 
+        	-->
+        	<div style="text-align: center;">活动暂未发布，敬请期待</div>
+        	<!--</if>-->
+        	    <!-- <foreach name="list.list" item="vo">   -->
+      <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}"  class="act-tu">
+        <img src="/{$vo.art_img}" alt="" />
+        <div class="hidden">{$vo.title}</div>
+      </a>
+      <!-- </foreach> 
+            <a href="##" class="act-tu">
+                <img src="./img/w-act1.jpg" alt="">
+                <div class="hidden">
+                    九月活动公告
+                </div>
+            </a>
+            <a href="##" class="act-tu">
+                <img src="./img/w-act2.jpg" alt="">
+                <div class="hidden">
+                    八月活动公告
+                </div>
+            </a>
+            <a href="##" class="act-tu">
+                <img src="./img/w-act3.jpg" alt="">
+                <div class="hidden">
+                    七月活动公告
+                </div>
+            </a>-->
+<div class="page_div navslis">{$list.page}</div>
+        </div>
+    </div>
+    <!-- 活动内容 end -->
+
+
+
+    

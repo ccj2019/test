@@ -1,0 +1,72 @@
+<include file="default:Public:header" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	body{
+		background: #f8f8f8;
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">钱包管理</a></span>
+	<span>&gt;</span>
+	<span><a>钱包提现</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>钱包提现</span></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+			   	<div class="myzil" style="padding-top:100px; padding-left:150px;">
+			   		
+			  <!--  		<form action="https://walletweb.lianlianpay.com/webcharge/gateway.htm" method="post" id="l-shiminglc" class="clearfix"> -->
+					<form action="__URL__/dotixians" method="post" id="l-shiminglc" class="clearfix"> 
+			   			<input type="hidden" name="version" id="version" value="{$data.version}" />
+			   			<input type="hidden" name="platform" id="platform" value="{$data.platform}" />
+			   			<input type="hidden" name="oid_partner" id="oid_partner" value="{$data.oid_partner}" />
+			   			<input type="hidden" name="timestamp" id="timestamp" value="{$data.timestamp}" />
+			   			<input type="hidden" name="sign_type" id="sign_type" value="{$data.sign_type}" />
+			   			<input type="hidden" name="sign" id="sign" value="{$data.sign}" />
+			   			<input type="hidden" name="userreq_ip" id="userreq_ip" value="{$data.userreq_ip}" />
+			   			<input type="hidden" name="user_login" id="user_login" value="{$data.user_login}" />
+			   			<input type="hidden" name="busi_partner" id="busi_partner" value="{$data.busi_partner}" />
+			   			<input type="hidden" name="no_order" id="no_order" value="{$data.no_order}" />
+			   			<input type="hidden" name="dt_order" id="dt_order" value="{$data.dt_order}" />
+			   			提现金额：<input type="text" name="money_order" id="money_order" value="{$data.money_order}" />
+			   			<input type="hidden" name="name_goods" id="name_goods" value="{$data.name_goods}" />
+			   			<input type="hidden" name="url_return" id="url_return" value="{$data.url_return}" />
+			   			<input type="hidden" name="notify_url" id="notify_url" value="{$data.notify_url}" /><br>
+
+						<div class="touzilei oz clearfix" style="border-top: 0px; margin-right: 80px;"> 
+				       		<button class="bcxsz" type="button" id="save_userinfo">确认提现</button>
+						</div>
+	
+				   	</form>
+				</div>
+				<script type="text/javascript">
+				$('#save_userinfo').click(function() {
+		            $('#l-shiminglc').submit();
+		          })
+					function comp(cid){
+						if(cid == 1){
+							$(".person").show();
+							$(".company").hide();
+						}else if(cid == 2){
+							$(".person").hide();
+							$(".company").show();
+						}
+					}
+				</script>
+		
+			</div>
+              
+              	
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

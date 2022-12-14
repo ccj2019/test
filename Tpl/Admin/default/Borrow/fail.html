@@ -1,0 +1,59 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">初审未通过的众筹</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选众筹" style="search_action" />
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">众筹人</th>
+    <th class="line_l">众筹种类</th>
+    <th class="line_l">标题</th>
+    <th class="line_l">众筹金额</th>
+    <th class="line_l">处理时间</th>
+    <th class="line_l">处理说明</th>
+    <th class="line_l">处理人</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td><htmlA:user id="vo.mid" uname="vo.user_name" /></td>
+        <td>{$vo.borrow_type}</td>
+        <td><a href="/invest/detail/id/{$vo.id}.html" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,12}</a></td>
+        <td>{$vo.borrow_money}</td>
+      
+        <td>{$vo.deal_time|date="Y-m-d H:i",###}</td>
+        <td>{$vo.deal_info}</td>
+        <td>{$vo.deal_uname}</td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+  </div>
+</div>
+
+
+<include file="Public:_footer" />

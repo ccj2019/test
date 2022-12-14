@@ -1,0 +1,71 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  $(function(){
+    $("#huodongid").change(function(event) {
+      var v = $(this).val();
+      var y = $(this).attr('lastid');
+      if(v<y){
+        $(this).focus().next('span').css('color', 'red');
+        $(this).val(y);        
+      }else{
+        $(this).val(parseInt(y)+1);
+        $(this).focus().next('span').css('color', '#666');
+      }
+    });
+  });
+</script>
+<div class="so_main">
+  <div class="page_tit">活动设置</div>
+  <div class="page_tab"><span data="tab_1" class="active">活动设置</span>    
+  </div>
+  <div class="form2">
+    <form method="post" action="" enctype="multipart/form-data">
+      <div id="tab_1">
+        <dl class="lineD">
+          <dt>活动开关：</dt>
+          <dd>
+            <input name="set[open]" value="1" type="radio" <if condition="$set.open eq 1">checked</if> >开启
+            <input name="set[open]" value="0" type="radio" <if condition="$set.open neq 1">checked</if>>关闭        
+          </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>本次活动编号：</dt>
+          <dd>
+            <input type="text" name="set[id]" value="{$set.id}" id="huodongid" lastid="{$set.id}" class="input"  style="width:100px;"/><span style="color:#666">(创建新活动请增加活动编号，同时上次活动自动结束；否则无需修改。)</span>
+          </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>单人抽奖次数：</dt>
+          <dd>
+            <input type="text" name="set[ptimes]" value="{$set.ptimes}" class="input" style="width:100px;" />&nbsp;次            
+          </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>奖项设置：</dt>                    
+          <foreach name="set.prize" item="vo" key="k" >
+            <dd>
+              <input type="text" name="set[prize][{$k}][prize]" value="{$vo.prize}" class="input" style="width:100px;"/>
+              &emsp;
+              中奖概率：<input type="text" name="set[prize][{$k}][v]" value="{$vo.v}" class="input" style="width:50px;text-align:center;" />%
+              &emsp;&emsp;
+              奖品：<input type="text" name="set[prize][{$k}][rs]" value="{$vo.rs}" class="input" style="" />
+            </dd>
+          </foreach>
+        </dl>          
+        <dl class="lineD">
+          <dt>活动说明：</dt>
+          <dd>
+            <textarea name="set[desc]" style="width:650px;height:90px;">{$set.desc}</textarea>            
+          </dd>
+        </dl>        
+      </div>
+      <!--tab2-->
+      <div class="page_btm">
+        <input name="set[id]" type="hidden" value="{$set.id}">
+        <input type="submit" class="btn_b" value="确定" />
+        <span style="color:#CCCCCC">(所有方式修改提交一次即可)</span> </div>
+    </form>
+  </div>
+</div>
+<include file="Public:_footer" />

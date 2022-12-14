@@ -1,0 +1,195 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script src="__ROOT__/Style/Js/jquery.min.js"></script>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+
+<style type="text/css">
+	.albCt{height:200px}
+	/*.autoSupRelative{position: relative;padding: 0;float:left;z-index:99;}*/
+	/*.autoSupAbsolute{position: absolute;left: 0;top:30px;background: #ffffff;border:1px solid #ccc;width:100%;max-height:240px;overflow-y: auto;margin: 0;padding: 0;box-shadow: 0px 2px 2px #ccc;display: none}*/
+	/*.autoSupAbsolute li{ list-style: none;cursor: pointer;padding: 5px;line-height: 22px;font-size: 12px;}*/
+	/*.autoSupAbsolute li:hover{background: #2dc3e8;color: #ffffff;}*/
+
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+	<div class="page_tit">添加赠品</div>
+	<div class="page_tab"></div>
+	<div class="form2">
+		<form method="post" action="__URL__/doAdd" onsubmit="return subcheck();" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<div id="tab_1">
+
+
+				<dl class="lineD">
+					<dt>礼品选择：</dt>
+					<dd>
+						<div class="autoSupRelative">
+						<input type="text" id="zpname" name="zpname">
+							<ul class="autoSupAbsolute"></ul>
+						</div>
+						<input type="hidden" id="zpid" name="zpid">
+					</dd>
+				</dl>
+
+<script>
+	//模糊查询
+	function SearchLike(jsons) {
+		$(document).on('keyup', '[name=' + jsons.name + ']', function () {
+			var This = this;
+			this.timerSerch = setTimeout(function () {
+				//如果一直输入，就先不查询，等键抬起500毫秒之后再进行查询。
+				getSearchValue({
+					This: This,
+					Event: "keyup",
+					url: jsons.url,
+					fun: jsons.fun
+				});
+			}, 500);
+			// $(this).parents('.autoSupRelative').css({ 'zIndex': '100' });
+			$(this).parents('.autoSupRelative').find('.autoSupAbsolute').show();
+		}).on("blur", function () {
+			$('.autoSupRelative').css({ 'zIndex': '' });
+		});
+		$(document).on('keydown', '[name=' + jsons.name + ']', function () {
+			var _this = this;
+			clearTimeout(_this.timerSerch);
+		});
+
+		$(document).on('click', '.autoSupAbsolute li', function (e) {
+			var name = $(this).parents('.autoSupRelative').find('input[type=text]').attr('name');
+			if (name == jsons.name) {
+				var thisHtml = $(this).attr('companyName');
+				if (jsons.HideName) {
+					$(this).parents('.autoSupRelative').find('[name=' + jsons.HideName + ']').val($(this).attr("PK_Guid"));
+				}
+				if (thisHtml) {
+					$(this).parents('.autoSupRelative').find('[name=' + jsons.name + ']').val(thisHtml);
+				}
+				if (jsons.fun1) {
+					jsons.fun1(this);
+				}
+				$(this).parents('.autoSupRelative').find('[name=' + jsons.name + ']').siblings('ul').html('');
+				$(this).parents('.autoSupAbsolute').hide();
+			}
+		});
+
+		$(document).on('click', '[name=' + jsons.name + ']', function (e) {
+			e.stopPropagation();
+			var This = this;
+			$('.autoSupRelative').css({ 'zIndex': '99' });
+			$(this).parents('.autoSupRelative').css({ 'zIndex': '100' });
+			$(this).parents('.autoSupRelative').find('.autoSupAbsolute').show();
+			$(this).parents('.autoSupRelative').find('ul').html('<div style="padding:0 10px;">数据加载,请稍后....</div>');
+			getSearchValue({
+				This: This,
+				Event: "click",
+				url: jsons.url,
+				fun: jsons.fun
+			});
+			// }
+		}).on("blur", function () {
+			$('.autoSupRelative').css({ 'zIndex': '' });
+		});
+		$(document).on('click', function (e) {
+			$('.autoSupAbsolute').hide();
+		});
+		function getSearchValue(json) {
+			$.ajax(
+					{
+						type: "GET",//POST
+						dataType: "json",
+						url: json.url + encodeURIComponent($(json.This).val()),
+						success: function (msg) {
+							var list=msg["list"];
+							var htmlInit = '';
+							if(list!=null){
+								for(var j=0;j<list.length;j++) {
+									htmlInit+='<li PK_Guid="'+list[j]['id']+'" name="'+list[j]['title']+'">'+list[j]['title']+'</li>';
+								}
+							}
+							$(json.This).parents('.autoSupRelative').find('.autoSupAbsolute').html(htmlInit);
+							$(json.This).parents('.autoSupRelative').find('.autoSupAbsolute').show();
+						},
+						error: function () {
+							$(json.This).parents('.autoSupRelative').find('ul').html('<div style="padding:10px;">数据加载失败....</div>');
+						}
+					}
+			);
+		}
+	}
+	// 使用--点击输入框，请求接口--url是联想搜索接口，companyName没有值的时候显示所有的列表--下拉列表选择把姓名和id复制给input
+	SearchLike({
+		name: 'zpname',
+		url: '/admin/Zengpin/getzp?title=',
+		fun1: function (_this) {
+			$("#zpname").val($(_this).attr('name'));
+			$("[name=zpid]").val($(_this).attr('PK_Guid'));
+		}
+	});
+
+</script>
+				<dl class="lineD"><dt>商品数量：</dt><dd><htmlA:input id="num" value="1" tip="*"/>&nbsp;</dd></dl>
+				<!--<dl class="lineD"><dt>发货时间：</dt><dd><htmlA:input id="fhtime" tip="*" value=""/>&nbsp;</dd></dl>-->
+
+				<dl class="lineD"><dt>姓名：</dt><dd><htmlA:input id="uname" tip="*"/>&nbsp;</dd></dl>
+				<dl class="lineD"><dt>电话：</dt><dd><htmlA:input id="phone" tip="*"/>&nbsp;</dd></dl>
+				<dl class="lineD"><dt>地址：</dt><dd>
+
+					<div id="distpicker2" data-toggle="distpicker">
+						<select name="province" id="province" data-province="---- 选择省 ----"></select>
+						<select name="city" id="city" data-city="---- 选择市 ----"></select>
+						<select name="district" id="district" data-district="---- 选择区 ----"></select>
+					</div>
+					<br>
+					<htmlA:input id="address" tip="*"/>&nbsp;</dd></dl>
+
+				<script src="__ROOT__/Style/Js/distpicker.data.js"></script>
+				<script src="__ROOT__/Style/Js/distpicker.js"></script>
+				<script type="text/javascript">
+
+					$("#distpicker").distpicker({
+						province: "---- 所在省 ----",
+						city: "---- 所在市 ----",
+						district: "---- 所在区 ----"
+					});
+
+					// date = new Date();
+					// Calendar.setup({
+					// 	inputField     :    "fhtime",
+					// 	ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					// 	showsTime      :    true,
+					// 	timeFormat     :    "24"
+					// });
+				</script>
+
+				<if condition="in_array($vo['status'],[1,2])">
+					<dl class="lineD"><dt>订单状态：</dt><dd><htmlA:radio id="status" default="1|待发货,2|已发货" value="key|vo.status" tip="订单处理"/>&nbsp;</dd></dl>
+					<else/>
+					<dl class="lineD"><dt>订单状态：</dt><dd>
+						{$zhuangtai[$vo['status']]}&nbsp;
+					</dd></dl>
+				</if>
+
+				<dl class="lineD"><dt>物流：</dt><dd><htmlA:input id="wuliu" value="{$vo.wuliu}" tip="*"/>&nbsp;</dd></dl>
+				<dl class="lineD"><dt>单号：</dt><dd><htmlA:input id="yundan" value="{$vo.yundan}" tip="*"/>&nbsp;</dd></dl>
+				<if condition="empty($vo['fh_time']) neq true">
+					<dl class="lineD"><dt>发货时间：</dt><dd>{$vo.fh_time|date='Y-m-d H:i:s',###}&nbsp;</dd></dl>
+				</if>
+
+				<dl class="lineD"><dt>备注：</dt><dd><htmlA:input id="remarks" value="{$vo.remarks}" tip="赠品更换记录"/>&nbsp;</dd></dl>
+
+			</div><!--tab1-->
+
+			<div class="page_btm">
+				<input type="submit" class="btn_b" value="确定" />
+			</div>
+		</form>
+	</div>
+
+</div>
+<include file="Public:_footer" />

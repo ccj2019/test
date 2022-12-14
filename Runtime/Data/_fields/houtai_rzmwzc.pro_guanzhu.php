@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'bid', 2 => 'add_time', 3 => 'uid', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(255)', 'bid' => 'int(255)', 'add_time' => 'int(255)', 'uid' => 'int(255)', ), ); ?>

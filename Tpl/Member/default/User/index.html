@@ -1,0 +1,111 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理安全中心-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>修改交易密码</span>
+                </div>
+                <div class="zdtb">
+                    <div class="zdt2">
+                        <div class="con">
+                            <p>您可以通过经常性修改支付密码更好的保护您的账号安全，以避免您受到意外损失</p>
+                            <p>1.经常性修改支付密码能有效的保护您的帐号安全</p>
+                            <p>2.涉及到您的资金安全，请勿设置简单的支付密码，不要设置和其它网站相同的支付密码</p>
+                        </div>
+                    </div>
+                    <div class="zdt1">
+                        <div class="zdt1con">
+                            <form action="">
+                                <div class="zt1box">
+                                    <label for="">用户名：</label>
+                                    <div class="zt1b">
+                                        {:session('u_user_name')}
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <!-- <div class="zt1box">
+                                    <label for="">请输入原密码：</label>
+                                    <input id="oldpassword_pin" name="oldpassword_pin" class="inp" type="password">
+                                    <div class="clear"></div>
+                                </div> -->
+                                <div class="zt1box">
+                                    <label for="">请输入新密码：</label>
+                                    <input id="newpassword_pin" name="newpassword_pin" class="inp" type="password">
+                  <span class="font666" style="width: auto">(输入您的新密码)</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="zt1box">
+                                    <label for="">请再输入新密码：</label>
+                                    <input id="newpassword_pin1" name="newpassword_pin1" class="inp" type="password">
+                  <span class="font666" style="width: auto;">(再输入一次您的新密码)</span>
+                                    <div class="clear"></div>
+                                </div>
+  
+                                <div class="zt1box">
+                                    <label for=""></label>
+                                    <a href="javascript:void(0)" id="btn_set" onclick="UpdatePwd_pin()" class="btn" style="width:100px;">提交</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+ 
+  function UpdatePwd_pin() {
+    // var oldpwd = $("#oldpassword_pin").val();
+    var newspwd1 = $("#newpassword_pin").val();
+    var newspwd2 = $("#newpassword_pin1").val();
+
+    // if (oldpwd == '') {
+    //  layer.msg('原密码必须填写！');
+    //  return false;
+    // }
+    if (newspwd1 == '') {
+      layer.msg('新密码必须填写！');
+      return false;
+    }
+    if (newspwd2 == '') {
+      layer.msg('确认新密码必须填写！');
+      return false;
+    }
+    if (newspwd2 != newspwd1) {
+      layer.msg('两次支付密码不一致！');
+      return false;
+    }
+    $.ajax({
+      url: "__URL__/changepin/",
+      type: "post",
+      dataType: "json",
+      data: {"newpwd1":newspwd1,"newpwd2":newspwd2},
+      success: function(d) {
+        if (d.status == "2") {
+          layer.msg(d.message);
+          return;
+        } else if (d.status == "1") {
+          layer.alert('恭喜，支付密码修改成功', 1,!1);
+          window.location.reload();
+        } else {
+          layer.msg(d.message);
+        }
+      }
+    })
+  }
+</script>

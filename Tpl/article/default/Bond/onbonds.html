@@ -1,0 +1,91 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款标题</td>
+        <td>利率</td>
+        <td>未还期数/总期数</td>
+        <td>待收本息</td>
+        <td>转让价格</td>
+        <td>转让时间</td>
+        <td>操作</td>
+      </tr>
+      <volist name="list.data" id="vo">
+        <tr>
+            <td><a target="_blank" href="{$vo.borrow_id|getInvestUrl=###}" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,10}</a></td>
+            <td>{$vo.borrow_interest_rate}%</td>
+            <td>{$vo.period}期/{$vo.total_period}期</td>
+            <td>￥{$vo.money|default=0}</td>
+            <td>￥{$vo.transfer_price|default=0}</td>
+            <td>{$vo.addtime|date="Y-m-d H:i",###}</if></td>
+            <td><if condition="$vo.status eq 2"><a href="javascript:void(0)" class="back_bond" aid="{$vo.invest_id}" sonclick="cancelhtml('{$vo.invest_id}')">撤销</a> <else />审核中</if></td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-3" id="pager" class="yahoo2 ajaxpagebar navslis">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.ajaxpagebar a').click(function(){
+    try{    
+        var geturl = $(this).attr('href');
+        var id = $(this).parent().attr('data');
+        var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+                  if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+    }catch(e){};
+    return false;
+})
+var loginhtml, validation = function(){
+    //验证写在这
+    $('.onsell').on('click', function(){
+        return false; //此处只作演示
+    });
+};
+var page = {};
+layer.login = function(options){
+    options = options || {};
+    $.layer({
+        type: 1,
+        title: '撤销债权转让',
+        offset: [($(window).height() - 490)/2+'px', ''],
+        border : [5, 0.5, '#666'],
+        area: ['400px','180px'],
+        shadeClose: true,
+        page: page
+    });
+};
+$('.back_bond').on('click', function(){
+    //如果已经请求过，则直接读取缓存节点
+    if(loginhtml){
+        page.html = loginhtml;
+    } else {
+        page.url = "__URL__/cancelhtml?invest_id="+$(this).attr("aid")
+        page.ok = function(datas){
+            loginhtml = datas.html; //保存登录节点
+        }
+    }
+    layer.login();    
+});
+function sellhtml(id) {
+	
+	if(loginhtml){
+        page.html = loginhtml;
+    } else {
+        page.url = "__URL__/sellhtml?id="+id
+        page.ok = function(datas){
+            loginhtml = datas; //保存登录节点
+        }
+    }
+    layer.login();   
+}
+</script>

@@ -1,0 +1,99 @@
+<include file="Public:headern"/>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>	
+<div class="banner">
+ <volist name=":get_ad(37)" id='voa'  offset="1" length='1'>   <!-- offset="0"length='1'-->
+        <a href="{$voa.url}" style="background-image:url(/{$voa.img})"></a>    
+	</volist> 
+</div>
+<div class="yangzhi">
+
+<div class="yz_lb">
+	<a href="#">全部</a>
+    <a href="#" class="hover">联合养殖</a>
+    <a href="#">联合种植</a>
+</div>
+	<div class="yz_tab">
+    	<li><span class="hover">全部</span></li>
+        <li><span>预热中</span></li>
+        <li><span>购买中</span></li>
+        <li><span>进行中</span></li>
+        <li style="border-right:none;"><span>已完成</span></li>
+        <a class="yz_tab_a" href="#">查看全部></a>
+        <div class="clear"></div>
+    </div>
+
+
+
+<div class="yz_list xmlab">
+	<volist name="yzlist" id="vo">	
+	    <div class="xsb">
+			<div class="xm_title">
+				<span>联合养殖</span>
+				{$vo.borrow_name|cnsubstr=###,16}
+			</div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_min}元/份</span>
+	            购买成本
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_duration}个月</span>
+	            周期
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_interest_rate}%</span>
+	            年化利润
+	        </div>
+
+
+	        <div class="jidu">
+	        <if condition="$vo.borrow_status eq 1">
+				<span class="jd_ks">离项目开始还有</span>
+	            <span class="jd_ksd cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'>16小时30分20秒</span>   
+
+	         
+	        <else/>
+				 <div id="process" class="An_wrap">
+				                         <div class="An_num">
+				                             <span class="An_sales">已售</span>
+				                             <span class="An_span_num ng-binding">{$vo.progress}</span><span>%</span>
+				                         </div>
+				                     <div class="An_circle An_clip-auto">
+	                                 <div class="An_percent"></div>
+	                                 <div class="An_percent"></div>
+	                                 </div>
+	        	</div>
+	        </if>
+	        </div>
+			<if condition="$vo.borrow_status eq 1"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a hui">抢先预览</a></if>
+	    	<if condition="$vo.borrow_status eq 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即体验</a></if>
+	    	<if condition="$vo.borrow_status gt 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即查看</a></if> 
+	    </div>
+	</volist>
+ </div>   
+ 
+
+
+
+</div>
+<div class="clear"></div>
+  
+<script type="text/javascript">
+
+$(function(){
+        $('.cui-timer').Cuitimer();
+});
+
+function dh(){
+	$.each($(".An_wrap"),function(){
+		$(this).FnExe1();
+	});
+}
+dh();
+
+function showTooltip(d){
+	$(".yz_tab li span").removeClass("hover").eq(d).addClass("hover");
+	$(".yangzhi .xmlab").css("display","none").eq(d).css("display","block");
+}
+
+</script>
+<include file="Public:footern"/>

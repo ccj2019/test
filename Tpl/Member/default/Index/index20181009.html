@@ -1,0 +1,207 @@
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="zhgl">
+                    <div class="zh1">
+                        <div class="zh1top">
+                            <div class="tx">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/img26.jpg" alt="">
+                            </div>
+                            <div class="zh1r">
+                                <div class="z1">
+                                    <ul>
+                                        <li>{$Think.session.u_user_name}</li>
+                                        <li style="border-right:none">
+                                            {$minfo.id|getVerify=###}
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                                <div class="z2">
+                                    <ul>
+                                        <li><a href="{:U('bank/index')}">提现银行卡： <span>{$bankcount}张</span></a></li>
+                                        <li><a href="{:U('bonus/bonus')}">未使用红包： <span>{$boncount}个</span></a></li>
+                                        <li style="border-right:none"><a href="{:U('memberinterest/memberinterest')}">未使用的加息券： <span>{$ratecount}个</span></a></li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                                <div class="z3">
+                                    <table>
+                                        <tr>
+                                            <td>安全等级：</td>
+                                            <td>
+                                                <div class="pro">
+                                                    <div class="pr" style="width:60%"></div>
+                                                </div>
+                                            </td>
+                                            <td>高</td>
+                                            <td><a href="javascript:;">提升安全等级</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="z4">
+                                    <a href="{:U('charge/charge')}" class="a1">充 值</a>
+                                    <a href="{:U('withdraw/withdraw')}" class="a2">提 现</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="zh1bot">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="tdbox">
+                                            <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon77.png" alt="">
+                                            <div class="tdbr"><span>资金总额</span>{:getFloatvalue($minfo['account_money']+$minfo['money_collect']+$minfo['money_freeze'],2)}</div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="tdbox">
+                                            <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon78.png" alt="">
+                                            <div class="tdbr"><span>体验金余额</span> {:getFloatvalue($minfo['money_experience'],2)}</div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="tdbox">
+                                            <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon79.png" alt="">
+                                            <div class="tdbr"><span>可提现金余额</span> {:getFloatvalue($minfo['account_money'],2)}</div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="zh2">
+                        <div class="zh2l" style="margin-right:10px">
+                            <div class="zh2tt"><span></span>资产统计</div>
+                            <div class="zh2con">
+                                <table border="0" cellspacing="1" cellpadding="0">
+                                    <tr>
+                                        <th>账户总额</th>
+                                        <td>{:getFloatvalue($minfo['account_money']+$minfo['money_collect']+$minfo['money_freeze'],2)}</td>
+                                        <th>项目总收益</th>
+                                        <td>{:getFloatvalue($minfo['receive_interests'],2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>冻结金额</th>
+                                        <td>{$minfo.money_freeze|Fmoney=###,false}</td>
+                                        <th>待收金额</th>
+                                        <td>{$minfo.money_collect|Fmoney=###,false}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="zh2l">
+                            <div class="zh2tt"><span></span>投资统计</div>
+                            <div class="zh2con">
+                                <table border="0" cellspacing="1" cellpadding="0">
+                                    <tr>
+                                        <th>累计充值总额</th>
+                                        <td>{$msummary.ljczje|default="0.00"}</td>
+                                        <th>累计提现总额</th>
+                                        <td>{$msummary.ljtxje|default="0.00"}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>已收本金</th>
+                                        <td>{$msummary.ysbj|default="0.00"}</td>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="zh3">
+                        <div class="zh2tt"><span></span>最近投资项目</div>
+                        <div class="fhzc">
+                            <table border="0" cellspacing="1" cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <th width="20%">项目</th>
+                                        <th width="10%">万元回报</th>
+                                        <th width="10%">期限</th>
+                                        <th width="10%">金额</th>
+                                        <th width="10%">红包奖励</th>
+                                        <th width="10%">中标时间</th>
+                                        <th width="10%">本期还款日</th>
+                                        <th width="10%">状态</th>
+                                        <th width="10%">电子协议</th>
+                                    </tr>
+                                    <volist name="tenlist" id="vo">
+                                    <tr>
+                                        <td>{$vo.borrow_name}</td>
+                                        <td>{$vo.borrow_interest_rate}</td>
+                                        <td>{$vo.borrow_duration}天</td>
+                                        <if condition="$vo.bonus_id neq 0">
+                                            <td>{:getFloatvalue($vo['investor_capital']-(bounsmoney($vo['bonus_id'])),2)}</td>                    
+                                        <else/>
+                                            <td>{$vo.investor_capital|Fmoney=###}</td>                    
+                                        </if>
+                                        <td>
+                                            <if condition="$vo.member_interest_rate_id neq 0">加息券：{:intestrate($vo['member_interest_rate_id'])}%<br /></if>
+                                            <if condition="$vo.bonus_id neq 0">红包{:bounsmoney($vo['bonus_id'])}</if>
+                                        </td> 
+                                        <td><if condition="$vo.full_time neq 0">{$vo.full_time|date="Y-m-d H:i:s",###}</if></td>
+                                        <td><if condition="$vo.deadline neq 0">{$vo.deadline|date="Y-m-d H:i:s",###}</if></td>
+                                        <td><if condition="$vo.status eq 1">投资中<elseif condition="$vo.status eq 4" />出售中<elseif condition="$vo.status eq 5"/>已回款<else/></if></td>
+                                        
+                                        <if condition="$vo.status eq 4 || $vo.status eq 5">
+
+                                        <if condition="$mdata.signerId eq '' ">
+                                            <td><a href="__APP__/member/agreement/create">创建用户</a></td>
+                                        <elseif condition="$mdata.moulageId eq '' " />
+                                            <td><a href="__APP__/member/agreement/personmoulage">创建印模</a></td>
+                                        <else/>
+                                            <if condition="$vo.contractId eq '' ">
+                                                <td><a href="__APP__/member/agreement/templatecontract?id={$vo.inid}">生成合同</a></td>
+                                            <else/>
+                                                <if condition="$vo.is_sign eq 0 ">
+
+                                                    <php>if($vo['step'] == 0){ </php>
+                                                    <td><a href="__APP__/member/agreement/addsigner?id={$vo.inid}">添加签署者</a></td>
+                                                    <php>}else if($vo['step'] == 1){</php>
+                                                    <td><a href="__APP__/member/agreement/jfsign?id={$vo.inid}">签署</a></td>
+                                                    <php>}else if($vo['step'] == 2){</php>
+                                                    <td><a href="__APP__/member/agreement/sign?id={$vo.inid}">签署</a></td>
+                                                    <php>}else if($vo['step'] == 4){</php>
+                                                    <td><a href="__APP__/member/agreement/qcsign?id={$vo.inid}">签署</a></td>
+
+                                                    <php>}</php>
+                                                <else/>
+                                                    <td><a href="__APP__/member/agreement/download?id={$vo.inid}">合同下载</a></td>
+                                                </if>
+                                            </if>
+                                        </if>
+                                    <else/>
+                                        <td>未生成合同</td>
+                                    </if>
+                                    </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <a href="{:U('tendout/index')}" class="lokm">查看更多投资项目</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+

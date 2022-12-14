@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" /> 
+	<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+	<meta name="keywords" content="{$glo.web_keywords}" />
+	<meta name="description" content="{$glo.web_descript}" />
+    	<link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+    	<link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />	
+
+	<link rel="stylesheet" href="/Public/web/css/jquery.fullPage.css">
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/swiper-4.3.3.min.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/web/css/ltt.css" />
+	<script src="/Public/web/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/Public/web/js/swiper-4.3.3.min.js"></script>
+	<script src="/Public/web/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="/Public/web/js/jquery.fullPage.min.js"></script>
+	<script type="text/javascript" src="/Public/web/js/ldy.js"></script>
+	<script src="/Style/file/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/web/js/layer.js"></script>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/tfindex.css" />
+ <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
+
+<link rel="stylesheet" type="text/css" href="/Public/new/css/style.css"/>
+<script type="text/javascript" src="/Public/new/js/index.js"></script>
+   <script type="text/javascript">
+            function jisuanFontsize(){
+                var winWidth;
+                if (window.innerWidth)
+                winWidth = window.innerWidth;
+                else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+                // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+                if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+                {
+                winWidth = document.documentElement.clientWidth;
+                }
+                if(winWidth<1300){
+                    winWidth=1300
+                }
+                if(winWidth>1920){
+                    winWidth=1920
+                }
+                document.getElementsByTagName('html')[0].style="font-size: calc("+winWidth+"px / 1920 * 100);"
+            }
+            jisuanFontsize();
+            window.onresize = function(){
+                jisuanFontsize()
+            }
+        </script>
+
+</head>
+
+<body>
+  <div class="tfggHeaderBox">
+            <div class="tfggHeaderBoxMain">
+                <img src="__PUBLIC__/shop/img/logo.png" class="tfggHeaderBoxMainLogo">
+                <div class="tfggHeaderBoxMainRight">
+                    <div class="tfggHeaderBoxMainRightMenuBox">
+                        <a href="/"  <if condition="$dh eq 1">class="active"</if> >首页</a>
+                        <a href="__APP__/invest">渔业养殖</a>
+                        <!--<a href="__APP__/zhongzhi">联合种植</a>-->
+                        <a href="__APP__/article/video">视频直播</a>
+                        <a href="__APP__/article/active">活动公告</a>
+                        <a href="__APP__/article/about">关于我们</a>
+
+                    </div>
+                    <div class="wechatAppBox">
+                        <div class="wechatAppBoxLi">
+                            微信
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-w.png" />
+                                微信公众号
+                            </div>
+                        </div>
+                        <div class="wechatAppBoxLi">
+                            APP下载
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-app.png" />
+                                APP下载
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tfggHeaderBoxMainRightImgBox">
+                        <a href="__APP__/member/index"><img src="__PUBLIC__/shop/img/tfUser.png"></a>
+                        <a href="__APP__/shop/car_list"><img src="__PUBLIC__/shop/img/tfCart.png" class="tfgouwuche"></a>
+                        
+                 <if condition="$UID gt '0'"> 
+            <a href="{:U('/member/common/actlogout')}"  style="    font-size: 0.2rem;
+    display: block;
+    float: left;
+    margin-top: 0.44rem;
+    color: #bf5757;
+    margin-left: 0.13rem;">退出</a>
+            </if>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div style="height: 1.12rem;"></div>
+
+

@@ -1,0 +1,93 @@
+<include file="Public:header"/>
+		<!--关于我们-->
+		<script type="text/javascript">
+    if ('article' == 'index') {
+        $('.navmember').addClass('on').siblings().removeClass('on');
+    }else if('article' == 'article'){
+        $(".navarticle-active").addClass('on').siblings().removeClass('on');
+    }else{
+        
+        $('.navarticle').addClass('on').siblings().removeClass('on');
+    }
+</script>
+		<div class="t-about_us">
+			<div class="about_banner">
+				<!--<p class="p1">WELCOME TO RZMWZC.COM</p>
+				<p class="p2">欢迎来到铭万众筹</p>
+				<p class="p3">铭万众筹，一个专注于海洋特色项目的综合性众筹平台</p>
+				<p class="p4">让梦想从这里起航</p>-->
+				<img src="/Public/web/img/guanyu/11.png"/>
+			</div>
+			<div class="gsjj">
+				<div class="box">
+					<div class="tabme">
+						 <if condition="($cid neq 55) and ($cid neq 37) and ($cid neq 517)">
+								<a href="/article/news_list"><span <if condition="($cid neq 54) and ($cid neq 53) and ($cid neq 22)"> class="on"  </if>style="padding-left:30px;padding-right:30px;">全部</span></a>
+						<a  href="/article/index/cid/53.html"><span <if condition="($cid eq 53)"> class="on"  </if>>回款公告</span></a>
+						<a href="/article/index/cid/22.html"><span <if condition="($cid eq 22)"> class="on"  </if>>媒体报道</span></a>
+						<a href="/article/index/cid/54.html"><span <if condition="($cid eq 54)"> class="on"  </if>>热门公告</span></a>
+						</if>
+					</div>
+				</div>
+			</div>
+			<div class="t-part clearfix">
+				<div class="box">
+					<div class="lln fl">
+						<p class="p1">   {$article.title}</p>
+						<p class="p2"><span>发布日期：{$article.art_time|date='Y-m-d',###}</span>来源：日照铭万网络科技有限公司</p>
+						   {$article.art_content}
+						
+						<div class="t-ud clearfix"> 
+							<if condition="$preid">
+								<div class="t-up fl">
+									<div class="t-block">
+										<a href="{:U('article/index',array('cid'=>$article['type_id'],'id'=>$preid))}" >
+											<img src="/Public/web/img/zuixinzixun/up.png"/>
+										</a>
+									</div>
+									<p>上一篇</p>
+								</div>
+							</if>
+							<if condition="$nextid">
+							<div class="t-down fr">
+								<div class="t-block">
+									<a href="{:U('article/index',array('cid'=>$article['type_id'],'id'=>$nextid))}" >
+										<img src="/Public/web/img/zuixinzixun/down.png"/>
+									</a>
+								</div>
+								<p>下一篇</p>
+							</div>
+							</if>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="rr fr">
+						<div class="tit clearfix">
+							<p class="p1 fl">众筹项目</p>
+							<a class="fr" href="/invest/index.html">更多</a>
+							<!-- <volist name="list_type3.list" id="vb"> -->
+							<a href="{:U('invest/detail',array('id'=>$vb['id']))}" target="_blank"><img src="{$vb.borrow_img}" alt="" width="280" /></a>
+							<p class="p3">{$vb.borrow_name|cnsubstr=###,16}</p>
+							<p class="p4">{$vb.borrow_info|strip_tags|cnsubstr=###,60}</p>
+							<!-- </volist>  -->
+						</div>
+						<div class="tit tit1 clearfix">
+							<p class="p1 fl">热门资讯</p>
+							<a class="fr" href="/article/news_list">更多</a>
+							<!-- <volist name="artlist" id="avoa"> -->
+		                        <a href="{:U('article/index',array('cid'=>$avoa['type_id'],'id'=>$avoa['id']))}">
+									<img src="/{$avoa.art_img}" alt="" width="280" />
+									<p class="p3">{$avoa.title}</p>
+									<p class="p4">{$avoa.art_content|strip_tags|cnsubstr=###,60}</p>
+								</a>
+		                    <!-- </volist> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--关于我们-end-->
+		
+
+			<!--底部-->
+		<include file="Public:footer"/>

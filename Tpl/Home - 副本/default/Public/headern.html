@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" /> 
+	<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+	<meta name="keywords" content="{$glo.web_keywords}" />
+	<meta name="description" content="{$glo.web_descript}" />
+    	<link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+    	<link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="/Public/new/css/style.css"/>
+<script type="text/javascript" src="/Public/new/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/Public/new/js/index.js"></script>
+
+<!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+</head>
+
+<body>
+<!--header-->
+<?php $minfo =getMinfo(session("u_id"),true);?>
+
+ <div class="head">
+	<div class="h_ym">
+     <div class="h_ymz">
+    	<div class="hym_l">
+        	<span>客服热线：{$glo.ttxf_call}   &nbsp;&nbsp; 关注我们：</span>
+            <span>微信
+            	<div class="hym_ewm wx">
+                	<img src="/Public/web/img/shouye/erwei-w.png" />
+                    <p>微信公众号</p>
+                </div>
+            </span>
+            <span>app下载
+            <div class="hym_ewm app">
+                	<img src="/Public/web/img/shouye/erwei-app.png" />
+                    <p>app下载</p>
+                </div>
+            </span>
+        </div>
+        <div class="hym_r">
+        <a href="{:U('/member/common/login')}">登录</a>/<a href="{:U('/member/common/register')}">注册</a>
+        </div></div>
+    </div>
+    
+    <div class="h_dh">
+     <div class="h_dhz">
+    	<div class="dh_l">
+        	<img src="/Public/new/images/xyj_07.png" />
+        </div>
+        <div class="dh_r">
+       		<ul>
+            	<li <if condition="$dh eq 1">class="hover"</if>  ><a href="/index/index">首页</a></li>
+                <li <if condition="$dh eq 2">class="hover"</if>><a href="/invest/index.html">渔业养殖</a></li>
+                <li <if condition="$dh eq 3">class="hover"</if>><a href="/zhongzhi/index.html">联合种植</a></li>
+                <li <if condition="$dh eq 4">class="hover"</if>><a href="/shop">海产商城</a></li>
+                <li <if condition="$dh eq 5">class="hover"</if>><a href="{:U('/article/video')}">视频直播</a></li>
+                <li <if condition="$dh eq 6">class="hover"</if>><a href="{:U('/article/active')}">活动公告</a></li>
+                <li <if condition="$dh eq 7">class="hover"</if>><a href="{:U('/article/about')}">关于我们</a></li>
+                <li <if condition="$dh eq 8">class="hover"</if>><a href="{:U('/member/index/index')}">会员中心</a></li>
+
+       
+                
+            </ul>
+        </div>
+        
+        </div>
+    </div>
+    
+
+</div>

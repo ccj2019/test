@@ -1,0 +1,78 @@
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var $tab_li = $('#tab5 ul li');
+	$tab_li.hover(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+		var index = $tab_li.index(this);
+		$('div.tab_box5 > div').eq(index).show().siblings().hide();
+	});	
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $tab_li = $('#tab6 ul li');
+	$tab_li.hover(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
+		var index = $tab_li.index(this);
+		$('div.tab_box6 > div').eq(index).show().siblings().hide();
+	});	
+});
+</script>
+<div style="clear:both;"></div>
+<div class="jc10-2">
+<div class="hzjg1">
+	<p class="jc_spec83">甄选合作机构</p>
+    <div class="hzjg1-1">
+    	<div id="tab5">
+	<ul class="tab_menu5">
+        <!-- <volist id="cat_t" name=":getCat(471)"> -->        
+    	<li <if condition="$i==1">class="selected"</if> >{$cat_t.type_name}</li>
+        <!-- </volist> -->
+    </ul>
+    <div class="tab_box5">
+        <!-- <volist id="cat" name=":getCat(471)"> -->        
+    	<div <if condition="$i!=1">class="hide"</if>>
+        	<div class="jc_spec84">
+            	{$cat.type_content}
+            </div>
+        </div>
+        <!-- </volist> -->        
+    </div>
+</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="hzjg1">
+	<p class="jc_spec83" style="margin-top:40px;">合作保障机构</p>
+    <div class="hzjg1-1" style="border:none; background:none;">
+    	<div id="tab6">
+	<ul class="tab_menu6">
+        <!-- <volist id="guartype_menu" name="guartype"> -->
+    	<li <if condition="$i==1">class="selected"</if> <if condition="$i==4">style="border-right:0px; width:303px;"</if> >{$guartype_menu.title}</li>
+        <!-- </volist> -->
+    </ul>
+    <div class="tab_box6">
+        <!-- <volist id="guartype" name="guartype"> -->
+    	<div <if condition="$i!=1">class="hide"</if> >
+        	<div class="hzjg2">
+            	<ul>
+                 <volist id="vo1" name="guartype.list">
+                	<li overstyle='on' id="list_{$vo1.id}">
+                    	<p class="jc_spec85"><a href="{:U('guarantee/detail',array('id'=>$vo1['id']))}"><img src="/{$vo1.art_img}" width="253" height="90" align="top" /></a><a href="{:U('guarantee/detail',array('id'=>$vo1['id']))}">{$vo1.title}</a></p>
+                        <p class="jc_spec86">注册资本：{$vo1.db_zijin}元</p>
+                        <p class="jc_spec87">{$vo1.db_jianjie}...</p>
+                        <p class="jc_spec88"><a href="{:U('guarantee/detail',array('id'=>$vo1['id']))}">了解详情>></a></p>
+                    </li>
+                    </volist>
+                    <div style="clear:both;"></div>
+                </ul>
+            </div>
+        </div>
+        <!-- </volist> -->
+    </div>
+</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

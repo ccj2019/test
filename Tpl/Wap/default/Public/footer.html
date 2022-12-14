@@ -1,0 +1,93 @@
+<link type="text/css" rel="stylesheet" href="/Public/wap/css/xin.css">
+<div class="gaodu"></div>
+<div class="footerg">
+    <ul>
+        <li class="">
+            <a href="/wap"><img src="/Public/zpublic/images/shouye_1.png"/><img src="/Public/zpublic/images/shouye.png"/><span>主页</span></a>
+        </li>
+        <li class="">
+            <a href="/Wap/Borrow/index"><img src="/Public/zpublic/images/faqi_1.png"/><img src="/Public/zpublic/images/faqi.png"/><span>发起</span></a>
+        </li>
+        <li class="">
+            <a href="/wap/shop"><img src="/Public/zpublic/images/shangcheng_1.png"/><img src="/Public/zpublic/images/shangcheng.png"/><span>商城</span></a>
+         </li>
+        <li class="">
+            <a href="/Wapmember"><img src="/Public/zpublic/images/wode_1.png"/><img src="/Public/zpublic/images/wode.png"/><span>我的</span></a>
+        </li>
+    </ul>
+</div>
+</body>
+    <link rel="stylesheet" href="/Public/default/home/style/layer.css">
+    <script type="text/javascript" src="/Public/default/Member/layer/layer.min.js"></script>
+</html>
+<script>
+
+if(typeof($zindex)  == "undefined"){
+	$zindex=0;
+}
+
+$(".footerg li").removeClass("hom");
+$(".footerg li").eq($zindex).addClass("hom");
+
+</script>
+<style>
+.qiao{
+    width: 0.62rem;
+    height: 2.12rem;
+    position: fixed;
+    top: 40%;
+    left: 0%;
+    background: url(/Public/zpublic/images/qiao_01.jpg) no-repeat;
+    background-size:100% 100%;
+     z-index: 1000;    
+  }
+.qiao .kefu{
+    width: 0.62rem;
+    height: 0.77rem;
+    display: block;
+}
+ 
+.qiao .qiao_01{
+    width: 0.62rem;
+    height: 1.35rem;
+    display: block;
+  } 
+.qiao .kefu_01{
+    width: 2.35rem;
+    height: 0.73rem;
+    position: absolute;
+    top: 0;
+    left: 0.7rem;
+    background: url(/Public/zpublic/images/qiao_02.png) no-repeat;
+    background-size: 100% 100%;
+    z-index: 1000;
+    font-size: 0.18rem;
+    padding-left: 0.2rem;
+    line-height: 0.35rem;
+    padding-top: 0.04rem;
+    color: #737373;
+    display: none;
+  } 
+.qiao .kefu:hover .kefu_01{
+    display: block;
+ } 
+</style>
+<div class="qiao">
+<div class="kefu">
+    <div class="kefu_01">
+        服务时间：09:00~18:00<br>
+        热线电话：<a style="color: #737373;" href="tel:400-1100216">400-1100216</a>
+    </div>
+</div>
+<a class="qiao_01" href="http://p.qiao.baidu.com/cps/chat?siteId=12273679&userId=21437474"></a>
+</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55018a7c810a0920c9997b042f7da876";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>

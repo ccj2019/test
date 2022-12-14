@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'borrow_id', 2 => 'status', 3 => 'sort_order', 4 => 'deadline', 5 => 'info', 6 => 'capital', 7 => 'has_capital', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(10) unsigned', 'borrow_id' => 'int(10) unsigned', 'status' => 'tinyint(3) unsigned', 'sort_order' => 'tinyint(3) unsigned', 'deadline' => 'int(10) unsigned', 'info' => 'text', 'capital' => 'decimal(10,2)', 'has_capital' => 'int(10)', ), ); ?>

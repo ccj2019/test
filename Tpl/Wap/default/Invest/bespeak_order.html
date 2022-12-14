@@ -1,0 +1,94 @@
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<style type="text/css">
+    .right{
+        width: 70%;
+    }
+    .clear.right1{
+        line-height: .7rem;
+    }
+    .zhifu-center.clear{
+        border-bottom: 0;
+    }
+</style>
+<body>
+<div class="header ">
+    <div class="w-header w-content flex">
+        <a href="javascript:window.history.back();" class="w-header-left">
+            < 返回 </a>
+        <h3>确认订单</h3>
+        <a href="##" class="w-header-right"></a>
+    </div>
+</div>
+<!-- 项目详情-确认订单 start -->
+<form method="post" name="bespeakForm" id="bespeakForm" action="/wap/invest/bespeakmoney">
+    <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+    <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+    <div class="w-proaff">
+        <ul class="w-proaff-con">
+            <li>
+                <a href="##" class="flex">
+                    <div class="left">
+                        <img src="{$binfo.borrow_img}" alt="">
+                    </div>
+                    <div class="right">
+                        <h6>{$binfo.borrow_name}</h6>
+                        <div class="clear right1">
+                            <span class="f1">{$binfo.borrow_min}元</span>
+                            <span class="fr">x{$num}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="w-proaff-con">
+            <div class="you youhui-top clear">
+                <div class="fl">
+                    应支付金额
+                </div>
+                <div class="fr">
+                    <p> ¥{$mone*$glo.bespeak_point}元</p>
+                    <input type="hidden" id="bespeak_money" class="invest_input text_box" value= '{$mone}'   size="11" name="money">
+                </div>
+            </div>
+            <if condition="$binfo.id eq '1'">
+                <input type="hidden" name="is_experience" id="is_experience" value="1" />
+            </if>
+        </div>
+        <div class="w-proaff-con">
+            <div class="zhifu-center clear">
+                <div class="fl">
+                    支付密码:
+                </div>
+                <div class="fr" style="  width: 75%;">
+                    <input type="password" class="invest_input" id="pin" name="pin" style="width: 100%;height: 0.5rem;    margin-top: -.05rem;    background: #f5f5f5;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<!-- 项目详情-确认订单 end -->
+<if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+    <a id="sub1"class="w-queren">确认支付</a>
+    <else />
+    <a href="javascript:void(0);" class="w-queren">新用户专享</a>
+</if>
+<!-- 弹窗 -->
+<div class="l-dtc" >
+    <div class="l-tanchubox">
+        <p>支付成功</p>
+        <p> <button id="sub1" class="l-btnc">确定</button></p>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#sub1').click(function() {
+        $('#sub1').off("click");
+        $('#bespeakForm').submit();
+    })
+</script>
+</body>
+</html>

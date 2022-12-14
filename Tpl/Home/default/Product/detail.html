@@ -1,0 +1,133 @@
+<include file="Product:js"/>
+<div class="banner_else" style="background:url(/{$binfo.borrow_img_big}) no-repeat center;"></div>
+<!--banner_else-->
+<div class="content">
+    <div class="content_info">
+        <div class="cont_left">
+            <div class="cont_left_top">
+                <div class="left_top_title">{$binfo.borrow_name}<span><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/images/img2.jpg" width="151" height="22" />3.9分</span></div>
+                <!--left_top_title-->
+                <p class="left_top_p"> <span>发起人：{$binfo.borrow_uid|get_user_info}</span> <span>行业：{$binfo.borrow_uid|get_user_info}</span> </p>
+                <!--left_top_p-->
+                <div class="move_all"><embed src="{$binfo.borrow_video}" allowFullScreen="true" quality="high" width="781" height="555" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" wmode="transparent" ></embed></div>
+                <!--move_all--> 
+            </div>
+            <!--cont_left_top-->
+            <div class="cont_left_bottom">
+                <div id="box_a">
+                    <ul id="tab_a">
+                        <li class="on" id="tab_a_1" onClick="switchTab(1)">项目详情</li>
+                        <li id="tab_a_2" onClick="switchTab(2)">资料审核</li>
+                        <li id="tab_a_3" onClick="switchTab(3)">支持者</li>
+                        <li id="tab_a_4" onClick="switchTab(4)">项目讨论</li>
+                    </ul>
+                    <ul id="tab_con_a">
+                        <li id="tab_con_a_1" style="padding:10px 0px;">{$binfo.borrow_info}</li>
+                        <li id="tab_con_a_2">
+                         <if condition="!is_array($data_list)">
+                        <div style="padding:10px 0px;"> 没有任何资料审核通过! </div>
+                        <else/>
+                            <table class="table_a">
+                                <tr>
+                                    <td>审核项目</td>
+                                    <td>审核状态</td>
+                                    <td>通过日期</td>
+                                </tr>
+                                <volist name="data_list" id="vd">
+                                <tr>
+                                    <td>{$Bconfig['DATA_TYPE'][$vd['type']]}</td>
+                                    <td><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/images/yes.png" width="36" height="31" /></td>
+                                    <td>{$vd.add_time|date="Y-m-d H:i",###}</td>
+                                </tr>
+                                 </volist>
+                               
+                            </table>
+                             </if>
+                        </li>
+                        <li id="tab_con_a_3">
+                            <div class="tab_model">
+                                 <!-- <volist name="investinfo" id="vi"> -->
+                                <dl class="model_dl">
+                                    <dt><img src="{$vi.id|get_avatar=###}" width="90" height="90"></dt>
+                                    <dd class="model_name">{$vi.user_name|hidecard=###,5}</dd>
+                                    <dd class="model_time" style="color:red">支持了{$vi.investor_capital|Fmoney=###}</dd>
+                                    <dd class="model_time">{$vi.add_time|date="Y-m-d H:i:s",###}</dd>
+                                    <dd class="model_cengjing">支持过<span>{$vi.id|get_invest_num}</span>个项目</dd>
+                                </dl>
+                                <!-- </volist> --> 
+                            </div>
+                            <!--tab_model--> 
+                        </li>
+                        <li id="tab_con_a_4">
+                            <div class="main_d">
+                                <textarea class="main_text"></textarea>
+                                <div class="kuang">还可以输入200字符<span>立即<a href="#">登录</a>发表评论<a href="#" class="now_pinglun">发表评论</a></span></div>
+                                <!--kuang-->
+                                <dl class="tab_dl">
+                                    <dt><span>大壮：</span>去年盈利这么好，有必要融资么? 。。。</dt>
+                                    <dd class="tab_dd_a">评论于 2014-12-30 13:27:59 | <a>回复</a></dd>
+                                    <dd class="tab_dd_b">
+                                        <input type="text" placeholder="回复消息">
+                                        <a href="#">回复</a><span>取消</span></dd>
+                                </dl>
+                                
+                            </div>
+                            <!--main_d--> 
+                        </li>
+                    </ul>
+                </div>
+                <!--#box_a--> 
+            </div>
+            <!--cont_left_bottom--> 
+        </div>
+        <!--cont_left-->
+        <div class="cont_right">
+            <div class="cont_right_a"> <a href="#" class="cont_guanzhu"><span>关注</span></a> <a href="#" class="cont_yuetan"><span>约谈</span></a> </div>
+            <!--cont_right_a-->
+            <div class="cont_right_b">
+                <p class="edu">项目总额：<span>{$binfo.borrow_money|Fmoney=###}</span></p>
+                <p class="edu" style="letter-spacing:0.4px">已&nbsp;认&nbsp;购&nbsp;：<span style="color:#ff3c5c">{$binfo.has_borrow|Fmoney=###}</span></p>
+                <div class="cont_edu">
+                    <div>
+                        <p style="width:{$binfo.progress}%;"></p>
+                    </div>
+                    <span>{$binfo.progress}%</span> </div>
+                <!--cont_edu-->
+                <div class="pinglun">
+                    <p>关注数：<span>{$binfo.id|get_pro_guanzhu}</span></p>
+                    <p>浏览数：<span>{$binfo.hits}</span></p>
+                    <p>评论数：<span>{$binfo.id|get_pro_comment}</span></p>
+                    <p>认投数：<span>{$binfo.id|get_pro_invest}</span></p>
+                </div>
+                <!--pinglun--> 
+                <input name="invest_number" class="invest_number" value="1" type="text">
+				<input name="each_number" class="each_number" value="{$binfo.each_number}" type="hidden">
+				<input name="borrow_id" class="borrow_id" value="{$binfo.id}" type="hidden">
+                <a href="javascript:void(0);" class="now_tou">立即投资</a><!--now_tou--> 
+            </div>
+            <!--cont_right_b--> 
+            <a href="#" class="cont_right_c"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/images/img3.jpg" width="100%"></a><!--cont_right_c--> 
+            <a href="#" class="cont_right_c"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/common/images/img4.jpg" width="100%"></a><!--cont_right_c-->
+            <div class="problem">
+                <h1>常见问题</h1>
+                <dl>
+                    <dt><a href="#">何为股权众筹？</a></dt>
+                    <dd>何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹</dd>
+                </dl>
+                <dl>
+                    <dt><a href="#">何为股权众筹？</a></dt>
+                    <dd>何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹</dd>
+                </dl>
+                <dl>
+                    <dt><a href="#">何为股权众筹？</a></dt>
+                    <dd>何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹何为股权众筹</dd>
+                </dl>
+                <a href="#" class="at_more">查看更多+</a> </div>
+            <!--problem--> 
+        </div>
+        <!--cont_right--> 
+    </div>
+    <!--content_info--> 
+</div>
+<!--content--> 
+<!--bottom--> 

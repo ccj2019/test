@@ -1,0 +1,89 @@
+{__NOLAYOUT__}
+            <div class="page_info">
+              <div class="page_tips">
+                <p>'{$name}'的还款明细</p>
+              </div>
+              <div class="m_page_right_box">
+                <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+                  <tr class="tr_header">
+                  <td>
+				应收日期
+			</td>
+			<td>
+				应收本金
+			</td>
+			<td>
+				应收利息
+			</td>
+			<td>
+				应收手续费
+			</td>
+			<td>
+				实收本息
+			</td>
+			<th scope="col">
+				应收本息
+			</th>
+			<td >
+				收款状态
+			</td>
+			<td>
+				当前/总(期)
+			</td>
+                  </tr>
+                  <volist name="list" id="vo">
+                    <tr>
+                      <td>{$vo.deadline|date="Y-m-d",###}</td>
+		<td>{$vo.capital}</td>
+		<td>{$vo['interest']}</td>
+		<td>{$vo['interest_fee']}</td>
+		<td>{$vo['receive_interest']+$vo['receive_capital']}</td>
+		<td><if condition="($vo.status eq 1) or ($vo.status eq 2) or ($vo.status eq 3)">0<else/>{:getFloatValue(($vo['interest']+$vo['capital']-$vo['receive_interest']-$vo['receive_capital']-$vo['interest_fee']),2)}</if></td>
+		<td><if condition="$vo['deadline'] lt time() && $vo['status'] eq 7">愈期未还<else/>{$status_arr[$vo['status']]}</if></td>
+		<td>{$vo.sort_order}/{$vo.total}</a></td>
+                    </tr>
+                  </volist>
+                </table>
+                <div data="chip-2" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+              </div>
+            </div>
+                        <script type="text/javascript">
+function repayment(bid,sort_order){
+	x = {"bid":bid,"sort_order":sort_order};
+	
+	$.ajax({
+		url: "__URL__/repayment",
+		data: x,
+		timeout: 15000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1) layer.alert('还款成功！', 1,!1);
+				else layer.msg(d.message);
+			}
+		}
+	});
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+     <link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />     
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  
+    </head>
+
+<script type="text/javascript" src="/Public/web/js/jquery-1.8.3.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<form action="__URL__/xiazai" id="from" method="post">
+    <h3 class="title">参赛人员照片：</h3>
+
+    <div>
+        <img class="preview" src="" alt="">
+        <button class="uploadImage" type="button" id="vote_pic">点击上传（建议上传800*600的png,jpg,或者gif格式图片）</button>
+        <input type="hidden" name="vote_pic">
+        <input type="text" class="a1">
+        <img id="tupian1" src="__PUBLIC__/web/img/shouye/erwei-app.png">
+        
+        <input type="text" name="serverId" class="a2">
+        <img id="tupian" src="__PUBLIC__/web/img/shouye/erwei-app.png">
+    </div>
+
+    <button class="bbon" type="submit" id="submit">提交</button>
+
+    <a href="http://weixin.qq.com/r/wzglPW3EQjA9rSle923R">启动微信</a>
+</form>
+
+
+<script>
+    wx.config({
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{$signPackage.appId}',// 必填，公众号的唯一标识
+        timestamp: {$signPackage.timestamp}, // 必填，生成签名的时间戳
+        nonceStr: '{$signPackage.nonceStr}',// 必填，生成签名的随机串
+        signature: '{$signPackage.signature}',// 必填，签名
+        jsApiList: [
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage'
+        ]// 必填，需要使用的JS接口列表
+    });
+
+    wx.ready(function () {
+// 5.1 拍照、本地选图
+//         var images = {
+//             localId: [],
+//             serverId: []
+//         };
+//
+//         wx.previewImage({
+//             current: '', // 当前显示图片的http链接
+//             urls: [] // 需要预览的图片http链接列表
+//         });
+//
+//         wx.uploadImage({
+//             localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
+//             isShowProgressTips: 1, // 默认为1，显示进度提示
+//             success: function (res) {
+//                 var serverId = res.serverId; // 返回图片的服务器端ID
+//             }
+//         });
+
+        $(".uploadImage").click(function(){
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    $("#tupian1").attr("src",localIds)
+
+                    //setTimeout(function(){
+                        wx.uploadImage({
+                            localId: localIds.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var serverId = res.serverId; // 返回图片的服务器端ID
+                                $("#tupian").attr("src",serverId)
+                                $(".a1").val(localIds);
+                                $(".a2").val(serverId);
+                            }
+                        });
+                        // wx.getLocalImgData({
+                        //     localId: localIds.toString(), // 图片的localID
+                        //     success: function (res) {
+                        //          var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                        //          $("#tupian").attr("src",localData)
+                        //          $(".a1").val(localIds);
+                        //          $(".a2").val(serverId);
+                        //     }
+                        // });
+
+
+                   // },1000);
+
+
+
+
+                }
+            });
+
+
+
+        })
+
+
+
+        $("#submit").click(function(){alert("sdf");
+              $("#form").submit();
+            // $.ajax({
+            //     type:'post',
+            //     url:"__URL__/xiazai",
+            //     data :{"serverId":$(".a2").val()},
+            //     dataType: "json",
+            //     success : function(data){
+                    
+            //         if(data.status){
+            //             alert(data.info);
+            //             window.location.href = data.url;
+            //         }else{
+
+            //         }
+            //     }
+            // });
+            // return false;
+        })
+    });
+</script>

@@ -1,0 +1,113 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<!--账户管理安全中心-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>安全中心</span>
+                </div>
+                <div class="safety">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon60.png" alt="">
+                            </td>
+                            <td class="td2">昵称</td>
+                            <td class="td3">
+                                <a>已设置</a>
+                            </td>
+                            <td class="td4">
+                                {$Think.session.u_user_name}
+                                <!-- <a href="##">修改</a> -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon61.png" alt="">
+                            </td>
+                            <td class="td2">实名认证</td>
+                            <td class="td3">
+                            <if condition="$ids eq 1">
+                                {$minfo.idcard|hidecard=###,1}
+                            </if>
+                            </td>
+                            <td class="td4">
+                                <if condition="$ids neq 1">
+                                    <a href="/member/verify/index.html?id=1#chip-3">修改</a>
+                                </if>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon62.png" alt="">
+                            </td>
+                            <td class="td2">登录密码</td>
+                            <td class="td3">
+                                <a>已设置</a>
+                            </td>
+                            <td class="td4">
+                                <a href="/Member/user/password.html">修改</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon63.png" alt="">
+                            </td>
+                            <td class="td2">绑定邮箱</td>
+                            <td class="td3">
+                                <if condition="$emails eq 1">
+                                    <a>已绑定</a>
+                                    {$email}
+                                </if>
+                                
+                            </td>
+                            <td class="td4">
+                                <a href="/member/verify/email.html">绑定</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon64.png" alt="">
+                            </td>
+                            <td class="td2">绑定手机</td>
+                            <td class="td3">
+                                <if condition="$phones eq 1">
+                                    <a>已绑定</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    {$phone|hidecard=###,1}
+                                </if>
+                            </td>
+                            <td class="td4">
+                                <a href="/member/safe/cellphone.html">修改</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon65.png" alt="">
+                            </td>
+                            <td class="td2">交易密码</td>
+                            <td class="td3">
+                                <a href="/Member/user/pinpass.html">已设置</a>
+                            </td>
+                            <td class="td4">
+                                <a href="/Member/user/pinpass.html">修改</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

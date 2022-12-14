@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0070)http://metinfo.zihaistar.com/admin/system/sysadmin.php?anyid=8&lang=cn -->
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK 
+href="__ROOT__/Style/A20141030/style/metinfo.css" type=text/css rel=stylesheet>
+<LINK 
+href="__ROOT__/Style/A20141030/style/newstyle.css" type=text/css rel=stylesheet>
+<SCRIPT 
+type=text/javascript>var basepath='../templates/met/images?52911';</SCRIPT>
+<SCRIPT src="__ROOT__/Style/A20141030/js/jQuery1.7.2.js" type=text/javascript></SCRIPT>
+<SCRIPT src="__ROOT__/Style/A20141030/js/metvar.js" type=text/javascript></SCRIPT>
+<SCRIPT src="__ROOT__/Style/A20141030/js/jquery.uploadify.v2.1.4.min.js" 
+type=text/javascript></SCRIPT>
+<SCRIPT src="__ROOT__/Style/A20141030/js/iframes.js" type=text/javascript></SCRIPT>
+<SCRIPT src="__ROOT__/Style/A20141030/js/cookie.js" type=text/javascript></SCRIPT>
+<SCRIPT type=text/javascript>
+/*ajax执行*/
+var lang = 'cn';
+var metimgurl='../templates/met/images/';
+var depth='';
+$(document).ready(function(){
+	ifreme_methei();
+});
+</SCRIPT>
+<!--[if lte IE 9]>
+<SCRIPT language=JavaScript>  
+function killErrors() {  
+return true;  
+}  
+window.onerror = killErrors;  
+</SCRIPT>
+<![endif]-->
+<STYLE type=text/css>
+.stsadmin_qyyy {
+	BORDER-RIGHT: #dfdfdf 1px solid;
+	BORDER-TOP: #dfdfdf 1px solid;
+	PADDING-BOTTOM: 0px! important;
+	BORDER-LEFT: #dfdfdf 1px solid;
+	BORDER-BOTTOM: #dfdfdf 1px solid
+}
+.stsadmin_qyyy LI {
+	PADDING-RIGHT: 15px;
+	PADDING-LEFT: 15px;
+	FLOAT: left;
+	PADDING-BOTTOM: 0px;
+	PADDING-TOP: 0px;
+	TEXT-ALIGN: center
+}
+.stsadmin_qyyy LI IMG {
+	WIDTH: 50px;
+	HEIGHT: 50px
+}
+.stsadmin_qyyy LI A {
+	COLOR: #666;
+	TEXT-DECORATION: none
+}
+.stsadmin_qyyy LI A P {
+	LINE-HEIGHT: 28px;
+	HEIGHT: 28px
+}
+</STYLE>
+<META content="MSHTML 6.00.2900.6550" name=GENERATOR>
+</HEAD>
+<BODY>
+<SCRIPT type=text/javascript>
+$(function(){
+  $('.stat_list', parent.document).hide();
+});
+function metreturn(url){
+	if(url){
+		location.href=url;
+	}else if($.browser.msie){
+		history.go(-1);
+	}else{
+		history.go(-1);
+	}
+}
+</SCRIPT>
+<DIV class=clear></DIV>
+<SCRIPT type=text/javascript>
+$("html",parent.document).find('.returnover').remove();
+</SCRIPT>
+<DIV></DIV>
+<DIV class=sysadmin>
+  <DIV class=sysadmin_box_1 style="DISPLAY: none; WIDTH: 100%">
+    <DIV class=sysadmin_box_cont>
+      <H3>常用应用</H3>
+      <DIV class="boxcont stsadmin_qyyy">
+        <UL class=list-none>
+          <LI><A title=手机版（免费版） 
+  href="http://metinfo.zihaistar.com/admin/app/wap/wap.php?anyid=44&amp;lang=cn"><IMG 
+  src="__ROOT__/Style/A20141030/images/wap.png">
+            <P>手机版（免费版）</P>
+            </A></LI>
+          <LI><A title=短信功能 
+  href="http://metinfo.zihaistar.com/admin/app/sms/sms.php?anyid=44&amp;lang=cn"><IMG 
+  src="__ROOT__/Style/A20141030/images/sms.png">
+            <P>短信功能</P>
+            </A></LI>
+          <LI><A title=网站保姆 
+  href="http://metinfo.zihaistar.com/admin/app/nurse/index.php?anyid=44&amp;lang=cn"><IMG 
+  src="__ROOT__/Style/A20141030/images/nurse.png">
+            <P>网站保姆</P>
+            </A></LI>
+          <LI><A title=在线客服 
+  href="http://metinfo.zihaistar.com/admin/interface/online/index.php?anyid=44&amp;lang=cn"><IMG 
+  src="__ROOT__/Style/A20141030/images/online.png">
+            <P>在线客服</P>
+            </A></LI>
+          <LI><A title=网站体检 
+  href="http://metinfo.zihaistar.com/admin/app/physical/index.php?anyid=44&amp;lang=cn"><IMG 
+  src="__ROOT__/Style/A20141030/images/physical.png">
+            <P>网站体检</P>
+            </A></LI>
+        </UL>
+        <DIV class=clear></DIV>
+      </DIV>
+    </DIV>
+  </DIV>
+  <div style="clear:both;"></div>
+  <DIV class=sysadmin_box_7 style="width:100%">
+    <ul class="spec3">
+      <li class="spec4">
+        <p class="spec8">平台会员总数</p>
+        <p class="spec9">{$memberscount}</p>
+        <p class="spec10">单位：人</p>
+      </li>
+      <li class="spec5">
+        <p class="spec8">用户投资总额</p>
+        <p class="spec9">{$investor_capital_count|Fmoney=###}</p>
+        <p class="spec11">单位：元</p>
+      </li>
+     
+    </ul>
+  </DIV>
+  <div style="clear:both;"></div>
+  <DIV class=sysadmin_box_1>
+    <DIV class=sysadmin_box_cont>
+      <H3>待办事项</H3>
+      <DIV class=boxcont 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px">
+        <TABLE class=stat_table cellSpacing=1 cellPadding=0>
+          <TBODY>
+            <TR>
+              <TD class=t width="30" style="color:#1e71b1 !important;">等待初审的标</TD>
+              <TD class=t width=20 align="center"><a href="__APP__/admin/borrow/waitverify.html">{$row.borrow_1|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#556b8d;">等待复审的标</TD>
+              <TD class=t align="center"><a href="__APP__/admin/borrow/waitverify2.html">{$row.borrow_2|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#6ca632;">额度申请等待审核</TD>
+              <TD class=t align="center"><a href="__APP__/admin/members/infowait.html">{$row.limit_a|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#d62c1a;">等待实名认证</TD>
+              <TD class=t align="center"><a href="__APP__/Admin/memberid/index?status=3">{$row.real_a|default=0}</a></TD>
+            </TR>
+            <!--<TR class=mouse>
+              <TD class=t style="color:#dc8911;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>-->
+          </TBODY>
+        </TABLE>
+      </DIV>
+    </DIV>
+  </DIV>
+  <DIV class=sysadmin_box_3>
+    <DIV class=sysadmin_box_cont>
+      <H3>财务部门</H3>
+      <DIV class=boxcont 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px">
+        <TABLE class=stat_table cellSpacing=1 cellPadding=0>
+          <TBODY>
+            <TR>
+              <TD class=t  style="color:#1e71b1 !important;">充值未成功审核</TD>
+              <TD class=t   align="center"><a href="__APP__/Admin/paylog/">{$row.real_Paylog|default=0}</a></TD>
+            </TR>
+            <!--<TR class=mouse>
+            	
+              <TD class=t style="color:#d62c1a;">待审核的提现 &nbsp;</TD>
+              <TD class=t align="center">&nbsp;<a href="__APP__/Admin/Withdrawlogwait/index.html">{$row.Withdrawlogwait|default=0}</a>  </TD>
+            </TR>-->
+            <TR class=mouse>
+              <TD class=t style="color:#6ca632;">线下充值审核</TD>
+              <TD class=t align="center"><a href="__APP__/admin/Paylog/paylogoffline.html">{$row.paylogoffline|default=0}</a></TD>  
+              <!--<TD class=t align="center"><a>0</a></TD>-->
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#d62c1a;">待审核的提现</TD>
+              <TD class=t align="center"><a href="__APP__/Admin/Withdrawlogwait/index.html">{$row.Withdrawlogwait|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#556b8d;">扫码付充值审核</TD>
+              <TD class=t align="center"><a href="__APP__/admin/Paylog/paylogonline.html">{$row.paysmf|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#d62c1a;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>
+            <!--<TR class=mouse>
+              <TD class=t style="color:#d62c1a;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR> -->
+          </TBODY>
+        </TABLE>
+      </DIV>
+    </DIV>
+  </DIV>
+ <DIV class=sysadmin_box_1>
+    <DIV class=sysadmin_box_cont>
+      <H3>风控部门</H3>
+      <DIV class=boxcont 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px">
+        <TABLE class=stat_table cellSpacing=1 cellPadding=0>
+          <TBODY>
+         
+            <TR class=mouse>
+              <TD class=t width="30"  style="color:#556b8d;">上传资料等待审核</TD>
+              <TD class=t width=20  align="center"><a href="__APP__/admin/memberdata/index.html">{$row.data_up|default=0}</a></TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#dc8911;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#dc8911;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>
+             <TR class=mouse>
+              <TD class=t style="color:#dc8911;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>
+            <TR class=mouse>
+              <TD class=t style="color:#d62c1a;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>
+            <!--<TR class=mouse>
+              <TD class=t style="color:#d62c1a;">&nbsp;</TD>
+              <TD class=t align="center">&nbsp;</TD>
+            </TR>-->
+          </TBODY>
+        </TABLE>
+      </DIV>
+    </DIV>
+  </DIV>
+  <!-- -->
+  <DIV class=sysadmin_box_3>
+    <div class=sysadmin_box_cont>
+      <H3>服务器信息</H3>
+      <TABLE class=stat_table cellSpacing=1 cellPadding=0 >
+        <TBODY>
+          <TR>
+            <TD class="t spec1" >程序名称</TD>
+            <TD class="t spec1">互联网金融系统</TD>
+          </TR>
+          <TR class=mouse>
+            <TD class="t spec1">系统安全</TD>
+            <TD class="t spec1">防SQL攻击， 后台双重防护验证&nbsp;<span style="color:red;">★★★★★</span></TD>
+          </TR>
+          <TR class=mouse>
+            <TD class="t spec1">系统版本</TD>
+            <TD class="t spec1" >V10.1 <span style="color:#339900;">已是最新版本</span></TD>
+          </TR>
+          <TR class=mouse>
+            <TD class="t spec1">操作系统</TD>
+            <TD class="t spec1" >Windows/Linux</TD>
+          </TR>
+          <TR class=mouse>
+            <TD class="t spec1">PHP | Mysql</TD>
+            <TD class="t spec1">PHP5.4+,Msyql5.0+</TD>
+          </TR>
+          <!--<TR class=mouse>
+            <TD class="t spec1">&nbsp;</TD>
+            <TD class="t spec1">&nbsp;</TD>-->
+          </TR>
+        </TBODY>
+      </TABLE>
+    </div>
+  </DIV>
+  <div style="clear:both;"></div>
+  <DIV class=sysadmin_box_7 style="display:none">
+    <DIV class=sysadmin_box_cont>
+      <H3>开发团队</H3>
+      <DIV class=bangzhu>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+          <tr>
+            <td class="spec2">程序开发及UI交互设计：梁SIR ,闫小草 , 九年 </td>
+          </tr>
+          <tr>
+            <td class="spec2">技术支持团队：小鹤 , 小白 , 双儿</td>
+          </tr>
+          <tr>
+            <td class="spec2">鸣谢：大飞 , 小强 , 李默研 , 四叶草 , 古月今照</td>
+          </tr>
+        </table>
+      </DIV>
+    </DIV>
+  </DIV>
+  <DIV class=clear></DIV>
+</DIV>
+<DIV class=footer>Powered by <B><A href="http://p2p.zihaistar.com/" 
+target=_blank>资海科技集团</A></B> ©20014-2015 &nbsp;<A 
+href="http://www.p2p.zihaistar.com" target=_blank>资海P2P</A></DIV>
+<SCRIPT type=text/javascript>
+	
+metgetdata('#newslist','http://www.metinfo.cn/metv5news.php?fromurl=http://metinfo.zihaistar.com/&action=json');
+function metHeight(group){
+	tallest=0;
+	group.each(function(){
+		thisHeight=jQuery(this).height();
+		if(thisHeight>tallest){
+			tallest=thisHeight;
+		}
+	});
+	group.height(tallest);
+}
+$(document).ready(function(){
+	var autbox = $(".sysadmin_box_6 .boxcont");
+	var fubox = $(".sysadmin_box_8 .stat_table");
+	if(autbox.size()>0){
+		var nhh = autbox.height()+12;
+		if(fubox.height()<nhh){
+			fubox.height(nhh);
+		}else{
+			autbox.height(fubox.height()-12);
+		}
+	}
+	var group1 = $(".sysadmin_box_1 .stat_table,.sysadmin_box_2 .stat_table,.sysadmin_box_3 .text");
+	metHeight(group1);
+	ifreme_methei();
+});
+function divshowiframe(div){
+	var content=$('#update_content_control', parent.document);
+	content.click();
+	//
+	//content.height($(window).height());
+	//content.width($(window).width());
+	//content.show();
+}
+</SCRIPT>
+</BODY>
+</HTML>

@@ -1,0 +1,35 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+
+
+
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">编辑规格</div>
+<div class="form2">
+  <form method="post" action="__URL__/doeditgg" onsubmit="return subcheck();" enctype="multipart/form-data">
+
+  <input type="hidden" name="id" value="{$vo.id}" />
+  <input type="hidden" name="zid" value="{$vo.zid}" />
+  <div id="tab_1">
+  <dl class="lineD"><dt>品类：</dt><dd><htmlA:input id="pinlei" value="{$vo.pinlei}" tip="*"/></dd></dl>
+
+  <dl class="lineD"><dt>次数：</dt><dd><htmlA:input id="cishu" value="{$vo.cishu}" tip="*"/></dd></dl>
+
+  <dl class="lineD"><dt>周期：</dt><dd><htmlA:input id="zhouqi" value="{$vo.zhouqi}" tip="*"/></dd></dl>
+  <dl class="lineD"><dt>规格：</dt><dd><htmlA:input id="guige" value="{$vo.guige}" tip="*"/></dd></dl>
+  <dl class="lineD"><dt>价格：</dt><dd><htmlA:input id="price" value="{$vo.price}" tip="*"/></dd></dl>
+  </div><!--tab1-->
+  
+  
+  <div class="page_btm">
+    <input type="submit" class="btn_b" value="确定" />
+  </div>
+  </form>
+</div>
+</div>
+<include file="Public:_footer" />

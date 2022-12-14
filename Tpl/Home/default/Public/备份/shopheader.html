@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/tfindex.css" />
+        <script type="text/javascript">
+            function jisuanFontsize(){
+                var winWidth;
+                if (window.innerWidth)
+                winWidth = window.innerWidth;
+                else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+                // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+                if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+                {
+                winWidth = document.documentElement.clientWidth;
+                }
+                if(winWidth<1300){
+                    winWidth=1300
+                }
+                if(winWidth>1920){
+                    winWidth=1920
+                }
+                document.getElementsByTagName('html')[0].style="font-size: calc("+winWidth+"px / 1920 * 100);"
+            }
+            jisuanFontsize();
+            window.onresize = function(){
+                jisuanFontsize()
+            }
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <div class="tfggHeaderBox">
+            <div class="tfggHeaderBoxMain">
+                <img src="__PUBLIC__/shop/img/logo.png" class="tfggHeaderBoxMainLogo">
+                <div class="tfggHeaderBoxMainRight">
+                    <div class="tfggHeaderBoxMainRightMenuBox">
+                        <a href="" class="active">首页</a>
+                        <a href="">渔业养殖</a>
+                        <a href="">联合种植</a>
+                        <a href="">视频直播</a>
+                        <a href="">活动公告</a>
+                        <a href="">关于我们</a>
+                    </div>
+                    <div class="wechatAppBox">
+                        <div class="wechatAppBoxLi">
+                            微信
+                            <div class="tfErweimaBox">
+                                <img src="__PUBLIC__/shop/img/erwei-w.png">
+                                微信公众号
+                            </div>
+                        </div>
+                        <div class="wechatAppBoxLi">
+                            APP下载
+                            <div class="tfErweimaBox">
+                                <img src="__PUBLIC__/shop/img/erwei-app.png">
+                                APP下载
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tfggHeaderBoxMainRightImgBox">
+                        <a href=""><img src="__PUBLIC__/shop/img/tfUser.png"></a>
+                        <a href=""><img src="__PUBLIC__/shop/img/tfCart.png" class="tfgouwuche"></a>
+                    </div>
+                </div>
+            </div>
+        </div>

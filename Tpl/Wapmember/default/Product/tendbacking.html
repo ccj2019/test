@@ -1,0 +1,89 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>尊敬的{$glo.web_name}用户，以下是您在{$glo.web_name}的回收中的投资</p>
+    <p>您目前回收中的投资总额是：<span class="fontred">￥{$alltotal|default="0.00"}</span>，共<span class="fontred">{$num|default="0"}</span>笔投标,投资<span class="fontred">￥{$total|default="0"}</span>。</p>
+  </div>
+  <div class="m_page_right_box">
+    <table border="0" cellspacing="0" cellpadding="0" width="850" style=" border:none">
+      <tr>
+        <td>时间从：</td>
+        <td><input type="text" id="start_time" value="<php>if($search['start_time']){echo date('Y-m-d',$search['start_time']);}</php>" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\\'end_time\\\')||\\\'1998-10-01\\\'}'})"/></td>
+        <td>至：</td>
+        <td><input type="text" value="<php>if($search['end_time']){echo date('Y-m-d',$search['end_time']);}</php>" id="end_time" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({minDate:'#F{$dp.$D(\\\'start_time\\\')||\\\'1998-10-01\\\'}'})"/></td>
+        <td><a href="javascript:void(0)"  id="btn_search" onclick="sdetail2()" class="button_input" >查看</a></td>
+      </tr>
+    </table>
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款标号</td>
+        <td>借款标题</td>
+        <td>借入人</td>
+        <td>我的投资金额</td>
+        <td>已还本息</td>
+        <td>年化利率</td>
+        <td>总期数(还款期)</td>
+        <!-- <td>合同</td> -->
+      </tr>
+      <volist name="list" id="vo">
+        <tr>
+          <td>{$vo.borrow_id}</td>
+			<td><a href="{$vo.borrow_id|getInvestUrl=###}" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,10}</a></td>
+			<td>{$vo.user_name}</td>
+			<td>{$vo.investor_capital}</td>
+			<td>{$vo['receive_capital'] + $vo['receive_interest']}</td>
+			<td>{$vo.borrow_interest_rate}%</td>
+			<td>{$vo.total}({$vo.deadline|date='Y-m-d',###})(<a class="xiangxi" href="__URL__/tendoutdetail?id={$vo.id}">详情</a>)</td>
+			<!-- <td><a href="__APP__/member/agreement/downfile?id={$vo.id}">合同</a></td> -->
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-3" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){  
+  $(".xiangxi").click(function(){
+      var url = $(this).attr('href');
+      $("#xiangxi_li").find('a').attr('ajax_href',url);
+      $("#xiangxi_li").show();
+      $("#xiangxi_li").find('a').click();
+      return false;
+  });
+});
+function sdetail2(){
+	x = makevar(['start_time2','end_time2']);
+	$.ajax({
+		url: "__URL__/tendbacking",
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			//if(d) $("#"+id).html(d.html);
+			if(d) $("#chip-3").html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+		}
+	});
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

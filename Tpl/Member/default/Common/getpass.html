@@ -1,0 +1,243 @@
+<include file="default:Public:header" />
+<style type="text/css">
+  
+      body>div{
+          min-width: auto;
+      }
+  div#tcaptcha_transform{
+      width: 360px !important;
+      
+  }
+      .tcaptcha-transform{
+          width:360px !important;
+          background: none !important;
+          border:none !important;
+      }
+        #tcaptcha_transform{
+          width:360px !important;
+          background: none !important;
+          border:none !important;
+      }
+</style>
+<!--内容-->
+<div class="l-omg1">
+    <div class="l-mlogin1">
+        <div class="l-mlg1">
+            <div class="shiming">
+                找回密码
+            </div>
+            <div class="l-lebox clearfix">
+                <div class="l-le">
+                    <img src="__PUBLIC__/web/img/yindao/28.jpg" />
+                </div>
+                <div class="l-le bg">
+                    <form>
+                        <div>
+                            <div class="inp-box">
+                                <span><img src="__PUBLIC__/web/img/yindao/mima-5.png"/></span>
+                                <input type="password" name="pass" id="pass" placeholder="请输入新密码" />
+                            </div>
+                            <div class="inp-box">
+                                <span><img src="__PUBLIC__/web/img/yindao/mima-5.png"/></span>
+                                <input type="password" name="repass" id="repass" placeholder="请确认新密码" />
+                                <p class="p1">密码长度为6~16位数字和字母组合</p>
+                            </div>
+                            <div class="inp-box">
+                                <span><img src="__PUBLIC__/web/img/yindao/shouji-5.png"/></span>
+                                <input type="text" name="phone" id="phone" placeholder="请输入手机号" />
+                            </div>
+							       <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+ 
+                            <div class="clearfix">
+                                <div class="inp-box yz">
+                                    <span><img src="__PUBLIC__/web/img/yindao/anquan.png"/></span>
+                                    <input type="text" name="yzm" id="yzm" placeholder="请输入验证码" />
+
+                                </div>
+                                <div class="yanz-btn">
+                                    <a href="javascript:void(0);" id="TencentCaptcha"  data-appid="2024559842"  data-cbfn="callback"style="color: #fff">获取验证码</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="queren-btn" style="margin-top: 115px">
+                            <a href="javascript:void(0);" onclick="tijiao()" style="color: #fff">修改密码</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//settime2018()
+//settime2018();
+///onclick="send()" 
+    	var vazvcode;
+		    var time=60;
+		var countdown=60; 
+            window.callback = function(res){ 
+              res=res; 
+                if(res.ret === 0){ 
+                     
+			 $.ajax({
+
+				 type: "POST", 
+				 url: "/member/Common/curl", 
+				 data: {ticket:res.ticket, randstr:res.randstr}, 
+				 dataType: "json", 
+				 success: function(data){ 
+						  console.log(data);
+						  vazvcode=1;    
+time=60;							  
+						settime2018();
+									  //  vazvcodedata=data
+						/*  
+							var dataz= $.parseJSON(data );
+							if(dataz.err_msg=="ok"){
+							//   zmembersuser()
+								// vazvcode=1;      
+							}
+						*/ 	 
+				 }, 
+				 error: function (XMLHttpRequest, textStatus, errorThrown) { 
+					if(XMLHttpRequest.status==301){
+					vazvcode=1; 
+	time=60;					
+						settime2018();
+					}
+				 
+　　 //              $("#p_test").innerHTML = "there is something wrong!";
+ 　            	    /*alert(XMLHttpRequest.status); 
+　　                alert(XMLHttpRequest.readyState); 
+　　               alert(textStatus);    */      
+		　　}    		  //    console.log(data);
+				
+			 }); 
+                }
+            }
+var mbTest = /^1[0-9]{10}$/;
+var closeAction = function (){
+  window.location.href="__APP__/index";
+}
+var apppath = "__APP__";
+    
+     
+                
+                 
+                var timer=null;
+function settime2018(){
+
+             clearInterval(timer);//这句话至关重要
+          
+             var that=$("#TencentCaptcha");//习惯       
+               
+                    timer=setInterval(function(){
+                        //console.log(time);
+                        if(time<=0){ 
+                            that.text("点击重新发送"); 
+						
+							return false;
+							
+                        }else   if(time==60){  
+							send()
+                            that.text("剩余时间"+(time)+"秒");
+                            time--;
+                        }else {  
+                            that.text("剩余时间"+(time)+"秒");
+                            time--;
+                        }
+                    },1000);
+              
+           
+ }
+function send(){
+				  
+      var phone = $('#phone').val();
+      if(phone == ''){
+        layer.msg("手机号不能为空");
+		  time = 0; 
+        return false;
+      }else if(!phone.match(mbTest)){
+        layer.msg("手机号不正确");
+		  time = 0; 
+        return false;
+      }else{
+	     
+            
+        $.ajax({
+          url: "__URL__/ckphone/",
+          type: "post",
+          dataType: "json",
+          data: {"phone":phone},
+          success: function(data) {
+		   console.log(10000);
+            if (data.status == '1') {
+              layer.msg("手机号不存在");
+			    time = 0; 
+              return false;
+            }else if(data.status == 'y') {
+			  //countdown = 0; 
+              layer.alert(data.info,1,!1);
+              return false;
+            }else{
+			  time = 0; 
+              layer.alert(data.info);
+              return false;
+            }
+          }
+        });
+	 
+	  } 
+}
+
+  
+function tijiao(){
+    var phone = $('#phone').val();
+    var yzm = $('#yzm').val();
+    var pass1 = $('#pass').val();
+    var pass2 = $('#repass').val();
+    if ($.trim(pass1) == '' || pass1.length<6 || pass1.length>8) {
+          layer.msg("请输入新密码,且新密码长度为6~8位数字和字母组合")
+          return false;
+    }
+    if ($.trim(pass2) != $.trim(pass1)) {
+          layer.msg("新密码与重复密码必须相同")
+          return;
+    }
+  if(phone == ''){
+    layer.msg("手机号不能为空");
+    return false;
+  }else if(!phone.match(mbTest)){
+    layer.msg("手机号不正确");
+    return false;
+  }else if(yzm == ''){
+    layer.msg("验证码不能为空");
+    return false;
+  }else if(yzm == ''){
+    layer.msg("验证码不能为空");
+    return false;
+  }else if(yzm == ''){
+    layer.msg("验证码不能为空");
+    return false;
+  }else{
+    $.ajax({
+      url: "__URL__/ckphonecode/",
+      type: "post",
+      dataType: "json",
+      data: {"phone":phone,"yzm":yzm,"pass":pass1},
+      success: function(data) {
+        if (data.status == 'f') {
+          layer.alert(data.info);
+          return false;
+        }else{
+            layer.msg(data.info,{shift: -1},function(){
+                window.location.href="__APP__/member/common/login";
+            });
+        }
+      }
+    });
+  }
+}   
+</script>
+
+<include file="default:Public:footer" group="Home" />

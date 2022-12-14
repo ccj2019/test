@@ -1,0 +1,164 @@
+
+<link rel="stylesheet" type="text/css" href="/Public/cpublic/css/style.css"/>
+<script type="text/javascript" src="/Public/cpublic/js/index.js"></script>
+<script type="text/javascript" src="/Public/cpublic/js/jquery-1.7.2.min.js"></script>
+
+ <link rel="stylesheet" href="/Public/cpublic/css/swiper.min.css">
+ <script src="/Public/cpublic/js/swiper.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+<style type="text/css">
+    body{
+       background-color:#f7f7f7;
+    }
+</style>     
+<div class="xm_top">
+    <a href="javascript:window.history.back();" class="c_fanhui"><返回</a>
+    <span>项目浏览</span>
+    <if condition="$UID gt '0'">
+
+    <a href="/Wapmember" class="c_geren"><img src="/Public/cpublic/image/1_03.png"></a>
+
+     <else />
+
+            
+
+<a href="/Wapmember/common/login.html"  class="c_geren">
+<span class="xmdl">登录</span></a>
+
+        
+     </if>
+
+</div>
+<div class="xm_kdh"></div>
+
+<div class="xm_dh">
+    <ul>
+        <li><a href="/Wap/invest/index.html?borrow_type=0"  <if condition="0 eq $borrow_type">  class="hover" </if> >全部项目</a></li>
+        <volist name=":getProCat()" id="vo" key="i">
+            <li  <if condition='$i eq 3'> style="border:none;"</if>><a href=" /Wap/invest/index.html?borrow_type={$vo.id}" <if condition="$vo.id eq $borrow_type">  class="hover" </if>>{$vo.type_name}</a></li>
+      
+        </volist>
+    </ul>
+
+
+
+
+    <div class="clear"></div>
+</div>
+<div class="xm_banner">
+    <div class="xbaner">
+      <div class="w-probro-bg">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                <volist name=":get_ad(32)" id='voa'  >
+                                    <div class="swiper-slide"><a href="{$voa.url}">   <img src="/{$voa.img}"/></a></div>
+                                </volist>
+                                </div>
+
+            </div>
+
+        </div>
+</div>
+
+    
+    <div class="xm_ss">
+        <input type="text" name="ss"  id="key" class="ss_text" placeholder="搜索您感兴趣的项目">
+        
+        <a href="javascript:void(0);" class="btn"> <img src="/Public/cpublic/image/1_07.png"> </a>
+    </div>
+</div>
+<script type="text/javascript">
+ // var mySwiper = new Swiper ('.w-probro-bg .swiper-container', {
+ //    //loop: true, // 循环模式选项
+ //    // 如果需要分页器
+ //    pagination: {
+ //      el: '.w-probro-bg .swiper-pagination'
+ //    },
+ //     autoplay: {
+ //    delay: 3000000000,//1秒切换一次
+ //  },
+ //    // 如果需要前进后退按钮
+ //    navigation: {
+ //      nextEl: '.w-probro-bg .swiper-button-next',
+ //      prevEl: '.w-probro-bg .swiper-button-prev',
+ //    },
+ //  })  
+
+ //    $(".btn").on("click", function(){
+ //        var val =  $("#key").val();
+ //        window.location.href="/Wap/invest/index.html?borrow_type={$borrow_type|default=0}&key="+val;  
+
+ //    });
+ //    $(".borrow_type").removeClass("w-porpertop-active");  
+ //    $(".borrow_type{$borrow_type|default=0}").addClass("w-porpertop-active");      
+
+         
+
+</script>
+
+
+<div class="xm_list">
+<ul>
+<volist name="list" id="vb" key="i">
+    <a href="/wap/invest/detail/id/{$vb['id']}.html">
+    <li <if condition="$i eq 1"> style="border-top:none;"</if> >
+        <?php $borrow_img=explode(',',$vb['content_img']); ?>  
+        <img class="xm_l_img" src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}"/>
+
+        <div class="xm_right">
+            <p class="xm_title">{$vb.borrow_name|cnsubstr=###,8}</p>
+            
+            <p class="xm_s1"><span class="xc_left">目标：<span class="xm_s1_p">¥{$vb.borrow_money|getMoneyFormt=###}</span> </span>
+
+                <if condition="$vb.start_time gt time()">
+                                    <span class="xm_s1_s xm_stauts1">预热中</span>
+                                <elseif condition="$vb.borrow_status eq 2" />
+                                    <span class="xm_s1_s xm_stauts2">众筹中</span>
+                                <elseif condition="$vb.borrow_status gt 2 && $vb.borrow_status lt 7" />
+                                    <span class="xm_s1_s xm_stauts3">待收益</span>
+                                <elseif condition="$vb.borrow_status eq 7" />
+                                    <span class="xm_s1_s xm_stauts4">已收益</span>
+
+                </if>
+            </p>
+            
+            <div class="kdu">
+                    <present name="vb.bespeak_progress">
+                    <if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                        <div class="kdu1" style="width: {$vb.bespeak_progress|floatval|min=100}%"></div>
+                    </if>
+                    </present>
+                    <div class="kdu2" style="width: {$vb.progress|floatval|min=100}%"></div>
+            </div>
+            <p <if condition="$vb.start_time gt time()"> class="xm_yr" <else/>  class="xm_zt" </if> >
+                <if condition="$vb.start_time gt time()"> 距离项目开始:<span class="cui-timer" data-config = '["endtime":"{$vb.start_time|date="Y-m-d H:i:s",###}","msec":false]'> </span> 
+                    <else/>  
+                        <span class="dc1">达成率：<span class="dc">{$vb.progress|floatval}%</span></span>
+                        <span class="dc2">剩余时间：<if condition="$vb.borrow_status eq 2"> {:getLeftTimes( $vb['start_time'] + ($vb['collect_day']*60*60*24))}<else/>0天 </if>
+                    </if>
+            </p>
+        </div>
+        <div class="clear"></div>
+    </li></a>
+</volist>
+
+</ul>    
+</div>
+<div class="xpage">
+      {$page}             
+</div>
+                       
+<div style="height:1.5rem;"></div>
+
+
+
+<script>
+ $(function(){
+        $('.cui-timer').Cuitimer();
+});
+
+$zindex=0;
+
+</script>
+
+ 

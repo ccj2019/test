@@ -1,0 +1,200 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a >收货地址</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>收货地址</span></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx1">
+					<!--tab地址选择-->
+                   	<div class="DZtab clearfix">
+                   		<volist name="va" id="v">
+	                   	<div <if condition="$v.default eq 1">class="Diz on"<else/>class="Diz"</if>>
+	                   		<p class="p2">	<img src="__PUBLIC__/web/img/huiyuan/shouhuo/mingzi.png"/>
+	                   		  	{$v.name}
+	                   		</p>
+	                   		<p class="p1">	<img src="__PUBLIC__/web/img/huiyuan/shouhuo/zihzi.png"/>
+	                   		  	{$v.province} {$v.city} {$v.district} {$v.address}
+	                   		</p>
+	                   		<p><img src="__PUBLIC__/web/img/huiyuan/shouhuo/Phone.png"/>
+	                   		 	<span>	{$v.main_phone|hidecard=###,3} </span>  
+	                   		 	<a class="edit" href="{:U('memberaddress/save',array('id'=>$v['id'],'order_id'=>$order_id))}" >修改</a>
+	                   		 	<a class="edit" href="{:U('memberaddress/delete',array('id'=>$v['id']))}" >删除</a>
+	                   		</p>
+	                   		<div class="dws" onclick="isdefault({$v.id})">
+	                   		</div>
+	                   	</div>
+	                  	</volist>
+                   	</div>
+                   	<!--增加-->
+                   	<div class="newSHzdbox">
+                   	   	<div class="newSHzd">
+                   	   		新增收货地址
+                   	   	</div>
+                   	   	<div>		
+                   	    <p>
+                   	    	<span>收货人： </span>
+                   	    	<input type="text" name="name" id="name" value="" placeholder="收货人姓名"/>
+                   	    </p>
+                   	     <p>
+                   	    	<span>地址： </span>
+                   	    	<select name="province" id="province">
+								<option value="0">省/直辖市 </option>
+							</select>
+							<select name="city" id="city">
+								<option value="0">市</option>
+							</select>
+                   	    	<select name="district" id="district" >
+								<option value="0">区/县</option>
+							</select>
+                   	    </p>
+                   	    <p class="p1">	<input type="text" name="address" id="address" style="width: 370px;"  value=""  placeholder="详细地址"/></p>
+                   	    <p>
+                   	    	<span>手机号：</span> <input type="text" id="phone" name="main_phone" value="" placeholder="手机号"/>
+                   	    </p>
+                   	    <p class="def">
+                   	    	<span>默认地址：</span> 
+                   	    	<label><input type="radio" id="default" name="default" value="0" />否</label>
+                   	    	<label><input type="radio" id="default" name="default" value="1" checked="checked" />是</label>
+                   	    </p>
+                   	   </div>
+                   	   <!--保存btn-->
+                   	   <div class="baocunBtn">	
+               	   	        <div class="bcBtn">
+               	   	        	<a id="btn_set" style="color: #fff;">保存收货地址</a>
+               	   	        </div>
+                   	   </div>
+                   </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+.def input{
+    margin-right: 10px;
+    margin-left: 10px;
+    height: auto;
+}
+.edit{
+	padding: 2px 10px;
+    border: 1px solid #DCDCDC;
+    border-radius: 4px;
+    float: right;
+}
+</style>
+<script type="text/javascript">
+	function isdefault(id){
+		var order_id = {$order_id};
+		$.ajax({
+			url: "__URL__/save_do",
+			type: "post",
+			dataType: "json",
+			data: {
+				default:1,id:id
+			},
+			success: function(d) {
+				if (d.status == 1) {
+					if(order_id == 0){
+	                    layer.msg('恭喜，修改成功',{shift: -1}, function(){
+	                        window.location.reload();
+	                    });
+					}else{
+						window.location.href='/Shop/shop_is_order?id='+order_id+'&sun=1';
+					}
+				}else if (d.status == 0) {
+					layer.msg(d.message);
+				}
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	$("#btn_set").click(function() {
+		var order_id = {$order_id};
+		if ($("#name").val()=="") {
+			layer.msg('请输入收货人姓名！');
+			return false;
+		}
+		if ($("#province").val()=="") {
+			layer.msg('请选择省份！');
+			return false;
+		}
+		if ($("#city").val()=="") {
+			layer.msg('请选择市！');
+			return false;
+		}
+		if ($("#district").val()=="") {
+			layer.msg('请选择区/县！');
+			return false;
+		}
+		if ($("#address").val()=="") {
+			layer.msg('请输入详细地址');
+			return false;
+		}
+		if ($("#phone").val()=="") {
+			layer.msg('请输入手机号');
+			return false;
+		}
+		 
+	 
+		  //var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+            var p1 = /^1\d{10}$/;
+		 if(!p1.test($("#phone").val())) {		  
+	        layer.msg('请填写正确电话号码!');		  
+    		//	layer.msg('请输入手机号');
+			return false;
+    	}
+ 	 
+// var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/'; 
+// if(!myreg.test($("#phone").val())) 
+// { 
+//  layer.msg('请填写正确电话号码!!');		  
+//     return false; 
+// } 
+ 
+		
+		var de = $("input[name='default']:checked").val();
+		$.ajax({
+			url: "__URL__/add_do",
+			type: "post",
+			dataType: "json",
+			data: {
+				name: $("#name").val(), province: $("#province").find("option:selected").text(),
+				city: $("#city").find("option:selected").text(),district: $("#district").find("option:selected").text(),
+				address: $("#address").val(), main_phone: $("#phone").val(),default:de
+			},
+			success: function(d) {
+				if (d.status == 1) {
+					if(order_id == 0){
+	                    layer.msg('恭喜，添加收货地址成功',{shift: -1}, function(){
+	                        window.location.reload();
+	                    });
+					}else{
+						window.location.href='/Shop/shop_is_order?id='+order_id+'&sun=1';
+					}
+				}else if (d.status == 0) {
+					layer.msg(d.message);
+				}
+			}
+		});
+
+	});
+</script>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+<script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

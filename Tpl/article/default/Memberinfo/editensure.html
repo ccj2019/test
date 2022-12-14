@@ -1,0 +1,108 @@
+{__NOLAYOUT__}<tagLib name="htmlA" />
+<table style="width: 850px; float: left;padding: 0px; border-collapse: collapse; text-align: left;" id="formTb" cellpadding="0" cellspacing="0">
+	<tbody><tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				第一联保人：
+			</td>
+			<td class="tdContent" width="500">
+				<htmlA:input id="ensuer1_name" value="{$vo.ensuer1_name}" class="text_input"/>
+			</td>
+			<td id="dv_EnsuerFirst" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="spec87" width="120">
+				关系：
+			</td>
+			<td class="tdContent">
+			<htmlA:radio id="ensuer1_re" default="家庭成员|家庭成员,朋友|朋友,商业伙伴|商业伙伴" value="key|vo.ensuer1_re" />
+			</td>
+			<td id="dv_firstrelation" class="tdTip">
+			</td>
+		</tr>
+		<tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				手机号码：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="ensuer1_tel" value="{$vo.ensuer1_tel}" class="text_input"/>
+			</td>
+			<td id="dv_EnsuerFirstrTel" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td align="right" class="spec87" width="120">
+				第二联保人：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="ensuer2_name" value="{$vo.ensuer2_name}" class="text_input"/>
+			</td>
+			<td id="dv_EnsuerSecond" class="tdTip">
+			</td>
+		</tr>
+		<tr class="trBg">
+			<td align="right" class="spec87" width="120">
+				关系：
+			</td>
+			<td class="tdContent">
+			<htmlA:radio id="ensuer2_re" default="家庭成员|家庭成员,朋友|朋友,商业伙伴|商业伙伴" value="key|vo.ensuer2_re" />
+			</td>
+			<td id="dv_secondrelation" class="tdTip">
+			</td>
+		</tr>
+		<tr style=" border-bottom:1px solid #dedede;">
+			<td align="right" class="spec87" width="120">
+				手机号码：
+			</td>
+			<td class="tdContent">
+				<htmlA:input id="ensuer2_tel" value="{$vo.ensuer2_tel}" class="text_input"/>
+			</td>
+			<td id="dv_EnsuerSecondTel" class="tdTip">
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;
+				
+			</td>
+			<td style="height: 50px;padding-left: 10px;" class="tdContent">
+                  <a href="javascript:void(0)" class="button_input" id="btn_set" onclick="editensure()">保存</a>
+			</td>
+			<td id="xx" class="tdTip">
+			</td>
+		</tr>
+</tbody></table>
+<script type="text/javascript">
+function editensure(){
+	p = makevar(['ensuer1_name','ensuer1_tel','ensuer1_re','ensuer2_name','ensuer2_tel','ensuer2_re']);
+	p['_tps'] = "post";
+	var mxs = true;
+	$.each(p,function(i){
+		if(typeof p[i] == "undefined"){
+			//mxs=false;
+			//layer.msg("所有项目都不能为空")
+		}
+	});
+	if(mxs===false){
+	 // layer.msg("所有项目都不能为空")
+	 // return;
+	}
+	//$.jBox.tip('提交中......','tip');
+	$.ajax({
+		url: "__URL__/editensure/",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert(d.message, 1,!1);
+					$('#xtab').find('a[data=info8]').click();
+				}
+				else layer.msg(d.message);
+			}
+		}
+	});
+}
+</script>

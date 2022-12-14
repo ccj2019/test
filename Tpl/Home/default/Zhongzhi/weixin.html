@@ -1,0 +1,83 @@
+<include file="default:Public:headern" />
+
+<div class="gwc">
+    <p class="gwc_1">订单付款</p>
+    <div class="gwc_list">
+        <div class="gwc_dz">
+            <div class="sh_xx">商品信息 </div>
+            <ul>
+
+    <li><span>{$data.name}&nbsp;&nbsp;{$vo.money} </span></li>
+
+
+            </ul>   <div class="clear"></div>
+           
+
+         </div>
+        <div class="clear"></div>
+        <div class="gwc_topd">
+            微信扫码支付
+        </div>
+        <div class="clear"></div>
+    
+    <div class="zz_order">
+       
+ 
+    <img src="https://{$_SERVER['SERVER_NAME']}/phpsdk/example/qrcode.php?data={$url2}" style="width:150px;height:150px; margin:50px auto;"/>
+
+
+       </div>
+        
+        
+
+  
+  
+    </div>
+    
+    
+  
+ 
+  
+</div>
+
+
+<script type="text/javascript">
+function donum(num){
+    var id=$("#id").val();
+    $.ajax({
+    url: "__URL__/do_car_num",
+    type: "post",
+    dataType: "json",
+    data: {"num":num,"id":id},
+    success: function(d) {
+       $("#dd_zongjia").html("￥"+d);
+       $("#dd_zongjias").html("￥"+d);
+    }
+  }); 
+}
+
+$(function(){
+
+    /*订单数量*/
+    $(".kucun #jia").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        $(".kucun #shuliang").val(Number(b)+1)
+        donum(Number(b)+1);
+    })
+    
+    $(".kucun #jian").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        if(b>1){
+            $(".kucun #shuliang").val(Number(b)-1);
+            donum(Number(b)-1);
+        }
+    })
+
+    $("#zf_btn").click(function(){
+        $("#zz_order_from").submit();
+    })
+})
+
+</script>
+<!--底部-->
+<include file="default:Public:footern" />

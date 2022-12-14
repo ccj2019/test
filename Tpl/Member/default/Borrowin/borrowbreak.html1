@@ -1,0 +1,101 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>已逾期还未还的借款</p>
+  </div>
+  <div class="m_page_right_box">
+    <table border="0" cellspacing="0" cellpadding="0" width="850" style=" border:none">
+      <tr>
+        <td>时间从：</td>
+        <td><input type="text" id="start_time" value="<php>if($search['start_time']){echo date('Y-m-d',$search['start_time']);}</php>" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\\'end_time\\\')||\\\'2020-10-01\\\'}',startDate:'%y-%M-%d'})"/></td>
+        <td>至：</td>
+        <td><input type="text" value="<php>if($search['end_time']){echo date('Y-m-d',$search['end_time']);}</php>" id="end_time" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({minDate:'#F{$dp.$D(\\\'start_time\\\')||\\\'2020-10-01\\\'}',startDate:'%y-%M-%d'})"/></td>
+        <td><a href="javascript:void(0)"  id="btn_search" onclick="sdetail1()" class="button_input" >查看</a></td>
+      </tr>
+    </table>
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款标题</td>
+        <td>待还本金</td>
+        <td>待还利息</td>
+        <td>待付罚息</td>
+        <td>待付催收费</td>
+        <td>待付总金额</td>
+        <td>应还日期</td>
+        <td>当前/总(期)</td>
+        <td>逾期天数</td>
+        <td>还款</td>
+      </tr>
+      <volist name="list" id="vo">
+        <tr>
+          <td><a href="#" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,8}</a></td>
+		<td>{$vo.capital}</td>
+		<td>{$vo.interest}</td>
+		<td>{$vo.expired_money|default=0.00}</td>
+		<td>{$vo.call_fee|default=0.00}</td>
+		<td>{$vo.allneed}</td>
+		<td>{$vo.deadline|date="Y-m-d",###}</td>
+		<td>{$vo.sort_order}/{$vo.total}</td>
+		<td>{$vo.breakday}</td>
+		<td><a href="javascript:;" onclick="repayment({$vo.borrow_id},{$vo.sort_order})">还款</a></td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-4" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+function repayment(bid,sort_order){
+	x = {"bid":bid,"sort_order":sort_order};
+	//$.jBox.tip("还款中......",'loading');
+	$.ajax({
+		url: "__URL__/doexpired",
+		data: x,
+		timeout: 15000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){ layer.alert('还款成功', 1,!1);window.location.reload();}
+				else {layer.msg(d.message);}
+			}
+		}
+	});
+}
+
+
+function sdetail1(){
+	x = makevar(['start_time1','end_time1']);
+	$.ajax({
+		url: "__URL__/borrowbreak",
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d) $("#chip-4").html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+		}
+	});
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<style>
+		/*投资积分*/
+.l-tzjf div:nth-child(1){
+	float: left;
+	width: 40%;
+}
+.l-tzjf div:nth-child(2){
+	float: left;
+	width: 55%;
+	padding-left: .2rem;
+}
+.l-tzjf{
+	padding: .2rem;
+	border-bottom: 5px solid #EEF1F8;
+}
+
+		.p1{
+			font-size: .4rem;
+    padding: .1rem 0;
+		}
+	.p2{
+		font-size: .2rem;
+    color: #797777;
+	}
+	.l-fh{
+			border-bottom: 5px solid #EEF1F8;
+	}
+	.p1 img{
+		width: .4rem;
+		margin-right: .3rem;
+		margin-bottom: -0.05rem;
+		
+	}
+	.p3{
+		font-size: .2rem;
+		color: #797777;
+		padding: .2rem 0;
+	}
+	
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="<?php echo $_SERVER['HTTP_REFERER'] ;?>" class="l-fanhui on">&lt;返回</a><span>获取积分</span>
+			<div class="l-fanhui1">
+				<!--<a href="##"></a>-->
+			</div>
+		</div>
+		<div class="l-tzjf clearfix">
+			<div  >
+				<img src="/Public/wap/img/shouye/tu3.png" alt="" style="width: 100%;" />
+			</div>
+			<div style="width: 55%;" >
+                <p class="p1">投资项目</p>
+				<p class="p2">每投资100元获赠1积分，所获
+积分在投资项目结束后到账</p>	
+			</div>
+			
+		</div>
+		<div class="l-tzjf clearfix">	
+		   <p class="p1"><img src="/Public/wap/img/haoyou.png"/>邀请好友</p>
+		   <p class="p3">每成功邀请一位好友您将获得5积分，好友首次投资后您
+可再获得100积分</p>
+		</div>
+		<div class="l-tzjf clearfix"  onClick="location.href='/Wapmember/index/sign'">	
+			
+		   <p class="p1"><img src="/Public/wap/img/qiandao1.png"/>签到领积分</p>
+		   <p class="p3">每天坚持签到可获得相应积分</p>
+		</div>
+            <div class="l-qurena">
+		                  <a href="/wap">返回主页</a>  	
+		             </div>
+	</body>
+	<script>
+	</script>
+
+</html>

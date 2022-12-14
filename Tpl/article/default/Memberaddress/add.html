@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/select-ceng.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery.area.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<script src="/Public/wap/js/citylist.js"></script>
+
+	<style>
+		li>input {
+			width: 88%;
+			padding-left: .2rem;
+			border: 0;
+			color: #313131;
+			font-size: .3rem;
+		}
+
+		input::-webkit-input-placeholder {
+			/* WebKit browsers */
+			color: #C4C4C4;
+		}
+
+		li span img {
+			height: .4rem;
+		}
+
+		.l-leir1 input {
+			border: 0;
+			background-color: rgba(255, 255, 255, 0);
+			outline: none;
+			color: #313131;
+			height: .42rem;
+			font-size: .3rem;
+		}
+
+		.l-shiming1 li {
+			padding: .3rem 0;
+			color: #313131;
+			height: 1rem;
+			border-bottom: 2px solid #EFF3F9;
+		}
+
+		.l-moren+label {
+			width: 0.4rem;
+			height: 0.3rem;
+			display: inline-block;
+			/*border-radius: 50%;*/
+			background: url(img/l-duih1.png)no-repeat left center;
+			background-size: 100% 100%;
+			margin-top: 0.05rem;
+		}
+
+		.l-moren:checked+label {
+			/*border-radius: 50%;*/
+			background: url(img/xuanzhong.png)no-repeat left center;
+			background-size: 100% 100%;
+		}
+
+		.l-leir {
+			width: 62%;
+		}
+
+		.l-leir a {
+			color: #313131;
+			font-size: .3rem;
+			width: 95%;
+			display: block;
+			float: left;
+			display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp:1;
+overflow: hidden;
+		}
+		.area-list li{
+		    margin:  0;
+		    padding: 0.1rem 0;
+		    height: 0.4rem;
+		    line-height: 0.4rem;
+		    text-align: center;
+
+		}
+		.express-area-box .back{
+		    width: 0.4rem;
+		    display: block;
+		    height: 0.4rem;
+		}
+		.l-fh.l-on{
+			border-bottom: .1rem solid #EEF1F8;
+		}
+	</style>
+
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>添加收货地址</span>
+			<div class="l-fanhui1">
+						 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a> <!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+		<div class="l-loginbox1">
+			<div>
+
+				<form action="/Wapmember/memberaddress/add_do"  id="form1" method="post" class="clearfix l-shiming1">
+					<ul>
+
+						<li>
+							<div class="l-leix fl">
+								收货人
+							</div>
+							<!--
+
+								id
+uid
+name
+main_phone
+secondary_phone
+address
+post_code
+address_type
+province
+city
+district
+default
+
+
+							-->
+							<div class="l-leir1 fl">
+								<input type="text" id="name"  name="name" value="{$va.name}"/>
+
+							</div>
+						</li>
+
+						<li>
+							<div class="l-leix fl">
+								手机号
+							</div>
+							<div class="l-leir1 fl">
+								<input type="number" id="main_phone" name="main_phone" value="{$va.main_phone}" />
+
+							</div>
+							<!--<span class="l-fr">
+                                   <img src="/public/wap/img/l-yjt.png"/>
+                                 </span>-->
+						</li>
+
+						<li>
+						  <div class="addess_sub">
+						<label  style="color: #747474;font-size: .34rem;
+
+    padding: 0 .2rem;
+    width: 25%;
+">收货地址</label>
+							<input id="expressArea" type="text" name="address" placeholder="请选择" readonly/ style="border:none;">
+							<span class="mui-icon mui-icon-arrowdown"></span>
+							<!--选择地区弹层-->
+							<section id="areaLayer" class="express-area-box">
+								<header>
+									<h3>选择地区</h3>
+									<a id="backUp" class="back" href="javascript:void(0)" title="返回" style="width:0.2rem;height0.2rem;display:inline-block;height:0.25rem;top:0.1rem"></a>
+									<a id="closeArea" class="close" href="javascript:void(0)" title="关闭" style="width:0.2rem;height0.2rem;display:inline-block;top:0.1rem"></a>
+								</header>
+								<article id="areaBox">
+									<ul id="areaList" class="area-list"></ul>
+								</article>
+							</section>
+				</div>
+
+						</li>
+						<li>
+							<input type="text" id="address" name="address" value="{$va.address}" placeholder="详细地址：如道路、门牌号、小区" />
+
+						</li>
+						<li>
+							<div class="l-leix1 fl">
+
+								<span>
+
+		   <input type="checkbox" name="default" value="1" style="margin-left: 5px;" checked />
+		   <label for="moren" class="l-labdui" ></label>
+           <label for="moren">设为默认地址</label>
+		</span>
+
+							</div>
+						</li>
+
+					</ul>
+					<div class="l-qurena " id="sutr">
+						<a  >保存</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--弹出-->
+		<!--省市-->
+		<div id="l-citiy">
+
+			<van-actionsheet v-model="show">
+				<van-area :area-list="areaList" columns-num="3" @confirm="confirm" @cancel="show=!show" />
+			</van-actionsheet>
+
+		</div>
+		<!--弹出-->
+
+		<div class="l-dtc">
+			<div class="l-tanchubox">
+				<p>修改成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="/Public/wap/js/jquery.area.js"></script>
+		<script>
+		var selectAll = new Object;
+			$(function() {
+				var forSelect = $('.for-select');
+				for(var i = 0; i < forSelect.length; i++) {
+					var selOptions = $('.select-for-' + forSelect[i].name)[0].options;
+					var objName = forSelect[i].name;
+					eval('selectAll.' + objName + ' = new Array');
+					for(var o = 0; o < selOptions.length; o++) {
+						eval('selectAll.' + objName + '[o] = {"value":selOptions[o].value,"text":selOptions[o].innerText}');
+					}
+				}
+			forSelect.click(function() {
+					$("#areaMask").fadeIn();
+					$("#selectTitle").text($(this).attr('title'));
+					var listObj = eval('selectAll.' + $(this).attr('name'));
+					for(var i in listObj) {
+						$("#selectList").append("<li onClick='selectIntoBox(\"" + $(this).attr('name') + "\",\"" + listObj[i].text + "\")'>" + listObj[i].text + "</li>");
+					}
+					$("#selectCeng").animate({
+						"bottom": 0
+					});
+				});
+				$("#areaMask,#closeSelect").click(function() {
+					clockSelect();
+				});
+			function clockSelect() {
+				$("#areaMask").fadeOut();
+				$("#selectCeng").animate({
+					"bottom": "-100%"
+				});
+				$("#selectList").empty();
+				intProvince();
+			}
+			function selectIntoBox(name, value) {
+				$('.for-select[name="' + name + '"]').val(value);
+				clockSelect();
+			}
+	});
+</script>
+	<script>
+		//		地区
+		var lcitiy = new Vue({
+
+			data: {
+				areaList: citylist,
+				show: false
+
+			},
+			methods: {
+				confirm(item) {
+					this.show = false
+					let citytext = '';
+					for(let i in item) {
+						citytext += item[i].name + " "
+					}
+					console.log(item[0].name)
+					console.log(item[1].name)
+					console.log(citytext)
+
+
+//								id
+//uid
+//name
+//main_phone
+//secondary_phone
+//address
+//post_code
+//address_type
+//province
+//city
+//district
+//default
+
+
+
+					var str ="	<input type='hidden' name='province' value='"+item[0].name+"' />"
+					  str +="	<input type='hidden' name='city' value='"+item[1].name+"' />"
+					 str +="	<input type='hidden' name='district' value='"+item[2].name+"' />";
+					 $('#form1').append(str);
+					$('#selcity').text(citytext)
+				},
+
+			}
+		}).$mount('#l-citiy')
+
+		$(".getcity").click(function() {
+			lcitiy.show = true
+		})
+			$("#sutr").click(function() {
+					var phoneReg = /(^1\d{10}$)|(^09\d{8}$)/;
+				var phone = $.trim($("#main_phone").val().replace(/(^\s*)|(\s*$)/g, ""));
+				if($("#province").length < 1 || $("#province").val()=="" || $("#city").length < 1 ||$("#city").val()=="" || $("#district").length < 1 || $("#district").val()==""){
+                    			alert("地址未选择");
+                 		   	return false;
+                		}
+				var reg = new RegExp(/[(】)(【)(！)(？)(\ )(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\-)(\_)(\+)(\=)(\[)(\])(\{)(\})(\|)(\\)(\;)(\:)(\')(\")(\,)(\.)(\/)(\<)(\>)(\?)(\)]+/);
+						if(!reg.test($("#name").val())&&phoneReg.test(phone) && $("#address").val().replace(/(^\s*)|(\s*$)/g, "")!="" && $("#selcity").text() !="点击选取省市区县" ){
+					$("#form1").submit();
+				}else if($("#name").val().replace(/(^\s*)|(\s*$)/g, "")==""){
+					alert("收货人未填写")
+					return false;
+
+				}else if(!phoneReg.test(phone)){
+					alert("请填写正确手机号")
+							return false;
+				}else if($("#address").val().replace(/(^\s*)|(\s*$)/g, "")==""){
+					alert("详细地址未填写")
+							return false;
+				}else if($("#selcity").text() =="点击选取省市区县" ){
+					alert("地址未选择")
+							return false;
+
+				}else if(reg.test($("#name").val())){
+					alert("名字不合法")
+				}
+				else{
+					alert("未知原因")
+							return false;
+				}
+
+
+
+
+		})
+
+	</script>
+
+</html>

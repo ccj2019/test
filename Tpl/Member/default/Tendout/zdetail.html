@@ -1,0 +1,119 @@
+<include file="default:Public:mheader"/>
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+	.xmmc{
+		float: left;
+		line-height: 30px;
+		
+		min-width: 140px;
+		height: 30px;
+		font-size: 18px;
+		text-align: center;
+		background: #e1f5ff;
+	}
+	.xmmcbox{
+		padding: 20px 0;
+		width: 90%;
+		height: 30px;
+		margin: 0 auto;
+	}
+	.xmmcbox ul li{
+		padding-top: 20px;
+	}
+	.xmmcnr{
+		height: 30px;
+		line-height: 30px;
+		padding-left: 20px;
+		float: left;
+	}
+</style>
+
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>订单明细</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left"/>
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>订单明细</span></div>
+		</div>
+		<div class="tabv2box">
+
+			<div class="tabv2 show">
+			   <div class="xmmcbox">
+			   	<ul>
+			   		<li>
+					   	<div class="xmmc">商品名称</div>
+					   	<div class="xmmcnr">
+					   		{$goods.title}
+					   	</div>
+                    </li>
+                     <li>
+					   	<div class="xmmc">数量</div>
+					   	<div class="xmmcnr">
+					   		{$order.num}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">购买金额</div>
+					   	<div class="xmmcnr">
+					   		￥{$order.jine}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">收货人</div>
+					   	<div class="xmmcnr">
+					   		{$order.real_name}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">收货地址</div>
+					   	<div class="xmmcnr">
+					   		{$order.address}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">联系电话</div>
+					   	<div class="xmmcnr">
+					   		{$order.cell_phone}
+					   	</div>
+                    </li>
+                    <li>
+					   	<div class="xmmc">下单时间</div>
+					   	<div class="xmmcnr">
+					   		{$order.add_time|date="Y-m-d",###}
+					   	</div>
+                    </li>
+                    <if condition="$order.pay_time neq ''">
+                    <li>
+					   	<div class="xmmc">支付时间</div>
+					   	<div class="xmmcnr">
+					   		{$order.pay_time|date="Y-m-d",###}
+					   	</div>
+                    </li></if>
+				
+				<if condition="$order.status gt 1">
+                   	<li>
+					   	<div class="xmmc">快递</div>
+					   	<div class="xmmcnr">
+					   		{$order.yijian}
+					   	</div>
+                    </li>
+                  
+                 </if>
+
+			   	</ul>
+
+			   </div>
+			</div>
+           
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,44 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a href="__APP__/member/withdraw/withdrawlog">提现记录</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div><a href="__APP__/Member/withdraw/withdraw"><span>我要提现</span></a></div>
+			<div class="on"><a href="__APP__/member/withdraw/withdrawlog"><span>提现记录</span></a></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+					<div class="tou1 hb1">
+						<span>序号</span>
+						<span>提现金额（元）</span>
+						<span>提现时间</span>
+						<span>状态</span>
+					</div>
+					<volist name="list" id="vo">
+					<div class="bgxmlis hb1">
+						<span>{$vo.id}</span>
+						<span>{$vo.withdraw_money}</span>
+						<span>{$vo.add_time|date="Y-m-d H:i",###}</span>
+						<span>{$vo.status}</span>
+					</div>
+					</volist>
+				</div>
+				<!--分页-->
+				<div class="aFye clearfix">
+					<p>
+						{$pagebar}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="default:Public:footer" />

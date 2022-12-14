@@ -1,0 +1,293 @@
+<include file="Public:header"/>
+<style type="text/css">
+	.swiper-container {
+    width: 1200px;
+    height: 450px;
+}  
+.box.l-pdd img{
+	width: 1200px;
+	height: 450px;
+}
+</style>
+<style type="text/css">
+    /*进度条样式*/
+    .kdu {
+        position: relative;
+        height: 8px;
+        background: #ececec;
+        border-radius: 30px;
+        margin: 10px;
+    }
+    .kdu1{
+        float: left;
+        position: absolute;
+        height: 8px;
+        background: linear-gradient(to right, 	#ff8c00,#ff6421);
+        border-radius: 30px;
+    }
+    .kdu2{
+        float: left;
+        position: absolute;
+        height: 8px;
+        background: linear-gradient(to right, #06a5e9,#74fded);
+        border-radius: 30px;
+    }
+</style>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+<div class="box l-pdd">		
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	    <!--    <div class="swiper-slide">
+	        		<img src="{$listProduct_top[0][borrow_img]}"/>
+	        </div>
+	        <div class="swiper-slide">
+	        		<img src="{$listProduct_top[1][borrow_img]}"/>
+	        </div>
+	        <div class="swiper-slide">
+	        		<img src="{$listProduct_top[2][borrow_img]}"/>
+	        </div>-->
+			
+				  <volist name=":get_ad(37)" id='voa'>   <!-- offset="0"length='1'-->
+				  <div class="swiper-slide">
+	        	<a href="{$voa.url}">	<img src="/{$voa.img}"/></a>
+					</div>
+                     
+	        	</volist> 
+	    </div>
+	    <!-- 如果需要分页器 -->
+	    <div class="swiper-pagination"></div>
+	    
+	    <!-- 如果需要导航按钮 -->
+	    <div class="swiper-button-prev"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 44'><path d='M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z' fill='#ffffff'/></svg></div>
+	    <div class="swiper-button-next"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 44'><path d='M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z' fill='#ffffff'/></svg></div>
+</div>
+	</div>
+</div>
+<!--<div class="lunb clearfix">
+					<div class="l_c1 fl">
+						<a href="{:U('invest/detail',array('id'=>$listProduct_top[0]['id']))}">
+							<div class="l_jshao">
+								<p></p>
+								 <p>{$listProduct_top[0].borrow_name}</p> 
+							</div>
+							<img src="{$listProduct_top[0][borrow_img]}"/>
+						</a>
+					
+					</div>
+					<div class="l_c2 fl">
+						<a href="{:U('invest/detail',array('id'=>$listProduct_top[1]['id']))}">
+							<div class="l_jshao">
+								<p></p>
+								 <p>{$listProduct_top[1].borrow_name}</p> 
+							</div>
+							<img src="{$listProduct_top[1][borrow_img]}"/>
+						</a>
+
+						<div class="l_c3 clearfix">
+								<a href="{:U('invest/detail',array('id'=>$listProduct_top[2]['id']))}">
+							<div class="l_jshao">
+								<p></p>
+								 <p>{$listProduct_top[2].borrow_name}</p> 
+							</div>
+							<img src="{$listProduct_top[2][borrow_img]}"/>
+						</a>
+
+
+							<a href="{:U('invest/detail',array('id'=>$listProduct_top[3]['id']))}">
+							<div class="l_jshao">
+								<p></p>
+								 <p>{$listProduct_top[3].borrow_name}</p> 
+							</div>
+							<img src="{$listProduct_top[3][borrow_img]}"/>
+						</a>
+
+						</div>
+					</div>
+				
+	        	
+	        	</div>-->
+<!--中心内容-->
+<div class="box">
+<div class="l-zxneir">
+    <div  >
+        <span class="p1" style="float: left;margin-left: 20px; margin-top: 10px">项目浏览  	</span>	<div class="sous" style="float: right;    margin-top: 15px;
+    margin-right: 15px;">
+        <input type="text" name="key" id="key" value="" style="width: 300px"/><div class="sou_btnc">
+
+                      		</div>
+                      			</div>
+                     	</div>
+                      		
+	<div class="xmbox" >
+		<div class="l-xmlist">
+		   
+		    
+		     <div class="l1" style=" clear: left">
+				 
+			</div>
+	
+			<div class="l1">
+				<span class="span1"><img src="__PUBLIC__/web/img/xiangmu/l1.png" alt="" />分类：</span>
+			    <span><a href="{$strUrl}&borrow_type=0" class="borrow_type0">全部</a></span>
+			    <volist name=":getProCat()" id="vo">
+	             	<span> <a href="{$strUrl}&borrow_type={$vo.id}"  class="borrow_type{$vo.id}">{$vo.type_name}</a></span> 
+	          	</volist>
+	          	<if condition="$tybid">
+	          	<span> <a href="/invest/idetail/id/{$tybid}.html"  class="borrow_type{$vo.id}">新手标</a></span>
+	          	</if> 
+			</div>
+			<div class="l1">
+				<span class="span1"><img src="__PUBLIC__/web/img/xiangmu/l2.png" alt="" style="    padding-right: 17px;" />地区：</span>
+			    <span><a href="{$strUrl}&borrow_city=0" class="borrow_city0">全部</a></span>
+			    <volist name=":getsdcity()" id="vo">
+	             	<span> <a href="{$strUrl}&borrow_city={$vo.id}"  class="borrow_city{$vo.id}">{$vo.name}</a></span> 
+	          	</volist>
+			</div>
+	
+		
+		<div class="l-xmlist1 clearfix">
+			<div class="fl">
+			<span class="on" ><a href="{$strUrl}&orderby=borrow_money">融资金额<?php if($_GET['orderby']=='borrow_money'){?> <img src="__PUBLIC__/web/img/xiangmu/hot.png"/><?php } else{ ?> <img src="__PUBLIC__/web/img/xiangmu/hot1.png"/><?php  }?></a></span>
+				
+			<span><a href="{$strUrl}&orderby=gz_num">关注数<?php if($_GET['orderby']=='gz_num'){ ?> <img src="__PUBLIC__/web/img/xiangmu/hot.png"/><?php } else{ ?> <img src="__PUBLIC__/web/img/xiangmu/hot1.png"/><?php  }?></a></span>
+			
+			<!--<span >剩余时间 <img src="__PUBLIC__/web/img/xiangmu/hot1.png"/></span>	-->
+			</div>
+			<div class="fr"> 
+				<span class="on"></span>
+				<span ><a href="/invest/index.html" class="borrow_status">所有项目({$dataCount_num})</a></span>          
+                <span ><a href="{$strUrl}&borrow_status=2" class="borrow_status2">筹资中</a></span>
+               	<span ><a href="{$strUrl}&borrow_status=6" class="borrow_status6">筹资成功</a></span>
+                <span ><a href="{$strUrl}&borrow_status=7" class="borrow_status7">已分红</a></span>
+
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+                      				    <script>
+                      		        $(".sou_btnc").on("click", function(){
+                      		         var val =  $("#key").val();
+                      		            window.location.href="{$strUrl}&key="+val;  
+                      		        })
+                      		    </script>
+<script type="text/javascript">
+    $('.borrow_type{$borrow_type}').addClass('on').siblings().removeClass('on');
+    $('.borrow_city{$borrow_city}').addClass('on').siblings().removeClass('on');
+    $('.borrow_status{$borrow_status}').addClass('on').siblings().removeClass('on');
+</script>
+<!--项目-->
+<div class="z-list">
+	<div class="box clearfix">
+		<!-- <volist name="list.list" id="vb"> -->
+		<div class="z-xiangm">	
+			<div class="z-img">
+				<a <if condition="$vb.is_experience eq 1"> href="{:U('invest/idetail',array('id'=>$vb['id']))}" <else /> href="{:U('invest/detail',array('id'=>$vb['id']))}" </if> >
+					<!--<img src="{$vb.borrow_img|default='/Public/upload/1542157585_48.jpg'}"/>-->
+						 	<?php $borrow_img=explode(',',$vb['content_img']); ?>  
+    	 
+                                   <img src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}" alt=""> 
+                              
+					<!-- <if condition="$vb.start_time gt time()"> -->
+					    <img src="__PUBLIC__/web/img/xiangmu/20.png" alt="" class="on1"/>
+					<!-- <elseif condition="$vb.borrow_status eq 2"/> -->
+					    <img src="__PUBLIC__/web/img/xiangmu/21.png" alt="" class="on1"/>
+					<!-- <elseif condition="$vb.borrow_status eq 6"/> -->
+					    <img src="__PUBLIC__/web/img/xiangmu/23.png" alt="" class="on1"/>
+					<!-- <elseif condition="$vb.borrow_status eq 7"/> -->
+					    <img src="__PUBLIC__/web/img/xiangmu/24.png" alt="" class="on1"/>
+					<!-- </if> -->
+					
+				</a>
+			</div>
+			<div class="p-box">
+				<p>{$vb.borrow_name|cnsubstr=###,18}</p>
+				<!--<p class="p-jdu"><span style="width:{$vb.progress}%"></span></p>-->
+                <div class="kdu">
+                    <present name="vb.bespeak_progress">
+			<if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                        	<div class="kdu1" style="width: {$vb.bespeak_progress|floatval|min=100}%">
+                        	</div>
+			</if>
+                    </present>
+                    <div class="kdu2" style="width: {$vb.progress|floatval|min=100}%">
+                    </div>
+                </div>
+                <div style="width: 100%; overflow: auto;margin: 5px 0px;">
+                    <present name="vb.bespeak_progress">
+			<if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                        	<div style=" float: left; line-height: 25px;padding: 0 10px;">
+                            	<span style="color:#737373;font-size: 12px;">已预约：</span><span style="color: #ff6421"> {$vb.bespeak_progress|floatval}%</span>
+                        	</div>
+			</if>
+                    </present>
+                    <div style="float: left; line-height: 25px;padding: 0 10px;">
+                        <span style="color:#737373;font-size: 12px;">已筹金额：</span><span style="color: #00a6e4">{$vb['has_borrow']/10000}万</span>
+                    </div>
+                </div>
+				<!-- <if condition="$vb.start_time gt time()"> -->
+			    <p>离项目开始还有</p>
+			    <p class="cui-timer" data-config = '["endtime":"{$vb.start_time|date="Y-m-d H:i:s",###}","msec":false]'</p>
+			    <a <if condition="$vb.is_experience eq 1"> href="{:U('invest/idetail',array('id'=>$vb['id']))}" <else /> href="{:U('invest/detail',array('id'=>$vb['id']))}" </if> ><p>抢先浏览 </p></a>
+			    <!-- <elseif condition="$vb.borrow_status eq 2"/> -->
+                <div style="margin:20px 0;">
+                    <span style="color:#737373;font-size: 12px;margin-left: 10px;">目标金额</span><span style="color:#333333;font-size: 14px;margin-left: 10px;margin-right: 20px;">￥{$vb.borrow_money|getMoneyFormt=###}</span>
+                    <span style="color:#737373;font-size: 12px;margin-left: 10px;">剩余时间</span><span style="color:#333333;font-size: 14px;margin-left: 10px;"><if condition="$vb.start_time gt time()">预热中
+                        <elseif condition="$vb.borrow_status eq 2" /> {:getLeftTimes( $vb['start_time'] + ($vb['collect_day']*60*60*24))}
+                        <elseif condition="$vb.borrow_status eq 6" />0天
+                        <elseif condition="$vb.borrow_status eq 7" />0天
+                        <else/> 0
+                        </if></span>
+                </div>
+				<p class="xian"></p>
+				<p class="p-fx clearfix"><span class="fl">支持：{$vb.id|get_pro_invest}</span> <span class="fr">关注：{:guanzhu($vb['id'])}</span>	</p>
+			    <!-- <else/> -->
+			    <div style="margin:20px 0;">
+                    <span style="color:#737373;font-size: 12px;margin-left: 10px;">目标金额</span><span style="color:#333333;font-size: 14px;margin-left: 10px;margin-right: 20px;">￥{$vb.borrow_money|getMoneyFormt=###}</span>
+                    <span style="color:#737373;font-size: 12px;margin-left: 10px;">剩余时间</span><span style="color:#333333;font-size: 14px;margin-left: 10px;"><if condition="$vb.start_time gt time()">预热中
+                        <elseif condition="$vb.borrow_status eq 2" /> {:getLeftTimes( $vb['start_time'] + ($vb['collect_day']*60*60*24))}
+                        <elseif condition="$vb.borrow_status eq 6" />0天
+                        <elseif condition="$vb.borrow_status eq 7" />0天
+                        <else/> 0
+                        </if></span>
+                </div>				<p class="xian"></p>
+			 
+				<p class="p-fx clearfix"><span class="fl">支持：{$vb.id|get_pro_invest}</span> <span class="fr">关注：{:guanzhu($vb['id'])}</span>	</p>
+			    <!-- </if> -->
+			</div>
+		</div>
+		<!-- </volist> -->
+	</div>
+</div>
+<!--分页-->
+	<div class="aFyeinvest clearfix">
+		{$list.page}
+	</div>
+</div>
+</div>
+<include file="Public:footer"/>
+<script>
+	var mySwiper = new Swiper ('.swiper-container', {
+    
+    loop: true, // 循环模式选项
+    autoplay:{
+    delay: 2500,
+    disableOnInteraction: false,
+   },
+//slidesPerView: 4,//一行显示3个   
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+     pagination: {
+      el: '.swiper-pagination',
+    }
+  })        
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('.cui-timer').Cuitimer();
+    });
+</script>

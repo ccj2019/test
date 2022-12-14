@@ -1,0 +1,121 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+	var editUrl = '__URL__/edit';
+	var editTitle = '修改会员类型';
+	var isSearchHidden = 1;
+	var searchName = "搜索/筛选会员";
+</script>
+<div class="so_main">
+  <div class="page_tit">红包列表</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+  
+  <!--  <htmlA:commonBtn type="jsfun" action="del();" value="删除会员(谨慎操作)" />-->
+   <!-- <htmlA:commonBtn type="href" action="__URL__/export?{$query}" value="将当前条件下数据导出为Excel"/> -->
+  
+
+  
+  <div class="Toolbar_inbox">
+
+   <htmlA:commonBtn type="href" action="__URL__/khadd" value="绑定客户"/>
+    <form name="sdf" id="sdf" action="__URL__/wkhlist" method="get" style="    display: inline;">
+    <span>客户
+      <input name="user_name" type="text" value="{$user_name}">
+    
+
+<!--   <select name="kfid" class="select">
+    <option value="">请选择</option>
+          <option value="0" <if condition='0 eq $kfid'>selected</if>>未选择</option>
+          <volist name="kflist" id="vo">
+                    <option value="{$vo.id}" <if condition='$vo.id eq $kfid'>selected</if>>{$vo.name}</option>
+          </volist>
+  </select> 
+绑定时间
+<select name="nian" class="select">
+    <option value="">请选择</option>
+      <option value="2020" <if condition='2020 eq $nian'>selected</if>>2020</option>
+      <option value="2021" <if condition='2021 eq $nian'>selected</if>>2021</option>
+      <option value="2022" <if condition='2022 eq $nian'>selected</if>>2022</option>
+      <option value="2023" <if condition='2023 eq $nian'>selected</if>>2023</option>
+</select> -
+<select name="yue" class="select">
+      <option value="">请选择</option>
+      <option value="1" <if condition='1 eq $yue'>selected</if>>1</option>
+      <option value="2" <if condition='2 eq $yue'>selected</if>>2</option>
+      <option value="3" <if condition='3 eq $yue'>selected</if>>3</option>
+      <option value="4" <if condition='4 eq $yue'>selected</if>>4</option>
+      <option value="5" <if condition='5 eq $yue'>selected</if>>5</option>
+      <option value="6" <if condition='6 eq $yue'>selected</if>>6</option>
+      <option value="7" <if condition='7 eq $yue'>selected</if>>7</option>
+      <option value="8" <if condition='8 eq $yue'>selected</if>>8</option>
+      <option value="9" <if condition='9 eq $yue'>selected</if>>9</option>
+      <option value="10" <if condition='10 eq $yue'>selected</if>>10</option>
+      <option value="11" <if condition='11 eq $yue'>selected</if>>11</option>
+      <option value="12" <if condition='12 eq $yue'>selected</if>>12</option>
+
+
+</select> --> 
+
+    </span>
+    <a href="javascript:;" onclick="javascript:document.forms.sdf.submit();" class="btn_a"><span>查询</span></a>   </form> </div>
+
+
+
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">客户名称</th>
+    <th class="line_l">客户电话</th>
+    <th class="line_l">实名认证</th>
+    <th class="line_l">是否投资</th>
+    <th class="line_l">注册时间</th>
+
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+        <td>{$vo.user_name}</td>
+        <td>{$vo.user_phone}</td>            
+        <td>{$vo.renzheng}</td>
+        <td>{$vo.touzi}</td>   
+        <td>{$vo.reg_time|date="Y-m-d H:i:s",###}</td>        
+            
+        <td>
+          <a href="__URL__/khbangding/id/{$vo['id']}">绑定</a>   
+        </td>
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$pagebar}</div>
+      <htmlA:commonBtn type="href" action="__URL__/khadd" value="绑定客户"/>
+   <!--  <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选" style="search_action" /> -->
+    <!--<htmlA:commonBtn type="jsfun" action="del();" value="删除会员(谨慎操作)" />-->
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

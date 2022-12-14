@@ -1,0 +1,322 @@
+<include file="Public:_header" />
+
+<script type="text/javascript">
+
+	var delUrl = '__URL__/doDelete';
+
+</script>
+
+<div class="so_main">
+
+  <div class="page_tit">{$position}</div>
+
+  <!-------- 添加编辑友情链接 -------->
+
+  <div id="addAttr_div" style="display:none;">
+
+  	<div class="page_tit">添加管理员 [ <a href="javascript:void(0);" onclick="addAdminUser();">隐藏</a> ]</div>
+
+	<div class="form2">
+
+	<form method="post" action="__URL__/addAdmin" onsubmit="return addNewAdmin();">
+
+    
+
+    <dl class="lineD">
+
+      <dt>管理员用户名：</dt>
+
+      <dd>
+
+        <input name="user_name" class="input" id="user_name" type="text" value="">
+
+        <span>管理员登陆时的用户名</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>管理员密码：</dt>
+
+      <dd>
+
+        <input name="user_pass" class="input" id="user_pass" type="text" value="">
+
+        <span id="pass_tip">登陆员登陆时的密码,密码不区分大小写</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>真实姓名：</dt>
+
+      <dd>
+
+        <input name="real_name" class="input" id="real_name" type="text" value="">
+
+        <span>管理员的真实姓名</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>QQ：</dt>
+
+      <dd>
+
+        <input name="qq" class="input" id="qq" type="text" value="">
+
+        <span>客服QQ</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>电话：</dt>
+
+      <dd>
+
+        <input name="phone" class="input" id="phone" type="text" value="">
+
+        <span>联系电话,用于登录的时候接收验证码使用</span>
+
+      </dd>
+
+    </dl>
+
+
+
+    <dl class="lineD">
+
+      <dt>所属用户组：</dt>
+
+      <dd>
+
+	  	<select name="u_group_id" class="input" id="u_group_id">
+
+	  	<volist key="k" name="group_list" id="vo">
+
+		<option value="{$vo.group_id}">{$vo.groupname}</option>
+
+		</volist>
+
+		</select>
+
+        <span>不同的用户组对应不同的权限</span>
+
+      </dd>
+
+    </dl>
+
+
+
+    <dl class="lineD">
+
+      <dt>所属子站：</dt>
+
+      <dd>
+
+	  	<select name="area_id" class="input" id="u_area_id">
+
+        <option value="1">主站</option>
+
+		</select>
+
+        <span>主要是针对文章管理和客服,其他类型的管理员可以随便选</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>是否禁用：</dt>
+
+      <dd style="overflow:hidden;">
+
+	  	<input type="radio" name="is_ban" id="yes" value="1" /><label for="yes">是</label>&nbsp;&nbsp;&nbsp;<input type="radio" name="is_ban" id="no" value="0" checked="checked" /><label for="no">否</label>
+
+        <span>禁用后此管理员不能登陆</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+    <dl class="lineD">
+
+      <dt>是不是客服：</dt>
+
+      <dd style="overflow:hidden;">
+
+	  	<input type="radio" name="is_kf" id="yesx" value="1" /><label for="yesx">是</label>&nbsp;&nbsp;&nbsp;<input type="radio" name="is_kf" id="nox" value="0" checked="checked" /><label for="nox">否</label>
+
+        <span>客服会出现在会员选择客服的列表，其他的不会</span>
+
+      </dd>
+
+    </dl>
+
+	
+
+	 <dl class="lineD">
+
+      <dt>密码口令：</dt>
+
+      <dd>
+
+        <input name="user_word" class="input" id="user_word" type="text" value="">
+
+        <span>管理员密码口令设置后，在后台登录时只有写对口令才能进入后台（可填写文字、字母或数字，如：客服1号）</span>
+
+      </dd>
+
+    </dl>
+
+		 
+
+    <div class="page_btm">
+
+	  <input type="hidden" name="uid" id="uid" value="" disabled="disabled" />
+
+      <input type="submit" class="btn_b" id="showwait" onclick="addNewAdmin();" value="添加" />
+
+    </div>
+
+	</form>
+
+  </div>
+
+  </div>
+
+<div class="suggestion_wrap" id="suggestion_wrap" style="display:none">
+
+	<div class="suggestion_box">
+
+		<ul id="suggestion_con">
+
+		</ul>
+
+	</div>
+
+</div>
+
+  
+
+<!--添加管理员-->
+
+   <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+<a onclick="addAdminUser();" class="btn_a" href="javascript:void(0);">
+
+		<span class="addAttr_action"></span>
+
+	</a>
+
+    <a href="javascript:void(0);" class="btn_a" onclick="del();"><span></span></a> 
+
+  </div>
+
+  
+
+  <div class="list">
+
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+
+    <th style="width:30px;">
+
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+
+        <label for="checkbox"></label>
+
+    </th>
+
+    <th class="line_l">ID</th>
+
+    <th class="line_l">管理员</th>
+
+    <th class="line_l">日志信息</th>
+
+    <th class="line_l">类型</th>
+
+    <th class="line_l">IP地址</th>
+
+    <th class="line_l">记录时间</th>    
+
+  </tr>
+  <foreach name="list" item="vo">
+  <tr  overstyle='on' id="list_{$vo.id}">
+    <td style="width:30px;">
+
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+
+        <label for="checkbox"></label>
+
+    </td>
+
+    <td class="line_l">{$vo.id}</td>
+
+    <td class="line_l">{$vo.user_name}</td>
+
+    <td class="line_l">{$vo.info_log}</td>
+
+    <td class="line_l"><php>echo $logtype[$vo['type']];</php></td>
+
+    <td class="line_l">{$vo.add_ip}</td>
+
+    <td class="line_l">{$vo.add_time|date='Y-m-d H:i:s',###}</td>    
+
+  </tr>
+  </foreach>
+
+
+  </table>
+
+
+
+  </div>
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+	<a onclick="addAdminUser();" class="btn_a" href="javascript:void(0);">
+
+		<span class="addAttr_action"></span>
+
+	</a>
+
+    <a href="javascript:void(0);" class="btn_a" onclick="del();"><span></span></a>
+
+  </div>
+
+</div>
+
+
+
+
+
+<include file="Public:_footer" />

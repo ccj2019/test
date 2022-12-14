@@ -1,0 +1,160 @@
+<include file="Public:header"/>
+<script src="__PUBLIC__/date/jquery-2.2.3.js" type="text/javascript"></script>
+<script src="__PUBLIC__/date/WdatePicker.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/date/skin/WdatePicker.css" />
+<style>
+    body>div {
+        min-width: 1200px;
+    }
+    .hk_box{
+        width: 1200px;
+        margin: 0 auto;
+        background-color: #423e3d;
+        /*display: flex;*/
+        text-align: center;
+        background: url("__PUBLIC__/cpublic/image/b_02.jpg") repeat;
+    }
+    .box_top{
+        height: 130px;
+        line-height: 35px;
+        font-size: 25px;
+        padding-top: 50px;
+        background-color: #ffffff;
+        letter-spacing:4px;
+
+    }
+    .boxdt .box_top{
+        height: 35px;
+        padding-top: 0px;
+        font-size: 18px;
+    }
+    .box_con1{
+        padding: 0 40px;
+        width: 1119px;
+        position: relative;
+    }
+    .box_con .box_cons{
+        width: 279px;
+        height: 220px;
+        float: left;
+        text-align: center;
+        color: #ffffff;
+        line-height: 220px;
+        font-size: 18px;
+        border-right:solid 1px #ffffff;
+        background-color: #000000;
+    }
+    .boxdt .box_con .box_cons{
+        height: 35px;
+        line-height: 35px;
+        font-size: 18px;
+    }
+    .box_bs{
+        width: 279px;
+        height: 220px;
+        line-height: 220px;
+        float: left;
+        text-align: center;
+        color: #121212;
+        font-size: 18px;
+        border-right:solid 1px #c6c6c6;
+        background-color: #dcdddd;
+        border-top:solid 1px #c6c6c6;
+    }
+
+    .boxdt .box_b .box_bs{
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+    }
+    .bai .box_bs{
+        background-color: #ffffff;
+    }
+    .box_b .hei{
+        background-color: #000000;
+        color: #ffffff;
+        font-family: "宋体";
+    }
+
+.clear {
+    background: none;
+    border: 0;
+    clear: both;
+    display: block;
+    float: none;
+    font-size: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+    .sj{
+        color: #ffffff;
+        font-size: 17px;
+        position: absolute;
+        top: -32px;
+    }
+</style>
+
+<div class="hk_box">
+    <img src="__PUBLIC__/cpublic/image/123_01.jpg">
+
+    <if condition=' count($list) gt 3 '>
+        <div class="box_con1 boxdt">
+            <div class="sj">
+                {$time|date="Y年m月d日",###}
+            </div>
+            <div class="box_top">{$binfo.borrow_name} (单位/元) {$binfo.total}个月周期</div>
+            <div class="box_con">
+                <div class="box_cons">认养时间</div>
+                <div class="box_cons">认养用户</div>
+                <div class="box_cons">认养金额</div>
+                <div class="box_cons" style="border-right: none;">认养盈利额({$time|date="Y.m.d",###})
+                </div>
+                <div class="clear"></div>
+            </div>
+            <volist name="list" id="vo" key="i">
+                <div class="box_b <if condition='$i%2 eq 0'> bai</if>">
+                    <div class="box_bs hei">{$vo.add_time|date='Y.m.d',###}</div>
+                    <div class="box_bs">{$vo.yh}</div>
+                    <div class="box_bs">{$vo.investor_capital}</div>
+                    <div class="box_bs" style="border-right: none;" >{$vo.lixi}</div>
+                </div>
+                <div class="clear"></div>
+            </volist>
+        </div>
+    <else/>
+        <div class="box_con1">
+            <div class="sj">
+                {$time|date="Y年m月d日",###}
+            </div>
+            <div class="box_top">{$binfo.borrow_name} (单位/元)<br>{$binfo.total}个月周期</div>
+            <div class="box_con">
+                <div class="box_cons">认养时间</div>
+                <div class="box_cons">认养用户</div>
+                <div class="box_cons">认养金额</div>
+                <div class="box_cons" style="border-right: none; line-height: 30px; padding-top: 85px; height: 135px;">认养盈利额<br>
+                    ({$time|date="Y.m.d",###})
+                </div>
+                <div class="clear"></div>
+            </div>
+            <volist name="list" id="vo" key="i">
+                <div class="box_b <if condition='$i%2 eq 0'> bai</if>">
+                    <div class="box_bs hei">{$vo.add_time|date='Y.m.d',###}</div>
+                    <div class="box_bs">{$vo.yh}</div>
+                    <div class="box_bs">{$vo.investor_capital}</div>
+                    <div class="box_bs" style="border-right: none;" >{$vo.lixi}</div>
+                </div>
+                <div class="clear"></div>
+            </volist>
+        </div>
+    </if>
+    <img src="__PUBLIC__/cpublic/image/123_03.jpg">
+</div>
+
+<include file="default:Public:footer" />

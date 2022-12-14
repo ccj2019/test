@@ -1,0 +1,58 @@
+<include file="Public:header"/>
+<!--关于我们-->
+<div class="t-about_us">
+	<div class="about_banner">
+		<img src="/Public/web/img/guanyu/11.png"/>
+	</div>
+	<div class="gsjj">
+		<div class="box">
+			<div class="tabme">
+				<a href="/article/news_list"><span <if condition="($cid neq 53) and ($cid neq 22) and ($cid neq 54) and ($cid neq 526)"> class="on"  </if>style="padding-left:30px;padding-right:30px;">全部</span></a>
+				<a  href="/article/news_list/cid/526.html"><span <if condition="($cid eq 526)"> class="on"  </if>>新手帮助</span></a>
+				<a href="/article/news_list/cid/22.html"><span <if condition="($cid eq 22)"> class="on"  </if>>媒体报道</span></a>
+				<a href="/article/news_list/cid/54.html"><span <if condition="($cid eq 54)"> class="on"  </if>>热门公告</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="t-part clearfix">
+		<div class="box">
+			<div class="ll fl">
+				<ul>
+					<!-- <foreach name="list.list" item="vo">   -->
+							  <a href="{:U('article/newsshow',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}" >	<li class="clearfix">
+							<div class="ls fl">
+								<img src="/{$vo.art_img}" alt="" />
+							</div>
+							<div class="lr fl clearfix">
+								<p class="p1">{$vo.title}</p>
+								<p class="p2 fl">
+									<span>{$vo.art_time|date="Y-m-d H:i:s",### }</span>
+									<span>发布的人：日照铭万网络科技有限公司</span>
+								</p>
+								<div class="hk fr">
+									  <a href="{:U('article/newsshow',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}" >查看</a>
+								</div>
+							</div>
+						</li></a>
+						<!-- </foreach> -->
+				</ul>
+				<div class="aFye clearfix" style="float: right;margin-top:50px;    position: inherit;">
+					{$list.page}
+				</div>
+			</div>
+			<div class="rr fr">
+				<div class="tit clearfix">
+					<p class="p1 fl">众筹项目</p>
+					<a class="fr" href="/invest/index.html">更多</a>
+					<!-- <volist name="list_type3.list" id="vb" offset="0" length='1'> -->
+					<a href="{:U('invest/detail',array('id'=>$vb['id']))}" target="_blank"><img src="{$vb.borrow_img}" alt="" width="280" /></a>
+					<p class="p3">{$vb.borrow_name|cnsubstr=###,16}</p>
+					<p class="p4">{$vb.borrow_info|strip_tags|cnsubstr=###,60}</p>
+					<!-- </volist>  -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--关于我们-end-->
+<include file="Public:footer"/>

@@ -1,0 +1,144 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/A/js/uploadPreview.js"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/swfupload.js"></script>
+<script type="text/javascript">
+	//swf上传后排序
+	var IS_AD = true;
+	function rightPic(o){
+		var o = $("#albCtok"+o);
+		if( o.next().length > 0) {
+			var tmp = o.clone();
+			var oo = o.next();
+			o.remove();
+			oo.after(tmp);
+		}else{
+			alert("已经是最后一个了");
+		}
+	}
+	//swf上传后排序
+	function leftPic(o){
+		var o = $("#albCtok"+o);
+		if( o.prev().length > 0) {
+			var tmp = o.clone();
+			var oo = o.prev();
+			o.remove();
+			oo.before(tmp);
+		}else{
+			alert("已经是第一个了");
+		}
+	}
+	//swf上传后删除图片start
+	function delPic(id){
+		var imgpath = $("#albCtok"+id).find("input[type='hidden']").eq(0).val();
+		var datas = {'picpath':imgpath,'oid':id};
+		$.post("__URL__/swfupload?delpic", datas, picdelResponse,'json');
+	}
+
+	function picdelResponse(res){
+		var imgdiv = $("#albCtok"+res.data);
+		imgdiv.remove();
+		ui.success(res.info);
+		ui.box.close();
+	}
+	//swf上传后删除图片end
+</script>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+<script>
+	KindEditor.ready(function(K) {
+		var editor = K.editor({
+			allowFileManager : true
+		});
+		K('#J_selectImage').click(function() {
+			editor.loadPlugin('multiimage', function() {
+				editor.plugin.multiImageDialog({
+					clickFn : function(urlList) {
+						var div = K('#J_imageView');
+						div.html('');
+						K.each(urlList, function(i, data) {
+							addImage(data.url,i,data.url)
+							//div.append('<img src="' + data.url + '">');
+						});
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#imgfile").uploadPreview({width:100,height:50,imgDiv:"#imgDiv",imgType:["bmp","gif","png","jpg"],maxwidth:3169,maxheight:4759});
+	});
+</script>
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">添加产品</div>
+
+<div class="form2">
+	<form method="post" action="__URL__/doAdd" onsubmit="return subcheck();" enctype="multipart/form-data">
+	<div id="tab_1">
+	
+	<dl class="lineD"><dt>产品名称：</dt><dd><htmlA:input id="name" tip="*"/></dd></dl>
+	<!-- <dl class="lineD"><dt>所属栏目：</dt><dd><htmlA:select id="type_id" datakey='type_list' vt='id|type_name' tip="*"/></dd></dl> -->
+
+
+
+		<dl class="lineD" style="display:none"><dt>广告图片：</dt><dd><div style="display: inline; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;"><span id="spanButtonPlaceholder"></span></div><span class="tip">*</span></dd></dl>
+		<dl class="lineD"><dt>广告图片：</dt><dd> <input type="button" id="J_selectImage" value="批量上传" />
+			<div id="J_imageView"></div></dd></dl>
+		<dl class="lineD"><dt>图片预览：</dt>
+			<dd>
+				<table cellpadding="0" cellspacing="0" width="100%">
+					<tr id="handfield">
+						<td colspan="4" class="bline" style="background:url(images/albviewbg.gif) #fff 0 20px no-repeat;">
+							<table width='100%' height='160' style="margin:0 0 20px 0">
+								<tr>
+									<td>
+										<div id="thumbnails">
+											<php>$x=1000;foreach(unserialize($vo['images']) as $v){ $x--;</php>
+											<div class="albCt" id="albCtok<php>echo $x;</php>">
+												<img width="120" height="120" src="__ROOT__/<php>echo $v['img'];</php>"><a onclick="javascript:delPic(<php>echo $x;</php>)" href="javascript:;">[删除]</a><a onclick="javascript:leftPic(<php>echo $x;</php>)" href="javascript:;">[前移]</a><a onclick="javascript:rightPic(<php>echo $x;</php>)" href="javascript:;">[后移]</a><div style="margin-top:10px"></div>
+											</div>
+											<php> } </php>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</dd></dl>
+
+<!--
+	<dl class="lineD"><dt>文章关键字：</dt><dd><htmlA:input id="art_keyword" tip="SEO元素"/></dd></dl>
+	<dl class="lineD"><dt>文章简介：</dt><dd><htmlA:text id="art_info" tip="SEO元素"/></dd></dl>
+-->	
+<!-- 	<dl class="lineD"><dt>是否抓取远程图片：</dt><dd><htmlA:radio id="is_remote" default="0|否,1|是" tip="抓取远程图片时保存时间可能会稍长，请耐心等待" /></dd></dl> -->
+	<dl class="lineD"><dt>产品介绍：</dt>
+	  <dd>
+		<include file="./Style/Editor/kissy.html" />
+		<htmlA:editor id="content" w='780px' type='kissy'/>
+	  </dd>
+	</dl>
+
+	<dl class="lineD"><dt>产品保障：</dt>
+	  <dd>
+		<include file="./Style/Editor/kissy.html" />
+		<htmlA:editor id="baozhang" w='780px' type='kissy'/>
+	  </dd>
+	</dl>
+
+	
+	</div>
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+</div>
+<include file="Public:_footer" />

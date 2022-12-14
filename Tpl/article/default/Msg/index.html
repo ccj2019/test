@@ -1,0 +1,59 @@
+<include file="default:Public:header" />
+
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>站内通知</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition='$status eq 0'>class="on"</if> >
+				<a href="/member/Msg/index?status=0"><span>所有通知</span></a>
+			</div>
+			<div <if condition='$status eq 1'>class="on"</if>> 
+				<a href="/member/Msg/index?status=1">	<span>已读通知</span></a>
+			</div>
+			<div <if condition='$status eq 2'>class="on"</if>>
+				<a href="/member/Msg/index?status=2">	<span>未读通知</span></a>
+			</div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--项目明细-->
+				<div class="t-object_move">
+					<ul class="ul1 clearfix">
+						<li>通知内容</li>
+						<li>通知时间</li>
+						<li>操作</li>
+					</ul>
+					<volist name="list" id="vo">
+                            <ul class="ul2 clearfix">
+								<li>
+									<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/images/<if condition='$vo.status eq 1'>read.jpg<else/>unread.jpg</if>">
+									<p>{$vo.title}</p>
+								</li>
+								<li>{$vo.send_time|date="Y-m-d",###}</li>
+								<li>
+									<a class="read subject" href="/member/msg/viewmsg?id={$vo.id}" data="{$vo.id}">查看详情</a>
+									<a href="/member/msg/delmsg?idarr={$vo.id}"  >删除</a>
+								</li>
+							</ul>
+                    </volist>
+					
+					<!--分页-->
+					<div class="aFye clearfix">
+						 <p>
+						 	 {$pagebar}
+						 </p>
+					</div>
+				</div>
+			</div>
+		 </div>
+	</div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,59 @@
+<include file="Public:_header" />
+<style type="text/css">
+.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">  
+  <div class="page_tab"><span data="tab_4">回报计划</span></div>
+  <div class="form2">
+    <form action="" method="post">
+     <dl class="lineD">
+      <dt>千元收益：</dt>
+      <dd>
+        <input name="borrow_interest_rate" style="width:190px" id="title" type="text" value="">元&nbsp;
+        <input name="id" type="hidden" value="{$binfo.id}" />        
+      </dd>
+    </dl>
+    <dl class="lineD" style="display:none">
+      <dt>回报本金：</dt>
+      <dd>
+        <input name="has_capital" type="checkbox" value="1" id="has_capital" checked><label for="has_capital">是</label>        
+      </dd>
+    </dl>
+    <dl class="lineD" style="display:none">
+      <dt>回报完成：</dt>
+      <dd>
+        <input name="has_done" type="checkbox" value="1" id="has_done" checked><label for="has_done">是，项目进入已分红。</label>        
+      </dd>
+    </dl>
+    <dl class="lineD">
+      <dt></dt>
+      <dd>        
+        <input type="submit" class="btn_b" value="确认回报" />
+      </dd>
+    </dl>
+    </form>
+      <div id="tab_4" style="" class="list">
+           <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="ta_a">
+                <th>投资人</th>
+                  <th>真实姓名</th>
+                  <th>投资金额</th>
+                  <th>投资时间</th>
+              </tr>
+              <volist name="investinfo" id="vi">
+              <tr>
+                <td><htmlA:user id="vi.userid" uname="vi.user_name" /></td>
+                <td><htmlA:user id="vi.userid" uname="vi.real_name" /></td>                              
+                  <td>{$vi.investor_capital|Fmoney=###}元</td>
+                  <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+                  
+              </tr>
+              </volist>
+          </table>
+      </div>
+      <div class="page_btm">
+      </div>
+  </div>
+</div>
+<include file="Public:_footer" />

@@ -1,0 +1,62 @@
+
+<if condition="$cid eq 36 || $cid eq 35 || $cid eq 40">
+<div class="help">
+    <div class="help-search">
+        <div class="container">
+            <div class="search-box">
+                <form action="{:U('article/search')}" method="get">
+                    <div class="search">
+                        <input type="text" name="key" placeholder="请输入问题关键词" />
+                        <input type="submit" class="sub" value="搜索" />
+                    </div>
+                    <div class="key">
+                        <a href="/article/search.html?key=充值">充值</a>
+                        <a href="/article/search.html?key=提现">提现</a>
+                        <a href="/article/search.html?key=手续费">手续费</a>
+                        <a href="/article/search.html?key=借款">借款</a>
+                        <a href="/article/search.html?key=收益">收益</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="help-detail">
+        <div class="container">
+            <div class="hd-top">
+                <a href="/article/index/cid/35.html">返回帮助中心首页</a>
+            </div>
+            <div class="hd-title"><if condition="$article['title'] neq ''">{$article.title}<else />{$article.name}</if></div>
+            <div class="hd-content">
+                {$article.art_content}
+            </div>
+        </div>
+    </div>
+</div>
+
+<else />
+<div class="naver_abo">
+    <div class="container">
+        <ul>
+            <li class="cid18"><a href="/article/index/cid/18.html">平台简介</a></li>
+            <li class="cid12"><a href="/article/index/cid/12.html">管理团队</a></li>
+            <li class="cid17"><a href="/article/index/cid/17.html">新手指引</a></li>
+            <li class="cid3"><a href="/article/index/cid/3.html">合作伙伴</a></li>
+            <li class="cid5"><a href="/article/index/cid/5.html">招贤纳士</a></li>
+            <li class="cid16"><a href="/article/index/cid/16.html">联系我们</a></li>
+            <div class="clear"></div>
+        </ul>
+        <script type="text/javascript">
+            $(".cid{$cid}").addClass('act').siblings().removeClass('act');
+        </script>
+    </div>
+</div>
+<if condition="$cid eq 28 || $cid eq 10 || $cid eq 39">
+<div class="body">{$article.art_content}</div>
+<style type="text/css">
+    .body img{width: 100%;}
+</style>
+<else />
+<div class="con">{$article.art_content}</div>
+</if>
+</if>
+<div class="clear"></div>

@@ -1,0 +1,54 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/A/js/uploadPreview.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#imgfile").uploadPreview({width:100,height:50,imgDiv:"#imgDiv",imgType:["bmp","gif","png","jpg"],maxwidth:3169,maxheight:4759});
+	});
+</script>
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">添加文章栏目</div>
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2">高级设置</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/edit" onsubmit="return subcheck();" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="{$celeNow.id}">
+	<div id="tab_1">	
+	<dl class="lineD"><dt>项目标题：</dt><dd>
+		<select name="borrow_id">
+			<if condition="$borrowList">
+			<volist name="borrowList" id="vo">
+				<option value="{$vo.id}" <if condition="$celeNow.borrow_id eq $vo.id">selected</if>>{$vo.borrow_name}</option>
+			</volist>
+			<else />
+			<option>--没有可选项目--</option>
+			</if>
+		</select>
+
+	</dd></dl>
+	<dl class="lineD"><dt>入选原因：</dt><dd>
+		<volist name='yuanyinArr' id="vo" key="key">
+		<input name="yuanyin[]" type="checkbox" value="{$key-1}" id="yuanyin_{$key-1}" <if condition="in_array($key-1,$celeNow['yuanyin'])">checked</if> ><label for="yuanyin_{$key-1}">{$vo}</label>&emsp;
+		</volist>		
+	</dd></dl>
+	<dl class="lineD"><dt>获得好处：</dt><dd>
+		<volist name='haochuArr' id="vo" key="key">
+		<input name="haochu[]" type="checkbox" value="{$key-1}" id="haochu_{$key-1}" <if condition="in_array($key-1,$celeNow['haochu'])">checked</if>><label for="haochu_{$key-1}">{$vo}</label>&emsp;
+		</volist>	
+	</dd></dl>
+	<dl class="lineD"><dt>视频介绍：</dt><dd><htmlA:input id="shipin" value="{$celeNow.shipin}" tip='视频地址'/></dd></dl>		
+	</div><!--tab1-->
+	
+	<div id="tab_2" style="display:none">
+	<dl class="lineD"><dt>文章属性：</dt><dd><htmlA:radio id="art_set" default="0|普通,1|跳转" /></dd></dl>
+	<!--<dl class="lineD"><dt>标题颜色：</dt><dd><htmlA:input id="title_style" /></dd></dl>-->
+	<dl class="lineD"><dt>文章作者：</dt><dd><htmlA:input id="art_writer" /></dd></dl>
+	<dl class="lineD"><dt>跳转地址：</dt><dd><htmlA:input id="art_url" tip='仅在文章属性为跳转时有效'/></dd></dl>
+	
+	</div><!--tab2-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+</div>
+<include file="Public:_footer" />

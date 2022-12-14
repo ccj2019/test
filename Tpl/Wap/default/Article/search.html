@@ -1,0 +1,50 @@
+<div class="help">
+    <div class="help-search">
+        <div class="container">
+            <div class="search-box">
+                <form action="{:U('article/search')}" method="get">
+                    <div class="search">
+                        <input type="text" name="key" placeholder="请输入问题关键词" />
+                        <input type="submit" class="sub" value="搜索" />
+                    </div>
+                    <div class="key">
+                        <a href="/article/search.html?key=充值">充值</a>
+                        <a href="/article/search.html?key=提现">提现</a>
+                        <a href="/article/search.html?key=手续费">手续费</a>
+                        <a href="/article/search.html?key=借款">借款</a>
+                        <a href="/article/search.html?key=收益">收益</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about">
+    <div class="container">
+        <div class="hzhb">
+            <ul>
+                <foreach name="artlist" item="vo">  
+                <li>
+                    <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">
+                        <table>
+                            <tr>
+                                <td class="td2">
+                                    <h4>{$vo.title}</h4>
+                                    <div class="con"> {$vo.art_info|cnsubstr=###,100}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                </foreach>
+            </ul>
+            <div class="number navslis" style="background:none">
+               {$pagebar}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>按月付息到期还本-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<include file="Public:_header_common" />
+<style type="text/css">
+.pnones{ display:none}
+</style>
+</head>
+<body>
+<include file="Public:_header_main" />
+<div style="clear:both;"></div>
+<script type="text/javascript">
+        $(function() {
+            $("#sel_Days").bind("change", function() {
+                var thisDom = $(this);
+                if (thisDom.val() == "-1") {
+                    thisDom.next().show();
+                }
+                else {
+                    thisDom.next().hide();
+                }
+            });
+           
+        });  
+    </script>
+
+<div class="content">
+  <div class="box">
+    <table width="1004" border="0" cellspacing="0" cellpadding="0" class="tools">
+      <tr>
+        <td><div class="box_left">
+            <ul>
+             <li><a class="sel" href="tool2.html">按月付息到期还本</a></li>
+              <li><a href="tool.html">按月等额本息计算</a></li>
+            </ul>
+          </div>
+          <div class="box_right"> <span style="color:#0c5da6; font-size:18px;">按月付息到期还本</span><br /><br />
+            <div class="tool_title ">
+              <div class="funframe">
+                <div> 投资金额：
+                  <input name="txtAmount" id="txtAmount" type="text" value="{$money}" class="spec92" style="width:100px">
+                  元&nbsp;&nbsp;&nbsp; 年化利率：
+                  <input name="txtIntegernal" id="txtIntegernal" value="{$interest_rate}"  type="text" class="spec92" style="width:30px">
+                  %
+                  投资期限：
+                  <select name="sel_Days" id="sel_Days" style="width:70px" class="selectStyle spec92">
+                    <php>for($j=1;$j<13;$j++){</php>
+                    <option value="{$j}" <if condition="$selDays eq $j"> selected="selected"</if>>{$j}</option>
+                    <php>}</php>
+                    <option value="-1" <if condition="$selDays eq -1"> selected="selected" </if> <if condition="$selDays gt 12"> selected="selected"</if> >自定义</option>
+                  </select>
+                  <input name="txtCusDay" id="txtCusDay" class="spec92" value="{$selDays}"  style="width:30px; <if condition="$selDays gt 12"><else>display:none </if> " type="text">
+                  个月&nbsp;&nbsp;&nbsp;<input name="btnCount" value="计算" onclick="return Verify();" id="btnCount" class="spec38" style="border:none" type="button">
+                  </div>
+              </div>
+              <div class="tools02">
+                
+              </div>
+            </div>
+            <div style=" display:none" class="tool_title" id="backList"> </div>
+            <div id="backList" class="tool_title">
+              <div class="fun_title">
+                <div> 投资收回的时间表</div>
+              </div>
+              <div class="reback">
+                <ul>
+                  <li class="toola1">月份</li>
+                  <li class="toola2">月收回本金</li>
+                  <li class="toola3">月收回利息</li>
+                  <li class="toola4">月收回总额</li>
+                  <li class="toola5">余额</li>
+                </ul>
+              </div>
+              <div class="rslist" id="repaylist"> </div>
+            </div>
+            <script type="text/javascript">
+			$(function(){
+					$("#btnCount").click(function(){
+						return Verify();
+							
+					})
+				})
+                var _partten_n = /^\d+$/;               //整数
+                var _partten_f = /^\d+\.\d{1,2}$/;      //浮点
+                var _partten_a = /^\d+(.)?\d{1,2}$/;    //兼容浮点和整数
+                var newTitle = '{$glo.web_name}提醒您：';
+				var txtDateLimit=$("#sel_Days").val();
+                function RegVerify(_val, _partten) {
+                    var _reg = new RegExp(_partten);
+                    return _reg.test(_val);
+                }
+				
+                function Verify() {
+					var txtDateLimit=$("#sel_Days").val();
+                    if (!RegVerify($("#txtAmount").val(), _partten_n)) {
+						$("#txtAmount").focus();
+                       layer.msg('您好，请输入投资金额！');
+                        return false;
+                    }
+                    if(txtDateLimit==-1){
+						txtDateLimit=$("#txtCusDay").val();
+					}
+                    if (!RegVerify($("#txtIntegernal").val(), _partten_a)) {
+						//$("#txtIntegernal").focus();
+                       // layer.msg('您好，您所输入的年利率数值不正确！');
+                       // return false;
+                    }
+					
+					$.ajax({
+						url: "__URL__/tool2",
+						data: {"money":$("#txtAmount").val(),"month":txtDateLimit,"interest_rate":$("#txtIntegernal").val(),"selDays":$("#sel_Days").val()},
+						timeout: 5000,
+						cache: false,
+						type: "post",
+						dataType: "json",
+						success: function (d, s, r) {
+							if(d){
+								$("#backList").html(d.html).show();
+								 $("#repaylist").html(d.html1);
+							}
+						}
+					});					
+                }
+			
+                $(function(){
+					var money="{$money}";
+					var month="{$m}";
+					var interest_rate="{$interest_rate}";
+					var selDays="{$selDays}";
+					$.ajax({
+						url: "__URL__/tool2",
+						data: {"money":money,"month":month,"interest_rate":interest_rate,"selDays":selDays},
+						timeout: 5000,
+						cache: false,
+						type: "post",
+						dataType: "json",
+						success: function (d, s, r) {
+							if(d){
+								$("#backList").html(d.html).show();
+								$("#repaylist").html(d.html1);
+							}
+						}
+					});	
+					
+						
+				})
+           
+            </script> 
+          </div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div style="clear:both;"></div>
+<include file="Public:_footer" />
+</body>
+</html>

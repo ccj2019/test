@@ -1,0 +1,163 @@
+ 
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+    <script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/js/jquery-1.8.0.min.js"></script>
+
+ 
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:window.history.back();" class="w-header-left">
+                < 返回 </a>
+                    <h3>最新资讯</h3>
+                    	<if condition="$UID gt '0'">
+				  <a href="/Wapmember/" style="text-align: right;">会员中心</a> 
+                    <!--   <a href="/Wapmember">铭万众筹</a>-->
+                    <else />
+                    <!--未登录状态-->
+                    	 
+                                <a href="/Wapmember/common/login.html" style="text-align: right;" class="w-header-right">登录</a>
+                    </if>
+        </div>
+    </div>
+
+    <!-- 积分明细1  start -->
+
+    <div class="w-int">
+        <div class="w-shang-top">
+        	         	 <volist name=":get_ad(34)" id='vo' offset="0" length='1'>  
+                 
+                        <a href="{$vo.url}" class="img_1" style="background:url() no-repeat center center;"><img src="/{$vo.img}" /></a>
+                    
+              </volist> 
+ <!--           <img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/huodong/images/active-banner.jpg" alt="">
+-->
+        </div>
+        <div class="w-porper w-shang">
+            <div class="porper-top w-about-top flex">
+ 
+                <a class="cid54" href="/wap/article/index/cid/54.html">热门公告</a>
+                <a  class="cid11" href="/wap/article/index/cid/11.html">新手帮助</a>
+                <a class="cid22" href="/wap/article/index/cid/22.html">媒体报道</a>
+                <a class="cid53" href="/wap/article/index/cid/53.html">回款公告</a>
+                <a class="cid21" href="/wap/article/index/cid/21.html" class="">关于我们</a>
+                 <script type="text/javascript">
+            $(".cid{$cid}").addClass('w-porpertop-active').siblings().removeClass('w-porpertop-active');
+        </script>
+            </div>
+            <div class="int-list-warpper">
+
+                <div class="int-list w-about w-zixun">
+    
+                  <!-- <foreach name="list.list" item="vo">   -->
+      <a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}"  class="clear">
+        <div class="int-list-left fl"> <img src="/{$vo.art_img}" alt="" /></div>
+              <div class="int-list-right fr">
+                            <h6>{$vo['title']|cnsubstr=###,12}</h6>
+                            <div>{$vo.art_time|date="Y-m-d H:i:s",### }</div>
+
+
+                        </div>
+ 
+      </a>
+      <!-- </foreach>   <a class="clear">
+                        <div class="int-list-left fl">
+                            <img src="./img/w-zixun1.jpg" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> 投资的第113期海鲜项目（皮皮
+                                <br>
+                                    虾）已回款，请投资人查收</h6>
+                            <div>2018-09-05 12:53:26</div>
+
+
+                        </div>
+                    </a>
+                    <a class="clear">
+                        <div class="int-list-left fl">
+                                <img src="./img/w-zixun2.jpg" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> 投资的私人领第4期已处置，回
+                                <br>
+                                    款收益成功</h6>
+                            <div>2018-09-05 12:53:26</div>
+
+
+                        </div>
+                    </a>
+
+                    <a class="clear">
+                        <div class="int-list-left fl">
+                                <img src="./img/w-zixun3.jpg" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> 投资的第3期工厂化联合养殖已
+                                <br>
+                                    处置，回款收益成功</h6>
+                            <div>2018-09-05 12:53:26</div>
+
+
+                        </div>
+                    </a>-->
+                   
+<div class="page_div navslis"></div>
+                </div>
+                            	<!--<if condition="empty($list['list'])"> 
+        	-->
+        	<div style="text-align: center;background: #fff;">暂无内容</div>
+        	<!--</if>-->
+            </div>
+        </div>
+       <div class="navslis">{$list.page}</div> 
+        <!-- 积分明细1 end -->
+
+   </div>
+
+    <!--<div class="footer">
+            <ul>
+                <li class="home on">
+                    <a href="##">
+                        <img src="img/zhuye.png">
+                        <img src="img/zhuye1.png">
+                        <span>主页</span>
+                    </a>
+                </li>
+                <li class="home">
+                    <a href="##">
+                        <img src="img/faqi.png">
+                        <img src="img/faqi1.png">
+                        <span>发起</span>
+                    </a>
+                </li>
+                <li class="home">
+                    <a href="##">
+                        <img src="img/shangcheng.png">
+                        <img src="img/shangcheng1.png">
+                        <span>商城</span>
+                    </a>
+                </li>
+
+                <li class="home">
+                    <a href="##">
+                        <img src="img/wode.png">
+                        <img src="img/wode1.png">
+                        <span>我的</span>
+                    </a>
+                </li>
+            </ul>
+        </div>-->
+<style>
+.footer{	    background: #fff;
+    border-top: .1rem solid #eff3f9;
+    width: 100%;
+    box-sizing: border-box;
+    padding: .22rem 0 .1rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;}
+</style>
+        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+        <script src="./js/index.js"></script>
+ 

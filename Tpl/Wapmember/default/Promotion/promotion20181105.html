@@ -1,0 +1,105 @@
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+<script src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/ZeroClipboard/ZeroClipboard.js"></script>
+<!--账户管理推荐好友-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="muhb">
+                    <h2>好友推荐</h2>
+                    <div class="hbtop">
+                        <ul>
+                            <li><a href="{:U('promotion/promotion')}">好友推荐</a></li>
+                            <li><a href="{:U('promotion/promotionfriend')}">推荐的好友</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tjhy">
+                    <div class="ts">
+                        当好友使用你的推荐码完成注册并充值，即可领取年化收益奖励红包
+                    </div>
+                    <div class="tj1">
+                        您的邀请链接：<textarea class='txt_code text_input' readonly="readonly" style="width:400px; height:40px;"  >{:C('WEB_URL')}/member/common/register?invite={:session('u_id')}</textarea>（将推荐码发送给好友）
+                    </div>
+                    <div class="tj2">
+                        <h3>推荐奖励：</h3>
+                        <div class="con">
+                            成功推荐第 1 位好友，可领取1个1%的加息劵；<br> 
+                            成功推荐第 2 位好友，可再领取1个1%的加息劵；<br> 
+                            成功推荐第 3 位及更多好友，每增加一位都可领取1个1%的加息劵。<br> 
+                        </div>
+                    </div>
+                    <div class="tj2">
+                        <h3>备注：</h3>
+                        <div class="con">
+                            1、推荐奖励加息劵的使用有效期为获得领取资格之日起30日内；<br> 
+                            2、成功推荐的标准为：好友使用您的推荐链接完成注册并充值认筹，可在推荐的好友查询是否投资； <br> 
+                            3、新注册用户体验金只可用于体验项目标的一次性投资使用； <br> 
+                            4、体验项目标的到期后，该体验金自动收回，所得利息归用户所有； <br> 
+                            5、建议将推荐码分享到微信朋友圈、各种QQ群、论坛、社区等地方，可能会有意想不到的惊喜。<br> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        var newTitle = '{$glo.web_name}提醒您：';
+        function copyToClipboard(obj) {
+            if (obj) {
+                var clipBoardContent = obj.value;
+                $(obj).select();
+                try {
+                    window.clipboardData.setData("Text", clipBoardContent);
+                    alert("您好，链接复制成功!", newTitle);
+                }
+                catch (e) {
+                    alert("您好，链接复制失败，请手动复制!");
+                }
+            }
+        }
+        $(function() {
+           // $("#txt_links").click(function() { $(this).select(); });
+        });
+        
+$(function(){
+    
+    //选中代码
+    $('.txt_code').click(function(){
+        
+        $(this).select();
+    });
+
+    //设置swf路径
+    ZeroClipboard.setMoviePath("__PUBLIC__/{:C('DEFAULT_THEME')}/Member/ZeroClipboard/ZeroClipboard.swf"); 
+    //创建对象
+    var clip = new ZeroClipboard.Client();
+    //设置手型
+    clip.setHandCursor(true); 
+    //绑定按钮
+    clip.glue('btn_copy');
+    //复制内容
+    clip.addEventListener( "mouseOver", function(client) {
+        client.setText($('.txt_code').val());
+    });
+    //复制成功后的提示
+    clip.addEventListener( "complete", function(){ 
+        layer.alert("您好，链接复制成功!", 1,!1);   
+    }); 
+
+});     
+</script>

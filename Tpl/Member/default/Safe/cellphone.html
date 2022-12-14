@@ -1,0 +1,84 @@
+<include file="default:Public:mheader" />
+<!--内容-->
+<div class="l-omg1">
+    <div class="l-mlogin1">
+        <div class="l-mlg1">
+            <div class="shiming">
+                修改手机号
+            </div>
+            <div class="l-lebox clearfix">
+                <div class="l-le">
+                    <img src="/public/web/img/yindao/28.png" />
+                </div>
+                <div class="l-le bg">
+                        <form action="__APP__/member/Memberinfo/cell_phone" method="post" id="shiminglc"    class="clearfix l-shiming1">
+                        <div>
+                            <div class="inp-box">
+                                <span><img src="/public/web/img/yindao/shouji-5.png"/></span>
+                                    <input type="text" name="old_phone" value="{$member_info.user_phone}" id="old_phone" readonly /></div>
+                            <div class="clearfix">
+                                <div class="inp-box yz">
+                                    <span><img src="/public/web/img/yindao/anquan.png"/></span>
+                                    <input type="text" name="Verification" id="Verification"  class="l-inpkd" placeholder="输入验证码"/>
+                                </div>
+                                <div class="yanz-btn" onclick="Verification()">
+                                    获取验证码
+                                </div>
+                            </div>
+
+                            <div class="inp-box">
+                                <span><img src="/public/web/img/yindao/shouji-5.png"/></span>
+                                <input type="text"  name="phone" id="phone"  placeholder="新手机号" />
+
+                            </div>
+
+                        </div>
+                        <div class="queren-btn" onclick="Asubmit()">
+                            确认修改
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />
+
+<script  type="text/javascript">
+    function Asubmit() {
+        var Verification = $("#Verification").val();
+        var phone = $("#phone").val();
+        if(Verification!=""&&phone!=""){
+            $("#shiminglc").submit();
+        }
+    }
+    function Verification() {
+        var phone = $("#old_phone").val();
+        if (phone == '') {
+            layer.msg('手机号必须填写！');
+            return false;
+        }
+        $.ajax({
+            url: "/Member/Memberinfo/Verification/",
+            type: "post",
+            dataType: "json",
+            data: {"phone":phone},
+            success: function(d) {
+                if (d.status == "y") {
+                    layer.msg(d.info);
+                    return;
+                }else if (d.status == "n") {
+                    layer.msg(d.info );
+                    return;
+                }else if (d.status == "s") {
+                    layer.msg(d.info );
+                    return;
+                }
+            }
+        })
+    }
+</script>

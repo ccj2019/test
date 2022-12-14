@@ -1,0 +1,152 @@
+<include file="Public:headern"/>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>	
+
+<div class="yangzhi">
+
+<div class="yz_lb">
+	<a href="/invest/xmlist/type/0/status/{$status}/name/{$search}" <if condition='$type eq 0'>  class="hover" </if> >全部</a>
+    <a href="/invest/xmlist/type/1/status/{$status}/name/{$search}" <if condition='$type eq 1'>  class="hover" </if>>联合养殖</a>
+    <a href="/invest/xmlist/type/2/status/{$status}/name/{$search}" <if condition='$type eq 2'>  class="hover" </if>>联合销售</a>
+</div>
+<style type="text/css">
+	
+	.sy_ss_xx{
+		float: right;
+	    height: 31px;
+	    border: #fff solid 1px;
+	    background: url(__PUBLIC__/new/images/sy_05.png) no-repeat left center #d4d4d4;
+	    padding-left: 32px;
+	    margin-top: -11px;
+	}
+	.sy_ss_xx input{
+		border: none;
+	    background: none;
+	    line-height: 30px;
+	    height: 30px;
+	    width: 200px;
+	    float: left;
+	    color: #222;
+	}
+	.sy_ss_xx a{
+		display: block;
+	    height: 31px;
+	    line-height: 31px;
+	    width: 55px;
+	    background-color: #4969f2;
+	    color: #ffffff;
+	    font-size: 16px;
+	    text-align: center;
+	    float: left;
+	}
+</style>
+
+        <div class="sy_ss_xx">
+            <input type="text" id="key" name="search" value="{$search}"/>
+            <a href="javascript:void(0);" id="ssx">搜 索</a> 
+        </div> 
+
+
+	<div class="yz_tab">
+    	<li><a href="/invest/xmlist/type/{$type}/status/0/name/{$search}" <if condition='$status eq 0'>  class="hover" </if>>全部</a></li>
+        <li><a href="/invest/xmlist/type/{$type}/status/1/name/{$search}" <if condition='$status eq 1'>  class="hover" </if>>预热中</a></li>
+        <li><a href="/invest/xmlist/type/{$type}/status/2/name/{$search}" <if condition='$status eq 2'>  class="hover" </if>>购买中</a></li>
+        <li><a href="/invest/xmlist/type/{$type}/status/6/name/{$search}" <if condition='$status eq 6'>  class="hover" </if>>进行中</a></li>
+        <li style="border-right:none;"><a href="/invest/xmlist/type/{$type}/status/7/name/{$search}" <if condition='$status eq 7'>  class="hover" </if>>已完成</a></li>
+       <!--  <a class="yz_tab_a" href="#">查看全部></a> -->
+        <div class="clear"></div>
+    </div>
+
+<script type="text/javascript">
+	  $('#ssx').on('click',function(){
+             var search = $('input[name="search"]').val();//搜索的文字
+             location.href = '/invest/xmlist/type/{$type}/status/{$status}/name/'+search;
+        })
+
+</script>
+
+<div class="yz_list xmlab">
+
+<if condition="$list">	
+	<volist name="list" id="vo">	
+	    <div class="xsb">
+			
+<a href="/invest/detail/id/{$vo.id}.html">
+			<div class="xm_title">
+				<span>联合养殖</span>
+				{$vo.borrow_name|cnsubstr=###,16}
+			</div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_min}元/份</span>
+	            购买成本
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_duration}个月</span>
+	            周期
+	        </div>
+	        <div class="xsb_xx">
+	        	<span>{$vo.borrow_interest_rate}%</span>
+	             销售利润
+	        </div>
+
+</a>
+	        <div class="jidu">
+	        <if condition="$vo.borrow_status eq 1">
+				<span class="jd_ks">离开售时间</span>
+	            <span class="jd_ksd cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'></span>   
+
+	         
+	        <else/>
+				 <div id="process" class="An_wrap">
+				                         <div class="An_num">
+				                             <span class="An_sales">已售</span>
+				                             <span class="An_span_num ng-binding">{$vo.progress}</span><span>%</span>
+				                         </div>
+				                     <div class="An_circle An_clip-auto">
+	                                 <div class="An_percent"></div>
+	                                 <div class="An_percent"></div>
+	                                 </div>
+	        	</div>
+	        </if>
+	        </div>
+			<if condition="$vo.borrow_status eq 1"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a hui">抢先预览</a></if>
+	    	<if condition="$vo.borrow_status eq 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即体验</a></if>
+	    	<if condition="$vo.borrow_status gt 2"><a href="/invest/detail/id/{$vo.id}.html" class="gm_a">立即查看</a></if> 
+	    </div>
+	</volist>
+<else/>
+	<div style="    text-align: center;
+    line-height: 250px;
+    color: #ccc;
+    font-size: 18px;
+    margin-top: 100px;">暂时没有记录~~~</div>
+</if>
+ </div>   
+ 
+<div class="xpage">
+  {$page}         
+</div>
+
+
+</div>
+<div class="clear"></div>
+  
+<script type="text/javascript">
+
+$(function(){
+        $('.cui-timer').Cuitimer();
+});
+
+function dh(){
+	$.each($(".An_wrap"),function(){
+		$(this).FnExe1();
+	});
+}
+dh();
+
+function showTooltip(d){
+	$(".yz_tab li span").removeClass("hover").eq(d).addClass("hover");
+	$(".yangzhi .xmlab").css("display","none").eq(d).css("display","block");
+}
+
+</script>
+<include file="Public:footern"/>

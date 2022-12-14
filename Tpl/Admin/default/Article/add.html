@@ -1,0 +1,98 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/A/js/uploadPreview.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#imgfile").uploadPreview({width:100,height:50,imgDiv:"#imgDiv",imgType:["bmp","gif","png","jpg"],maxwidth:3169,maxheight:4759});
+	});
+</script>
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">添加文章栏目</div>
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2">高级设置</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/doAdd" onsubmit="return subcheck();" enctype="multipart/form-data">
+	<div id="tab_1">
+	
+	<dl class="lineD"><dt>文章标题：</dt><dd><htmlA:input id="title" tip="*"/></dd></dl>
+	<dl class="lineD"><dt>所属栏目：</dt><dd><htmlA:select id="type_id" datakey='type_list' vt='id|type_name' tip="*"/></dd></dl>
+	
+	<dl class="lineD" style="overflow:hidden"><dt>缩略图：</dt>
+		<dd>
+			<input type="file" id="imgfile" name="imgfile" style="float:left"/>
+			<span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDiv"></div></div></span>
+		</dd>
+	</dl>
+		<dl class="lineD" style="overflow:hidden"><dt>展示图：</dt>
+			<dd>
+				<input type="file" id="imgfiles" name="imgfiles" style="float:left"/>
+				<span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDivs"></div></div></span>
+			</dd>
+		</dl>
+	<dl class="lineD"><dt>文章关键字：</dt><dd><htmlA:input id="art_keyword" tip="SEO元素"/></dd></dl>
+	<dl class="lineD"><dt>文章简介：</dt><dd><htmlA:text id="art_info" tip="SEO元素"/></dd></dl>
+	<dl class="lineD"><dt>是否发布：</dt><dd><htmlA:radio id="is_fabu" default="1|是,0|否" tip="*" /></dd></dl>
+	<dl class="lineD"><dt>推荐：</dt><dd><htmlA:radio id="tuijian" value="key|vo.tuijian"  default="1|是,0|否" /></dd></dl>
+
+	  <dl class="lineD">
+          <dt>日期：</dt>
+          <dd>
+                <!--<input name="lead_time" type="date" value="" placeholder="2018-01-01" required="required"> -->
+            <htmlA:input id="art_time" value="{$vo.art_time|date='Y-m-d H:i:s',###}" tip="用于排序,时间倒叙" />
+          </dd>
+        </dl>
+         <script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "art_time",
+					ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+			</script>
+
+	<dl class="lineD"><dt>是否抓取远程图片：</dt><dd><htmlA:radio id="is_remote" default="0|否,1|是" tip="抓取远程图片时保存时间可能会稍长，请耐心等待" /></dd></dl>
+	<dl class="lineD"><dt>文章内容：</dt>
+	  <dd>
+       <link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+<script>
+$(function(){
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="art_content"]', {
+			allowFileManager : true,
+			autoHeightMode : true,
+			afterCreate : function() {
+				this.loadPlugin('autoheight');
+			},
+			afterUpload : function(url) {
+				var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+				var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+				$("#firstimage").append(firstimageoption);
+				$("#images").append(selectoption);
+			},afterBlur: function(){this.sync();}
+		});
+	});
+})
+</script><textarea name="art_content" id="art_content" style="width:80%;height:500px;visibility:hidden;"></textarea>
+		
+	  </dd>
+	</dl>
+	</div><!--tab1-->
+	
+	<div id="tab_2" style="display:none">
+	<dl class="lineD"><dt>文章属性：</dt><dd><htmlA:radio id="art_set" default="0|普通,1|跳转" /></dd></dl>
+	<!--<dl class="lineD"><dt>标题颜色：</dt><dd><htmlA:input id="title_style" /></dd></dl>-->
+	<dl class="lineD"><dt>文章作者：</dt><dd><htmlA:input id="art_writer" /></dd></dl>
+	<dl class="lineD"><dt>跳转地址：</dt><dd><htmlA:input id="art_url" tip='仅在文章属性为跳转时有效'/></dd></dl>
+	
+	</div><!--tab2-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+</div>
+<include file="Public:_footer" />

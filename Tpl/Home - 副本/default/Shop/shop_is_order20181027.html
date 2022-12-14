@@ -1,0 +1,112 @@
+ 
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<style>
+		.l-tc1 img {
+			width: 67%;
+			padding: .2rem;
+			padding-left: 0;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="javascript:history.go(-1);" class="l-fanhui on">&lt;返回</a><span>确认订单</span>
+			<div class="l-fanhui1">
+				<!--<a href="##"></a>-->
+			</div>
+		</div>
+		<div>
+			
+			 <form action="/wap/Shop/post_order" class="duihuan_form" id="test_form"  method="post">
+         <input type="hidden" name="gid" id="gid" value="{$vo.id}" />
+			<div class="l-userxinxi">
+				<p class="l-pc1"> <span>{$va.name}	<input  name="real_name" type="hidden" value="{$va.name}"></span> <input  name="cell_phone" type="hidden" value="{$va.main_phone}">{$va.main_phone}</p>
+				<p class="l-pc2"><span>【默认】</span>
+					<input  name="address" type="hidden" value="{$va.province}{$va.district}{$va.main_phone}{$va.address}">
+					 {$va.province}{$va.district}{$va.main_phone}{$va.address}</p>
+				<div class="l-pc3"><a href="/wap/Shop/madd?id={$vo['id']}&sun={$unm}"><img src="/public/wap/img/l-yjt.png" /></a></div>
+
+
+ 
+ <input name="email"    value=" " type="hidden"  />
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+			<div class="clearfix l-fd" style="position: relative;border-bottom: 5px solid #EEF1F8;">
+				<div class="l-tc1">
+					<img src="/public/wap/img/l-s1.png" />
+				</div>
+				<div class="l-tc2">
+					<p class="l-tc2">{$vo['title']}</p>
+			<!--		<p class="l-tc4">规格：1斤装</p>-->
+				</div>
+				<div class="l-pc3">
+				<input name="num" type="hidden" value="{$unm}">x{$unm}</div>
+			</div>
+			<div class="l-dingdan">
+				<!--<p>运费 <span style="color: #313131;">免邮</span></p>-->
+			</div>
+			<div class="l-dingdan">
+				<p>商品总价 <span style="color: #fdb000;">	 <?php echo $vo['art_jiage']*$unm;?>积分</span></p>
+			</div>
+			<div class="l-liuyan">
+				<p> 留言</p>
+				<textarea name="beizhu" rows="" cols="" placeholder="请在此处填写留言内容（200字以内）"></textarea>
+				<div onclick='doSubmitForm()' class="l-qurena cc">
+					提交订单
+				</div>
+			</div>
+	
+		 </form>
+		</div>
+
+		<!--弹出-->
+
+		 <!--<div class="l-dtc">
+			<div class="l-tanchubox">
+				<p>支付成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>
+		</div> 
+		 <div class="l-dtc">
+			<div class="l-tanchubox">
+				<p class="l-ppx">对不起，您的积分不足</p>
+				<a href="/wap/Shop/get_points" class="l-btnc"><p class="l-ppx1">点击查看如何获取积分</p></a>
+				
+			</div>
+		</div> -->
+
+	</body>
+	<script>
+		function doSubmitForm(){
+var form = document.getElementById('test_form');
+//再次修改input内容
+
+form.submit();
+}
+
+</script>
+	<script>
+		
+	</script>
+
+</html>

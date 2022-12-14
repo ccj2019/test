@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+<head>
+
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <meta name="keywords" content="{$glo.web_keywords}" />
+
+    <meta name="description" content="{$glo.web_descript}" />
+
+
+
+    <title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+
+
+
+    <link rel="stylesheet" href="/Public/wap/css/FlexoCalendar.css" />
+
+    <link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+    <link rel="stylesheet" href="/Public/wap/css/index.css" />
+
+    <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+    <script src="/Public/wap/js/index.js"></script>
+
+</head>
+
+<body>
+
+<div class="header ">
+
+    <div class="w-header w-content flex">
+
+        <a href="javascript:window.history.back();" class="w-header-left">
+
+            &lt; 返回 </a>
+
+        <h3>我的预约</h3>
+
+        <a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" style="width: 0.4rem;    padding-top: 0.3rem;float: right;"  /></a>
+
+    </div>
+
+</div>
+
+<div class="w-wo w-int">
+
+    <ul class="int-list-warpper">
+
+        <volist name="list" id="vo">
+
+            <li class="int-list clear">
+
+                <a href="/wap/invest/detail/id/{$vo.borrow_id}.html" class="clear" style="padding: 0">
+			
+			<div style="height:10px;"></div>
+
+                    <div class="int-list-left fl">
+
+                        <img src="{$vo.borrow_img}"  alt="">
+
+                    </div>
+
+                    <div class="int-list-right fr">
+
+                        <div class="w-first flex">
+
+                            <span>{$vo.borrow_name|cnsubstr=###,10}</span>
+
+                            <span></span>
+
+                        </div>
+
+                        <div class="clear wo-last">
+
+                            <p href="##" class="fr ">预约金额：<br/><span style="color: #ff6600;">{$vo.bespeak_money|Fmoney}</span></p>
+
+                            <p>预约时限：</p>
+
+                            <span href="##" class="fl ">{$vo['start_time'] + $vo['bespeak_days'] * 60 * 60 * 24|date='Y-m-d H:i:s',###}</span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <div>
+
+		<eq name="vo.bespeak_status" value="0">
+
+                	<if condition="$vo.start_time gt time()">
+
+                    	<span style="color: #ff6421;float: right;margin:.1rem 0">等待开标</span>
+
+                    	<elseif condition="$vo.start_time + $vo.bespeak_days * 60 * 60 * 24 gt time()"/>
+
+                    	<a href="/wap/invest/is_order/id/{$vo.borrow_id}.html" class="w-wo-a fr">缴纳余款</a>
+
+                    	<else/>
+
+                    	<span style="color: #737373;float: right;margin:.1rem 0">预约金已作废</span>
+
+                	</if>
+
+		<else/>
+
+                        <span style="color: #000000;float: right;margin:.1rem 0">余款已缴纳</span>
+
+                </eq>
+
+                </div>
+
+                <a href="/wapmember/tendout/detail/id/{$vo.borrow_id}.html" class="w-wo-a" style="float: none !important;width: min-content;white-space: nowrap">查看详情</a>
+
+		<div style="height: 1px"></div>
+
+            </li>
+
+        </volist>
+
+    </ul>
+
+</div>
+
+<div class=" navslis">{$pagebar}</div>
+
+<div style="height:1.6rem"></div>
+
+<div class="footer">
+
+    <ul>
+
+        <li class="home">
+
+            <a href="/wap"><img src="/Public/wap/img/zhuye.png"><img src="/Public/wap/img/zhuye1.png"><span>主页</span></a>
+
+        </li>
+
+        <li class="home">
+
+            <a href="/Wap/Borrow/index"><img src="/Public/wap/img/faqi.png"><img src="/Public/wap/img/faqi1.png"><span>发起</span></a>
+
+        </li>
+
+        <li class="home">
+
+            <a href="/wap/shop"><img src="/Public/wap/img/shangcheng.png"><img src="/Public/wap/img/shangcheng1.png"><span>商城</span></a>
+
+        </li>
+
+
+
+        <li class="home on">
+
+            <a href="/Wapmember"><img src="/Public/wap/img/wode.png"><img src="/Public/wap/img/wode1.png"><span>我的</span></a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+<script>
+
+    var str = $(".navslis").html();
+
+    var m =str.length; var n = str.indexOf("条记录");
+
+    var j = str.substring(n+1,m); var s = str.replace(j,"");
+
+    var el = $(".navslis");  el.html(el.html().replace(s+"记录", ""));
+
+    var m =str.length; var n = str.indexOf("尾页</a>");
+
+    var j = str.substring(n+6,m); var s = str.replace(j,"");
+
+    var el = $(".navslis");  el.html(el.html().replace(j, ""));
+
+    for (var i=4;i<$(".navslis a").length-1;i++) {
+
+        $(".navslis a").eq(i).hide();
+
+    }
+
+</script>
+
+</body>
+
+</html>

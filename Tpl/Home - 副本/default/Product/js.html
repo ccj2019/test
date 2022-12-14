@@ -1,0 +1,140 @@
+<script type="text/javascript">
+    $(function(){
+		
+        $(".num_btn").click(function(){      
+
+            var invest_number = $(this).parents().find('.invest_number').val();
+            var each_number   = $(this).parents().find('.each_number').val();                        
+
+            if($(this).text()=='-') invest_number-=1;
+            if($(this).text()=='+') invest_number= parseInt(invest_number)+parseInt(1);
+            $(this).parents().find('.invest_number').val(invest_number);  
+            $(".invest_number").change();          
+        });
+        $(".invest_number").change(function(){
+            var invest_number = parseInt($(this).val());
+            var each_number = parseInt($(this).parents().find('.each_number').val());  
+            if(invest_number<1){
+                invest_number = 1;
+            }else if(each_number>0 && invest_number>each_number){                  
+                invest_number = each_number;
+            }
+            $(this).val(invest_number);
+        });
+        $(".now_tou").on('click', function(){
+			
+            var invest_number = $(this).parents().find('.invest_number').val();
+            var invest_money = $(this).parents().find('.invest_money').val();
+            var borrow_id = $(this).parents().find('.borrow_id').val();            
+            var ajax_url = "__URL__/ajax_invest?id="+borrow_id;            
+            if(typeof(invest_number) == 'undefined'){
+              ajax_url = ajax_url+"&invest_money="+invest_money;
+              if(invest_money<=0){
+                layer.msg('您好，请输入购买金额！');return false;
+              }
+            }else{              
+              ajax_url = ajax_url+"&invest_number="+invest_number;              
+            }
+            
+            $.ajax({
+              url: ajax_url,
+              timeout: 5000,
+              cache: false,
+              type: "get",
+              dataType: "json",
+              success: function (d, s, r) {
+                if(d.status==0){
+                   layer.msg(d.message);
+                }else{
+                    var obj_html=d.content;
+                    $.layer({
+                      type: 1,
+                      title: "立即购买",
+                      area: ['500px', '200px'],
+                      shade: [0],
+                      page: {
+                        html: '<div class="jiedai_con">'+obj_html+'</div>'
+                      }, success: function(){
+                        layer.shift('left');
+                      }
+                    });
+                }
+              }
+            });
+        });
+    }); 
+          //投标
+        
+        var investmoney = 0;
+        var borrowidMS = 0;
+        var borrow_min = 0;
+        var borrow_max = 0;
+        function PostData(id) {
+          var invest_number = parseFloat($("#invest_number").val());
+          var invest_money = parseFloat($("#invest_money").val());
+          var pin = $("#pin").val();          
+          var borrow_id = $("#borrow_id").val();              
+          if(pin==""){
+            layer.msg('您好，请输入支付密码！');
+            return false;
+          }
+          $.ajax({
+            url: "__URL__/investcheck",
+            type: "post",
+            dataType: "json",
+            data: {"invest_number":invest_number,"invest_money":invest_money,'pin':pin,'borrow_id':borrow_id},
+            success: function(d) {
+                if (d.status == 1) {
+                  investmoney = invest_money;
+                  $.layer({
+                    shade: [0],
+                    area: ['auto','auto'],
+                    dialog: {
+                      msg: d.message,
+                      btns: 2,                    
+                      type: 4,
+                      btn: ['确认购买','暂不购买'],
+                      yes: function(){
+                        isinvest(true);
+                      }, no: function(){
+                        return false;
+                      }
+                    }
+                  });
+                }
+                else if(d.status == 2)// 无担保贷款多次提醒
+                {
+                  $.layer({
+                    shade: [0],
+                    area: ['auto','auto'],
+                    dialog: {
+                      msg: d.message,
+                      btns: 2,                    
+                      type: 4,
+                      btn: ['去冲值','暂不冲值'],
+                      yes: function(){
+                        ischarge(true);
+                      }, no: function(){
+                        return false;
+                      }
+                    }
+                  });                 
+                }
+                else if(d.status == 3)// 无担保贷款多次提醒
+                {
+                  layer.msg(d.message);
+                }else{
+                  layer.msg(d.message);  
+                }
+            }
+          });
+        }
+
+        function ischarge(d){
+          if(d===true) window.location.href="__APP__/member/charge#fragment-1";
+        }
+        function isinvest(d){
+          if(d===true) document.forms.investForm.submit();
+        }
+     
+</script>

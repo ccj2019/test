@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/all.css" />
+<link rel="stylesheet" href="css/index.css">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="##" class="w-header-left">
+                < 返回</a>
+                    <h3>回报内容</h3>
+                    <a href="##" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+    <!-- origin start  -->
+
+
+    <div class="w-retcon">
+        <div class="w-origin-input ">
+                <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">回报类型</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="pay" id="pay11">
+                            <label class="fl" for="pay11"></label>
+                            <span class="fl">产品回报</span>
+        
+        
+                            <input class="fl" type="radio" name="pay" id="pay22">
+                            <label class="fl" for="pay22"></label>
+                            <span class="fl">无私奉献
+                            </span>
+                            <input class="fl" type="radio" name="pay" id="pay33">
+                            <label class="fl" for="pay33"></label>
+                            <span class="fl">抽奖
+                            </span>
+                        </div>
+                </div>
+            <div class="origin-input w-content">
+                <label for="">支持金额</label>
+                <input type="number" placeholder="100000">
+                <span>元</span>
+            </div>
+            <div class="origin-input w-content" style="border:0;">
+                <label for="">会员最大支持数量</label>
+                <input class="number" type="number" placeholder="10">
+                <span>天</span>
+            </div>
+            
+        </div>
+
+        <div class="w-origin-input ">
+            
+            <div class="origin-input w-content textarea clear">
+                <label for="" class="fl">回报内容</label>
+                <textarea class="fr" name="" id=""></textarea>
+
+            </div>
+           
+        </div>
+
+
+      
+
+        <!-- 头像上传 -->
+
+        <div class="w-origin-touxiang w-origin-touxiang1">
+            <h3>上传充值凭证</h3>
+            <div class="touxiang clear">
+                <div class="left fl">
+                    <label for="doc">
+                        <div class="img">
+                            <img src="./img/w-jia.jpg" alt="">
+                        </div>
+
+                        <div>图片上传</div>
+
+
+                    </label>
+
+
+
+                    <input type=file name="doc" id="doc" onchange="javascript:setImagePreview();" style="display:none">
+                </div>
+                <div class="right fr">
+                    支持jpg、jpeg、png、gif格式大小不 超过20.0MB，
+                   
+              
+                    
+                </div>
+                <div class="clear" id="localImag">
+                    <img id="preview" style="diplay:none" />
+                </div>
+
+            </div>
+        </div>
+       
+        
+
+        <div class="w-origin-input peisong">
+                <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否配送</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="peiss" id="pei1">
+                            <label class="fl" for="pei1"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="peiss" id="pei2">
+                            <label class="fl" for="pei2"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+                </div>
+                <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否限购</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="pei" id="pei11">
+                            <label class="fl" for="pei11"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="pei" id="pei22">
+                            <label class="fl" for="pei22"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+                </div>
+                <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否分红</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="peis" id="pei3">
+                            <label class="fl" for="pei3"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="peis" id="pei4">
+                            <label class="fl" for="pei4"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+                </div>
+                <div class="last">
+                    项目汇报时间 &nbsp; 
+                   <span> 项目成功后 &nbsp;
+                        <span>5</span>天
+                    </span>
+                </div>
+                 <!-- 下一步 -->
+            <div class="w-origin-xiayibu" style="margin-bottom:2rem;padding:.13rem 0;font-size:.34rem;">
+                确认回报
+            </div>
+        </div>
+
+       
+</div>
+        <!-- origin end -->
+
+
+        <div class="footer">
+            <ul>
+                <li class="home on">
+                    <a href="##">
+                        <img src="img/zhuye.png">
+                        <img src="img/zhuye1.png">
+                        <span>主页</span>
+                    </a>
+                </li>
+                <li class="home">
+                    <a href="##">
+                        <img src="img/faqi.png">
+                        <img src="img/faqi1.png">
+                        <span>发起</span>
+                    </a>
+                </li>
+                <li class="home">
+                    <a href="##">
+                        <img src="img/shangcheng.png">
+                        <img src="img/shangcheng1.png">
+                        <span>商城</span>
+                    </a>
+                </li>
+
+                <li class="home">
+                    <a href="##">
+                        <img src="img/wode.png">
+                        <img src="img/wode1.png">
+                        <span>我的</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <script src="js/picker.min.js"></script>
+        <script src="js/city.js"></script>
+       
+        <script>
+  function setImagePreview() {
+                var docObj=document.getElementById("doc");
+       
+                var imgObjPreview=document.getElementById("preview");
+                        if(docObj.files &&    docObj.files[0]){
+                                //火狐下，直接设img属性
+                                imgObjPreview.style.display = 'block';
+                                                  
+                                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+         
+              //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+              imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+         
+                        }else{
+                                //IE下，使用滤镜
+                                docObj.select();
+                                var imgSrc = document.selection.createRange().text;
+                                var localImagId = document.getElementById("localImag");
+                                //必须设置初始大小
+                                localImagId.style.width = "300px";
+                                localImagId.style.height = "120px";
+                                //图片异常的捕捉，防止用户修改后缀来伪造图片
+        try{
+                                        localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                        localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                                }catch(e){
+                                        alert("您上传的图片格式不正确，请重新选择!");
+                                        return false;
+                                }
+                                imgObjPreview.style.display = 'none';
+                                document.selection.empty();
+                        }
+                        return true;
+                }
+        </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

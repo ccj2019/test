@@ -1,0 +1,60 @@
+<include file="Public:header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/web/css/G.css" />
+<div class="box">   
+    <div class="navDs">
+        <img src="__PUBLIC__/web/img/Ls4.png" alt="" /> 
+        <a href="/Borrow/index"><span>发起项目></span></a>
+        <a href="/invest/index.html"><span>项目信息</span></a> 
+    </div>
+</div>
+<div class="box clearfix  nicontent">      
+    <div class="Baiaosd">
+        回报设置-项目标题        <span><a>返回项目信息</a></span>
+    </div>
+    <div class="bgtabshi">
+        <p>小提示：</p>
+        <p>
+            【建议设置3个以上的回报】，回报多样化更能提高关注度。
+        </p>
+        <p>
+            【建议设置几十、几百、上千元的支持档位】，回报差异化更能满足不同人的需求。
+        </p>
+        <p>
+            【建议设置有创意的回报】，与众不同的回报更能打动支持者。
+        </p>
+        <div class="Tabbox">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>价格</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                        <th>限额</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                 </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">￥{$borrow_info.borrow_money}</th>
+                        <td><if condition="$borrow_info['loan_certificate'] eq 1">收益回报<else />线下回报</if></td>
+                        <td>{$borrow_info.return_info}</td>
+                        <td><if condition="$borrow_info['is_limit'] eq 1">限额<else />不限</if></td>
+                        <!-- <td><span>编辑</span><span>删除</span></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="btnBioxs">
+            <a class="c3" href="/borrow/post1?id={$borrow_info.id}" style="border: 0;margin-left: 20px;padding: 3px 15px;">添加新回报内容</a>
+            <a class="c3" href="/borrow/savestatus?id={$borrow_info.id}" style="border: 0;margin-left: 20px;padding: 3px 15px;">提交审核</a>
+        </div>
+     </div>
+
+
+
+    
+        </div>
+    
+
+        <!--底部-->
+<include file="Public:footer"/>

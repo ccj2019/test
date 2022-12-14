@@ -1,0 +1,234 @@
+<include file="default:Public:headern" />
+
+
+
+<div class="sy_banner">
+
+<volist name=":get_ad(37)" id='voa'>   <!-- offset="0"length='1'-->
+       <a  href="{$voa.url}"><span style="background-image:url(/{$voa.img})">&nbsp;</span>  </a>  
+</volist> 
+
+
+<ul></ul>
+</div>
+<div class="sy_sousuo">
+    <div class="ss_zt">
+        <div class="sy_srm">
+            热门搜索：
+            <a href="/invest/xmlist/type/0/status/0/key/黑头鱼">黑头鱼</a>
+            <a href="/invest/xmlist/type/0/status/0/key/网箱">网箱</a>
+            <a href="/invest/xmlist/type/0/status/0/key/联合养殖">联合养殖</a>
+        </div>
+        
+        <div class="sy_ss_x">
+            <input type="text" id="key"/>
+            <a href="javascript:void(0);" onclick="ss()">搜 索</a> 
+        </div> 
+    </div>
+    
+</div>
+<script type="text/javascript">
+    function ss(){
+       var s=$("#key").val();
+        // 去掉转义字符  
+        s = s.replace(/[\'\"\\\/\b\f\n\r\t]/g,'');  
+        // 去掉特殊字符  
+        s = s.replace(/[\@\#\$\%\^\&\*\{\}\:\"\L\<\>\?]/g,'');  
+        window.location.href="/invest/xmlist/type/0/status/0/key/"+s;
+    }
+</script>
+<div class="sy_content">
+    <div class="sy_con">
+        <div class="sy_title">
+                 渔业养殖
+                <span class="zs_en">Fishery culture </span>
+                <span class="zs_line"></span>
+        </div>
+            <div class="clear"></div>
+        <div class="xm_left">
+            <div class="xm_img"><img src="/Public/new/images/img_12.jpg" />
+            {$yzz.type}
+          </div>
+            <div class="xm_hover">
+                <a href="/article/newsshow/cid/532/id/2011.html"> 查看详情</a>
+                <span class="xm_line"></span>
+                 <span class="xm_lx"> 联合养殖</span>
+                 <span class="xm_en"> Combined culture</span>
+              <!--    <span class="xm_cp"> {$yzz.borrow_name}</span> -->
+            </div>
+        </div>
+        
+        <div class="xm_right">
+            <ul>
+                <li><div class="xm_img">
+                <img src="/Public/new/images/img_121.jpg" />
+            养殖介绍
+                </div> <div class="xm_hover">
+                    <a href="/article/news_list/cid/532.html"> 查看详情</a>
+                <span class="xm_line"></span>
+                 <span class="xm_lx">养殖介绍</span>
+                 <span class="xm_en">Introduction of culture</span>
+                </div></li>
+                
+                <li><div class="xm_img">
+                <img src="/Public/new/images/img_14.jpg" />
+            茶叶订制
+                </div> <div class="xm_hover">
+                    <a href="/zhongzhi/index.html"> 查看详情</a>
+                <span class="xm_line"></span>
+                 <span class="xm_lx">茶叶订制</span>
+                 <span class="xm_en">Tea ordering</span>
+                </div></li>
+                
+                <li><div class="xm_img">
+                <img src="/Public/new/images/s2_03.jpg" />
+            联合销售
+                </div> <div class="xm_hover">
+                    <a href="/invest/xmlist/type/2/status/0"> 查看详情</a>
+                <span class="xm_line"></span>
+                 <span class="xm_lx">联合销售</span>
+                 <span class="xm_en">Joint sale</span>
+                </div></li>
+                
+                <li><div class="xm_img">
+                <img src="/Public/new/images/s2_05.jpg" />
+            联合养殖
+                </div> <div class="xm_hover">
+                    <a href="/invest/xmlist/type/1/status/0"> 查看详情</a>
+                <span class="xm_line"></span>
+                 <span class="xm_lx">联合养殖</span>
+                 <span class="xm_en">Combined culture</span>
+                </div></li>
+         
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+<div class="clear"></div>
+
+<div class="youshi">
+    <div class="ys_con">    
+        <div class="ys_title">
+            <span>3</span>
+            <span>大产品优势</span>
+            <span><b>寻渔记</b>真实有效  经验丰富  专业负责</span>
+        </div>
+        <div class="clear"></div>
+        <div class="ys_left">
+            <span>寻渔记</span>
+            <span>选择我们的</span>
+            <span><i>3</i>大优势</span>
+            <span>You choose our three<br /> 
+strengths</span>
+
+        </div>
+        
+    <div class="ys_right">
+            <div class="ys_r_li">
+                <ul>
+                    <li class="hover"><span>01</span></li>
+                    <li><span>02</span></li>
+                    <li><span>03</span></li>
+                </ul>
+            </div>
+            
+            <div class="ys_r_dv">
+                <ul>
+                    <li><img src="/Public/new/images/img_03.jpg" />
+                      <p><span>真实有效</span>真实优质的产品 平台通过图片、文字、视频等方式将产品真实的呈现给客户。</p>
+                    </li>
+                    <li><img src="/Public/new/images/img_06.jpg" />
+                        <p><span>经验丰富</span>多次成功的经验 自平台成立以来，平台成功销售产品已达百余期，经验丰富。</p>
+                  </li>
+                    <li><img src="/Public/new/images/img_09.jpg" />
+                        <p><span>实地考察</span>趣味的实地考察 平台定时举办免费实地考察旅游活动，与产品近距离接触。</p>
+                  </li>
+                </ul>
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+          <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div> 
+
+
+
+<div class="hx_shop">
+         <div class="sy_title">
+                 海鲜商城
+                <span class="zs_en">Seafood mall</span>
+                <span class="zs_line"></span>
+        </div>
+        
+        <ul>
+            <li><img src="/Public/new/images/xs_09.jpg" /><span>鲜活海鲜<a href="/shop#more">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_11.jpg" /><span>水产干货<a href="/shop#more">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_13.jpg" /><span>即食零食<a href="/shop#more">点击查看</a></span></li>
+            <li><img src="/Public/new/images/xs_16.jpg" /><span>海鲜礼包<a href="/shop#more">点击查看</a></span></li>
+        </ul>
+    </div>
+<div class="clear"></div>
+    
+</div>
+
+<div class="sy_list">
+    <div class="sy_new">
+        <div class="sn_title">
+            新手帮助 <a href="/article/news_list/cid/{$xlist[0]['type_id']}.html">更多>></a>
+        </div>
+        <a href="/article/newsshow/id/{$xlist[0]['id']}/cid/{$xlist[0]['type_id']}.html">
+        <img src="/{$xlist[0]['art_img']}" /></a>
+        <ul>
+            <volist name="xlist" id="vo">
+
+                <a href="{:U('article/newsshow',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">
+                    <li <if condition="$i eq 1"> style="border-top:none;"</if>>{$vo.title|cnsubstr=###,16}</li></a>
+            </volist>
+        </ul>
+    </div>
+    <div class="sy_new">
+        <div class="sn_title">
+            热门公告 <a href="/article/news_list/cid/{$rlist[0]['type_id']}.html">更多>></a>
+        </div>
+         <a href="/article/newsshow/id/{$rlist[0]['id']}/cid/{$rlist[0]['type_id']}.html">
+            <img src="/{$rlist[0]['art_img']}" /></a>
+        <ul>
+          <volist name="rlist" id="vo">
+
+                <a href="{:U('article/newsshow',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">
+                    <li <if condition="$i eq 1"> style="border-top:none;"</if>>{$vo.title|cnsubstr=###,16}</li></a>
+            </volist>
+        </ul>
+    </div>
+    <div class="sy_new">
+        <div class="sn_title">
+            媒体报道 <a href="/article/news_list/cid/{$mlist[0]['type_id']}.html">更多>></a>
+        </div>
+        <a href="/article/newsshow/id/{$mlist[0]['id']}/cid/{$mlist[0]['type_id']}.html">
+        <img src="/{$mlist[0]['art_img']}" /></a>
+        <ul>
+             <volist name="mlist" id="vo">
+
+                <a href="{:U('article/newsshow',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">
+                    <li <if condition="$i eq 1"> style="border-top:none;"</if>>{$vo.title|cnsubstr=###,16}</li></a>
+            </volist>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>    
+<div class="huoban">
+        <p class="hx_title"> <span>合作伙伴</span></p>
+        
+        <ul>
+          <volist name="hlist" id="vo">
+            <li><a  target="_blank"><img src="/{$vo.art_img}" /></a></li>
+   </volist>
+
+        </ul>
+        <div class="clear"></div>
+  </div>
+<!--底部-->
+<include file="default:Public:footern" />

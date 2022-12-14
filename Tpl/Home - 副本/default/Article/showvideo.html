@@ -1,0 +1,94 @@
+<include file="default:Public:header" />
+<style type="text/css">
+    .t-video-show .box ul li {
+        width: 31.9%;
+        float: left;
+        margin-right: 1.4%;
+        position: relative;
+    }
+</style>
+<script src="\Public\web\ckplayer\ckplayer\ckplayer.js"></script>
+
+<!--视频直播-->
+<div class="t-video-show">
+    <div class="box">
+        <ul class="clearfix">
+            <!-- <foreach name="list.list" item="vo">   -->
+            <a href="javascript:;" onclick="videoshow({$vo.id})"  >
+                <li>
+                    <img src="/{$vo.art_img}"  width="100%" height="245px" alt="" />
+                    <if condition="$vo.art_content neq ''">
+                        <img class="pic1" src="/Public/web/img/zuixinzixun/video.png" alt="" />
+                    </if>
+                    <div class="show">
+                        <p>{$vo.title}</p>
+                    </div>
+                    <div class="bot clearfix">
+                        <div class="num fl clearfix">
+                            <img class="pic2 fl" style="width: 22px; height: 19px;margin-left: 5px" src="/Public/web/img/zuixinzixun/eye.png" alt="" />
+                            <p class="fl">{$vo.art_click|default=0}</p>
+                        </div>
+                        <div class="day fr">
+                            <p>{$vo.art_time|date='Y-m-d',###}</p>
+                        </div>
+                    </div>
+                </li>
+            </a>
+            <!-- </foreach>-->
+        </ul>
+    </div>
+    <div class="aFye clearfix" style="margin-top:50px;    position: inherit;">
+        {$list.page}
+    </div>
+</div>
+
+<div class="clearfix" style="clear: both;"></div>
+<div class="viedo-sm" id="viddo" style="display: none;">
+    <div class="video bot videoshow" id="streamFrame">
+    </div>
+</div>
+<style type="text/css">
+    body>div{
+        min-width: 830px;
+    }
+</style>
+<script>
+    function videoshow(id){
+        $.ajax({
+            url: "__URL__/videoshow/",
+            type:'post',
+            dataType:'json',
+            data:  {"id":id},
+            success: function(data){
+                layer.open({
+                    skin:'p-p',
+                    title:data.title,
+                    type: 1,
+                    shadeClose: true, //点击遮罩关闭
+                    area: ['830px', '620px'], //宽高
+                    content:$('#viddo'),
+                    end:function () {
+                        $('#streamFrame').html("");                    		  }
+                });
+                if (data.art_content) {
+                    //document.getElementById("streamFrame").contentWindow.location.href = data.art_content;
+                    var videoObject = {
+                        container: '.video',//��#������������ID����.���򡰡�����������class
+                        variable: 'player',//�����Ա������ã�ֵ���������new chplayer()�Ķ���
+                        autoplay:true,
+                        html5m3u8:true,
+                        video:data.art_content,//��Ƶ��ַ
+                        live:true
+                    };
+                    var player=new ckplayer(videoObject);
+                }
+
+            }
+
+        });
+
+
+
+    };
+</script>
+<include file="default:Public:footer" />

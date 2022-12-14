@@ -1,0 +1,147 @@
+<div style="clear:both;"></div>
+<div class="jc10-2">    
+  <div class="hzjg3">
+  		<div class="jbxx">{$guarantee.title}</div>
+        <div class="jbxx_info">
+        	<table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr>
+                <td>注册资金：{$guarantee.db_zijin}</td>
+                <td>公司成立日期：{$guarantee.db_chengli}</td>
+                <td>开始合作时间：{$guarantee.db_hezuo}</td>
+                <td>联系电话：{$guarantee.db_tel}</td>
+              </tr>
+              <tr>
+                <td>公司网址：{$guarantee.db_net}</td>
+                <td colspan="3">公司地址：{$guarantee.db_address}</td>
+              </tr>
+            </table>
+
+      </div>
+      	<div class="jbxx">公司简介</div>
+        <div class="jbxx_info2">
+       		{$guarantee.db_content}
+      </div>
+  </div>
+    <div style="clear:both;"></div>
+    <div class="jc15">
+    	<div id="tab4">
+	<ul class="tab_menu4">
+    	<li class="selected">相关图片</li>
+        
+        
+    </ul>
+    <div class="tab_box4">
+    	<script src="/Public/default/home/js/slider.js" type="text/javascript"></script> 
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#slider').slider({ speed: 500 });
+	$('#slider2').slider({ speed: 500 });
+});            
+</script>
+    	<div class="jc_spec82">
+        	<div id="slider">
+            <php>$x=1000;foreach(unserialize($guarantee['db_pics']) as $v){ $x--;</php>
+		<div class="spic2">
+			<img src="/<php>echo $v['img'];</php>" />
+		</div>
+		<php> } </php>
+	</div>
+        </div>
+        
+        
+    </div>
+</div>
+    </div>
+    <div style="clear:both;"></div>
+    <!--在保项目-->
+   <!-- <div class="jc15">
+    	<div id="tab2">
+	<ul class="tab_menu2">
+    	<li class="selected">在保项目</li>
+        <li>结清项目</li>
+        
+    </ul>
+    <div class="tab_box2">
+    	<div style="padding-bottom:0px !important; padding-top:0px !important;">
+        	<ul class="jc_spec91">
+            	<li>
+                	<a href="#"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <div style="clear:both; padding-bottom:0px !important; padding-top:0px !important;"></div>
+            </ul>
+        </div>
+        <div class="hide"style="padding-bottom:0px !important; padding-top:0px !important;">
+        
+        	<ul class="jc_spec91">
+            	<li>
+                	<a href="#"><img src="images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <li>
+                	<a href="#"><img src="images/jc_img18.jpg" /></a>
+                    <p><a href="#">项目标题项目标题项目标题项目标题</a></p>
+                    <p>还款方式：按月付息，到期还本</p>
+                    <p>项目规模：<span class="jc_spec92">1000万</span></p>
+                    <p>项目期限：<span class="jc_spec93">12个月</span></p>
+                    <p>年化收益：：<span class="jc_spec94">14.50%</span></p>
+                </li>
+                <div style="clear:both; padding-bottom:0px !important; padding-top:0px !important;"></div>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+    </div> -->
+    <!--结清项目-->
+</div>
+
+<div style="clear:both;"></div>

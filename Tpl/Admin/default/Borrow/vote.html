@@ -1,0 +1,84 @@
+<include file="Public:_header" />
+<style type="text/css">
+.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+  <div class="page_tit">投票管理</div>
+  <div class="page_tab"><span data="tab_1" class="active">投票说明</span><span data="tab_2">投票记录</span></div>
+  
+  <div class="form2">
+  <form method="post" action="">
+      <input type="hidden" name="id" value="{$vo.id}" />
+      <input type="hidden" name="act" value="edit" />
+      <div id="tab_1" >
+         <dl class="lineD">
+          <dt>开启投票：</dt>
+          <dd>
+            <htmlA:radio id="can_vote" value="key|vo.can_vote" default="0|否,1|是" />
+          </dd>
+        </dl>
+        <dl>
+        <dt>短信通知投资人：</dt>
+          <dd>
+              <input name="is_send" type="checkbox" value="1" id="is_send"><label for="is_send">是，开启投票时通知。</label>        
+          </dd>
+        </dl>
+         <dl class="lineD">
+          <dt>投票说明：</dt>
+          <dd>
+          <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script> 
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="vote_content"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                <textarea name="vote_content" id="vote_content" style="width:96%;height:300px;visibility:hidden;">{$vo.vote_content}</textarea>
+          </dd>
+        </dl>      
+      </div>
+      <div id="tab_2" class="list" style="display:none">
+           <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr class="ta_a">
+                              <th>投资人</th>
+                                <th>真实姓名</th>
+                                <th>投票结果</th>
+                                <th>投票时间</th>
+                                
+                            </tr>
+                            <volist name="votelist" id="vi">
+                            <tr>
+                              <td><htmlA:user id="vi.userid" uname="vi.user_name" /></td>
+                              <td><htmlA:user id="vi.userid" uname="vi.real_name" /></td>                              
+                                <td>{$vi.status}</td>
+                                <td>{$vi.add_time}</td>
+                                
+                            </tr>
+                            </volist>
+                        </table>
+      </div>
+      
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+      </form>
+  </div>
+</div>
+<include file="Public:_footer" />

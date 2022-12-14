@@ -1,0 +1,138 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<tagLib name="htmlA" />
+<style type="text/css">
+.sel_fs{width:110px}  
+  .search_member{margin: 0px 10px;display: inline-block;padding: 5px;cursor: pointer;border: 1px solid #ABCDEF;border-radius: 3px;}
+</style>
+<div class="so_main">
+<div class="page_tit">添加红包发放规则</div>
+<div class="page_tab"><span data="tab_1" class="active">红包发放规则</span></div>
+<div class="form2">
+	<form method="post" action="{:U('rules_add')}">	
+	<input type="hidden" value="{$rules.id}" name="id">
+	<div id="tab_1">
+	<div id="tab_1">
+        <dl class="lineD guizeleixin">
+        	<dt>规则类型：</dt>
+        	<dd>
+        		<htmlA:radio id="type" default="2|注册成功，有多条规则时，逐条匹配发放,3|投资成功，有多条规则时，根据最多投资金额匹配,1|签到成功，有多条规则时，根据最多投资金额匹配" value="key|rules.type" />
+        	</dd>
+        </dl>
+	</div><!--tab1-->
+	<div id="tab_1" class="moneytypez">
+        <dl class="lineD">
+        	<dt>
+        		优惠类型：
+        	</dt>
+        	<dd>
+        		<htmlA:radio id="money_type" default="2|金额,1|积分" value="key|rules.money_type" />	
+        	</dd>
+        </dl>
+	</div><!--tab1-->
+	<dl class="lineD moneybonus"  ><dt>发放红包金额：</dt>
+	<dd>
+		<htmlA:input id="money_bonus" value="{$rules.money_bonus|default=1.00}" /><span class="tip">元</span></dd>
+</dl>
+<dl class="lineD investmoney"  ><dt>发放规则：</dt>
+	<dd><span class="tz">最低投资</span>
+		<htmlA:input id="invest_money" value="{$rules.invest_money|default=1000}" /><span class="tip">元</span>
+	规则为"<span class="guize">注册成功</span>"时有效
+	</dd>
+</dl>
+<dl class="lineD bonusinvestmin"  ><dt>使用规则：</dt>
+	<dd>最低投资
+		<htmlA:input id="bonus_invest_min" value="{$rules.bonus_invest_min|default=1000}" /><span class="tip">元</span>。</dd>
+</dl>
+<dl class="lineD expiredday" ><dt>&emsp;</dt>
+	<dd>红包有效
+		<htmlA:input id="expired_day" value="{$rules.expired_day|default=30}" /><span class="tip">天</span>。(默认30天)</dd>
+</dl>
+
+<dl class="lineD"><dt>规则生效时间：</dt>
+	<dd>
+		<htmlA:timer id="start_time" tip='只选开始时间则查询从开始时间往后所有'
+					 arg="{dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"
+					 class="Wdate" value="{$rules.start_time|date='Y-m-d H:i:s',###}" />
+	</dd>
+</dl>
+<dl class="lineD"><dt>规则失效时间：</dt>
+	<dd>
+		<htmlA:timer id="end_time" tip='只选结束时间则查询从结束时间往前所有'
+					 arg="{minDate:'#F{$dp.$D(\\\\'start_time\\\\')}',maxDate:'2025-10-01',startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}" class="Wdate" value="{$rules.end_time|mydate='Y-m-d H:i:s',###}" />
+	</dd>
+</dl>
+
+	</div><!--tab1-->
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+	//
+		 $(".moneytypez input").eq("1").hide();
+		 $(".moneytypez label").eq("1").hide();
+		 
+		$(".guizeleixin input").click(function(){
+		if($(this).val()==1){
+			//alert($(".moneybonus").html())
+		 	 $(".moneytypez input").eq("1").show();
+		 	  $(".moneytypez label").eq("1").show();
+		 	 	$(".investmoney .tz").text("签到天数")
+			$(".investmoney .tip").text("天")
+			$(".investmoney .guize").text("签到")
+			
+				$(".bonusinvestmin").hide();
+				$(".expiredday").hide();
+		}
+				if($(this).val()==2){
+					 	 $(".moneytypez input").eq("1").hide();
+					 	  $(".moneytypez label").eq("1").hide();
+			//alert($(".moneybonus").html())
+			$(".moneybonus>dt").html("发放红包金额:");
+				$(".moneybonus>dd>span").html("元");
+			$(".investmoney .tip").text("元")
+			$(".investmoney .guize").text("注册成功")
+			$(".bonusinvestmin").show();
+				$(".expiredday").show();
+		}
+		if($(this).val()==3){
+				 $(".moneytypez input").eq("1").hide();
+				  $(".moneytypez label").eq("1").hide();
+				  
+			//alert($(".moneybonus").html())
+			$(".moneybonus>dt").html("发放红包金额:");
+				$(".moneybonus>dd>span").html("元");
+			$(".investmoney .tip").text("元")
+			$(".investmoney .guize").text("投资成功")
+			$(".bonusinvestmin").show();
+				$(".expiredday").show();
+		}
+		//alert($(this).val());
+	})
+	$(".moneytypez input").click(function(){
+		if($(this).val()==1){
+			//alert($(".moneybonus").html())
+			$(".moneybonus>dt").html("发放积分数:");
+						$(".moneybonus>dd>span").html("积分");
+			$(".investmoney .tip").text("天")
+				$(".bonusinvestmin").hide();
+				$(".expiredday").hide();
+		}
+				if($(this).val()==2){
+			//alert($(".moneybonus").html())
+			$(".moneybonus>dt").html("发放红包金额:");
+				$(".moneybonus>dd>span").html("元");
+			$(".investmoney .tip").text("元")
+			$(".bonusinvestmin").show();
+				$(".expiredday").show();
+		}
+		//alert($(this).val());
+	})
+function showurl(url,Title){
+  ui.box.load(url, {title:Title});
+}
+</script>
+</div>
+<include file="Public:_footer" />

@@ -1,0 +1,113 @@
+<include file="default:Public:mheader" />
+
+<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a>项目收益</a></span> 
+</div>
+
+<div class="box clearfix">
+    <include file="default:Public:_left" />
+    <div class="tabvbox">
+
+<form action='__URL__/borrowpaying' id='searinfo' method='get'>
+
+        <div class="tabv clearfix">
+            <div <if condition="$borrow_status eq ''"> class="on" </if> ><span><a href="{:U('borrowin/borrowpaying')}">所有收益</a></span></div>
+            <div <if condition="$borrow_status eq 'paydone'"> class="on" </if> ><span><a href="{:U('borrowin/borrowpaying',array('borrow_status'=>'paydone'))}">已发放</a></span></div>
+            <div <if condition="$borrow_status eq 'paying'"> class="on" </if> ><span><a href="{:U('borrowin/borrowpaying',array('borrow_status'=>'paying'))}">未发放</a></span></div>
+<div>
+
+    <input name="name" size="30" type="text" id="name" value="{$name}">
+    <button name="" id="" class="btn btn-success" type="submit">查找</button>
+
+</div>
+
+
+        </div>
+<input name="borrow_status" type="hidden" value="{$borrow_status}">
+
+</form>
+
+
+
+
+
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <div class="bgbx">
+                    <volist name="list" id="vo">
+                    <div class="Tzic">
+                        <div class="clearfix Tzicson">
+                            <h3>{$vo.borrow_name|cnsubstr=###,28}</h3>
+                            <div class="syLsis clearfix">
+                                <p><span>融资金额：</span>¥{$vo.borrow_money}</p>
+                                <p><span>已筹金额：</span>¥{$vo.borrow_money}</p>
+                                <p><span>投资人数：</span>{$vo.id|getinvestnums}</p>
+                                <p><span>收益周期：</span>{$vo.borrow_duration}个月</p>
+                                <p><span>已发放期数：</span>{$vo.has_out}期</p>
+                                <p><span>已发放收益：</span>¥ <if condition="$vo.borrow_status eq '6'"> 0.00<else/>{$vo.repayment_interest}</if></p>
+                                <!-- <p><span>待发放收益：</span>¥{$vo.borrow_money}</p> -->
+                                <p><span>已发本金：</span>¥<if condition="$vo.borrow_status eq '6'"> 0.00<else/>{$vo.repayment_money}</if></p>
+                                
+                            </div>
+                            <div class="Fasy">
+                                <span><if condition="$vo.borrow_status eq '7'"><a style="color: #fff;">已发放</a><else/><a href="{:U('borrowin/fenhong',array('id'=>$vo['id']))}" style="color: #fff;">发放收益</a></if></span>
+                            </div>
+                        </div>
+                            <div class="XmBhbox clearfix">
+                                <div class="touTz">
+                                    <span>编号</span>
+                                    <span>收益期数</span>
+                                    <span>收益周期</span>
+                                    <span>收益金额</span>
+                                    <!-- <span>年利率</span> -->
+                                    <span>收益发放时间</span>
+                                    <span>状态</span>
+                                    <span>操作</span>
+                                </div>
+                                <volist name=":get_invest_list($vo['id'])" id="vb">
+                                <div class="touTz1 ">
+                                    <span>{$key+1}</span>
+                                    <span>{$vb.sort_order}期</span>
+                                    <span>{$vo.borrow_duration}个月</span>
+                                    <span>¥{$vb.income}</span>
+                                    <!-- <span>11.50%</span> -->
+                                    <if condition="$vb.repayment_time eq '0'">
+                                    <span>&nbsp;</span>
+                                    <else />
+                                    <span>{$vb.repayment_time|date="Y-m-d",###}</span>
+                                    </if>
+                                    <if condition="$vb.status eq 1">
+                                    <span>已通过</span>
+                                    <!-- <span>查看明细</span> -->
+                                    <else />
+                                    <span>等待审核</span>
+                                    <span>无</span>
+                                    </if>
+                                </div>
+                                </volist>
+                            </div>
+                    </div>
+                    </volist>
+                </div>
+                <!--分页-->
+                <div class="aFye clearfix" style="    position: inherit;">
+                    <p>
+                        {$pagebar}
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function chazhao(){
+        var key=$("#name").val();
+        window.location.href = "/borrowin/borrowpaying.html?borrow_status="+{$borrow_status}+"name="+key;
+    }
+</script>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

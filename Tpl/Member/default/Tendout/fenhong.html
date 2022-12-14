@@ -1,0 +1,491 @@
+{__NOLAYOUT__}<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="/public/web/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/web/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/public/web/css/ltt.css" />
+	<script src="/public/web/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/public/web/js/ldy.js">
+	</script>
+</head>
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+</style>
+<body>
+	<!--header-->
+	<div class="topbox">
+		<div class="mytop">
+			<div class="my1 clearfix">
+				<div class="mytime fl">
+					客服热线：400-1100-216 在线时间：周一~周六 9:00~18：00
+				</div>
+				<div class="login fr">
+						<if condition="$UID gt '0'"> 
+                       <span> <a href="{:U('/member/index')}" ><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/yh.png" alt=""> {$UNAME}/</a></span>
+                       	<span><a href="{:U('/member/common/actlogout')}">退出</a></span>
+                    <else />
+                    <!--未登录状态-->
+                         
+                       <span> <a href="{:U('/member/common/login')}">登录 /</a></span>
+                       <span> <a href="{:U('/member/common/register')}" >注册</a></span>
+                    </if>
+				</div>
+
+			</div>
+		</div>
+		<div class="mynav">
+			<div class="box clearfix">
+				<div class="navlogo fl">
+					<img src="/public/web/img/guanyu/logo2.png" />
+				</div>
+				<div class="navbox fl">
+										
+					<span><a href="/">首页</a></span>
+					<span>		<a href="/invest/index.html">项目浏览</a></span>
+					<span><a href="/article/news_list.html">最新资讯</a></span>
+					<span>  	<a href="/shop">积分商城</a></span>
+					<span><a href="{:U('/article/video')}">视频直播</a></span>
+					<span ><a href="/article/index/cid/39.html">活动公告</a></span>
+					<span><a href="/article/index/cid/21.html">关于我们</a></span>
+					<span   class="on"><a href="{:U('/member/index/index')}">会员中心</a></span>
+				</div>
+				<div class="l_myxm fr">
+						<a href="/Borrow/index">发起项目</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!--内容部分-->
+	<div class="box navls">
+		<span><a href="{:U('/member/index/index')}">会员中心</a></span>
+		<span>&gt;</span>
+		<span><a href="{:U('/member/index/borrowbreak')}">项目收益</a></span>
+	</div>
+	<div class="box clearfix">
+		<div class="Lxlbox">
+			<div class="lst1">
+				<p class="p1">
+					<span>账户安全级别</span>
+					<span class="bfb">75%</span>
+				</p>
+				<div class="p2">
+					<p class="p3"></p>
+				</div>
+
+			</div>
+			<div class="list2box">
+				<div class="lst2">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/zhanghu.png" />
+						<span>账户中心</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/">
+								<li>账户信息</li>
+							</a>
+							<a href="{:U('charge/index')}">
+								<li>我的充值</li>
+							</a>
+							<a href="{:U('withdraw/withdraw')}">
+								<li>我的提现</li>
+							</a>
+							<a href="/member/bonus/youhuijun">
+								<li>我的红包</li>
+							</a>
+							<a href="/member/capital/detail">
+								<li>收支明细</li>
+							</a>
+							<a href="/member/Credit/index">
+								<li>积分明细</li>
+							</a>
+						</ul>
+					</div>
+				</div>
+				<div class="lst2 ">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/wode.png" />
+						<span>我的项目</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/Borrowin/borrowing?type=1">
+								<li>联合养殖</li>
+							</a>
+							<a href="/member/Borrowin/borrowing?type=2">
+								<li>联合销售</li>
+							</a>
+							<a href="/member/Borrowin/borrowing?type=3">
+								<li>共建项目</li>
+							</a>
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="lst2">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/faqi.png" />
+						<span>发起管理</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/Borrow/index"> 
+								<li>发起项目</li>
+							</a>
+							<a href="/member/Tendout/index">
+								<li>项目收益</li>
+							</a>
+							<!--<a href="##">
+								<li>债权转让</li>
+							</a>
+							<a href="##">
+								<li>放款记录</li>
+							</a>--> 
+						</ul>
+					</div>
+				</div>
+				<div class="lst2 ">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/Settings.png" />
+						<span>个人设置</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/Memberinfo#chip-1">
+								<li>个人资料</li>
+							</a>
+							<a href="/member/safe/">
+								<li>安全信息</li>
+							</a>
+							<a href="/member/memberaddress">
+								<li>收货地址</li>
+							</a>
+							<a href="/member/bank/index">
+								<li>银行卡</li>
+							</a>
+
+						</ul>
+					</div>
+				</div>
+				<div class="lst2">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/yaoqing.png" />
+						<span>我的邀请</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/promotion/yaoqing">
+								<li>邀请记录</li>
+							</a>
+
+						</ul>
+					</div>
+				</div>
+				<div class="lst2">
+					<div class="p1" data-a="1">
+						<img src="/public/web/img/huiyuan/jifen.png" />
+						<span>积分兑换</span>
+						<span class="smp1">&gt;</span>
+					</div>
+					<div class="p2">
+						<ul>
+							<a href="/member/shoporder">
+								<li>兑换记录</li>
+							</a>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tabvbox">
+			<div class="tabv clearfix">
+				<div class="on"><span>发放收益</span></div>
+			</div>
+			<div class="tabv2box">
+				<div class="tabv2 show">
+					<div class="Ffsy">
+						<div class="Ffsy-n">
+							<h3>{$binfo.borrow_name}</h3>
+							<h4>收益设置：</h4>	
+							<!--收益选项-->
+							<div class="FSy clearfix">
+								<div class="FSy1">
+									<div class="FSyn">收益年度：</div>
+									<div>
+										<select name="investyear" id="investyear">
+											<option value="">请选择</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+										</select>
+									</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">收益期数：</div>
+									<div>
+										<select name="sort_order" id="sort_order" >
+											<option value="">请选择</option>
+											<option value="1">第一期</option>
+											<option value="2">第二期</option>
+											<option value="3">第三期</option>
+											<option value="4">第四期</option>
+											<option value="5">第五期</option>
+											<option value="6">第六期</option>
+											<option value="7">第七期</option>
+											<option value="8">第八期</option>
+											<option value="9">第九期</option>
+											<option value="10">第十期</option>
+											<option value="11">第十一期</option>
+											<option value="12">第十二期</option>
+										</select>
+									</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">本期收益金额：</div>
+									<div>
+										<input type="text" value="" name="income" id="income" />
+									</div>
+								</div>
+
+								<div class="FSy1">
+									<div class="FSyn">发放时间：</div>
+									<div>
+										<input type="date" name="starttime" id="starttime" /><span style="float: left; margin:0 10px;">-</span>
+										<input type="date" name="endtime" id="endtime" />
+										
+									</div>
+								</div>
+									<div class="FSy1">
+									<div class="FSyn">收益发放含本金：   </div>
+									<div>
+										<input name="has_capitals" type="checkbox" value="1" id="has_capitals" ><label for="has_capitals">是</label>
+									</div>
+								</div>
+								<div class="clearfix">	</div>
+								<button class="anNIOU" onclick="generate({$bid})">
+									生成收益明细
+								</button>
+							</div>
+								
+							<!--介绍-->
+							<div class="jSasp">
+								<p>
+								注：依据本次收益金额、投资人投资金额所占支持比例进行计算，自动计算投资人收益金额。
+								</p>
+								<p>
+								算法：单个投资人每期分红金额=每期分红金额/（已筹总额*收益率）*投资金额*收益率=每期分红金额*（投资金&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 额/已筹总额）
+								</p>
+								<p>
+								支持比例=投资金额/已筹总额
+								</p>
+								<p>
+								平均年收益率=本期收益金额/已筹总额/收益周期（月数）*12
+								</p>
+								<p>
+								<br/>
+								</p>
+							</div>
+						</div>
+						<div >
+							<!--项目收益-->
+							<div class="XmBhbox clearfix">
+							  	<div class="touTz on">
+							  	  	<span>收益期数</span>
+							  	  	<span>收益年度</span>
+							  	  	<span>本期收益金额</span>
+							  	  	<span>收益周期</span>
+							  	  	<span>本期收益总金额</span>
+							  	  	<span>平均年收益率</span>
+							  	  	<span>收益开始时间</span>
+							  	  	<span>收益结束时间</span>
+							  	  	<span>操作</span>
+							  	</div>
+							  	<volist name="list" id="vo">
+							  	<div class="touTz1 on">
+								        <span>{$vo.sort_order}</span>
+										<span>{$vo.investyear}</span>
+										<span>{$vo.income}</span>
+										<span>{$vo.borrow_duration}个月</span>
+										<span>{$vo.allmoney}</span>
+										<span>{$vo.year_invest}</span>
+										<span>{$vo.starttime|date="Y-m-d",###}</span>
+										<span>{$vo.endtime|date="Y-m-d",###}</span>
+										<span>
+											<if condition="$vo.is_repmeny eq 0">
+												<a href="__URL__/invest_detail_del?id={$vo.id}">删除</a>
+											</if>
+											<if condition="$vo.is_repmeny eq 1">
+												<if condition="$vo.status eq 1">
+													已还款
+												<else />
+													待审核
+												</if>
+											</if>
+										</span>
+							  	</div>
+								</volist>
+								<div class="touTz1 on touzilog"></div>
+							</div>
+							<!--编号投资人-->
+							<div class="XmBhbox clearfix showsy" style="display: none;">
+								<div class="touTz on">
+									
+									<span style="width: 23%;">编号</span>
+									<span>投资人</span>
+									<span>投资金额</span>
+									<span>支持比例</span>
+									<span>本金</span>
+									<span>收益</span>
+									<span> 最终收益（含本金）</span>
+								</div>
+								<div class="huikuanmingxi"></div>
+						    </div>
+						</div>
+			            <div  class="symios">
+			               	<form action="__URL__/subgenerate" method="post" name="myform" id="myform">
+				               	<h4>收益描述：</h4>
+				               	<!--编辑器没有-->
+				               	<textarea name="info" id="info" rows="" cols=""></textarea>
+				               	<input type="hidden" name="borrow_id" id="borrow_id" />
+				               	<input type="hidden" name="invest_orderid" id="invest_orderid" />
+				               	<input type="hidden" name="capital" id="capital" />
+				               	<input type="hidden" name="has_capital" id="has_capital" />
+				               	<!--提交-->
+				               	<div class="btnTjiao">
+				               		<input type="button" onclick="sub()" value="提交审核" class="button" >
+				               		<a onclick="subreg()">重置</a>
+				               		
+				               	</div>
+			               	</form>
+			            </div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+<!--底部-->
+<include file="default:Public:_footer" group="Home"/>
+<script type="text/javascript">
+	function subreg(){
+		document.getElementById("myform").reset();
+	}
+	function generate(bid){
+		var investyear = $("#investyear").val();
+		var sort_order = $("#sort_order").val();
+		var income = $("#income").val();
+		var starttime = $("#starttime").val();
+		var endtime = $("#endtime").val();
+		if($("#has_capitals").is(':checked')){
+			var has_capital = 1
+		}else{
+			var has_capital=0
+		}
+		if (investyear=="") {
+				alert('请选择收益年度！');
+				return false;
+			}
+		if (sort_order=="") {
+				alert('请选择收益期数！');
+				return false;
+			}
+		if (income=="") {
+				alert('请填写本期收益！');
+				return false;
+			}
+		if (starttime=="") {
+				alert('发放开始时间！');
+				return false;
+			}
+		if (endtime=="") {
+				alert('发放结算时间！');
+				return false;
+			}
+
+		$.ajax({
+				url: "__URL__/generate",
+				type: "post",
+				dataType: "json",
+				data: {
+					investyear:investyear,sort_order:sort_order,income:income,starttime:starttime ,endtime:endtime , has_capital:has_capital,bid:bid
+				},
+				success: function(d) {
+					if (d.status == 1) {
+						var htm = '';
+						var strhtm = '';
+						$('.showsy').show();
+                        var datalog= d.datalog;
+	                   	strhtm +='<span>'+datalog.sort_order+'</span>';
+	                   	strhtm +='<span>'+datalog.investyear+'</span>';
+	                   	strhtm +='<span>'+datalog.income+'</span>';
+	                   	strhtm +='<span>'+datalog.borrow_duration+'个月</span>';
+	                   	strhtm +='<span>'+datalog.capital+'</span>';
+	                   	strhtm +='<span>'+datalog.year_invest+'</span>';
+	                   	strhtm +='<span>'+datalog.starttime+'</span>';
+	                   	strhtm +='<span>'+datalog.endtime+'</span>';
+		                $.each(d.savedetaillog, function(index, val) {         
+		                   	htm +='<div class="touTz1 on ">';           
+							htm +='<span style="width: 23%;">'+val.nums+'</span>';
+							htm +='<span>'+val.investor+'</span>';
+							htm +='<span>'+val.capital+'元</span>';
+							htm +='<span>'+val.rate+'% </span>';
+							htm +='<span>'+val.benjin+'元</span>';
+							htm +='<span>'+val.invest+'元</span>';
+							htm +='<span>'+val.allmoney+'元</span>';
+							htm +='</div>';
+		                                      
+		                });
+		                $("#borrow_id").val(bid);
+		                $("#invest_orderid").val(sort_order);
+		                $("#has_capital").val(has_capital);
+		                $("#capital").val(datalog.capital);
+		                $(".huikuanmingxi").append(htm);
+		                $(".touzilog").append(strhtm);
+					}
+					else if (d.status == 0) {
+						alert(d.info);
+					}
+				}
+			});
+	}
+	function sub(){
+		var info = $("#info").val();
+		var borrow_id = $("#borrow_id").val();
+		var invest_orderid = $("#invest_orderid").val();
+		if(borrow_id == ''){
+			alert('请先生成收益明细');
+			return false;
+		}
+		if(invest_orderid == ''){
+			alert('请先生成收益明细');
+			return false;
+		}
+		if(info == ''){
+			alert('填写收益描述');
+			return false;
+		}
+		$("#myform").submit();
+		return true;
+	}
+</script>
+</body>
+
+</html>

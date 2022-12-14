@@ -1,0 +1,62 @@
+<include file="Public:header"/>
+<div style="clear:both;"></div>
+<div class="jfsc" style="padding-top:0px;">
+	<div class="jf_mbx" style="margin-top:0px;">当前位置：<a href="/">首页</a> > <a href="/maket">积分商城</a> > <span>{$vo.title}</span></div>
+    <div class="jf_info">
+    	<div class="line"></div>
+        <div class="jf_info2"><span>兑换详情</span></div>
+        <div class="jf_info_left">
+        	<img src="/{$vo.art_img}" width="500" height="420" />
+        </div>
+        <div class="jf_info_right">
+        	<p class="jf_spec6">{$vo.title}</p>
+            <p class="jf_spec7">所属类别：{$vo.type_name}</p>
+            <p class="jf_spec7">所需积分：<span>{$vo.art_jiage}</span></p>
+            <p class="jf_spec7">购买人数：{$vo.buy}人</p>
+            <p class="jf_spec7">剩余数量：{$vo.art_writer}</p>
+            <p class="jf_spec7">商品状态：<if condition="$vo.art_set eq 0"> 在售 <else/>已售完</if></p>
+            <p class="jf_spec8"><a href="/maket/order?id={$vo.id}">立即兑换</a></p>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="lc_tbjl">
+<script type="text/javascript">
+$(document).ready(function(){
+  var $tab_li = $('#px_tab ul li');
+  $tab_li.hover(function(){
+    $(this).addClass('selected').siblings().removeClass('selected');
+    var index = $tab_li.index(this);
+    $('div.px_tab_box > div').eq(index).show().siblings().hide();
+  }); 
+});
+</script>
+    <div id="px_tab">
+  <ul class="px_tab_menu">
+      <li class="selected">商品详情</li>
+        <li>购买记录<span class="px_spec37">{$vo.buy}</span></li>
+    </ul>
+    <div class="px_tab_box">
+      <div>{$vo.art_content}</div>
+      <div class="hide">
+          <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr class="px_spec38">
+                <td width="10%" align="center">序号</td>
+                <td width="50%">购买人</td>
+                <td width="40%">购买时间</td>
+              </tr>
+              <!-- <volist name="buylist" id="vi"> -->
+              <tr class="px_spec39">
+                <td align="center">{$i}</td>
+                <td>{$vi.user_name|hidecard=###,5}</td>
+                <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+              </tr>
+              <!-- </volist> -->
+            </table>
+        </div>        
+    </div>
+</div>
+    </div>
+<div style="clear:both;"></div>
+<include file="Public:footer"/>

@@ -1,0 +1,274 @@
+<script src="/Public/zpublic/js/jquery-1.7.2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/Public/zpublic/css/style.css">
+<script type="text/javascript">
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 640*100 + 'px';
+    $(function(){
+        var bl =document.documentElement.clientWidth/640;
+        var gd=bl*355;
+        $(".swiper-slide a").css("height",gd+"px");
+        $(".pc-banner").css("height",gd+"px");
+        $(".swiper-slide img").css("height",gd+"px");
+    });  
+</script>
+<script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+
+<style type="text/css">
+.menus li{
+    width:1rem;float: left;padding:0 .1rem
+}
+.menus li a{
+    float: left;width: 60%;margin-left: 20%;
+}
+.menus li span{
+    font-size: 0.24rem;float:left;
+}
+.bzhuangtai{
+    width: 0.8rem;
+}
+
+</style>
+<div class="menu">
+    <div style="margin:0 0.1704rem;height: 0.95424rem;overflow: auto;zoom: 1;">
+        <img src="/Public/zpublic/images/logo.png"  style=" height: .36636rem; float: left; padding-top: 0.3rem;" />
+        <span style="padding-left: 0.03rem;text-align: center;line-height:.19rem; color: #fff;height: .36636rem;border-left: 0.019661538461538rem solid #ffffff;font-size: 0.12rem;float:left;margin-left:.05rem;margin-top: .3rem;font-weight: 100"><p>专注海洋特色项目</p>    <p>综合性众筹平台</p></span>
+
+
+    <if condition="$UID gt '0'">
+
+  <a href="/Wapmember/">
+    <span style="height: .36636rem;float: right;color: #fff;padding-top: 0.26rem;font-size: .25rem;font-weight: 200;
+">
+<img src="/Public/cpublic/image/1_03.png" style=" height: .36636rem; float: right; padding-top: 0.02rem;">
+
+</span>
+</a>
+ 
+                    <else />
+
+            
+
+<a href="/Wapmember/common/login.html">
+<span style="height: .36636rem;float: right;color: #fff;padding-top: 0.26rem;font-size: .25rem;font-weight: 200;
+">登录</span></a>
+
+        
+     </if>
+
+
+
+
+
+
+    </div>
+</div>
+
+<div class="top">
+
+    <section class="pc-banner">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            
+            <volist name=":get_ad(39)" id='vo'  >  
+      
+              <div class="swiper-slide">
+                    <a href="{$vo.url}">
+                        <img src="/{$vo.img}">
+                    </a>
+
+                </div>
+            </volist> 
+
+            </div>
+      <!--       <div class="swiper-pagination"></div> -->
+        </div>
+    </section>
+ 
+    <script type="text/javascript">
+$(function(){
+        $('.cui-timer').Cuitimer();
+});
+
+       
+
+        window.onload = function() {
+            var swiper = new Swiper('.swiper-container',{
+                autoplay:3000,
+                speed: 1000,
+                loop: true,
+                centeredSlides: true,
+                slidesPerView: 1.2,
+            });
+
+        }
+    </script>
+       <script type="text/javascript" src="/Public/zpublic/js/swiper.min.js"></script>
+</div>
+<div class="menu2">
+    <div style="overflow: auto;zoom: 1;" class="menus">
+        <ul>
+            <li>
+                <a href="/wap/article/index/cid/37.html"><img style="width:100%" src="/Public/zpublic/images/huodong_1.png"></a>
+                <span>活动中心</span>
+            </li>
+            <li>
+                <a href="/wapmember/capital/qiandao"><img style="width:100%" src="/Public/zpublic/images/qiandao_1.png"></a>
+                <span>签到奖励</span>
+            </li>
+            <li>
+                <a href="/wap/article/index/cid/54.html"><img style="width:100%" src="/Public/zpublic/images/zixun_1.png"></a>
+                <span>最新资讯</span>
+            </li>
+            <li>
+                <a href="/wap/article/index/cid/55.html"><img style="width:100%" src="/Public/zpublic/images/zhibo_1.png"></a>
+                <span>直播中心</span>
+            </li>
+            <li>
+                <a href="/wap/invest/index"><img style="width:100%" src="/Public/zpublic/images/quanbu_2.png"></a>
+                <span>全部项目</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="menu3">
+
+<a href="/wap/article/index/cid/{$gg.type_id}/id/{$gg.id}.html">  
+        <p style="padding:.2rem .1rem 0;font-size: 0.25rem;line-height: .3rem;overflow: hidden;height: 0.3rem;">
+     <span style="float: left"><img src="/Public/zpublic/images/zuixin_1.png" style="height: .3rem" /></span>
+     【{$gg.tname}】{$gg.title|cnsubstr=###,15}
+
+    
+    </p>
+</a>
+
+</div>
+
+<div class="menu4">
+    <a href="/Wapmember/promotion/yaoqing"><img src="/Public/zpublic/images/yaoqing.png" width="100%"/></a>
+</div>
+<div class="menu5">
+    <div style="height:2.45376rem;padding-bottom: .25rem;background: #ffffff;border-radius: .1rem;">
+        <div ><h1>体验项目</h1><span>仅限新人</span></div>
+        <ul>
+            <li>
+                <span>24.00<span>%</span></span>
+                <p>年化（%）</p>
+            </li>
+            <li>
+                <span>8888<span>元</span></span>
+                <p>体验金</p>
+            </li>
+            <li>
+                <span>1<span>天</span></span>
+                <p>周期（天）</p>
+            </li>
+        </ul>
+        <a href="/Wap/invest/detail/id/1.html"><p>立即投资</p></a>
+    </div>
+</div>
+<div class="menu6">
+    <div style="background: #ffffff;border-radius: .1rem;padding-bottom: .25rem;">
+        <div style="padding-top: .25rem;"><h2></h2><h1>众筹项目</h1> <span><a href="/wap/invest/index">更多>></a></span></div>
+        <ul>
+ 
+        <volist name="list_type1.list" id="vb">
+
+            <li>
+                <a href="{:U('invest/detail',array('id'=>$vb['id']))}">
+                    <div>
+                        <?php $borrow_img=explode(',',$vb['content_img']); ?>  
+                        <img src="{$borrow_img[0]|default='/Public/upload/1542157585_48.jpg'}"/>
+
+                        <if condition="$vb.start_time gt time()">
+                                 <img class="bzhuangtai" src="/Public/zpublic/images/yure.png" alt="" />
+
+                                 <elseif condition="$vb.borrow_status eq 2" />
+                                 <img class="bzhuangtai" src="/Public/zpublic/images/zhongchou.png" alt="" />
+                                 <elseif condition="$vb.borrow_status eq 6" />
+                                 <img class="bzhuangtai" src="/Public/zpublic/images/wancheng.png" alt="" />
+                                
+                         </if>
+                    </div>
+                    <div>
+                        <b>{$vb.borrow_name|cnsubstr=###,10}</b>
+                        <span>目标：<span>￥{$vb.borrow_money|getMoneyFormt=###}</span></span>
+                        <p>
+                            <?php $var=member_img($vb['borrow_uid']);?>
+                            <img src="{$var.user_img}">
+                            <span>{$var.user_name}</span>
+                        </p>
+
+      
+                        
+                    <div class="kdu">
+                                <present name="vb.bespeak_progress">
+                    <if condition="$vb.start_time + $vb.bespeak_days * 60 * 60 * 24 gt time()">
+                                            <div class="kdu1" style="width: {$vb.bespeak_progress|floatval|min=100}%">
+                                            </div>
+                    </if>
+                                </present>
+                                <div class="kdu2" style="width: {$vb.progress|floatval|min=100}%">
+                                </div>
+                    </div>
+                            
+
+
+
+
+
+                         <if condition="$vb.start_time gt time()"> 
+                            <p id="daojishi">距离开始：<span class="cui-timer" data-config = '["endtime":"{$vb.start_time|date="Y-m-d H:i:s",###}","msec":false]'> </span></p>
+
+                         <elseif condition="$vb.borrow_status eq 2" /> 
+
+
+                          <p id="daojishi1"><span>达成率：<b>{$vb.progress|floatval|min=100}%</b></span><span>剩余时间：<b>{:getLeftTimes( $vb['start_time'] + ($vb['collect_day']*60*60*24))}</b></span>
+
+                          </p>
+
+                         <else/> 
+
+
+                          <p id="daojishi1"><span>达成率：<b>{$vb.progress|floatval|min=100}%</b></span><span>剩余时间：<b>0天</b></span>
+
+                          </p>           
+
+
+                        </if>
+
+                      
+
+
+                       
+
+                    </div>
+
+                </a>
+           <div class="clear"></div>
+            </li>
+
+        </volist>
+
+         
+        </ul>
+    </div>
+</div>
+<div class="menu7">
+    <div style="height: 0.978rem;">
+        <p style="margin-top: .23856rem;padding:0 .1rem;font-size: 0.25rem;line-height: .3rem;overflow: auto;zoom: 1">
+            <span style="float: left"><img src="/Public/zpublic/images/zuixin_2.png" style="height: .3rem" /></span><b style="color:#3575ea">新手帮助</b>
+            <b> <a href="/wap/article/index/cid/11.html">更多>></a></b>
+        </p>
+        <p style="margin-top: .13856rem; padding: 0 0.1rem;">
+            
+            <a href="/wap/article/index/cid/{$xinshou.type_id}/id/{$xinshou.id}.html">
+            <b style="float: left;margin-left: 0">
+                
+                {$xinshou.title|cnsubstr=###,18}
+
+            </b>
+            <b>{$xinshou.art_time|date="Y/m/d",###}</b></a>
+        </p>
+    </div>
+</div>
+

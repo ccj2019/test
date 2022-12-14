@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css"> -->
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<script src="/Public/wap/js/citylist.js"></script>
+
+	<body>
+		<div class="l-fh l-on">
+			<a href="/wapmember"  class="l-fanhui on">&lt;返回</a><span>项目合同</span>
+			<div class="l-fanhui1">
+			<a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a>
+			</div>
+		</div>
+		<div class="l-tabbox clearfix">
+			<div>
+				
+			<div <if condition="$is_hetong eq 0">class="on"</if>><a href="/Wapmember/Agreement?p={$p}&is_hetong=0">未签合同</a></div>
+			<div <if condition="$is_hetong eq 1">class="on"</if>><a href="/Wapmember/Agreement?p={$p}&is_hetong=1">已签合同</a> </div>	
+			</div>
+			
+		</div>
+		<div class="">	
+			 	<if condition="$is_hetong eq 0"> 	
+		 <div class="l-tab on">
+		 <ul>
+	
+		 	<volist name="list" id="vo">
+		 	<li>
+		 		<a href="/Wapmember/Agreement/qianshu?id={$vo.id}">
+		 			<span>{$vo.borrow_name}</span> <span class="l-fr l-btnfot">签署</span>
+		 		</a>
+		 	</li>
+		 
+		 		
+		 	</volist>
+		  <!--<li>
+		 		<a href="##">
+		 			<span>第sss期联合养殖活动</span> <span class="l-fr l-btnfot">查看详情</span>
+		 		</a>
+		 	</li>-->
+		 </ul>
+		 
+		 </div>
+		 </if>
+		 	 	<if condition="$is_hetong eq 1"> 
+		 <div class="l-tab on">
+		 	<volist name="list" id="vo">
+		 	<li>
+		 		<a href="/Wapmember/Agreement/xiazai?id={$vo.id}">
+		 			<span>{$vo.borrow_name}</span> <span class="l-fr l-btnfot">下载</span>
+		 		</a>
+		 	</li>
+		 
+		 		
+		 	</volist>
+		 <!--<li>
+		 		<a href="##">
+		 			<span>第sss2期联合养殖活动</span> <span class="l-fr l-btnfot">查看详情</span>
+		 		</a>
+		 	</li>
+		 	<li>
+		 		<a href="##">
+		 			<span>第sss期联合养殖活动</span> <span class="l-fr l-btnfot">查看详情</span>
+		 		</a>
+		 	</li>-->
+		 </div> 
+		  </if>
+			</div>
+			
+			{$srt}
+		 	<!--$this->assign('list',$list);
+	 	$this->assign('srt',$srt); 		-->
+			<!--底部-->
+<include file="Public:footer"/>

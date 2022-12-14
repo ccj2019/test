@@ -1,0 +1,82 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+		.bgxmlis>div{
+		width: 13%;
+		text-align: center;
+		padding-left: 0;
+	}
+	.tou1 span{
+		width: 13%;
+		text-align: center;
+		padding-left: 0;
+		margin-left: 0;
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a >发起项目</a></span>
+
+</div>
+<div class="box clearfix">
+    <include file="default:Public:_left"/>
+    <div class="tabvbox">
+        <div class="tabv clearfix">
+            <div <if condition="$borrow_status eq '' "> class="on" </if>><span><a href="{:U('borrowin/index')}">所有项目</a></span></div>
+            <div <if condition="$borrow_status eq 'start' "> class="on" </if>><span><a href="{:U('borrowin/index',array('borrow_status'=>'start'))}">发起成功</a></span></div>
+            <div <if condition="$borrow_status eq 'nostart' "> class="on" </if>><span><a href="{:U('borrowin/index',array('borrow_status'=>'nostart'))}">未发起</a></span></div> 
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                 <!--充值记录-->
+                <div class="bgbx">
+                    <div class="tou1">  
+                        <span style="width: 230px;">项目名称</span>
+                        <span>发起时间</span>
+                        <span>类型</span> 
+                        <span>筹集资金</span>
+                        <span style="width: 115px">状态</span>
+                        <span style="width: 14%;">操作</span>
+                    </div>
+                    <volist name="list" id="vo">
+                    <div class="bgxmlis">
+                        <div class="bt" style="width: 230px !important;">
+                            <img src="{$vo.borrow_img}" width="60" alt="" />
+                            <p>{$vo.borrow_name}</p>
+                        </div>
+                        <div>
+                            {$vo.add_time|date="Y-m-d",###}
+                        </div>
+                        <div>
+                            联合养殖
+                        </div>
+                        <div class="zijin">
+                            ¥{$vo.borrow_money}
+                        </div>
+                        <div class="cg" style="width: 15%;">
+                            <if condition="$vo.borrow_status eq 0">
+                                未发起
+                            <else />
+                                已发起
+                            </if>
+                           
+                        </div>
+                        <div class="xqing" style="width: 15%;">
+                            <a href="{:U('/invest/detail',array('id'=>$vo['id']))}">查看详情</a>
+                        </div>
+                    </div>
+                    </volist>
+                    
+                </div>
+                <!--分页-->
+                <div class="aFye clearfix">
+                    <p>{$pagebar}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,93 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款者</td>
+        <td>借款标题</td>
+        <td>利率</td>
+        <td>未还/总期数</td>
+        <td>待收本金/待收利息</td>
+        <td>投资时间</td>
+        <td>到期时间</td>
+        <td>操作</td>
+      </tr>
+      <volist name="list.data" id="vo">
+        <tr>
+          <td>{$vo.user_name}</td>
+            <td><a target="_blank" href="{$vo.borrow_id|getInvestUrl=###}" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,10}</a></td>
+            <td>{$vo.borrow_interest_rate}%</td>
+            <td>{$vo.re_num}期/{$vo.total}期</td>
+            <td>￥{$vo.capital}/￥{$vo.interest}</td>
+            <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+            <td>{$vo.deadline|date="Y-m-d H:i",###}</if></td>
+            <td><a href="javascript:void(0)" class="onsell" aid="{$vo.id}" onclixck="sellhtml('{$vo.id}')">转让</a></td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-3" id="pager" class="yahoo2 ajaxpagebar navslis">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.ajaxpagebar a').click(function(){
+    try{    
+        var geturl = $(this).attr('href');
+        var id = $(this).parent().attr('data');
+        var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+                  if(d) $("#"+id).html(d.html);
+            }
+        });
+    }catch(e){};
+    return false;
+})
+var loginhtml, validation = function(){
+    //验证写在这
+    $('.onsell').on('click', function(){
+        return false; //此处只作演示
+    });
+};
+var page = {};
+layer.login = function(options){
+    options = options || {};
+    $.layer({
+        type: 1,
+        title: '债权转让',
+        offset: [($(window).height() - 490)/2+'px', ''],
+        border : [5, 0.5, '#666'],
+        area: ['450px','490px'],
+        shadeClose: true,
+        page: page
+    });
+};
+$('.onsell').on('click', function(){
+    //如果已经请求过，则直接读取缓存节点
+    if(loginhtml){
+        page.html = loginhtml;
+    } else {
+        page.url = "__URL__/sellhtml?id="+$(this).attr("aid")
+        page.ok = function(datas){
+            loginhtml = datas.html; //保存登录节点
+        }
+    }
+    layer.login();    
+});
+function sellhtml(id) {
+	
+	if(loginhtml){
+        page.html = loginhtml;
+    } else {
+        page.url = "__URL__/sellhtml?id="+id
+        page.ok = function(datas){
+            loginhtml = datas; //保存登录节点
+        }
+    }
+    layer.login();   
+}
+</script>

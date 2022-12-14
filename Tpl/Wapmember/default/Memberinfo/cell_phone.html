@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<script src="/Public/wap/js/citylist.js"></script>
+
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>修改手机号</span>
+			<div class="l-fanhui1">
+				<!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+		<div class="l-loginbox1" >
+			<div>
+ 
+			<form action="/Wapmember/Memberinfo/cell_phone" method="post" id="shiminglc"    class="clearfix l-shiming1">
+					<ul> 
+
+						<li>
+							<div class="l-leix fl">
+								原手机号
+							</div>
+							<div class="l-leir1 fl">
+								<!--{$member_info.cell_phone}-->
+								<input type="text"   name="old_phone"  id="old_phone" value="{$members.user_phone}"  placeholder="原手机号" />
+
+							</div>
+						</li>
+					 
+						<li>
+							<div class="l-leix fl">
+								验证码
+							</div>
+							<div class="l-leir1 fl">
+								<input type="text" name="Verification" id="Verification"  class="l-inpkd" placeholder=""/>
+								<div class="l-yanzhengm1" id="Img1" >获取验证码</div>
+							</div>
+						</li>
+						<li>
+							<div class="l-leix fl">
+								新手机号
+							</div>
+							<div class="l-leir1 fl">
+								 <input type="text"  name="phone" id="phone"  placeholder="新手机号" />
+ 
+							</div>
+						</li> 
+					</ul>
+					<div class="l-qurena cc"  onclick="Asubmit()">
+	<a> 确认修改</a> 
+		</div>
+				</form>
+			</div>
+		</div>
+		
+		<!--弹出- 
+		
+			<div class="l-dtc" >
+			<div class="l-tanchubox">
+				<p>修改成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>-->
+		</div>
+		
+	
+	</body>
+	 
+	<script  type="text/javascript">
+	function Asubmit() {
+		 var Verification = $("#Verification").val();
+		  var phone = $("#phone").val();
+		  if(Verification!=""&&phone!=""){
+		  	$("#shiminglc").submit();
+		  }
+ 		
+ 	 
+	}
+
+	  $("#Img1").click(function() {
+	
+	var phone = $("#old_phone").val();
+ 
+    if(phone == ""){
+      alert('手机号不能为空');
+      return false;
+    }else{
+    settime() 
+    }
+	
+	
+
+	})
+  var zc=60;
+  if(zc>=60){
+   var countdown=60; 
+  }else{
+   var countdown=zc; 
+  }
+//     var countdown=60; 
+     function settime() 
+        { 
+		var old_phone = $("#old_phone").val();
+ 
+	  if (countdown == 60){
+		$.ajax({
+			url: "/Wapmember/user/Verification/",
+			type: "post",
+			dataType: "json",
+			data: {"phone":old_phone},
+			success: function(d) {
+				       if(d.status == "p"){
+            alert(d.info);
+             return false;
+          }else if(d.status == "m"){
+            alert(d.info);
+             return false;
+          }
+          else if(d.status == "f"){
+            alert(d.info);
+             return false;
+          }else{
+           alert(d.info,{icon: 1});
+            return false;
+          }
+				 console.log(d)
+			}
+		})
+		}
+	     if (countdown == 0) 
+            { 
+                $("#Img1").removeAttr("disabled");    
+                $("#Img1").html("获取验证码"); 
+                countdown = 60; 
+            } 
+            else 
+            { 
+                $("#Img1").attr("disabled","disabled");
+                $("#Img1").html("重新发送(" + countdown + ")"); 
+                countdown--; 
+            } 
+            var dxtimer = setTimeout(function() { if (countdown == 60){clearTimeout(dxtimer);}else{settime();} },1000) 
+}
+
+	</script>
+
+</html>

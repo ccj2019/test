@@ -1,0 +1,138 @@
+<include file="../Public/_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<style type="text/css">
+.tip{color:#000000}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+  <!--列表模块-->
+  <form name="sdf" id="sdf" action="__URL__/khindex" method="get">
+  <div class="Toolbar_inbox">
+  	<span>客服
+       <select name="kfid" class="select">
+    <option value="">请选择</option>
+          <volist name="kflist" id="vo">
+                    <option value="{$vo.id}" <if condition='$vo.id eq $kfid'>selected</if>>{$vo.name}</option>
+          </volist>
+  </select> 
+
+      从<htmlA:timer id="start_time" tip='只选开始时间则查询从开始时间往后所有' arg="{maxDate:'#F{$dp.$D(\\\\'end_time\\\\')||\\\\'2020-10-01\\\\'}',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true}"  class="Wdate" value="{$search.start_time|mydate='Y-m-d',###}"/>
+      到<htmlA:timer id="end_time" tip='只选结束时间则查询从结束时间往前所有' arg="{minDate:'#F{$dp.$D(\\\\'start_time\\\\')}',maxDate:'2020-10-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true}" class="Wdate" value="{$search.end_time|mydate='Y-m-d',###}"/>
+
+    </span>
+    <a href="javascript:;" onclick="javascript:document.forms.sdf.submit();" class="btn_a"><span>统计</span></a></div>
+</form>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+
+              <th class="line_l">用户数量</th>
+              <th class="line_l">新增用户数量</th>
+              <th class="line_l">有效支付用户</th>
+              <th class="line_l">支付项目数量</th>
+              <th class="line_l">支付总金额</th>
+              <th class="line_l">余额支付总金额</th>
+              <th class="line_l">红包总金额</th>
+              <th class="line_l">渔币支付总金额</th>
+          </tr>
+          <tr>
+              <td>{$kfdata['count']}</td>
+              <td>{$kfdata['num']}</td>
+              <td>{$kfdata['empty']}</td>
+              <td>{$kfdata['borrow_num']}</td>
+              <td>{$kfdata['borrow_sum_money']}</td>
+              <td>{$kfdata['borrow_sum_yue']}</td>
+              <td>{$kfdata['bonus_num']}</td>
+              <td>{$kfdata['borrow_sum_yubi']}</td>
+          </tr>
+      </table>
+      
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">投资项目</th>
+    <th class="line_l">投资人</th>
+    <th class="line_l">投资金额</th>
+    <th class="line_l">使用余额</th>
+    <th class="line_l">使用鱼币</th>
+    <th class="line_l">使用红包</th>
+    <th class="line_l">项目周期</th>
+    <th class="line_l">投资时间</th>
+  </tr>
+  <php>$cn=$investor_money=$yubi=0;</php>
+  <volist id="vo" name="list">
+        <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}-{$vo.borrow_name}<php>$cn++;</php></td>
+        <td>{$vo.user_name}</td>
+        <td>￥{$vo.investor_capital|default=0}<php>$investor_money+=$vo['investor_capital'];</php></td>
+
+        <td>￥{$vo.yue}</php></td>
+
+        <td>￥{$vo.yubi|default=0}<php>$yubi+=$vo['yubi'];</php></td>
+        <td>￥{$vo.money_bonus|default=0}</php></td>
+        <td>{$vo.borrow_duration}月</td>
+        <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+      
+      </tr>
+  </volist>
+
+<!--   <php>$cn=$investor_money=$borrow_money=0;</php>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td>&nbsp;</td>
+        <td>{$vo.id}<php>$cn++;</php></td>
+        <td>{$vo.user_name}</td>
+        <td>￥{$vo.investor_capital|default=0}<php>$investor_money+=$vo['investor_capital'];</php></td>
+        <td>￥{$vo.borrow_money|default=0}<php>$borrow_money+=$vo['borrow_money'];</php></td>
+        <td>{$kfname}</td>
+      </tr>
+  </volist> -->
+
+
+
+    <tr overstyle='on' id="list_{$vo.id}">
+      <td>
+        
+
+      </td>
+      <td colspan="6">统计：当前时间段内有<php>echo $cn;</php>条投资记录,投资金额<php>echo $investor_money+0;</php>,使用鱼币：<php>echo $yubi+0;</php>
+   <!--      ,借款金额投资金额<php>echo $borrow_money+0;</php>，共<php>echo $borrow_money+$investor_money+0;</php>，可获得千分之<php>echo $glo['customer_rate']</php>提成，共<php>echo ($borrow_money+$investor_money+0)*$glo['customer_rate']/1000</php>元 -->
+
+<a href="javascript:void(0);" onclick="export1()" > 将当前条件下数据导出为Excel</a> 
+
+      </td>
+    </tr>
+  </table>
+
+  </div>
+</div>
+<script type="text/javascript">
+
+function export1(){
+  //alert("adf");
+  // var kfid=$(".select option:selected").val();
+  // if(kfid==''){
+  //   alert("请选择客服！");
+  //   return false;
+  // }
+  
+  // if($("#borrow_username").val()=='无'){
+  //   alert("请选择客户！");
+  //   return false;
+  // }
+  $("#sdf").attr("action","__URL__/export");
+  // alert($("#sdf").attr("action"));
+  $("#sdf").submit();
+
+}
+
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

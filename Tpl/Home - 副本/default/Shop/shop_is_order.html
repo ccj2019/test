@@ -1,0 +1,197 @@
+<include file="default:Public:header" />
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+<!-- 引入组件 -->
+
+ <form action="/Shop/post_order" class="duihuan_form" id="test_form"  method="post">
+	<!--内容部分-->
+	<input type="hidden" name="gid" id="gid" value="{$vo.id}" />
+	<input  name="real_name" type="hidden" value="{$va.name}">
+	<input  name="cell_phone" type="hidden" value="{$va.main_phone}">
+	<input  name="address" type="hidden" value="{$va.province}省{$va.city}市{$va.district}{$va.address}">
+	  
+	<input name="email" value=" " type="hidden"  />
+	<input name="num" id="num" type="hidden" value="{$unm}">
+	<div class="box l-a3" style="background: #FFFFFF;">
+		<div class="Box-img clearfix">
+			<div class="Box-img1"><img src="{$vo.art_img}" /></div>
+			<div class="l-Title">
+				<div class="clearfix l-titi">
+					<h3>{$vo['title']}</h3>
+					<p class="Lbtt">
+						所需积分 <?php echo $vo['art_jifen'];?>积分 / 份
+					</p>
+				</div>
+				<div class="clearfix jy-shul">
+					<span class="jy-Bt">数量</span>
+					<div class="fl">
+						<div class="van-stepper">
+							<button type="button" onclick="minusnums()" class="van-stepper__minus"></button>
+							<input type="number" id="nums" name="nums" value="{$unm}" onblur="changenums()"  class="van-stepper__input">
+							<button type="button" onclick="plusnums()" class="van-stepper__plus"></button>
+						</div>
+					</div>
+					<span class="jy-Btz">余量：{$vo.art_writer}</span>
+				</div>
+			</div>
+		</div>
+		<div class="huibao1">
+			<p class="jy-Bt1">收货地址 <span class="l-shbz"><a href="/member/memberaddress?order_id={$vo.id}">添加收货地址</a></span></p>
+			<div class="mapdiz">
+				<p>
+					<a href="/member/memberaddress?order_id={$vo.id}">
+					<span class="sp1">{$va.name}</span>{$va.province}{$va.city}{$va.district}{$va.address}
+					<span class="sp2">{$va.main_phone}</span>
+				</a>
+				</p>
+			</div>
+
+		</div>
+		<div class="huibao1">
+			<p class="jy-Bt1 on" style="padding-bottom: 0;">支付信息</p>
+
+			<p class="huibaop1 on">
+				<span class="huibaop2">数量</span>
+				<span><font id="shuliang">{$unm}</font>份</span>
+			</p>
+
+			<p class="huibaop1 on">
+				<span class="huibaop2">所需积分</span>
+				<span class="jy-shifu" id="needjifen"><?php echo $vo['art_jifen']*$unm;?></span>
+			</p>
+			<p class="huibaop1 on">
+				<span class="huibaop2">支付方式</span>
+				<span>
+				<input type="radio" name="sex" checked="checked" id="male" />
+					<label for="male">积分兑换</label>
+				</span>
+
+			</p>
+			<!--密码-->
+			<div class="l-zhifuye">
+
+				<span class="l-yesy on">
+					剩余积分：{$memberinfo.credits} 
+				</span>
+
+			</div>
+
+			<div class="l-zhifuye" id="xsye" <if condition="$yue eq 0"> style="display:none;" </if> >
+				<span class="l-yesy on">
+					余额支付：<span class="jy-shifu" id="yue"> {$yue}</span>&nbsp;元
+				</span>
+				<span style="padding-left: 10px;">积分不足部分使用余额支付</span>
+			</div>
+
+
+		</div>
+		<div class="huibao1 clearfix">
+			<p class="jy-Bt1 on">备注信息
+			</p>
+			<textarea  name="beizhu" rows="" cols="" placeholder="请在此处留言"></textarea>
+
+		</div>
+
+		<div class="huibao1 clearfix">
+			<p class="jy-Bt1 on">支付密码
+			</p>
+			<input type="password" style="padding-left: 5px;" name="zhifu" id="zhifu" value="" />
+		</div>
+
+		<div class="huibao1 clearfix" >
+			<button type="button" type="button" onclick='doSubmitForm()'  class="btn-sub">确认支付</button>
+		</div>
+
+	</div>
+</form>
+<script>
+	function doSubmitForm(){
+	    var zhifu=$("#zhifu").val();
+        if(!$("input[name='address']").val()!=""){
+        	layer.msg('您未添加地址!');
+        	return false;   		
+        }
+        if ($("#zhifu").val()=='') {
+			layer.msg('请输入支付密码！');
+			return false;
+		}
+		var form = document.getElementById('test_form');
+        form.submit();
+	} 
+</script>
+<!--底部-->
+<script>
+$("#nums").keyup(function(){
+  if($("#nums").val()<=0){
+      	layer.alert('数量不能小于等于0');
+      	$("#nums").val("1");
+			return false;
+  } 
+});
+	function plusnums(){
+		var n = $("#nums").val();
+		var newn = Number(n) + Number(1);
+		if(newn > {$vo.art_writer}){
+			layer.alert('商品余量不足');
+			return false;
+		}
+		var jf = Number(newn)*{$vo.art_jifen};
+		var yue=0;
+		if(jf>{$memberinfo.credits}){
+			yue=(jf-{$memberinfo.credits})/{$glo.market_bl};
+			$("#xsye").css("display","block");
+		}else{
+			$("#xsye").css("display","none");
+		}
+
+		$("#nums").val(newn);
+		$("#num").val(newn);
+		$("#shuliang").html(newn);
+		$("#needjifen").html(jf);
+		$("#yue").html(yue);
+
+	}
+	function minusnums(){
+		var n = $("#nums").val();
+		if(n ==1){
+			layer.alert('数量不能小于等于0');
+			return false;
+		}
+		var newn = Number(n) - Number(1);
+		var jf = Number(newn)*{$vo.art_jifen};
+		var yue=0;
+		if(jf>{$memberinfo.credits}){
+			yue=(jf-{$memberinfo.credits})/{$glo.market_bl};
+			$("#xsye").css("display","block");
+		}else{
+			$("#xsye").css("display","none");
+		}
+		$("#nums").val(newn);
+		$("#num").val(newn);
+		$("#shuliang").html(newn);
+		$("#needjifen").html(jf);
+		$("#yue").html(yue);
+
+	}
+	function changenums(){
+		var n = $("#nums").val();
+		if(n <=0){
+			layer.alert('数量不能小于等于0');
+			return false;
+		}   
+	//if(this.value<=0){this.value=1}else{this.value=parseInt(this.value)}
+	
+ 
+ 
+		var newn = parseInt(n);
+		if(newn > {$vo.art_writer}){
+			layer.alert('商品余量不足');
+			return false;
+		}
+		var jf = parseInt(newn)*{$vo.art_jifen};
+		$("#nums").val(newn);
+		$("#num").val(newn);
+		$("#shuliang").html(newn);
+		$("#needjifen").html(jf);
+	}
+</script>
+<include file="Public:footer"/>

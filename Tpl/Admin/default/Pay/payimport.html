@@ -1,0 +1,29 @@
+<include file="Public:_header" />
+
+<style type="text/css">
+table{width: 100%;margin-top: 20px;}
+	table tr td:first-child{width: 150px;text-align: right;height: 40px;}
+	table tr td:last-child{text-align: left;}
+</style>
+<form action="" method="post" enctype="multipart/form-data">
+<table>
+	<tr>
+		<td>选择上传文件：</td>
+		<td><input type="file" name="importfile"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span>请上传excel表格，后缀为xls,xlsx；</span><br>
+			格式为（用户名，充值金额，站内信标题，充值说明）；<br>
+			详细请参看<a href="/UF/dw/import.xls" target="_blank">模板</a>；
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input value="导入" type="submit">
+			<input name="action" value="doimport" type="hidden">
+		</td>
+	</tr>
+</table>
+</form>
+<include file="Public:_footer" />

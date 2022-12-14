@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+<link rel="stylesheet" href="/public/wap/css/index.css">
+<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="javascript:history.go(-1);" class="w-header-left">
+                < 返回</a>
+                    <h3>回报内容</h3>
+                    <a href="/Wapmember/" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+    <!-- origin start  -->
+
+  <form action="/wap/borrow/save1" method="post"  enctype='multipart/form-data'id="form0">
+  	<input   type="hidden" name="id" value="{$id}">
+    <div class="w-retcon">
+        <div class="w-origin-input ">
+                <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">回报类型</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="loan_certificate" value="1" id="pay11">
+                            <label class="fl" for="pay11"></label>
+                            <span class="fl">产品回报</span>
+        
+        
+                            <input class="fl" type="radio" name="loan_certificate" value="2" id="pay22">
+                            <label class="fl" for="pay22"></label>
+                            <span class="fl">无私奉献
+                            </span>
+                            <input class="fl" type="radio" name="loan_certificate" value="3" id="pay33">
+                            <label class="fl" for="pay33"></label>
+                            <span class="fl">抽奖
+                            </span>
+                        </div>
+                </div>
+            <div class="origin-input w-content">
+                <label for="">支持金额</label>
+                <input type="number" name="borrow_min" placeholder="100000">
+                <span>元</span>
+            </div>
+                    <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否限购</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="is_limit" id="pei11">
+                            <label class="fl" for="pei11"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="is_limit" id="pei22">
+                            <label class="fl" for="pei22"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+               </div>
+            <div class="origin-input w-content" style="border:0;">
+                <label for="">会员最大支持数量</label>
+                <input class="number" type="number" name="max_limit" placeholder="10">
+                <span>个</span>
+            </div>
+			 <div class="origin-input w-content" style="border:0;">
+		                    项目汇报时间 &nbsp; 
+		                   <span> 项目成功后 &nbsp;
+		                        <span><input type="text" style="min-width: 5px; width: 15px;" name="deadline" ></span>天
+		                    </span>
+		                </div>
+        </div>
+                   
+        <div class="w-origin-input ">
+            
+            <div class="origin-input w-content textarea clear">
+                <label for="" class="fl">回报内容</label>
+                <textarea class="fr" name="return_info" id=""></textarea>
+
+            </div>
+           
+        </div>
+
+
+      
+
+        <!-- 头像上传 -->
+
+        <div class="w-origin-touxiang w-origin-touxiang1">
+            <h3>上传充值凭证</h3>
+            <div class="touxiang clear zzzzzzzzzzisad">
+                <div class="left fl">
+                    <label for="doc">
+                        <div class="img">
+                            
+                        </div>
+
+                       
+
+                    </label>
+
+  <input type=file name="doc" id="doc" onchange="imgChange1('z_photo','z_file');" style="display:none">
+ 
+                </div>
+                <div class="right fr">
+                    支持jpg、jpeg、png、gif格式大小不 超过20.0MB，
+                   
+              
+                    
+                </div>
+                
+
+            </div>
+        </div>
+       
+        
+
+        <div class="w-origin-input peisong">
+                <!--<div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否配送</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="peiss" id="pei1">
+                            <label class="fl" for="pei1"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="peiss" id="pei2">
+                            <label class="fl" for="pei2"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+                </div>-->
+        
+                <!-- <div class="origin-input w-content radio ">
+
+
+                        <lable class="lable fl">是否分红</lable>
+                        <div class="fl">
+        
+        
+                            <input class="fl" type="radio" name="peis" id="pei3">
+                            <label class="fl" for="pei3"></label>
+                            <span class="fl">是</span>
+        
+        
+                            <input class="fl" type="radio" name="peis" id="pei4">
+                            <label class="fl" for="pei4"></label>
+                            <span class="fl">否
+                            </span>
+                            
+                        </div>
+                </div>-->
+        
+                 <!-- 下一步 -->
+            <div class="w-origin-xiayibu" id="sub1" style="margin-bottom:2rem;padding:.13rem 0;font-size:.34rem;">
+                确认回报
+            </div>
+             <div class="z_mask">
+                    <!--弹出框-->
+                    <div class="z_alert" style=" position: absolute;   left: 28%;   top: 35%;">
+                        <p>确定要删除这张图片吗？</p>
+                        <p>
+                            <span class="z_cancel">取消</span>
+                            <span class="z_sure">确定</span>
+                        </p>
+                    </div>
+                </div>
+        </div>
+
+       
+</div>
+
+ </form>       <!-- origin end -->
+
+ 
+        <script src="/public/wap/js/picker.min.js"></script>
+        <script src="/public/wap/js/city.js"></script>
+     <script type="text/javascript">
+ 	$('#sub1').click(function() {
+ 		$('#form0').submit();
+ 	})
+ </script>   
+        <script>
+        	 			
+              
+			$(document).on("click", "#localImag", function(){ 
+			   var 	mask = document.getElementsByClassName("z_mask")[0];
+ 		    	 	mask.style.display = "block";
+ 		    	 	
+				var athis= $(this);
+				var ztr=$(this).find("img").attr("src");
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+                var sure = document.getElementsByClassName("z_sure")[0];
+                
+			//此处的$(this)指$( "#testDiv")，而非$(document) 
+				$("#localImag").find("img").attr("src");
+						       sure.onclick = function () { 
+				$.ajax({  
+			      url:"/Wap/Borrow/zhaodelete",  
+			      type:"post",  
+			   	  data:{"url":ztr},    
+			     
+			      success:function(data){ 
+						console.log(data);
+						if(data==1){
+							mask.style.display = "none";
+							athis.remove();
+							$(".borrow_img").eq(athis.index()).remove();
+							$zv=0;
+						}
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });  
+			    }
+//				 
+			});
+        	$zv=0;
+      	  	function imgChange1() {
+        		if($zv<1){
+        	
+      			 var form = new FormData(document.getElementById("form0"));  
+      			 var stv ='<div class="clear" id="localImag"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+
+
+
+      			 	 
+      			 
+//					()
+			      $.ajax({  
+			      url:"/Wap/Borrow/zhao",  
+			      type:"post",  
+			      data:form,  
+			      cache: false,  
+			      processData: false,  
+			      contentType: false,  
+			      success:function(data){ 
+						console.log(data);
+			 
+						var stv =' <div class="clear" id="localImag"><img id="preview" style="display: block;" src="'+data+'">     </div>'
+						var stv2 =' <input class="fl borrow_img" type="hidden" name="loan_certificate" value="'+data+'">'
+							$(".zzzzzzzzzzisad").append(stv);
+							 $("#form0").append(stv2);
+			           		$zv++;
+			      },  
+			      error:function(e){  
+			          //alert("网络错误，请重试！！");  
+			       }  
+			      });
+			      		
+        		}
+        		else{
+        			alert("只能传五个");
+        		}
+				 
+      	  	}  
+        </script>
+
+
+   <script>
+// 	alert(1);
+$zindex=1;
+ 	
+ </script>
+
+
+
+
+</body>
+
+</html>

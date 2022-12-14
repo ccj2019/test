@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<!--<link rel="stylesheet" type="text/css" href="/Public/wap/css/FlexoCalendar.css" />-->
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/rili.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+	<style>
+	.changeImage {
+	    position: relative;
+	}
+	.changeImage i{
+	   position: absolute;
+	   width: .3rem;
+	   height: .3rem;
+	   top:-0.06rem;
+       right: -0.06rem;
+       background: url(/Public/web/img/dgimg.png) no-repeat right top;
+       background-size: .3rem;
+	}
+	
+	
+		.top {
+  width: 100%;
+  height: 12rem;
+  background: #007aff;
+  margin-bottom: .8rem;
+  overflow: hidden;
+}
+.top .out-1 {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 1rem auto 0 auto;
+}
+.top .out-1 .out-2 {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  background: #ffffff;
+  margin: 0 auto;
+}
+.top .out-1 .out-2 .signBtn {
+  width: 6.2rem;
+  height: 6.2rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border: 1px #7ebdff solid;
+}
+.top .out-1 .out-2 .signBtn strong,
+.top .out-1 .out-2 .signBtn span {
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+  text-align: center;
+  color: #007aff;
+}
+.top .out-1 .out-2 .signBtn strong {
+  height: 3.5rem;
+  line-height: 4.5rem;
+  font-weight: 600;
+  border-bottom: 1px #eee solid;
+}
+.top .out-1 .out-2 .signBtn span {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: .9rem;
+  line-height: 2rem !important;
+}
+.top .out-1:active {
+  animation: sign .25s forwards;
+  -webkit-animation: sign .25s forwards;
+}
+.tips {
+  position: absolute;
+  top: 10rem;
+  z-index: 999;
+  width: 100%;
+  color: #fff;
+  font-size: .9rem;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+.Calendar {
+	/*transform: scale(.5);*/
+  background: #fff;
+  padding-bottom: .5rem;
+}
+.Calendar #toyear {
+  border-bottom: 1px #e7e7e7 solid;
+  width: 96%;
+  margin: 0 auto;
+  height: .8rem;
+  text-align: center;
+  color: #3dbaf0;
+  font-size: .30rem;
+}
+.Calendar #toyear .year-month {
+  height: 100%;
+  width: 69%;
+  float: left;
+  
+  line-height: .8rem;
+}
+.tou{
+	color: #3dbaf0;
+}
+.Calendar #toyear #idCalendarPre{
+	float: left;
+	
+}
+.Calendar #toyear #idCalendarNext{
+	float: right;
+	
+}
+.Calendar #toyear #idCalendarPre,
+.Calendar #toyear #idCalendarNext {
+  height: 100%;
+  line-height: .8rem;
+ width: 15%;
+  text-align: center;
+  font-size: .35rem;
+  color: #3dbaf0;
+}
+.Calendar table,
+.Calendar tr,
+.Calendar td {
+  border: 0;
+}
+.Calendar table {
+  width: 96%;
+  margin: 0 auto;
+}
+.Calendar table tr {
+  text-align: center;
+  height: .5rem;
+}
+.Calendar table tr td span {
+  margin: 0 auto;
+  display: block;
+  line-height: .7rem;
+  width: .7rem;
+  height: .7rem;
+  font-size: .3rem;
+  border-radius: 100%;
+}
+/*.Calendar table tr .onToday span {*/
+/*  background: #3dbaf0;*/
+/*  color: #fff;*/
+/*}*/
+
+		.calendar-wrapper {
+			position: relative;
+			margin-bottom: 20px;
+			width: 80%;
+			margin: 15px auto;
+			background: #fff;
+			min-height: 155px;
+			margin-top: -23px;
+		}
+		
+	
+		
+		#calendar {
+			box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+		}
+		
+		.l-fh {
+			border-bottom: 3px solid #EEF1F8;
+		}
+		
+		.l-tanchubox {
+			width: 80%;
+			padding: .3rem .2rem;
+			margin: 2rem auto;
+			background: #FFFFFF;
+			border-radius: 5px;
+			text-align: left;
+		}
+		
+		.l-tanchubox p {
+			padding: .2rem 0;
+			font-size: .3rem;
+			padding-bottom: 0;
+		}
+		
+		.l-tanchubox p:nth-child(1) {
+			font-size: .3rem;
+			text-align: center;
+		}
+		.Calendar{
+			    width: 80%;
+    margin: 0px auto;
+    margin-top: -.5rem;
+    margin-bottom: .6rem;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,.3);
+    background: #fff;
+		}
+		.l_qdtxt{
+			margin-bottom: .3rem;
+		}
+	</style>
+
+	<body>
+		<div class="l-fh l-on">
+			<a  href="javascript:window.history.back();" class="l-fanhui on">&lt;返回</a><span>签到中心</span>
+			<!--{$shangyiyeurl}-->
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a>
+			</div>
+		</div>
+		<div class="l-qdao">
+			<div class="qiandbtn cc">
+				签到规则<img src="/Public/wap/img/yaoqing/qdwenh.png" alt="" />
+			</div>
+			<div class="l-qdao1 cc1 signBtn" id="signIn">
+				<p class="p1">{$yi}</p>
+				
+			</div>
+			<div class="l-qdjf">
+				<p class="p1">
+					积分 <span>{$find.account_credits}</span>
+				</p>
+				<p>已签到<span id="sign-count">0</span>天</p>
+			</div>
+		</div>
+		<!--签到-->
+		<div class="Calendar">
+			<div id="toyear" class="flex flex-pack-center">
+				<div id="idCalendarPre">&lt;</div>
+				<div class="year-month">
+					<span id="idCalendarYear">2018</span>年<span id="idCalendarMonth">6</span>月
+				</div>
+				<div id="idCalendarNext">&gt;</div>
+			</div>
+			<table border="1px" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr class="tou">
+						<td>日</td>
+						<td>一</td>
+						<td>二</td>
+						<td>三</td>
+						<td>四</td>
+						<td>五</td>
+						<td>六</td>
+					</tr>
+				</thead>
+				<tbody id="idCalendar">
+				</tbody>
+			</table>
+		</div>
+		
+		
+		<!--签到进度条-->
+		<div class="clearfix l_qdtxt">
+		<div class="fl l_qdjbimg"><img src="/Public/wap/img/yaoqing/lb.png"/>签到福利</div>
+        <div class="fr l_qdjbimg1">
+          	<?php echo date("m",time());?>月已签到<span> 1 </span>天
+        </div> 			
+		</div>
+      <div >
+      	<ul class="l_libox" style="padding: 0;">
+      		<li>1元优惠券</li>
+      		<li>2000积分</li>
+      		<li>8元优惠券</li>
+      		<li>10000积分</li>
+      		<li>20元优惠券</li>
+      		
+      	</ul>
+      </div>
+		<div class="l_jdbox">
+			<div class="l_jindut">
+		<div class="l_jindut on"></div>
+			<img src="/Public/wap/img/yaoqing/t1.png" alt="" />
+		</div>
+
+		</div>
+		<div >
+      	<ul class="l_libox" style="padding: 0;">
+      		<li>   
+      		    <if condition="$ling1 eq 1"> 
+          			<span class="qdao1z ling1">领取</span>
+          			<elseif condition="$ling1 eq 2"/>
+          			<span class="已领取">已领取</span>
+          				<else/>
+          				1天
+                </if>
+          	</li>
+      		<li>  
+      		<if condition="$ling2 eq 1"> 
+      			<span class="qdao1z ling2">领取</span>
+      			<elseif condition="$ling2 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/>
+      			 7天
+          </if>
+          </li>
+      		<li>  
+      		<if condition="$ling3 eq 1"> 
+      			<span class="qdao1z ling3">领取</span>
+      			<elseif condition="$ling3 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/>
+      				14天
+          </if> </li>
+      		<li> 
+      		<if condition="$ling4 eq 1"> 
+      			<span class="qdao1z  ling4">领取</span>
+      			<elseif condition="$ling4 eq 2"/>
+      			<span class="已领取">已领取</span>
+      				<else/>
+      			21天
+          </if></li>
+      		<li>  
+      		     
+      		    <if condition="date('m',time()) eq 2"> 
+      		    <if condition="$ling5 eq 1"> 
+      		    	<span class="qdao1z  ling5">领取</span>
+      			<elseif condition="$ling5 eq 2"/>
+      			    <span class="已领取">已领取</span> 
+                <else/>28天 
+                </if> 
+      				<else/> <if condition="$ling5 eq 1"> 
+                  			<span class="qdao1z  ling5">领取</span>
+                  			<elseif condition="$ling5 eq 2"/>
+                  			<span class="已领取">已领取</span> 
+                  				<else/>30天
+                                  </if>
+                      </if>
+      		
+      		</li>
+      		
+      	</ul>
+      </div>
+		
+		<!--积分兑换-->
+		<div class="l-jfduh">
+			<p>
+				<span>积分兑换</span> <span class="l-span1"><a href="/wap/shop">查看更多&gt;&gt;</a></span>
+			</p>
+
+		</div>
+		<div class="l-imggd clearfix"> 
+			<!--	<div>-->
+			<!--		<?PHP  //var_dump($shoplist[0]['art_img']);?>-->
+			<!--	<a href="/wap/Shop/shop_show?id={$shoplist[0]['id']}"> -->
+			<!--		<img src="{$shoplist[0]['art_img']}" />-->
+			<!--	</a>-->
+			<!--</div> -->
+		    <volist name="zvolist" id="vo">
+				<div>
+					<!--<?PHP //var_dump($shoplist[1]);?>-->
+    				<a href="/wap/Shop/shop_show?id={$vo['id']}"> 
+    					<img src="{$vo.art_img}" />
+    				</a>
+		    	</div> 
+			</volist>
+			<!--<div>
+				<a href="##">
+					<img src="/Public/wap/img/yaoqing/l-ckgd.png" />
+				</a>
+			</div>
+			<div>
+				<a href="##">
+					<img src="/Public/wap/img/yaoqing/l-ckgd1.png" />
+				</a>
+			</div>-->
+
+		</div>
+
+		<!--底部-->
+<include file="Public:footer"/>
+		<!--弹出-->
+
+		<div class="l-dtc l-btnc">
+
+			<div class="l-tanchubox">
+	 {$article.type_content}
+			<!--
+				<p>—————签到规则—————</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参v与</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参与签到活动仅限APP参与</p>
+				<p>1.签到活动仅限APP参与</p>-->
+
+				<p style="text-align: center;"> <button class="l-btnc">确定</button></p>
+			</div>
+		</div>
+
+		<!--礼包-->
+
+		<div class="l-dtc1  oc">
+
+			<div class="l-tanchubox1 on">
+				<img src="/Public/wap/img/yaoqing/gbbtn.png" class="l_gbbtn" />
+				<p class="l_lb1"><img src="/Public/wap/img/yaoqing/lb.png" /></p>
+				<p class="l_lb2">累计签到<?php if($ling==0||$ling==7||$ling==14||$ling==21||$ling==30){echo $ling;}else{echo $ling;}?>天</p>
+				<p class="l_lb3">送你优惠大礼包</p>
+				<p style="text-align: center;"> <button class=" queding">立即领取</button></p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	var qiandaobonuszz='';
+	$('.l_gbbtn').click(function() {
+	    
+	    	$('.l-dtc1').hide();
+	    	    window.location.reload()
+	})
+		$('.ling3').click(function() {
+		  qiandaobonuszz=14;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling1').click(function() {
+		  qiandaobonuszz=1;
+			$('.l-qdao1 .p1').text('已签到');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling2').click(function() {
+		  qiandaobonuszz=7;
+			$('.l-qdao1 .p1').text('已签到');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+		$('.ling4').click(function() {
+		  qiandaobonuszz=21;
+			$('.l-qdao1 .p1').text('已签到');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})	
+			     <?php if(date('m',time()) == 2){ ?>
+ 	$('.ling5').click(function() {
+		  qiandaobonuszz=28;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})
+      			 <?php  }else{ ?>  
+      				 
+    			  		$('.ling5').click(function() {
+		  qiandaobonuszz=30;
+			$('.l-qdao1 .p1').text('已签到');
+			
+			
+			$('.l_lb2').text('累计签到'+qiandaobonuszz+'天');
+			$('.l-qdao1 .p2').text('+10');
+			$('.l-qdao1').css("background-color", "#8de2f5");
+			$('.l-dtc1.oc').show();
+//			console.log(2)
+
+		})
+                    <?php } ?> 
+	
+// 		$('.qdao1z').click(function() {
+// 		   alert( $(this).index());
+// 			$('.l-qdao1 .p1').text('已签到');
+// 			$('.l-qdao1 .p2').text('+10');
+// 			$('.l-qdao1').css("background-color", "#8de2f5");
+// 			$('.l-dtc1.oc').show();
+// //			console.log(2)
+
+// 		})
+		$('.queding').click(function() {
+			console.log(qiandaobonuszz)
+			window.location.href="/wapmember/capital/qiandaobonus?date="+qiandaobonuszz;
+			//$('.l-dtc1').hide();
+
+		});
+//
+//		$('.calendar-wrapper').attr('id', '1');
+//		times('a');
+//
+//		function times(jud) {
+//
+//			console.log(jud + '2')
+//			var myDate = new Date;
+//			var year = myDate.getFullYear(); //获取当前年
+//			var yue = myDate.getMonth() + 1; //获取当前月
+//			var date = myDate.getDate(); //获取当前日
+//			var h = myDate.getHours(); //获取当前小时数(0-23)
+//			var m = myDate.getMinutes(); //获取当前分钟数(0-59)
+//			var s = myDate.getSeconds(); //获取当前秒
+//			console.log(year)
+//			// $('.calendar-wrapper').show();
+//			$("#calendar").flexoCalendar({
+//				setYear: year,
+//				setMonth: yue,
+//				selectDate: 'each-each-each',
+//				onselect: function(res) {
+//					var id = $('.calendar-wrapper').attr('id');
+//					if(id == 1) {
+//						console.log('q');
+//						$('#start').val(res);
+//					} else {
+//						console.log('w')
+//						$('#end').val(res);
+//					}
+//
+//					// $('.calendar-wrapper').hide();
+//					console.log(res)
+//
+//				}
+//			});
+//
+//		}
+var yuetianshu=30;
+var isSign = false;
+			var myday = new Array(); //已签到的数组
+         // 这尼玛是秒数
+         <?php 
+         $i=0;
+         foreach($volist as $k=>$v){
+         	?>
+            myday[<?php echo $i; ?>] = <?php echo empty($v['sign_time'])?"":$v['sign_time']; ?>;
+        <?php $i++; } ?>
+// 	    myday[0] = "1539858723"
+// 		myday[1] = "1539772323"
+// 		myday[2] = "1239652323"
+
+
+			var cale = new Calendar("idCalendar", {
+				qdDay: myday,
+				onToday: function(o) {
+
+					o.className = "onToday";
+				},
+				onSignIn: function (){
+						
+					
+					$('.l-qdao1 .p1').text('已签到');
+					
+				},
+				onFinish: function() {
+			 		$('.l_qdjbimg1 span').text(myday.length);
+			 //		var valength=myday.length/30*100
+
+
+			     <?php if(date('m',time()) == 2){ ?>
+
+                        if(myday.length<=0){
+                            var valength=myday.length/30*100;
+                        }else if(myday.length<=7){
+    			 		    	var valength=myday.length/30*100+6;
+    			 		}else if(myday.length<=14){
+    			 		    	var valength=myday.length/30*100+5;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else if(myday.length<=28){
+    			 		    yuetianshu=28;
+    			 		    	var valength=myday.length/28*100+2;
+    			 		}else{
+    			 		    	var valength=myday.length/30*100;
+    			 		}
+      			 <?php  }else{ ?>
+
+                        if(myday.length<=0){
+                            var valength=myday.length/30*100;
+                        }else if(myday.length<=7){
+    			 		    	var valength=myday.length/30*100+6;
+    			 		}else if(myday.length<=14){
+    			 		    	var valength=myday.length/30*100+5;
+    			 		}else if(myday.length<=21){
+    			 		    	var valength=myday.length/30*100+2;
+    			 		}else{
+    			 		    	var valength=myday.length/30*100;
+    			 		}
+                    <?php } ?> 
+			 	 
+//			 		if(valength/30<1){
+//			 			vawidth=1;
+//			 		}
+			 		$('.l_jindut.on').css("width",valength+"%");
+					$$("sign-count").innerHTML = myday.length //已签到次数
+					$$("idCalendarYear").innerHTML = this.Year;
+					$$("idCalendarMonth").innerHTML = this.Month; //表头年份
+
+				}
+			});
+			$$("idCalendarPre").onclick = function() {
+				cale.PreMonth();
+			}
+			$$("idCalendarNext").onclick = function() {
+				cale.NextMonth();
+			}
+			//添加今天签到
+			$$("signIn").onclick = function(){
+				if(isSign == false) {
+					var res = cale.SignIn();
+					if(res == '1') {
+$('.l-qdao1 .p1').text('已签到');
+
+
+						$$("sign-count").innerHTML = parseInt($$("sign-count").innerHTML) + 1;
+						
+//						alert($$("sign-count").innerHTML);
+						$.ajax({
+							      url:"/wapmember/capital/qiandaodong",  
+							      type:"post",  
+							   	  data:{"url":"1"},    
+							      success:function(data){ 
+							      	 var dataarr = $.parseJSON(data);
+							      	
+									console.log($$("sign-count").innerHTML);
+								// 	console.log(dataarr.status);
+								
+										if(dataarr.status==1&&($$("sign-count").innerHTML==1||$$("sign-count").innerHTML==7||$$("sign-count").innerHTML==14||$$("sign-count").innerHTML==21||$$("sign-count").innerHTML==yuetianshu)){
+										      	  qiandaobonuszz=({$ling}+1);
+											$('.l-qdao1 .p1').text('已签到');
+											 
+											$('.l-qdao1 .p2').text('+10');
+												$('.l_lb2').text('累计签到'+({$ling}+1)+'天');
+											$('.l-qdao1').css("background-color", "#8de2f5");
+										
+											$('.l-dtc1.oc').show();
+											console.log(2)
+										}else{
+                	                       window.location.reload()
+                	                    }
+							      },  
+							      error:function(e){  
+							          //alert("网络错误，请重试！！");  
+							       }  
+							      }); 
+						isSign = true;
+					} else if (res == '2'){
+//						$$("sign-txt").innerHTML = '已签到';
+						alert('今天已经签到了')
+					}
+				} else {
+					alert('今天已经签到了')
+				}
+			}
+			
+			function drawAgain()
+	{
+		// 对号
+	 var mydate = new Date();
+     var str = "" + mydate.getFullYear() + "-";
+     str += (mydate.getMonth()+1) + "-";
+     str += mydate.getDate() ;
+      console.log(str);
+//   $('.onToday span')find('')
+$("#"+str).css("background-color","#3dbaf0").css("color","#fff");
+		$('.onToday').find('span').addClass("changeImage").append('<i></i>');
+	
+		
+		
+
+	}
+	$('#idCalendarNext').click(function(){
+	   	drawAgain();
+	})
+		$('#idCalendarPre').click(function(){
+	    	drawAgain();
+	})
+	drawAgain();
+
+	</script>
+
+</html>

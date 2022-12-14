@@ -1,0 +1,39 @@
+{__NOLAYOUT__}
+<div class="page_info">
+  <div class="page_tips">
+    尊敬的{$glo.web_name}用户，以下是您在{$glo.web_name}的理财总表，敬请仔细审阅
+  </div>
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>项目</td>
+        <td>金额</td>
+        <td>说明</td>
+      </tr>
+        <tr>
+          <td class="lt">竞标中理财：</td>
+          <td class="rt">￥{$mx.invest.1.investor_capital|default="0.00"}/{$mx.invest.1.num|default="0"}标
+				<span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx2').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">目前正在投标中，尚未确定投资的金额</td>
+        </tr>
+        <tr>
+          <td class="lt">回收中理财：</td>
+          <td class="rt">￥{$mx.invest.4.investor_capital|default="0.00"}/{$mx.invest.4.num|default="0"}标
+				<span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx3').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">目前已经投资，正在回收中的投资总额</td>
+        </tr>
+        <tr>
+          <td class="lt">收完的投资：</td>
+          <td class="rt">￥{$mx['invest']['5']['investor_capital'] + $mx['invest']['6']['investor_capital']}/{$mx['invest']['5']['num']+$mx['invest']['6']['num']}标
+				<span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx5').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">已经全部收回的投资的本金总额</td>
+        </tr>
+
+        <tr>
+          <td class="lt">累计投资金额：</td>
+          <td class="rt">￥{$mx.tj.borrowOut|default="0.00"}</td>
+          <td class="rt">注册至今，您累计投资的总额</td>
+        </tr>
+    </table>
+  </div>
+</div>

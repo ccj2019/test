@@ -1,0 +1,680 @@
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<!--<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">-->
+ <link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+		
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<script src="/Public/wap/js/citylist.js"></script>
+	<script src="/Public/default/M/js/layer.js"></script>
+	<!--<script src="/Public/wap/js/vconsole.min.js"></script>-->
+ <!--<script type="text/javascript">
+ 	var vConsole = new VConsole();
+ </script>-->
+ 
+ <script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+
+<style type="text/css">
+	.l-leix{
+		color: #737373;
+	}
+	.l-leir a{
+		color: #313131;
+	}
+	.l-leir input {
+    border: 0;
+	
+    
+    outline: none;
+    color: #313131;
+    height: .42rem;
+    font-size: .3rem;
+}
+#l-shiming ul li {
+    padding: .3rem 0;
+    /* color: #FFFFFF; */
+    border-bottom:3px solid #EFF3FC;
+}
+input{
+	height: .6rem;
+
+}
+
+</style>
+
+	<body>
+		
+
+				<div class="l-fh l-on">
+			<a href="javascript:window.history.back();"  class="l-fanhui on">&lt;返回</a><span>添加银行卡</span>
+			<div class="l-fanhui1">
+				<a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a>
+			</div>
+		</div>
+
+				<form action="" method="post" id="l-shiming" class="clearfix">
+				 
+				<ul>
+<!--
+	<input type="hidden" value="{:cnsubstr($voinfo['real_name'],1,0,'utf-8',false).str_repeat('*',strlen($voinfo['real_name'])-1)}" />-->
+					<!--				<input type="hidden" id="txt_bankName" value="{$voinfo['txt_bankName']}" />-->
+						<li>
+							<div class="l-leix fl">
+								开户名
+							</div>
+							<div class="l-leir fl">
+								<input type="text"  id="txt_bankName" readonly="readonly" name="realname" value="{$vobank['realname']}" />
+
+							</div>
+						</li> 
+						<li>
+							<div class="l-leix fl">
+								开户银行
+							</div>
+							<div class="l-leir fl getyh">
+								<input type="hidden" name="bank_name" id="bank_name" value="{$vobank['bank_name']}" />
+					 				<!--	请选择 
+									ICBC  工商银行  
+									ABC  农业银行  
+									BOCSH  中国银行  
+									CCB  建设银行  
+									CMB  招商银行  
+									SPDB  浦发银行  
+									GDB  广发银行  
+									BOCOM  交通银行  
+									PSBC  邮政储蓄银行  
+									CNCB  中信银行  
+									CMBC  民生银行  
+									CEB  光大银行  
+									HXB  华夏银行  
+									CIB  兴业银行  
+									BOS  上海银行  
+									SRCB  上海农商  
+									PAB  平安银行  
+									BCCB  北京银行  
+									BOC  中行（大额） 
+									-->
+								 
+								 <a href="#" role="button" id="sel_city1">{$bank_list[$vobank['bank_name']]}</a> 
+
+								<span class="l-fr">&gt;</span>
+							</div>
+						</li>
+
+						<!--<li>
+							<div class="l-leix fl">
+								开户地址
+							</div>
+							<div class="l-leir fl getcity">
+								<a href="#" role="button" id="sel_city">点击选取省市区县</a>
+								<span class="l-fr">&gt;</span>
+
+							</div>
+						</li>-->
+						<li>
+							<div class="l-leix fl">
+								开户地址
+							</div>
+							<div class="l-leir fl getcity">
+								<select name="selectp" id="province">
+                                    <option value="0">请选择省份 </option>
+                                </select>
+                                <select name="selectc" id="city">
+                                    <option value="0">请选择城市</option>
+                                </select>
+
+							</div>
+						</li>
+								<li>
+							<div class="l-leix fl">
+								详细地址信息
+							</div>
+							<div class="l-leir fl">
+		 
+                		    <input   id="bank_address" style="width: 100%;"  type="text" maxlength="19">
+							</div>
+						</li>
+						<li>
+							<div class="l-leix fl">
+								银行卡号
+							</div>
+							<div class="l-leir fl">
+		 
+                		    <input   id="txt_account" style="width: 100%;background: #f5f5f5 !important;" value="{$vobank['bank_num']}" type="text" maxlength="19">
+							</div>
+						</li>
+
+						<li>
+							<div class="l-leix fl">
+								绑定手机号
+							</div>
+							<div class="l-leir fl">
+								<input type="text" id="user_phone" value="{$voinfo.user_phone}" id="new_phone"/>
+
+							</div>
+						</li>
+						<li style="padding: .2rem 0rem;">
+							<div class="l-leix fl" style="line-height: .6rem;">
+								验证码
+							</div>
+							<div class="l-leir fl">
+								<input type="text" id="reg_code" class="l-inpkd" style="background: #f5f5f5 !important;margin-right: .2rem;"/>
+								<div class="l-yanzhengm1" id="yanzhengma">获取验证码</div>
+							</div>
+						</li>
+						<li>
+							<div class="l-leix1 fl">
+
+								
+								   <input type="checkbox"   name="moren" id="moren" value="1" class="l-moren" checked  style="margin-top: -.1rem; float: left;"/>
+								   <label for="moren" class="l-labdui" ></label>
+						           <label for="moren">设为默认银行卡</label>
+								
+
+							</div>
+						</li>
+					</ul>
+						<div id="btn_set" class="l-qurena">
+		                 <a>确认添加</a>  	
+		             </div>
+				</form>
+			
+		
+		<!--弹出-->
+		<!--省市-->
+		<div id="l-citiy">
+			<van-actionsheet v-model="show">
+				<van-area :area-list="areaList" columns-num="2" @confirm="confirm" @cancel="show=!show"/>
+			</van-actionsheet>
+
+		</div>
+		<div id="lyh">
+			<van-actionsheet v-model="show1">
+				<van-picker show-toolbar  :columns="columns" @cancel="show1=!show1" @confirm="confirm"/>
+			</van-actionsheet>
+        
+		</div>
+	<?php
+if(isset($reg_code_time)&&!empty($reg_code_time)){
+echo "<script type='text/javascript'>var zz=".$reg_code_time." </script>";
+echo "<script type='text/javascript'>var aa=".time()." </script>";
+}else{
+echo "<script type='text/javascript'>var zz=0 </script>";
+echo "<script type='text/javascript'>var aa=60 </script>";
+}
+?>	
+		<!--<div class="l-dtc" >
+			<div class="l-tanchubox">
+				<p>添加成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>
+		</div>-->
+	</body>
+	<script>
+'use strict';
+		
+ 	var yes=0;
+		$(document).ready(function() {
+		
+		 
+		$("#btn_set").click(function() {
+		
+			if ($("#bank_name").val()=="") {
+				alert('请选择开户行！');
+		console.log("请选择开户行")
+				return false;
+			}
+			if ($("#txt_account").val().length < 7) {
+				alert('请正确输入您的银行帐号！');
+						console.log("请正确输入您的银行帐号")
+				return false;
+			}
+			if ($("#txt_account").val().length > 19) {
+						console.log("请正确输入您的银行帐号")
+				alert('请正确输入您的银行帐号！');
+				return false;
+			}
+			var is_default=$("input[name='moren']:checked").val();
+			if(is_default=="undefined"){
+				is_default=0
+			}
+		  
+	var reg_code=$("#reg_code").val();
+			if(reg_code=="undefined"){
+				reg_code=0
+			}
+// alert(is_default);return false;
+var realname=$("#txt_bankName").val();
+var account=$("#txt_account").val();
+var bankname=$("#bank_name").val();
+var bank_id={$vobank['id']};
+//			layer.msg(111111111);
+console.log(yes)	
+ if(yes==1){
+ 	    		$.ajax({
+			url: "/wapmember/bank/savebindbank/",
+			type: "post",
+			dataType: "json",
+			data: {account:account ,bank_address:$("#bank_address").val(), realname:realname , bankname:bankname ,is_default:is_default,bank_id:bank_id,reg_code:reg_code,province: $("#province").find("option:selected").text(),cityName: $("#city").find("option:selected").text()},
+			success: function(d) {
+				 if (d.status == 1) {
+	                  alert('恭喜，您的银行卡更新成功')
+                         window.location.href="/wapmember/bank";
+         			 
+//						// layer.alert('恭喜，您的银行卡更新成功', 1,!1);
+//						// window.loaction.reload();
+ 	}
+ 					else if (d.status == 0) {
+ 					alert(d.message);
+ 					}		 
+				 console.log(d)
+			}
+		})
+ }else{
+ 	alert('请正确输入您的银行帐号！');
+ 	return false;
+ }
+
+    		  
+//			$.ajax({
+//				url: "/wapmember/bank/bindbank",
+//				type: "post",
+//				dataType: "json",
+//				data: {
+//					account: $("#txt_account").val(), 
+//					bankaddress: $("#txt_bankName").val(), bankname: $("#bank_name").val(),is_default:$("input[name='moren']:checked")
+//					
+//				},
+//				success: function(d) {
+//					if (d.status == 1) {
+//                      alert('恭喜，您的银行卡更新成功',1, function(){
+//                          window.location.reload();
+//                      });
+//						// layer.alert('恭喜，您的银行卡更新成功', 1,!1);
+//						// window.loaction.reload();
+//					}
+//					else if (d.status == 0) {
+//						alert(d.message);
+//					}
+//				}
+//			});
+		});
+ 
+ 
+	  $("#yanzhengma").click(function() {
+    var phone = $("#user_phone").val();
+ 			if ($("#bank_name").val()=="") {
+				alert('请选择开户行！');
+				console.log("请选择开户行")
+				return false;
+			}
+			if ($("#txt_account").val().length < 7) {
+				alert('请正确输入您的银行帐号！');
+						console.log("请正确输入您的银行帐号")
+				return false;
+			}
+			if ($("#txt_account").val().length > 19) {
+						console.log("请正确输入您的银行帐号")
+				alert('请正确输入您的银行帐号！');
+				return false;
+			}
+			if(yes!=1){
+			 	alert('请正确输入您的银行帐号！');
+				return false;
+			}
+		    if(phone == ""){
+		    	  alert('手机号不能为空');
+		    	  return false;
+		    }else{
+		    	settime() 
+		    }
+
+  });
+  var zc=aa-zz;
+  if(zc>=60){
+   var countdown=60; 
+  }else{
+   var countdown=zc; 
+  }
+//     var countdown=60; 
+     function settime() 
+        { 
+        	
+            var phone = $("#user_phone").val();
+ 
+      if (countdown == 60)
+            {
+            	//alert(1);return;
+            	console.log(phone);
+    $.ajax({
+      url: "/wapmember/index/sendcode/",
+      type: "post",
+      dataType: "json",
+      data: {"phone":phone,"type":4},
+      success: function(d) {
+      	console.log(d);
+        if(d.status == "f"){
+            alert(d.info);
+             return false;
+          }else{
+           alert(d.info);
+            return false;
+          }
+//      else if(d.status == "m"){
+//          alert(d.info);
+//           return false;
+//        }
+//        else if(d.status == "f"){
+//          alert(d.info);
+//           return false;
+//        }else{
+//         alert(d.info,{icon: 1});
+//          return false;
+//        }
+      }
+    });
+      }
+            if (countdown == 0) 
+            { 
+                $("#yanzhengma").removeAttr("disabled");    
+                $("#yanzhengma").html("获取验证码"); 
+                countdown = 60; 
+            } 
+            else 
+            { 
+                $("#yanzhengma").attr("disabled","disabled");
+                $("#yanzhengma").html("重新发送(" + countdown + ")"); 
+                countdown--; 
+            } 
+            var dxtimer = setTimeout(function() { if (countdown == 60){clearTimeout(dxtimer);}else{settime();} },1000) 
+            }
+function strLength(as_str){
+    return as_str.replace(/[^\x00-\xff]/g, 'xx').length;
+}; 		
+			
+			
+			
+			
+			
+//  $("#yanzhengma").click(function() {
+//      var phone = $("#new_phone").val();
+//      if(phone == ""){
+//          layer.msg('手机号不能为空', {type : 9});
+//          return false;
+//      }
+//  		$.ajax({
+//			url: "/wapmember/user/Verification/",
+//			type: "post",
+//			dataType: "json",
+//			data: {"phone":phone},
+//			success: function(d) {
+//				if (d.status == "y") {
+//					alert('已发送！');
+//						alert(d.info );
+//					return;
+//				}else if (d.status == "n") {
+//					alert('失败');
+//					window.location.reload();
+//				}else if (d.status == "s") {
+//					alert(d.info );
+//					//window.location.reload();
+//				}
+//				 console.log(d)
+//			}
+//		})
+//  }); 
+    
+    
+    
+});
+//		地区
+		var lcitiy = new Vue({
+
+			data: {
+				areaList: citylist,
+				show: false
+
+			},
+			methods: {
+				confirm(item) {
+					this.show = false
+					let citytext = item[0].name+item[1].name
+//					for(let i in item) {
+//						citytext += item[i].name + " "
+//					}
+//					console.log(item[0].name)
+//					console.log(item[1].name)
+					console.log(citytext)
+					$('#sel_city').text(citytext)
+					$('#sel_city').text(citytext)
+				},
+
+			}
+		}).$mount('#l-citiy')
+		$(".getcity").click(function() {
+			lcitiy.show = true
+		})
+//		银行的
+		//后端这里输出json字符串
+		//	请选择 
+//									ICBC  工商银行  
+//									ABC  农业银行  
+//									BOCSH  中国银行  
+//									CCB  建设银行  
+//									CMB  招商银行  
+//									SPDB  浦发银行  
+//									GDB  广发银行  
+//									BOCOM  交通银行  
+//									PSBC  邮政储蓄银行  
+//									CNCB  中信银行  
+//									CMBC  民生银行  
+//									CEB  光大银行  
+//									HXB  华夏银行  
+//									CIB  兴业银行  
+//									BOS  上海银行  
+//									SRCB  上海农商  
+//									PAB  平安银行  
+//									BCCB  北京银行  
+//									BOC  中行（大额） 
+		var banklist='{"data":["请选择","工商银行", "农业银行", "中国银行", "建设银行", "招商银行","浦发银行","广发银行","交通银行","邮政储蓄银行","中信银行","民生银行","光大银行","华夏银行","兴业银行","上海银行","上海农商","平安银行","北京银行","中行（大额)","城市银行"]}'
+//		setInterval(function(){
+//		 console.log(banklist.data)
+//			banklist.data[0]="123"
+//		},2000)
+		banklist=JSON.parse(banklist)
+		console.log("Vue init",Vue)
+		var lyh = new Vue ({
+			data:{
+				show1: false,
+				
+				columns: banklist.data
+					
+				},
+				mounted(){
+					
+				},
+				methods: {
+					confirm(item,index) {
+                    console.log(item)
+                    console.log(index)
+                    $('#sel_city1').text(item)
+//                  	请选择 
+//									ICBC  工商银行  
+//									ABC  农业银行  
+//									BOCSH  中国银行  
+//									CCB  建设银行  
+//									CMB  招商银行  
+//									SPDB  浦发银行  
+//									GDB  广发银行  
+//									BOCOM  交通银行  
+//									PSBC  邮政储蓄银行  
+//									CNCB  中信银行  
+//									CMBC  民生银行  
+//									CEB  光大银行  
+//									HXB  华夏银行  
+//									CIB  兴业银行  
+//									BOS  上海银行  
+//									SRCB  上海农商  
+//									PAB  平安银行  
+//									BCCB  北京银行  
+//									BOC  中行（大额） 
+                    if(item=="工商银行"){
+                    	 $('#bank_name').val("ICBC")
+                    }else if(item=="农业银行"){
+                    	 $('#bank_name').val("ABC")
+                    }else if(item=="中国银行"){
+                    	 $('#bank_name').val("BOCSH")
+                    }else if(item=="建设银行"){
+                    	 $('#bank_name').val("CCB")
+                    }else if(item=="招商银行"){
+                    	 $('#bank_name').val("CMB")
+                    }else if(item=="浦发银行"){
+                    	 $('#bank_name').val("SPDB")
+                    }else if(item=="广发银行"){
+                    	 $('#bank_name').val("GDB")
+                    }else if(item=="交通银行"){
+                    	 $('#bank_name').val("BOCOM")
+                    }else if(item=="邮政储蓄银行"){
+                    	 $('#bank_name').val("PSBC")
+                    }else if(item=="中信银行"){
+                    	 $('#bank_name').val("CNCB")
+                    }else if(item=="民生银行"){
+                    	 $('#bank_name').val("CMBC")
+                    }else if(item=="光大银行"){
+                    	 $('#bank_name').val("CEB")
+                    }else if(item=="华夏银行"){
+                    	 $('#bank_name').val("HXB")
+                    } else if(item=="兴业银行"){
+                    	 $('#bank_name').val("CIB")
+                    } else if(item=="上海银行"){
+                    	 $('#bank_name').val("BOS")
+                    }  else if(item=="上海农商"){
+                    	 $('#bank_name').val("SRCB")
+                    }else if(item=="平安银行"){
+                    	 $('#bank_name').val("PAB")
+                    } else if(item=="北京银行"){
+                    	 $('#bank_name').val("BCCB")
+                    }else if(item=="中行（大额）"){
+                    	 $('#bank_name').val("BOC")
+                    }  else if(item=="城市银行"){                    	 $('#bank_name').val("BAC")                    }     
+                   
+					this.show1 = false
+			
+				}
+	
+				}
+		}).$mount('#lyh');
+		console.log("Vue obj",lyh)
+		$(".getyh").click(function() {
+			lyh.show1 = true
+		})
+		$("#txt_account").blur(function() {
+			var account =$("#txt_account").val();
+if (account.length < 16 || account.length > 19) {
+//
+//$("#accountInfo").html("银行卡号长度必须在16到19之间");
+alert("银行卡号长度必须在16到19之间");
+	 yes=0;
+return false;
+
+}
+var num = /^\d*$/;  //全数字
+if (!num.exec(account)) {
+alert("银行卡号必须全为数字");
+	 yes=0;
+//$("#accountInfo").html("银行卡号必须全为数字");
+return false;
+}
+ 
+//开头6位
+var strBin="10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";    
+if(strBin.indexOf(account.substring(0, 2))== -1) {
+alert("银行卡号开头6位不符合规范");
+//$("#accountInfo").html("银行卡号开头6位不符合规范");
+	 yes=0;
+return false;
+}
+    var lastNum=account.substr(account.length-1,1);//取出最后一位（与luhm进行比较）
+    var first15Num=account.substr(0,account.length-1);//前15或18位
+    var newArr=new Array();
+   // alert(lastNum);
+    for(var i=first15Num.length-1;i>-1;i--){    //前15或18位倒序存进数组
+        newArr.push(first15Num.substr(i,1));
+    }
+     
+    var arrJiShu=new Array();  //奇数位*2的积 <9
+    var arrJiShu2=new Array(); //奇数位*2的积 >9
+    var arrOuShu=new Array();  //偶数位数组
+    for(var j=0;j<newArr.length;j++){
+    	if((j+1)%2==1){
+    		if(parseInt(newArr[j])*2<9){
+    			arrJiShu.push(parseInt(newArr[j])*2)
+    			
+    		}else{
+    			arrJiShu2.push(parseInt(newArr[j])*2)
+    		}
+    	}else{
+    		arrJiShu.push(newArr[j])
+    	}
+       
+    }
+    var jishu_child1=new Array();//奇数位*2 >9 的分割之后的数组个位数
+    var jishu_child2=new Array();//奇数位*2 >9 的分割之后的数组十位数
+    for(var h=0;h<arrJiShu2.length;h++){
+        jishu_child1.push(parseInt(arrJiShu2[h])%10);
+        jishu_child2.push(parseInt(arrJiShu2[h])/10);
+    }        
+    var sumJiShu=0; //奇数位*2 < 9 的数组之和
+    var sumOuShu=0; //偶数位数组之和
+    var sumJiShuChild1=0; //奇数位*2 >9 的分割之后的数组个位数之和
+    var sumJiShuChild2=0; //奇数位*2 >9 的分割之后的数组十位数之和
+    var sumTotal=0;
+    for(var m=0;m<arrJiShu.length;m++){
+        sumJiShu=sumJiShu+parseInt(arrJiShu[m]);
+    }
+    for(var n=0;n<arrOuShu.length;n++){
+        sumOuShu=sumOuShu+parseInt(arrOuShu[n]);
+    }
+    for(var p=0;p<jishu_child1.length;p++){
+        sumJiShuChild1=sumJiShuChild1+parseInt(jishu_child1[p]);
+        sumJiShuChild2=sumJiShuChild2+parseInt(jishu_child2[p]);
+    }      
+    //计算总和
+    sumTotal=parseInt(sumJiShu)+parseInt(sumOuShu)+parseInt(sumJiShuChild1)+parseInt(sumJiShuChild2);
+    //计算Luhm值
+    var k= parseInt(sumTotal)%10==0?10:parseInt(sumTotal)%10;        
+    var luhm= 10-k;
+    if(lastNum==luhm){
+    	  
+    	 	  yes=1; 
+       	console.log(yes);	 	
+    return true;
+    }
+    else{
+     yes=0; 
+    alert("你的银行卡号不正确,请确认")
+    return false;
+    } 
+			
+		})	
+	</script>
+  <script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>
+</html>

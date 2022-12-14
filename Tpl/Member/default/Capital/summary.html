@@ -1,0 +1,83 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>尊敬的{$glo.web_name}用户，以下是您在{$glo.web_name}的资金统计，敬请仔细审阅</p>
+  </div>
+  <div class="m_page_right_box">
+    <table width="850" border="1" align="center" cellspacing="0" cellpadding="0" height="400" style="border-collapse:collapse;" bordercolor="#ccc">
+        <tr>
+          <td colspan="3" align="left" class="spec87 td_bg">资金存量</td>
+        </tr>
+        <tr>
+          <td align="right" class="spec87">可用现金金额：</td>
+          <td align="center">{:getFloatValue($minfo['account_money']+$minfo['back_money'],2)}</td>
+         <td>（可以用来直接提现或投标的金额）</td>           
+        </tr>
+       
+        <tr>
+          <td align="right" class="spec87">冻结总额：</td>
+          <td align="center">{$minfo.money_freeze|Fmoney=###}</td>
+          <td>（包括投标冻结和提现冻结的资金总额）</td>
+        </tr>
+       <tr>
+          <td align="right" class="spec87">账户资金总额：</td>
+          <td align="center">{:getFloatValue($minfo['account_money']+$minfo['back_money']+$minfo['money_collect']+$minfo['money_freeze'],2)}</td>
+          <td>（您在{$glo.web_name}平台上现有现金资产的总额）</td>
+        </tr>
+      
+        <tr>
+          <td align="right" class="spec87">累计提现手续费：</td>
+          <td align="center">￥{$vo.ljtxsxf|default="0.00"}</td>
+          <td>（支付的提现手续费总和）</td>
+        </tr>
+       
+        <tr>
+          <td colspan="3" align="left" class="spec87 td_bg">资金流量</td>
+        </tr>
+        <tr>
+            <td align="right" class="spec87">
+                累计投资金额：
+            </td>
+            <td align="center">
+                ￥{$vo.ljtzje|default="0.00"}
+            </td>
+            <td>
+                （注册至今，累计投资金额）
+            </td>
+        </tr>
+<!--         <tr>
+            <td align="right" class="spec87">
+                累计众筹金额：
+            </td>
+            <td align="center">
+                ￥{$vo.ljjrje|default="0.00"}
+            </td>
+            <td>
+                （注册至今，您账户众筹资金总额）
+            </td>
+        </tr> -->
+        <tr>
+            <td align="right" class="spec87">
+                累计充值金额：
+            </td>
+            <td align="center">
+                ￥{$vo.ljczje|default="0.00"}
+            </td>
+            <td>
+                （注册至今，您账户累计充值总额）
+            </td>
+        </tr>
+        <tr >
+            <td align="right" class="spec87">
+                累计提现金额：
+            </td>
+            <td align="center">
+                ￥{$vo.ljtxje|default="0.00"}
+            </td>
+            <td>
+                （注册至今，您账户累计提现总额）
+            </td>
+        </tr>
+      
+      </table>
+  </div>
+</div>

@@ -1,0 +1,256 @@
+<include file="Public:header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/web/css/G.css" />
+<style type="text/css">
+    body {
+        background: #f8f8f8;
+    }
+    select::-ms-expand { display: none; }
+     #myselect{ 
+    　   appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        background: url(img/xiangmu/tir.png) no-repeat right center #FFFFFF;
+        height: 30px;
+        padding-right: 14px;
+        /* background: #f5f5f5; */
+        color: #00a0ea;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        width: auto;
+        padding: 0 20% 0 0;
+        margin: 0;
+    }
+    .YQer {
+        font-weight: 600;
+        font-size: 18px;
+        color: #00a0ea;
+        text-align: center;
+        padding-top: 0;
+    }
+    .jinE p{
+        font-size: 12px;
+      padding-top: 28px;
+      }
+      .jinE1 p{
+        line-height: 24px;
+        font-size: 12px;
+        
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+      }
+      .jinE1 {
+        float: left;
+        width: 235px;
+        line-height: 20px;
+        font-size: 12px;
+        padding: 5px 0 0 5px;
+    }
+    .abdw .skuisd{
+        width: 120px;
+        padding: 30px 0;
+    }
+    .abdw{
+        position: absolute;
+        top: 0;
+        width: 400px !important;
+        right: 0;
+    }
+      .Zhiyuan1 {
+      
+        width: 390px;
+        height: 140px;
+        border: 1px solid #DEDEDE;
+        background: #FFFFFF;
+        overflow: hidden;
+        /*transform: scale(.5);*/
+    }
+    .jinE {
+        width: 110px;
+        height: 140px;
+        margin-top: 5px;
+        /* background: #00a0ea; */
+        float: left;
+        border-right: 1px dashed #CCCCCC;
+    }
+
+    .jinE2 {
+        display: table;
+        float: right;
+        padding-top: 0px;
+    }
+
+
+    .jinE2 span:nth-child(1) a {
+        display: block;
+        border-radius: 10px;
+        color: #FFFFFF;
+        background: #00a0ea;
+        width: 43px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        float: left;
+        font-size: 14px;
+        margin-right: 20px;
+    }
+    .jinE2 span:nth-child(2) {
+        float: left;
+        font-size: 12px;
+    margin: 0;
+    padding: 0;
+    }
+    .btnBioxs{
+        text-align: left;
+        padding: 30px 0;
+        /*padding-left: 30px;*/
+        padding-left: 180px;
+
+    }
+    .neirron {
+        padding: 20px 14px;
+        background: #f8f9fa;
+        width: 96%;
+        margin: 15px auto;
+        position: relative;
+    }
+</style>
+<div class="box">   
+    <div class="navDs">
+        <img src="__PUBLIC__/web/img/Ls4.png" alt="" /> 
+        <a href="/Borrow/index"><span>发起项目></span></a>
+        <a href="/invest/index.html"><span>项目信息</span></a> 
+    </div>
+</div>
+<!--内容部分-->
+<div class="box clearfix zuo">
+    <div class="Baiaosd">
+        回报设置-项目标题<span><a>返回项目信息</a></span>
+   </div>
+    <div class="bgtabshi">
+        <p>小提示：</p>
+        <p>
+            【建议设置3个以上的回报】，回报多样化更能提高关注度。
+        </p>
+        <p>
+            【建议设置几十、几百、上千元的支持档位】，回报差异化更能满足不同人的需求。
+        </p>
+        <p>
+            【建议设置有创意的回报】，与众不同的回报更能打动支持者。
+        </p>
+        <div>
+            <form action="/borrow/save1" method="post"  enctype='multipart/form-data'id="form0">
+            <div class="neirron">   
+                <input type="hidden" name="id" value="{$id}">    
+                <ul>
+                    <li>
+                        <div class="lisaso">
+                            <div class="skuisd">支持类型：</div>
+                            <div class="skuisdslid">
+                                <select name="loan_certificate" id="loan_certificate">
+                                    <option value="1" selected>收益回报</option>
+                                    <option value="2">线下回报</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lisaso">
+                            <div class="skuisd">支持金额：</div>
+                            <div class="skuisdslid">
+                                <input type="text" id="borrow_min"  name="borrow_min" required="required"> 元
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lisaso">
+                            <div class="skuisd">是否限购：</div>
+                            <div class="skuisdslid">
+                                <select name="is_limit" id="is_limit">
+                                    <option value="1" selected="selected">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li id="ride" >
+                        <div class="lisaso">
+                            <div class="skuisd" style="padding-left: 45px;width: 138px;margin-top: -10px;">每个会员最大支持数量：</div>
+                            <div class="skuisdslid">
+                                <input type="text" id="max_limit" name="max_limit" required="required">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lisaso">
+                            <div class="skuisd" style="padding-left: 32px;width: 150px;margin-top: -10px;">快捷支持份数：</div>
+                            <div class="skuisdslid">
+                                <input type="text" id="shortcut" name="shortcut" placeholder="请严格按照示例填写支持份数，例如：10,20,50">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lisaso">
+                            <div class="skuisd">回报内容：</div>
+                            <div class="skuisdslid">
+                                <textarea name="return_info" id="return_info" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    
+                </ul>
+                <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script> 
+                <script>
+                    $(function(){
+                        var editor;
+                        KindEditor.ready(function(K) {
+                            editor = K.create('textarea[name="return_info"]', {
+                                allowFileManager : true,
+                                autoHeightMode : true,
+                                afterCreate : function() {
+                                    this.loadPlugin('autoheight');
+                                },
+                                afterUpload : function(url) {
+                                    var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                                    var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                                    $("#firstimage").append(firstimageoption);
+                                    $("#images").append(selectoption);
+                                },afterBlur: function(){this.sync();}
+                                 items : [
+                                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                'insertunorderedlist', '|', 'emoticons', 'image']
+                            });
+                        });
+                    })
+                </script>
+                
+                <div class="btnBioxs">
+                    <button class="c2" type="submit">提交审核</button>
+                    <button class="c4" type="reset">取消添加</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#is_limit').change(function(){
+　　　　　　 var p1=$(this).children('option:selected').val();//这就是selected的值  
+　　　　　　 if(p1==0){
+            $("#ride").hide();
+            $("#ride input").removeAttr("required");
+        }else{
+            $("#ride").show();
+            $("#ride input").attr("required", "true");
+        }
+　　　})
+</script>
+<!--底部-->
+<include file="Public:footer"/>

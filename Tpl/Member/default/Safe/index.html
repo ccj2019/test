@@ -1,0 +1,104 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>安全信息</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>安全信息</span></div>
+		</div>
+		<div class="tabv2box">
+		
+			<div class="tabv2 show">
+			     <!--充值记录-->
+				<div class="bgbx">
+					<div class="l-anquandj">
+						<div><div style="float:left;margin-left: 12px;">安全等级： </div><style>	.dengji{		width: 50px;		float: left;		height: 30px;		text-align: center;		line-height: 30px;			background: #fff;			border: 1px #07a923 solid ;			}		</style><div style="height: 50px; float:left;    margin-top: 29px; margin-right: 12px;">		<if condition="$mInfoProgress lt 60 ">			<style>			.dengji{		border: 1px #f73737 solid;	}</style>						<div class="dengji" style="	background: #f73737;" >	低	</div>	<div class="dengji" >	中	</div>	<div class="dengji" >	高	</div><!-- 底 -->						<elseif condition="$mInfoProgress gt 60 && $mInfoProgress lt 70"/>				<style>			.dengji{		border: 1px #ecbc0d solid;	}</style>							<div class="dengji" style="	background: #ecbc0d;" >	低	</div>	<div class="dengji" >	中	</div>	<div class="dengji" >	高	</div> <!-- 中 -->						<else/>							<style>			.dengji{		border: 1px #07a923 solid;	}</style>						<div class="dengji"  >	低	</div>	<div class="dengji" >	中	</div>	<div class="dengji" style="	background: #07a923;" >	高	</div>  <!-- 高 -->						</if>	</div><!--
+						<if condition="$mInfoProgress lt 60 ">						
+							<img src="/Public/web/img/huiyuan/anquanj.png" alt="" /> <!-- 底 
+						<elseif condition="$mInfoProgress gt 60 && $mInfoProgress lt 70"/>
+							<img src="/Public/web/img/huiyuan/aq2.png" alt="" />  <!-- 中  
+						<else/>
+							<img src="/Public/web/img/huiyuan/aq3.png" alt="" />  <!-- 高
+						</if> -->
+						建议您完善全部安全设置，保障账户和资金安全。</div>
+					</div>
+					<div class="Qusxinx">
+						<if condition="$ids eq 1">
+						<span class="spi"><img src="/Public/web/img/huiyuan/anquan/shiming-2.png"/></span>
+						<else/>
+						<span class="spi"><img src="/Public/web/img/huiyuan/anquan/shiming-1.png"/></span>
+						</if>
+						<span class="sp1">
+						      实名认证
+						</span>
+						<span class="sp2">
+							用于提升账户和资金安全性，认证后不能自行修改，如需修改请联系客服
+						</span>
+						<if condition="$ids eq 1">
+							<span class="sp3"><a >您已认证</a></span>
+						<else/> 
+							<span class="sp3"><a href="__APP__/member/Memberinfo">立即认证</a></span>
+						</if>
+					</div>
+					<div class="Qusxinx">
+						<span class="sp1">
+							<if condition="$phones eq 1">
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/shouji-1.png"/></span>
+							<else/>
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/shouji-2.png"/></span>
+							</if>
+						     绑定手机
+						</span>
+						<span class="sp2">
+							已绑定手机号：<text>{$phone} </text>	，可实时了解账户变动情况，享受铭万服务
+						</span>
+						<span class="sp3"><a href="__APP__/member/Memberinfo/cell_phone">修改手机号</a></span>
+					</div>
+					<div class="Qusxinx">
+						<span class="sp1">
+							<if condition="$user_pass">
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/mima-1.png"/></span>
+							<else/>
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/mima-2.png"/></span>
+							</if>
+						    登录密码
+						</span>
+						<span class="sp2">
+							用于保障账户安全
+						</span>
+						<span class="sp3"><a href="__APP__/member/user/password">修改密码</a></span>
+					</div>
+					<div class="Qusxinx">
+						<span class="sp1">
+							<if condition="$pin_pass">
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/zhifu-2.png"/></span>
+							<else/>
+								<span class="spi"><img src="/Public/web/img/huiyuan/anquan/zhifu-1.png"/></span>
+							</if>
+						    支付密码
+						</span>
+						<span class="sp2">
+							用于保障账户财产安全
+						</span>
+						<span class="sp3"><a href="__APP__/member/user/pinpass">
+							<if condition="$pin_pass">
+								修改密码
+								<else/>
+								马上设置</if>
+
+							</a></span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<include file="default:Public:footer" group="Home" />

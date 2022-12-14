@@ -1,0 +1,170 @@
+<include file="default:Public:mheader" />
+<!--内容-->
+<div class="l-omg1">
+	<div class="l-mlogin1">
+		<div class="l-mlg1">
+			<div class="shiming">
+				支付密码
+			</div>
+			<div class="l-lebox clearfix">
+				<div class="l-le">
+					<img src="/Public/web/img/yindao/28.png" />
+				</div>
+				<div class="l-le bg">
+				<form action="" method="post" name="form"  class="clearfix l-shiming1">
+						<div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/mima-5.png"/></span>
+										<input name="newpwd1" id="newpwd1" type="password"  maxlength="6" placeholder="付款密码" />
+							</div>
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/mima-5.png"/></span>
+								<input name="newpwd2" id="newpwd2" placeholder="确认密码"  maxlength="6" type="password"  />
+							<p class="p1">密码长度为6位数字</p>
+								
+							</div>
+
+							<div class="inp-box">
+								<span><img src="/Public/web/img/yindao/shouji-5.png"/></span>
+								<input name="phone" id="phone" value="{$member_info.user_phone}" readonly  type="text" /></div>
+							<div class="clearfix">
+								<div class="inp-box yz">
+									<span><img src="/Public/web/img/yindao/anquan.png"/></span>
+									<input type="text" name="Verification" placeholder="验证码"  id="Verification"  class="l-inpkd" />
+								</div>
+								<div class="yanz-btn" >
+									<input type="button" name="getyzm" id="getyzm" class="yanz-btn" onclick="sendSMS(60)" style="font-size: 15px;border: none;" value="获取验证码" />
+								</div>
+							</div>
+						</div>
+						<div class="queren-btn" onclick="submitForm()" style="margin-top: 115px">
+							修改密码
+						</div>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />
+<script type="text/javascript">
+function submitForm() {
+	var phone = $("#phone").val();
+	var Verification = $("#Verification").val();
+	var newspwd1 = $("#newpwd1").val();
+	var newspwd2 = $("#newpwd2").val();
+	if(newspwd1==''){
+		layer.msg("支付密码不能为空");
+		return false;
+	}
+	if(newspwd1.length<6){
+		layer.msg("支付密码长度不小于6位");
+		return false;
+	}
+	if(newspwd1 != newspwd2){
+		layer.msg("新密码和确认新密码不一致");
+		return false;
+	}
+	if(Verification==''){
+		layer.msg("验证码不能为空");
+		return false;
+	}
+	$.ajax({
+		url: "__URL__/changepin/",
+		type: "post",
+		dataType: "json",
+		data: {"newpwd1":newspwd1,"newpwd2":newspwd2,"Verification":Verification,"phone":phone},
+		success: function(d) {
+			if (d.status == "2") {
+				layer.msg('手机号不正确，请重新输入！',function(){
+				    window.location.reload();
+				});
+				return;
+			} else if (d.status == "1") {
+				layer.msg('恭喜，密码修改成功',{shift: -1},function(){
+				    window.location.href='__APP__/member/safe';
+				});
+				return;
+			}else if (d.status == "3") {
+				layer.msg('验证码不正确',function(){
+				    window.location.reload();
+				});
+				return;
+			}else {
+				layer.msg('对不起，原密码与新密码相同或者操作失败，请联系客服！',function(){
+				    window.location.reload();
+				});
+				return;
+			}
+		}
+	})
+    
+}
+
+function sendSMS(t) {
+	var phone = $("#phone").val();
+	var newspwd1 = $("#newpwd1").val();
+	var newspwd2 = $("#newpwd2").val();
+	if (phone == '') {
+		alert('手机号不能为空！');
+		return false;
+	}
+	if (newspwd1 == '') {
+		alert('密码不能为空！');
+		return false;
+	}
+	if (newspwd2 == '') {
+		alert('确认密码不能为空！');
+		return false;
+	}
+	if (newspwd1 != newspwd2) {
+		alert('确认密码与密码不一致！');
+		return false;
+	}
+
+	$.ajax({
+		url: "__URL__/Verification/",
+		type: "post",
+		dataType: "json",
+		data: {"phone":phone,"type":2},
+		success: function(d) {
+			if (d.status == "y") {
+			    	showtime(t);
+				layer.msg(d.info);
+				return;
+			}else if (d.status == "n") {
+			     
+				layer.msg(d.info );
+			
+				return;
+			}else if (d.status == "s") {
+			     
+				layer.msg(d.info );
+				
+				return;
+			}
+		}
+	})
+}
+function showtime(t){ 
+    document.form.getyzm.disabled=true; 
+    for(i=1;i<=t;i++) { 
+        window.setTimeout("update_p(" + i + ","+t+")", i * 1000); 
+    } 
+    
+} 
+
+function update_p(num,t) { 
+    if(num == t) { 
+        document.form.getyzm.value =" 重新发送 "; 
+        document.form.getyzm.disabled=false; 
+    } 
+    else { 
+        printnr = t-num; 
+        document.form.getyzm.value = " (" + printnr +")秒后重新发送"; 
+    } 
+}
+</script>

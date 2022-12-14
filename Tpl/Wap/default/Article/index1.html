@@ -1,0 +1,53 @@
+
+
+
+<div style="background:#f6f7f8; padding-top:20px; padding-bottom:10px;"><div class="news">
+    <div class="news_left" style="background:#fff">
+        <div class="left_img"><img src="/Public/default/common/images/new-a.jpg" width="240" height="93" /></div>
+        <!--left_img-->
+            <foreach name="menuList" item="vo">
+          <dl class="left_dl">
+          <if condition="!empty($vo['sub'])">
+            <dt><span>{$vo.type_name}</span></dt>
+                        <foreach name="vo.sub" item="v">
+                        	<dd><a href="{$v.linkurl}">{$v.type_name}</a></dd>
+                        </foreach>  
+                     <else />
+                     <dt><span><a href="{$vo.linkurl}">{$vo.type_name}</a></span></dt>
+               		 </if>
+        </dl>
+        
+        </foreach>
+        
+    </div>
+    <!--news_left-->
+    <div class="news_right" style=" background:#fff">
+        <div class="break_title">
+            <p>{$article.name} </p>
+        </div>
+        
+        <if condition="$isArticle eq 1">
+        <div class="model_text">
+        	<h1 class="model_text_title_all">{$article.title}</h1>
+            <!--<h2 class="model_text_title_time"><span>编辑时间：2015-05-01</span></h2>-->
+        	<div class="model_text_main">{$article.art_content}</div><!--model_text_main-->
+        </div>
+        <else />
+          <foreach name="list.list" item="vo">
+        <dl class="news_main">
+                <dt style="width:120px; height: auto;"><!--<img style="width: 120px; float: left;" src="/{$vo.art_img}" onError="this.src='__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/hyxw.jpg'">--></dt>
+                <dd class="new_biaoti"><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">{$vo.title}</a><span class="new_time">{$vo.art_time|date='Y-m-d',###}</span></dd>
+                <dd class="new_text_b"><php>echo ReStrLen(ClearHtml($vo["art_content"]),100,"...");</php></dd>
+                <dd class="new_more_b"><a href="{:U('article/index',array('cid'=>$vo['type_id'],'id'=>$vo['id']))}">查看更多></a></dd>
+            </dl><!--news_main-->
+         </foreach>
+     
+        <div class="fanye">{$list.page}</div>
+    </if>
+        
+        
+    </div>
+    <!--news_right--> 
+</div>
+</div>
+<!--news--> 

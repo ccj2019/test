@@ -1,0 +1,57 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+		.tou1.hb4 span{
+		width: 25% !important;
+	}
+	.bgxmlis.hb4 span{
+		width: 25% !important;
+		
+	}
+</style>
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a >体验金</a></span>
+</div>
+<div class="box clearfix">
+    <include file="default:Public:_left"/>
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><span>体验金</span></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+					<div class="tou1 hb4">
+						<span>活动名称</span>
+						<span>体验金额（元）</span>
+						<!--<span>投标收益</span>-->
+						<span>投标状态</span>
+						<span>投标时间</span>
+						<!--	<span>操作</span>-->
+					</div>
+					<volist name="money_experience" id="volist">
+						<div class="bgxmlis hb4">	
+							<span>注册体验</span>
+							<span>{$volist.money_experience}</span>
+							<!--<span>未投资</span>-->
+                            <span><if condition="$volist['paystatus'] eq 1">已投资<elseif condition="$volist['paystatus'] eq 3"/>已收益<elseif condition="$volist['start_time'] gt time()"/>未生效<elseif condition="$volist['end_time'] lt time()"/>已失效<else/>未投资 </if></span>
+							<span>{$volist.update_time|date="Y-m-d",###}</span>
+							<!--<span><a href="##">查看</a></span>-->
+						</div>
+					</volist>	
+				</div>
+				<!--分页-->
+				<div class="aFye clearfix">
+					<p>{$pagebar}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="default:Public:footer" group="Home" />
+
+
+

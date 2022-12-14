@@ -1,0 +1,49 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a href="{:U('charge/index')}">购买记录</a></span>
+
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div><a href="__APP__/member/charge"><span>购买鱼币</span></a></div>
+			<div class="on"><a href="__APP__/member/charge/chargelog"><span>购买记录</span></a></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+			     <!--充值记录-->
+				<div class="bgbx">
+					<div class="tou">
+						<span>序号</span>
+						<span>购买金额（元）</span>
+						<span>购买时间</span>
+						<span>状态</span>
+					</div>
+					<div class="tou2">
+						<ul>
+							<volist name="list" id="vo">
+								<li>
+									<span>{$vo.id}</span>
+									<span>{$vo.money}</span>
+									<span>{$vo.add_time|date="Y-m-d H:i",###}</span>
+									<span>{$vo.status}<if condition="$vo.way eq 'off'">（线下购买）<else />（在线购买）</if></span>
+								</li>
+							</volist>
+						</ul>
+					</div>
+					  <div >
+                        {$pagebar}
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

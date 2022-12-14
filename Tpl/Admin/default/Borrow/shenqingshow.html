@@ -1,0 +1,32 @@
+<include file="Public:_header" />
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<tagLib name="htmlA" />
+<div class="so_main">
+
+<div class="page_tit">处理申请信息</div>
+<div class="page_tab"><span data="tab_1" class="active">申请信息</span></div>
+<div class="form2">
+	<form method="post" action="__URL__/doshuomingEdit"  enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$vo.id}" />
+	<div id="tab_1">
+	<dl class="lineD"><dt>姓名/公司名称：</dt><dd>{$vo.username}</dd></dl>
+	<dl class="lineD"><dt>联系地址：</dt><dd>{$vo.address}</dd></dl>
+	<dl class="lineD"><dt>联系方式：</dt><dd>{$vo.tel}</dd></dl>
+	<dl class="lineD"><dt>借款金额：</dt><dd>{$vo.jine}万元</dd></dl>
+	<dl class="lineD"><dt>借款时间：</dt><dd>{$vo.shijian}</dd></dl>
+	<dl class="lineD"><dt>月融资成本：</dt><dd>{$vo.chengben}</dd></dl>
+	<dl class="lineD"><dt>安全保障：</dt><dd>{$vo.baozhang}</dd></dl>
+	<dl class="lineD"><dt>借款说明：</dt><dd>{$vo.shuoming}</dd></dl>
+	<dl class="lineD"><dt>处理说明：</dt><dd><htmlA:text id="chuli" value="{$vo.chuli}"  tip="*"/></dd></dl>
+	<dl class="lineD"><dt>审核状态：</dt><dd><htmlA:radio id="checkinfo" datakey="type_list" value="key|vo.checkinfo"/></dd></dl>
+	</div><!--tab1-->
+	
+	<div class="page_btm">
+	  <input type="submit" class="btn_b" value="确定" />
+	</div>
+	</form>
+</div>
+
+</div>
+
+<include file="Public:_footer" />

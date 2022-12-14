@@ -1,0 +1,95 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script src="__ROOT__/Style/Js/jquery.min.js"></script>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+
+<style type="text/css">
+	.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+	<div class="page_tit">添加赠品</div>
+	<div class="page_tab"></div>
+	<div class="form2">
+		<form method="post" action="__URL__/doEdit" onsubmit="return subcheck();" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<input type="hidden" name="zpid" value="{$vo.zpid}" />
+			<input type="hidden" name="uphone" value="{$vo.uphone}" />
+			<div id="tab_1">
+
+				<dl class="lineD"><dt>商品名称：</dt><dd>{$vo.title}&nbsp;</dd></dl>
+				<dl class="lineD"><dt>商品数量：</dt><dd><htmlA:input id="num" value="{$vo.num}" tip="*"/>&nbsp;</dd></dl>
+				<!--<dl class="lineD"><dt>发货时间：</dt><dd>{$vo.fhtime|date='Y-m-d H:i:s',###}&nbsp;</dd></dl>-->
+				<!--<dl class="lineD"><dt>姓名：</dt><dd>{$vo.uname}&nbsp;</dd></dl>-->
+				<!--<dl class="lineD"><dt>电话：</dt><dd>{$vo.phone}&nbsp;</dd></dl>-->
+				<!--<dl class="lineD"><dt>地址：</dt><dd>{$vo.province}-{$vo.city}-{$vo.district}<br>{$vo.address}&nbsp;</dd></dl>-->
+
+				<dl class="lineD"><dt>姓名：</dt><dd><htmlA:input id="uname" value="{$vo.uname}" tip="*"/>&nbsp;</dd></dl>
+				<dl class="lineD"><dt>电话：</dt><dd><htmlA:input id="phone" value="{$vo.phone}" tip="*"/>&nbsp;</dd></dl>
+				<dl class="lineD"><dt>地址：</dt><dd>
+
+					<div id="distpicker2">
+						<select name="province" id="province" data-province="{$vo.province}"></select>
+						<select name="city" id="city" data-city="{$vo.city}"></select>
+						<select name="district" id="district" data-district="{$vo.district}"></select>
+					</div>
+					<br>
+					<htmlA:input id="address"  value="{$vo.address}" tip="*"/>&nbsp;</dd></dl>
+
+				<script src="__ROOT__/Style/Js/distpicker.data.js"></script>
+				<script src="__ROOT__/Style/Js/distpicker.js"></script>
+				<script type="text/javascript">
+					$("#distpicker2").distpicker({
+						autoSelect: false,
+					})
+					//this.comp('distpicker').setValue({province:'省',city:'市','district','县'})
+					// date = new Date();
+					// Calendar.setup({
+					// 	inputField     :    "fhtime",
+					// 	ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					// 	showsTime      :    true,
+					// 	timeFormat     :    "24"
+					// });
+				</script>
+				<if condition="in_array($vo['status'],[1,2])">
+					<dl class="lineD"><dt>订单状态：</dt><dd><htmlA:radio id="status" default="2|已发货,3|已完成" value="key|vo.status" tip="订单处理"/>&nbsp;</dd></dl>
+				<else/>
+					<dl class="lineD"><dt>订单状态：</dt><dd>
+						{$zhuangtai[$vo['status']]}&nbsp;
+					</dd></dl>
+				</if>
+				<input name="fhtime" value="{$vo.fhtime}" type="hidden"/>
+				<if condition="$vo.status eq 3">
+
+					<dl class="lineD"><dt>物流：</dt><dd>{$vo.wuliu}&nbsp;</dd></dl>
+					<dl class="lineD"><dt>单号：</dt><dd>{$vo.yundan}&nbsp;</dd></dl>
+					<if condition="empty($vo['fhtime']) neq true">
+						<dl class="lineD"><dt>发货时间：</dt><dd>{$vo.fhtime|date='Y-m-d H:i:s',###}&nbsp;</dd></dl>
+					</if>
+					<dl class="lineD"><dt>备注：</dt><dd>{$vo.remarks}&nbsp;</dd></dl>
+
+					<else/>
+					<dl class="lineD"><dt>物流：</dt><dd><htmlA:input id="wuliu" value="{$vo.wuliu}" tip="*"/>&nbsp;</dd></dl>
+					<dl class="lineD"><dt>单号：</dt><dd><htmlA:input id="yundan" value="{$vo.yundan}" tip="*"/>&nbsp;</dd></dl>
+					<if condition="empty($vo['fhtime']) neq true">
+						<dl class="lineD"><dt>发货时间：</dt><dd>{$vo.fhtime|date='Y-m-d H:i:s',###}&nbsp;</dd></dl>
+					</if>
+					<dl class="lineD"><dt>备注：</dt><dd><htmlA:input id="remarks" value="{$vo.remarks}"/>&nbsp;</dd></dl>
+				</if>
+
+
+			</div><!--tab1-->
+
+			<div class="page_btm">
+				<input type="submit" class="btn_b" value="确定" />
+				<input type="button" class="btn_b" onclick="window.history.back(-1);" value="返回" />
+			</div>
+		</form>
+	</div>
+
+</div>
+<include file="Public:_footer" />

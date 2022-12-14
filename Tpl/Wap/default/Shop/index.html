@@ -1,0 +1,175 @@
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    document.documentElement.style.fontSize = document.documentElement.clientWidth /750*100 + 'px';</script>
+<link rel="stylesheet" type="text/css" href="/Public/zpublic/css/scstyle.css" />
+<div class="top">
+    <div class="header">
+        <p> <span> <a style="color:#fff;" href="/Wap"><返回</a></span><span>积分商城</span>
+
+
+<if condition="$UID gt '0'">
+
+            <a href="/Wapmember"><img src="/Public/zpublic/img/login.png"/></a>
+
+     <else />
+            <span><a style="color:#fff;" href="/Wapmember/common/login.html"> 登录</a></span>
+
+
+</if>
+
+        </p>
+    </div>
+   
+</div>
+ <div class="major">
+        <volist name=":get_ad(33)" id='vo' offset="0" length='1'>  
+                   <a href="{$vo.url}" <img src="/{$vo.img}/"> </a>
+        </volist> 
+</div>
+<!-- <div style="height:3.8rem;"> </div> -->
+<if condition="$UID gt '0'">
+<div class="all">
+        <ul>
+           <a href="/wapmember/Credit/index"> <li><img src="/Public/zpublic/img/jf_1.png"/><p>  积分&nbsp;  {$meinfo['credits']}</p></li></a>
+            <a href="/wap/invest/index"><li><img src="/Public/zpublic/img/jf_2.png"/><p> 赚积分</p></li></a>
+            <a href="/Wapmember/shoporder"><li style="border-right:none;"><img src="/Public/zpublic/img/jf_3.png"/><p>兑换记录</p></li></a>
+        </ul>
+</div>
+<else/>
+    
+    <div class="all">
+        <ul>
+            <a href="/wapmember/Credit/index"><li><img src="/Public/zpublic/img/jf_1.png"/><p> 积分&nbsp;  </p></li></a>
+            <a href="/wap/invest/index"><li><img src="/Public/zpublic/img/jf_2.png"/><p> 赚积分</p></li></a>
+            <a href="/Wapmember/shoporder"><li style="border-right:none;"><img src="/Public/zpublic/img/jf_3.png"/><p>兑换记录</p></li></a>
+        </ul>
+</div>
+
+</if>
+<div style="widht:100%;height:0.2rem; background:#fff;"></div>
+<div class="all1">
+    <ul>
+        <volist name=":get_ad(40)" id='vo' offset="0" length='3' key="i">  
+                <li>
+
+<a href="{$vo.url}"><img src="/{$vo.img}"/></a>
+                  
+                </li>
+        </volist> 
+
+    </ul>
+</div>
+<div class="all2">
+    <volist name=":get_ad(40)" id='vo' offset="3" length='1'>  
+         <a href="{$vo.url}"><img src="/{$vo.img}"/></a>
+    </volist>
+</div>
+<div class="all3">
+    <p>&#47;&#47;<span>火热推荐</span>&#47;&#47;</p>
+    <ul>
+         <volist id="vo" name="list.tlist">
+    
+
+        <li> <a href="/wap/Shop/shop_show?id={$vo['id']}">
+                    <img src="{$vo.art_img}"/>
+                    <p>{$vo.title|cnsubstr=###,8}</p>
+                    <p>{$vo.art_jifen}</p>
+                    <p>剩余{$vo.art_writer}份</p> </a>
+                </li>
+           
+        </volist>   
+
+
+    </ul>
+</div>
+<div class="all4"><p>海鲜精选</p></div>
+<ul class="all5" id="fixPara">
+    <li><a href="/wap/shop/index?type_id=0" <if condition="$type_id eq 0">class="hove"</if>>全部商品</a></li><li>
+    <a href="/wap/shop/index?type_id=56"<if condition="$type_id eq 56">class="hove"</if>>自养海鲜</a></li><li>
+    <a href="/wap/shop/index?type_id=57"<if condition="$type_id eq 57">class="hove"</if>>海鲜干货</a></li><li style="border-right:none;">
+    <a href="/wap/shop/index?type_id=58"<if condition="$type_id eq 58">class="hove"</if>>优惠券船票</a></li>
+
+</ul>
+<div class="all6" id="fixPar">
+    <ul>
+        <volist id="vo" name="list.list">
+           
+                <li> <a  href="/wap/Shop/shop_show?id={$vo['id']}">
+                    <img src="{$vo.art_img}"/>
+                    <p>{$vo.title|cnsubstr=###,10}</p>
+                    <p>{$vo.art_jifen}</p>
+                    <p>剩余{$vo.art_writer}份</p> </a>
+                </li>
+           
+        </volist>   
+
+    </ul>
+<style type="text/css">
+    .xpage{
+    width:6.9rem;
+    margin: 0 auto;
+    /* margin-top:0.2rem; */
+    text-align:center;
+    height:1.5rem;
+}
+.xpage a{
+    display:inline-block;
+    height: 0.48rem;
+    text-align: center;
+    line-height:0.48rem;
+    background: #f7f7f7;
+    color: #737373;
+    border: 0.01rem solid #d5d5d5;
+    padding:0 0.06rem;
+    border-radius:0.08rem;
+    -moz-border-radius:0.08rem;
+    -webkit-border-radius:0.08rem;
+    font-size:0.22rem;
+}
+.xpage span{
+    display:inline-block;
+    height: 0.48rem;
+    text-align: center;
+    line-height:0.48rem;
+    background: #3575ea;
+    color: #fff;
+    border: 0.01rem solid #3575ea;
+    padding:0 0.1rem;
+    border-radius:0.08rem;
+    -moz-border-radius:0.08rem;
+    -webkit-border-radius:0.08rem;
+    font-size:0.22rem;  
+}
+</style>
+<div class="xpage">{$pagebar}</div>
+
+</div>
+
+<script>
+    var oDiv = document.getElementById("fixPara"),
+                H =-document.documentElement.clientWidth /750*100*1.13,
+                Y = oDiv
+            while (Y) {
+                H += Y.offsetTop;
+                Y = Y.offsetParent;
+                console.log(Y);
+            }
+            window.onscroll = function()
+            {
+                var s = document.body.scrollTop || document.documentElement.scrollTop
+                if(s>H) {
+                    oDiv.style = "position:fixed;top:1.12rem;";
+                    document.getElementById("fixPar").style="margin-top:1.04rem;";
+                } else {
+                    oDiv.style = "";
+                    document.getElementById("fixPar").style= "";
+                }
+            }
+  
+
+// 	alert(1);
+
+$zindex=2;
+    
+
+</script>

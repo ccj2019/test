@@ -1,0 +1,174 @@
+ 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+ 
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+	<body style="background: #fff;">
+
+		<div class="l-fh l-on">
+			<a href="javascript:window.history.back();"class="l-fanhui on">&lt;返回</a><span>个人资料</span>
+			<div class="l-fanhui1">
+						 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a> 
+			</div>
+		</div>
+
+		<div class="l-myziliao clearfix">
+			<ul>
+
+				<li id="zzzzzzzzzzisad" >
+					<a href="##">
+					
+						<span class="l-diansan">头像</span>
+						<span class="l-imgyuan l-fr cc" style="padding-top: .1rem;">	
+					   	<img src="{$member_info.user_img|default='/Public/wap/img/default-avatar.png'}" id="user_img"alt="" />
+					   	 	<span class="l-konge">&gt;</span>
+						</span>
+				 
+
+					</a>
+
+				</li>
+				<a href="/Wapmember/Memberinfo/nick_name">
+				<li>
+						
+						<span class="l-diansan">会员名</span><span class="l-imgyuan l-fr" > 
+							<span>{$member_info.nick_name}</span><span>&gt;</span></span>
+					
+				
+						 
+
+				</li></a>
+				<li>
+					<a href="##">
+						<span class="l-diansan">真实姓名</span><span class="l-imgyuan l-fr" >	
+							<span>{$member_info.real_name}</span><span></span></span>
+					</a>
+
+				</li>
+				<li> <if condition="$ids neq 1">
+                         <a href="/wapmember/verify/index.html?id=1#chip-3">
+						<span class="l-diansan">身份证号</span><span class="l-imgyuan l-fr"><span>
+							{$member_info.idcard|hidecard=###,3|default="未认证"} </span> <span>&gt; 
+                               </span></span>
+						</a>
+					<else/>
+					  	<a href="">
+							<span class="l-diansan">身份证号</span>
+							<span class="l-imgyuan l-fr" ><span>
+							{$member_info.idcard|hidecard=###,3|default="未认证"} </span> <span> 
+                               </span></span>
+						</a>
+					 </if>
+				</li>
+				<li>
+					<a href="/Wapmember/Memberinfo/cell_phone">
+						<span class="l-diansan">绑定手机号</span>
+						<span class="l-imgyuan l-fr" style=" display: table;"><span>
+							{$members.user_phone}</span> <span>&gt;</span></span>
+					</a>
+				</li>
+				<li>
+					<a href="/Wapmember/Memberaddress">
+						<span class="l-diansan">收货地址</span><span class="l-imgyuan l-fr" style="width: 69%;    line-height: .5rem;padding-top: 0.25rem;">
+							<span >{$va.province}{$va.city}{$va.district}{$va.address}</span> <span>&gt;</span></span>
+					</a>
+				</li> 
+
+			</ul>
+		</div>
+		
+		<div class="l-tuichudl">
+		  <a href="/wapmember/common/actlogout.html">退出登录</a>  	
+		</div>
+<!--弹出-->
+			  <form action="" method="post"  enctype='multipart/form-data'id="form0">
+							
+					
+			<div class="l-dtc" >
+			<div class="l-tanchubox">
+		<input id="takepicture" type="file" name="image" onchange="imgChange1('z_photo','z_file');"accept="image/*" > 
+				<p class="l-tcp3">  <span class="l-btnc">取消</span></p>
+			</div>
+		</div>
+		</form>
+		
+
+	</body>
+
+</html>
+<script>
+	
+				function imgChange1() {
+					 
+ 
+        	
+      			  			 var form = new FormData(document.getElementById("form0"));  
+      			 	console.log(form);
+   
+ 			      $.ajax({  
+ 			      url:"/Wapmember/memberinfo/addimg",  
+ 		      type:"post",  
+ 		      data:form,  
+ 			      cache: false,  
+ 			      processData: false,  
+ 			      contentType: false,  
+ 		      success:function(data){ 
+ 					console.log(data);
+ 			  data=	JSON.parse(data);
+						console.log(data);
+						
+					if(data.status==1){
+							$(".l-dtc").hide();
+ 							$("#user_img").attr("src",data.message);
+			           		}else{
+						alert(data.message);
+					}
+ 						 
+ 							 
+ 		           		 
+ 		      },  
+ 			      error:function(e){  
+ 		          //alert("网络错误，请重试！！");  
+			       }  
+ 		      });
+			      		
+        	} 
+	
+	
+//	var takePictureOnclick = function(){
+//  var takePicture = document.getElementById('takepicture');
+//  // 添加需要处理的代码
+//  takePicture.click();
+//}// 监听照片拍摄,并获取照片流
+// var takePicture = document.getElementById('takepicture');
+//var takePictureUrl = function () {
+//    takePicture.onchange = function (event) {
+//        var files = event.target.files, file;
+//        if (files && files.length > 0) {
+//            file = files[0];
+//            try {
+//                var URL = window.URL || window.webkitURL;
+//               var blob = URL.createObjectURL(file);　　// 获取照片的文件流
+//               compressPicture(blob);　　// 压缩照片
+//           }
+//           catch (e) {
+//               try {
+//                   var fileReader = new FileReader();
+//                   fileReader.onload = function (event) {　　　　// 获取照片的base64编码
+//                       compressPicture(event.target.result);　　// 压缩照片
+//                   };
+//                   fileReader.readAsDataURL(file);
+//               }
+//               catch (e) {
+//                   alert(common.MESSAGE.title.error, '拍照失败,请联系客服或尝试更换手机再试!');
+//               }
+//           }
+//       }
+//   }
+// }();
+</script>

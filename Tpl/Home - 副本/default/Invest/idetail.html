@@ -1,0 +1,130 @@
+<include file="default:Public:header" />
+<!--内容部分-->
+<div class="mwsybx clearfix">
+	<div class="mwsybx1">
+    <div class="mwcz1">	
+		<h1>{$binfo.borrow_name}  【注册体验标】</h1>
+		<div class="clearfix">
+			<div class="aisi">
+				<p class="p1">新手体验金</p>
+				<p class="p2">￥8888.00元</p>
+				<!--{$money_experience}-->
+			</div>
+			<div class="aisi">
+				<p class="p1">年化收益</p>
+				<p class="p2">{$binfo.borrow_interest_rate}%</p>
+				
+			</div>
+			<div class="aisi">
+				<p class="p1">投资期限</p>
+				<p class="p2">不限</p>
+				
+			</div>
+			<div class="aisi">
+				<p class="p1">收益期限</p>
+				<p class="p2">1天</p>
+				
+			</div>
+		</div>  
+
+		<div class="sitimebox clearfix"> 
+			 <div class="sitime">	
+			   <span >支付方式：</span>   <span style="display: -webkit-inline-box;  width: 183px; ">网站支付</span>
+			</div>
+			<div class="sitime">	
+			   <span>支持人数：</span>   <span>不限</span>
+			</div>
+			<div class="sitime" style="clear: left;">	
+			   <span>已筹金额：</span>  <span style="display: -webkit-inline-box;  width: 183px; ">此标为体验标，不设上限</span> 
+			</div>
+			
+			<!--<div class="sitime">	
+			   <span>收益时间：</span>2018-10-11 10：12：54
+			</div> -->
+		 </div>
+
+		<!--<div class="sitimebox clearfix">-->
+			<!--<div class="sitime">	
+			   <span>注册时间：</span>2018-10-11 10：12：54
+			</div>
+			<div class="sitime">	
+			   <span>投标时间：</span>2018-10-11 10：12：54
+			</div>
+			<div class="sitime">	
+			   <span>过期时间：</span>2018-10-11 10：12：54
+			</div>
+			<div class="sitime">	
+			   <span>收益时间：</span>2018-10-11 10：12：54
+			</div>-->
+		<!--</div>-->
+    </div>
+
+		
+	</div>
+	<div class="mwsybx1">
+		<h3>我的新手注册体验金</h3>
+		<p class="p1y" ><span>￥{$binfo.borrow_min|default='--'}</span>元</p>
+		<p class="p1y">起投金额：￥8888.00元</p>
+	    <p class="p1y">限投金额：￥8888.00元</p>
+		<!--<p class="p1y">可投资金额：￥{$money_experience|default='--'}元</p>-->
+		<!--<p class="p1y">可用余额：￥{$money_experience|default='--'}元</p> -->
+ 
+		<!-- <p class="p1y">每天收益：<span>￥{:round($binfo['borrow_min']*$binfo['borrow_interest_rate']/100/360,2)}</span>/天</p> -->
+		<p class="p1y">每天收益：<span>￥5.92</span>/天</p>
+		<!--<div class="btnsy">
+			投标已收益
+		</div>-->
+		<form method="post" class="p1y"  name="investForm" id="investForm" action="/invest/investmoney">
+            <input type="hidden" name="is_experience" id="is_experience" value="1" />
+            <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+            <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+            <input type="hidden" id="invest_money" value="{$binfo.borrow_min}" name="money">
+
+            <li>支付密码：	<input type="password"value="" id="pin" name="pin"  /> </li>
+
+
+        </form>
+		<div class="btnsy1" id="sub1" >
+			立即投标
+		</div>
+		<!--<div class="btnsy2">
+			已投标待收益
+		</div>-->
+		 <script type="text/javascript">
+		 	$('#sub1').click(function() {
+		 		$('#investForm').submit();
+		 	})
+		 </script>
+	</div>
+	<div class="mwsybx2" style="height: auto">
+		<h3>新手标说明</h3>
+		<div class="LSIX1"><div></div></div>
+		<div class="im1box">
+			
+			<div>
+				<img src="/public/web/img/1.png" alt="" style="width: 96%"/>
+			</div>
+			<div class="im1">
+				<h3>新手注册体验标说明</h3>
+				<p>新手注册体验金是铭万众筹平台送给每个新注册用户的福利，每人限投一次，每个用户注册后即送8888元体验金，使用有效期为注册后一月内。
+					投资后即可在短期内获得投资收益。投资收益可直接提现。</p>
+			</div>
+			
+		</div>
+		<div class="im1box">
+			
+			<div>
+				<img src="/public/web/img/2.png" alt="" style="width: 96%"/>
+			</div>
+			<div class="im1">
+				<h3>体验标回报说明</h3>
+				<p>用户在完成新手注册体验标后，将获得5.84元的收益，收益直接发放至用户的个人中心账户，可提现。</p>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+	
+		<!--底部-->
+<include file="default:Public:footer" />

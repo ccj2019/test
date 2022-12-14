@@ -1,0 +1,87 @@
+
+        <div class="footer">
+            <div class="foot_con">
+                <img class="foot_l" src="__PUBLIC__/shop/img/xyj_21.jpg">
+                <div class="foot_r">
+                    <div class="foot_zz"></div>
+                    <div class="foot_r_l" style="width:2.00rem;">
+                        <li><a href="/article/cateshow/cid/523.html">服务条款</a></li>
+                        <li><a href="/article/cateshow/cid/533.html">隐私策略</a></li>
+                        <!--     <li><a href="/article/cateshow/cid/523.html">服务介绍</a></li> -->
+                        <!--  
+                    <li><a href="/article/cateshow/cid/523.html">撰写指南</a></li> -->
+                    </div>
+                    <div class="foot_r_l" style="width:4.00rem; margin-left:0.40rem;">
+                        <li><a href="/invest/index.html">渔业养殖</a></li>
+                        <li><a href="/zhongzhi/index.html">联合种植</a></li>
+                        <li><a href="/shop">海产商城</a></li>
+                        <li><a href="/article/news_list.html">最新资讯</a></li>
+                        <li><a href="/article/video.html">视频直播</a></li>
+                        <li><a href="/article/active.html">活动公告</a></li>
+                        <li><a href="/article/about.html">关于我们</a></li>
+                        <li><a href="/member/index/index.html">会员中心</a></li>
+                    </div>
+                    <div class="foot_r_r">
+
+                        <div class="ftm_ewm">
+                            <img src="__PUBLIC__/shop/img/erwei-w.png">
+                        </div>
+                        微信公众号
+                    </div>
+                    <div class="clear"></div>
+                    <div class="foot_ry">
+                        <a target="_blank"><img src="__PUBLIC__/shop/img/xyj_28.jpg"></a>
+
+                        <a target="_blank"><img src="__PUBLIC__/shop/img/gg_07.png"></a>
+
+                        <a target="_blank"><img src="__PUBLIC__/shop/img/gg_09.png"></a>
+
+
+
+                    </div>
+                    <div class="clear"></div>
+                    <div class="foot_bq">
+                        公司地址：山东省日照市东港区石臼街道海滨二路156号 <a href="http://www.beian.miit.gov.cn" style="color:#fff;" target="_blank">鲁公网安备
+                            37110302000118号 鲁ICP备17003630号-1</a><br>
+
+
+                        <span style="line-height:0.25rem; display:black;">寻渔记-日照铭万网络科技有限公司版权所有 </span>
+                        市场有风险 投资需谨慎<br>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="__PUBLIC__/shop/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var tfBannerIndex = 0;
+        var tfBannerStatus = true;
+        //鼠标经过切换轮播图
+        $('.tfBannerDianBox').on('mouseover', '.tfBannerDian', function() {
+            tfBannerStatus = false;
+            $('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq($(this).index()).addClass(
+                'active');
+            $('body').find('.tfBanner').removeClass('active').eq($(this).index()).addClass('active');
+            tfBannerIndex = $(this).index()
+        })
+        $('.tfBannerDianBox').on('mouseout', '.tfBannerDian', function() {
+            tfBannerStatus = true;
+        })
+        //定时轮播Banner
+        setInterval(function() {
+            if (tfBannerStatus) {
+                tfBannerIndex++;
+                if (tfBannerIndex + 1 > $('body').find('.tfBanner').length) {
+                    tfBannerIndex = 0
+                }
+                $('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq(tfBannerIndex).addClass(
+                    'active');
+                $('body').find('.tfBanner').removeClass('active').eq(tfBannerIndex).addClass('active');
+            }
+        }, 5000)
+    </script>
+</html>

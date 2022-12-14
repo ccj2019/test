@@ -1,0 +1,190 @@
+<include file="default:Public:header" />
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+<!--内容-->
+<tagLib name="htmlA" />
+<div class="l-omg">
+	<div class="l-mlogin">
+		<div class="l-mlg">
+			<div class="shiming">
+				添加银行卡
+			</div>
+			<form action="">
+				<div>		
+				<p class="smRZ">
+				<span>开户名:</span><input type="text" name="realname" id="realname" value="{$voinfo.real_name}" readonly="readonly" />
+				</p>
+
+				<p class="smRZ">
+				<span>身份证号:</span><input type="" name="idcard" id="idcard" value="{$voinfo.idcard}" readonly="readonly" />
+				</p>
+
+				<p class="smRZ">
+				<span>类型:</span><span class="span1">借记卡（不支持信用卡）</span>
+				</p>
+				<p class="smRZ zm">
+				<span>选择银行:</span>
+				<htmlA:select id="bank_name" value="key|vobank.bank_name" datakey='bank_list' class="spec89" addstr='' style="width: 277px;"/>
+				</p>
+
+
+
+				<p class="smRZ" style="display:none;" id="khh">
+				<span>开户行名称:</span><input type="" name="bank_namecs" id="bank_namecs" />
+				</p>
+						
+				<p class="smRZ">
+				<span>开户行所在地:</span> 
+				<select name="selectp" id="province" style="width: 136px;">
+					<option value="0">请选择省份 </option>
+				</select>
+				<select name="selectc" id="city" style="width: 136px;">
+					<option value="0">请选择城市</option>
+				</select>
+				</p>
+					<p class="smRZ">
+				<span>详细地址信息:</span>
+					<input   id="bank_address" name="bank_address"  type="text">
+				</p>
+			
+				<p class="smRZ">
+				<span>银行卡号:</span>
+				<input type="text" name="txt_account" id="txt_account" value="" />
+				</p>
+				<p class="smRZ">
+				<span>手机号码:</span><input type="text" name="phone" id="phone" value="" />
+				</p>
+				<p class="smRZ yzm">
+				<span>验证码:</span><input type="text" name="yzm" id="yzm" value="" />
+				<a href="javascript:void(0);" onclick="send()" class="button" style="color: #fff; height: 30px;line-height: 30px;display: inline-block;">获取验证码</a>
+				</p>
+				<!--投资类型-->
+				
+				</div>
+				<div class="z-btnbox">
+					<span >
+						<a href="__APP__/member" style="color: #fff;"> 忽略</a>
+					</span>
+					<span class="on">
+						<a href="javascript:void(0)" id="btn_set" style="color: #fff;">确认添加</a>
+		            </span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var mbTest =/^1\d{10}$/;
+function send(){
+	var phone = $('#phone').val();
+	if(phone == ''){
+		layer.msg("手机号不能为空");
+		return false;
+	}else if(!phone.match(mbTest)){
+		layer.msg("手机号不正确");
+		return false;
+	}else{
+		$.ajax({
+		  url: "__URL__/sendcode/",
+		  type: "post",
+		  dataType: "json",
+		  data: {"phone":phone,"type":2},
+		  success: function(data){
+		  	console.log(data);
+		    if(data.status == 'y'){
+		      	layer.msg(data.info,{shift: -1});
+		      	return false;
+		    }else{
+		      layer.alert(data.info);
+		      return false;
+		    }
+		  }
+		});
+	}
+}
+$(function() {
+
+$("#bank_name").click(function() {
+		var aa=$("#bank_name").val();
+		if(aa=="BAC"){
+			$("#khh").css("display","block");
+		}else{
+			$("#khh").css("display","none");
+		}
+	});
+
+	$("#btn_set").click(function() {
+		if ($("#bank_name").val()=="") {
+			layer.msg('请选择开户行！');
+			return false;
+		}
+
+		if ($("#khh").css("display")=="block"&&$("#bank_namecs").val()=="") {
+			layer.msg('请填写开户行名称！');
+			return false;
+		}
+
+		if ($("#txt_account").val().length < 7) {
+			layer.msg('请正确输入您的银行帐号！');
+			return false;
+		}
+		if ($("#txt_account").val().length > 19) {
+			layer.msg('请正确输入您的银行帐号！');
+			return false;
+		}
+		if ($("#province").val()=="") {
+			layer.msg('请选择开户行所在省份！');
+			return false;
+		}
+		if ($("#city").val()=="") {
+			layer.msg('请选择开户行所在市！');
+			return false;
+		}
+
+        if ($("#yzm").val()=="") {
+            layer.msg('验证码不能为空！');
+            return false;
+        }
+
+        var bb=$("#bank_name").val();
+
+        var khhname=$('#bank_name > option[value=' + bb + ']').text();
+
+			if ($("#khh").css("display")=="block"&&$("#bank_namecs").val()!="") {
+				khhname=khhname+"|"+$("#bank_namecs").val();
+		}
+
+
+		$.ajax({
+			url: "__URL__/bindbank",
+			type: "post",
+			dataType: "json",
+			data: {
+				account: $("#txt_account").val(), realname: $("#realname").val(),idcard: $("#idcard").val(),phone: $("#phone").val(),yzm: $("#yzm").val(),
+				province: $("#province").find("option:selected").text(),bank_address:$("#bank_address").val(),cityName: $("#city").find("option:selected").text(),bankname: khhname
+			},
+			success: function(d) {
+				//
+				console.log(d.status);
+
+				if (d.status == 1) {
+					layer.msg('恭喜，您的银行卡更新成功',{shift: -1},function(){
+			            window.location.href="__APP__/member/";
+			        });
+					
+				}
+				else if (d.status == "f") {
+					$("#btn_set").css("pointer-events","auto");
+					layer.msg(d.info);
+				}
+
+			}
+		});
+
+	});
+});
+</script>
+<include file="default:Public:footer" group="Home" />
+<script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>

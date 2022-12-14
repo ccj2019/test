@@ -1,0 +1,805 @@
+<include file="Public:_header" />
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/swfupload.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script>
+<script>
+    $(function(){
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="return_info"]', {
+                allowFileManager : true,
+                autoHeightMode : true,
+                afterCreate : function() {
+                    this.loadPlugin('autoheight');
+                },
+                afterUpload : function(url) {
+                    var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                    var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                    $("#firstimage").append(firstimageoption);
+                    $("#images").append(selectoption);
+                },afterBlur: function(){this.sync();}
+            });
+        });
+    })
+</script>
+
+<style type="text/css">
+.albCt{height:200px}
+#J_imageView img{
+    max-width: 200px;
+}
+/*#password {display: none;}*/
+</style>
+<tagLib name="htmlA" />
+<div class="so_main">
+  <div class="page_tit">审核借款</div>
+  <div class="page_tab">
+  <span data="tab_1" class="active">基本信息</span>
+  <span data="tab_2">项目介绍</span>
+  <span data="tab_3">分红及收益</span>
+  <span data="tab_4">风控及退出</span>
+  <span data="tab_5"  style="display:none">财务分析</span>  
+  <span data="tab_6"  style="display:none">项目关注</span>  
+  </div>
+  <div class="form2">
+    <form method="post" action="__URL__/doEdit{$xact}" onsubmit="return subcheck();" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{$vo.id}" />
+      <div id="tab_1">
+        <if condition="$id neq '1'">
+       <dl class="lineD">
+          <dt>项目属性：</dt>
+          <dd>
+            <htmlA:radio id="is_tuijian" value="key|vo.is_tuijian" default="0|普通,1|首页推荐,2|新手专区" />
+          </dd>
+        </dl>
+         <dl class="lineD">
+          <dt>合同模板号：</dt>
+          <dd>
+            <htmlA:input id="templateid" value="{$vo.templateid}" tip="*"/>
+          </dd>
+        </dl>   
+       </if>
+        <!--
+        <dl class="lineD" style="color:red">
+          <dt>是否提前完成：</dt>
+          <dd>
+            <htmlA:radio id="pause" value="key|vo.pause" default="0|否,1|是"  tip="项目总额为当前投资总额，项目投资完成。"  />
+          </dd>
+        </dl>
+        <dl class="lineD" style="color:red">
+          <dt>密码标：</dt>
+          <dd>
+            <htmlA:input name="password" id='password' value="{$vo.password}"/>
+          </dd>
+        </dl>  -->
+      
+          
+       
+       <!--//编号 : $(bianhao)
+//甲方 : $(jiafang)
+//身份证 : $(idno)
+
+//乙方公司 : $(yifang_company_name)
+//乙方代表人 : $(yifang_name)
+//乙方信用代码 : $(yifang_xinyongdaima) -->
+       <!--<dl class="lineD">
+          <dt>甲方：</dt>
+          <dd>
+            <htmlA:input id="jiafang" value="{$vo.jiafang}" tip="*"/>
+          </dd>
+        </dl>    <dl class="lineD">
+          <dt>甲方身份证：</dt>
+          <dd>
+            <htmlA:input id="idno" value="{$vo.idno}" tip="*"/>
+          </dd>
+        </dl>-->
+         <!--<dl class="lineD">
+          <dt>乙方公司：</dt>
+          <dd>
+            <htmlA:input id="yifang_company_name" value="{$vo.yifang_company_name}" tip="*"/>
+          </dd>
+        </dl>    <dl class="lineD">
+          <dt>乙方代表人：</dt>
+          <dd>
+            <htmlA:input id="yifang_name" value="{$vo.yifang_name}" tip="*"/>
+          </dd>
+        </dl>   
+        <dl class="lineD">
+          <dt>乙方信用代码：</dt>
+          <dd>
+            <htmlA:input id="yifang_xinyongdaima" value="{$vo.yifang_xinyongdaima}" tip="*"/>
+          </dd>
+        </dl>   -->
+        <dl class="lineD">
+          <dt>众筹标题：</dt>
+          <dd>
+            <htmlA:input id="borrow_name" value="{$vo.borrow_name}" tip="*"/>
+          </dd>
+        </dl>
+          <if condition="$id neq '1'">
+        <dl class="lineD">
+          <dt>项目类型：</dt>
+          <dd>                 
+            <htmlA:select id="pid" value='key|vo.pid' datakey='pid' tip=""/>                      
+          </dd>
+        </dl>
+      <dl class="lineD">
+            <dt>新手专享：</dt>
+            <dd>
+                <htmlA:radio id="new_user_only" value="key|vo.new_user_only" default="0|否,1|是" />
+            </dd>
+        </dl>
+        <dl class="lineD">
+            <dt>可以预约：</dt>
+            <dd>
+                <htmlA:radio id="bespeak_able" value="key|vo.bespeak_able" default="0|否,1|是" />
+            </dd>
+        </dl>
+         <dl class="lineD">
+            <dt>可以智投：</dt>
+            <dd>
+                <htmlA:radio id="zhitou_able" value="key|vo.zhitou_able" default="0|是,1|否,2|新手智投" />
+            </dd>
+        </dl>
+        <!--
+        <dl class="lineD">
+          <dt>是否允许加息券：</dt>
+          <dd>
+            <htmlA:radio id="is_memberinterest" value="key|vo.is_memberinterest" default="0|否,1|是，只是否允许加息券" />
+          </dd>
+        </dl>-->
+        <!-- <dl class="lineD">
+          <dt>是否允许体验金：</dt>
+          <dd>
+            <htmlA:radio id="is_experience" value="key|vo.is_experience" default="0|否,1|是，只允许使用体验金" />
+          </dd>
+        </dl>        
+        <dl class="lineD">
+          <dt>是否允许使用红包：</dt>
+          <dd>
+            <htmlA:radio id="is_bonus" value="key|vo.is_bonus" default="0|否,1|是，最低投资金额" />
+            <htmlA:input id="is_bonus_invest_min" value="{$vo.is_bonus_invest_min}" tip="元" />
+          </dd>
+        </dl> -->
+ 
+ 
+        
+        <dl class="lineD">
+          <dt>项目管理费：</dt>
+          <dd>
+            <htmlA:input id="borrow_fee" value="{$vo.borrow_fee}" tip="默认为按后台设置计算出来的，如果私下有协议可以改" />
+          </dd>
+        </dl>
+         <dl class="lineD">
+          <dt>项目总金额：</dt>
+          <dd>
+             <htmlA:input id="borrow_money" value="{$vo.borrow_money}" tip="众筹总金额" />   
+          </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>众筹时间(天)：</dt>
+          <dd>
+            <htmlA:input id="collect_day" value="{$vo.collect_day}" tip="在前台展示天数，如在担心在设定时间内不能募集完成，可修改延长" />
+          </dd>
+        </dl>
+
+
+
+
+        <dl class="lineD">
+          <dt>售价：</dt>
+          <dd>
+            <htmlA:input id="shoujia" value="{$vo.shoujia}" tip="商城销售价格" />
+          </dd>
+        </dl>
+              <dl class="lineD">
+                  <dt>库存：</dt>
+                  <dd>
+                      <htmlA:input id="art_writer" value="{$vo.art_writer}" tip="库存" />
+                  </dd>
+              </dl>
+
+        <!--<dl class="lineD">-->
+          <!--<dt>众筹时间(天)：</dt>-->
+          <!--<dd>-->
+            <!--<htmlA:input id="collect_day" value="{$vo.collect_day}" tip="在前台展示天数，如在担心在设定时间内不能募集完成，可修改延长" />-->
+          <!--</dd>-->
+        <!--</dl>-->
+
+        <!--doEdit-->
+        
+       <if condition="$xact eq 'waitverify2'">
+
+           <dl class="lineD">
+               <dt>开售时间：</dt>
+               <dd>
+                   <htmlA:input id="xs_time" value="{$vo.xs_time|date='Y-m-d H:i:s',###}" tip="上架商城时间" />
+               </dd>
+           </dl>
+
+           <dl class="lineD">
+               <dt>下架时间：</dt>
+               <dd>
+                   <htmlA:input id="xj_time" value="{$vo.xj_time|date='Y-m-d H:i:s',###}" tip="下架商城时间" />
+               </dd>
+           </dl>
+
+           <dl class="lineD">
+               <dt>收购时间：</dt>
+               <dd>
+                   <htmlA:input id="sg_time" value="{$vo.sg_time|date='Y-m-d H:i:s',###}" tip="到期收购时间" />
+               </dd>
+           </dl>
+           <script type="text/javascript">
+               date = new Date();
+               Calendar.setup({
+                   inputField     :    "xs_time",
+                   ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                   showsTime      :    true,
+                   timeFormat     :    "24"
+               });
+
+               Calendar.setup({
+                   inputField     :    "sg_time",
+                   ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                   showsTime      :    true,
+                   timeFormat     :    "24"
+               });
+
+               Calendar.setup({
+                   inputField     :    "xj_time",
+                   ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                   showsTime      :    true,
+                   timeFormat     :    "24"
+               });
+
+           </script>
+
+        <dl class="lineD">
+          <dt>预计回款日期：</dt>
+          <dd>
+           <!--<input name="lead_time" type="date" value="" placeholder="2018-01-01" required="required"> -->
+            <htmlA:input id="lead_time" value="{$vo.lead_time|date='Y-m-d H:i:s',###}" tip="在前台展示天数，如在担心在设定时间内不能募集完成，可修改延长" />
+          </dd>
+        </dl>
+         <script type="text/javascript">
+        date = new Date();
+        Calendar.setup({
+          inputField     :    "lead_time",
+          ifFormat       :    "%Y-%m-%d %H:%M:%S",
+          showsTime      :    true,
+          timeFormat     :    "24"
+        });
+        </script>
+
+       </if>
+      
+        <dl class="lineD">
+          <dt>回报类型：</dt>
+          <dd>
+            <htmlA:radio id="loan_certificate" value="key|vo.loan_certificate" default="1|收益回报,2|线下回报" />  
+          </dd>
+        </dl> 
+          
+        <dl class="lineD">
+          <dt>是否限制：</dt>
+          <dd>
+            <htmlA:radio id="is_limit" value="key|vo.is_limit" default="0|否,1|是" />
+          </dd>
+        </dl>
+
+              <dl class="lineD">
+                  <dt>活动：</dt>
+                  <dd>
+                      <htmlA:radio id="is_huodong" value="key|vo.is_huodong" default="0|否,1|是" />
+                  </dd>
+              </dl>
+
+              <dl class="lineD">
+                  <dt>约标：</dt>
+                  <dd>
+                      <htmlA:radio id="leixing" value="key|vo.leixing" default="1|否,2|是" />
+                  </dd>
+              </dl>
+
+              <dl class="lineD">
+                  <dt>赠品选择：</dt>
+                  <dd>
+                      <select name="zpid"  class="c_select">
+                          <option>--请选择--</option>
+
+                          <volist name="zplist" id="v1">
+                              <option value="{$v1.id}" <if condition="$v1.id eq $vo['zpid']">  selected="selected" </if> >{$v1.title}</option>
+                          </volist>
+
+                      </select>
+
+
+
+                      <!--<htmlA:select id="title" value='key|vo.zpid' datakey='zpid' tip=""/>-->
+                  </dd>
+              </dl>
+
+              <dl class="lineD">
+                  <dt>送赠品金额：</dt>
+                  <dd>
+                      <htmlA:input id="huodongnum" value="{$vo.huodongnum}" tip="活动项目送一份赠品的金额" />
+                      {$vo.huodongnum}
+                  </dd>
+              </dl>
+
+
+
+
+        <dl class="lineD">
+          <dt>快捷支持份数：</dt>
+          <dd>
+            <htmlA:input id="shortcut" value="{$vo.shortcut}" tip="请严格按照示例填写支持份数，例如：10,20,50" />
+          </dd>
+        </dl>
+         </if>
+        <if condition="$id eq '1'">
+          <dl class="lineD">
+            <dt>累计投标人数：</dt>
+            <dd>
+              <htmlA:text id="cinvestinfo" value="{:count($investinfo)}"   />
+            </dd>
+          </dl> 
+            <dl class="lineD">
+            <dt>累计投标金额：</dt>
+            <dd>
+              <htmlA:text id="has_borrow" value="{$vv.has_borrow}"   />
+            </dd>
+          </dl>
+     
+          <!--readonly="readonly"-->
+        </if>
+        <!--
+                 <if condition="$vo.borrow_status lt '3' || $vo.borrow_status eq '3'">
+          <dl class="lineD">
+            <dt>初审处理意见：</dt>
+            <dd>
+              <htmlA:text id="deal_info" value="{$vv.deal_info}" tip="*" />
+            </dd>
+          </dl>
+        </if>
+          
+        -->
+          <if condition="$id eq '1'">
+        <dl class="lineD" style="display: none;"  >
+          <dt> 支持金额：</dt>
+          <dd>
+            <htmlA:input id="borrow_min" value="{$glo.award_reg}" tip="0表示无限制" />
+          </dd>
+        </dl>
+        <else/>
+          <dl class="lineD" style=""  >
+          <dt> 支持金额：</dt>
+          <dd>
+            <htmlA:input id="borrow_min" value="{$vo.borrow_min}" tip="0表示无限制" />
+          </dd>
+        </dl>
+          </if>
+      <if condition="$id neq '1'">
+        <dl class="lineD"  >
+          <dt>每人限购数：</dt>
+          <dd>
+            <htmlA:input id="max_limit" value="{$vo.max_limit}" tip="0表示无限制" />
+          </dd>
+        </dl> 
+
+       <dl class="lineD" style=""  >
+          <dt> 收益率：</dt>
+          <dd>
+            <htmlA:input id="shouyilv" value="{$vo.shouyilv}" tip="填写后将最先显示" />
+          </dd>
+        </dl>
+         <dl class="lineD" style=""  >
+          <dt> 回款天数：</dt>
+          <dd>
+            <htmlA:input id="hkday" value="{$vo.hkday}" tip="多期回款，回款间隔小于一个月的" />
+          </dd>
+        </dl>
+
+       <dl class="lineD">
+          <dt>回报内容：</dt>
+          <dd>          
+<textarea name="return_info" id="return_info" style="width:800px;height:40px;">{$vo.return_info}</textarea>
+          </dd>
+        </dl>
+    
+        <!-- 
+           <dl class="lineD" style="display: none;">
+          <dt>最多投资总额：</dt>
+          <dd>
+            <htmlA:input id="borrow_max" value="0" tip="0表示无限制" />
+          </dd>
+        </dl>-->
+        <!--<dl class="lineD">
+          <dt>项目生产厂家：</dt>
+          <dd>
+            <htmlA:input id="borrow_sccj" value="{$vo.borrow_sccj}" />
+          </dd>
+        </dl>-->    
+        <dl class="lineD">
+          <dt>预计收益：</dt>
+          <dd>
+            <htmlA:input id="borrow_interest_rate" value="{$vo.borrow_interest_rate}" />%
+          </dd>
+        </dl>
+                
+        <dl class="lineD">
+          <dt>项目周期：</dt>
+          <dd>
+            <htmlA:input id="borrow_duration" value="{$vo.borrow_duration}" />
+          </dd>
+        </dl> 
+        
+        <dl class="lineD">
+          <dt>项目期数：</dt>
+          <dd>
+            <htmlA:input id="total" value="{$vo.total}" />
+          </dd>
+        </dl>
+           <dl class="lineD">
+          <dt>项目上线时间：</dt>
+          <dd>
+               <!-- <input type="text" id="start_time" name="start_time" value="<?php echo date('Y-m-d H:i:s',time());?>" class="tip">请选择项目预热时间，不选择为立即上线</span>-->
+             <if condition="empty($vo['start_time'] ) or ((int)$vo['start_time'] lt 1755423)">
+                  <input type="text" id="start_time" name="start_time" value="<?php echo date('Y-m-d H:i:s',time());?>" class="tip">请选择项目预热时间，不选择为立即上线</span>
+            <else/>
+                 <input type="text" id="start_time" name="start_time" value="{$vo['start_time']|date='Y-m-d H:i:s',###}" class="tip">请选择项目预热时间，不选择为立即上线</span>
+             </if>
+           
+            
+          </dd>
+        </dl>
+     <script type="text/javascript">
+        date = new Date();
+        Calendar.setup({
+          inputField     :    "start_time",
+          ifFormat       :    "%Y-%m-%d %H:%M:%S",
+          showsTime      :    true,
+          timeFormat     :    "24"
+        });
+        </script>
+        <!--<dl class="lineD">
+          <dt>项目上线时间：</dt>
+          <dd>
+            <htmlA:timer id="start_time" tip='请选择项目预热时间，不选择为立即上线' arg="{maxDate:'#F{$dp.$D(\\\\'end_time\\\\')||\\\\'2020-10-01\\\\'}',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"  class="Wdate" value="{$vo.start_time|mydate='Y-m-d H:i:s',###}"/>
+            <div style="display:none"><htmlA:timer id="end_time" tip='只选结束时间则查询从结束时间往前所有' arg="{minDate:'#F{$dp.$D(\\\\'start_time\\\\')}',maxDate:'2020-10-01',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}" class="Wdate" value="{$search.end_time|mydate='Y-m-d H:i:s',###}"/></div>
+          </dd>
+        </dl>-->
+
+ </if>
+        
+        <dl class="lineD" style="overflow:hidden">
+          <dt>项目缩略图：</dt>
+          <dd>
+            <input type="file" id="borrow_img" name="borrow_img[]" style="float:left"/>
+      <span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDiv"></div><if condition="$vo.borrow_img eq ''">无缩略图<else/><img src="{$vo.borrow_img}" width="100" height="100" /></if></div></span> 宽度:366px 高度:273px 
+          </dd>
+        </dl>
+              <dl class="lineD" style="overflow:hidden">
+                  <dt>分享缩略图：</dt>
+                  <dd>
+                      <input type="file" id="fx_img" name="fx_img[]" style="float:left"/>
+                      <span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px">
+                          <div id="imgDiv"></div><if condition="$vo.fx_img eq ''">无缩略图<else/>
+                          <img src="{$vo.fx_img}" width="100" height="100" /></if></div></span> 20k以下
+                  </dd>
+              </dl>
+
+
+          <dl class="lineD" style="overflow:hidden">
+              <dt>视频图片：</dt>
+              <dd>
+                  <input type="file" id="shipinimg" name="shipinimg[]" style="float:left"/>
+                  <span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px">
+                      <div id="imgDiv"></div><if condition="$vo.shipinimg eq ''">无缩略图<else/>
+                      <img src="{$vo.shipinimg}" width="100" height="100" /></if></div></span>
+              </dd>
+          </dl>
+          <dl class="lineD">
+              <dt>视频地址：</dt>
+              <dd>
+                  <htmlA:input id="shipin" value="{$vo.shipin}" />
+              </dd>
+          </dl>
+
+
+
+
+
+          <dl class="lineD">
+          <dt>一句话介绍：</dt>
+          <dd>          
+<textarea name="borrow_con" id="borrow_con" style="width:800px;height:40px;">{$vo.borrow_con}</textarea>
+          </dd>
+        </dl>
+        <!-- <dl class="lineD">
+          <dt>项目官方群：</dt>
+          <dd><input name="contact_qq" type="text" value="{$vo.contact_qq}"></dd>
+        </dl> -->
+       <!--  <dl class="lineD">
+         <dt>站 长 电 话：</dt>
+         <dd><input name="contact_site_phone" type="text" value="{$vo.contact_site_phone}"></dd>
+       </dl> -->
+        <!-- <dl class="lineD">
+          <dt>客 服 电 话：</dt>
+          <dd><input name="contact_kefu_phone" type="text" value="{$vo.contact_kefu_phone}"></dd>
+        </dl> -->
+       <!--  <dl class="lineD">
+          <dt>监 督 电 话：</dt>
+          <dd><input name="contact_jiandu_phone" type="text" value="{$vo.contact_jiandu_phone}"></dd>
+        </dl>
+          -->
+            <if condition="$id neq '1'">
+        <dl class="lineD">
+          <dt>是否通过：</dt>
+          <dd>
+            <htmlA:radio id="borrow_status" datakey="borrow_status" value="key|vo.borrow_status" />
+          </dd>
+        </dl>
+        <if condition="$vo.borrow_status lt '3' || $vo.borrow_status eq '3'">
+          <dl class="lineD">
+            <dt>初审处理意见：</dt>
+            <dd>
+              <htmlA:text id="deal_info" value="{$vv.deal_info}" tip="*" />
+            </dd>
+          </dl>
+        </if>
+        <if condition="$vo.borrow_status gt '3'">
+          <dl class="lineD">
+            <dt>复审处理意见：</dt>
+            <dd>
+              <htmlA:text id="deal_info_2" value="{$vv.deal_info_2}" tip="*" />
+            </dd>
+          </dl>
+        </if>
+        <else/>
+<input type="hidden" name="borrow_status" value="2"  checked="checked">
+         </if>
+      </div>
+      <!--tab1-->
+      <div id="tab_2" style="display:none">
+         <dl class="lineD">
+          <dt>项目简介：</dt>
+          <dd>
+          <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script>
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="borrow_info"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        filterMode:false,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+
+                  KindEditor.ready(function(K) {
+                      var editor = K.editor({
+                          allowFileManager : true
+                      });
+                      K('#J_selectImage').click(function() {
+                          editor.loadPlugin('multiimage', function() {
+                              editor.plugin.multiImageDialog({
+                                  clickFn : function(urlList) {
+                                      var div = K('#J_imageView');
+                                      div.html('');
+                                      var imgs='';
+                                      K.each(urlList, function(i, data) {
+                                         // addImage(data.url,i,data.url)
+                                          if(i==0){
+                                              imgs+=data.url;
+                                          }else{
+                                              imgs+=','+data.url;
+                                          }
+                                          div.append('<img src="' + data.url + '">');
+                                      });
+
+                                      $("#content_img").val(imgs);
+                                      editor.hideDialog();
+                                  }
+                              });
+                          });
+                      });
+                  });
+
+
+                  </script>
+                <textarea name="borrow_info" id="borrow_info" style="width:1000px;height:400px;visibility:hidden;">{$vo.borrow_info}</textarea>
+          </dd>
+        </dl>
+
+          <dl class="lineD">
+              <dt>轮播图：</dt>
+              <dd>
+                  <input type="button" id="J_selectImage" value="批量上传" />
+                  <input type="text"  id="content_img" name="content_img" value="{$vo.content_img}">
+                    <div id="J_imageView">
+                        <?php
+                        $con_img=explode(',',$vo['content_img']);
+                        foreach ($con_img as $v1){?><img src="<?php echo $v1;?>"><?php }?>
+                    </div>
+              </dd>
+          </dl>
+
+      </div>
+      <div id="tab_3" style="display:none">
+               <dl class="lineD">
+          <dt>分红及收益：</dt>
+          <dd>          
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="budget_revenue"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                <textarea name="budget_revenue" id="budget_revenue" style="width:1000px;height:400px;visibility:hidden;">{$vo.budget_revenue}</textarea>
+          </dd>
+        </dl> 
+      </div>
+      <div id="tab_4" style="display:none">
+                 <dl class="lineD">
+          <dt>风控及退出：</dt>
+          <dd>
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="borrow_feasibility"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                <textarea name="borrow_feasibility" id="borrow_feasibility" style="width:1000px;height:400px;visibility:hidden;">{$vo.borrow_feasibility}</textarea>
+          </dd>
+        </dl>
+      </div>
+      <div id="tab_6"  style="display:none">        
+        <dl class="lineD">
+          <dt>财务分析：</dt>
+          <dd>
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="borrow_financial"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                <textarea name="borrow_financial" id="borrow_financial" style="width:1000px;height:400px;visibility:hidden;">{$vo.borrow_financial}</textarea>
+          </dd>
+        </dl>
+      </div>
+            <div id="tab_5"  style="display:none">        
+        <dl class="lineD">
+          <dt>项目关注：</dt>
+          <dd>
+                <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="borrow_follow"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                <textarea name="borrow_follow" id="borrow_follow" style="width:1000px;height:400px;visibility:hidden;">{$vo.borrow_follow}</textarea>
+          </dd>
+        </dl>
+      </div>
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+    </form>
+  </div>
+</div>
+     <script>
+            $("#cinvestinfo").attr("readonly","readonly");
+              $("#has_borrow").attr("readonly","readonly");
+          </script>
+<script type="text/javascript">
+function addone(){
+  var htmladd = '<dl class="lineD"><dt>资料名称：</dt>';
+    htmladd+= '<dd><input type="text" name="updata_name[]" value="" />&nbsp;&nbsp;更新时间:<input type="text" name="updata_time[]" onclick="WdatePicker();" class="Wdate" /></dd>';
+    htmladd+= '</dl>';
+  $(htmladd).appendTo("#tab_3");
+}
+var cansub = true;
+function subcheck(){
+  if(!cansub){
+    alert("请不要重复提交，如网速慢，请等待！");
+    return false; 
+  }
+  var deal_info = $("#deal_info").val();
+  var deal_info_2 = $("#deal_info_2").val();
+  var borrow_status = {$vo.borrow_status};
+  
+  if(borrow_status<=3){
+    if(deal_info ==""){
+      //ui.error("初审处理意见不能为空！");
+      //return false;
+    }
+  }else{
+    if( deal_info_2 ==""){
+      //ui.error("复审处理意见不能为空！");
+      //return false;
+    }
+  }
+  cansub = false;
+  return true;
+}
+</script>
+<include file="Public:_footer" />

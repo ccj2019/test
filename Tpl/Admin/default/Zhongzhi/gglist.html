@@ -1,0 +1,58 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  var delUrl = '__URL__/doDel';
+  var addUrl = '__URL__/add';
+  var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">初审待审核众筹</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+   <!--  <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选众筹" style="search_action" />-->
+    <htmlA:commonBtn type="href" action="__URL__/addgg?id={$zid}" value="添加规格"/> 
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">品类</th>
+    <th class="line_l">次数</th>
+    <th class="line_l">周期</th>
+    <th class="line_l">规格</th>
+    <th class="line_l">价格</th>
+    <th class="line_l">操作</th>
+  </tr>
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.pinlei}</td>
+
+        <td>{$vo.cishu}</td>
+  
+       <td>{$vo.zhouqi}</td>
+       <td>{$vo.guige}</td>
+       <td>{$vo.price}</td>
+      <td>
+        <a href="__URL__/editgg?id={$vo['id']}">编辑</a> 
+              <!--< elseif condition="$vo.borrow_status eq '5'"/> 1-->
+        </td>
+      </tr>
+  </volist>
+  </table>
+  </div>
+  
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+  </div>
+</div>
+<include file="Public:_footer" />

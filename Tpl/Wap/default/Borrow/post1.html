@@ -1,0 +1,136 @@
+ <link rel="stylesheet" type="text/css" href="/Public/cpublic/css/style.css"/>
+<script type="text/javascript" src="/Public/cpublic/js/index.js"></script>
+<script type="text/javascript" src="/Public/cpublic/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<style type="text/css">
+    body{
+       background-color:#f7f7f7;
+    }
+    #sel_city {
+    float: right;
+    display: block;
+    width: 100%;
+}
+</style> 
+
+
+<div class="xm_top">
+    <a  href="/wap/borrow/post" class="c_fanhui"><返回</a>
+    <span>回报设置</span>
+    <a class="c_geren">
+  <if condition="$UID gt '0'">
+
+    <a href="/Wapmember" class="c_geren"><img src="/Public/cpublic/image/1_03.png"></a>
+
+     <else />
+
+            
+
+<a href="/Wapmember/common/login.html"  class="c_geren">
+<span class="xmdl">登录</span></a>
+
+        
+     </if>
+    </a>
+</div>
+
+
+    <!-- origin start  -->
+  <form action="/wap/borrow/save1" method="post"  enctype='multipart/form-data'id="form0">
+ 
+ 
+  	<input   type="hidden" name="id" value="{$id}">
+    <div class="xm_kdh"></div>
+<div class="xm_tishi">
+小提示：<br>
+【建议设置3个以上的回报】回报多样化更能提高关注度。<br>
+【建议设置几十、几百、上千元的支持档位】回报差异化更能满足不同人的需求。<br>
+【建议设置有创意的回报】与众不同的回报更能打动支持者。
+</div>
+<div class="faqi">
+    <ul>
+      <li><span class="fq_txt">支持类型</span><span class="fq_nr dxan">
+        <input class="fl" type="radio" checked="checked"  name="loan_certificate"  value="1" id="pay11">
+        <label class="fl" for="pay11"></label>
+        
+        <span class="fl">收益回报</span>
+        <input class="fl" type="radio" name="loan_certificate"  value="2" id="pay22">
+        <label class="fl" for="pay22"></label>
+        
+        <span class="fl">线下回报</span>
+        </span>
+         <div class="clear"></div>
+         </li>
+         
+        <li><span class="fq_txt">支持金额</span><span class="fq_nr">
+        <input type="number" id="borrow_min" name="borrow_min"  placeholder="100元" class="fq_nr_t"></span>
+            <div class="clear"></div>
+        </li>
+         <li><span class="fq_txt">是否限购</span><span class="fq_nr dxan">
+        <input class="fl" type="radio" checked="checked" value="0" name="is_limit" id="pei11">
+        <label class="fl" for="pei11"></label>
+        
+        <span class="fl">否</span>
+        <input class="fl" type="radio" value="1" name="is_limit" id="pei22">
+        <label class="fl" for="pei22"></label>
+        
+        <span class="fl">是</span>
+        </span>
+         <div class="clear"></div>
+         </li>
+         
+          <li id="ride" style="display:none;"><span class="fq_txt" style="width:2.9rem;">每个会员最大支持数量</span><span class="fq_nr"  style="width:4rem;"> <input placeholder="100份" class="fq_nr_t"  style="width:4rem;" id="max_limit"  type="number" name="max_limit" ></span>
+            <div class="clear"></div></li>
+            <li><span class="fq_txt"  style="width:1.87rem;">快捷支付分数</span>
+            <span class="fq_nr" style="width:4.13rem;"> <input type="text" id="shortcut" name="shortcut" placeholder="请中间用“，”隔开，如：10，20" class="fq_nr_t" style="width:4.13rem;"></span>
+            <div class="clear"></div></li> 
+            
+         <li style="border-bottom:none;"><span class="fq_txt">回报内容</span><span class="fq_nr">
+            <textarea class="fq_nr_ta"  style="height:1.6rem;"  name="return_info" id="return_info"  placeholder="请简要描述一下您的回报内容"></textarea>
+        </span>
+        <div class="clear"></div>
+        </li>
+    </ul>
+</div>
+
+<a href="javascript:void();"  id="sub1" class="faqibtn">
+    下一步
+</a>
+
+    
+ </form>       <!-- origin end -->
+
+<script src="/public/wap/js/picker.min.js"></script>
+<script type="text/javascript">
+
+                    $( "#pei11" ).prop("checked", true);
+                    $('#pei22').click(function() {
+                        $('#ride').css('display', 'block')
+                    })
+                    $('#pei11').click(function() {
+                        $('#ride').css('display', 'none')
+                    })
+                /*  $('.radio_a').click(function() {
+                        console.log($('input:radio[name="is_limit"]:checked').val())
+                        
+                        
+                    })*/
+        
+
+ 	$('#sub1').click(function() {
+ 		if($("#borrow_min").val()==""||$("#borrow_min").val()<100){
+            layer.alert('支持金额不得小于100元', {icon: 2})
+ 			return false;
+ 		}
+ 		$('#form0').submit();
+ 	})
+
+    $zindex=1;
+</script>   
+
+</body>
+
+</html>

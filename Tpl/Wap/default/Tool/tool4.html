@@ -1,0 +1,195 @@
+<include file="Public:_header_rc" />  
+<style type="text/css">
+	.spec27{font-size:22px; border-bottom:1px solid #ddd; color:#484e5e; font-weight:bold; line-height:30px; padding-bottom:10px;}
+.spec28{ color:#848a98; font-size:14px; line-height:24px; padding:10px 0px;}
+.spec29{background:#ebeff2; line-height:40px; height:40px; padding-left:10px; font-weight:bold; font-size:16px; color:#474f5c; margin-bottom:50px;}
+</style>
+<script type="text/javascript">
+function makevar(v){
+	var d={};
+	for(i in v){
+		var id = v[i];
+		d[id] = $("#"+id).val();
+		if(!d[id]) d[id] = $("input[name='"+id+"']:checked").val();
+		if(!d[id]) d[id] = $("input[name='"+id+"']").val();
+		if(typeof d[id] == "undefined") d[id] = "";
+	}
+	return d;
+}
+</script>
+<script type="text/javascript" src="/Style/file/tools/jquery.js"></script>
+<script type="text/javascript" src="/Style/file/tools/jquery-ui-1.9.0.custom.min.js?v=13838933230"></script>
+<link type="text/css" rel="stylesheet" href="/Style/file/tools/primefaces.css" />
+<script type="text/javascript" src="/Style/file/tools/primefaces.js"></script>
+<script type="text/javascript" src="/Style/file/tools/jquery-1.9.min.js"></script>
+
+<script type="text/javascript">
+		jQuery.noConflict();
+		jQuery(function(){
+			 if( window.top != window.self ){
+				jQuery("body").remove();
+		     }
+			computeFun();
+			//if (document.getElementById("radio4").checked) {
+			//	repayTypeW.disable();
+			//} else {
+			//	repayTypeW.enable();
+			//}
+			
+			jQuery("input.num1").bind("keyup blur", function(){
+				var value = jQuery(this).val();
+				jQuery(this).val(value.replace(/[^\.\d]/g,''));
+				
+				if (this.id == "prize") {
+					jQuery(".moneyPrize").each(function(){
+						jQuery(this).val("0");
+					});
+				}
+				
+				if (this.id == "bidTotalMoney" || this.id == "bidTotalPrize") {
+					var bidTotalPrizeValue = parseFloat(jQuery("#bidTotalPrize").val());
+					var bidTotalMoneyValue = parseFloat(jQuery("#bidTotalMoney").val());
+					if (bidTotalMoneyValue > 0) {
+						jQuery("#prize").val(Math.round(bidTotalPrizeValue/bidTotalMoneyValue*100*1000)/1000);
+					}
+				}
+			});
+			jQuery("input.num2").bind("keyup blur", function(){
+				var value = jQuery(this).val();
+				jQuery(this).val(value.replace(/[^\d]/g,''));
+			});
+			jQuery(".compute").bind("keyup blur", computeFun);
+			
+			jQuery("input[name='yearRateType']:radio").bind("click", function(){
+				computeFun();
+			});
+			
+			jQuery("input[name='limitType']:radio").bind("click", function(){
+				//if (document.getElementById("radio4").checked) {
+				//	repayTypeW.disable();
+				//} else {
+				//	repayTypeW.enable();
+				//}
+				
+				computeFun();
+			});
+		});
+		
+		function computeFun(){
+			var totalYearRate, yearRate, monthRate, prize, fee, money, earnMoney, flYearRate;
+	    	var display;
+	    	var limitTime, season, repayType;
+    	
+			totalYearRate = 0;
+			yearRate = parseFloat(jQuery("#yearRate").val());
+			if (document.getElementById("radio2").checked) yearRate = yearRate * 365;
+			prize = parseFloat(jQuery("#prize").val());
+			fee =  parseFloat(jQuery("#fee").val() / 100);
+			limitTime =  parseFloat(jQuery("#limitTime").val());
+			money = parseFloat(jQuery("#money").val());
+			yearRate = yearRate * (1 - fee);
+			//repayType = repayTypeW.getSelectedValue();
+			if (jQuery("#repayType_label").html() == "按月还本息") {
+				repayType = 1;
+			} else if (jQuery("#repayType_label").html() == "按季还本息") {
+				repayType = 2;
+			} else if (jQuery("#repayType_label").html() == "月还息到期还本") {
+				repayType = 3;
+			} else if (jQuery("#repayType_label").html() == "到期还本息") {
+				repayType = 4;
+			} else {
+				repayType = 1;
+			}
+			
+			if (document.getElementById("radio3").checked && limitTime > 0) {
+				if (repayType == 1) {
+					totalYearRate = 24.00 * prize / (limitTime + 1) + yearRate;
+					flYearRate = (Math.pow((1 + totalYearRate / 1200), 12) - 1) * 100;
+					if (yearRate > 0) {
+						earnMoney = (money * yearRate / 1200 * Math.pow((1 + yearRate / 1200), limitTime) /(Math.pow((1 + yearRate / 1200),limitTime)- 1) * limitTime - money + money * prize / 100);
+					} else {
+						earnMoney = Math.round(money*prize) / 100;
+					}
+				} 
+				
+				else if (repayType == 2) {
+					season = Math.ceil(limitTime / 3);
+     				earnMoney = money * yearRate * (1 + season) / 800 + money * prize / 100;
+     				totalYearRate = (yearRate * 3 + 24 * prize /(limitTime/3+1)) / 3;
+     				flYearRate = (Math.pow((1 + totalYearRate / 400), 4) - 1) * 100;
+				} 
+				
+				else if (repayType == 3) {
+					earnMoney = money * yearRate * limitTime / 1200 + money * prize / 100;
+     				totalYearRate = (yearRate * limitTime + 12 * prize) / limitTime;
+     				flYearRate = (Math.pow((1 + totalYearRate / 1200 * limitTime), 12 / limitTime) - 1) * 100;
+				} 
+				
+				else if (repayType == 4) {
+					earnMoney = money * yearRate * limitTime / 1200 + money * prize / 100;
+     				totalYearRate = yearRate + prize * 12 / limitTime;
+     				flYearRate = (Math.pow((1 + totalYearRate / 1200 * limitTime), 12 / limitTime) - 1) * 100;
+				} 
+				
+				jQuery("#totalYearRate").html(Math.round(totalYearRate*100)/100);
+				jQuery("#monthRate").html(Math.round(totalYearRate/12*100)/100);
+				jQuery("#flYearRate").html(Math.round(flYearRate*100)/100);
+				jQuery("#flMonthRate").html(Math.round(flYearRate/12*100)/100);
+				jQuery("#earnMoney").html(Math.round(earnMoney*100)/100);
+				jQuery("#prizeMoney").html(Math.round(money*prize) / 100);
+			}
+			
+			if (document.getElementById("radio4").checked && yearRate > 0 && limitTime > 0) {
+				totalYearRate = yearRate + prize / limitTime * 365;
+				monthRate = totalYearRate / 12;
+				earnMoney = money * yearRate * limitTime / 36500 + money * prize / 100;
+				flYearRate = (Math.pow((1 + totalYearRate / 36500 * limitTime), 365 / limitTime) - 1) * 100;
+				
+				jQuery("#totalYearRate").html(Math.round(totalYearRate*100)/100);
+				jQuery("#monthRate").html(Math.round(totalYearRate/12*100)/100);
+				jQuery("#flYearRate").html(Math.round(flYearRate*100)/100);
+				jQuery("#flMonthRate").html(Math.round(flYearRate/12*100)/100);
+				jQuery("#earnMoney").html(Math.round(earnMoney*100)/100);
+				jQuery("#prizeMoney").html(Math.round(money*prize) / 100);
+			}
+		};
+	</script>
+
+    <div class="main_b">
+      <div class="main_c" style="padding:10px;width:1080px;margin:0px auto;">
+          <h1>收益计算器</h1>
+     		
+            <table id="j_idt12" class="ui-panelgrid ui-widget" style="margin:20px auto auto auto;font-family:'微软雅黑';font-weight:bold;font-size:14px;width:550px;color:#000000;line-height:30px;" role="grid"><thead class="ui-panelgrid-header"><tr class="ui-widget-header" role="row"><td role="columnheader" style="height:30px;" class="ui-widget-header" colspan="4">
+        				收益计算器
+        			</td></tr></thead><tfoot class="ui-panelgrid-footer"><tr class="ui-widget-header" role="row"><td role="columnheader" style="text-align: left;height:25px;padding-left:30px;" class="ui-widget-header" colspan="2">  
+		            	年化利率： <span id="totalYearRate" style="color:red;">0</span> %
+		            </td><td role="columnheader" style="text-align: left;height:25px;padding-left:30px;" class="ui-widget-header" colspan="2">  
+		            	年化月利率： <span id="monthRate" style="color:green;">0</span> %
+		            </td></tr><tr class="ui-widget-header" role="row"><td role="columnheader" style="text-align: left;height:25px;padding-left:30px;" class="ui-widget-header" colspan="2">  
+		            	复利利率： <span id="flYearRate" style="color:blue;">0</span> %
+		            </td><td role="columnheader" style="text-align: left;height:25px;padding-left:30px;" class="ui-widget-header" colspan="2">  
+		            	复利月利率： <span id="flMonthRate" style="color:green;">0</span> %
+		            </td></tr><tr class="ui-widget-header" role="row"><td role="columnheader" style="text-align: left;height:25px;padding-left:30px;" class="ui-widget-header" colspan="4">  
+		            	总收益： <span id="earnMoney" style="color:green;">0</span> 元
+		            	（含奖励：<span id="prizeMoney">0</span> 元）
+		            </td></tr></tfoot><tbody><tr class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right;">利率</td><td role="gridcell" style="text-align: left;" colspan="3"><input id="yearRate" name="yearRate" type="text" value="0" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1" /><script id="yearRate_s" type="text/javascript">PrimeFaces.cw('InputText','widget_yearRate',{id:'yearRate'});</script> %  
+		        	<input id="radio1" type="radio" name="yearRateType" checked="checked" style="width:30px"/>年利率  
+		        	<input id="radio2" type="radio" name="yearRateType" style="width:30px"/>日利率  
+		        </td></tr><tr class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right;">投标奖励</td><td role="gridcell" style="text-align: left;" colspan="3"><input id="prize" name="prize" type="text" value="0" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1" /><script id="prize_s" type="text/javascript">PrimeFaces.cw('InputText','widget_prize',{id:'prize'});</script> %  
+		        </td></tr><tr style="display:none;" class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right;color:red;">标总额</td><td role="gridcell" style="text-align: left;color:red;"><input id="bidTotalMoney" name="bidTotalMoney" type="text" value="0" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1 moneyPrize" /><script id="bidTotalMoney_s" type="text/javascript">PrimeFaces.cw('InputText','widget_bidTotalMoney',{id:'bidTotalMoney'});</script> 元  
+		        </td><td role="gridcell" style="text-align: right;color:red;">总奖励</td><td role="gridcell" style="text-align: left;color:red;"><input id="bidTotalPrize" name="bidTotalPrize" type="text" value="0" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1 moneyPrize" /><script id="bidTotalPrize_s" type="text/javascript">PrimeFaces.cw('InputText','widget_bidTotalPrize',{id:'bidTotalPrize'});</script> 元  
+		        </td></tr><tr class="ui-widget-content" role="row" style="display:none;"><td role="gridcell" style="text-align: right;">管理费</td><td role="gridcell" style="text-align: left;" colspan="3"><input id="fee" name="fee" type="text" value="0" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1" /><script id="fee_s" type="text/javascript">PrimeFaces.cw('InputText','widget_fee',{id:'fee'});</script> %  
+		        </td></tr><tr class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right">期限</td><td role="gridcell" style="text-align: left;" colspan="3"><input id="limitTime" name="limitTime" type="text" value="1" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num2" /><script id="limitTime_s" type="text/javascript">PrimeFaces.cw('InputText','widget_limitTime',{id:'limitTime'});</script>
+		        	<input id="radio3" type="radio" name="limitType" checked="checked" style="width:30px"/>月  
+		        	<input id="radio4" type="radio" name="limitType" style="width:30px"/>天  
+		        </td></tr><tr class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right;">投标金额</td><td role="gridcell" style="text-align: left;" colspan="3"><input id="money" name="money" type="text" value="10000" style="width:80px;text-align:right;" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all compute num1" /><script id="money_s" type="text/javascript">PrimeFaces.cw('InputText','widget_money',{id:'money'});</script> 元  
+		        </td></tr><tr class="ui-widget-content" role="row"><td role="gridcell" style="text-align: right;">还款方式</td><td role="gridcell" style="text-align: left;" colspan="3"><div id="repayType" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all ui-helper-clearfix" style="width:200px;text-align: left;"><div class="ui-helper-hidden-accessible"><select id="repayType_input" name="repayType_input"><option value="1">按月还本息</option><option value="2">按季还本息</option><option value="3">月还息到期还本</option><option value="4">到期还本息</option></select></div><div class="ui-helper-hidden-accessible"><input id="repayType_focus" name="repayType_focus" type="text" /></div><label id="repayType_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">&nbsp;</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s"></span></div><div id="repayType_panel" class="ui-selectonemenu-panel ui-widget-content ui-corner-all ui-helper-hidden ui-shadow"><div class="ui-selectonemenu-items-wrapper" style="height:auto"><ul class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="按月还本息">按月还本息</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="按季还本息">按季还本息</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="月还息到期还本">月还息到期还本</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="到期还本息">到期还本息</li></ul></div></div></div><script id="repayType_s" type="text/javascript">$(function(){PrimeFaces.cw('SelectOneMenu','repayTypeW',{id:'repayType',onchange:function(){computeFun()}});});</script></td></tr></tbody></table>
+		        <p class="spec28">等额本息，即借款人每月以相等的金额偿还借款本息，也是银行房贷等采用的方法。因计算中存在四舍五入，最后一期还款金额与之前略有不同。<br />
+每月付息，到期还本，即借款人每月偿还固定利息，最后一期偿还全部本金。<br />
+注：计算结果如存在偏差，以账户中显示的信息为准。</p>
+
+
+      
+    </div>
+    <div style="clear:both;"></div>
+<include file="Public:_footer_rc" />

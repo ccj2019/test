@@ -1,0 +1,365 @@
+<html style="overflow-y: auto !important;">
+<head>
+    <style>
+.top{
+	font-size:0.36rem;
+	text-align:center;
+	line-height:0.8rem;
+    height: 0.8rem;
+}
+.kdlist{
+	font-size:0.24rem;
+}
+.cx{
+	width:5.3rem;
+	margin:0 auto;
+	display:block;
+	height:1rem;
+	line-height:1rem;
+	margin-top:0.3rem;
+}
+.cx input{
+	float:left;
+    line-height: 0.8rem;
+    height: 0.8rem;
+    font-size: 0.26rem;
+    color: #666;
+}
+.cx .cxp{
+	width:4.4rem;
+	padding-left:0.1rem;
+}
+.cx .cxb{
+	width:0.8rem;
+    line-height: 0.8rem;
+    height: 0.8rem;
+}
+.kdlist{
+    width: 6.3rem;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+}
+.kdlist .wl_con{
+	line-height:0.4rem;
+    color: #666;
+    padding-bottom: 0.4rem;
+    padding-left: 0.4rem;
+    border-left: solid 0.01rem #c5c1c1;
+}
+.kdlist .lptime{
+    font-size: 0.2rem;
+    color: #999;
+}
+.kdjd{
+
+    position: relative;
+}
+span.disn{
+    position: absolute;
+    top: 0;
+    left: -0.15rem;
+    height: 0.3rem;
+    width: 0.3rem;
+    border-radius: 50%;
+    background: #c5c1c1;
+}
+.yd_lv .wl_con{
+    color: #3b5af1;
+}
+.yd_lv span.disn{
+    background: #3b5af1;
+}
+.lpxx{
+    font-size: 0.24rem;
+    line-height: 0.4rem;
+    height: 1.2rem;
+    padding-left: 0.3rem;
+}
+.lpxx .xxc{
+    margin-top: 0.3rem;
+}
+.lpxx img{
+    height: 1.2rem;
+    width: 1.2rem;
+    float: left;
+    margin-right: 0.2rem;
+}
+.top{
+    position: relative;
+}
+.top a{
+    text-decoration: none;
+    color: #666;
+    font-size: 0.28rem;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+        .aad{
+
+        }
+</style>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>寻渔记快递查询系统</title>
+</head>
+
+<div class="tfloaddingBox" id="tfloaddingBox" style="/* display: none; */"><style>#tfloading{
+    background-color: rgba(255,255,255,1);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 98;
+    margin-top: 0px;
+    top: 0px;
+}
+#tfloading-center{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#tfloading-center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 20vw;
+    width: 20vw;
+    margin-top: -10vw;
+    margin-left: -10vw;
+    transform: scale(0.5);
+}
+.object{
+    width: 5vw;
+    height: 5vw;
+    background-color: #2fa0ec;
+    margin-right: 10vw;
+    float: left;
+    margin-bottom: 10vw;
+}
+.object:nth-child(2n+0) {
+    margin-right: 0px;
+
+}
+#object_one {
+    -webkit-animation: object_one 2s infinite;
+    animation: object_one 2s infinite;
+    background-color: #ee0a24;
+}
+#object_two {
+    -webkit-animation: object_two 2s infinite;
+    animation: object_two 2s infinite;
+    background-color: #c0da1a;
+}
+#object_three {
+    -webkit-animation: object_three 2s infinite;
+    animation: object_three 2s infinite;
+    background-color: #ff00c1;
+}
+#object_four {
+    -webkit-animation: object_four 2s infinite;
+    animation: object_four 2s infinite;
+}
+@-webkit-keyframes object_one {
+    25% { -webkit-transform: translate(15vw,0) rotate(-90deg) scale(0.5); }
+    50% { -webkit-transform: translate(15vw,15vw) rotate(-180deg); }
+    75% { -webkit-transform:  translate(0,15vw) rotate(-270deg) scale(0.5); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+
+@keyframes object_one {
+    25% {
+        transform: translate(15vw,0) rotate(-90deg) scale(0.5);
+        -webkit-transform: translate(15vw,0) rotate(-90deg) scale(0.5);
+    }
+    50% {
+        transform: translate(15vw,15vw) rotate(-180deg);
+        -webkit-transform: translate(15vw,15vw) rotate(-180deg);
+    }
+    75% {
+        transform: translate(0,15vw) rotate(-270deg) scale(0.5);
+        -webkit-transform: translate(0,15vw) rotate(-270deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+
+@-webkit-keyframes object_two {
+    25% { -webkit-transform: translate(0,15vw) rotate(-90deg) scale(0.5); }
+    50% { -webkit-transform: translate(-15vw,15vw) rotate(-180deg); }
+    75% { -webkit-transform:  translate(-15vw,0) rotate(-270deg) scale(0.5); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+
+@keyframes object_two {
+    25% {
+        transform: translate(0,15vw) rotate(-90deg) scale(0.5);
+        -webkit-transform: translate(0,15vw) rotate(-90deg) scale(0.5);
+    }
+    50% {
+        transform: translate(-15vw,15vw) rotate(-180deg);
+        -webkit-transform: translate(-15vw,15vw) rotate(-180deg);
+    }
+    75% {
+        transform: translate(-15vw,0) rotate(-270deg) scale(0.5);
+        -webkit-transform: translate(-15vw,0) rotate(-270deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes object_three {
+    25% { -webkit-transform: translate(0,-15vw)  rotate(-90deg) scale(0.5); }
+    50% { -webkit-transform: translate(15vw,-15vw) rotate(-180deg); }
+    75% { -webkit-transform:  translate(15vw,0) rotate(-270deg) scale(0.5); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+
+@keyframes object_three {
+    25% {
+        transform: translate(0,-15vw)  rotate(-90deg) scale(0.5);
+        -webkit-transform: translate(0,-15vw)  rotate(-90deg) scale(0.5);
+    }
+    50% {
+        transform: translate(15vw,-15vw) rotate(-180deg);
+        -webkit-transform: translate(15vw,-15vw) rotate(-180deg);
+    }
+    75% {
+        transform:  translate(15vw,0) rotate(-270deg) scale(0.5);
+        -webkit-transform: translate(15vw,0) rotate(-270deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+
+@-webkit-keyframes object_four {
+    25% { -webkit-transform: translate(-15vw,0)  rotate(-90deg) scale(0.5); }
+    50% { -webkit-transform: translate(-15vw,-15vw) rotate(-180deg); }
+    75% { -webkit-transform:  translate(0,-15vw) rotate(-270deg) scale(0.5); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+
+@keyframes object_four {
+    25% {
+        transform: translate(-15vw,0)  rotate(-90deg) scale(0.5);
+        -webkit-transform: translate(-15vw,0)  rotate(-90deg) scale(0.5);
+    }
+    50% {
+        transform: translate(-15vw,-15vw) rotate(-180deg);
+        -webkit-transform: translate(-15vw,-15vw) rotate(-180deg);
+    }
+    75% {
+        transform: translate(0,-15vw) rotate(-270deg) scale(0.5);
+        -webkit-transform: translate(0,-15vw) rotate(-270deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+    }
+}</style>
+    <div id="tfloading" style="position:fixed">
+        <div id="tfloading-center"><div id="tfloading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div><div class="object" id="object_four">
+
+        </div></div></div></div></div>
+
+
+<body>
+<div class="top"><a href="javascript:window.history.go(-1); ">返回</a>快递查询</div>
+<div class="lpxx">
+    <img src="/{$info.images}">
+    <div class="xxc">
+        <p>{$info.title}</p>
+        <p>{$expTextName}:
+            <span id="zfb_account">{$mailNo}</span>
+            &nbsp;<a href="javascript:void(0);" onclick="fuzhi()" data-clipboard-action="copy" data-clipboard-target="#zfb_account" id="copy_zfb">复制</a></p>
+    </div>
+</div>
+<div class="kdlist">
+    <volist name="list" id="vo" key="i">
+     <div class='kdjd <if condition="1 eq $i"> yd_lv</if>' >
+         <span class="disn">
+             &nbsp;
+         </span>
+         <div class="wl_con" <if condition="count($list)==$i"> style='border-left:none;' </if> >{$vo.context} <br>
+             <span class="lptime">
+                  {$vo.time}
+             </span>
+     </div>
+      </div>
+    </volist>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/Public/wap/js/clipboard.min.js"></script>
+<script>
+    function fuzhi(){
+            var clipboard = new ClipboardJS('#copy_zfb');
+            clipboard.on('success', function(e) {
+                e.clearSelection(); //选中需要复制的内容
+                alert('运单号已复制！');
+            });
+            clipboard.on('error', function(e) {
+                alert("当前浏览器不支持此功能，请手动复制。")
+            });
+    }
+
+    $(document).ready(function () {
+        (function(designWidth, maxWidth) {
+            var doc = document,
+                win = window,
+                docEl = doc.documentElement,
+                remStyle = document.createElement("style"),
+                tid;
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                maxWidth = maxWidth || 540;
+                width>maxWidth && (width=maxWidth);
+                var rem = width * 100 / designWidth;
+                remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+            }
+            if (docEl.firstElementChild) {
+                docEl.firstElementChild.appendChild(remStyle);
+            } else {
+                var wrap = doc.createElement("div");
+                wrap.appendChild(remStyle);
+                doc.write(wrap.innerHTML);
+                wrap = null;
+            }
+            //要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+            refreshRem();
+            win.addEventListener("resize", function() {
+                clearTimeout(tid); //防止执行两次
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener("pageshow", function(e) {
+                if (e.persisted) { // 浏览器后退的时候重新计算
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+            if (doc.readyState === "complete") {
+                doc.body.style.fontSize = "16px";
+            } else {
+                doc.addEventListener("DOMContentLoaded", function(e) {
+                    doc.body.style.fontSize = "16px";
+                }, false);
+            }
+        })(750,750);
+    })
+    setTimeout(()=>{
+        $("#tfloaddingBox").css('display','none');
+    },500)
+
+</script>
+

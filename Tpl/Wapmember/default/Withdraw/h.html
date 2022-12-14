@@ -1,0 +1,249 @@
+<style>
+	body {
+		background: #f1f1f1;
+	}
+</style>
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/amounttochinese.js" language="javascript"></script>
+<script type="text/javascript">
+$(function() {
+	//$("#btnSendMsg").click(sendSMS);
+	$("#txt_Amount").bind("keyup", function() {
+		$this = $(this);
+		$this.val($this.val().toString().replace(/[^(\d|\.)]+/, ""));
+	});
+	$("#txt_Amount").focus(function() {
+		$("#d_money").css("display", "none");
+	});
+});
+var suretx = function(d,h,v){
+	if(d===true){
+			$.ajax({
+				url: "__URL__/actwithdraw",
+				type: "post",
+				dataType: "json",
+				data: {"pwd":$("#txtPassword").val(),"amount":$("#txt_Amount").val()},
+				success: function(d) {
+					if (d.status == 2) {
+						layer.msg(d.message,1, function(){
+						    window.location.reload();
+						});
+
+						// layer.alert(d.message);
+						// window.location.reload();
+					}
+					else if(d.status==1) {
+						layer.msg(d.message,1, function(){
+						    window.location.reload();
+						});
+						// layer.alert(d.message, 1,!1);
+					} else {
+						layer.msg("支付密码错误",1, function(){
+						    window.location.reload();
+						})
+					}
+				}
+			});
+	}
+}
+var arrWrong = "";
+function SetError(val, cont) {
+		$("#d_money").css("display", "block");
+		$("#d_money").html(val + cont);
+		$("#d_money").attr("class", "reg_wrong");
+}
+
+function drawMoney() {
+
+	if (testAmount()) {
+		if ($("#txtPassword").val().length < 1) {
+			layer.msg("您好，请输入支付密码后再点击确认提现")
+			return;
+		}
+		
+		//if (parseFloat($("#txt_Amount").val()) <= parseFloat($("td.tdContent span").html()) && $("#txtPassword").eq(0).val().length > 0 && parseFloat($("#txt_Amount").val()) > 0) {
+			$.ajax({
+				url: "__URL__/validate",
+				type: "post",
+				dataType: "json",
+				data: {"pwd":$("#txtPassword").val(),"amount":$("#txt_Amount").val()},
+				success: function(d) {
+					if (d.status == 2) {
+						layer.msg(d.message)
+					}
+					else if(d.status==1) {
+						$.layer({
+						  shade: [0],
+						  area: ['auto','auto'],
+						  dialog: {
+							  msg: d.message,
+							  btns: 2,                    
+							  type: 4,
+							  btn: ['确认提现','暂不提现'],
+							  yes: function(){
+								 suretx(true);
+							  }, no: function(){
+								 return false;
+							  }
+						  }
+					  });
+						//$.jBox.confirm(d.message, "提现确认", suretx, { buttons: { '确认提现': true, '暂不提现': false} });
+					} else {
+						layer.msg("支付密码错误")
+					}
+				}
+			});
+		//} 
+	}
+}
+
+function testAmount() {
+	var testreuslt = true;
+	if ($("#txt_Amount").val() == '') {
+		layer.alert( "请输入提现金额，如1000.10。");
+		testreuslt = false;
+	}
+	if (!(/^\d+(.)?\d{1,2}$/.test($("#txt_Amount").val()))) {
+		layer.alert( "请输入正确的提现金额，如1001.20。");
+		testreuslt = false;
+	}
+	if (parseFloat($("#txt_Amount").val()) < 100) {
+		layer.alert( "提现金额不能小于100。");
+		testreuslt = false;
+	}
+	if (parseFloat($("#txt_Amount").val()) > 300000) {
+		SetError(arrWrong, "提现金额不能大于300000。");
+		testreuslt = false;
+	}
+	if (parseFloat($("#currentMoeny").html()) < parseFloat($("#txt_Amount").val())) {
+		layer.alert( "您的账户余额不足以提现。");
+		testreuslt = false;
+	}
+	if (testreuslt) {
+		showChineseAmount();
+	}
+	return testreuslt;
+}
+
+function showChineseAmount() {
+	var regamount = /^(([1-9]{1}[0-9]{0,})|([0-9]{1,}\.[0-9]{1,2}))$/;
+	var reg = new RegExp(regamount);
+	if (reg.test($("#txt_Amount").val())) {
+		var amstr = $("#txt_Amount").val();
+		var leng = amstr.toString().split('.').length;
+		if (leng == 1) {
+			$("#txt_Amount").val($("#txt_Amount").val() + ".00");
+		}
+		$("#d_money").html(Arabia_to_Chinese($("#txt_Amount").val()));
+		$("#d_money").css("display", "");
+		$("#d_money").css("color", "red");
+		$("#d_money").removeClass("reg_wrong");
+	}
+	else {
+		$("#d_money").html("");
+	}
+}
+</script>
+<!--账户管理体现银行卡-->
+<div class="hyzx">
+	<div class="container">
+		<div class="mian">
+			<a href="/">首页</a>
+            <a href="/member">个人中心</a>
+		</div>
+		<div class="hyzxcon">
+			<include file="default:Public:_left" group="Member"/>
+			<div class="hyr">
+				<div class="title1">
+					<span>申请提现</span>
+				</div>
+				<div class="tj2">
+                    <h3>提现时间：</h3>
+                    <div class="con">
+                        <p>每周一至周五早上9:00至下午16:00处理提现，周六、周日及法定节假日不予处理提现申请。</p>
+	                   	<p> A.当日16:00之前提交的提现申请则于当日进行处理，具体以实际到账时间为准；</p>
+						<p>B.当日16:00之后提交的提现申请则于次日上午9:00之后进行处理，具体以实际到账时间为准；</p>
+						<p>C.在周日及法定节假日提交的提现申请则于节假日后第一个工作日内进行处理，具体以实际到账时间为准。</p>
+                    </div>
+                </div>
+                <div class="tj2">
+                    <h3>2.提现费用：</h3>
+                    <div class="con">
+						<p>A.线上线下充值十五天内提现，需支付千分之五的手续费（若充值投标后15天内回款，提现则不收取相关手续费）；</p>
+						<p>B.线上线下充值十五天后提现，则不收取相关手续费用；</p>
+                    </div>
+                </div>
+
+				<div class="addyhk txsq">
+					<form action="">
+						<div class="addybox">
+                            <label for="">姓名：</label>
+                            <div class="addy">{$vo.real_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">用户账号：</label>
+                            <div class="addy">{$Think.session.u_user_name}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="addybox">
+                            <label for="">可提现金额：</label>
+                            <div class="addy">{$vo.all_money|default=0}</div>
+                            <div class="clear"></div>
+                        </div>
+						<div class="addybox">
+							<label for="">我的银行卡：</label>
+							<div class="addy" style="height: auto;">
+								<ul>
+									<li>
+										<a href="##">
+											<div class="yhk">
+												<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/backimages/bank_{$vo.bank_name}.jpg" alt="">
+												<p>{$vo.bank_num|hidecard=###,1,'还没有登记您的银行账号'}</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="addybox" style="margin: 15px 0;">
+							<label for="">提现金额：</label>
+							<input name="txt_Amount" id="txt_Amount" class="text_input" onblur="testAmount();" type="text">
+						</div>
+						<div class="clear"></div>
+						<div class="addybox">
+							<label for="">提现密码：</label>
+							<input name="txtPassword" id="txtPassword" class="text_input" style="float: left; margin-top: 5px;" type="password">
+						<div class="clear"></div>
+						</div>
+						<div class="addybox sub subtxcz" style="margin-top: 50px;">
+							<label for=""></label>
+							<a href="javascript:void(0)" class="button_input" id="btn_set" onclick="drawMoney()">提交</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<style type="text/css">
+	.tj2{
+		padding: 10px;
+	}
+	.tj2 h3 {
+	    padding: 4px 0;
+	    padding-left: 22px;
+	    color: #398e57;
+	    font-size: 14px;
+	    font-weight: normal;
+	    border-bottom: 1px solid #dadada;
+	}
+	.tj2 .con {
+	    margin-top: 10px;
+	    padding-left: 22px;
+	    color: #454545;
+	    font-size: 14px;
+	    line-height: 30px;
+	}
+</style>

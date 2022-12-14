@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+	<head>
+
+		<meta charset="utf-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+ 
+
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+
+<meta name="keywords" content="{$glo.web_keywords}" />
+
+<meta name="description" content="{$glo.web_descript}" />
+
+ 
+
+	</head>
+
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+
+	<!--<link rel="stylesheet" type="text/css" href="/Public/wap/css/FlexoCalendar.css" />-->
+
+	
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+
+
+	<script type="text/javascript" src="/Public/wap/js/rili.js"></script>
+
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+
+	
+
+	
+
+	<style>
+
+		
+
+		@charset "utf-8";
+
+blockquote,body,button,caption,dd,div,dl,dt,fieldset,figure,form,h1,h2,h3,h4,h5,h6,html,input,legend,li,menu,ol,p,pre,.flexoCalendar,td,textarea,th,ul{margin:0;padding:0}
+
+
+
+.calendar-wrapper{position: relative;margin-bottom: 20px;width: 87%;margin:15px auto;background: #fff;min-height:155px; }
+
+.calendar-wrapper .flexoCalendar{margin:0 auto;border-collapse:separate;width: 100%;position: relative;z-index: 1;}
+
+.flexoCalendar td,.flexoCalendar th{border:0 none;height:27px;text-align:center;width:32px;font-size:12px;cursor:pointer}
+
+.flexoCalendar tr th .icon-arrow-left{display:inline-block;height:16px;line-height:16px;margin-top:4px;vertical-align:text-top;width:12px;cursor:pointer}
+
+.flexoCalendar tr th .icon-arrow-right{display:inline-block;height:16px;line-height:16px;margin-top:4px;vertical-align:text-top;width:12px;cursor:pointer}
+
+.icon-arrow-left:before{content: '<';font-style: normal;}
+
+.icon-arrow-right:before{content: '>';font-style: normal;}
+
+.flexoCalendar thead tr{height:25px;color: #fff;}
+
+.flexoCalendar thead tr:first-child th{cursor:pointer}
+
+/*.flexoCalendar thead tr:first-child th:hover{background:#3dbaf0}*/
+
+.flexoCalendar tr td.other-month{color:#aaa}
+
+.flexoCalendar thead,.flexoCalendar th{background-color: #FFFFFF;font-weight: normal;color: #3dbaf0; width: 14.2%;}
+
+.flexoCalendar tr th.current-year{width: 60%;font-size: .35rem;}
+
+/*.flexoCalendar td.selected-day span{color:  #3dbaf0;}*/ 
+
+.flexoCalendar tr td .day{display: block;width: 30px;height: 25px;line-height: 22px;text-align: center;margin:1px;border:1px solid transparent;}
+
+.flexoCalendar tr td.current-day>div,.flexoCalendar td.current-day>span{border:1px solid #3dbaf0!important;border-radius: 4px;color:#3dbaf0;background: #fff;}
+
+.flexoCalendar tr td.selected>div,.flexoCalendar tr td.selected>span,.flexoCalendar tr td.selected>div span{border:1px solid #3dbaf0;border-radius: 4px;background-color:#3dbaf0;color: #fff!important}
+
+#calendar-weekly .calendar-hd,#calendar-monthly .calendar-hd,#calendar-weekly tbody td{height: 30px;}
+
+#calendar-weekly tr td div{margin-bottom: 2px;}
+
+#calendar-weekly tr td .week{width: 100%;height: 100%;line-height: 30px;color:#565656;text-align: center;}
+
+#calendar-weekly tr td .process{color:#999;margin-left: 20px;display: inline-block;width: 57px;text-align: left;}
+
+#calendar-monthly td.tmonth .month{display: block;width: 55px;height: 30px;line-height:30px;margin:1px;text-align: center;border-radius: 4px;color: #565656;border:1px solid transparent;}
+
+#calendar-monthly td.current-month .month{border:1px solid #3dbaf0;}
+
+#calendar-weekly tr td.week1 div,.tmonth.month1 span,.tmonth.month2 span,.tmonth.month3 span,.tmonth.month4 span{margin-top: 10px!important;}
+
+#calendar{
+
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+
+}
+
+
+
+		
+
+		.l-fh {
+
+			border-bottom: 3px solid #EEF1F8;
+
+		}
+
+		.l-tanchubox {
+
+    width: 80%;
+
+    padding: .3rem .2rem;
+
+    margin: 2rem auto;
+
+    background: #FFFFFF;
+
+    border-radius: 5px;
+
+    text-align: left;
+
+    
+
+}
+
+.l-tanchubox p {
+
+    padding: .2rem 0;
+
+    font-size: .3rem;
+
+    padding-bottom: 0;
+
+}
+
+.l-tanchubox p:nth-child(1){
+
+  font-size: .3rem;
+
+    text-align: center;
+
+}
+
+
+
+		.top {
+
+  width: 100%;
+
+  height: 12rem;
+
+  background: #007aff;
+
+  margin-bottom: .8rem;
+
+  overflow: hidden;
+
+}
+
+.top .out-1 {
+
+  width: 5rem;
+
+  height: 5rem;
+
+  border-radius: 100%;
+
+  -webkit-border-radius: 100%;
+
+  background: rgba(255, 255, 255, 0.4);
+
+  margin: 1rem auto 0 auto;
+
+}
+
+.top .out-1 .out-2 {
+
+  width: 7rem;
+
+  height: 7rem;
+
+  border-radius: 100%;
+
+  -webkit-border-radius: 100%;
+
+  background: #ffffff;
+
+  margin: 0 auto;
+
+}
+
+.top .out-1 .out-2 .signBtn {
+
+  width: 6.2rem;
+
+  height: 6.2rem;
+
+  border-radius: 100%;
+
+  -webkit-border-radius: 100%;
+
+  border: 1px #7ebdff solid;
+
+}
+
+.top .out-1 .out-2 .signBtn strong,
+
+.top .out-1 .out-2 .signBtn span {
+
+  display: block;
+
+  width: 85%;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  color: #007aff;
+
+}
+
+.top .out-1 .out-2 .signBtn strong {
+
+  height: 3.5rem;
+
+  line-height: 4.5rem;
+
+  font-weight: 600;
+
+  border-bottom: 1px #eee solid;
+
+}
+
+.top .out-1 .out-2 .signBtn span {
+
+  height: 2.5rem;
+
+  line-height: 2.5rem;
+
+  font-size: .9rem;
+
+  line-height: 2rem !important;
+
+}
+
+.top .out-1:active {
+
+  animation: sign .25s forwards;
+
+  -webkit-animation: sign .25s forwards;
+
+}
+
+.tips {
+
+  position: absolute;
+
+  top: 10rem;
+
+  z-index: 999;
+
+  width: 100%;
+
+  color: #fff;
+
+  font-size: .9rem;
+
+  text-align: center;
+
+  padding-bottom: .5rem;
+
+}
+
+.Calendar {
+
+	/*transform: scale(.5);*/
+
+  background: #fff;
+
+  padding-bottom: .5rem;
+
+}
+
+.Calendar #toyear {
+
+  border-bottom: 1px #e7e7e7 solid;
+
+  width: 96%;
+
+  margin: 0 auto;
+
+  height: .8rem;
+
+  text-align: center;
+
+  color: #3dbaf0;
+
+  font-size: .30rem;
+
+}
+
+.Calendar #toyear .year-month {
+
+  height: 100%;
+
+  width: 69%;
+
+  float: left;
+
+  
+
+  line-height: .8rem;
+
+}
+
+.tou{
+
+	color: #3dbaf0;
+
+}
+
+.Calendar #toyear #idCalendarPre{
+
+	float: left;
+
+	
+
+}
+
+.Calendar #toyear #idCalendarNext{
+
+	float: right;
+
+	
+
+}
+
+.Calendar #toyear #idCalendarPre,
+
+.Calendar #toyear #idCalendarNext {
+
+  height: 100%;
+
+  line-height: .8rem;
+
+ width: 15%;
+
+  text-align: center;
+
+  font-size: .35rem;
+
+  color: #3dbaf0;
+
+}
+
+.Calendar table,
+
+.Calendar tr,
+
+.Calendar td {
+
+  border: 0;
+
+}
+
+.Calendar table {
+
+  width: 96%;
+
+  margin: 0 auto;
+
+}
+
+.Calendar table tr {
+
+  text-align: center;
+
+  height: .5rem;
+
+}
+
+.Calendar table tr td span {
+
+  margin: 0 auto;
+
+  display: block;
+
+  line-height: .7rem;
+
+  width: .7rem;
+
+  height: .7rem;
+
+  font-size: .3rem;
+
+  border-radius: 100%;
+
+}
+
+.Calendar table tr .onToday span {
+
+  background: #3dbaf0;
+
+  color: #fff;
+
+}
+
+
+
+		.calendar-wrapper {
+
+			position: relative;
+
+			margin-bottom: 20px;
+
+			width: 80%;
+
+			margin: 15px auto;
+
+			background: #fff;
+
+			min-height: 155px;
+
+			margin-top: -23px;
+
+		}
+
+		
+
+	
+
+		
+
+		#calendar {
+
+			box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+
+		}
+
+		
+
+		.l-fh {
+
+			border-bottom: 3px solid #EEF1F8;
+
+		}
+
+		
+
+		.l-tanchubox {
+
+			width: 80%;
+
+			padding: .3rem .2rem;
+
+			margin: 2rem auto;
+
+			background: #FFFFFF;
+
+			border-radius: 5px;
+
+			text-align: left;
+
+		}
+
+		
+
+		.l-tanchubox p {
+
+			padding: .2rem 0;
+
+			font-size: .3rem;
+
+			padding-bottom: 0;
+
+		}
+
+		
+
+		.l-tanchubox p:nth-child(1) {
+
+			font-size: .3rem;
+
+			text-align: center;
+
+		}
+
+		.Calendar{
+
+			    width: 80%;
+
+    margin: 0px auto;
+
+    margin-top: .5rem;
+
+    margin-bottom: .6rem;
+
+    position: relative;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,.3);
+
+    background: #fff;
+
+		}
+
+		.l_qdtxt{
+
+			margin-bottom: .3rem;
+
+		}
+
+		.huang{
+
+			background: #fece31;
+
+			color: #fff;
+
+		}
+
+	</style>
+
+
+
+	<body>
+
+
+
+		<div class="l-fh l-on">
+
+			<a href="/wapmember/" class="l-fanhui on">&lt;返回</a><span>回款日历</span>
+
+			<div class="l-fanhui1"> 
+
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a>
+
+			</div>
+
+		</div>
+
+		<div class="l_hk">
+
+		<img src="/Public/wap/img/yaoqing/hk1.png" style="display: block;"/>
+
+		</div>
+
+	 <div class="l_jieshao clearfix">
+
+			<div><span class="l_jssp1"></span>已回款</div>
+
+			<div><span class="l_jssp2"></span>待回款</div>
+
+			<div><span class="l_jssp3"></span>选中日期</div>
+
+			
+
+		</div> 
+
+		<!--日历-->
+
+	 <!--<div class="calendar-wrapper" id="0" >
+
+		<div id="calendar"></div>
+
+	</div> -->
+
+		<!--签到-->
+
+		<div class="Calendar">
+
+			<div id="toyear" class="flex flex-pack-center">
+
+				<div id="idCalendarPre">&lt;</div>
+
+				<div class="year-month">
+
+					<span id="idCalendarYear">2018</span>年<span id="idCalendarMonth">6</span>月
+
+				</div>
+
+				<div id="idCalendarNext">&gt;</div>
+
+			</div>
+
+			<table border="1px" cellpadding="0" cellspacing="0">
+
+				<thead>
+
+					<tr class="tou">
+
+						<td>日</td>
+
+						<td>一</td>
+
+						<td>二</td>
+
+						<td>三</td>
+
+						<td>四</td>
+
+						<td>五</td>
+
+						<td>六</td>
+
+					</tr>
+
+				</thead>
+
+				<tbody id="idCalendar">
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+		
+
+	<!--本月返还本金--> 
+
+	
+
+	<div class="l_jieshao clearfix " style="border: 0; border-top: 10px solid #EFF4FA;text-align: center;" >
+
+			<div style="padding-top: .1rem;">本月已返本金</div>
+
+			<div style="padding-top: .1rem;">本月已返利润</div>
+
+			<div style="padding-top: .1rem;">本月待返本金</div>
+
+			
+
+		</div>
+
+	
+
+	<div class="l_jieshao clearfix on" style="border: 0;">
+
+			<div id="sumreceive_interests">{$sum['sum']['receive_interests']|default="0.00"}</div>
+
+			<div id="sumshouyi"> <if condition="$sum['sum']['shouyi'] neq ''">{$sum['sum']['shouyi']}<else/>0.00</if></div>
+
+			<div id="suminvestor_capital">{$sum['sum']['investor_capital']|default="0.00"}</div>
+
+			
+
+	</div>
+
+
+
+
+
+	<div class="l_jieshao clearfix drhks" id="div1" style="text-align: center;" >
+
+		
+
+	</div>
+
+
+
+	<div class="dd">
+
+	    	    
+
+			<!--<div class="l_hkxmt">
+
+				<img src="/public/wap/img/shouye/tu4.png"/>
+
+			</div>
+
+			<div class="l_hkxmt1">
+
+				<p class="l_ppx1"> 第100期海鲜项目（皮皮虾）体验标</p>
+
+				<p class="l_ppx2"> 类型：已回款</p>
+
+				<p class="l_ppx3"> 2018-09-05 12:53:26
+
+					<span class="l_ppx4">
+
+					¥1003.00
+
+				    </span>
+
+				</p>
+
+				
+
+				
+
+			</div>
+
+			-->
+
+	<volist name="tenlist" id="ten">
+
+	    
+
+<!--
+
+			 
+
+    	<a href="/Wap/invest/detail/id/{$ten.borrow_id}.html"> 
+
+    			<div class="l_hkxmbox clearfix">
+
+            			<div class="l_hkxmt">
+
+            				<a href="/Wap/invest/detail/id/{$ten.borrow_id}.html">
+
+            				    <img src="{$ten.borrow_img}"/>
+
+            				</a>
+
+            			</div>
+
+            			<div class="l_hkxmt1">
+
+            				<p class="l_ppx1"><a href="/Wap/invest/detail/id/{$ten.borrow_id}.html">{$ten.borrow_name|cnsubstr=###,10}</a></p>
+
+            				<p class="l_ppx2"> 类型：       <if condition="$ten.bstatus eq '7'">已回款<else/>未回款</if></p>
+
+            				<p class="l_ppx3">        <if condition="$ten.lead_time neq ''">{$ten.lead_time_c|date="Y-m-d",###}</if>
+
+            					<span class="l_ppx4">
+
+            					 <if condition="$ten.bonus_id neq 0">
+
+                                        {:getFloatvalue($ten['investor_capital']-(bounsmoney($ten['bonus_id'])),2)}                 
+
+                                  <else/>
+
+                                             {$ten.investor_capital|Fmoney=###}                   
+
+                                  </if> 
+
+            				    </span>
+
+            				</p>
+
+            			</div>    
+
+            	</div>	
+
+       	     </a>
+
+-->
+
+			 
+
+    	<a href="/Wap/invest/detail/id/{$ten.borrow_id}.html"> 
+
+    			<div class="l_hkxmbox clearfix">
+
+            			<div class="l_hkxmt">
+
+            				    <img src="{$ten.borrow_img}"/>
+
+            			</div>
+
+            			<div class="l_hkxmt1">
+
+            				<p class="l_ppx1">{$ten.borrow_name|cnsubstr=###,10}</p>
+
+            				<!-- <p class="l_ppx2"> 类型：       <if condition="$ten.hkzt eq '1'">已回款<else/>未回款</if></p> -->
+
+                    <p class="l_ppx2"> 类型：      {$ten.hklx}</p> 
+
+            				<p class="l_ppx3">        <if condition="$ten.lead_time neq ''">{$ten.lead_time_c|date="Y-m-d",###}</if>
+
+            					<span class="l_ppx4">
+
+            				<!--<if condition="$ten.bonus_id neq 0">  {:getFloatvalue($ten['investor_capital']-(bounsmoney($ten['bonus_id'])),2)}  <else/>    {$ten.investor_capital|Fmoney=###}   </if> -->
+
+             
+
+<!-- <if condition="$ten.hkzt neq 0"> -->    <!--         </if> -->
+
+                    {$ten.shouyi}
+
+
+
+         
+
+                   <!--  <if condition="$ten.bj neq 0">
+
+                                             {$ten.investor_capital|Fmoney=###}  </if> -->
+
+            				    </span>
+
+            				</p>
+
+            			</div>    
+
+            	</div>	
+
+       	     </a>
+
+		</volist>
+
+	</div>
+
+	         {$page}
+
+<!--底部-->
+
+<include file="Public:footer"/>
+
+	
+
+	</body>
+
+	<script type="text/javascript">
+
+
+
+
+
+	$('.l-btnc').click(function(){
+
+			$('.l-dtc1').hide();	
+
+	});
+
+			
+
+		var isSign = false;
+
+		var myday = new Array(); //已签到的数组
+
+         // 这尼玛是秒数
+
+		var cale = new Calendar("idCalendar", {
+
+				qdDay: myday,
+
+				onToday: function(o) {
+
+					o.className = "onToday";
+
+				},
+
+				onSignIn: function (){	
+
+					$('.l-qdao1 .p1').text('已签到');
+
+				},
+
+				onFinish: function() {
+
+					$$("idCalendarYear").innerHTML = this.Year;
+
+					$$("idCalendarMonth").innerHTML = this.Month; //表头年份
+
+				}
+
+			});
+
+			$$("idCalendarPre").onclick = function() {
+
+        $('.dd').empty();
+
+				cale.PreMonth(); 
+
+// 		this.Month = this.options.Month;
+
+			  var zstr= $$("idCalendarYear").innerHTML;
+
+			 //  alert($$("idCalendarYear").innerHTML);
+
+			 // console.log($$("idCalendarYear").innerHTML);
+
+			  zstr+="-"+($$("idCalendarMonth").innerHTML);
+
+			 //  console.log(str);
+
+			        $.ajax({
+
+                        type: "post",
+
+                        url: "/wapmember/capital/zindexapi",
+
+                        //data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+
+                        data: {"date":zstr},
+
+                        cache: false,
+
+                        async : false,
+
+                        dataType: "json",
+
+                        success: function (data)
+
+                        {
+
+                        	$('.drhks').empty();
+
+                           // console.log(data);
+
+                            if(data.sum.receive_interests==""||data.sum.receive_interests==null){
+
+                                	$$("sumreceive_interests").innerHTML = "0.00";
+
+                            }else{
+
+                                	$$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+
+                            }
+
+                            
+
+                            if(data.sum.shouyi==""||data.sum.shouyi==null){
+
+                                	$$("sumshouyi").innerHTML = "0.00";
+
+                            }else{
+
+                                	$$("sumshouyi").innerHTML = data.sum.shouyi;
+
+                            }
+
+                            
+
+                            if(data.sum.investor_capital==""||data.sum.investor_capital==null){
+
+                                	$$("suminvestor_capital").innerHTML = "0.00";
+
+                            }else{
+
+                                // alert(data.sum.investor_capital);
+
+                                	$$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+
+                            } 
+
+                              var str="";
+
+                            if(data.tenlist) {
+
+                                $.each(data.tenlist, function(i,val){ 
+
+                                  // console.log(i);
+
+                                  str+='      <a href="/Wap/invest/detail/id/';
+
+                                str+=val.borrow_id;
+
+                                str+='.html">';
+
+                                  str+='<div class="l_hkxmbox clearfix">';
+
+                                str+='<div class="l_hkxmt">';
+
+                                  str+='<img src="';
+
+                                str+=val.borrow_img; 
+
+                                str+='"/>   </div>';
+
+                                str+='<div class="l_hkxmt1"> <p class="l_ppx1">';
+
+                                str+=val.borrowname;
+
+                                str+='</p>';
+
+                                str+='<p class="l_ppx2"> 类型：   ';
+
+                                //  if(val.bstatus == '7'){
+
+                                //   str+='已回款';
+
+                                  
+
+                                //   }   else{
+
+                                //   str+='未回款';
+
+                                // }
+
+                               
+
+                               str+=val.hklx;
+
+                            
+
+                      
+
+                                str+='</p> <p class="l_ppx3">';
+
+                                if(val.lead_time != '1'){
+
+                                  str+=val.hk_time_c;
+
+                                } else{
+
+                                  str+=val.hk_time_c;
+
+                                }  
+
+                                str+='<span class="l_ppx4">';
+
+                                // if(val.bonus_id != '0'){
+
+                                //     str+= val.getFloatvalue_c;       
+
+                                // }else{
+
+                                //    str+=val.getFloatvalue_c;   
+
+                                // }
+
+                                //if(val.hkzt != '0'){}
+
+                                str+= val.shouyi;             
+
+                                str+='</span>   </p>  </div> </div></a>';
+
+                                    $(".l_hkxmbox").remove();
+
+                              $('.dd').append(str);
+
+                              //console.log(str);
+
+                               /*
+
+                                 */
+
+                              });
+
+                            } 
+
+                            // 	$$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+
+                            // 	$$("sumshouyi").innerHTML = data.sum.shouyi;
+
+                            // 	$$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+
+//                             id="">{$sum['sum']['receive_interests']|default="0.00"}</div>
+
+// 			<div id="sumshouyi"> <if condition="$sum['sum']['shouyi'] neq ''">{$sum['sum']['shouyi']}<else/>0.00</if></div>
+
+// 			<div id="suminvestor_capital"
+
+                        },
+
+                        error:function () {      
+
+                            alert("请求失败！");
+
+                        }
+
+                    });
+
+                    huang(); 
+
+         
+
+// 					this.Year = this.options.Year;
+
+// 		 condition.log(this.Year);
+
+
+
+			}
+
+			$$("idCalendarNext").onclick = function() {
+
+				cale.NextMonth();
+
+		
+
+			}
+
+			//添加今天签到
+
+//			$$("signIn").onclick = function(){
+
+//				if(isSign == false) {
+
+//					var res = cale.SignIn();
+
+//					if(res == '1') {
+
+//$('.l-qdao1 .p1').text('已签到');
+
+//
+
+//
+
+//						$$("sign-count").innerHTML = parseInt($$("sign-count").innerHTML) + 1;
+
+//						
+
+////						alert($$("sign-count").innerHTML);
+
+//						isSign = true;
+
+//					} else if (res == '2'){
+
+////						$$("sign-txt").innerHTML = '已签到';
+
+//						alert('今天已经签到了')
+
+//					}
+
+//				} else {
+
+//					alert('今天已经签到了')
+
+//				}
+
+//			}
+
+	$('#idCalendarPre').click(function(){
+
+		  drawAgain();
+
+	});
+
+	$('#idCalendarNext').click(function(){
+
+		  drawAgain();
+
+      $('.dd').empty();
+
+		
+
+			var zstr= $$("idCalendarYear").innerHTML;
+
+			
+
+			 //  console.log($$("idCalendarYear").innerHTML);
+
+			zstr+="-"+($$("idCalendarMonth").innerHTML);
+
+		// alert(zstr);
+
+			 //  console.log(str);
+
+			        $.ajax({
+
+                        type: "post",
+
+                        url: "/wapmember/capital/zindexapi",
+
+                        //data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+
+                        data: {"date":zstr},
+
+                        cache: false,
+
+                        async : false,
+
+                        dataType: "json",
+
+                        success: function (data)
+
+                        {
+
+                        	$('.drhks').empty();
+
+                            //console.log(data);
+
+                            if(data.sum.receive_interests==""||data.sum.receive_interests==null){
+
+                                	$$("sumreceive_interests").innerHTML = "0.00";
+
+                            }else{
+
+                                	$$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+
+                            }
+
+                            
+
+                            if(data.sum.shouyi==""||data.sum.shouyi==null){
+
+                                	$$("sumshouyi").innerHTML = "0.00";
+
+                            }else{
+
+                                	$$("sumshouyi").innerHTML = data.sum.shouyi;
+
+                            }
+
+                            
+
+                            if(data.sum.investor_capital==""||data.sum.investor_capital==null){
+
+                                	$$("suminvestor_capital").innerHTML = "0.00";
+
+                            }else{
+
+                                // alert(data.sum.investor_capital);
+
+                                	$$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+
+                            } 
+
+                           
+
+                            var str="";
+
+                            if(data.tenlist){
+
+                              $.each(data.tenlist, function(i,val){ 
+
+                            // console.log(i);
+
+                                str+='      <a href="/Wap/invest/detail/id/';
+
+                                str+=val.borrow_id;
+
+                                str+='.html">';
+
+                                  str+='<div class="l_hkxmbox clearfix">';
+
+                                str+='<div class="l_hkxmt">';
+
+                                  str+='<img src="';
+
+                                str+=val.borrow_img; 
+
+                                str+='"/>   </div>';
+
+                                str+='<div class="l_hkxmt1"> <p class="l_ppx1">';
+
+                                str+=val.borrowname;
+
+                                str+='</p>';
+
+                                str+='<p class="l_ppx2"> 类型：   ';
+
+                                //  if(val.bstatus == '7'){
+
+                                //   str+='已回款';
+
+                                  
+
+                                //   }   else{
+
+                                //   str+='未回款';
+
+                                // }
+
+                               
+
+                                str+=val.hklx;
+
+                         
+
+                                str+='</p> <p class="l_ppx3">';
+
+                                if(val.lead_time != '1'){
+
+                                  str+=val.hk_time_c;
+
+                                } else{
+
+                                  str+=val.hk_time_c;
+
+                                }  
+
+                                str+='<span class="l_ppx4">';
+
+                                // if(val.bonus_id != '0'){
+
+                                //     str+= val.getFloatvalue_c;       
+
+                                // }else{
+
+                                //     str+= val.getFloatvalue_c;   
+
+                                // }
+
+                                //if(val.hkzt != '0'){}
+
+                                str+= val.shouyi;  
+
+
+
+                                str+='</span>   </p>  </div> </div></a>';
+
+                                
+
+                          
+
+                              });
+
+                            }
+
+                       
+
+                          $(".l_hkxmbox").remove();
+
+                        $('.dd').append(str);
+
+                            
+
+                            // 	$$("sumreceive_interests").innerHTML = data.sum.receive_interests;
+
+                            // 	$$("sumshouyi").innerHTML = data.sum.shouyi;
+
+                            // 	$$("suminvestor_capital").innerHTML = data.sum.investor_capital;
+
+//                             id="">{$sum['sum']['receive_interests']|default="0.00"}</div>
+
+// 			<div id="sumshouyi"> <if condition="$sum['sum']['shouyi'] neq ''">{$sum['sum']['shouyi']}<else/>0.00</if></div>
+
+// 			<div id="suminvestor_capital"
+
+                        },
+
+                        error:function () {      
+
+                            alert("请求失败！");
+
+                        }
+
+                    });
+
+                    huang(); 
+
+         
+
+	});
+
+	
+
+ 
+
+function drawAgain()
+
+{
+
+		// 待回
+
+		//var dates11 = {$dhktime};
+
+var dates={$dhktime};
+
+
+
+var ddc={$dhk};
+
+//	var dates = ["2019-6-28","2019-6-20","2018-11-21","2018-11-22"];
+
+//console.log(dates);
+
+
+
+if(dates){
+
+		$.each(dates, function(i,n) {
+
+			$('#' + n).css({'border':'2px solid #a6f0fd','background-color':'#A6F0FD','color':'#fff'});
+
+      $('#' + n).attr("dd",ddc[n]);
+
+		});
+
+}
+
+		// 已回
+
+//		var dates1 = {$hktime};
+
+var dates1={$hktime};
+
+// var tmp = null; 
+
+// if (!tmp && typeof(tmp)!="undefined" && tmp!=0){ 
+
+
+
+//console.log(dates1);
+
+var ddb={$hkt};
+
+var dhkid=11;
+
+if(dates1){
+
+          	$.each(dates1, function(i,n) {
+
+			$('#' + n).css({'border':'2px solid #dedede','background-color':'#DEDEDE','color':'#000'});
+
+      dhkid= $('#' + n).attr("dd");
+
+      if(typeof(dhkid)!="undefined"){
+
+        //console.log($('#' + n).attr("dd"));
+
+        $('#' + n).attr("dd",dhkid+','+ddb[n]);
+
+      }else{
+
+        $('#' + n).attr("dd",ddb[n]);
+
+      }
+
+      
+
+		});
+
+}
+
+//		var dates1 =  ["2018-11-1","2018-11-2","2018-11-3","2018-11-4",];
+
+		
+
+	
+
+
+
+}
+
+drawAgain();
+
+function huang(){
+
+  $('.Calendar table tr td span').click(function(){
+
+
+
+      if($(this).html()!='&nbsp;'){
+
+      
+
+         $('.Calendar table tr td span').removeClass("huang");
+
+         $(this).addClass("huang");
+
+      }
+
+
+
+    })
+
+} 
+
+huang();
+
+//$('.calendar-wrapper').attr('id','1');
+
+//			times('a');
+
+//      function times(jud){
+
+//
+
+//      	console.log(jud+'2')
+
+//      	 var myDate = new Date;
+
+//  var year = myDate.getFullYear();//获取当前年
+
+//  var yue = myDate.getMonth()+1;//获取当前月
+
+//  var date = myDate.getDate();//获取当前日
+
+//  var h = myDate.getHours();//获取当前小时数(0-23)
+
+//  var m = myDate.getMinutes();//获取当前分钟数(0-59)
+
+//  var s = myDate.getSeconds();//获取当前秒
+
+//  console.log(year)
+
+//      	// $('.calendar-wrapper').show();
+
+//      	$("#calendar").flexoCalendar({
+
+//              setYear:year,
+
+//              setMonth:yue,
+
+//              selectDate: 'each-each-each',
+
+//              onselect: function(res){
+
+//              	var id = $('.calendar-wrapper').attr('id');
+
+//                  if(id == 1){
+
+//                  	console.log('q');
+
+//                  	$('#start').val(res);
+
+//                  }else{
+
+//                  	console.log('w')
+
+//                  	$('#end').val(res);
+
+//                  }
+
+//                  
+
+//                  // $('.calendar-wrapper').hide();
+
+//                  console.log(res)
+
+//                   
+
+//              }
+
+//          });
+
+//
+
+//         
+
+//      }
+
+
+
+ 	$('.Calendar').on('click',"td span",function(){
+
+ 	    var idz=	$(this).attr("id");
+
+        var ids= $(this).attr("dd");
+
+
+
+ 	    // console.log(idz);
+
+
+
+ 	    // console.log(ids);
+
+ 	    //return false;
+
+ 	    var url= "/wapmember/capital/showidnexs";
+
+        $.ajax({
+
+            type: "post",
+
+            url: url,
+
+    //      data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+
+            data: {"date":idz,"ids":ids},
+
+            cache: false,
+
+            async : false,
+
+            dataType: "json",
+
+            success: function (data)
+
+            {    //console.log(data);
+
+                if(data.state==1){
+
+                   $(".l_hkxmbox").remove();
+
+                    	var str="";
+
+                    // console.log(data.list);
+
+                    	//return false;
+
+                        $.each(data.list, function(i,val){ 
+
+                            // console.log(i);
+
+                            str+='			<a href="/Wap/invest/detail/id/';
+
+                        	str+=val.borrow_id;
+
+                        	str+='.html">';
+
+                            str+='<div class="l_hkxmbox clearfix">';
+
+                        	str+='<div class="l_hkxmt">';
+
+                            str+='<img src="';
+
+                        	str+=val.borrow_img; 
+
+                        	str+='"/>  	</div>';
+
+                        	str+='<div class="l_hkxmt1"> <p class="l_ppx1">';
+
+                        	str+=val.borrowname;
+
+                        	str+='</p>';
+
+                        	str+='<p class="l_ppx2"> 类型：   ';
+
+                          str+=val.hklx;
+
+                        	//  if(val.bstatus == '7'){
+
+                        	// 	str+='已回款';
+
+                            
+
+                         //    } 	else{
+
+                        	// 	str+='未回款';
+
+                        	// }
+
+                          //  if(val.hkzt == '1'){
+
+                          //  str+='已回款';
+
+                            
+
+                          //   }  else{
+
+                          //  str+='未回款';
+
+                          // }
+
+                        	str+='</p> <p class="l_ppx3">';
+
+                        	if(val.lead_time != '1'){
+
+                        		str+=val.hk_time_c;
+
+                        	}	else{
+
+                        		str+=val.hk_time_c;
+
+                        	}	 
+
+                        	str+='<span class="l_ppx4">';
+
+                        	// if(val.bonus_id != '0'){
+
+                        	// 	  str+= val.getFloatvalue_c;       
+
+                        	// }else{
+
+                        	// 	 str+=val.getFloatvalue_c;   
+
+                        	// }
+
+
+
+                          // if(val.bonus_id != '0'){
+
+                                //     str+= val.getFloatvalue_c;       
+
+                                // }else{
+
+                                //     str+= val.getFloatvalue_c;   
+
+                                // }
+
+                          // if(val.bj != '0'){
+
+                          //   str+= val.getFloatvalue_c;       
+
+                          // }
+
+                          //if(val.hkzt != '0'){}
+
+                          str+= val.shouyi;  
+
+                        	str+='</span> 	</p> 	</div> </div></a>';
+
+                        	
+
+                        //console.log(str);
+
+                         /*
+
+                        	
+
+                        
+
+                        
+
+                        
+
+                        
+
+                           */
+
+                        });
+
+                        
+
+                        $('.dd').append(str);
+
+                        $('.drhks').empty();
+
+
+
+                        $('.drhks').append(data.hks);
+
+                        //   alert(i);   
+
+                        //   alert(val);
+
+                    
+
+                }else{
+
+                	$('.drhks').empty();
+
+                }
+
+               //condition.log(1);
+
+            },
+
+            error:function () {      
+
+                alert("请求失败！");
+
+            }
+
+         });
+
+	})
+
+
+
+
+
+	</script>
+
+</html>

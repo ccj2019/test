@@ -1,0 +1,263 @@
+<include file="default:Public:mheader" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/web/css/ltt1.css" />
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+<tagLib name="htmlA" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>银行卡</a></span>
+</div>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on">
+				<span>银行卡</span>
+			</div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<div class="card_all">
+					<ul class="clearfix">
+						<volist name="vobank" id="vo">		 
+							<li >
+								<div class="card">
+									<div class="topbank clearfix">
+										<div class="ll fl clearfix">
+											<img src="/Public/wap/Home/images/icon59.png" style="width: 20px;" alt="" />
+											<span>{$vo.bank_name_cn}</span>
+										</div>
+										<div class="rr fr">
+											<p>尾号{$vo.bank_num|substr=-4,4}</p>
+										</div>
+									</div>
+									<div class="mid clearfix">
+										<div class="ll fl">储蓄卡</div> 
+										<div class="rr fr">
+											<a href="__APP__/member/Bank/delete?id={$vo.id}">删除</a>
+											<span>|</span>
+											<a href="__APP__/member/withdraw/withdraw.html?bankid={$vo.id}">提现</a>
+										</div>
+									</div>
+									<div class="bot"></div>
+								</div>
+							</li>
+						</volist>
+					</ul>
+					<div class="card-form">
+						<div class="topbank">
+							<p>新增银行卡</p>
+						</div>
+						<form action="" method="post" id="l-shiming" class="clearfix">
+							<div class="box clearfix">
+								<label for=""><span>*</span>开户名：</label>
+								<input type="text" id="realname" name="realname" value="{$voinfo['real_name']}" readonly/>
+							</div>
+							<div class="box clearfix">
+								<label for=""><span>*</span>身份证号：</label>
+								<input type="text" name="idcard" id="idcard" value="{$voinfo['idcard']}" readonly/>
+							</div>
+							<div class="box clearfix">
+								<label for=""><span>*</span>账户类型：</label>
+								<p>借记卡<span>（不支持信用卡）</span></p>
+							</div>
+							<div class="box clearfix">
+								<label for=""><span>*</span>选择银行：</label>
+								<htmlA:select id="bank_name" value="key|vobank.bank_name" datakey='bank_list' class="spec89" addstr=''/>
+							</div>
+
+							<div class="box clearfix" style="display: none;" id="khh">
+								<label for=""><span>*</span>开户行名称：</label><input type="text" name="bank_namecs" id="bank_namecs" value="" />
+							</div>
+
+
+
+
+							<div class="box clearfix">
+								<label for=""><span>*</span>开户行所在地：</label>
+								<select name="selectp" id="province">
+									<option value="0">请选择省份 </option>
+								</select>
+								<select name="selectc" id="city">
+									<option value="0">请选择城市</option>
+								</select>
+							</div>
+							<div class="box clearfix">
+								<label for=""><span>*</span>详细地址信息：</label>
+								<input type="text" name="bank_address" id="bank_address" value="" />
+							</div>
+							<div class="box clearfix">
+								<label for=""><span>*</span>银行卡号：</label>
+								<input type="text" name="txt_account" id="txt_account" value="" />
+							</div>
+							<div class="box box2 clearfix">
+								<label for=""><span>*</span>绑定手机号：</label>
+								<input type="text" name="phone" id="phone" value="" />
+								<div class="yzm" id="yanzhengma" ><a href="javascript:void(0);" onclick="send(120)" class="getyzm" style="font-size: 12px;">获取验证码</a></div>
+							</div>
+							<div class="box box2 clearfix">
+								<label for=""><span>*</span>验证码：</label>
+								<input type="text" name="yzm" id="yzm" value="" />
+							</div>
+
+							<div class="qr fl" id="btn_set" ><a>确认添加</a></div>
+							<div class="qx fl"><a>取消</a></div>
+							
+							<div class="clear"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>			 
+$(function() {
+	$("#bank_name").click(function() {
+		var aa=$("#bank_name").val();
+		if(aa=="BAC"){
+			$("#khh").css("display","block");
+		}else{
+			$("#khh").css("display","none");
+		}
+	});
+
+	$("#btn_set").click(function() {
+
+
+		if ($("#bank_name").val()=="") {
+			layer.msg('请选择开户行！');
+			return false;
+		}
+
+		if ($("#khh").css("display")=="block"&&$("#bank_namecs").val()=="") {
+			layer.msg('请填写开户行名称！');
+			return false;
+		}
+		
+		if ($("#bank_address").val()=="") {
+			layer.msg('请正确输入详细地址信息！');
+			return false;
+		}
+		if ($("#txt_account").val().length < 7) {
+			layer.msg('请正确输入您的银行帐号！');
+			return false;
+		}
+		if ($("#txt_account").val().length > 19) {
+			layer.msg('请正确输入您的银行帐号！');
+			return false;
+		}
+		if ($("#province").val()=="") {
+			layer.msg('请选择开户行所在省份！');
+			return false;
+		}
+		if ($("#city").val()=="") {
+			layer.msg('请选择开户行所在市！');
+			return false;
+		}
+		if ($("#yzm").val()=="") {
+			layer.msg('验证码不能为空！');
+			return false;
+		}
+
+		var bank_list = JSON.parse('{$bankList}');
+        	var bank_list_keys = Object.keys(bank_list);
+        	var bank_name = $('#bank_name').val();
+        	for(var i=0;i<=bank_list_keys.length;i++){
+            		if(bank_name == bank_list_keys[i]){
+                		$('#bank_name > option').removeAttr("selected");
+                		$('#bank_name > option[value=' + bank_name + ']').attr("selected","selected");
+            		}
+        	}
+
+			var aa=$('#bank_name > option[value=' + bank_name + ']').text()
+			if ($("#khh").css("display")=="block"&&$("#bank_namecs").val()!="") {
+				aa=aa+"|"+$("#bank_namecs").val();
+			}
+		$("#btn_set").css("pointer-events","none");
+		$.ajax({
+			url: "__URL__/bindbank",
+			type: "post",
+			dataType: "json",
+			data: {
+				account: $("#txt_account").val(), bank_address: $("#bank_address").val(),realname: $("#realname").val(),idcard: $("#idcard").val(),phone: $("#phone").val(),yzm: $("#yzm").val(),
+				province: $("#province").find("option:selected").text(),cityName: $("#city").find("option:selected").text(),bankname: aa
+			},
+			success: function(d) {
+				if (d.status == 1) {
+					layer.msg('恭喜，您的银行卡更新成功',{shift: -1},function(){
+			            window.location.reload();
+			        });
+					
+				}
+				else if (d.status == "f") {
+					$("#btn_set").css("pointer-events","auto");
+					layer.msg(d.info);
+				}
+			}
+		});
+
+	});
+});
+var mbTest =/^1\d{10}$/;
+function send(t){
+ var msg = "确认银行卡绑定手机号，账户类型必须是借记卡？";
+            if (confirm(msg)==true){
+              	var phone = $('#phone').val();
+	if(phone == ''){
+		layer.msg("手机号不能为空");
+		return false;
+	}else if(!phone.match(mbTest)){
+		layer.msg("手机号不正确");
+		return false;
+	}else{
+		showtime(t);
+		$.ajax({
+		  url: "__URL__/sendcode/",
+		  type: "post",
+		  dataType: "json",
+		  data: {"phone":phone,"type":2},
+		  success: function(data){
+		  	console.log(data);
+		    if(data.status == 'y'){
+		      	layer.msg(data.info,{shift: -1});
+		      	return false;
+		    }else{
+		      layer.alert(data.info);
+		      return false;
+		    }
+		  }
+		});
+	}
+            }else{
+                return false;
+            }
+
+}  
+
+function showtime(t){ 
+    // document.form.getyzm.disabled=true; 
+    for(i=1;i<=t;i++) { 
+        window.setTimeout("update_p(" + i + ","+t+")", i * 1000); 
+    } 
+    
+} 
+
+function update_p(num,t) { 
+    if(num == t) { 
+        $(".getyzm").html(" 重新发送 "); 
+        // document.form.getyzm.disabled=false; 
+    } 
+    else { 
+        printnr = t-num; 
+        $(".getyzm").html(" (" + printnr +")秒后重新发送"); 
+        // document.form.getyzm.value = " (" + printnr +")秒后重新发送"; 
+    } 
+}
+</script>
+<script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>
+<include file="default:Public:footer" group="Home" />

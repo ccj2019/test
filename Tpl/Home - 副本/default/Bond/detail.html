@@ -1,0 +1,330 @@
+<div class="lc">
+  <div class="lc_info">
+      <div class="lc_info_left">
+          <p class="px_spec16" title="{$binfo.borrow_name}"><span><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/px_y.png" class="png" /><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/px_b.png" class="png" /></span>{$binfo.borrow_name|cnsubstr=###,28}</p>
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr class="px_spec17">
+                <td>年化收益率</td>
+                <td style="padding-left:30px;">项目总额</td>
+                <td style="padding-left:30px;">项目期限</td>
+                <td rowspan="2" align="center" style="border-right:0px;"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/pc_jd.jpg" /></td>
+              </tr>
+              <tr>
+                <td class="px_spec18">{$binfo.borrow_interest_rate}%</td>
+                <td class="px_spec19" style="padding-left:30px;">{$binfo.borrow_money|Fmoney=###,''}</td>
+                <td class="px_spec19" style="padding-left:30px;">{$binfo.borrow_duration}<if condition="$binfo.repayment_type eq 1">天<else/>个月</if></td>
+                
+              </tr>
+            </table>
+      <p class="px_spec20">项目起息：即投即起息<a href="javascript:;" class="calc_btn">计算收益</a></p>
+            <p class="px_spec21">收益方式：{$Bconfig['REPAYMENT_TYPE'][$binfo['repayment_type']]}</p>
+            <p class="px_spec40">剩余时间：<span class="zh_spec24"><span  id="loan_time">--天 -- 小时 -- 分 -- 秒</span> <input id="hid" type="hidden" value="{$binfo.lefttime}" /></span></p>
+            <p class="px_spec23"><a href="/article/index/cid/470.html" target="_blank">投资协议范文查看</a></p>
+        </div>
+        <div class="lc_info_right">
+          <p>
+              <span class="px_spec24">正在募集</span>
+                <span class="px_spec25">92%</span>
+                <div style=" clear:both"></div>
+            </p>
+            <p class="px_spec26"><span style="width:92%"></span></p>
+            <p class="px_spec27">
+              <span class="px_spec28">可投金额</span>
+                <span class="px_spec29"><span>{$vo.need|Fmoney=###,false}</span>元</span>
+                <div style="clear:both;"></div>
+            </p>
+            <p class="px_spec27">
+              <span class="px_spec28">投标奖励</span>
+                <span class="px_spec29"><span><if condition="$binfo.reward_type eq 1">
+                    按投标金额比例奖励{$binfo.reward_num}%
+                  <elseif condition="$binfo.reward_type eq 2"/>
+                 按固定金额分摊奖励{$binfo.reward_num}元
+                 <else />
+                 无
+                </if>
+                      
+                  </if>
+                </span>
+                <div style="clear:both;"></div>
+            </p>                     
+            <if condition="$binfo.borrow_status eq 2">
+              <p class="px_spec30">投资金额：</p>
+              <p>
+              <script type="text/javascript">
+                $(document).ready(function(){
+            $(".px_spec31").hover(function(){
+              $(".px_spec32").show();
+              });
+              $(".px_spec31").mouseleave(function(){
+              $(".px_spec32").hide();
+              });
+            })
+              </script>     
+                  <input name="" type="text" class="px_spec31" placeholder="1000元"/>
+                    <div class="px_spec32 png">
+                      <ul>
+                          <li></li>
+                            <li>最低投资金额{$binfo.borrow_min}元</li>
+                            <li>最高投资金额{$binfo.borrow_max}元</li>
+                        </ul>
+                    </div>                
+              </p>
+            <else />
+
+            </if>
+            <p class="px_spec33">当前累计投资<span>{:count($investinfo)}</span>次</p>
+            <span class="px_spec34">
+              <if condition="$binfo.borrow_status eq 3"><a class="zhong">已流标</a>
+              <elseif condition="$binfo.borrow_status eq 4"/>
+              <a class="zhong">等待审核</a>
+              <elseif condition="$binfo.borrow_status eq 6"/>
+              <a class="zhong">还款中</a>
+              <elseif condition="$binfo.borrow_status gt 6"/>
+              <a class="zhong">已完成</a>
+              <else/><a href="javascript:;" id="toumiao">立即投资</a></if>
+              
+            </span>
+            <span class="px_spec35"><a  href="javascript:;" class="calc_btn">计算<br />收益</a></span>
+            <div style="clear:both;"></div>
+            <p class="px_spec36">提醒您：投资非存款，投资需谨慎！</p>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="lc_aq">
+      <ul>
+          <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/lc_aq1.png" class="png" /><p>交易实时监控</p>7*24全天交易监控</li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/lc_aq2.png" class="png" /><p>全实名认证交易</p>所有投资者必须实名认证</li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/lc_aq3.png" class="png" /><p>资金认证提现</p>资金只能提现到您名下的银行</li>
+            <li><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/lc_aq4.png" class="png" /><p>信息安全保障</p>阿里巴巴提供最安全云技术</li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="lc_tbjl">
+      <script type="text/javascript">
+$(document).ready(function(){
+  var $tab_li = $('#px_tab ul li');
+  $tab_li.hover(function(){
+    $(this).addClass('selected').siblings().removeClass('selected');
+    var index = $tab_li.index(this);
+    $('div.px_tab_box > div').eq(index).show().siblings().hide();
+  }); 
+});
+</script>
+    <div id="px_tab">
+  <ul class="px_tab_menu">
+      <li class="selected">项目详情</li>
+        <li>投资记录<span class="px_spec37">{:count($investinfo)}</span></li>
+    </ul>
+    <div class="px_tab_box">
+      <div>{$binfo.borrow_info}</div>
+      <div class="hide">
+          <table border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tr class="px_spec38">
+                <td width="13%" align="center">序号</td>
+                <td width="15%">投标人</td>
+                <td width="20%">投标金额</td>
+                <td width="13%">投标利息</td>
+                <td width="20%">投标类型</td>
+                <td width="19%">投标时间</td>
+              </tr>
+              <!-- <volist name="investinfo" id="vi"> -->
+              <tr class="px_spec39">
+                <td align="center">{$i}</td>
+                <td>{$vi.user_name|hidecard=###,5}</td>
+                <td>{$vi.investor_capital|Fmoney=###}</td>
+                <td>{$vi.investor_interest|Fmoney=###}</td>
+                <td><if condition="$vi.is_auto eq 1">自动<else />手动</if></td>
+                <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+              </tr>
+              <!-- </volist> -->
+            </table>
+        </div>        
+    </div>
+</div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $("#toumiao").on('click', function(){
+    var id={$binfo.id};
+    $.ajax({
+      url: "__URL__/ajax_invest?id="+id,
+      timeout: 5000,
+      cache: false,
+      type: "get",
+      dataType: "json",
+      success: function (d, s, r) {
+        if(d.status==0){
+           layer.msg(d.message);
+        }else{
+        var obj_html=d.content;
+        $.layer({
+          type: 1,
+          title: "立即投标",
+          area: ['650px', '360px'],
+          shade: [0],
+          page: {
+            html: '<div class="jiedai_con">'+obj_html+'</div>'
+          }, success: function(){
+            layer.shift('left');
+          }
+        });
+        }
+      }
+    });
+  });
+  //投标
+})
+var investmoney = 0;
+var borrowidMS = 0;
+var borrow_min = 0;
+var borrow_max = 0;
+function PostData(id) {
+  var tendValue = parseFloat($("#invest_money").val());
+  var pin = $("#pin").val();
+  var borrow_pass = (typeof $("#borrow_pass").val()=="undefined")?"":$("#borrow_pass").val();
+  var borrow_id = $("#borrow_id").val();
+      tendValue = isNaN(tendValue)?0:tendValue;
+  if(pin==""){
+  //layer.msg('您好，请输入支付密码！');
+  //return false;
+  }
+  if(tendValue<borrow_min){
+  layer.msg("本标最低投标金额为"+borrow_min+"元，请重新输入投标金额");
+  return false;
+  }else if(tendValue>borrow_max && borrow_max!=0){
+  layer.msg("本标最大投标总金额为"+borrow_max+"元，请重新输入投标金额");  
+  return false;
+  }
+  $.ajax({
+    url: "__URL__/investcheck",
+    type: "post",
+    dataType: "json",
+    data: {"money":tendValue,'pin':pin,'borrow_id':borrow_id,"borrow_pass":borrow_pass},
+    success: function(d) {
+        if (d.status == 1) {
+          investmoney = tendValue;
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['确认投标','暂不投标'],
+              yes: function(){
+                isinvest(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+          
+          //$.jBox.confirm(d.message, "会员投标提示", isinvest, { buttons: { '确认投标': true, '暂不投标': false},top:'40%' });
+        }
+        else if(d.status == 2)// 无担保贷款多次提醒
+        {
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['去冲值','暂不冲值'],
+              yes: function(){
+                ischarge(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+         // $.jBox.confirm(d.message, "会员投标提示", ischarge, { buttons: { '去冲值': true, '暂不冲值': false},top:'40%' });
+        }
+        else if(d.status == 3)// 无担保贷款多次提醒
+        {
+          layer.msg(d.message);
+        }else{
+          layer.msg(d.message);  
+        }
+    }
+  });
+}
+
+function ischarge(d){
+  if(d===true) window.location.href="__APP__/member/charge#fragment-1";
+}
+function isinvest(d){
+  if(d===true) document.forms.investForm.submit();
+}
+function PostDataVouch(id) {
+  var tendValue = parseFloat($("#vouch_money").val());
+  var pin = $("#pin").val();
+      tendValue = isNaN(tendValue)?0:tendValue;
+  if(pin==""){
+  layer.msg("请输入支付密码");  
+  return false;
+  }
+  if(tendValue<50){
+  layer.msg("最低担保额度50元");  
+  return false;
+  }
+
+  $.ajax({
+    url: "__URL__/vouchcheck",
+    type: "post",
+    dataType: "json",
+    data: {"vouch_money":tendValue,'pin':pin},
+    success: function(d) {
+        if (d.status == 1) {
+          investmoney = tendValue;
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['确认担保','暂不担保'],
+              yes: function(){
+                isvouch(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+          //$.jBox.confirm(d.message, "会员投标提示", isvouch, { buttons: { '确认担保': true, '暂不担保': false},top:'40%' });
+        }
+        else if(d.status == 2)// 无担保贷款多次提醒
+        {
+          //$.jBox.confirm(d.message, "会员投标提示", isapply, { buttons: { '去申请额度': true, '暂不申请额度': false},top:'40%' });
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['去申请额度','暂不申请额度'],
+              yes: function(){
+                isapply(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+        }else{
+          layer.msg(d.message);  
+        }
+    }
+  });
+}
+
+function isapply(d){
+  if(d===true) window.location.href="__APP__/member/moneylimit#fragment-1";
+}
+function isvouch(d){
+  if(d===true) document.forms.vouchForm.submit();
+}
+</script>

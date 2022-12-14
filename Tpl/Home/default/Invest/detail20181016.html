@@ -1,0 +1,363 @@
+<div class="fhjsy">
+    <div class="container">
+        <div class="fhjsytop">
+            <div class="fhjsytl">
+                <div class="fstit">
+                    <div class="tt">{$binfo.borrow_name}</div>
+                    <div class="bshare-custom enjoy" style="float:right;"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+                    <div class="clear"></div>
+                </div>
+                <div class="fscon">
+                    <ul>
+                        <li>
+                            众筹金额
+                            <h3>{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}</h3>
+                        </li>
+                        <li>
+                            筹集进度
+                            <h3>{$binfo.progress}%</h3>
+                        </li>
+                        <li>
+                            剩余金额
+                            <h3>{:getFloatvalue($binfo['borrow_money']-$binfo['has_borrow'],2)}</h3>
+                        </li>
+                        <li>
+                            支持人数
+                            <h3>{:count($investinfo)}人</h3>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="process">
+                        <div class="pro" style="width:{$binfo.progress}%"></div>
+                    </div>
+                    <div class="xnjs">
+                        <ul>
+                            <li class="li1">起投金额：{$binfo.borrow_min|Fmoney=###}元起投</li>
+                            <li class="li2">项目周期：{$binfo.borrow_duration}天</li>
+                            <li class="li3">万元回报收益: {$binfo.borrow_interest_rate}</li>
+                            <li class="li4">项目厂商：{$binfo.borrow_sccj} </li>
+                            <li class="li5">项目发起人：{$minfo.user_name}</li>
+                        </ul>
+                    </div>
+                    <div class="djs">
+                        剩余时间：<span  class="cui-timer" data-config = '["endtime":"{$binfo.endtimes|date="Y-m-d H:i:s",###}","msec":false]' ></span>
+                    </div>
+                </div>
+            </div>
+            <div class="fhjsytr">
+                <if condition="$UID gt '0'">
+                <FORM method="post" name="investForm" id="investForm" action="__URL__/investmoney">
+                    <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+                    <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+                    <ul>
+                        <li>
+                          <if condition="$vo.is_experience eq 1">
+                            体验金余额：{$money_experience|default=0.00}
+                            <div class="clear"></div>
+                          <else />
+                            账户余额：{$account_money|default=0.00}
+                            <a href="__APP__/member/charge/charge.html">充值</a>
+                            <div class="clear"></div>
+                          </if>
+                        </li>
+                        <li>支持金额
+                            <div class="mon">
+                                <input class="min" name="" type="button" value="" />
+                                <INPUT type="text" id="invest_money" class="invest_input text_box" value="1"  size="11" name="money" value="{$vo.toubiao}" />
+                                <input class="add" name="" type="button" value="" />
+                            </div>
+                            <div class="wan">
+                                <a href="javascript:;" onclick="slectinvest(10000)">1万</a>
+                                <a href="javascript:;" onclick="slectinvest(50000)">5万</a>
+                                <a href="javascript:;" onclick="slectinvest(100000)">10万</a>
+                                <a href="javascript:;" onclick="slectinvest({$allinvest})">全投</a>
+                            </div>
+                        </li>
+                        
+                        <if condition="$vo.is_experience eq 1">
+                          <li>用体验金 <input type="checkbox" id="is_experience" name="is_experience" value="1" onclick="return true;" />&nbsp;<label for="is_experience">是，只允许体验金投资</label></li>
+                        </if>
+                        <if condition="$vo.is_bonus eq 1">
+                            <li>
+                                使用红包
+                                <select name="bonus_id" id="bonus_id">
+                                    <option value="0">--请选择红包--</option>
+                                    <volist name="bonus_list" id="bonus_line">
+                                        <option value="{$bonus_line.id}" money_bonus="{$bonus_line.money_bonus}">红包{$bonus_line.money_bonus}元</option>
+                                        <option value="{$bonus_line.id}" disabled="disabled">（满{$bonus_line.bonus_invest_min}元可用）</option>
+                                    </volist>
+                                </select>
+                            </li>
+                        </if>
+                        <if condition="$vo.is_memberinterest eq 1">
+                            <li>
+                                使用加息券
+                                <select name="memberinterest_id" id="memberinterest_id" style="width: 125px;">
+                                    <option value="0">--请选择加息券--</option>
+                                    <volist name="inrate_list" id="bonus_line">
+                                        <option value="{$bonus_line.id}">加息券{$bonus_line.interest_rate}%</option>
+                                    </volist>
+                                </select>
+                            </li>
+                        </if>
+                        <li>支付密码：
+                        <if condition="$has_pin eq 'yes'">
+                            <INPUT type="password" class="invest_input" id="pin" name="pin" value="" />
+                        <else/>
+                            <A href="/Member/user/pinpass.html" target="_blank"><FONT color="#ff0000">请先设一个支付交易密码</FONT></A></if>
+                        </li>
+                        <if condition="!empty($vo['password'])">
+                            <li>密码标密码:<input type="password" class="invest_input" id="borrow_pass" name="borrow_pass" value="" /></li>
+                        </if>
+                    </ul>
+                    <if condition="$binfo.start_time gt time()">                         
+                        <a href="javascript:void(0);" id="toumiao" class="loan_time zhic">预热中</a>
+                    <elseif condition="$binfo.borrow_status eq 2" />
+                        <a href="javascript:void(0);" onclick="PostData()" class="zhic">立即支持</a>                
+                    <else />
+                        <a href="javascript:void(0);" class="zhic">项目完成</a>                
+                    </if> 
+                </form>
+                <else />
+                <!--未登录状态-->
+                    <a href="{:U('/member/common/login')}"  class="zhic">登录</a>
+                </if>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="fhjsybot">
+            <div class="sxb_tab">
+                <div class="sxb_t">
+                    <div class="sxb_tc sxbxly">项目介绍</div>
+                    <div class="sxb_tc">分红及收益</div>
+                    <div class="sxb_tc">风控及退出</div>
+                    <div class="sxb_tc">投资记录</div>
+                    <div class="sxb_tc">合同模板</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="sxbcon">
+                    <div class="sxbo">
+                        <div class="xljs">
+                            {$binfo.borrow_info}
+                        </div>
+                    </div>
+                    <div class="sxbo">
+                        <div class="fh">
+                            {$binfo.budget_revenue}
+                        </div>
+                    </div>
+                    <div class="sxbo">
+                        <div class="fk">
+                            {$binfo.borrow_feasibility}
+                        </div>
+                    </div>
+                    <div class="sxbo">
+                        <div class="tzjl">
+                            <table>
+                                <tr>
+                                      <th>投资人</th>
+                                      <if condition="$vo.is_experience eq 1">
+                                      <th>体验金余额</th>
+                                      <else />
+                                      <th>投资金额</th>
+                                      </if>
+                                      <th>红包奖励</th>
+                                      <th>投资方式</th>
+                                      <th>众筹时间</th>
+                                </tr>
+                                <!-- <volist name="investinfo" id="vi"> -->
+                                    <tr>
+                                      <td align="center">{$vi.user_name|hidecard=###,5}</td>
+                                      <if condition="$vi.bonus_id neq 0">
+                                        <td>{:getFloatvalue($vi['investor_capital']-(bounsmoney($vi['bonus_id'])),2)}</td>                    
+                                      <else/>
+                                        <td>{:getFloatvalue($vi['investor_capital'],2)}</td>                    
+                                      </if>
+                                      <td>
+                                        <if condition="$vi.member_interest_rate_id neq 0">加息券：{:intestrate($vi['member_interest_rate_id'])}%<br /></if>
+                                        <if condition="$vi.bonus_id neq 0">红包{:bounsmoney($vi['bonus_id'])}</if>
+                                      </td>                    
+                                      <td><if condition="$vi.investor_way eq 1">PC<else />APP</if></td>                    
+                                      <td>{$vi.add_time|date="Y-m-d H:i:s",###}</td>
+                                    </tr>
+                                <!-- </volist> -->
+                            </table>
+                        </div>
+                    </div>
+                    <div class="sxbo">{$article_category.type_content}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function slectinvest(mon){
+    $('#invest_money').val(mon);
+}
+function addGuanzhu(){
+    var tid = {$binfo.id|default=0};
+    $.ajax({
+        url: "__URL__/addguanzhu",
+        data: {"tid":tid},
+        timeout: 5000,
+        cache: false,
+        type: "post",
+        dataType: "json",
+        success: function (d, s, r) {            
+              layer.alert(d.message, 1,!1);
+        }
+    }); 
+}
+function addVote(status){
+    var borrow_id = {$binfo.id|default=0};
+    $.ajax({
+        url: "__URL__/addvote",
+        data: {"status":status,"borrow_id":borrow_id},
+        timeout: 5000,
+        cache: false,
+        type: "post",
+        dataType: "json",
+        success: function (d, s, r) {
+            if(d){
+                if(d.status==1){
+                    if(d.message=="关注成功"){
+                        $(".cont_guanzhu").find("span").html("已关注");
+                    }else{
+                        $(".cont_guanzhu").find("span").html("关注"); 
+                    }
+                    layer.alert(d.message, 1,!1);
+                }else{
+                    layer.msg(d.message);
+                    $(".cont_guanzhu").find("span").html("关注");
+                }
+            }
+        }
+    });
+}
+/*$(function(){
+  $("#toumiao").on('click', function(){
+    var id={$binfo.id};
+    $.ajax({
+      url: "__URL__/ajax_invest?id="+id,
+      timeout: 5000,
+      cache: false,
+      type: "get",
+      dataType: "json",
+      success: function (d, s, r) {
+        if(d.status==0){
+           layer.msg(d.message);
+        }else{
+        var obj_html=d.content;
+        $.layer({
+          type: 1,
+          title: "支持该项目",
+          area: ['320px', '240px'],
+          shade: [0],
+          page: {
+            html: '<div class="jiedai_con">'+obj_html+'</div>'
+          }, success: function(){
+            layer.shift('left');
+          }
+        });
+        }
+      }
+    });
+  });
+  //投标
+})*/
+var investmoney = 0;
+var borrowidMS = 0;
+var borrow_min = 0;
+var borrow_max = 0;
+function PostData(id) {
+  var tendValue = parseFloat($("#invest_money").val());
+  var pin = $("#pin").val();
+  var borrow_pass = (typeof $("#borrow_pass").val()=="undefined")?"":$("#borrow_pass").val();
+  var borrow_id = $("#borrow_id").val();
+      tendValue = isNaN(tendValue)?0:tendValue;
+  var is_experience = (typeof $("#is_experience") != "undefined") && $("#is_experience").is(':checked') ? 1 : 0 ;
+  var bonus_id = $("#bonus_id").val();  
+  var memberinterest_id = $("#memberinterest_id").val();  
+  if(pin==""){
+  layer.msg('您好，请输入支付密码！');
+  return false;
+  }
+  if(tendValue<borrow_min){
+  layer.msg("本标最低投标金额为"+borrow_min+"元，请重新输入投标金额");
+  return false;
+  }else if(tendValue>borrow_max && borrow_max!=0){
+  layer.msg("本标最大投标总金额为"+borrow_max+"元，请重新输入投标金额");  
+  return false;
+  }
+  $.ajax({
+    url: "__URL__/investcheck",
+    type: "post",
+    dataType: "json",
+    data: {"money":tendValue,'pin':pin,'borrow_id':borrow_id,"borrow_pass":borrow_pass,"is_experience":is_experience,"bonus_id":bonus_id,"memberinterest_id":memberinterest_id},
+    success: function(d) {
+        if (d.status == 1) {
+          investmoney = tendValue;
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['确认投标','暂不投标'],
+              yes: function(){
+                isinvest(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+          
+          //$.jBox.confirm(d.message, "会员投标提示", isinvest, { buttons: { '确认投标': true, '暂不投标': false},top:'40%' });
+        }
+        else if(d.status == 2)// 无担保贷款多次提醒
+        {
+          $.layer({
+            shade: [0],
+            area: ['auto','auto'],
+            dialog: {
+              msg: d.message,
+              btns: 2,                    
+              type: 4,
+              btn: ['去冲值','暂不冲值'],
+              yes: function(){
+                ischarge(true);
+              }, no: function(){
+                return false;
+              }
+            }
+          });
+         // $.jBox.confirm(d.message, "会员投标提示", ischarge, { buttons: { '去冲值': true, '暂不冲值': false},top:'40%' });
+        }
+        else if(d.status == 3)// 无担保贷款多次提醒
+        {
+          layer.msg(d.message);
+        }else{
+          layer.msg(d.message);  
+        }
+    }
+  });
+}
+function ischarge(d){
+  if(d===true) window.location.href="__APP__/member/charge";
+}
+function isinvest(d){
+  if(d===true) document.forms.investForm.submit();
+}
+function isapply(d){
+  if(d===true) window.location.href="__APP__/member/moneylimit";
+}
+function isvouch(d){
+  if(d===true) document.forms.vouchForm.submit();
+}
+</script>
+<script type="text/javascript">
+$(function(){
+        $('.cui-timer').Cuitimer();
+    });
+</script>

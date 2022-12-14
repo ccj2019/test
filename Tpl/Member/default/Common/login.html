@@ -1,0 +1,157 @@
+<style>
+    input::-webkit-input-placeholder{
+    color: #737373 !important;
+}
+input:-moz-placeholder{
+    color: #737373 !important;
+}
+input::-moz-placeholder{
+    color: #737373 !important;
+}
+input:-ms-input-placeholder{
+    color: #737373 !important;
+}
+input : -webkit-autofill {
+background-color : #FAFFBD ;
+background-image : none ;
+color : #000 ;
+}
+</style><include file="default:Public:header" />
+
+<script type="text/javascript" src="/Public/wap/js/qrcode.min.js"></script>
+<!--内容-->
+<div class="l-omg" style="background: url(__PUBLIC__/web/img/yindao/bj.jpg) no-repeat center center;">
+<div style="width: 1130;margin: 0 auto;">
+	<div class="l-mlogin" style="float:right; margin-top:80px;" >
+		<div class="l-mlg">
+			<div class="clearfix dl-box">
+				<span class="mylgon">登录</span>  
+				<div class="mylgon1"><span>没有账号？</span>
+					<span><a href="/member/common/register">立即注册</a></span>
+				</div>
+			</div>
+			 <form action="" method="POST">
+					
+			   <div class="inp-box">
+				  <span><img src="/Public/web/img/yindao/shouji-5.png"/></span>
+				  <input type="text" name="sUserName" id="sUserName" autocomplete="off" placeholder="请输入手机号/用户名"/>
+			   </div>	
+				 <div class="inp-box">
+				  <span><img src="/Public/web/img/yindao/mima-5.png"/>
+				  </span><input type="password" name="sPassword" id="sPassword" autocomplete="off"   placeholder="请输入密码"/>
+
+				  <input type="hidden" name="url" id="url" value="{$url}"/>
+			   </div>	
+			   <p class="wjmima"><a href="/member/common/getpass/">忘记密码？</a>	</p>
+			   <!--<p class="qitalogn">&lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;其他登录方式&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;</p>-->
+			   <!--<p class="qitadengl">	-->
+			   	<!--<span><a href="javascript:;" onclick="weixinlog()">-->
+			   	    <!--<img style="display: inline;" src="/Public/web/img/yindao/weixin-2.png"/></a></span>-->
+			   	<!--&lt;!&ndash; <span><a href="##"><img src="/Public/web/img/yindao/qq-2.png"/></a></span> &ndash;&gt;-->
+			   	<!--</p>-->
+			   <input type="button" autocomplete="off"  style="height:40px;" name="" class="lijsubm" onclick="loginsub()" value="立即登录">
+			</form>
+			
+		</div>
+	</div>
+	</div>
+</div>
+<div class="dome-1">
+<div class="dome-2" style="background:none;    margin-top: 15%;">
+<div id="qrcode" style="width: 125px; margin: 0px auto;"></div>
+</div>
+</div>
+<script type="text/javascript">
+$('input').bind('keyup', function(event) {
+　　if (event.keyCode == "13") {
+　　　　//回车执行查询
+　　　loginsub()
+　　}
+});
+function loginsub() {
+	var sUserName = $("#sUserName").val();
+	var sPassword = $("#sPassword").val();
+	if(sUserName == ''){
+		layer.msg("请填写手机号")
+        return false;
+	}
+	if(sPassword == ''){
+		layer.msg("请填写密码")
+        return false;
+	}
+
+	$.ajax({
+		url: "__APP__/member/common/actlogin",
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		data: {"sUserName":sUserName,"sPassword":sPassword},
+		success: function (d, s, r) {
+			if(d.status==0){
+				   layer.msg(d.message);
+			}else{
+				layer.msg('登录成功',{shift: -1},function(){
+					if($("#url").val()!=''){
+						window.location.href=$("#url").val();
+					}else{
+						window.location.href="__APP__/member";
+					}
+	                
+	            });
+			}
+		}
+	});
+}
+function weixinlog(){
+	$.ajax({
+		url: "__APP__/member/common/weixinlog",
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			$(".dome-1").show();
+			var qrcode = new QRCode('qrcode', {
+	            text:d.wxurl,
+	            width: 256,
+	            height: 256,
+	            colorDark: '#000000',
+	            colorLight: '#ffffff',
+	            correctLevel: QRCode.CorrectLevel.H
+	        });
+	        setInterval("getislogin('"+d.session_id+"')",1000*3); //单位毫秒
+		}
+	});
+}
+$(function(){
+	$(".dome-1").click(function(){
+		$(".dome-1").hide();
+	})
+
+	$(".dome-2 img").click(function(){
+		$(".dome-1").hide();
+	})
+})
+function getislogin(session_id){
+
+	var session_id = session_id;
+	$.ajax({
+		url: "__APP__/home/index/islogin",
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		data:{'session_id':session_id},
+		success: function (d, s, r) {
+			console.log(d);
+			if(d.status == 1){
+				layer.alert('登录成功',4,function(){
+					window.location.href='/member';
+				});
+			}
+		}
+	});
+}
+</script>
+<include file="default:Public:footer" group="Home" />

@@ -1,0 +1,118 @@
+<include file="default:Public:mheader" />
+<!--内容-->
+<div class="l-omg">
+	<div class="l-mlogin">
+		<div class="l-mlg">
+			<div class="shiming">
+				支付密码
+			</div>
+			<form action="">
+				<div>		
+				<p class="smRZ">
+				<span>付款密码:</span><input type="password" name="newpinpass" id="newpinpass" value="" />
+				</p>
+				<p class="smRZ">
+				<span>确认密码:</span><input type="password" name="newpinpass1" id="newpinpass1" value="" />
+				</p>
+				<p class="smRZ">
+				<span>手机号码:</span><input type="text" name="phone" id="phone" value="{$minfo.user_phone}"  readonly="readonly" />
+				</p>
+				<p class="smRZ yzm">
+				<span>验证码:</span><input type="text" name="code" id="code" value="" />
+				<button type="button" id="Img1">获取验证码</button>
+				</p>
+				<!--投资类型-->
+				</div>
+				<div class="z-btnbox">
+					<span >
+						<a href="/member" style="color: #fff;">忽略</a>
+					</span>
+					<span class="on">
+						<a href="javascript:;" onclick="setpass()" style="color: #fff;">下一步</a>
+		            </span>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+<style type="text/css">
+	.yzm button{
+		width: 120px;
+		margin-left: 15px;
+		border: 0;
+		height: 32px;
+		cursor: pointer;
+		padding-left: 5px;
+		padding-right: 5px;
+		text-align: center;
+		background: rgba(255,255,255,0);
+		border: 1px solid #737373;
+		font-size: 21px;
+		color: #00a0ea;
+	}
+</style>
+<script type="text/javascript">
+	$("#Img1").click(function() {
+        var phone = $("#phone").val();
+        if(phone == ""){
+            layer.msg('手机号不能为空', {type : 9});
+            return false;
+        }
+        $.ajax({
+            url: "__URL__/sendcode",
+            type: "post",
+            dataType: "json",
+            data: {"phone":phone},
+            success: function(d) {
+                layer.msg(d.info);
+                return false;
+            }
+        });
+    }); 
+    function setpass(){
+		var newpinpass = $('#newpinpass').val();
+		var newpinpass1 = $('#newpinpass1').val();
+		var code = $('#code').val();
+
+		if(newpinpass == ''){
+			layer.msg("请填写支付密码");
+			return false;
+		}
+		if(newpinpass1 == ''){
+			layer.msg("请填写确认密码");
+			return false;
+		}
+		if(code == ''){
+			layer.msg("请填写验证码");
+			return false;
+		}
+
+		if(newpinpass != newpinpass1){
+			layer.msg("支付密码和确认密码必须相同");
+			return false;
+		}
+		
+		$.ajax({
+			url: "__URL__/savepass/",
+			type: "post",
+			dataType: "json",
+			data: {"newpinpass":newpinpass,"code":code},
+			success: function(result) {
+				if (result.status == "0") {
+					layer.alert(result.message, 1,!1);
+				}
+				else {
+					layer.msg('请先绑定银行卡',{shift: -1},function(){
+                        window.location.href='/member/bank/bank';
+                    });
+				}
+			},
+			complete:function(XMLHttpRequest, textStatus){
+				// window.location.reload();
+			}
+		});
+	}
+</script>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

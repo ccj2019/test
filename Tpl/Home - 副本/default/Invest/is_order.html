@@ -1,0 +1,572 @@
+<include file="Public:header"/>
+<link rel="stylesheet" type="text/css" href="/Public/biaoindex.css" />
+<!-- 引入组件 -->
+<style type="text/css">
+	.kujie{
+		    /*display: table;
+		    margin: 0 auto;
+		    padding-bottom: 50px;*/
+		   /*margin-bottom: -10px;*/
+	}
+	.kujie a{
+		    display: block;
+		    /* width: 30px; */
+		    height: 30px;
+		    float: left;
+		    text-align: center;
+		    line-height: 30px;
+		    background: #FFFFFF;
+		    color: #333333;
+		    margin: 0 2px;
+		    border: 1px solid #DEDEDE;
+		    padding: 4px;
+	}
+	#bonus_id{
+	    background: #f9f9f9;
+    border: 0;
+    outline: none;
+    color: red;
+    -webkit-appearance: none;
+	}
+	.huibaop2{
+	    font-weight: 600;
+	}
+	.huibao1 textarea{
+	    border: none;
+	}
+	#pin{
+	    width: 200px;
+    height: 26px;
+    background: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding-left: 10px;
+	}
+</style>
+	<!--内容部分-->
+	
+	<div class="box l-a3" style="background: #FFFFFF;" >
+		<div class="Box-img clearfix">
+			<div class="Box-img1"><img src="{$binfo.borrow_img}" /></div>
+			<div class="l-Title">
+				<div class="clearfix l-titi">
+					<h3>{$binfo.borrow_name}</h3>
+                    <notpresent name="bespeak">
+					<p>
+						每份 <span> ￥<span id="single_price">{$binfo.borrow_min}</span> </span>元
+					</p>
+                    </notpresent>
+				</div>
+                <notpresent name="bespeak">
+				<div class="clearfix jy-shul">
+					<span class="jy-Bt">数量</span>
+					<div class="van-stepper">
+						<button type="button" onclick="minusnums()" class="van-stepper__minus"></button>
+						<input type="text"   onkeyup="if(this.value<1){this.value=1;} " onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"id="invnums" name="invnums" value="{$invnums}" onblur="changenums()"  class="van-stepper__input">
+						<button type="button" onclick="plusnums()" class="van-stepper__plus"></button>
+					</div>
+				</div>
+				<if condition="$shcut">   
+				<!--<div class="clearfix jy-shul">
+					<span class="jy-Bt">快捷选择</span>
+					<div class="kujie">
+						<volist name="shcut" id="vb">
+							<a href="javascript:;" onclick="selectshcut({$vb})" class="selected{$vb} selectmd">{$vb}份</a>
+						</volist>
+					</div>
+				</div>-->
+				</if>
+                </notpresent>
+			</div>
+		</div>
+		<script>
+		    $("#invnums").blur(function(){
+  if($("#invnums").val()<=0){
+      $("#invnums").val(1)
+       layer.msg("数量不能小于等于0");
+       return false;
+  }
+});
+		</script>
+		<form method="post" name="investForm" id="investForm" action="__URL__/investmoney">
+		<div class="huibao1">
+			<p class="jy-Bt1">回报内容</p>
+			<p class="huibaop1">{$binfo.return_info}</p>
+		</div>
+		<div class="huibao1">
+			<p class="jy-Bt1 on">支付信息</p>
+			<div class="huibaop1">
+				<if condition="$binfo.is_bonus eq 1">
+                    <notpresent name="bespeak">
+					<span class="huibaop2">优惠券</span>
+					<!--<span>已自动为您选择优惠券：</span>-->
+					<span class="l-Yhui"> 
+						<select name="bonus_id"  id="bonus_id" onclick="plusnumsz()">
+	                        <option value="0" money_bonus="0" >--请选择优惠券--</option>
+	                        <volist name="bonus_list" id="bonus_line">
+	                            <option value="{$bonus_line.id}" id="bonus{$bonus_line.id}"  money_bonus="{$bonus_line.money_bonus}">优惠券{$bonus_line.money_bonus}元</option>
+	                            <option value="{$bonus_line.id}" disabled="disabled">（满{$bonus_line.bonus_invest_min}元可用）</option>
+	                        </volist>
+	                    </select>
+	                </span>
+                    </notpresent>
+	            </if>
+			</div>
+			<p class="huibaop1 on">
+				<span class="huibaop2">数量</span>
+				<span><font id="nums">1</font>份</span>
+				<input type="hidden" name="invest_nums" id="invest_nums" value="1">
+			</p>
+            <notpresent name="bespeak">
+			<p class="huibaop1 on">
+				<span class="huibaop2">应付金额</span>
+				<span>￥<font  id="money">{$binfo.borrow_min}</font></span>
+			</p>
+			<p class="huibaop1 on">
+				<span class="huibaop2">优惠金额</span>
+				<span>-<font id="youhui">0</font></span>
+			</p>
+            </notpresent>
+			<p class="huibaop1 on">
+				<span class="huibaop2">实付款</span>
+				<span class="jy-shifu">￥<font  id="realmoney">{$binfo.borrow_min}</font></span>
+				<INPUT type="hidden" id="invest_money"  name="money" value="{$binfo.borrow_min}" />
+			</p>
+			<p class="huibaop1 on">
+				<span class="huibaop2">支付方式</span>
+				<span>
+					<input type="radio" name="yuer" id="yuer" value="1" checked="" />
+					<label for="male">鱼币+余额支付</label>
+				</span>
+			</p>
+			<!--密码-->
+			<div class="l-zhifuye">
+				<span class="l-yesy" style="dispaly:block;">
+					剩余鱼币：{$yubi}
+				</span>
+				<span class="l-yesy">
+					余额剩余：￥{$account_money}
+				</span>
+				<p class="l-yesy1">请输入支付密码</p>
+				<p class="l-yesy2"><input type="password" id="pin" name="pin" /></p>
+			</div>
+			<input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+			<input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+		</div>
+        <div class="huibao1 clearfix">
+		<p class="jy-Bt1 on">备注信息
+        </p>
+		<textarea  name="liuyan" rows="" cols="" placeholder="请在此处留言"></textarea>
+		</div>
+	<div class="huibao1 clearfix">
+		<if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+                	<button class="btn-sub" id="sub1">确认支付</button>
+		<else />
+                	<div class="Lizc">新用户专享</div>
+            	</if>
+        </div>	
+		</form>
+	</div>
+	
+	<!--底部-->
+<include file="Public:footer"/>
+
+<script>
+    window.onload=function() {
+        let bespeak = "{$bespeak}";
+        let money = "{$money}";
+        let point = "{$point}";
+        if (bespeak == null || money == null) {
+            changenums();
+        } else {
+            if (money > 0) {
+                $("#invest_money").val(money);
+                $("#realmoney").text(Number(money) * (1 - Number(point)));
+            } else {
+                changenums();
+            }
+        }
+    };
+function plusnumsz(){
+  
+	var money_bonus = $("#bonus_id").find("option:selected").attr("money_bonus");
+ 
+	$("#youhui").html(money_bonus);
+		
+
+ 
+}
+
+function Verifymoney(){ 
+	var newn = Number(n) + Number(1); 
+	var m = {$binfo.borrow_min};
+	var money = newn*m;
+ 
+	//money1
+	
+	 
+	
+	 $.ajax({
+    url: "__URL__/Verifymoney",
+    type: "post",
+    dataType: "json",
+    data: {"verifymoney":money},
+    success: function(d) {
+        console.log(d);
+       
+             var str =   '<option value="0" money_bonus="0">--请选择优惠券--</option> ';
+         var date=d.data;
+         $.each(date,function(i,item){ //两个参数，第一个参数表示遍历的数组的下标，第二个参数表示下标对应的值
+                	            str += 	'<option value="';
+                       		    str += 	item.id;
+        						str +='" id="bonus';
+        						str += 	item.id; 
+        						if(item.is_Verify_money==2){
+        							str += 	'"  disabled="disabled';
+        						}
+        						str += 	'" money_bonus="'
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'">优惠券';
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'元</option>';
+        	                    str +=      '   <option value="';
+        						str += 	item.id;
+        						str += 		'" disabled="disabled">（满';
+        				    	str += 	item.bonus_invest_min
+        						str += 		'元可用）</option>'	 ;   
+          })
+         console.log(str);		
+          $("#bonus_id").empty();
+          $("#bonus_id").append(str);
+			 return false;				
+
+    }
+  });
+  }
+function plusnums(){
+	var n = $("#invnums").val();
+	var newn = Number(n) + Number(1);
+	$("#invnums").val(newn);
+	$("#nums").html(newn);
+	var m = {$binfo.borrow_min};
+	var money = newn*m;
+	var money_bonus = $("#bonus_id").find("option:selected").attr("money_bonus");
+	
+	//money1
+ 
+	 
+	
+	$.ajax({
+    url: "__URL__/Verifymoney",
+    type: "post",
+    dataType: "json",
+    data: {"verifymoney":money},
+    success: function(d) {
+        console.log(d);
+       
+             var str =   '<option value="0" money_bonus="0">--请选择优惠券--</option> ';
+         var date=d.data;
+         $.each(date,function(i,item){ //两个参数，第一个参数表示遍历的数组的下标，第二个参数表示下标对应的值
+                	            str += 	'<option value="';
+                       		    str += 	item.id;
+        						str +='" id="bonus';
+        						str += 	item.id; 
+        						if(item.is_Verify_money==2){
+        							str += 	'"  disabled="disabled';
+        						}
+        						str += 	'" money_bonus="'
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'">优惠券';
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'元</option>';
+        	                    str +=      '   <option value="';
+        						str += 	item.id;
+        						str += 		'" disabled="disabled">（满';
+        				    	str += 	item.bonus_invest_min
+        						str += 		'元可用）</option>'	 ;   
+          })
+         console.log(str);		
+          $("#bonus_id").empty();
+          $("#bonus_id").append(str);
+			 return false;				
+
+    }
+  });
+
+	/*if(money_bonus){
+		var money1 = money-money_bonus;
+	
+		
+	    $("#money").html(money1);
+		$("#realmoney").html(money1);
+		$("#invest_money").val(money1);
+		$("#youhui").html(money_bonus);
+	}else{
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+	}*/
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+}
+
+function minusnums(){
+      
+	var n = $("#invnums").val();
+	if(n ==1){
+		layer.alert('数量不能为0');
+		return false;
+	}
+	var newn = Number(n) - Number(1);
+	$("#invnums").val(newn);
+	$("#nums").html(newn);
+	var m = {$binfo.borrow_min};
+	var money = newn*m;
+	var money_bonus = $("#bonus_id").find("option:selected").attr("money_bonus");
+		 $.ajax({
+    url: "__URL__/Verifymoney",
+    type: "post",
+    dataType: "json",
+    data: {"verifymoney":money},
+    success: function(d) {
+        console.log(d);
+       
+             var str =   '<option value="0" money_bonus="0">--请选择优惠券--</option> ';
+         var date=d.data;
+         $.each(date,function(i,item){ //两个参数，第一个参数表示遍历的数组的下标，第二个参数表示下标对应的值
+                	            str += 	'<option value="';
+                       		    str += 	item.id;
+        						str +='" id="bonus';
+        						str += 	item.id; 
+        						if(item.is_Verify_money==2){
+        							str += 	'"  disabled="disabled';
+        						}
+        						str += 	'" money_bonus="'
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'">优惠券';
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'元</option>';
+        	                    str +=      '   <option value="';
+        						str += 	item.id;
+        						str += 		'" disabled="disabled">（满';
+        				    	str += 	item.bonus_invest_min
+        						str += 		'元可用）</option>'	 ;   
+          })
+         console.log(str);		
+          $("#bonus_id").empty();
+          $("#bonus_id").append(str);
+			 return false;				
+
+    }
+  });
+
+	/*if(money_bonus){
+		var money1 = money-money_bonus;
+	    $("#money").html(money1);
+		$("#realmoney").html(money1);
+		$("#invest_money").val(money1);
+		$("#youhui").html(money_bonus);
+	}else{
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+	}*/
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+
+}
+function changenums(){
+	var n = $("#invnums").val();
+	if(n <=0){
+		layer.alert('数量不能为0');
+		return false;
+	}
+	//if(this.value<=0){this.value=1}else{this.value=parseInt(this.value)}
+	var newn = parseInt(n);
+	$("#invnums").val(newn);
+	$("#nums").html(newn);
+	var m = {$binfo.borrow_min};
+	var money = newn*m;
+	var money_bonus = $("#bonus_id").find("option:selected").attr("money_bonus");
+	
+	
+ 
+	
+	 $.ajax({
+    url: "__URL__/Verifymoney",
+    type: "post",
+    dataType: "json",
+    data: {"verifymoney":money},
+    success: function(d) {
+        console.log(d);
+       
+             var str =   '<option value="0" money_bonus="0">--请选择优惠券--</option> ';
+         var date=d.data;
+         $.each(date,function(i,item){ //两个参数，第一个参数表示遍历的数组的下标，第二个参数表示下标对应的值
+                	            str += 	'<option value="';
+                       		    str += 	item.id;
+        						str +='" id="bonus';
+        						str += 	item.id; 
+        						if(item.is_Verify_money==2){
+        							str += 	'"  disabled="disabled';
+        						}
+        						str += 	'" money_bonus="'
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'">优惠券';
+        						str += 	item.money_bonus;//	优惠钱
+        						str += 	'元</option>';
+        	                    str +=      '   <option value="';
+        						str += 	item.id;
+        						str += 		'" disabled="disabled">（满';
+        				    	str += 	item.bonus_invest_min
+        						str += 		'元可用）</option>'	 ;   
+          })
+         console.log(str);		
+          $("#bonus_id").empty();
+          $("#bonus_id").append(str);
+			 return false;				
+
+    }
+  });
+
+	/*if(money_bonus){
+		var money1 = money-money_bonus;
+	    $("#money").html(money1);
+		$("#realmoney").html(money1);
+		$("#invest_money").val(money1);
+		$("#youhui").html(money_bonus);
+	}else{
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+	}*/
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+}
+function selectshcut(fs){
+
+	$(".selectmd").css({"background":"#FFFFFF","color":"#333333"});
+	$(".selected"+fs).css({"background":"#00a0ea","color":"#fff"});
+	var newn = Number(fs);
+	$("#invnums").val(newn);
+	$("#nums").html(newn);
+	var m = {$binfo.borrow_min};
+	var money = newn*m;
+	var money_bonus = $("#bonus_id").find("option:selected").attr("money_bonus");
+
+	if(money_bonus){
+		var money1 = money-money_bonus;
+	    $("#money").html(money1);
+		$("#realmoney").html(money1);
+		$("#invest_money").val(money1);
+		$("#youhui").html(money_bonus);
+	}else{
+		$("#money").html(money);
+		$("#realmoney").html(money);
+		$("#invest_money").val(money);
+		$("#invest_nums").val(newn);
+	}
+}
+</script>
+<script type="text/javascript">
+
+$("#bonus_id").bind("change",function(){
+    //alert();
+    //var realmoney = parseFloat($('#realmoney').html());
+    var realmoney = parseFloat($('#single_price').html())*parseInt($('#nums').html());
+    
+  	var im = parseFloat($("#invest_money").val());
+    //获取自定义属性的值
+    var money_bonus = $(this).find("option:selected").attr("money_bonus");
+    var money = realmoney-money_bonus;
+    $("#money").html(money);
+	$("#realmoney").html(money);
+	$("#invest_money").val(money);
+	$("#youhui").val(money_bonus);
+});
+
+function PostData(id) {
+    
+  	var tendValue = parseFloat($("#invest_money").val());
+  	var pin = $("#pin").val();
+  	var borrow_id = $("#borrow_id").val();
+    tendValue = isNaN(tendValue)?0:tendValue;
+    var bonus_id = $("#bonus_id").val();  
+	  if(pin==""){
+	  	layer.msg('您好，请输入支付密码！');
+	  	return false;
+	  }
+  $.ajax({
+    url: "__URL__/investcheck",
+    type: "post",
+    dataType: "json",
+    data: {"money":tendValue,'pin':pin,'borrow_id':borrow_id,"bonus_id":bonus_id},
+    success: function(d) {
+        console.log(d);
+        return false;
+        if (d.status == 1) {
+        	investmoney = tendValue;
+	          $.layer({
+	            shade: [0],
+	            area: ['auto','auto'],
+	            dialog: {
+	              msg: d.message,
+	              btns: 2,                    
+	              type: 4,
+	              btn: ['确认投标','暂不投标'],
+	              yes: function(){
+	                isinvest(true);
+	              }, no: function(){
+	                return false;
+	              }
+	            }
+	          });
+        }
+        else if(d.status == 2)// 无担保贷款多次提醒
+        {
+          layer.msg(d.message);
+        }
+        else if(d.status == 3)// 无担保贷款多次提醒
+        {
+          layer.msg(d.message);
+        }else{
+          layer.msg(d.message);
+        }
+    }
+  });
+}
+function isinvest(d){
+  if(d===true) document.forms.investForm.submit();
+}
+
+	var date = new Date();
+     	var openTime = date.getTime().toString();
+     	openTime = openTime.substring(0,openTime.length-3);
+
+ 	$('#sub1').click(function() {
+        	$('#sub1').off("click");
+        	var date = new Date();
+        	var postIime = date.getTime().toString();
+        	postIime = postIime.substring(0,postIime.length-3);
+        	var bespeak_able =  {$binfo['bespeak_able']};
+        	var start_time =  {$binfo['start_time']};
+        	var bespeak_days =  {$binfo['bespeak_days']};
+
+        	if(bespeak_able == 1){
+            		if(start_time + bespeak_days*60*60*24 > openTime && start_time + bespeak_days*60*60*24 < postIime) {
+                		alert("表单已失效，请重试");
+                		window.location.reload();
+                		return;
+            		}
+        	}
+        	$('#investForm').submit();
+ 	})
+</script>

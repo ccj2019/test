@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'type', 2 => 'text', 3 => 'name', 4 => 'tip', 5 => 'order_sn', 6 => 'code', 7 => 'is_sys', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'smallint(6)', 'type' => 'varchar(10)', 'text' => 'text', 'name' => 'varchar(50)', 'tip' => 'varchar(200)', 'order_sn' => 'int(11)', 'code' => 'varchar(25)', 'is_sys' => 'tinyint(3) unsigned', ), ); ?>

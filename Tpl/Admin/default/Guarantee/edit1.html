@@ -1,0 +1,280 @@
+<include file="Public:_header" />
+<link href="__ROOT__/Style/Swfupload/swfupload.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/handlers.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/Swfupload/swfupload.js"></script>
+<script language="javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" type="text/javascript">
+<script type="text/javascript">
+	var IS_AD = true;
+	$(document).ready(function() {
+		//swf上传图片
+		swfu = new SWFUpload(
+		{
+			// Backend Settings
+			upload_url: "__URL__/swfupload",
+			post_params: {"PHPSESSID": "<php> echo session_id(); </php>", "dopost" : ""},
+
+			// File Upload Settings
+			file_size_limit : "2 MB",	// 2MB
+			file_types : "*.jpg; *.gif; *.png",
+			file_types_description : "选择 JPEG/GIF/PNG 格式图片",
+			file_upload_limit : "0",
+
+			file_queue_error_handler : fileQueueError,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			upload_complete_handler : uploadComplete,
+
+			button_image_url : "../images/SmallSpyGlassWithTransperancy_17x18.png",
+			button_placeholder_id : "spanButtonPlaceholder",
+			button_width: 250,
+			button_height: 18,
+			button_text : '<span class="button">选择本地图片 <span class="buttonSmall">(单图最大为 2 MB，支持多选)</span></span>',
+			button_text_style : '.button { font-family: "宋体", sans-serif; font-size: 12px; } .buttonSmall { font-size: 10pt; }',
+			button_text_top_padding: 0,
+			button_text_left_padding: 18,
+			button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+			button_cursor: SWFUpload.CURSOR.HAND,
+			
+			// Flash Settings
+			flash_url : "__ROOT__/Style/Swfupload/swfupload.swf",
+
+			custom_settings : {
+				upload_target : "divFileProgressContainer"
+			},
+			
+			// Debug Settings
+			debug: false
+		});
+		//swf上传图片
+	});
+
+</script>
+<script type="text/javascript">
+//swf上传后排序
+function rightPic(o){
+	 var o = $("#albCtok"+o);
+	 if( o.next().length > 0) {
+		  var tmp = o.clone();
+		  var oo = o.next();
+		  o.remove();
+		  oo.after(tmp);
+	 }else{
+		alert("已经是最后一个了"); 
+	 }
+}
+//swf上传后排序
+function leftPic(o){
+	 var o = $("#albCtok"+o);
+	 if( o.prev().length > 0) {
+		  var tmp = o.clone();
+		  var oo = o.prev();
+		  o.remove();
+		  oo.before(tmp);
+	 }else{
+		alert("已经是第一个了"); 
+	 }
+}
+//swf上传后删除图片start
+function delPic(id){
+	var imgpath = $("#albCtok"+id).find("input[type='hidden']").eq(0).val();
+	var datas = {'picpath':imgpath,'oid':id};
+	$.post("__URL__/swfupload?delpic", datas, picdelResponse,'json');
+}
+
+function picdelResponse(res){
+	var imgdiv = $("#albCtok"+res.data);
+		imgdiv.remove();
+		ui.success(res.info);
+		ui.box.close();
+}
+//swf上传后删除图片end
+</script>
+<link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+		<script>
+			KindEditor.ready(function(K) {
+				var editor = K.editor({
+					allowFileManager : true
+				});
+				K('#J_selectImage').click(function() {
+					editor.loadPlugin('multiimage', function() {
+						editor.plugin.multiImageDialog({
+							clickFn : function(urlList) {
+								var div = K('#J_imageView');
+								div.html('');
+								K.each(urlList, function(i, data) {
+									addImage(data.url,i,data.url)
+									
+									//div.append('<img src="' + data.url + '">');
+								});
+								editor.hideDialog();
+							}
+						});
+					});
+				});
+			});
+							var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="db_content"]', {
+			allowFileManager : true,
+			autoHeightMode : true,
+			afterCreate : function() {
+				this.loadPlugin('autoheight');
+			},
+			afterUpload : function(url) {
+				var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+				var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+				$("#firstimage").append(firstimageoption);
+				$("#images").append(selectoption);
+			},afterBlur: function(){this.sync();}
+		});
+	});
+
+		</script>
+<style type="text/css">
+.albCt{height:200px}
+</style>
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+
+
+<div class="page_tit">编辑文章</div>
+
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><!--<span data="tab_2">高级设置</span>--></div>
+
+<div class="form2">
+
+	<form method="post" action="__URL__/doEdit" onsubmit="return subcheck();" enctype="multipart/form-data" >
+
+	<input type="hidden" name="id" value="{$vo.id}" />
+
+	<div id="tab_1">
+
+	
+
+	<dl class="lineD"><dt>公司名称：</dt><dd><htmlA:input id="title" value="{$vo.title}" tip="*"/></dd></dl>
+
+	<dl class="lineD"><dt>所属类别：</dt><dd><htmlA:select id="type_id" value="id|vo.type_id" datakey='type_list' vt='id|title' tip="*"/></dd></dl>
+	<dl class="lineD" style="overflow:hidden"><dt>公司LOGO：</dt>
+
+		<dd>
+
+			<input type="file" id="imgfile" name="imgfile" style="float:left"/>
+
+			<span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDiv"></div><if condition="$vo.art_img eq ''">无缩略图<else/><img src="__ROOT__/{$vo.art_img}" width="100" height="100" /></if></div></span>
+
+		</dd>
+
+	</dl>
+<dl class="lineD"><dt>注册资金：</dt><dd><htmlA:input id="db_zijin" value="{$vo.db_zijin}" tip=""/></dd></dl>
+
+	<dl class="lineD"><dt>公司成立日期：</dt><dd><!--<htmlA:input id="db_chengli"  value="{$vo.db_chengli}" tip=""/>--><htmlA:timer id="db_chengli" tip='' arg="{maxDate:'#F{$dp.$D(\\\\'db_chengli\\\\')||\\\\'2090-10-01\\\\'}',startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"  class="Wdate" value="{$vo.db_chengli}"/></dd></dl>
+	<dl class="lineD"><dt>开始合作时间：</dt><dd><!--<htmlA:input id="db_hezuo"  value="{$vo.db_hezuo}" tip=""/>--><htmlA:timer id="db_hezuo" tip='' arg="{maxDate:'#F{$dp.$D(\\\\'db_hezuo\\\\')}',maxDate:'2090-10-01',startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}" class="Wdate" value="{$vo.db_hezuo}"/></dd></dl>
+	<dl class="lineD"><dt>联系电话：</dt><dd><htmlA:input id="db_tel"  value="{$vo.db_tel}" tip=""/></dd></dl>
+    <dl class="lineD"><dt>公司网址：</dt><dd><htmlA:input id="db_net"  value="{$vo.db_net}" tip=""/></dd></dl>
+	<dl class="lineD"><dt>公司地址：</dt><dd><htmlA:input id="db_address"  value="{$vo.db_address}" tip=""/></dd></dl>
+<dl class="lineD"><dt>公司简介：</dt><dd><htmlA:input id="db_jianjie"  value="{$vo.db_jianjie}" tip=""/></dd></dl>
+	<!--<dl class="lineD"><dt>文章关键字：</dt><dd><htmlA:input id="art_keyword" value="{$vo.art_keyword}" tip="SEO元素"/></dd></dl>
+
+	<dl class="lineD"><dt>文章简介：</dt><dd><htmlA:text id="art_info" value="{$vo.art_info}" tip="SEO元素"/></dd></dl>
+<dl class="lineD"><dt>是否发布：</dt><dd><htmlA:radio id="is_fabu" value="key|vo.is_fabu"  default="1|是,0|否" /></dd></dl>
+
+
+	
+
+	<dl class="lineD" style="overflow:hidden"><dt>缩略图：</dt>
+
+		<dd>
+
+			<input type="file" id="imgfile" name="imgfile" style="float:left"/>
+
+			<span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDiv"></div><if condition="$vo.art_img eq ''">无缩略图<else/><img src="../Article - 拷贝/__ROOT__/{$vo.art_img}" width="100" height="100" /></if></div></span>
+
+		</dd>
+
+	</dl>
+
+	<dl class="lineD"><dt>是否抓取远程图片：</dt><dd><htmlA:radio id="is_remote" default="0|否,1|是" tip="抓取远程图片时保存时间可能会稍长，请耐心等待" /></dd></dl>
+-->
+	<dl class="lineD"><dt>公司内容：</dt>
+
+	  <dd>
+       <link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+<!--<script>
+$(function(){
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="db_content"]', {
+			allowFileManager : true,
+			autoHeightMode : true,
+			afterCreate : function() {
+				this.loadPlugin('autoheight');
+			},
+			afterUpload : function(url) {
+				var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+				var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+				$("#firstimage").append(firstimageoption);
+				$("#images").append(selectoption);
+			},afterBlur: function(){this.sync();}
+		});
+	});
+})
+</script>--><textarea name="db_content" id="db_content" style="width:80%;height:500px;visibility:hidden;">{$vo.db_content}</textarea>
+
+
+	  </dd>
+
+	</dl>
+
+ <dl class="lineD"><dt>资质图片：</dt><dd> <input type="button" id="J_selectImage" value="批量上传" />
+		<div id="J_imageView"></div></dd></dl>
+	<dl class="lineD"><dt>图片预览：</dt>
+	<dd>
+	<table cellpadding="0" cellspacing="0" width="100%">
+    <tr id="handfield">
+      <td colspan="4" class="bline" style="background:url(images/albviewbg.gif) #fff 0 20px no-repeat;">
+       	<table width='100%' height='160' style="margin:0 0 20px 0">
+       		<tr>
+       			<td>
+			 		<div id="thumbnails">
+				<php>$x=1000;foreach(unserialize($vo['db_pics']) as $v){ $x--;</php>
+						<div class="albCt" id="albCtok<php>echo $x;</php>">
+							<img width="120" height="120" src="__ROOT__/<php>echo $v['img'];</php>"><a onclick="javascript:delPic(<php>echo $x;</php>)" href="javascript:;">[删除]</a><a onclick="javascript:leftPic(<php>echo $x;</php>)" href="javascript:;">[前移]</a><a onclick="javascript:rightPic(<php>echo $x;</php>)" href="javascript:;">[后移]</a><div style="margin-top:10px">注释：<input type="text" style="width:190px;" value="<php>echo $v['info'];</php>" name="picinfo[]"><input type="hidden" value="__ROOT__/<php>echo $v['img'];</php>" name="swfimglist[]"></div><div style="margin-top:10px">地址：<input type="text" style="width:190px;" value="<php>echo $v['url'];</php>" name="urlinfo[]"></div>
+						</div>				
+				<php> } </php>
+					</div>
+				</td>
+			</tr>
+		</table>
+      </td>
+    </tr>
+	</table>
+	</dd></dl>		
+
+	</div><!--tab1-->
+
+	
+
+
+	<div class="page_btm">
+
+	  <input type="submit" class="btn_b" value="确定" />
+
+	</div>
+
+	</form>
+
+</div>
+
+
+
+</div>
+
+<include file="Public:_footer" />

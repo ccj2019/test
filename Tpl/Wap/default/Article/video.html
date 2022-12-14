@@ -1,0 +1,68 @@
+ 
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+ 
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="<?php echo $_SERVER['HTTP_REFERER'] ;?>" class="w-header-left">
+                < 返回</a>
+                    <h3>直播中心</h3>
+                   	<if condition="$UID gt '0'">
+				  <a href="/Wapmember/" style="text-align: right;">会员中心</a> 
+                    <!--   <a href="/Wapmember">铭万众筹</a>-->
+                    <else />
+                    <!--未登录状态-->
+                    	 
+                                <a href="/Wapmember/common/login.html" style="text-align: right;" class="w-header-right">登录</a>
+                    </if>
+        </div>
+    </div>
+
+
+    <!-- 活动内容  start -->
+
+    <div class="w-act-warpper w-act-warpper1">
+        <div class="w-act">
+            
+                  	    <!-- <foreach name="list.list" item="vo">   -->
+      <a href="{$vo.art_content}" target="_blank" type="application/vnd.apple.mpegurl"  class="act-tu">
+        <img src="/{$vo.art_img}" alt="" /><div class="hidden1">
+                    <img src="/Public/wap/img/w-bofang.png" alt="">
+                </div>
+        <div class="w-act-g">{$vo.title}</div>
+      </a>
+      <!-- </foreach> 
+            <a href="##" class="act-tu">
+                <img src="./img/w-act0.png" alt="">
+                
+                <div class="w-act-g">
+                    工厂化联合养殖直播一
+                </div>
+            </a>
+            <a href="##" class="act-tu">
+                <img src="./img/w-act01.png" alt="">
+                <div class="hidden1">
+                    <img src="./img/w-bofang.png" alt="">
+                </div>
+                <div class="w-act-g">
+                    工厂化联合养殖直播一
+                </div>
+            </a>
+            <a href="##" class="act-tu">
+                <img src="./img/w-act02.png" alt="">
+                <div class="hidden1">
+                    <img src="./img/w-bofang.png" alt="">
+                </div>
+                <div class="w-act-g">
+                    工厂化联合养殖直播一
+                </div>
+            </a>-->
+
+        </div>
+    </div>
+    <!-- 活动内容 end -->
+
+ 

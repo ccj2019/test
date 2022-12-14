@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" /> 
+    <title>{$glo.web_name}</title>
+    <meta name="keywords" content="{$glo.web_keywords}" />
+    <meta name="description" content="{$glo.web_descript}" />
+        <link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+        <link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />
+
+
+<!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/tfindex.css" />
+        <script type="text/javascript">
+            function jisuanFontsize(){
+                var winWidth;
+                if (window.innerWidth)
+                winWidth = window.innerWidth;
+                else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+                // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+                if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+                {
+                winWidth = document.documentElement.clientWidth;
+                }
+                if(winWidth<1300){
+                    winWidth=1300
+                }
+                if(winWidth>1920){
+                    winWidth=1920
+                }
+                document.getElementsByTagName('html')[0].style="font-size: calc("+winWidth+"px / 1920 * 100);"
+            }
+            jisuanFontsize();
+            window.onresize = function(){
+                jisuanFontsize()
+            }
+        </script>
+		<style>
+			.tfDaDuiShangPinBox .tfDivTd{
+				height: auto;
+				padding-bottom: 10px;
+			}
+		</style>
+
+
+</head>
+
+<body>
+  <a href="/shop/car_list">
+            <div class="car_n">
+                <span id="carnum">{$carnum}</span>
+            </div>
+        </a>
+       <div class="tfggHeaderBox" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);">
+            <div class="tfggHeaderBoxMain">
+                <img src="__PUBLIC__/shop/img/logo.png" class="tfggHeaderBoxMainLogo">
+                <div class="tfggHeaderBoxMainRight">
+                    <div class="tfggHeaderBoxMainRightMenuBox">
+                        <a href="/"  <if condition="$dh eq 1">class="active"</if> >首页</a>
+                        <a href="__APP__/invest">渔业养殖</a>
+                        <!--<a href="__APP__/zhongzhi">联合种植</a>-->
+                        <a href="__APP__/article/video">视频直播</a>
+                        <a href="__APP__/article/active">活动公告</a>
+                        <a href="__APP__/article/about">关于我们</a>
+
+                    </div>
+                    <div class="wechatAppBox">
+                        <div class="wechatAppBoxLi">
+                            微信
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-w.png" />
+                                微信公众号
+                            </div>
+                        </div>
+                        <div class="wechatAppBoxLi">
+                            APP下载
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-app.png" />
+                                APP下载
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tfggHeaderBoxMainRightImgBox" style="margin-left: 20px;">
+                        <a href="__APP__/member/index"><img src="__PUBLIC__/shop/img/tfUser.png"></a>
+                        <a href="__APP__/shop/car_list"><img src="__PUBLIC__/shop/img/tfCart.png" class="tfgouwuche"></a>
+
+       
+                 <if condition="$UID gt '0'"> 
+            <a href="{:U('/member/common/actlogout')}"  style="    font-size: 0.2rem;
+    display: block;
+    float: left;
+    margin-top: 0.4rem;
+    color: #bf5757;
+    margin-left: 0.13rem;">退出</a>
+            </if>
+     
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+<div class="tfBannerBox">
+            <volist name=":get_ad(37)" id='voa' key="i"> 
+                <a  href="{$voa.url}"><img src="{$voa.img}" class='tfBanner <if condition="$i eq 1">active</if>'></a>
+            </volist> 
+
+            <div class="tfBannerDianBox">
+            <volist name=":get_ad(37)" id='voa' key="i">  
+                <div class='tfBannerDian <if condition="$i eq 1">active</if>'></div>
+            </volist> 
+            </div>
+        </div>
+        <div class="tfggMainBox">
+           
+                <div class="tfggSousuonali">
+                    <img src="__PUBLIC__/shop/img/indexNiuBi.png" class="tfggSousuonaliLeftImg">
+                    <div class="tfggSousuonaliRightBox">
+                        <input type="text" name="search" placeholder="龙利鱼" autocomplete="off"/>
+                        <div class="tfggGoSouguo" >搜索</div>
+                    </div>
+                </div>
+         
+            <div class="wuGongGeBox">
+
+
+                <div class="wuGongGeBoxDiv" style="background-image: url(__PUBLIC__/shop/img/tfgg.jpg);">
+                    <div class="wuGongGeBoxDivJuzhongDiv">
+                        <div class="wuGongGeBoxDivJuzhongDivTitle1">SEAFOOD</div>
+                        <div class="wuGongGeBoxDivJuzhongDivTitle2">自养海鲜</div>
+                        <a href="__APP__/Index/shop/type_id/56.html">
+                            <div class="wuGongGeBoxDivJuzhongDivTitle3">立即选购</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="wuGongGeBoxDiv" style="background-image: url(__PUBLIC__/shop/img/tfgg1.jpg);">
+                    <div class="wuGongGeBoxDivJuzhongDiv">
+                        <div class="wuGongGeBoxDivJuzhongDivTitle1">DRIED FOOD</div>
+                        <div class="wuGongGeBoxDivJuzhongDivTitle2">海鲜干货</div>
+                        <a href="__APP__/Index/shop/type_id/56.html">
+                            <div class="wuGongGeBoxDivJuzhongDivTitle3">立即选购</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="wuGongGeBoxDiv" style="background-image: url(__PUBLIC__/shop/img/tfgg2.jpg);">
+                    <div class="wuGongGeBoxDivJuzhongDiv">
+                        <div class="wuGongGeBoxDivJuzhongDivTitle1">STREET FOOD</div>
+                        <div class="wuGongGeBoxDivJuzhongDivTitle2">即食小吃</div>
+                        <a href="__APP__/Index/shop/type_id/56.html">
+                            <div class="wuGongGeBoxDivJuzhongDivTitle3">立即选购</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="wuGongGeBoxDiv" style="background-image: url(__PUBLIC__/shop/img/tfgg3.jpg);">
+                    <div class="wuGongGeBoxDivJuzhongDiv">
+                        <div class="wuGongGeBoxDivJuzhongDivTitle1">COUPON</div>
+                        <div class="wuGongGeBoxDivJuzhongDivTitle2">船票优惠券</div>
+                        <a href="__APP__/Index/shop/type_id/56.html">
+                            <div class="wuGongGeBoxDivJuzhongDivTitle3">立即选购</div>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="tfRexiaoBox">
+                <div class="tfRexiaoBoxTitle1">
+                    <div class="tfRexiaoBoxTitle1Left">
+                        热销商品
+                    </div>
+                    <div class="tfRexiaoBoxTitle1Right">
+                        <div class="tfRexiaoBoxTitle1RightTop1">超值爆款嗨不停</div>
+                        <div class="tfRexiaoBoxTitle1RightTop2">好物疯抢</div>
+                    </div>
+                </div>
+                <div class="tfRexiaoShangPinBox">
+
+                <volist name="tjgoods" id="vo">
+                    <a href="/Shop/shop_show/id/{$vo.id}.hmtl">
+                        <div class="tfRexiaoShangPin">
+                            <div class="tfRexiaoShangPinTopDiv">
+                                <div class="tfRexiaoShangPinTopDivLeft"><span>{$i}</span></div>
+                                <div class="tfRexiaoShangPinTopDivRight">
+                                    <div class="tfRexiaoShangPinTopDivRight1 tfshenglue1">{$vo.title|cnsubstr=###,20}</div>
+                                    <div class="tfRexiaoShangPinTopDivRight2 tfshenglue1">{$vo.art_miaoshu}</div>
+                                    <div class="tfRexiaoShangPinTopDivRight3">¥{$vo.art_jiage}</div>
+                                </div>
+                            </div>
+                            <div class="tfRexiaoShangPinTu tfImg" style="background-image: url({$vo.art_img});"></div>
+                        </div>
+                    </a>
+                </volist>    
+                </div>
+            </div>
+            <div class="tfChaoZhiAd">
+                <div class="tfChaoZhiAdLeftBox">
+                    <div class="tfChaoZhiAdLeftBoxMenuBox">
+
+                        
+
+                         <volist name="tinfo" id="v1">
+                              <a href="__APP__/Index/shop?name={$v1}">
+                                    <div class="tfChaoZhiAdLeftBoxMenu">{$v1}</div>
+                                </a>    
+                        </volist>
+
+
+                    </div>
+                    <a href="__APP__/Index/shop.html">
+                        <div class="tfChaoZhiAdLeftBoxChakan">查看更多>></div>
+                    </a>
+                </div>
+                <div class="tfChaoZhiAdRightBox">
+                    <volist name="guanggao" id="vo" offset='0' length='2'>
+                        <a  href="{$vo.url}"> 
+                            <div class="tfChaoZhiAdRightBoxImg tfImg" style="background-image: url({$vo.img});"></div>
+                        </a>
+                    </volist>
+                </div>
+            </div>
+            <div class="tfDaDuiShangPinBox">
+                <div class="tfDivTable">
+                    <volist name="tjlist" id="vo">
+                        <a href="/Shop/shop_show/id/{$vo.id}.hmtl">
+                            <div class="tfDivTd">
+                                <div class="tfDivTdTitle1 tfshenglue1">{$vo.title|cnsubstr=###,20}</div>
+                                <div class="tfDivTdTitle2">¥{$vo.art_jiage}</div>
+                                <div class="tfDivTdImg tfImg" style="background-image: url({$vo.art_img});"></div>
+                            </div>
+                        </a>
+                    </volist>
+                </div>
+            </div>
+            <volist name="guanggao" id="vo" offset='2' length='1'>
+                <a  href="{$vo.url}"> 
+                    <div class="tfDaAd tfImg" style="background-image: url({$vo.img})"></div>
+                </a>
+            </volist>
+
+            <div class="tfDanPinTuiJianTop1">
+                <img src="__PUBLIC__/shop/img/tfdanpintuijian.png" class="tfDanPinTuiJianTop1leftImg">
+                <a href="__APP__/Index/shop.html">
+                    <img src="__PUBLIC__/shop/img/chakanJianTou.png" class="tfChakanjiantou">
+                </a>
+            </div>
+         <div class="tfshangPinDiSanGeBox">
+                <volist name="danpin" id="vo">
+                    <div class="tfshangPinDiSanGe">
+                        <div class="tfTuijian"></div>
+                        <div class="tfshangPinDiSanGeImg tfImg" style="background-image: url({$vo.art_img});"></div>
+                        <div class="tfshangPinDiSanGeTitle1">¥{$vo.art_jiage}</div>
+                        <a href="/Shop/shop_show/id/{$vo.id}.hmtl">
+                            <div class="tfshangPinDiSanGeTitle2">立即购买</div>
+                        </a>
+                    </div>
+                </volist>
+                
+            </div>
+              <!--  <volist name="guanggao" id="vo" offset='3' length='1'>
+                <a  href="{$vo.url}"> 
+                    <div class="tfDaAd tfImg" style="background-image: url({$vo.img})"></div>
+                </a>
+            </volist>
+            <div class="tfDanPinTuiJianTop1">
+                <img src="__PUBLIC__/shop/img/tfchaozhituangoulogo.png" class="tfDanPinTuiJianTop1leftImg2">
+                <a href="">
+                    <img src="__PUBLIC__/shop/img/chakanJianTou.png" class="tfChakanjiantou">
+                </a>
+            </div>
+            <div class="tfCHaoZhiTuanGouBox">
+                <volist name="tuangou" id="vo">
+                    <div class="tfCHaoZhiTuanGou">
+                        <div style="height: 0.22rem;"></div>
+                        <div class="tftuangouSuolUE tfImg" style="background-image: url({$vo.art_img});"></div>
+                        <div class="tfCHaoZhiTuanGouTitle1 tfshenglue1">
+                            <font color="#FF9A14">(三人团)</font>{$vo.title|cnsubstr=###,20}
+                        </div>
+                        <div class="tfCHaoZhiTuanGouTitle2">¥{$vo.art_jiage}</div>
+                        <a href="/Shop/shop_show/id/{$vo.id}.hmtl">
+                            <div class="tfCHaoZhiTuanGouTitle3">立即购买</div>
+                        </a>
+                    </div>
+                </volist>
+           
+                
+            </div> -->
+        </div>
+   <div class="tfIndexBottomAd">
+    <volist name="guanggao" id="vo" offset='4' length='2'>
+            <a  href="{$vo.url}"> 
+                <div class="tfIndexBottomAdImg tfImg" style="background-image: url({$vo.img});"></div>
+            </a>
+     </volist>
+    </div>
+
+
+<!--底部-->
+<include file="default:Public:footern" />
+<script src="__PUBLIC__/shop/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var tfBannerIndex = 0;
+        var tfBannerStatus = true;
+        //鼠标经过切换轮播图
+        $('.tfBannerDianBox').on('mouseover', '.tfBannerDian', function() {
+            tfBannerStatus = false;
+            $('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq($(this).index()).addClass(
+                'active');
+            $('body').find('.tfBanner').removeClass('active').eq($(this).index()).addClass('active');
+            tfBannerIndex = $(this).index()
+        })
+        $('.tfBannerDianBox').on('mouseout', '.tfBannerDian', function() {
+            tfBannerStatus = true;
+        })
+        //定时轮播Banner
+        setInterval(function() {
+            if (tfBannerStatus) {
+                tfBannerIndex++;
+                if (tfBannerIndex + 1 > $('body').find('.tfBanner').length) {
+                    tfBannerIndex = 0
+                }
+                $('.tfBannerDianBox').find('.tfBannerDian').removeClass('active').eq(tfBannerIndex).addClass(
+                    'active');
+                $('body').find('.tfBanner').removeClass('active').eq(tfBannerIndex).addClass('active');
+            }
+        }, 5000)
+
+
+        
+        $('.tfggGoSouguo').on('click',function(){
+             var search = $('input[name="search"]').val();//搜索的文字
+             location.href = 'Index/shop?name='+search;
+        })
+    </script>

@@ -1,0 +1,60 @@
+==  2022-08-16 16:28:50=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '单据支付情况未知',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'WX-20220816-560670',
+  'jnet_bill_no' => 'H22081688720651B',
+  'pay_type' => '30',
+  'result' => '0',
+  'pay_amt' => '0.00',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220816162340',
+  'sign' => 'ac3873f3bc9cccd5656527f32726697d',
+)
+
+==  2022-08-16 16:28:51=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '单据支付情况未知',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'WX-20220816-560670',
+  'jnet_bill_no' => 'H22081688720651B',
+  'pay_type' => '30',
+  'result' => '0',
+  'pay_amt' => '0.00',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220816162340',
+  'sign' => 'ac3873f3bc9cccd5656527f32726697d',
+)
+
+==  2022-08-16 16:38:03=====================
+array (
+  'ret_code' => '0000',
+  'ret_msg' => '查询状态出现未知(返回信息：交易不存在)，请到相关网关后台手动查询！',
+  'agent_id' => '2138607',
+  'agent_bill_id' => 'ZFB-20220816-955309',
+  'jnet_bill_no' => 'H22081688721951B',
+  'pay_type' => '22',
+  'result' => '0',
+  'pay_amt' => '0.00',
+  'pay_message' => 
+  array (
+  ),
+  'remark' => 
+  array (
+  ),
+  'deal_time' => '20220816163604',
+  'sign' => '124c3fec18f6c5a7868ca485f6fb5e31',
+)
+

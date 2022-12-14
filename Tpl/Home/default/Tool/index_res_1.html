@@ -1,0 +1,15 @@
+<div class="fun_title">
+	<div>
+		投资概述</div>
+</div>
+<div class="funframe">
+	<ul class="rslist">
+		<li><span style="width: 100px;">每个月将收回：</span> <span style="width: 100px;" class="value">
+			￥{$repay_detail.monthly_repayment}</span> <span style="width: 50px;">您将在</span> <span class="value">
+				{$m}</span> <span>个月之后将投资收回</span> </li>
+		<li><span style="width: 100px;">月利率：</span> <span style="width: 100px;" class="value">
+			{$repay_detail.month_apr}%</span> <span style="width: 110px;">您收回投资总共要收</span> <span class="value">
+				{$repay_detail.repayment_money}</span> <span>元(小于0.01元无法计算，可能会有误差)</span> </li>
+	</ul><br />
+    <a href="/tools/tool.html?money={$money}&month={$m}&interest_rate={$interest_rate}&selDays={$selDays}" target="_blank" class="spec38 pnones">按月等额本息计算器</a>
+</div>

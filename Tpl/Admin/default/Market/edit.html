@@ -1,0 +1,135 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+
+
+<div class="page_tit">编辑商品</div>
+
+<div class="page_tab"><span data="tab_1" class="active">基本设置</span><span data="tab_2" style="display:none">高级设置</span></div>
+
+<div class="form2">
+
+	<form method="post" action="__URL__/doEdit" onsubmit="return subcheck();" enctype="multipart/form-data">
+
+	<input type="hidden" name="id" value="{$vo.id}" />
+
+	<div id="tab_1">
+<dl class="lineD"><dt>所属栏目：</dt><dd><htmlA:select id="type_id" value="id|vo.type_id" datakey='type_list' vt='id|type_name' tip="*"/></dd></dl>
+
+	<dl class="lineD"><dt>商品标题：</dt><dd><htmlA:input id="title" value="{$vo.title}" tip="*"/></dd></dl>
+
+	<dl class="lineD"><dt>商品描述：</dt><dd><htmlA:text id="art_miaoshu" value="{$vo.art_miaoshu}" tip=""/></dd></dl>
+
+    <dl class="lineD" style="display:none"><dt>商品风格：</dt><dd><htmlA:text id="art_fengge" value="{$vo.art_fengge}" tip=""/></dd></dl>
+
+	<dl class="lineD"><dt>商品原价：</dt><dd><htmlA:input id="art_jiage" value="{$vo.art_jiage}" tip="元"/></dd></dl>
+
+	<dl class="lineD"><dt>商品积分：</dt><dd><htmlA:input id="art_jifen" value="{$vo.art_jifen}" tip="积分"/></dd></dl>
+
+    <dl class="lineD"><dt>是否上线：</dt><dd><htmlA:radio id="art_set" value="key|vo.art_set"  default="0|上线,1|下线" /></dd></dl>
+    <dl class="lineD"><dt>优惠券：</dt><dd><htmlA:radio id="isyhq" value="key|vo.isyhq" default="0|否,1|是" tip="优惠券" /></dd></dl>
+	
+
+    <dl class="lineD"><dt>有效期：</dt><dd><htmlA:input id="youxiaoqi" value="{$vo.youxiaoqi}"/>月</dd></dl>
+    <dl class="lineD"><dt>金额：</dt><dd><htmlA:input id="jine" value="{$vo.jine}"/>元</dd></dl>
+    <dl class="lineD"><dt>最小金额：</dt><dd><htmlA:input id="bonus_invest_min" value="{$vo.bonus_invest_min}"/>元</dd></dl>
+
+
+    <dl class="lineD"><dt>推荐：</dt><dd><htmlA:radio id="tuijian" value="key|vo.tuijian" default="0|否,1|是" tip="积分商城推荐商品" /></dd></dl>
+
+
+    <dl class="lineD"><dt>类型：</dt><dd><htmlA:radio id="leixing" value="key|vo.leixing" default="1|单品推荐,2|超值团购"/></dd></dl>
+
+
+	<dl class="lineD"><dt>商品数量：</dt><dd><htmlA:input id="art_writer" value="{$vo.art_writer}" tip="个" /></dd></dl>
+
+
+    <dl class="lineD"><dt>商品重量：</dt><dd><htmlA:input id="zhongliang" value="{$vo.zhongliang}" /></dd></dl>
+    
+
+	<dl class="lineD" style="display:none"><dt>商品关键字SEO：</dt><dd><htmlA:input id="art_keyword" value="{$vo.art_keyword}" tip="SEO元素"/></dd></dl>
+
+	<dl class="lineD" style="display:none"><dt>商品简介SEO：</dt><dd><htmlA:text id="art_info" value="{$vo.art_info}" tip="SEO元素"/></dd></dl>
+
+	   <dl class="lineD">
+          <dt>日期：</dt>
+          <dd>
+                <!--<input name="lead_time" type="date" value="" placeholder="2018-01-01" required="required"> -->
+            <htmlA:input id="art_time" value="{$vo.art_time|date='Y-m-d H:i:s',###}" tip="用于排序,时间倒叙" />
+          </dd>
+        </dl>
+         <script type="text/javascript">
+				date = new Date();
+				Calendar.setup({
+					inputField     :    "art_time",
+					ifFormat       :    "%Y-%m-%d %H:%M:%S",
+					showsTime      :    true,
+					timeFormat     :    "24"
+				});
+				</script>
+
+
+	<dl class="lineD" style="overflow:hidden"><dt>商品缩略图：</dt>
+		<dd>
+			<input type="file" id="imgfile" name="imgfile" style="float:left"/>
+			<span style="float:left"><div style="text-align:left; clear:both; overflow:hidden; width:290px; height:50px"><div id="imgDiv"></div><if condition="$vo.art_img eq ''">无缩略图<else/><img src="__ROOT__{$vo.art_img}" width="100" height="100" /></if></div></span>
+
+		</dd>
+
+	</dl>
+	
+
+	<dl class="lineD" style="display:none"><dt>是否抓取远程图片：</dt><dd><htmlA:radio id="is_remote" default="0|否,1|是" tip="抓取远程图片时保存时间可能会稍长，请耐心等待" /></dd></dl>
+
+	<dl class="lineD"><dt>商品介绍：</dt>
+
+	  <dd>
+
+		<include file="./Style/Editor/kissy.html" />
+
+		<htmlA:editor id="art_content" value="{$vo.art_content}" w='780px' type='kissy'/>
+
+	  </dd>
+
+	</dl>
+
+	
+
+	</div><!--tab1-->
+
+	
+
+	<div id="tab_2" style="display:none">
+
+	
+
+	
+
+	<dl class="lineD"><dt>文件名称：</dt><dd><htmlA:input id="art_url" value="{$vo.art_url}" tip='仅在文章属性为跳转时有效'/></dd></dl>
+
+	
+
+	</div><!--tab2-->
+
+	<div class="page_btm">
+
+	  <input type="submit" class="btn_b" value="确定" />
+
+	</div>
+
+	</form>
+
+</div>
+
+
+
+</div>
+
+<include file="Public:_footer" />

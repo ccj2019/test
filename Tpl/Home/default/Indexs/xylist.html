@@ -1,0 +1,72 @@
+<include file="Public:header"/>
+<script src="__PUBLIC__/date/jquery-2.2.3.js" type="text/javascript"></script>
+<script src="__PUBLIC__/date/WdatePicker.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/date/skin/WdatePicker.css" />
+<style>
+.list{
+    width:1200px; 
+    margin:20px auto;
+    margin-top: 60px;
+    min-height: 390px;
+}
+.input-text{
+    border: solid 1px #666666; 
+}
+width:1130px;
+margin: 0 auto;
+margin-top:20px;
+text-align:center;
+margin-top:65px;
+font-size:0
+}
+.xpage a{
+    display:inline-block;
+    height: 50px;
+    text-align: center;
+    line-height:50px;
+    color: #3f3f3f;
+    padding:0 16px;
+    font-size:16px;
+    margin-left:10px;
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.xpage span{
+    display:inline-block;
+    height: 50px;
+    text-align: center;
+    line-height:50px;
+    background: #4969f2;
+    color: #fff;
+    border:1px solid #4969f2;
+    box-sizing: border-box;
+    font-size:16px;
+    padding:0 20px;
+    margin-left:10px;
+    border-radius: 2px;
+}
+.gong{
+    display: inline-block;
+    font-size:16px;
+    line-height:50px;
+    padding-right: 10px;
+}
+</style>
+
+<div class="list"> 
+    <form action="__URL__/xylist"  method="post" class="form form-horizontal" id="form-add" name="form-add" enctype="multipart/form-data">
+     商品名称：<input type="text" onfocus="" name="name" id="time" value='{$name}'><input type="hidden" name="yz"  id="yz" value='{$yzm}'>
+  <button class="btn btn-secondary radius" type="submit"> 查询</button>
+</from>
+<br><br>
+<volist name="list" id="vo" key="i">
+ <a href="" >{$i}. {$vo.title} ---{$vo.zmprice}----{$vo.zmnum} ---- {$vo.user_name} ----转卖时间：{$vo.add_time|date="Y-m-d H:i:s",###}</a><br>
+</volist> 
+</div>
+<div class="xpage">
+    {:str_replace('&nbsp;','',$page)}
+</div>
+ <!--底部-->
+<include file="default:Public:footer" />

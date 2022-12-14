@@ -1,0 +1,146 @@
+<include file="default:Public:headern" />
+
+
+<div class="zz_con">
+    <div class="zcon_l">
+        <img src="{$vo.art_img}" class="zt" />
+        <ul>
+            <li><img src="{$vo.art_img}" /></li>
+        </ul>
+    </div>
+    
+    <div class="zcon_r">
+        <div class="zz_name" style="border:none;">
+            <h2>{$vo.title}<!-- <span><i>积分</i>每2000积分可抵1元</span> --></h2>
+            <p>{$vo.art_miaoshu}</p>
+        </div>
+ <div class="sprice">
+    价格<span class="s_pc">￥{$vo.art_jiage}</span>
+    
+    <span class="s_jy">{$vo.jiaoyi}<br />交易成功</span>
+ </div>
+<div class="clear"></div>
+<div class="peisong">
+   <!--  <p>配送<span>山东省日照市</span></p> -->
+    <p>快递<span>免运费</span></p>
+    <p><span>7天内发货</span></p>
+</div>
+
+<p class="zhongliang">重量：<span>{$vo.zhongliang}</span></p>
+<form action="/Shop/add_car" id="add_car"  method="post">
+<div class="kucun">
+    <p>
+
+
+        <span id="jian">-</span>
+        <span><input type="text" name="num" id="shuliang" value="1" style="width: 36px;border: none; text-align: center;"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" maxlength='2'/></span>
+        <span id="jia">+</span>
+
+        <input type="hidden" name="gid" id="id" value="{$vo.id}"/>
+       
+    </p>
+    库存{$vo.art_writer}件
+</div>
+</form> 
+<div class="clear"></div>
+
+<a href="##" class="sc_btn">立即购买</a>
+
+<a href="##" class="sc_gwc">加入购物车</a>
+
+
+    </div>
+    <div class="clear"></div>
+    
+    <div class="shop_l">
+        <div class="shop_title">
+            热销产品
+        </div>
+        
+        <ul>
+            <volist name="rlist" id="vod">
+            <a href="/Shop/shop_show?id={$vod['id']}">
+                <li>
+                <img src="{$vod.art_img}" />
+                
+            
+                {$vod.title}
+              <span>
+                ￥{$vod.art_jiage}
+              </span>
+            </li>
+        </a>
+            </volist>
+        </ul>
+    </div>
+     <div class="shop_r">
+         <div class="zcon_b">
+            <div class="zcon_tab">
+                <span class="hover">产品详情</span>
+               <!--  <span>产品规格</span> -->
+            </div>
+            
+            <div class="zcon_con">
+                    {$vo.art_content} 
+            </div>
+
+            <div class="zcon_con" style="display:none">
+                  
+            </div>
+            
+        </div>
+      </div>  
+    
+        <div class="clear"></div>
+    
+
+</div>
+<a href="/shop/car_list">
+<div class="car_n">
+    <span>{$carnum}</span>
+</div></a>
+<script type="text/javascript">
+
+$(function(){
+
+    /*订单数量*/
+    $(".kucun #jia").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        $(".kucun #shuliang").val(Number(b)+1)
+       // donum(Number(b)+1);
+    })
+    
+    $(".kucun #jian").click(function(){
+        var b=Number($(".kucun #shuliang").val());
+        if(b>1){
+            $(".kucun #shuliang").val(Number(b)-1);
+           // donum(Number(b)-1);
+        }
+    })
+
+
+    $(".sc_gwc").click(function(){
+      $(".sc_gwc").attr('disabled','disabled');
+      var num='{$vo.art_writer}';
+      if(num<Number($("#shuliang").val())){
+        alert("库存不足购买数量!");
+        return false;
+      }
+      $("#add_car").submit();
+    })
+
+     $(".sc_btn").click(function(){
+      $(".sc_btn").attr('disabled','disabled');
+      var num='{$vo.art_writer}';
+      if(num<Number($("#shuliang").val())){
+        alert("库存不足购买数量!");
+        return false;
+      }
+      $("#add_car").attr("action","/Shop/goumai");;
+
+      $("#add_car").submit();
+    })
+})
+</script>
+<!--底部-->
+<include file="default:Public:footern" />

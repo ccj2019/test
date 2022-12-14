@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<style>
+		.l-fh {
+			border-bottom: 3px solid #EEF1F8;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="/wapmember/" class="l-fanhui on">&lt;返回</a><span>优惠券</span>
+			<div class="l-fanhui1">
+			<a href="/Wapmember/Memberinfo#chip-1"><img src="/Public/wap/img/huiyuan/shezhi.png" alt="" /></a>
+			</div>
+		</div>
+		     <volist name="bonusList" id="vo">
+					<!--优惠券-->
+					                  
+                                <!--<div class="hbox <if condition="$vo.status eq 3"> gq </if>">
+                                    <a href="/invest/index.html">
+                                        <div class="hbl">红包抵现</div>
+                                        <div class="hbm">
+                                            <strong>{元</strong>
+                                            <p>抵现{$vo.money_bonus}元 有效次数：1次</p>
+                                            <span>有效期：{$vo.start_time|date="Y-m-d",###} 至 {$vo.end_time|date="Y-m-d",###}</span>
+                                        </div>
+                                        
+                                        <if condition="$vo.status eq 1"><div class="hbr">可 使 用</div>
+                                        <elseif condition="$vo.status eq 2"/><div class="hbr">已 使 用</div>
+                                        <else/><div class="hbr">已 过 期</div>
+                                        </if>
+                                        
+                                        <div class="clear"></div>
+                                    </a>
+                                </div>-->
+                    <if condition="$vo.status eq 1"><div class="l-yhbox1">
+                                        <elseif condition="$vo.status eq 2"/><div class="l-yhbox">
+                                        <else/><div class="l-yhbox2">
+                                        </if>
+							
+								<div class="l-yhj">
+									        <if condition="$vo.status eq 1"> <img src="/Public/wap/img/yaoqing/m2.png" alt="" />
+                                        <elseif condition="$vo.status eq 2"/><img src="/Public/wap/img/yaoqing/m1.png" alt="" />
+                                        <else/>
+                                        <img src="/Public/wap/img/yaoqing/m3.png" alt="" />
+                                        </if>
+									
+									
+									<div class="l-yhj1 clearfix">
+										<div class="l-yhj2">
+											<p style="padding-bottom: 0;"><span>¥</span><span class="span1">{$vo.money_bonus}</span></p>
+											<p>满{$vo.bonus_invest_min}元</p>
+											    <if condition="$vo.status eq 1">
+											    	<span class="legf1">后台赠送</span>
+                                        <elseif condition="$vo.status eq 2"/>
+                                        <span class="legf">后台赠送</span>
+                                        <else/><span class="legf2">后台赠送</span>
+                                        </if>
+										</div>
+										<div class="l-yhj3">
+											<p class="ppc1">铭万众筹平台投资红包</p>
+											<p class="ppc2">适用于铭万众筹平台规定的对
+					应投资项目</p>
+										</div>
+										<div  class="ppc3">
+											有效期 {$vo.start_time|default='1549036800'|date="Y-m-d",###} 至 {$vo.end_time|date="Y-m-d",###}
+										</div>
+									</div>
+								</div>
+							</div>
+          </volist>
+         <div class=" navslis"> 
+         {$pagebar}
+         </div> 
+		<!--优惠券-->
+		<!--<div class="l-yhbox">
+			<div class="l-yhj">
+				<img src="/Public/wap/img/yaoqing/m1.png" alt="" />
+				<div class="l-yhj1 clearfix">
+					<div class="l-yhj2">
+						<p style="padding-bottom: 0;"><span>¥</span><span class="span1">6</span></p>
+						<p>满1000元</p>
+						<span class="legf">后台赠送</span>
+					</div>
+					<div class="l-yhj3">
+						<p class="ppc1">铭万众筹平台投资红包</p>
+						<p class="ppc2">适用于铭万众筹平台规定的对
+应投资项目</p>
+					</div>
+					<div  class="ppc3">
+						有效期  2018/09/10--2018/09/30
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<!--优惠券-->
+		<!--<div class="l-yhbox1">
+			<div class="l-yhj">
+				<img src="/Public/wap/img/yaoqing/m2.png" alt="" />
+				<div class="l-yhj1 clearfix">
+					<div class="l-yhj2">
+						<p style="padding-bottom: 0;"><span>¥</span><span class="span1">10</span></p>
+						<p>满5000元</p>
+						<span class="legf1">后台赠送</span>
+					</div>
+					<div class="l-yhj3">
+						<p class="ppc1">铭万众筹平台投资红包</p>
+						<p class="ppc2">适用于铭万众筹平台规定的对
+应投资项目</p>
+					</div>
+					<div  class="ppc3">
+						有效期  2018/09/10--2018/09/30
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<!--优惠券-->
+		<!--<div class="l-yhbox2">
+			<div class="l-yhj">
+				<img src="/Public/wap/img/yaoqing/m3.png" alt="" />
+				<div class="l-yhj1 clearfix">
+					<div class="l-yhj2">
+						<p style="padding-bottom: 0;"><span>¥</span><span class="span1">20</span></p>
+						<p>满5000元</p>
+						<span class="legf2">后台赠送</span>
+					</div>
+					<div class="l-yhj3">
+						<p class="ppc1">铭万众筹平台投资红包</p>
+						<p class="ppc2">适用于铭万众筹平台规定的对
+应投资项目</p>
+					</div>
+					<div  class="ppc3">
+						有效期  2018/09/10--2018/09/30
+					</div>
+				</div>
+			</div>
+		</div>-->
+<!--底部-->
+<include file="Public:footer"/>

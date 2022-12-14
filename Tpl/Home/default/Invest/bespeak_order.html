@@ -1,0 +1,159 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="https://unpkg.com/vant/lib/index.css">
+<!-- 引入组件 -->
+<style type="text/css">
+    .huibaop2{
+        font-weight: 600;
+    }
+    .huibao1 textarea{
+        border: none;
+    }
+    #pin{
+        width: 200px;
+        height: 26px;
+        background: #f9f9f9;
+        border: 1px solid #cccccc;
+        padding-left: 10px;
+    }
+</style>
+<!--内容部分-->
+
+<div class="box l-a3" style="background: #FFFFFF;" >
+    <div class="Box-img clearfix">
+        <div class="Box-img1"><img src="{$binfo.borrow_img}" /></div>
+        <div class="l-Title">
+            <div class="clearfix l-titi">
+                <h3>{$binfo.borrow_name}</h3>
+                <p>
+                    每份 <span> ￥<span id="single_price">{$binfo.borrow_min}</span> </span>元
+                </p>
+            </div>
+            <div class="clearfix jy-shul">
+                <span class="jy-Bt">数量</span>
+                <div class="van-stepper">
+                    <button type="button" onclick="minusnums()" class="van-stepper__minus"></button>
+                    <input type="text"   onkeyup="if(this.value<1){this.value=1;} " onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"id="besnums" name="besnums" value="{$besnums|max=1}" onblur="changenums()"  class="van-stepper__input">
+                    <button type="button" onclick="plusnums()" class="van-stepper__plus"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#besnums").blur(function(){
+            if($("#besnums").val()<=0){
+                $("#besnums").val(1)
+                layer.msg("数量不能小于等于0");
+                return false;
+            }
+        });
+    </script>
+    <form method="post" name="bespeakForm" id="bespeakForm" action="__URL__/bespeakmoney">
+        <div class="huibao1">
+            <p class="jy-Bt1">回报内容</p>
+            <p class="huibaop1">{$binfo.return_info}</p>
+        </div>
+        <div class="huibao1">
+            <p class="jy-Bt1 on">支付信息</p>
+            <p class="huibaop1 on">
+                <span class="huibaop2">数量</span>
+                <span><font id="nums">1</font>份</span>
+                <input type="hidden" name="bespeak_nums" id="bespeak_nums" value="1">
+            </p>
+            <p class="huibaop1 on">
+                <span class="huibaop2">应付金额</span>
+                <span>￥<font  id="money">{$binfo.borrow_min*$glo.bespeak_point}</font></span>
+            </p>
+            <p class="huibaop1 on">
+                <span class="huibaop2">实付款</span>
+                <span class="jy-shifu">￥<font  id="realmoney">{$binfo.borrow_min*$glo.bespeak_point}</font></span>
+                <INPUT type="hidden" id="bespeak_money"  name="money" value="{$binfo.borrow_min}" />
+            </p>
+            <p class="huibaop1 on">
+                <span class="huibaop2">支付方式</span>
+                <span>
+					<input type="radio" name="yuer" id="yuer" value="1" checked="" />
+					<label for="yuer">余额支付</label>
+				</span>
+            </p>
+            <!--密码-->
+            <div class="l-zhifuye">
+				<span class="l-yesy">
+					余额剩余：￥{$account_money}
+				</span>
+                <p class="l-yesy1">请输入支付密码</p>
+                <p class="l-yesy2"><input type="password" id="pin" name="pin" /></p>
+            </div>
+            <input type="hidden" name="borrow_id" id="borrow_id" value="{$binfo.id}" />
+            <input type="hidden" name="cookieKey" id="cookieKey" value="{$cookieKey}" />
+        </div>
+        <div class="huibao1 clearfix">
+            <if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+                <button class="btn-sub">确认支付</button>
+            <else />
+                <div class="Lizc">新用户专享</div>
+            </if>
+        </div>
+    </form>
+</div>
+
+<!--底部-->
+<include file="Public:footer"/>
+
+<script>
+
+    changenums();
+
+    function plusnums(){
+        var n = $("#besnums").val();
+        var newn = Number(n) + Number(1);
+        $("#besnums").val(newn);
+        $("#nums").html(newn);
+        var m = {$binfo.borrow_min};
+        var money = newn*m*{$glo.bespeak_point};
+        var invest_money = newn*m;
+
+        $("#money").html(money);
+        $("#realmoney").html(money);
+        $("#bespeak_money").val(invest_money);
+        $("#bespeak_nums").val(newn);
+    }
+
+    function minusnums(){
+
+        var n = $("#besnums").val();
+        if(n ==1){
+            layer.alert('数量不能为0');
+            return false;
+        }
+        var newn = Number(n) - Number(1);
+        $("#besnums").val(newn);
+        $("#nums").html(newn);
+        var m = {$binfo.borrow_min};
+        var money = newn*m*{$glo.bespeak_point};
+        var invest_money = newn*m;
+
+        $("#money").html(money);
+        $("#realmoney").html(money);
+        $("#bespeak_money").val(invest_money);
+        $("#bespeak_nums").val(newn);
+
+    }
+    function changenums(){
+        var n = $("#besnums").val();
+        if(n <= 0){
+            layer.alert('数量不能为0');
+            return false;
+        }
+        var newn = parseInt(n);
+        $("#besnums").val(newn);
+        $("#nums").html(newn);
+        var m = {$binfo.borrow_min};
+        var money = newn*m*{$glo.bespeak_point};
+        var invest_money = newn*m;
+
+        $("#money").html(money);
+        $("#realmoney").html(money);
+        $("#bespeak_money").val(invest_money);
+        $("#bespeak_nums").val(newn);
+    }
+</script>

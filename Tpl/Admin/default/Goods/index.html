@@ -1,0 +1,136 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+
+<script type="text/javascript">
+
+	var delUrl = '__URL__/doDell';
+
+	var addUrl = '__URL__/add';
+
+	var addTitle = '添加分类';
+
+</script>
+
+<div class="so_main">
+
+  <div class="page_tit">商城商品列表</div>
+
+
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+    <htmlA:commonBtn type="href" action="__URL__/goodadd" value="添加商品"/>
+
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除商品" />
+
+<form name="sdf" id="sdf" action="__URL__/index" method="get" style="    display: inline;">类别
+       <select name="typeid" class="select">
+        <option value="">请选择</option>
+              <volist name="typelist" id="vo">
+                        <option value="{$vo.id}" <if condition='$vo.id eq $typeid'>selected</if>>{$vo.name}</option>
+              </volist>
+      </select> 
+
+<a href="javascript:;" onclick="javascript:document.forms.sdf.submit();" class="btn_a"><span>查询</span></a>
+</form>
+
+
+
+  </div>
+
+  
+
+  <div class="list">
+
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+  <tr>
+
+    <th style="width:30px;">
+
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+
+        <label for="checkbox"></label>
+
+    </th>
+
+    <th class="line_l">商品ID</th>
+
+    <th class="line_l">商品名</th>
+
+    <th class="line_l">类别</th>
+
+    <th class="line_l">图片</th>
+
+    <th class="line_l">原价</th>
+
+    <th class="line_l">拼团优惠</th>
+
+    <th class="line_l">佣金</th>
+
+    <th class="line_l">是否上线</th>
+
+    <th class="line_l">操作</th>
+
+  </tr>
+
+  <volist id="vo" name="list">
+
+      <tr overstyle='on'   id="list_{$vo.id}">
+
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+
+        <td>{$vo.id}</td>
+
+        <td>{$vo.title}</td>
+
+        <td>{$vo.typename}</td>
+
+        <td><img src="__ROOT__/{$vo.art_img}" width="30" height="30" /></td>
+
+        <td>{$vo.yprice}</td>
+
+        <td>{$vo.yhprice}</td>
+
+        <td>{$vo.yongjin}</td>
+
+        <td><if condition="$vo.online eq 1"> 是 <else/> 否 </if></td>
+
+        <td>
+
+            <a href="__URL__/goodedit?id={$vo['id']}">编辑</a> <a href="javascript:void(0);" onclick="del({$vo['id']});">删除</a>  
+
+        </td>
+
+      </tr>
+
+  </volist>
+
+  </table>
+
+
+
+  </div>
+
+  
+
+  <div class="Toolbar_inbox">
+
+  	<div class="page right">{$pagebar}</div>
+
+    <htmlA:commonBtn type="href" action="__URL__/goodadd" value="添加商品"/>
+
+    <htmlA:commonBtn type="jsfun" action="del();" value="删除商品" />
+
+  </div>
+
+</div>
+
+
+
+
+
+<include file="Public:_footer" />

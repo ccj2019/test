@@ -1,0 +1,176 @@
+<include file="default:Public:mheader" />
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a>商城订单</a></span>
+
+</div>
+<style type="text/css">
+	.tjs{
+		padding: 0 20px;
+	}
+	.tjs_s{
+		border-top: solid 1px #D2D2D2;
+		padding-top: 20px;
+	}
+	.tjs_s:nth-child(1){
+		border:none;
+	}
+	.tjs_img{
+		width:280px;
+		float: left;
+		font-size: 13px;
+   		color: #333333; 
+	}
+	.tjs_img img{
+		float: left;
+	    width: 65px;
+	    height: 40px;
+	    padding-right: 10px;
+	}
+	.tjs_s .num{
+	    width:130px;
+	    float: left;
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	    text-align: center;
+	    font-size: 13px;
+	    color: #333333;
+	}
+	.tjs .shXxi{
+		width: 100%;
+		text-align: left;
+		font-size: 16px;
+
+     	padding-bottom: 15px;
+		border-bottom: 1px solid #D2D2D2;
+	}
+	.tjs .DdXinxi{
+		padding: 0;
+		width: 100% !important;
+		display: none;
+	}
+	.tjs .tjon {
+	    color: #00a0ea;
+	    font-size: 13px;
+	    cursor: pointer;
+	    padding-top: 10px;
+	    float: right;
+	    padding-bottom: 10px;
+	}
+	.bgbx {
+	    width: 850px;
+	}
+</style>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition="$action eq '' "> class="on" </if> ><span><a href="{$strUrl}">所有订单</a></span></div>
+			<div <if condition="$action eq '3' "> class="on" </if>><span><a href="{$strUrl}?action=3">未付款</a></span></div>
+			<div <if condition="$action eq '0' "> class="on" </if>><span><a href="{$strUrl}?action=0">未发货</a></span></div>
+			<div <if condition="$action eq '1' "> class="on" </if>><span><a href="{$strUrl}?action=1">已发货</a></span></div>
+		</div>
+		<!-- <div class="sous">
+            <input type="text" name="key" id="key" value="" />
+            <div class="sou_btnc"></div>
+        </div> -->
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+				<!-- 	<div class="toujf clearfix">
+						<span >商品</span>
+						<span>数量</span>
+						<span>单价</span>
+                        <span>总价</span>
+						<span>操作</span>
+					</div> -->
+					<div class="Hboxf">
+					<volist id="vo" name="list">
+						<div class="Hbox">
+							<div class="clearfix ddH">
+								<div class="fl">订单号：{$vo.ordernums}&nbsp;&nbsp;购买时间：{$vo.add_time|date='Y-m-d H:i:s',###}&nbsp;&nbsp;订单总额：{$vo.jine}元 + {$vo.jifen}积分</div>
+								<div class="fr">
+								<if condition="$vo.action eq 3">	
+				
+									<if condition="$vo.pay_way eq 1">
+									<a href="/shop/zhifubao/id/{$vo.ordernums}" style="color: #da4c24;">继续支付</a>
+&nbsp;
+									<a href="__URL__/quxiao/id/{$vo.ordernums}" style="color: #da4c24;">取消</a>
+
+								</if>
+
+								<if condition="$vo.pay_way eq 2">
+									<a href="/shop/weixin/id/{$vo.ordernums}" style="color: #da4c24;">继续支付</a>
+&nbsp;
+									<a href="__URL__/quxiao/id/{$vo.ordernums}" style="color: #da4c24;">取消</a>
+
+								</if>
+
+								</if>
+								</div>
+							</div>
+							<!--内容-->
+				
+							<div class="tjs clearfix">
+
+								<volist name="vo['goods']" id="vod">
+								<div class="tjs_s">	
+									<div class="tjs_img">
+										<img src="{$vod.art_img}" alt="" />
+										<p class="p1">
+											{$vod.title}
+										</p>
+									</div>
+									<div class="num">x{$vod.num}</div>
+									<div class="num" >{$vod.art_jiage}元</div>
+									<div class="num">{$vod.goods_jiage}元</div>
+									<div class="num">
+										<a href="/Shop/shop_show?id={$vod.id}">查看</a>
+									</div>
+									<div class="clear"></div>
+								</div>
+								</volist>
+								
+								<div class="DdXinxi">
+									<div class="shXxi">
+										收货信息
+									</div>
+									<div class="tiaoL">
+										<p>收货人姓名：{$vo.real_name}</p>
+										<p>收货人电话：{$vo.cell_phone}</p>
+										<p>收货人地址：{$vo.address}</p>
+										<p>{$vo.yijian}</p>
+									</div>
+								</div>
+								<div class="tjon">[展开]</div>
+							</div>
+
+
+
+						</div>	
+					</volist>
+					</div>
+					<!--分页-->
+				<div class="aFye clearfix" style="margin-top:20px;">
+				 	<p>{$page} </p>
+				</div>
+
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+</div>
+<script>
+    $(".sou_btnc").on("click", function(){
+        var val =  $("#key").val();
+        window.location.href="{$strUrl}&key="+val;
+    })
+</script>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

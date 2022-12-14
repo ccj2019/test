@@ -1,0 +1,53 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>尊敬的{$glo.web_name}用户，以下是您在{$glo.web_name}的逾期投资列表 </p>
+  </div>
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款标号</td>
+        <td>借款标题</td>
+        <td>借入人</td>
+        <td>年化利率</td>
+        <td>逾期天数</td>
+        <td>待收本金</td>
+        <td>待收利息</td>
+        <td>当前/总(期)</td>
+      </tr>
+      <volist name="list" id="vo">
+        <tr>
+          <td>{$vo.borrow_id}</td>
+			<td><a href="{$vo.borrow_id|getInvestUrl=###}" target="_blank">{$vo.borrow_name}</a></td>
+			<td>{$vo.borrow_user}</td>
+			<td>{$vo.borrow_interest_rate}%</td>
+			<td>{$vo.breakday}</td>
+			<td>{$vo.capital}</td>
+			<td>{$vo.interest}</td>
+			<td>{$vo.sort_order}/{$vo.total}</td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-4" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

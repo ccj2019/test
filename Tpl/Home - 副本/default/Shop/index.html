@@ -1,0 +1,73 @@
+<include file="default:Public:header" />
+<div class="box l-pdd">
+	<img src="/Public/web/img/shangcheng/18.png" alt="" />
+</div>
+<!--中心内容-->
+<div class="box">
+	<div class="l-zxneir">
+		<p class="p1">积分商城</p>
+		<div class="xmbox">
+			<div class="l-xmlist">
+				<div class="l1">
+					<span class="span1"><img src="/Public/web/img/xiangmu/l1.png" alt="" />分类：</span>
+					<span><a href="/shop/index" <if condition="$type_id eq ''">class="on"</if>>全部</a></span>
+					<span><a href="/shop/index?type_id=56" <if condition="$type_id eq '56'">class="on"</if>>自养海鲜</a></span>
+					<span><a href="/shop/index?type_id=57" <if condition="$type_id eq '57'">class="on"</if>>海鲜干货</a></span>
+					<span><a href="/shop/index?type_id=58" <if condition="$type_id eq '58'">class="on"</if>>优惠券船票</a></span>
+
+				</div>
+				<div class="l1">
+					<span class="span1"><img src="/Public/web/img/xiangmu/l2.png" alt="" style="    padding-right: 17px;" />积分：</span>
+					<span><a href="/shop/index?type_id={$type_id}" <if condition="$jifen eq ''">class="on"</if>>不限</a></span>
+					<span><a href="/shop/index?type_id={$type_id}&jifen=500" <if condition="$jifen eq '500'">class="on"</if>>500积分以下</a></span>
+					<span><a href="/shop/index?type_id={$type_id}&jifen=1000" <if condition="$jifen eq '1000'">class="on"</if>>500-1000积分</a></span>
+					<span><a href="/shop/index?type_id={$type_id}&jifen=3000" <if condition="$jifen eq '3000'">class="on"</if>>1000-3000积分</a></span>
+					<span><a href="/shop/index?type_id={$type_id}&jifen=5000" <if condition="$jifen eq '5000'">class="on"</if>>3000-5000积分</a></span>
+					<span><a href="/shop/index?type_id={$type_id}&jifen=5" <if condition="$jifen eq '5'">class="on"</if>>5000积分以上</a></span>
+
+				</div>
+			</div>
+			<div class="box l-jfpx clearfix">
+				<a href="/shop/index"><span <if condition="$type eq ''">class="on"</if>>默认排序</span></a>
+				<a href="/shop/index?type=new"><span <if condition="$type eq 'new'">class="on"</if>>最新</span></a>
+				<a href="/shop/index?type=hot"><span <if condition="$type eq 'hot'">class="on"</if>>热门</span></a>
+				<a href="/shop/index?type=jifen"><span <if condition="$type eq 'jifen'">class="on"</if>>积分</span></a>
+			</div>
+		</div>
+	</div>
+
+	<!--项目-->
+	<div class="z-list" style="padding-top: 60px;">
+		<div class="box clearfix">
+			<volist id="vo" name="list.list">
+        	    <div class="lJfsp">
+                    <a href="/Shop/shop_show?id={$vo['id']}"> 
+						<img src="{$vo.art_img}"  alt="" style="    width: 365px;  height: 272px;"/>
+                        <p class="lp1">{$vo.title|cnsubstr=###,15} 
+                        	<span class="fr">
+                           	还剩{$vo.art_writer}份
+                           </span>
+                       	</p>
+                        <div class="clearfix lJfsp1">
+                           	<div class="fl">
+                           		<p class="lp2">所需积分： 
+                           			<span id="">{$vo.art_jifen}</span>积分/份
+                           		</p>
+                           		<p class="lp3">购买人数：{:getbuynum($vo["id"])}人</p>
+                           </div>
+                           <div class="fr ckBtn" style="width: 110px; height: 44px;line-height: 44px">查看详情	</div>
+						</div>
+					</a>
+				</div>
+			</volist>
+		</div>
+	</div>
+	<!--分页-->
+	<div class="aFyeinvest clearfix">
+		<p>{$pagebar}
+		</p>
+	</div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" />

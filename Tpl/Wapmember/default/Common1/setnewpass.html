@@ -1,0 +1,51 @@
+<div class="mm1">
+  <div class="container">
+    <ul>
+      <li>1.输入手机号</li><li class="acti">2.重置密码</li><li>3.完成</li>
+      <div class="clear"></div>
+    </ul>
+    <div class="mm1con">
+      <table width="400" border="0">
+        <tr>
+          <td><span>新密码</span><input name="pass" id="pass" type="password" /></td>
+        </tr>
+        <tr>
+          <td><span>重置密码</span><input name="repass" id="repass" type="password" /></td>
+        </tr>
+      </table>
+      <a href="javascript:void(0);" onclick="jfun_setpass()" class="next">设置新密码</a>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+<script>
+  function jfun_setpass() {
+    var pass1 = $('#pass').val();
+    var pass2 = $('#repass').val();
+    if ($.trim(pass1) == '' || pass1.length<6) {
+      layer.msg("请输入新密码,且新密码的长度不要小于6位")
+      return false;
+    }
+    if ($.trim(pass2) != $.trim(pass1)) {
+      layer.msg("新密码与重复密码必须相同")
+      return;
+    }
+    $.ajax({
+      url: "__URL__/dosetnewpass/",
+      type: "post",
+      dataType: "json",
+      data: {"pass":pass1},
+      success: function(result) {
+              if (result.status == 1) {
+                  layer.alert(result.info,1);
+                  window.location.href="__APP__/member/common/login/";
+//                  
+              }
+              else {
+                layer.alert(result.info);
+                  return false;
+              }
+      }
+    });
+  }
+</script>

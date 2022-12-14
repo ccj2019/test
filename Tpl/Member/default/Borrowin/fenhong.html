@@ -1,0 +1,324 @@
+<include file="default:Public:mheader" />
+	<!--内容部分-->
+	<div class="box navls">
+		<span><a href="{:U('/member/index/index')}">会员中心</a></span>
+		<span>&gt;</span>
+		<span><a href="{:U('/member/index/borrowbreak')}">项目收益</a></span>
+	</div>
+	<div class="box clearfix">
+		<include file="default:Public:_left" />
+		<div class="tabvbox">
+			<div class="tabv clearfix">
+				<div class="on"><span>发放收益</span></div>
+			</div>
+			<div class="tabv2box">
+				<div class="tabv2 show">
+					<div class="Ffsy">
+						<div class="Ffsy-n">
+							<h3>{$binfo.borrow_name}</h3>
+							<h4>收益设置：</h4>	
+							<!--收益选项-->
+							<div class="FSy clearfix">
+								<div class="FSy1">
+									<div class="FSyn">收益年度：</div>
+									<div>
+										<select name="investyear" id="investyear">
+											<option value="">请选择</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+										</select>
+									</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">收益期数：</div>
+									<div>
+										<select name="sort_order" id="sort_order" >
+											<option value="0">请选择</option>
+											 <volist name="date" id="vb" key="key">
+											<option value="{$vb}">第{$vb}期</option>
+											 </volist>
+										</select>
+									</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">本期收益金额：</div>
+									<div id="shouyi">0</div>
+								</div>
+
+								<div class="FSy1">
+									<div class="FSyn">发放时间：</div>
+									<div>
+										<input type="date" name="starttime" id="starttime" /><span style="float: left; margin:0 10px;">-</span>
+										<input type="date" name="endtime" id="endtime" />
+										
+									</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">本期本金：   </div>
+									<div id="benji">0</div>
+								</div>
+								<div class="FSy1">
+									<div class="FSyn">销售差价：   </div>
+									<div id="chajia">0</div>
+								</div>
+
+								<div class="clearfix">	</div>
+								<button class="anNIOU" onclick="generate({$bid})">
+									生成收益明细
+								</button>
+							</div>
+								
+							<!--介绍-->
+							<div class="jSasp">
+								<p>
+								注：依据本次收益金额、投资人投资金额所占支持比例进行计算，自动计算投资人收益金额。
+								</p>
+								<p>
+								算法：单个投资人每期分红金额=每期分红金额/（已筹总额*收益率）*投资金额*收益率=每期分红金额*（投资金&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 额/已筹总额）
+								</p>
+								<p>
+								支持比例=投资金额/已筹总额
+								</p>
+								<p>
+								平均年收益率=本期收益金额/已筹总额/收益周期（月数）*12
+								</p>
+								<p>
+								<br/>
+								</p>
+							</div>
+						</div>
+						<div >
+							<!--项目收益-->
+							<div class="XmBhbox clearfix">
+							  	<div class="touTz on">
+							  	  	<span>期数</span>
+							  	  	<span>收益金额</span>
+									<span>销售差价</span>
+							  	  	<span>周期</span>
+							  	  	<span>总金额</span>
+							  	  	<span>平均年收益率</span>
+							  	  	<span>收益开始时间</span>
+							  	  	<span>收益结束时间</span>
+							  	  	<span>操作</span>
+							  	</div>
+							  	<volist name="list" id="vo">
+							  	<div class="touTz1 on">
+								        <span>{$vo.sort_order}</span>
+										<span>{$vo.interest}</span>
+									    <span>{$vo.chajia}</span>
+										<span>{$vo.borrow_duration}个月</span>
+										<span>{$vo.allmoney}</span>
+										<span>{$vo.year_invest}</span>
+										<span>{$vo.starttime|date="Y-m-d",###}</span>
+										<span>{$vo.endtime|date="Y-m-d",###}</span>
+										<span>
+											<if condition="$vo.is_repmeny eq 0">
+												<a href="__URL__/invest_detail_del?id={$vo.id}">删除</a>
+											</if>
+											<if condition="$vo.is_repmeny eq 1">
+												<if condition="$vo.status eq 1">
+													已还款
+												<else />
+													待审核
+												</if>
+											</if>
+										</span>
+							  	</div>
+								</volist>
+								<div class="touTz1 on touzilog"></div>
+							</div>
+							<!--编号投资人-->
+							<div class="XmBhbox clearfix showsy" style="display: none;">
+								<div class="touTz on">
+									<span>编号</span>
+									<span>投资人</span>
+									<span>回购金额</span>
+									<span>收益</span>
+									<span>差价</span>
+									<span>本金</span>
+									<span style="width: 23%;"> 最终收益（含本金,差价）</span>
+								</div>
+								<div class="huikuanmingxi"></div>
+						    </div>
+						</div>
+			            <div  class="symios">
+			               	<form action="__URL__/subgenerate" method="post" name="myform" id="myform">
+				               	<h4>收益描述：</h4>
+				               	<!--编辑器没有-->
+				               	<textarea name="info" id="info" rows="" cols=""></textarea>
+				               	<input type="hidden" name="borrow_id" id="borrow_id" />
+				               	<input type="hidden" name="invest_orderid" id="invest_orderid" />
+				               	<input type="hidden" name="capital" id="capital" />
+				               	<input type="hidden" name="has_capital" id="has_capital" />
+				               	<!--提交-->
+				               	<div class="btnTjiao">
+				               		<input type="button" onclick="sub()" value="提交审核" class="button" >
+				               		<a onclick="subreg()">重置</a>
+				               		
+				               	</div>
+			               	</form>
+			            </div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="bid" value="{$binfo.id}">
+		<input type="hidden" id="shouyis" value="0">
+		<input type="hidden" id="chajias" value="0">
+	</div>
+<!--底部-->
+<include file="default:Public:_footer" group="Home"/>
+<script type="text/javascript">
+	$("#sort_order").change(function() {
+		var aa=$('#sort_order option:selected').val();
+		if(aa!=0){
+			//$("#shouyi").html('asdfasdf');
+			let borrow_id=$("#bid").val();
+			$.ajax({
+				url: "__URL__/getshouyi",
+				type: "post",
+				dataType: "json",
+				data: {"borrow_id":borrow_id,"qi":aa},
+				success: function(d) {
+					console.log(d);
+					if(d.status == "1"){
+						$("#shouyi").html(d.income);
+						$("#shouyis").val(d.income);
+
+						$("#benji").html(d.capital);
+						$("#chajia").html(d.chajia);
+						$("#chajias").val(d.chajia);
+						return false;
+					}else if(d.status == "0"){
+						layer.msg(d.info,{icon: 1});
+						return false;
+					}
+				}
+			});
+		}else{
+			$("#shouyi").html(0);
+			$("#shouyis").val(0);
+			$("#benji").html(0);
+			$("#chajia").html(0);
+			$("#chajias").val(0);
+
+		}
+	});
+
+
+	function subreg(){
+		document.getElementById("myform").reset();
+	}
+	function generate(bid){
+		var investyear = $("#investyear").val();
+		var sort_order = $("#sort_order").val();
+		//var income = $("#income").val();
+		var income = $("#shouyis").val();
+		var chajia = $("#chajias").val();
+
+		//alert(income);return false;
+		var starttime = $("#starttime").val();
+		var endtime = $("#endtime").val();
+		if($("#has_capitals").is(':checked')){
+			var has_capital = 1
+		}else{
+			var has_capital=0
+		}
+		if (investyear=="") {
+				alert('请选择收益年度！');
+				return false;
+			}
+		if (sort_order=="") {
+				alert('请选择收益期数！');
+				return false;
+			}
+		if (income=="") {
+				alert('请填写本期收益！');
+				return false;
+			}
+		if (starttime=="") {
+				alert('发放开始时间！');
+				return false;
+			}
+		if (endtime=="") {
+				alert('发放结算时间！');
+				return false;
+			}
+
+		$.ajax({
+				url: "__URL__/generate",
+				type: "post",
+				dataType: "json",
+				data: {
+					investyear:investyear,sort_order:sort_order,income:income,starttime:starttime ,endtime:endtime , has_capital:has_capital,bid:bid,chajia:chajia,
+				},
+				success: function(d) {
+				    console.log(d);
+					if (d.status == 1) {
+						var htm = '';
+						var strhtm = '';
+						$('.showsy').show();
+                        var datalog= d.datalog;
+	                   	strhtm +='<span>'+datalog.sort_order+'</span>';
+	                   	strhtm +='<span>'+datalog.income+'</span>';
+	                   	strhtm +='<span>'+datalog.chajia+'</span>';
+	                   	strhtm +='<span>'+datalog.borrow_duration+'个月</span>';
+	                   	strhtm +='<span>'+datalog.capital+'</span>';
+	                   	strhtm +='<span>'+datalog.year_invest+'</span>';
+	                   	strhtm +='<span>'+datalog.starttime+'</span>';
+	                   	strhtm +='<span>'+datalog.endtime+'</span>';
+		                $.each(d.savedetaillog, function(index, val) {         
+		                   	htm +='<div class="touTz1 on ">';           
+							htm +='<span>'+val.nums+'</span>';
+							htm +='<span>'+val.investor+'</span>';
+							htm +='<span>'+val.capital+'元</span>';
+							htm +='<span>'+val.invest+'元</span>';
+							htm +='<span>'+val.chajia+'</span>';
+							// htm +='<span>'+val.rate+'% </span>';
+							htm +='<span>'+val.benjin+'元</span>';
+							htm +='<span style="width: 23%;">'+val.allmoney+'元</span>';
+							htm +='<a href="__URL__/invest_detail_del/id/'+val.id+'">删除</a>';
+							htm +='</div>';
+		                });
+		                $("#borrow_id").val(bid);
+		                $("#invest_orderid").val(sort_order);
+		                $("#has_capital").val(has_capital);
+		                $("#capital").val(datalog.capital);
+		                $(".huikuanmingxi").append(htm);
+		                $(".touzilog").append(strhtm);
+					}
+					else if (d.status == 0) {
+						alert(d.info);
+					}
+				}
+			});
+	}
+	function sub(){
+		var info = $("#info").val();
+		var borrow_id = $("#borrow_id").val();
+		var invest_orderid = $("#invest_orderid").val();
+		if(borrow_id == ''){
+			alert('请先生成收益明细');
+			return false;
+		}
+		if(invest_orderid == ''){
+			alert('请先生成收益明细');
+			return false;
+		}
+		if(info == ''){
+			alert('填写收益描述');
+			return false;
+		}
+		$("#myform").submit();
+		return true;
+	}
+</script>
+</body>
+</html>

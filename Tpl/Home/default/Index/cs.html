@@ -1,0 +1,39 @@
+<div class="banner">
+    <form action="__APP__/wap/api/uploads"  method="post" class="form form-horizontal" id="form-add" name="form-add" enctype="multipart/form-data">
+
+      <div class="row cl">
+
+
+        <input type="file" multiple name="img" class="input-file">
+
+    </div>
+    <input type="submit">
+
+    </form>
+</div>
+    <!--首页引用-->
+    <script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/js/countUp.min.js"></script>
+    <script>
+        var options = {  
+            useEasing: true,
+              useGrouping: true,
+              separator: ',',
+              decimal: '.',
+              prefix: '',
+              suffix: ''
+        };
+         var demo = new CountUp("myTargetElement", 0, {:getDataCount(5)}, 0, 2.5, options);
+        var demo2 = new CountUp("myTargetElement2", 0, {:getDataCount(2)}, 0, 2.5, options);
+        var demo3 = new CountUp("myTargetElement3", 0, {:getDataCount(4)}, 0, 2.5, options);
+        var demo4 = new CountUp("myTargetElement4", 0, {:getDataCount(3)}, 0, 2.5, options);
+        demo.start();
+        demo2.start();
+        demo3.start();
+        demo4.start();
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $('.cui-timer').Cuitimer();
+        });
+    </script>
+    

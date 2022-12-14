@@ -1,0 +1,211 @@
+
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+ 
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="/wap" class="w-header-left">< 返回 </a>
+            <h3>项目浏览</h3>
+            <a href="/Wapmember" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+<style>
+	.w-probro-bg{
+		height: auto;
+	}
+	.navslis{
+	    width: 100%;
+	}
+	.navslis a{
+	    padding: 0 .05rem;
+	}
+	.w-probro-bg img{
+		width: 100%;
+		height: auto;
+	}
+</style>
+ 
+    <!-- 我的项目 -->
+    <div class="w-int">
+        <div class="w-probro-bg"   >
+               <volist name=":get_ad(32)" id='vo' offset="0" length='1'>  
+                  <img src="/{$vo.img}" /> 
+                    
+              </volist> 
+        </div>
+        <div class="souszs">
+             <input type="text" class="inp" id="key" placeholder="搜索">
+            			<input type="submit" class="btn" value="搜索">
+            		
+        </div>
+
+
+     <div class="int-list-warpper">
+            <div class="w-porper"> 
+    <div class="porper-top flex">
+               <!-- <a href="##" class="w-porpertop-active">全部</a>
+                <a href="##">联合养殖</a>
+                <a href="##">联合销售</a>
+                <a href="##">共建项目</a>-->
+                <a href=" /Wap/invest/index.html?borrow_type=0" class="borrow_type0">全部</a>
+                      <volist name=":getProCat()" id="vo">
+                          <a href=" /Wap/invest/index.html?borrow_type={$vo.id}"  class="borrow_type{$vo.id}">{$vo.type_name}</a>
+                      </volist>
+                        <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+ 
+                      <script type="text/javascript">
+     
+          $(".btn").on("click", function(){
+                      		         var val =  $("#key").val();
+                      		            window.location.href="/Wap/invest/index.html?borrow_type={$borrow_type|default=0}&key="+val;  
+                      		        });
+    	$(".borrow_type").removeClass("w-porpertop-active");  
+      $(".borrow_type{$borrow_type|default=0}").addClass("w-porpertop-active");      
+ 		 
+</script>
+            </div>
+
+<div class="int-list">
+	   <!-- <volist name="list.list" id="vb"> -->
+	   	<if  condition="$vb.borrow_status eq 7" />
+                
+                        <elseif condition="$vb.borrow_status eq 6" />
+                    
+                        <else/>
+                          <a href="{:U('invest/detail',array('id'=>$vb['id']))}" class="clear">
+                        </if>
+             
+                        <div class="int-list-left fl">
+                            <img src="{$vb.borrow_img}" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6>   {$vb.borrow_name|cnsubstr=###,8}</h6>
+                            <div class="clear w-porper-div1">
+                                <span href="##" class="fl first">目标：
+                                    <span>{$vb.borrow_money}</span>
+                                </span>
+                                <span class="fr w-probro-yu">
+                                	<if condition="$vb.start_time gt time()">                         
+                            预热中
+                        <elseif condition="$vb.borrow_status eq 2" />
+                            众筹中  
+                        <elseif condition="$vb.borrow_status eq 7" />
+                            项目已收益
+                        <elseif condition="$vb.borrow_status eq 6" />
+                            项目完成  
+                        <!--< else  /  >-->
+                        <!--    项目完成               -->
+                        </if>
+                                </span>
+                            </div>
+                            <!-- 进度条 w为变量 -->
+                            <div class="wq-div" w="{$vb.progress}">
+
+                            </div>
+                            <div class="clear w-porper-div2">
+                            	<span class="fl first">达成率：
+                                    <span>{$vb.progress}%</span>
+                                </span>
+                                 <span class="fr first">剩余：
+                                    <span><?php if(intval(($vb['collect_time']-time())/60/60/24)>=0){echo(intval(($vb['collect_time']-time())/60/60/24));}else{
+                                    	echo("0");
+                                    } ;?>天</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    	<if  condition="$vb.borrow_status eq 7" />
+                
+                        <elseif condition="$vb.borrow_status eq 6" />
+                    
+                        <else/>
+                          </a>
+                        </if>
+                       <!-- </volist> -->
+               </div>
+
+
+        </div>
+        <div style="height: 2px;">
+   		</div>
+
+    </div>
+          <div class="navslis">
+        {$list.page}
+                     	
+        </div>
+     </div>
+<script>
+	$zindex=0;
+</script>
+   <script>
+            $(function () {
+
+                var a = "#00a0e9";
+                var b = "#dedede";
+                var w = "100%";
+                var h = "5px";
+                var wq0div = $(".wq-div");
+                var barb = function () {
+                    wq0div.each(function () {
+                        var width = $(this).attr('w');
+                        // width = parseFloat($('.w-porper-div2 .first>span').text())
+                        var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+                        $(this).append(barbox);
+                    })
+                }
+
+                var amimeat = function () {
+                    $(".charts").each(function (i, item) {
+                        var wi = parseInt($(this).attr("w"));
+                        $(item).animate({ width: wi + "%" }, 1000, function () {
+                            
+                        });
+                    });
+                }
+                var barbCss = function (a, b) {
+                    $(".barbox").css({
+                        "height": h,
+                        "line-height": h,
+                        "text-align": "center",
+                        "color": "#fff",
+                    })
+                    $(".barbox>dd").css({
+                        "float": "left"
+                    })
+                    $(".barline").css({
+                        "width": w,
+                        "background": b,
+                        "height": h,
+                        "overflow": "hidden",
+                        "display": "inline",
+                        "position": "relative",
+                        "border-radius": "8px",
+                    })
+                    $(".barline>d").css({
+                        "position": "absolute",
+                        "top": "0px",
+                    })
+                    $(".charts").css({
+                        "background": a,
+                        "height": h,
+                        "width": "0px",
+                        "overflow": "hidden",
+                        // "border-radius": "2px"
+                    })
+                }
+                barb();
+                amimeat();
+                barbCss(a, b);
+            })
+        </script>
+
+        <script>
+            $('.w-porper .porper-top>a').click(function () {
+
+                $(this).addClass('w-porpertop-active')
+                $(this).siblings().removeClass('w-porpertop-active')
+            })
+        </script>
+    <!-- 我的项目 -->
+ 

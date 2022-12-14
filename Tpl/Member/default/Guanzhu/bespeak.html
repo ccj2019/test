@@ -1,0 +1,84 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+    body {
+        background: #f8f8f8;
+    }
+    .bgxmlis>div{
+        width:25% !important;
+        text-align: center;
+        padding-left: 0px !important;
+        margin-left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:48px;
+    }
+    .tou1>span{
+        width:25% !important;
+        text-align: center;
+        padding-left: 0px;
+        margin-left: 0px !important;
+    }
+</style>
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a >发起项目</a></span>
+</div>
+<div class="box clearfix">
+    <include file="default:Public:_left"/>
+    <div class="tabvbox">
+        <div class="tabv clearfix" style="position: relative;">
+            <div class="on" >
+                <span>我的预约</span>
+            </div>
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <div class="bgbx">
+                    <div class="tou1">
+                        <span>项目名称</span>
+                        <span>预约时限</span>
+                        <span>预约金额</span>
+                        <span>操作</span>
+                    </div>
+                    <volist name="list" id="vo">
+                        <div class="bgxmlis">
+                            <div class="bt" style="width:25% !important;">
+                                <a target="_self" href="{$vo.borrow_id|getInvestUrl}" title="{$vo.borrow_name}"><div style="width:100%;text-align: center"><img src="{$vo.borrow_img}" alt="" style="float: none;"/></div>{$vo.borrow_name|cnsubstr=10}</a>
+                            </div>
+                            <div>
+                                {$vo['start_time'] + $vo['bespeak_days'] * 60 * 60 * 24|date='Y-m-d H:i:s',###}
+                            </div>
+                            <div class="zijin">
+                                {$vo.bespeak_money|Fmoney}
+                            </div>
+                            <div>
+                                <eq name="vo.bespeak_status" value="0">
+                                    <if condition="$vo.start_time gt time()">
+                                        <span style="color: #ff6421">等待开标</span>
+                                    <elseif condition="$vo.start_time + $vo.bespeak_days * 60 * 60 * 24 gt time()"/>
+                                        <a target="_self" href="/invest/is_order/id/{$vo.borrow_id}.html"><span style="color: #00a6e4">缴纳余款</span></a>
+                                    <else/>
+                                        <span style="color: #737373">预约金已作废</span>
+                                    </if>
+                                <else/>
+                                    余款已缴纳
+                                </eq>
+                            </div>
+                        </div>
+
+                    </volist>
+                </div>
+                <!--分页-->
+                <div class="aFye clearfix">
+                    <p>
+                        {$pagebar}共{$count}条记录
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

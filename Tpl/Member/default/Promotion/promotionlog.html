@@ -1,0 +1,57 @@
+<include file="default:Public:mheader" />
+
+<!--内容部分-->
+<div class="box navls">
+    <span><a href="{:U('/member')}">会员中心</a></span>
+    <span>&gt;</span>
+    <span><a>邀请记录</a></span>
+</div>
+<style type="text/css">
+    .text_input{
+        background: #f8f8f8;
+        border: #d2d2d2 1px solid;
+        line-height: 25px;
+        padding-left: 10px;
+        color: #737373;
+        float: left;
+    }
+</style>
+<div class="box clearfix">
+    <include file="default:Public:_left" />
+    <div class="tabvbox">
+        <div class="tabv clearfix">
+            <div><a href="{:U('promotion/index')}"><span>邀请记录</span></a></div>
+            <div class="on"><a href="{:U('promotion/promotionlog')}"><span>佣金记录</span></a></div>
+        </div>
+        <div class="tabv2box">
+            <div class="tabv2 show">
+                <!--充值记录-->
+                <div class="bgbx">
+                    <div class="tou1 hb3">
+                        <span>邀请的会员名</span>
+                        <span>注册时间</span>
+                        <span>返利订单</span>
+                        <span>发放时间</span>
+                        <span>发放佣金</span>
+                        <span>发放状态</span>
+                    </div>
+                    <volist name="friendlog" id="vb">
+                    <div class="bgxmlis hb3">
+                        <span>{$vb.user_name}</span>
+                        <span>{$vb.reg_time|date="Y-m-d",###}</span>
+                        <span>{$vb.ordernums}</span>
+                        <span>{$vb.add_time|date="Y-m-d",###}</span>
+                        <span>{$vb.money}</span>
+                        <span>已发放</span>
+                    </div>
+                    </volist>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

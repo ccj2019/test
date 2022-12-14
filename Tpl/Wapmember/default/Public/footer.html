@@ -1,0 +1,31 @@
+<link type="text/css" rel="stylesheet" href="/Public/wap/css/xin.css">
+<div class="gaodu"></div>
+<div class="footerg">
+    <ul>
+        <li class="">
+            <a href="/wap"><img src="/Public/zpublic/images/shouye_1.png"/><img src="/Public/zpublic/images/shouye.png"/><span>主页</span></a>
+        </li>
+        <li class="">
+            <a href="/Wap/Borrow/index"><img src="/Public/zpublic/images/faqi_1.png"/><img src="/Public/zpublic/images/faqi.png"/><span>发起</span></a>
+        </li>
+        <li class="">
+            <a href="/wap/shop"><img src="/Public/zpublic/images/shangcheng_1.png"/><img src="/Public/zpublic/images/shangcheng.png"/><span>商城</span></a>
+        </li>
+        <li class="hom">
+            <a href="/Wapmember"><img src="/Public/zpublic/images/wode_1.png"/><img src="/Public/zpublic/images/wode.png"/><span>我的</span></a>
+        </li>
+    </ul>
+</div>
+</body>
+
+</html>
+<script>
+
+if(typeof($zindex)  == "undefined"){
+	$zindex=0;
+}
+
+$(".footer li").removeClass("hom")
+$(".footer li").eq($zindex).addClass("hom")
+</script>
+

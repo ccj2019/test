@@ -1,0 +1,50 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>借款标题</td>
+        <td>利率</td>
+        <td>第几期/总期数</td>
+        <td>债权总值</td>
+        <td>转让价格</td>
+        <td>转让时间</td>
+        <td>购买人</td>
+        <td>协议书</td>
+      </tr>
+      <volist name="list.data" id="vo">
+        <tr>
+            <td ><a target="_blank" href="{$vo.borrow_id|getInvestUrl=###}" title="{$vo.borrow_name} 第{$vo.serialid}号">{$vo.borrow_name|cnsubstr=###,10}</a></td>
+            <td >{$vo.deadline|date="Y-m-d",###}</td>
+            <td >{$vo.user_name}</td>
+            <td >{$vo['has_pay']+1}期/{$vo.total_period}期</td>
+            <td >￥{$vo.money}</td>
+            <td >￥{$vo.capital|default=0}</td>
+            <td >￥{$vo.interest|default=0}</td>
+            <td ><a href="__URL__/agreement?invest_id={$vo.invest_id}" target="_blank">协议债权</a></td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-3" id="pager" class="yahoo2 ajaxpagebar navslis">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.ajaxpagebar a').click(function(){
+    try{    
+        var geturl = $(this).attr('href');
+        var id = $(this).parent().attr('data');
+        var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+                  if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+    }catch(e){};
+    return false;
+})
+</script>

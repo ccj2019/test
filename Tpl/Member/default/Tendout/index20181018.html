@@ -1,0 +1,101 @@
+
+<style>
+    body {
+        background: #f1f1f1;
+    }
+</style>
+
+<!--投资管理分红的众筹-->
+<div class="hyzx">
+    <div class="container">
+        <div class="mian">
+            <a href="/">首页</a>
+            <a href="/member">个人中心</a>
+        </div>
+        <div class="hyzxcon">
+            <include file="default:Public:_left" group="Member"/>
+            <div class="hyr">
+                <div class="title1">
+                    <span>已成功的众筹</span>
+                </div>
+                <div class="fhzc">
+                    <table border="0" cellspacing="1" cellpadding="0">
+                        <tr>
+                            <th>众筹标号</th>
+                            <th>项目</th>
+                            <th>预计万元收益</th>
+                            <th>期限</th>
+                            <th>金额</th>
+                            <th>红包奖励</th>
+                            <th>本期还款日</th>
+                            <th>状态</th>
+                            <th>电子协议</th>
+                        </tr>
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo.borrow_id}</td>
+                                <td>{$vo.borrow_name|cnsubstr=###,10}</td>
+                                <td>{$vo.borrow_interest_rate}</td>
+                                <td>{$vo.borrow_duration}天</td>
+                                <if condition="$vo.bonus_id neq 0">
+                                    <td>{:getFloatvalue($vo['investor_capital']-(bounsmoney($vo['bonus_id'])),2)}</td>                    
+                                <else/>
+                                    <td>{$vo.investor_capital|Fmoney=###}</td>                    
+                                </if>
+                                <td>
+                                    <if condition="$vo.member_interest_rate_id neq 0">加息券：{:intestrate($vo['member_interest_rate_id'])}%<br /></if>
+                                    <if condition="$vo.bonus_id neq 0">红包{:bounsmoney($vo['bonus_id'])}</if>
+                                </td> 
+                                <td><if condition="$vo.hk_time neq ''">{$vo.hk_time|date="Y-m-d",###}</if></td>
+                                <td>
+                                <if condition="($vo.borrow_status eq 1)">预热中
+                                <elseif condition="($vo.borrow_status eq 2)"/>众筹中
+                                <elseif condition="($vo.borrow_status eq 4)"/>复审中
+                                <elseif condition="($vo.borrow_status eq 6)"/>已成功
+                                <elseif condition="($vo.borrow_status eq 7)"/>已分红
+                                </if>
+                                </td>
+
+                                <if condition="$vo.borrow_status gt 4">
+                                    <if condition="$mdata.signerId eq '' ">
+                                        <td><a href="__APP__/member/agreement/create">创建用户</a></td>
+                                    <elseif condition="$mdata.moulageId eq '' " />
+                                        <td><a href="__APP__/member/agreement/personmoulage">创建印模</a></td>
+                                    <else/>
+                                        <if condition="$vo.contractId eq '' ">
+                                            <td><a href="__APP__/member/agreement/templatecontract?id={$vo.id}">生成合同</a></td>
+                                        <else/>
+                                            <if condition="$vo.is_sign eq 0 ">
+                                                <php>if($vo['step'] == 0){ </php>
+                                                    <td><a href="__APP__/member/agreement/addsigner?id={$vo.id}">添加签署者</a></td>
+                                                    <php>}else if($vo['step'] == 1){</php>
+                                                    <td><a href="__APP__/member/agreement/jfsign?id={$vo.id}">签署</a></td>
+                                                    <php>}else if($vo['step'] == 2){</php>
+                                                    <td><a href="__APP__/member/agreement/sign?id={$vo.id}">签署</a></td>
+                                                    <php>}else if($vo['step'] == 4){</php>
+                                                    <td><a href="__APP__/member/agreement/qcsign?id={$vo.id}">签署</a></td>
+
+                                                    <php>}</php>
+                                            <else/>
+                                                <td><a href="__APP__/member/agreement/download?id={$vo.id}">合同下载</a></td>
+                                            </if>
+                                        </if>
+                                    </if>
+                                <else/>
+                                    <td>未生成合同</td>
+                                </if>
+
+
+                            </tr>
+                        </volist>
+                        
+                    </table>
+                    <div class="number" style="background:none">
+                        {$pagebar}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

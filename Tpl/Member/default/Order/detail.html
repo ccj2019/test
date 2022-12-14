@@ -1,0 +1,91 @@
+<tagLib name="htmlA" />
+<style type="text/css">
+.tdHeard, .tdContent { border: solid 1px #ccc; }
+#pager { margin: 10px 4px 3px 0px; }
+.notes_frame { width: 715px; overflow: hidden; margin: 0 auto; height: 30px; margin-top: 10px; }
+.notes_frame div { padding-top: 13px; }
+.operaframe { width: 100%; overflow: hidden; line-height: 27px; padding-left: 25px; margin-top: 20px; }
+.operaframe ul { padding: 0px; margin: 0px; text-align: left; overflow: hidden; line-height: 25px; }
+.operaframe ul li { float: left; line-height: 25px; }
+</style>
+
+<div class="top_account_bg" style="overflow:hidden; height:50px; line-height:25px">
+	<img src="__ROOT__/Style/H/images/ministar.gif" style="margin-right: 5px;">
+	尊敬的{$glo.web_name}用户，积分商城兑换记录和您的订单详情！
+</div>
+<div class="notes_frame">
+	<div style="">
+		<span>兑换记录和订单详细信息。</span>
+	</div>
+</div>
+<div style="margin-top: 20px; overflow: hidden; text-align: left;">
+	<table id="content" style="width: 760px; border-collapse: collapse;margin-left: 8px;" cellspacing="0">
+		<tbody><tr>
+			<th scope="col" class="tdHeard" style="width: 150px;">购买商品</th>
+			<th scope="col" class="tdHeard" style="width: 100px;">消费金额</th>
+			<th scope="col" class="tdHeard" style="width: 100px;">订单时间</th>
+			<th scope="col" class="tdHeard" style="width: 80px;">购买数量</th>
+            <th scope="col" class="tdHeard" style="width: 80px;">订单状态</th>
+		</tr>
+	
+	<volist name="list" id="vo">
+	<tr class="nodatashowtr">
+		<td class="tdContent"><a href="/maket/view?id={$vo.gid}" target="_blank">{$vo.title}</a></td>
+		<td class="tdContent">￥{$vo.jine}元+{$vo.jifen}积分</td>
+		<td class="tdContent">{$vo.add_time|date="Y-m-d H:i",###}</td>
+		<td class="tdContent">{$vo.num}</td>
+        <td class="tdContent"><if condition="$vo.action eq 0"> 未发货 <else/> <font title="{$vo.yijian}">已发货</font> </if></td>
+	</tr>
+	</volist>
+	</tbody></table>
+	<div data="fragment-1" id="pager" style="float: right; text-align: right; width: 500px; padding-right: 8px;margin-right: 24px;" class="yahoo2 ajaxpagebar navslis">{$pagebar}</div><div class=" navslis">  {$pagebar}</div> <script> var str = $(".navslis").html(); var m =str.length; var n = str.indexOf("条记录"); var j = str.substring(n+1,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(s+"记录", "")); var m =str.length; var n = str.indexOf("尾页</a>"); var j = str.substring(n+6,m); var s = str.replace(j,""); var el = $(".navslis");  el.html(el.html().replace(j, "")); for (var i=4;i<$(".navslis a").length-1;i++) { $(".navslis a").eq(i).hide(); } </script>
+</div>
+<div style="clear: both; float: none;">
+</div>
+
+<script type="text/javascript">
+//返回数字
+function NumberCheck(t){
+	var num = t.value;
+	var re=/^\d+\.?\d*$/;
+	if(!re.test(num)){
+		isNaN(parseFloat(num))?t.value=0:t.value=parseFloat(num);
+	}
+}
+
+function sdetail(){
+	
+	x = makevar(['log_type','start_time','end_time']);
+	$.ajax({
+		url: "__URL__/detail",
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d) $("#chip-2").html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+		}
+	});
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

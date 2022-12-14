@@ -1,0 +1,472 @@
+<include file="Public:header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/web/css/G.css" />
+<script type="text/javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/area.js"></script>
+<style type="text/css">
+    body {
+        background: #f8f8f8;
+    }
+</style>
+<!--内容部分-->
+<div class="box clearfix">
+    <div class="navDs">
+        <img src="__PUBLIC__/web/img/Ls4.png" alt="" /> 
+        <a href="/Borrow/index"><span>发起项目></span></a>
+        <a href="/invest/index.html"><span>项目信息</span></a>  
+    </div>
+    <div class="zuob">
+        <div class="Faqi clearfix">
+            <div class="FaqiT1 on">
+                <a>项目信息</a>
+            </div>
+            <div class="FaqiT1">
+                <a>回报内容</a>
+            </div>
+            <div class="FaqiT1">
+                <a>提交项目</a>
+            </div>
+        </div>      
+        <!-- 填写内容 -->
+        <form action="/borrow/save" method="post" name="form1" id="form1" style="width: 750px;margin: 0 auto;">
+        <div class="neirron">   
+            <ul>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目标题：</div>
+                        <div class="skuisdslid">
+                            <input type="text"  name="borrow_name" id="borrow_name" placeholder="名称不可超过30个字" required="required">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">筹集金额：</div>
+                        <div class="skuisdslid">
+                            <input type="number" name="borrow_money" id="borrow_money"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" placeholder="不少于100" min="1" required="required">元
+                        </div>
+                    </div>
+                </li> 
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">筹集天数：</div>
+                        <div class="skuisdslid">
+                            <input name="borrow_time" type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" placeholder="不少于1" required="required" min="1">天
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目期数：</div>
+                        <div class="skuisdslid">
+                            <input name="total" type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" placeholder="不少于1" required="required" min="1">期
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目周期：</div>
+                        <div class="skuisdslid">
+                            <input name="borrow_duration" type="text" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" placeholder="不少于1" required="required" min="1">月
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">收益率：</div>
+                        <div class="skuisdslid">
+                            <input name="shouyilv" type="text"  placeholder="10%~11%"><br>填写后将最先显示
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">回款天数：</div>
+                        <div class="skuisdslid">
+                            <input name="hkday" type="text"  placeholder="回款间隔（天）"><br>多期回款，回款间隔小于一个月的
+                        </div>
+                    </div>
+                </li>   
+
+                
+                 <li>
+                    <div class="lisaso">
+                        <div class="skuisd">售价</div>
+                        <div class="skuisdslid">
+                            <input name="shoujia" type="text" value="" placeholder="2000.01" required="required"> 
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">库存</div>
+                        <div class="skuisdslid">
+                            <input name="art_writer" type="text" value="" placeholder="20" required="required">
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">开售时间</div>
+                        <div class="skuisdslid">
+                            <input name="xs_time" type="date"   value="" placeholder="2020-11-11" required="required">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">下架时间</div>
+                        <div class="skuisdslid">
+                            <input name="xj_time" type="date"   value="" placeholder="2020-11-11" required="required">
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">收购时间</div>
+                        <div class="skuisdslid">
+                            <input name="sg_time" type="date"   value="" placeholder="2020-11-11" required="required">
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">预计回款日期</div>
+                        <div class="skuisdslid">
+                            <input name="lead_time" type="date"   value="" placeholder="2020-11-11" required="required"> 
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目类别：</div>
+                        <div class="skuisdslid">
+                            <select name="pid" id="pid">
+                                <option value="1" selected>渔场养殖</option>
+                                <option value="2">海洋牧场</option>
+                                <option value="3">海上渔船</option>
+                                <option value="3">海鲜收购</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+		        <li>
+                    <div class="lisaso">
+                        <div class="skuisd">新手专享：</div>
+                            <input type="radio" name="new_user_only" value="0" checked="checked"/>否&nbsp;&nbsp;
+                            <input type="radio" name="new_user_only" value="1"/>是
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">可以预约：</div>
+                        <input type="radio" name="bespeak_able" value="0" checked="checked"/>否&nbsp;&nbsp;
+                        <input type="radio" name="bespeak_able" value="1"/>是
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">可以智投：</div>
+                        <input type="radio" name="zhitou_able" value="0" checked="checked"/>是&nbsp;&nbsp;
+                        <input type="radio" name="zhitou_able" value="1"/>否
+                        &nbsp;&nbsp;
+                        <input type="radio" name="zhitou_able" value="2"/>新手智投
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">所在地区：</div>
+                        <div class="skuisdslid">
+                            <select name="selectp" id="province">
+                                <option value="0">请选择省份 </option>
+                            </select>
+                            <select name="selectc" id="city" >
+                                <option value="0">请选择城市</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">页面封面：</div>
+                        <div class="skuisdslid">
+                            <div class="touxiang  DAN_Gs">
+                                <div class="">
+                                    <div class="left fl">
+                                        <label for="doc"  id="btn1">
+                                            <div class="img">
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="right fl zzzzzzzzzzisad">
+                                        支持jpg、jpeg、png、gif格式大小不 超过2.0MB，
+                                        <span>最佳尺寸：760px*530px</span>
+                                    </div>
+                                </div>
+                                <div id="ul_pics1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目图片：</div>
+                        <div class="skuisdslid">
+                            <div class="z_photo touxiang  ">
+                                <div class="clearfix">
+                                    <div class="left fl">
+                                        <label for="file" id="btn2">
+                                            <div class="img">
+                                            </div>
+                                        </label>
+                                    </div>  
+                                    <div class="right fl">
+                                        支持jpg、jpeg、png、gif格式，大小不超过2.0MB【推荐尺寸760px*530px，最多上传5张】
+                                    </div>
+                                    <div id="ul_pics2" style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <link rel="stylesheet" href="__ROOT__/Style/kindeditor/themes/default/default.css" />
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/kindeditor-min.js"></script> 
+                <script charset="utf-8" src="__ROOT__/Style/kindeditor/lang/zh_CN.js"></script> 
+                <script>
+                    $(function(){
+                        var editor;
+                        KindEditor.ready(function(K) {
+                            editor = K.create('textarea[name="borrow_info"]', {
+                                allowFileManager : true,
+                                autoHeightMode : true,
+                                filterMode:false,
+                                afterCreate : function() {
+                                    this.loadPlugin('autoheight');
+                                },
+                                afterUpload : function(url) {
+                                    var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                                    var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                                    $("#firstimage").append(firstimageoption);
+                                    $("#images").append(selectoption);
+                                },afterBlur: function(){this.sync();},
+                                items : [
+                                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                'insertunorderedlist', '|', 'emoticons', 'image']
+
+                            });
+                        });
+                    })
+                </script>
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">简要说明：</div>
+                        <div class="skuisdslid">
+                            <textarea  name="borrow_con"  id="borrow_con" cols="30" rows="30" placeholder="请简要描述一下你的项目"></textarea>
+                        </div>
+                    </div>
+                </li>
+                <!-- <pre></pre> -->
+                <li>
+                    <div class="lisaso">
+                        <div class="skuisd">项目详情：</div>
+                        <div class="skuisdslid">
+                            <textarea  name="borrow_info"  id="borrow_info" cols="30" rows="30"></textarea>
+                        </div>
+                    </div>
+                </li>
+                <input  type="hidden" name="borrow_type"  value="1" >
+                <input  type="hidden" name="repayment_type"  value="1" >
+                <input  type="hidden" name="borrow_model"  value="1" >
+                <li class="btnBioxs">
+                    <button class="c1">先保存</button>
+                    <button class="c2">下一步</button>
+                </li>
+            </ul>
+        </div>          
+        </form>
+    </div>
+    
+    
+    <div class="ybian">
+        <div class="z-xiangm"> 
+            <!-- <volist name="list_type3.list" id="vb"> -->
+            <div class="z-img">
+                <a href="{:U('invest/detail',array('id'=>$vb['id']))}" target="_blank"><img src="{$vb.borrow_img}" id="borrow_img2" alt="" width="280" /></a>
+                <img src="__PUBLIC__/web/img/xiangmu/21.png" alt="" class="on1">
+            </div>
+            <div class="p-box">
+                <p id="borrow_name2">{$vb.borrow_name}</p>
+                <p >目标：￥  <span id="borrow_money2">{$vb.borrow_money}</span></p>
+                <p class="p-jdu"><span id="progress2" style="width: {$vb.progress}%;"></span></p>
+                <p class="p-p1 on"><span id="progress3">{$vb.progress}%</span> <span id="has_borrow2">￥{$vb.has_borrow|getMoneyFormt=###}</span> <span id="collect_time2">{$vb.collect_time|date="Y/m/d",###}</span></p>
+                <p class="p-p1"><span>达成率</span> <span> 已筹金额</span> <span>剩余时间</span></p>
+                <p class="xian"></p>
+                <p class="p-fx clearfix"><span class="fl">支持:{$vb.id|get_pro_invest}</span> <span class="fr">分享</span> </p>
+            </div>
+            <!-- </volist>  --> 
+        </div>
+    </div>
+    
+    
+    
+    
+    
+</div> 
+<script type="text/javascript">
+
+$(document).keydown(function(event){ //监听键盘按下时的事件
+ 
+
+ if( $("#borrow_name").val()!= $("#borrow_name2").text()){
+      $("#borrow_name2").text($("#borrow_name").val());
+ }
+ if( $("#borrow_money").val()!= $("#borrow_money2").text()){
+      $("#borrow_money2").text($("#borrow_money").val());
+ }
+ 
+        $("#progress2").css("width", "0%");
+        $("#progress3").text("0%");
+        $("#has_borrow2").text(0);
+        var myDate = new Date();
+        $("#collect_time2").text(myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate());
+
+ 
+});
+    $('.c1').click(function() {
+
+        $('#form').submit();
+    })
+    $('.c2').click(function() {
+        $('#form').submit();
+    })
+
+</script>
+<include file="Public:footer"/>
+<script type="text/javascript" src="__PUBLIC__/web/js/plupload/plupload.full.min.js"></script>
+<script type="text/javascript">
+    var uploader1 = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'btn1',
+        url:  "__URL__/zhao",
+        flash_swf_url: '__PUBLIC__/web/js/plupload/Moxie.swf',
+        silverlight_xap_url: '__PUBLIC__/web/js/plupload/Moxie.xap',
+        filters: {
+            max_file_size: '5000kb',
+        },
+        multi_selection: false,
+        init: {
+            FilesAdded: function(up, files) {
+                var li = '';
+                plupload.each(files, function(file) {
+                    li = "<div id='b1'></div>";
+                });
+                $("#a21").hide();
+                $("#ul_pics1").append(li);
+                uploader1.start();
+            },
+            UploadProgress: function(up, file) {
+               
+            },
+            FileUploaded: function(up, file, info) {
+             
+                var data = eval("(" + info.response + ")");
+                if (data.error == 1) {
+                    layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+                        time:2000,
+                        end:function(){
+                            location.reload();
+                        }
+                    });
+                } else {
+                    
+                              $("#borrow_img2").attr("src",$("#borrow_img").val());
+                     
+                    $("#b1").css('width','100px').html("<img height='100' src='" + data.pic + "'/><input name='borrow_img' id='borrow_img' type='hidden' value='" + data.pic + "'/>");
+                }
+            },
+            Error: function(up, err) {
+                layer.closeAll();
+                layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+                    time:2000,
+                    end:function(){
+                        location.reload();
+                    }
+                });
+            }
+        }
+    });
+    uploader1.init();
+</script>
+<script type="text/javascript">
+    var uploader2 = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'btn2',
+        url:  "__URL__/zhao",
+        flash_swf_url: '__PUBLIC__/web/js/plupload/Moxie.swf',
+        silverlight_xap_url: '__PUBLIC__/web/js/plupload/Moxie.xap',
+        filters: {
+            max_file_size: '5000kb',
+        },
+        multi_selection: false,
+        init: {
+            FilesAdded: function(up, files) {
+                if ($("#ul_pics2").children("div").length > 4) {
+                    layer.msg("您上传的图片太多了！");
+                    uploader2.destroy();
+                } else {
+                    var li = '';
+                    plupload.each(files, function(file) {
+                        li += "<div id='b2" + file['id'] + "' style='float:left;padding-left: 10px;padding-right: 10px;'></div>";
+                    });
+                    $("#ul_pics2").append(li);
+                    uploader2.start();
+
+                }
+
+                // var li = '';
+                // plupload.each(files, function(file) {
+                //     li = "<div id='b2'></div>";
+                // });
+                // $("#a21").hide();
+                // $("#ul_pics2").append(li);
+                // uploader2.start();
+            },
+            UploadProgress: function(up, file) {
+                layer.load();
+            },
+            FileUploaded: function(up, file, info) {
+                layer.closeAll();
+                var data = eval("(" + info.response + ")");
+                if (data.error == 1) {
+                    layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+                        time:2000,
+                        end:function(){
+                            location.reload();
+                        }
+                    });
+                } else {
+                    $("#b2" + file.id).css('width','100px').html("<img height='100' width='100' src='" + data.pic + "'/><input name='content_img[]' id='content_img' type='hidden' value='" + data.pic + "'/>");
+                }
+            },
+            Error: function(up, err) {
+                layer.closeAll();
+                layer.msg('上传图片过大或图片格式不对,请重新上传5M以内,jpg、png格式的图片!',{
+                    time:2000,
+                    end:function(){
+                        location.reload();
+                    }
+                });
+            }
+        }
+    });
+    uploader2.init();
+</script>
+<script type="text/javascript">
+var areaurl="__URL__/getarea/";
+var s = new GetAreaSelect('#province','#city','#district',<empty name="vobank['bank_province']">2<else/>{$vobank.bank_province}</empty>,<empty name="vobank['bank_city']">52<else/>{$vobank.bank_city}</empty>);
+</script>

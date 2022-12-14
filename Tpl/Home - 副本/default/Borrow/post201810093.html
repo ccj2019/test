@@ -1,0 +1,146 @@
+<tagLib name="htmlA" />
+<script language="javascript" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Member/js/borrow.js?v=1" type="text/javascript"></script>
+<script type="text/javascript">
+function makevar(v){
+    var d={};
+    for(i in v){
+      var id = v[i];
+      d[id] = $("#"+id).val();
+      if(!d[id]) d[id] = $("input[name='"+id+"']:checked").val();
+    }
+    return d;
+}
+</script>
+<div class="launch">
+    <div class="launch_bottom">
+        <div class="launch_left"><span>发布{$borrow_model_cn}</span></div>
+        <!--launch_left-->
+        <div class="launch_right">
+         <form method="post" action="__URL__/save" onSubmit="return cksubmit();" name="postBorrow" id="postBorrow" enctype="multipart/form-data" >
+            <input type="hidden" name="vkey" value="{$vkey}" /><input type="hidden" name="borrow_type" value="{$borrow_type}" />
+    		
+        		<input type="hidden" name="repayment_type" value="5">
+            <input type="hidden" name="borrow_model" id="borrow_model" value="{$borrow_model}">              
+        
+            <div class="launch_text"> <span class="launch_a">项目名称：</span>
+                <input type="text" class="launch_b"  name="borrow_name" >
+                <span class="launch_c"></span> </div>
+            <!--launch_text-->
+            <div class="launch_text"> <span class="launch_a">筹资金额：</span>
+                <input type="text" class="launch_b" name="borrow_money" value="10000" >
+                <span class="launch_c">元</span> </div>
+            <!--launch_text-->
+            <div class="launch_text"> <span class="launch_a">募集天数：</span>
+                <input type="text" name="borrow_time" value="30" class="launch_b">
+                <span class="launch_c">天</span> </div>
+            <!--launch_text-->            
+            <div class="launch_text"> <span class="launch_a">项目行业：</span> 
+              <volist name=":getProCat()" id="vo">
+                   <a href="javascript:void(0);" type="{$vo.id}" class="pid_a xuanze_a">{$vo.type_name}</a>
+              </volist>
+              <input type="hidden" name="pid" id="pid">
+            </div>
+            <div class="launch_text"> <span class="launch_a">地区：</span>
+            <div style="margin-top:15px; margin-left:5px; padding-left:5px;"> 
+              <htmlA:select id="city" datakey="city" class="spec46" nodefalut="true"/></div>
+            </div>
+            <!--launch_text-->
+            <div class="launch_text"> <span class="launch_a">项目封面：</span> <a href="javascript:void(0)" class="fengmian">上传封面</a> <span class="launch_d">支持jpg、gif、png，大小不超过500K。建议尺寸366*273px</span> </div>
+            <input type="file" id="borrow_img" name="borrow_files" style=" display:none"/>
+            <!--launch_text-->
+            <!-- <div class="launch_text"> <span class="launch_a">视频：</span>
+                <input type="text" name="borrow_video" class="launch_b">
+            </div> -->            
+            <div class="launch_text"> <span class="launch_a">一句话介绍：</span>                                   
+                  <textarea name="borrow_con" id="borrow_con" style="width:760px;height:60px;border: 1px solid #ccc;"></textarea>
+            </div>            
+            <!--launch_text-->
+            <div class="launch_text"> <span class="launch_a">项目描述：</span>        
+            <link rel="stylesheet" href="/Style/kindeditor/themes/default/default.css" />
+                  <script charset="utf-8" src="/Style/kindeditor/kindeditor-min.js"></script>
+                  <script charset="utf-8" src="/Style/kindeditor/lang/zh_CN.js"></script>
+                  <script>
+                  $(function(){
+                    var editor;
+                    KindEditor.ready(function(K) {
+                      editor = K.create('textarea[name="borrow_info"]', {
+                        allowFileManager : true,
+                        autoHeightMode : true,
+                        afterCreate : function() {
+                          this.loadPlugin('autoheight');
+                        },
+                        afterUpload : function(url) {
+                          var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+                          var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+                          $("#firstimage").append(firstimageoption);
+                          $("#images").append(selectoption);
+                        },afterBlur: function(){this.sync();}
+                      });
+                    });
+                  })
+                  </script>
+                  <textarea name="borrow_info" id="borrow_info" style="width:760px;height:200px;visibility:hidden;"></textarea>
+            </div>
+          
+            <!--launch_text-->
+            <div class="launch_text" style="display:none"> <span class="launch_a"></span> <span class="lannch_g">
+                <input type="checkbox">
+                项目成功后，筹集金额的1.5%江北扣除，作为第三方支付平台的手续费。<a href="#">《服务协议》</a></span> </div>
+            <!--launch_text--> 
+            <a  href="javascript:void(0);" id="save_btn" class="a_next">提交项目申请</a> 
+            </form>
+            </div>
+        <!--launch_right--> 
+        
+    </div>
+    <!--launch_bottom--> 
+</div>
+<!--launch-->
+<script type="text/javascript">
+$(function(){
+  $("#save_btn").click(function(){
+    $("#postBorrow").submit();  
+  });
+  $(".pid_a").click(function(event) {
+    $(this).css({"background-color":"#e11111","color":"#FFF","border-color":"#e11111"});
+    $(this).siblings(".pid_a").css({"background":"none","color":"#666","border-color":"#ddd"});
+    $("#pid").val($(this).attr('type'));
+  });
+  $(".fengmian").click(function(event) {
+    $("#borrow_img").click();
+  });
+});
+
+// == <if condition="$miao eq 'yes'">
+var miao = 'yes';
+// == </if>
+
+$("#is_pass").click(function(e) {
+    if($(this).attr('checked')){
+    $("#password").show();
+  }else{
+    $("#password").hide();
+  }
+});
+
+function setError(tip){
+  layer.msg(tip);
+  return false;
+}
+
+function cksubmit(){
+  var p=makevar(['borrow_money','borrow_interest_rate','borrow_use','borrow_duration','borrow_min','borrow_max','borrow_time','repayment_type','reward_type_1','reward_type_1_value','reward_type_2','reward_type_2_value','vouch_rate','vouch_member','vouch_member','borrow_name','borrow_info']);
+
+  if(p.borrow_money == "")      return setError("借款金额不能为空！");
+  if(p.borrow_interest_rate == "")  return setError("借款利率不能为空！"); 
+  if(p.borrow_use == "")        return setError("借款用途不能为空！");
+  if(p.borrow_duration == "" && typeof miao=="undefined")     return setError("借款期限不能为空！");
+  if(p.borrow_min == "")        return setError("最小投资金额不能为空！");
+  if(p.borrow_time == "")       return setError("借款有效时间不能为空！");
+  if(p.repayment_type == "" && typeof miao=="undefined")      return setError("还款方式不能为空！");
+  if(p.borrow_name == "")       return setError("借款标题不能为空！");
+  if(p.borrow_info == "")       return setError("借款内容不能为空！");
+
+  return true;
+}
+</script>

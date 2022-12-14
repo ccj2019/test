@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<title><if condition="!empty($web_title)">{$web_title}-</if>{$glo.web_name}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+ 
+	</head>
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/layer_mobile/need/layer.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+	<script type="text/javascript" src="/Public/wap/layer_mobile/layer.js"></script>
+<style type="text/css">
+	input{
+		outline: none;
+	}
+</style>
+	<body>
+		<div class="l-fh l-on">
+			<a href="{$shangyiyeurl}" class="l-fanhui on">&lt;返回</a><span>提现</span>
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a>
+			</div>
+		</div>
+	
+				<a href="/Wapmember/bank/index">
+	 	 
+	 		<div class="l-tixian clearfix">
+				<img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/icon59.png" style="width: 20px;" alt="" />
+				<div class="l-yinhangwz ">
+					<p>	{$vobank.bank_name_cn}</p>
+					<p>	尾号{$vobank.bank_num|substr=-4,4}储蓄卡</p>
+					<input id="bank_id" type="hidden" value="{$vobank.id}" />
+				</div>
+
+					<div class="l-fr" style="line-height: 1rem; color: #484848;">
+						&gt;
+					</div>
+				
+			</div>
+ </a>
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">提现金额</p>
+			<p class="l-yhp2">¥ <input id="money" name="money" type="number" placeholder="请输入提现金额"/>
+</p>
+			<p class="l-yhp1">可用金额 {$va}      <span id="tixian1">全部提现</span></p> 
+		</div>
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1" style="display: table;float: left;line-height: 1.1rem;">支付密码</p>
+			<p class="l-yhp2" style="width: 77%;
+    float: left;"> <input name="pwd" id="pwd" type="password" style="border: 1px solid #d2d2d2;"/></p>
+		 
+		</div>
+		 
+		<div class="l-qurena isbutton">
+		                  <a>确认提现</a>  	
+		             </div>
+	</body>
+
+</html>
+		<script>
+				$("#tixian1").click(function() {
+					$("#money").val({$va});
+				})
+					$(".isbutton").click(function() {
+						this.disabled = true;
+				 		var money = $('#money').val();
+				 		var pwd = $('#pwd').val();	
+				 		var bank_id = $('#bank_id').val();	
+				 		
+//		 		alert(parseFloat(money));
+//		 		alert(parseFloat({$va}));
+//alert(parseFloat(money)>parseFloat({$va}));
+				 		if(parseFloat(money)>parseFloat({$va})){
+				 			alert("您的余额已不足，请及时充值");
+							this.disabled = false;
+				 				return false;
+				 		}else if(parseFloat(money)<100){
+				 			alert("提现金额不得小于100");
+							this.disabled = false;
+				 				return false;
+				 		}else if(bank_id==""){
+				 			alert("未选择银行卡");
+							this.disabled = false;
+				 				return false;
+				 		}
+//				 		bank_num 
+// 
+//						bank_id
+//						bank_num
+//						bank_name
+//						bank_name_cn
+//						bank_address
+//						withdraw_money
+//						withdraw_status
+//						withdraw_fee
+//						add_time
+//						add_ip
+//						deal_time
+//						deal_user
+//						deal_info
+//						second_fee
+//						success_money
+//						second_money
+//						cfg_req_sn
+
+//				 		return false;
+						var confirm_str = confirm("工作日上午11点、下午4点统一处理提现，非工作日次日上午10点统一处理（节假日除外）充值未投资的提现将扣除提现金额0.2%的手续费，提现手续费最低2元。");
+				 		if(confirm_str == true){
+							$.ajax({  
+								  url:"/Member/withdraw/actwithdraw",  
+								  type:"post",  
+								  data:{
+									"amount":money,
+									"pwd":pwd,
+									"bank_id":bank_id,
+								  },
+								  success:function(data){ 
+									var zz=$.parseJSON( data )
+									if(zz.status==1){
+										alert("成功");
+										window.location.href='/wapmember/';
+									}else{
+										alert(zz.message)
+										this.disabled = false;
+									}
+								 console.log(zz);
+								  },  
+								  error:function(e){  
+									  //alert("网络错误，请重试！！");  
+									this.disabled = false;
+								   }  
+							 });
+						}else{
+						   console.log("取消提现");
+						this.disabled = false;
+						}
+						
+					 })
+					   $("#pwd").focus(function(){
+							if(parseFloat($('#money').val()) < 100 || isNaN(parseFloat($('#money').val()))){
+							     layer.open({
+									content: '提现金额不得小于100'
+									,skin: 'msg'
+									,time: 2 //2秒后自动关闭
+								  });
+							}
+						});
+				</script>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<ret_code>0000</ret_code>
+	<ret_msg>创建支付单成功</ret_msg><
+	redirectUrl><![CDATA[https://pay.heepay.com/DirectPay/AliPayment.aspx?stid=H22072872676531B_81ac9c42424e5c1cb38fc74a6a0efa73]]></redirectUrl>
+	<sign><![CDATA[e5a80b330d366dcf0a98c82899d6b870]]></sign>
+</root>

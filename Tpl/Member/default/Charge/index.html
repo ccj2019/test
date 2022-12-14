@@ -1,0 +1,355 @@
+<include file="default:Public:mheader" />
+
+<!--内容部分-->
+<div class="box navls">
+	<span><a href="{:U('/member')}">会员中心</a></span>
+	<span>&gt;</span>
+	<span><a href="{:U('charge/index')}">购买鱼币</a></span>
+
+</div>
+<style type="text/css">
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #999;
+  font-size: 16px;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #999;
+  font-size: 16px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #999;
+  font-size: 16px;
+}   
+.pBorder{
+	 height: 40px;
+    line-height: 40px;
+    width: 96%;
+    outline: none;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+</style>
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div class="on"><a href="__APP__/member/charge"><span>购买鱼币</span></a></div>
+			<div><a href="__APP__/member/charge/chargelog"><span>购买记录</span></a></div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+			<form action="/Pay/offline" method="post" name="offlinePay" id="offlinePay">
+				<ul>
+					<li>
+						<div class="adgai">当前可用鱼币：</div>
+						<div class="yeyuan">
+							{$va}
+							<input type="hidden" id="yz" value="{$yz}">
+						</div>
+					</li>
+					<li>
+						<div class="adgai">购买鱼币：</div>
+						<div class="yeyuan1">
+						
+<input type="text" style="width:350px;" id="money" name="money" placeholder="请输入要购买的鱼币金额" class="pBorder"  onkeydown="if(event.keyCode==13)return false;" oninput="value=value.match(/^\d+(?:\.\d{0,2})?/)" maxlength="8">
+
+
+							<br />
+							<p class="p1" style="color:red;">* 1鱼币=1人民币,一次最少购买100鱼币</p>
+							<p class="p1">购买后可用鱼币<span id="zeng" >{$va}</span></p>
+							<p class="p1" style="width:570px;">
+							鱼币充值后只可用于认购，项目到期后，返还至您的个人账户，给您带来的不便敬请谅解。</p>
+						</div>
+
+					</li>
+					<li>
+						<div class="adgai">支付方式：</div>
+						<div class="yeyuan1 zhif">
+							<!--<label><input name="zhifu" class="top_type" type="radio" value="1" />在线支付 </label>-->
+							<label><input name="zhifu" class="top_type" type="radio" value="2" checked />线下支付</label>
+							<label><input name="zhifu" class="top_type" type="radio" value="3"  />扫码付</label>
+						</div>
+					</li>
+
+					<!--支付方式选择-->
+					<div class="zhiflbox">
+						<!--<div class="zhifl1" style="display: none">-->
+							<!--<li style="padding: 0;">-->
+								<!--<div class="yeyuan1" style="margin-left: 145px;">-->
+									<!--<div class="Ltdxz">-->
+
+									<!--</div>-->
+									<!--</div>-->
+							<!--</li>-->
+							<!--<li>-->
+								<!--<div class="yeyuan1" style="margin-left: 145px;">-->
+									<!--<label><input name="xianshang" type="radio" id="xianshang" value="" checked />丰付支付（PC版本）</label>-->
+									<!--</div>-->
+							<!--</li>-->
+
+							<!--<li>-->
+								<!--<a href="javascript:void(0);" style="color:#fff;" class="btnsc isbutton"  >-->
+									<!--提交-->
+								<!--</a>-->
+							<!--</li>-->
+						<!--</div>-->
+						<div class="zhifl1" >
+							<li>
+								<div class="adgai">上传凭证：</div>
+								<div class="yeyuan1">
+									<input type=file name="doc" id="doc" onchange="imgChange1();"  >
+									<div class="Ltdxz">
+										<span>选择图片</span> <span>支持jpg，jpeg，png，gif格式，大小不超过20.00MB</span>
+									</div>
+									<div class="imgclass" style="display: none;margin-top: 30px;">
+									  	<img id="fileIMg" style="margin-top: 30px;" src="" width="100px" height="100px" />
+									  	<span class="deleteimg" style=" ">x</span>
+    <style>
+    	.deleteimg{
+		    font-size: 23px;
+		    /* border: 1px solid #202020; */
+		    border-radius: 22px;
+		    display: table-caption;
+		    width: 20px;
+		    height: 20px;
+		    text-align: center;
+		    line-height: 20px;
+		    float:  left;
+		    position:  relative;
+		    left: 100px;
+		    color: red;
+		    top: 26px;
+    	}
+    </style>
+									  </div>
+								</div>
+							</li>
+							<li>
+								<div class="xxxinxi">
+									{$glo.ttxf_off_bank}
+
+								</div>
+							</li>
+							<li>
+								<a href="javascript:void(0);" style="color:#fff;" class="btnsc isbutton" >
+									已上传，提交
+								</a>
+							</li>
+						</div>
+
+
+						<div class="zhifl1" style="display: none">
+							<li style="padding: 0;">
+								<div class="yeyuan1" style="margin-left: 145px;">
+									<div class="Ltdxz">
+										
+									</div>
+									</div>
+							</li>
+							<li>
+								<div class="yeyuan1" style="margin-left: 145px;line-height: 25px; color:#737373;">
+									
+温馨提示：<br> 
+
+<span  style="color:red;font-size:25px;"> 1.充值金额必须与扫码付金额相同，否则会导致充值金额无法到账<br> </span>
+2. 扫码充值时间日9:00-17:30，审核到账时间约为5分钟。<br> 
+3. 非工作时间扫码充值的，工作人员将在工作时间统一处理到您账户。<br> 
+4. 非工作时间请尽量使用在线支付和线下支付。<br> 
+5. 使用微信、支付宝扫码支付，关于充值上限请联系微信、支付宝客服详询。<br> 
+6. 如有疑问，请联系在线客服。
+    
+									
+							    </div>
+							</li>
+			<!-- 				<li>
+						<div class="adgai">验证码：</div>
+
+						<div class="yeyuan1">
+									<input id="vcode" style="    height: 25px;
+    float: left;
+    line-height: 25px;" name="vcode" maxlength="4" id="Verification"    placeholder="验证码" />
+
+								<div class="l-yanzhengm1" style="float: left;padding: 0px;background: #fff;" id="VerificationImg" va="Verification()" > <img src="/Wapmember/Common/verify"  alt="点击换一个校验码" id="imVcode" onclick="this.src=this.src+'?t='+Math.random()"  style="width: 100%;height: 34px;" /></div>
+
+						</div>
+
+					</li> -->
+
+							<li>
+								<div class="btnsc isbutton"  >
+									提交
+								</div>
+							</li>
+						</div>
+
+
+
+					</div>
+				</ul>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>	 
+	//money_off				
+	$('#money').bind('input propertychange', function() {
+	
+		var vara = Number($('#money').val())+Number({$va});
+		$("#zeng").text( vara.toFixed(2));
+	
+
+	});		
+	var xianshang = Number($('#money').val())+Number({$va});
+	var url="/Pay/offline";
+	var aurl=2;
+	$(document).on("click", ".top_type", function(){ 
+		aurl=$(this).val();
+		if(aurl==2){
+			url="/Pay/offline";
+		}else if(aurl==3){
+			url="/index.php/member/charge/smf";
+		}
+		// else{
+		// 	url="/member/charge/paydemo";
+		// }
+
+	})
+	var tj=true;
+	$(".isbutton").click(function() {
+		if(tj==false){
+			layer.msg('你的表单已提交！',{shift: -1},function(){
+				            window.location.reload();
+				        });
+			return false;
+		}
+		tj=false;
+		
+		if(aurl==2){
+			var money = $('#money').val();
+			var way_img = $('.borrow_img').val();
+			if(money == '' || money == '0'){
+				layer.msg("请填写充值金额");
+				tj=true;
+				return false;
+			}
+			if(money < 100){
+				layer.msg("充值金额不能小于100");
+				tj=true;
+				return false;
+			}		
+			if(way_img == '' || typeof(way_img) == 'undefined'){
+				layer.msg("请上传线下支付凭证");
+				tj=true;
+				return false;
+			}
+
+	 		$.ajax({  
+			      url:url,  
+			      type:"post",  
+			      dataType: "json",
+			      data:{
+			      	"money_off":money,
+			      	"way_img":way_img,
+			      },
+			    success:function(data){ 
+			      	if(data.status==1){
+			      		layer.msg('线下充值申请成功，等待审核',{shift: -1},function(){
+				            window.location.reload();
+				        });
+			      	}else{
+			      		layer.msg('线下充值申请失败',{shift: -1},function(){
+				            window.location.reload();
+				        });
+			      	}
+				 	console.log(data);
+			    },  
+			    error:function(e){  
+			          //alert("网络错误，请重试！！");
+					tj=true;
+			    }  
+	 		 });
+		}else if(aurl==3){
+			var money = $('#money').val();
+			if(money == '' || money == '0'){
+				layer.msg("请填写充值金额");
+				tj=true;
+				return false;
+			}
+			if(money < 100){
+				layer.msg("充值金额不能小于100");
+				tj=true;
+				return false;
+			}	
+			var vcode = $('#vcode').val();
+			if(vcode == '' || vcode == '0'){
+				layer.msg("请输入验证码");
+				tj=true;
+				return false;
+			}
+			var money = $('#money').val();
+			var zzurl=url+'?money_off='+money;
+			window.location.href=zzurl;
+
+		}else{
+			var money = $('#money').val();
+			if(money == '' || money == '0'){
+				layer.msg("请填写充值金额");
+				tj=true;
+				return false;
+			}
+			if(money < 100){
+				layer.msg("充值金额不能小于100");
+				tj=true;
+				return false;
+			}	
+			var money = $('#money').val();
+			var zzurl=url+'?money_off='+money
+			window.location.href=zzurl;
+		}
+
+	})
+
+ $(".deleteimg").click(function() {
+ 				$("#way_img").remove();
+ 				$(".borrow_img").remove();
+ 				$("#doc").val("");
+ 				
+//				$("#fileIMg").attr("src",data);
+//				$("#offlinePay").append(stv2);
+				$(".imgclass").hide();
+ })
+	function imgChange1() {
+	 
+		 	var form = new FormData(document.getElementById("offlinePay"));  
+		 	var stv ='<div class="clear" id="localImag"><img src="'+"/Public/upload/1539667063_96.jpg"+'"></div>'
+			$(".borrow_img").remove();
+			$.ajax({  
+			url:"__URL__/zhao",  
+			type:"post",  
+			data:form,  
+			cache: false,  
+			processData: false,  
+			contentType: false,  
+			success:function(data){ 
+				console.log(data);
+				var stv2 =' <input class="fl borrow_img" type="hidden" name="way_img" value="'+data+'">'
+				$("#way_img").remove();
+				$("#fileIMg").attr("src",data);
+				$("#offlinePay").append(stv2);
+				$(".imgclass").show();
+			   	$zv++;
+			},  
+			error:function(e){  
+			  //alert("网络错误，请重试！！");  
+			}  
+			});
+					
+		 
+	}  
+</script>
+<include file="default:Public:footer" />

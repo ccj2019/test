@@ -1,0 +1,68 @@
+ 
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+ 
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<style>
+		
+		.l-userxinxi{
+			margin: .2rem 0;
+			border-top:0 ;
+		}
+		.l-fh{
+			border-bottom: 5px solid #EEF1F8;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="javascript:history.go(-1);" class="l-fanhui on">&lt;返回</a><span>选择收货地址</span>
+			<div class="l-fanhui1">
+				<!--<a href="##"></a>-->
+			</div>
+		</div>
+		<volist name="va" id="v">
+			<div class="l-userxinxi">
+				<a href="/wap/shop/shop_is_order?id={$gt.id}&sun={$gt.sun}&addid={$v.id}"><p class="l-pc1"> <span>{$v.name}</span> {$v.main_phone}</p>
+				<p class="l-pc2"><span><if condition="$v.default eq 1">【默认】<else/></if></span> {$v.province}{$v.city}{$v.district}{$v.address}</p></a>
+		<!--		<div class="l-pc3"><a href="/Wapmember/memberaddress/save?id={$v.id}"><img src="/public/wap/img/l-yjt.png" /></a></div>-->
+
+			</div>
+		</volist>
+		<div class="l-tanchubox" style="  margin: 0rem auto;   height: 0.3rem;  background: #98d7fd;">
+		 
+				<!--<a href="/Wapmember/memberaddress/add?id={$v.id}">  添加 </p>-->
+			</div>
+<!--		
+		<div class="l-userxinxi">
+				<p class="l-pc1"> <span>	哈哈</span> 123456789000</p>
+				<p class="l-pc2"><span></span> 山东省日照市东港区</p>
+				<div class="l-pc3"><img src="/public/wap/img/l-yjt.png" /></div>
+
+			</div>-->
+		
+		
+		<!--弹出-->
+
+		<!--<div class="l-dtc">
+			<div class="l-tanchubox">
+				<p>支付成功</p>
+				<p> <button class="l-btnc">确定</button></p>
+			</div>
+		</div>-->
+		
+
+	</body>
+	<script>
+	</script>
+
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		 
+		<link rel="stylesheet" href="css/jquery.fullPage.css">
+<link rel="stylesheet" type="text/css" href="css/swiper-4.3.3.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/all.css" />
+		<link rel="stylesheet" type="text/css" href="css/ldy.css" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+           <script type="text/javascript" src="js/swiper-4.3.3.min.js">
+           	
+           </script>
+		<script src="js/jquery-ui-1.10.3.min.js"></script>
+
+		<script src="js/jquery.fullPage.min.js"></script>
+		<script type="text/javascript" src="js/ldy.js">
+		</script>
+	</head>
+	<style type="text/css">
+		body {
+			background: #f8f8f8;
+		}
+		
+	</style>
+
+	<body>
+		<!--header-->
+		<div class="topbox">
+			<div class="mytop">
+                <div class="my1 clearfix">
+					<div class="mytime fl">
+						客服热线：{$glo.ttxf_call}在线时间：{$glo.kefu1}
+					</div>
+					<div class="login fr">
+							<if condition="$UID gt '0'"> 
+                       <span> <a href="{:U('/member/index')}" ><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/yh.png" alt=""> {$UNAME}/</a></span>
+                       	<span><a href="{:U('/member/common/actlogout')}">退出</a></span>
+                    <else />
+                    <!--未登录状态-->
+                         
+                       <span> <a href="{:U('/member/common/login')}">登录 /</a></span>
+                       <span> <a href="{:U('/member/common/register')}" >注册</a></span>
+                    </if>
+					</div>
+
+				</div>
+			</div>
+			<div class="mynav">
+				<div class="box clearfix">
+					<div class="navlogo fl">
+						<img src="img/guanyu/logo2.png" />
+					</div>
+					<div class="navbox fl">
+						<span><a href="/">首页</a></span>
+						<span>		<a href="/invest/index.html">项目浏览</a></span>
+						<span><a href="/article/news_list.html">最新资讯</a></span>
+						<span>  	<a href="/shop">积分商城</a></span>
+						<span><a href="{:U('/article/video')}">视频直播</a></span>
+						<span ><a href="/article/index/cid/39.html">活动公告</a></span>
+						<span><a href="/article/index/cid/21.html">关于我们</a></span>
+						<span   class="on"><a href="{:U('/member/index/index')}">会员中心</a></span>
+					</div>
+					<div class="l_myxm fr">
+							<a href="/Borrow/index">发起项目</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+<!--内容-->
+
+<div class="l-omg" style="background:#fff;">
+	
+	<div class="l-mlogin">
+		<div class="l-mlg">
+			<div class="shiming">
+				实名认证
+			</div>
+			   <if condition="$id_status eq '1'">
+						<div style="overflow: auto;  height: auto; padding:20px; font-size:18px" id="mybox2_content">
+							<span style="font-size:12px;color:#999999;">&nbsp;&nbsp;亲爱的[{:session('u_user_name')}]，您好，您已通过身份认证</span>
+						</div>
+						<elseif condition="$id_status eq '3'"/>
+						<div style="overflow: auto;  height: auto; text-align:center; padding:20px; font-size:18px" id="mybox2_content">
+							<span style="font-size:12px;color:#999999;">&nbsp;&nbsp;亲爱的[{:session('u_user_name')}]，您好，你提交的身份认证正在审核中...</span>
+						</div>
+						<else/>
+			<form action="" method="post">
+				<div>		
+				<p class="smRZ">
+				<span>会员名称:</span>
+					<input type="text" id="realname"/>
+				</p>
+				<p class="smRZ">
+				<span>真实姓名:</span><input type="" name="" id="" value="" />
+				</p>
+				 
+				<p class="smRZ">
+				<span>性别:</span> 
+				<label><input name="sex" type="radio" value="" />男 </label> 
+                <label><input name="sex" type="radio" value="" />女 </label> 
+				</p>
+				<p class="smRZ">
+				<span>类型:</span>
+				<label><input name="leix" type="radio" value="" />投资者 </label> 
+                <label><input name="leix" type="radio" value="" />创业者</label> 
+				</p>
+				<!--投资类型-->
+				<div class="touzilei clearfix">
+					<p>符合下列条件之一的自然人投资者</p>
+					<div>
+				<label><input name="toz" type="radio" value="" />我的金融资产超过100万元 </label> 
+                <label><input name="toz" type="radio" value="" />我的年收入超过100万元</label> 
+                <label><input name="toz" type="radio" value="" />我是专业的风险投资人 </label> 
+                <label><input name="toz" type="radio" value="" />我不符合上述任一条件</label> 
+					</div>
+				</div>
+				</div>
+					 
+				
+			
+			</form>
+				 </if>
+		</div>
+	</div>
+</div>
+
+
+<!--底部-->
+		<!--底部-->
+		<div id="addd">
+			<div class="l_banquan clearfix">
+				<div class="btm_logo">
+					<img src="/public/web/img/shouye/logo1.png" />
+				</div>
+				<div class="btm_text">
+					<div class="btm_text1">
+						<span><a href="##">服务条款</a></span>
+						<span>|</span>
+						<span><a href="##">服务介绍</a></span>
+						<span>|</span>
+						<span><a href="##">隐私策略</a></span>
+						<span>|</span>
+						<span><a href="##">关于我们</a></span>
+						<span>|</span>
+						<span><a href="##">撰写指南</a></span>
+
+					</div>
+					<div>{$glo.bottom}</div>
+					<div>{$glo.icp}</div>
+					<div class="btm_bot"><img src="/public/web/img/shouye/btmico.png" /> {$glo.gwab}</div>
+				</div>
+				<div class="btm_erwei fr">
+					<div class="erw">
+						<img src="/public/web/img/shouye/erwei-w.png" alt="" />
+						<div>
+							扫码关注铭万网
+						</div>
+					</div>
+					<div class="erw">
+						<img src="/public/web/img/shouye/erwei-app.png" alt="" />
+						<div>
+							扫码下载铭万app
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		
+		
+		
+		
+		
+		
+	</body>
+<script>
+	
+</script>
+</html>
+		 		
+
+	 
+ 
+<script type="text/javascript" src="__ROOT__/Style/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+
+//验证身份证号方法
+var testIdcard = function(idcard) {
+var Errors = new Array("验证通过!", "身份证号码位数不对!", "身份证号码出生日期超出范围!", "身份证号码校验错误!", "身份证地区非法!");
+var area = { 11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古", 21: "辽宁", 22: "吉林", 23: "黑龙江", 31: "上海", 32: "江苏", 33: "浙江", 34: "安徽", 35: "福建", 36: "江西", 37: "山东", 41: "河南", 42: "湖北", 43: "湖南", 44: "广东", 45: "广西", 46: "海南", 50: "重庆", 51: "四川", 52: "贵州", 53: "云南", 54: "西藏", 61: "陕西", 62: "甘肃", 63: "青海", 64: "宁夏", 65: "xinjiang", 71: "台湾", 81: "香港", 82: "澳门", 91: "国外" }
+var idcard, Y, JYM;
+var S, M;
+var idcard_array = new Array();
+idcard_array = idcard.split("");
+if (area[parseInt(idcard.substr(0, 2))] == null) return Errors[4];
+switch (idcard.length) {
+	case 15:
+		if ((parseInt(idcard.substr(6, 2)) + 1900) % 4 == 0 || ((parseInt(idcard.substr(6, 2)) + 1900) % 100 == 0 && (parseInt(idcard.substr(6, 2)) + 1900) % 4 == 0)) {
+			ereg = /^[1-9][0-9]{5}[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}$/; //测试出生日期的合法性 
+		}
+		else {
+			ereg = /^[1-9][0-9]{5}[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|1[0-9]|2[0-8]))[0-9]{3}$/; //测试出生日期的合法性 
+		}
+		if (ereg.test(idcard))
+			return Errors[0];
+		else
+			return Errors[2];
+		break;
+	case 18:
+		if (parseInt(idcard.substr(6, 4)) % 4 == 0 || (parseInt(idcard.substr(6, 4)) % 100 == 0 && parseInt(idcard.substr(6, 4)) % 4 == 0)) {
+			ereg = /^[1-9][0-9]{5}(19|20)[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}[0-9Xx]$/; //闰年出生日期的合法性正则表达式 
+		}
+		else {
+			ereg = /^[1-9][0-9]{5}(19|20)[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|1[0-9]|2[0-8]))[0-9]{3}[0-9Xx]$/; //平年出生日期的合法性正则表达式 
+		}
+		if (ereg.test(idcard)) {
+			S = (parseInt(idcard_array[0]) + parseInt(idcard_array[10])) * 7 + (parseInt(idcard_array[1]) + parseInt(idcard_array[11])) * 9 + (parseInt(idcard_array[2]) + parseInt(idcard_array[12])) * 10 + (parseInt(idcard_array[3]) + parseInt(idcard_array[13])) * 5 + (parseInt(idcard_array[4]) + parseInt(idcard_array[14])) * 8 + (parseInt(idcard_array[5]) + parseInt(idcard_array[15])) * 4 + (parseInt(idcard_array[6]) + parseInt(idcard_array[16])) * 2 + parseInt(idcard_array[7]) * 1 + parseInt(idcard_array[8]) * 6 + parseInt(idcard_array[9]) * 3;
+			Y = S % 11;
+			M = "F";
+			JYM = "10X98765432";
+			M = JYM.substr(Y, 1);
+			if (M == idcard_array[17])
+				return Errors[0];
+			else
+				return Errors[3];
+		}
+		else
+			return Errors[2];
+		break;
+	default:
+		return Errors[1];
+		break;
+}
+}
+
+function setIdCard() {
+//	alert(1);
+	var user_type = $('#user_typediv input[name="user_type"]:checked ').val();
+	var riskint = $('#riskintdiv input[name="riskint"]:checked ').val();
+	var realname = $('#realname').val();
+	var phone = $('#phone').val();
+	var Verification = $('#Verification').val();
+	var idcard = $('#idcard').val();
+
+	var isValidForm = true;
+	if ($.trim(realname) == '') {
+		isValidForm = false;
+		$('#realnameErr').html('请输入您的真实姓名。');
+	}else{
+		$('#realnameErr').html('');
+	}
+	
+	if ($.trim(idcard) == '') {
+		isValidForm = false;
+		$('#idcardErr').html('请输入您的身份证号码。');
+	}
+	else {
+		var idcartValidResult = testIdcard($.trim(idcard));
+		if (idcartValidResult.indexOf('通过') == -1) {
+			//isValidForm = false;
+			//$('#idcardErr').html(idcartValidResult);
+		}
+	}
+	if (isValidForm) {
+		$('#realnameErr').html('');
+		$('#idcardErr').html('');
+	}
+	else {
+		return;
+	} 
+//	alert(riskint);
+	$.ajax({
+		url: "__URL__/saveid/",
+		type: "post",
+		dataType: "json",
+		//risk
+		//riskint
+		
+		data: {"realname":realname,"idcard":idcard,"user_type":user_type,"riskint":riskint,"phone":phone,"Verification":Verification},
+		success: function(result) {
+			console.log(result);
+			if (result.status == "0") {
+				alert(result.message, 1,!1);
+				// $('#idcardErr').html(result.message);
+			}else if (result.status == "4") {
+					alert('验证码不正确');
+					//window.location.reload();
+				}else if (result.status == "5") {
+					alert('手机号不正确');
+					//window.location.reload();
+				}
+			else {
+				alert('身份认证成功', 1,!1);
+			}
+		},
+		complete:function(XMLHttpRequest, textStatus){
+			setTimeout('/',3000); //指定3秒刷新
+		}
+	});
+}
+</script>
+
+<script type="text/javascript">
+  function submitForm() {
+  		var phone = $("#phone").val();
+  		var Verification = $("#Verification").val();
+  		
+		var newspwd1 = $("#newpwd1").val();
+		var newspwd2 = $("#newpwd2").val();
+
+   		 $.ajax({
+			url: "__URL__/changepass/",
+			type: "post",
+			dataType: "json",
+			data: {"newpwd1":newspwd1,"newpwd2":newspwd2,"Verification":Verification,"phone":phone},
+			success: function(d) {
+				if (d.status == "2") {
+					alert('原密码错误，请重新输入！');
+					return;
+				} else if (d.status == "1") {
+					alert('恭喜，密码修改成功');
+					window.location.reload();
+				}else if (d.status == "3") {
+					alert('验证码不正确');
+					window.location.reload();
+				}else {
+					alert('对不起，原密码与新密码相同或者操作失败，请联系客服！');
+				}
+			}
+		})
+     // document.getElementById("myForm").submit();
+    
+   }
+
+	function Verification() {
+		var phone = $("#phone").val();
+ 
+		if (phone == '') {
+			alert('手机号必须填写！');
+			return false;
+		}
+		 
+		$.ajax({
+			url: "/Wapmember/user/Verification/",
+			type: "post",
+			dataType: "json",
+			data: {"phone":phone},
+			success: function(d) {
+				if (d.status == "y") {
+					alert('已发送！');
+					return;
+				}else if (d.status == "n") {
+					alert('失败');
+					window.location.reload();
+				}else if (d.status == "s") {
+					alert(d.info );
+					//window.location.reload();
+				}
+				 console.log(d)
+			}
+		})
+	}
+</script>

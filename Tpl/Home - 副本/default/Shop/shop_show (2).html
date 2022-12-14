@@ -1,0 +1,128 @@
+ 
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="/public/wap/js/ldy.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/vant/lib/vant-css/index.css">
+	<!-- 引入组件 -->
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vant/lib/vant.min.js"></script>
+	<style>
+		.l-fh {
+			border-bottom: 3px solid #EEF1F8;
+		}
+		
+		.van-stepper{
+			margin: .2rem;
+		}
+		.l-qurena{
+			margin-top: .3rem;
+			margin-bottom: .3rem;
+		}
+	</style>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="javascript:history.go(-1);" class="l-fanhui on">&lt;返回</a><span>商城内页</span>
+			<div class="l-fanhui1">
+				<!--<a href=""><img src="/public/wap/img/l-shangptopy.png" /></a>-->
+			</div>
+		</div>
+
+		<div class="l-s1">
+			<img src="/{$vo.art_img}" alt="" />
+		</div>
+		<div>
+	 
+			<p class="l-swzp1">{$vo.title}</p>
+			<p class="l-swzp2">{$vo.art_jiage}积分</p>
+			<div class="l-swz clearfix">
+				<p>类别：{$vo.type_name}</p>
+				<p>{$vo.buy}人已兑换</p>
+				<p>还剩：{$vo.art_writer}</p>
+			</div>
+		</div>
+		<!--详情-->
+		
+		<div class="l-scxq">
+			——————— 拖动查看详情 ———————
+		</div>
+		<div class="l-s1">
+			{$vo.art_content}
+			<!--<img src="/public/wap/img/l-s2.png" />-->
+
+		</div>
+		<!--底部-->
+		<div class="l-di"></div>
+		<div class="l-dw">
+			<a href="/wap/Shop/">
+				<div>返回商城</div>
+			</a>
+			<a href="##">
+				<div class="on">立即兑换</div>
+			</a>
+
+		</div>
+
+		<!--弹出-->
+	
+		<div class="l-spxztc" id="lsp" >
+				<van-actionsheet v-model="show">
+			<div class="clearfix l-fd">
+				<div class="l-tc1">
+					<img src="/public/wap/img/l-s1.png" />
+				</div>
+				<div class="l-tc2">
+					<p class="l-swzp2"> {$vo.art_jiage}积分</p>
+					<!--<p class="l-swzp2 on">已选择：1斤装</p>-->
+				</div>
+			</div>
+			<!--<div class="l-spguige">
+				<p>规格</p>
+				<div class="clearfix">-->
+					<!--<div class="l_spxz">2斤装</div>-->
+					<!--<!--<div class="l_spxz">2斤装</div>-->
+				<!--</div>
+			</div> -->
+			<div class="l-spguige">
+				<p>数量</p>
+				<van-stepper v-model="ddc" />
+			</div>
+			<div class="l-qurena" @click="asHide">
+		                  确认
+		    </div>
+			</van-actionsheet>
+		</div>	
+			
+	
+		
+
+	</body>
+	<style>
+		.footer{display: none;}
+	</style>
+	<script>
+		var lsp = new Vue({
+			data:{
+				ddc: 1,
+				show:false
+			},
+			methods:{
+				asHide(){
+					this.show=false
+					//TODO
+					window.location.href="/wap/Shop/shop_is_order?id={$vo.id}&sun="+this.ddc;
+					//alert(this.ddc)
+				}
+			}
+		}).$mount('#lsp');
+		$('.l-dw .on').click(function(){
+			lsp.show=true
+		});
+		
+	</script>
+
+</html>

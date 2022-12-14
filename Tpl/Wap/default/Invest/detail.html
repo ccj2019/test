@@ -1,0 +1,978 @@
+<script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 750*100 + 'px';
+</script>
+<script src="/Public/zpublic/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" >
+        $(function(){
+            $(".all1 ul li:first").addClass("current");
+            $(".forms div").eq(0).show().siblings().hide();
+            $(".all1 ul li").mouseover(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+                var index=$(this).index();
+                $(".forms>div").eq(index).show().siblings().hide();
+
+            });
+        })
+        $(function(){
+            a= $(".kdu2").width();
+            b=document.documentElement.clientWidth /750*100*5.36;
+            if(a>=b)
+            {
+                $(".kdu3").addClass("kdu30")
+            }else{
+                $(".kdu3").removeClass("kdu30")
+            }
+        })
+
+    </script>
+<link rel="stylesheet" href="/Public/zpublic/css/swiper.min.css">
+<script type="text/javascript" src="/Public/wap/js/swiper-4.3.3.min.js"></script>
+<style>
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, header, hgroup, nav, section, article, aside, footer, figure, figcaption, menu, button { margin: 0; padding: 0; }
+        h1, h2, h3, h4, h5, h6 {font-size:inherit;font-weight: normal;}
+        table {border-collapse: collapse;border-spacing: 0;}
+        fieldset,img { border: 0; }
+        li {list-style: none;}
+        input,textarea,select {font-family:inherit;font-size:inherit; font-weight:inherit;}
+        button,input[type="text"]{border: none; background: none;-webkit-appearance:none;outline:none;}
+        a { -webkit-touch-callout:none;text-decoration: none;color: #0079ff; outline:none;}
+        em,i {font-style: normal;}
+        ::-webkit-input-placeholder {color:#999;}
+        .header{position: fixed;top: 0;z-index: 13;width: 7.1rem;/*height:.68rem;*/ background: linear-gradient(to right, #3574ea , #32b7f9);padding: .35rem 0.2rem;color: #ffffff}
+        .header>p{line-height:.43rem;font-size: .3333rem;overflow: hidden;}
+       
+        .header>p>span{font-size:.3889rem;margin: 0 auto;line-height:.43rem;float: left}
+        .header>p>span:nth-of-type(1){width: 1.1rem;font-size: .33rem}
+        .header>p>span:nth-of-type(1)>a>img{height: .27rem;}
+        .header>p>span:nth-of-type(1)>a{color: #fff;}
+        .header>p>span:nth-of-type(2){margin-left: 1.85rem;}
+        .header .sp_dl{height: .43rem;font-size: .33rem; float: right;width: 1.1rem; text-align: right;}
+        .header .sp_dl img{width:.43rem;height: .43rem; float: right;}
+        .header .sp_dl a{color: #fff;}
+
+        .swiper-cont{overflow: hidden;margin-top: 1.1rem;margin-bottom: 3.4rem;}
+        .all{width: 6.3rem;height:4.14rem;padding: 0 0.3rem;margin: 0 0.3rem;border-radius: .3rem;border:.01rem  solid #e5e5e5;position:absolute;top: 5.2rem;background: #ffffff;    z-index: 1;}
+        .all>div>{width: 6.3rem;padding: 0 0.3rem;}
+        .kdu {position: relative;height: .15rem;border-radius:.3rem;margin-top: .5rem;margin-bottom:.5rem;border: .01rem solid #cccccc;}
+        .kdu2 { float: left;height: .15rem; background:#3575ea;border-top-left-radius:.3rem;border-bottom-left-radius:.3rem;}
+        .kdu3{float: left;line-height:.45rem;text-align:center;width:.9rem;border-radius: .45rem;border: .01rem solid #3575ea;color:#3575ea;font-size: .25rem;margin-top: -.15rem;background: #ffffff;}
+        .all>ul{overflow: hidden;padding-top:.1rem;padding-bottom: .25rem;border-bottom: .01rem solid #ccc;}
+        .all>ul>li{font-size: .25rem;float: left;}
+        .all>ul>li:nth-of-type(1){width: 1.34rem;border-right: 0.01rem solid #ccc}
+        .all>ul>li:nth-of-type(1)>p:nth-of-type(1){text-align: center}
+        .all>ul>li:nth-of-type(1)>p:nth-of-type(2){text-align: center}
+        .all>ul>li:nth-of-type(2){width: 1.5rem;border-right: 0.01rem solid #ccc}
+        .all>ul>li:nth-of-type(3){width: 1.45rem;border-right: 0.01rem solid #ccc}
+        .all>ul>li:nth-of-type(4){width: 1.9rem;}
+        .all>ul>li>p:nth-of-type(1){color:#333333;text-align: center;line-height: .26rem}
+        .all>ul>li>p:nth-of-type(2){color:#f62c2c;margin-top: .2rem;text-align: center;line-height: .23rem}
+        .title{margin-top: .25rem;line-height: .26rem;font-size: .26rem;text-align: center}
+        .title1{font-size: .22rem;line-height: .6rem;height: .6rem;border-bottom: .01rem solid #ccc;}
+        .title1>span>SPAN{color:#feaf00}
+        .title1>span:nth-of-type(1){float: left;}
+        .title1>span:nth-of-type(2){float: right;}
+        .title2{font-size: .22rem;line-height: .6rem;height: .6rem;color: #737373;}
+        .all1{width: 7.5rem;background: #f7f7f7}
+        .all1 a{color:#333333}
+        .all1>ul{width: 6.9rem;overflow: hidden;    margin: .2rem .3rem .37rem;height: .42rem;padding: .3rem 0 0;border-bottom:  .01rem solid #d4d4d4;}
+        .all1>ul>li{font-size: .28rem;color: #333333;height:.45rem;width: 1.8675rem;float: left;text-align: center;overflow:hidden}
+        .all1>ul>li:nth-of-type(1){width: 1.5675rem}
+        .all1>ul>li:nth-of-type(1)>span{border-right:0}
+        .all1>ul>li:nth-of-type(4){width: 1.5675rem}
+        .all1>ul>li>span{height:.28rem;border-right: .01rem solid #ccc;float: left;margin-top: .05rem}
+        #box ul{ list-style:none; border-bottom:#c00 1px solid; font-weight:bold; line-height:30px; height:30px}
+        #box  ul li{ float:left; padding:0 5px; }
+        #box{ background-color:#C00;  border:#c00 1px solid; padding-top:6px}
+        #tab{ background-color:#fff; padding:10px}
+        .current>a{padding-bottom: .02rem;border-bottom: .05rem solid #3575ea;color:#333333}
+        .forms{padding-bottom: .05rem}
+        .forms>div{width: 6.3rem;padding:0.3rem;margin: 0 0.3rem 0.3rem;border-radius: .12rem;background:#ffffff;border: .01rem solid #e5e5e5;font-size: .22rem }
+        .forms>div>img{width: 100%}
+        .forms img{width: 100%}
+        .forms>div>ul{overflow: hidden}
+        .forms>div:nth-of-type(3)>ul>li{height: 1.07rem;float:left ; width: 6.3rem;overflow:hidden;padding-bottom: .3rem;border-bottom: .01rem solid #d4d4d4;padding-top: .35rem}
+        .forms>div:nth-of-type(3)>ul>li:last-of-type{border-bottom:0}
+        .forms>div:nth-of-type(3)>ul>li:nth-of-type(1){padding-top: 0}
+        .forms>div:nth-of-type(3)>ul>li:last-of-type{padding-bottom:0}
+        .forms>div:nth-of-type(3)>ul>li .img{width:1.07rem;float: left;margin-right: .3rem;}
+        .forms>div:nth-of-type(3) span{color: #fa3836}
+        .forms>div:nth-of-type(2)>p:nth-of-type(1){line-height: .25rem;font-size: .24rem;}
+        .forms>div:nth-of-type(2)>p:nth-of-type(1)>span{width: .06rem;height:.25rem;background: #3575ea;float: left;margin-right: .2rem}
+        .forms>div:nth-of-type(2)>p:nth-of-type(2){line-height: .25rem;height:.25rem;font-size: .24rem;padding:.3rem 0;border-bottom: .01rem solid #d4d4d4;}
+        .forms>div:nth-of-type(2)>p:nth-of-type(2)>span:nth-of-type(1){float: left}
+        .forms>div:nth-of-type(2)>p:nth-of-type(2)>span:nth-of-type(2){float: right}
+        .forms>div:nth-of-type(2)>p:nth-of-type(2) b{color:#f62c2c;font-weight: 400}
+        .forms>div:nth-of-type(2)>div{font-size:.22rem;margin-top: 0}
+        .forms>div:nth-of-type(2)>div:nth-of-type(1){margin-top: .3rem}
+        .forms>div:nth-of-type(2)>div:last-of-type div.right-art{padding-bottom: 0}
+        .left-c{overflow: auto; zoom: 1;}
+        .left-time{height: .6rem;width: 1.25rem;padding: .8rem 0;float: left}
+        .left-time>p{font-size:.18rem;color:#737373;line-height: .28rem;}
+        .right-art{padding-left: .35rem;border-left: .01rem solid #d4d4d4;float: left;width: 4.64rem;padding-bottom: .3rem}
+        .article{width: 4.32rem;border:.01rem solid #d4d4d4;border-radius: .1rem;padding: .15rem; margin-bottom: 0.1rem;}
+        .article img{float: left;margin-left: .15rem;width: 1.06rem; height: 1.06rem; border-radius: .11rem;}
+
+
+        .article .ssd{float: left;width:.26rem; height:.26rem;margin-left: -.7rem;margin-top: .78rem;border-radius: 0rem;}
+        .article .sse{float: left;width:.13rem; height:.13rem;margin-left: -.27rem;margin-top: .78rem;background: #f7f7f7;z-index: 11; border-right: 0rem}
+        .article .ssf{margin-left: 0; margin-bottom: 0.1rem;    margin-right: 0.1rem;}
+
+
+        .article p{font-size: .22rem;line-height: .39rem; color: #737373;}
+
+
+        .all2{background: linear-gradient(to right, #0976ff , #1ebbff);height: 1.13rem;line-height:1.13rem;text-align: center;color:#ffffff;font-size: .36rem; margin-bottom: 1rem;}
+        .all2 a{color:#ffffff;}
+        .kdu30{float: right;margin-top: -.3rem}
+
+        .swiper-slide img{
+            width: 100%;
+            height: 5.15rem;
+        }
+        .swiper-wrapper{
+            width:  100%;
+            height: 5.15rem;
+        }
+        .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+            background-image: url("/Public/zpublic/img/left.png");
+        }
+        .swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+            background-image: url("/Public/zpublic/img/right.png");
+        }
+
+.footerg{width:96%; height: 0.8rem; padding:2%;font-size: .2rem;position:fixed;bottom: 0;background:  #ffffff;border-top: .1rem solid #eff4fa; z-index: 1000;}
+.footerg li{float:left;width: 25%}
+.footerg li a{width:25%;text-align: center;color:#737373}
+.footerg li a img{margin: 0 auto;width: 28%; height: auto; display: block;margin: 0 auto;}
+.footerg li a img:nth-child(2){display: none}
+.footerg li.hom a img:nth-child(1){display: none;}
+.footerg li.hom a img:nth-child(2){display: block;}
+.footerg li a span{display: block;margin: 0 auto;width: 60%; }
+.footerg li.hom a{color:#3575ea}
+.footerg{
+    display: none;
+}
+.wap-banner{
+    margin-top: 1.1rem;
+}
+.allc{
+    width: 100%;
+    height: 3.23rem;
+    background-color: #fff;
+}
+</style>
+
+
+<div class="header">
+    <p> 
+        <span> <a href="javascript:window.history.back();"><img src="/Public/zpublic/img/left.png"/>&nbsp;返回</a></span>
+        <span>项目详情</span>
+
+
+
+<span class="sp_dl">
+    <if condition="$UID gt '0'">
+
+<a href="/Wapmember/">
+
+<img src="/Public/zpublic/img/login.png" >
+
+</a>
+ <else />
+<a href="/Wapmember/common/login.html">
+登录</a>
+     </if>
+</span>
+
+
+
+    </p>
+</div>
+<section class="wap-banner">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+       
+       <?php $borrow_img=explode(',',$binfo['content_img']);?>
+   
+             <volist name="borrow_img" id="vo">
+
+                <div class="swiper-slide"><img src="{$vo}" alt=""></div>
+
+            </volist>
+        </div>
+        <div class="button">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</section>
+
+
+<div class="allc">
+<div class="all">
+    <div class="kdu">
+        <div class="kdu2" style="width:{$binfo.progress|floatval}%">
+        </div>
+        <div class="kdu3">{$binfo.progress|floatval}%</div>
+    </div>
+    <ul>
+        <li>
+            <p>目标金额</p>
+            <p>{$binfo.borrow_money|getMoneyFormt=###}</p>
+        </li>
+        <li>
+            <p>周期（月）</p>
+            <p>{$binfo.borrow_duration}个月</p>
+        </li>
+        <li>
+            <p>已筹金额</p>
+            <p>{$binfo.has_borrow|getMoneyFormt=###} </p>
+        </li>
+        <li>
+        
+
+                       <if condition="empty($binfo['shouyilv']) neq true">
+                     <p>综合年化率</p>
+
+                     <p>{$binfo.shouyilv}</p>
+
+                <else/>
+                    
+                     <p>项目收益率</p>
+
+                <p>{$binfo.borrow_interest_rate}%</p>
+
+                </if>
+
+
+          
+        </li>
+    </ul>
+    <p class="title">{$binfo.borrow_name}</p>
+    <p class="title1" >
+        <span>剩余天数：<SPAN>
+
+                        <if condition="$binfo.start_time gt time()"> 预热中
+
+                        <elseif condition="$binfo.borrow_status eq 2" /> {:getLeftTimes($binfo['start_time'] + ($binfo['collect_day']*60*60*24))}
+
+                        <elseif condition="$binfo.borrow_status eq 6" />0天
+
+                        <elseif condition="$binfo.borrow_status eq 7" />0天
+
+                        <else/> 0天
+
+                    </if>
+
+        </SPAN> </span>
+        <span>收益次数：<SPAN>{$binfo.total}次</SPAN> </span>
+    </p>
+    <p class="title2">注：此项目必须在{$binfo.endtimes|date="Y-m-d",###}之前众筹{$binfo.borrow_money|getfloatvalue=###,0|Fmoney=###}才算成功。</p>
+    <div class="clear"></div>
+</div>
+</div>
+
+<div class="all1">
+    <ul>
+        <li><a>项目详情</a><span></span></li>
+        <li><a>
+
+<if condition="$binfo.borrow_status lt 3">
+选择回报
+<else/>
+项目进展
+</if>
+        </a><span></span></li>
+        <li><a>支持人数</a><span></span></li>
+        <li><a>项目合同</a><span></span></li>
+    </ul>
+    <div class="forms">
+        <div>
+                {$binfo.borrow_info}
+        </div>
+
+        <div>
+
+
+
+<if condition="$binfo.borrow_status lt 3">
+           <p><span></span>回报内容</p>
+           <p><span>支持金额：<b>￥{$binfo.borrow_min}</b></span>    <span>支持者:<b>{:count($investinfo)}位</b></span></p> 
+            <div>
+              {$binfo.return_info}
+            </div>
+
+<else/>
+<p>
+    <span></span>项目动态</p>
+            <div>
+
+            <volist name="dynamiclist" id="vb">
+
+             <div class="left-c">
+                    <div class="left-time">
+                        <p>{$vb.add_time|date='Y-m-d',###}</p>
+                        <p>{$vb.add_time|date='H:i:s',###}</p>
+                    </div>
+                    <div class="right-art">
+                        <div class="article">
+                         <img class="ssd" src="/Public/zpublic/img/run_1.png" />
+                         <img class="sse"src="/Public/zpublic/img/run_2.png" />
+                        <p>【{$vb.typename}】{$vb.dycomment}</p>
+
+                            <?php 
+                                 if(!empty($vb['imgs'])){
+                                    $volistimg=explode(",",$vb['imgs']); 
+                                    foreach($volistimg as $k=>$v){
+                                ?>
+                                <a href="{$v}" target="_blank"><img src="{$v}"></a>
+                            <?php } } ?>
+
+                                    <div style="clear: both;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </volist>
+
+
+               
+</div>
+
+</if>
+         
+        </div>
+
+        <div>
+            <ul>
+                <volist name="investinfo" id="vi">
+                    <li>
+                        <img class="img" src="{$vi.user_img|default='/Public/wap/img/default-avatar.png'}"/>
+                        <p>{$vi.user_name|hidecard=###,5}</p>
+                        <p>支持金额：<span>￥{:getFloatvalue($vi['investor_capital'],2)}</span></p>
+                        <p>支持数：<?php echo intval($vi['investor_capital'])/intval($binfo['borrow_min']);?></p>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <div>
+            <div class="l-nerRong" style="background: rgb(248, 248, 248); font-size: 20px; display: block;">
+
+                <div style="background:#FFFFFF;padding:10px;">
+
+                    {$article_category.art_content}
+                    <div>
+                        <br>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<p class="all2">
+
+
+
+<if condition="($binfo.new_user_only eq 0) or ($newUser eq 0)">
+        <eq name="binfo.bespeak_able"  value="1">
+            <eq name="binfo.borrow_status" value="1">
+                <lt name="binfo.bespeak_progress" value="100">
+                    <eq name="has_bespeak" value="1">
+                        <a class="w-end-active w-end-a" style="width: 100%;">已预约</a>
+                        <else/>
+                        <a class="w-end-active w-end-a zc" style="width: 100%;">立即预约</a>
+                    </eq>
+                    <else/>
+                    <a class="w-end-active w-end-a  " style="width: 100%;">预约已满</a>
+                </lt>
+                <else/>
+                <if condition="$binfo.start_time gt time()">
+                    <a class="w-end-active w-end-a" style="width: 100%;">预热中</a>
+                    <elseif condition="$binfo.borrow_status eq 2" />
+                    <lt name="binfo.progress" value="100">
+                        <a class="w-end-active w-end-a zc" style="width: 100%;">立即支持</a>
+                        <else/>
+                        <a class="w-end-active w-end-a" style="width: 100%;">投资已满</a>
+                    </lt>
+                    <else/>
+                    <a class="w-end-active w-end-a" style="width: 100%;">已结束</a>
+                </if>
+            </eq>
+            <else/>
+            <if condition="$binfo.start_time gt time()">
+                <a class="w-end-active w-end-a" style="width: 100%;">预热中</a>
+                <elseif condition="$binfo.borrow_status eq 2" />
+                <lt name="binfo.progress" value="100">
+                    <a class="w-end-active w-end-a zc" style="width: 100%;">立即支持</a>
+                    <else/>
+                    <a class="w-end-active w-end-a" style="width: 100%;">投资已满</a>
+                </lt>
+                <else/>
+                <a class="w-end-active w-end-a" style="width: 100%;">已结束</a>
+            </if>
+        </eq>
+        <else/>
+        <a class="w-end-active w-end-a  " style="width: 100%;">新用户专享</a>
+    </if>
+
+
+
+</p>
+
+
+
+
+<style>
+
+    .l-spxztc {
+
+        position: fixed;
+
+        bottom: 0;
+
+        background: #fff;
+
+        z-index: 99;
+
+        display: none;
+        width: 100%;
+
+    }
+
+
+
+    #lpz {
+
+        position: fixed;
+
+        width: 100%;
+
+        height: 100%;
+
+        top: 0;
+
+        z-index: 10;
+
+        display: none;
+
+        background: rgba(0, 0, 0, .5);
+
+    }
+.l-spxztc .l-tc2 {
+    padding: .2rem;
+}
+.l-spxztc .l-tc2 .in {
+    font-size: .3rem;
+    color: #313131;
+}
+.l-swzp2 {
+    padding-top: .2rem;
+}
+.l-tc3{
+    font-size: 0.3rem;
+    position: absolute;
+    right: 0.2rem;
+    top: 0.2rem;
+}
+.l-spxztc .l-tc2 .on {
+    margin-top: .2rem;
+    font-size: .26rem;
+    color: #313131;
+}
+.l-swzp2.on {
+    padding-top: 0;
+    width: 3rem;
+    height: .4rem;
+    line-height: .4rem;
+    /* overflow: hidden; */
+    padding: 0 !important;
+    margin: .3rem 0;
+    text-align: left;
+}
+.l_spxz {
+    padding: .15rem .2rem;
+    color: #FFFFFF;
+    background: #ccd1d4;
+    float: left;
+    border-radius: 3px;
+    margin: .2rem;
+    margin-right: 0;
+    width: 0.66rem;
+    height: 0.4rem;
+    font-size: 0.3rem;
+}
+.l_spxz.on {
+    background: #029EE8;
+}
+.l-spguige{
+    width: 100%;
+}
+.l-spguige p {
+    padding-left: .2rem;
+    font-size: .4rem;
+
+}
+.van-stepper {
+    font-size: 0;
+    margin: .2rem;
+}
+.van-stepper__minus {
+    border-radius: 4px 0 0 4px;
+}
+.van-stepper__minus, .van-stepper__plus {
+    width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+    background-color: #f2f3f5;
+    border: 0;
+    margin: 1px;
+    position: relative;
+    padding: 5px;
+    vertical-align: middle;
+}
+.van-stepper__input {
+    width: 30px;
+    height: 26px;
+    padding: 1px;
+    border: 0;
+    margin: 1px;
+    background-color: #f2f3f5;
+    border-width: 1px 0;
+    border-radius: 0;
+    box-sizing: content-box;
+    color: #323233;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+    -webkit-appearance: none;
+}
+.l-qurena {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    text-align: center;
+    background: #00a0ea;
+    color: #FFFFFF;
+    height: .7rem;
+    line-height: .7rem;
+    font-size: .32rem;
+    border-radius: 5px;
+    margin-bottom: .2rem;
+}
+#newBridge{
+    display: none;
+}
+</style>
+
+
+
+<div id="lpz">
+
+
+
+</div>
+
+
+
+<div class="l-spxztc" id="lsp" style="none">
+
+    <!--<van-actionsheet v-model="show">-->
+
+    <div class="clear l-fd">
+
+        <!--<div class="l-tc1">-->
+
+        <!--    <img src="{$binfo.borrow_img}" />-->
+
+        <!--</div>-->
+
+        <div class="l-tc2">
+
+            <p class="l-swzp2 in">
+
+                {$binfo.borrow_name|cnsubstr=###,8}
+
+                <br>
+
+                <!--{$binfo.borrow_min}元/份-->
+
+                <!-- 体验标-->
+
+            </p>
+
+            <p class="l-swzp2 on">已选择：<span class="yuanqian" id="yuanqian1s">{$binfo.borrow_min}</span>元</p>
+
+        </div>
+
+        <div class="l-tc3"> 关闭</div>
+
+    </div>
+
+    <div class="l-spguige">
+
+        <p>规格</p>
+
+        <div class="clear">
+
+            <div class="l_spxz on"><span>1</span>份</div>
+
+            <volist name="shortcut_c" id="m">
+
+                <div class="l_spxz"><span>{$m|default='10'}</span>份</div>
+
+            </volist>
+
+<div style=" clear: both;"></div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="l-spguige">
+
+        <p>数量</p>
+
+
+
+
+
+        <!--<van-stepper v-model="ddc" />-->
+
+        <div class="van-stepper">
+
+            <button class="van-stepper__minus">-</button><input type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"class="van-stepper__input" value="1"><button class="van-stepper__plus">+</button>
+
+        </div>
+
+    </div>
+
+    <div class="l-qurena"  > 确认</div>
+
+    <!--</van-actionsheet>-->
+
+</div>
+
+
+
+<script type="text/javascript" src="/Public/zpublic/js/swiper.min.js"></script>
+<script type="text/javascript">
+ var bl =document.documentElement.clientWidth/750;
+ $(".swiper-slide").css("height",(bl*515)+"px");
+
+    var swiper = new Swiper('.swiper-container', {
+        autoplay:1500000,
+        loop: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+    });
+$(function() {
+
+
+
+        $('.clear .l_spxz').click(function() {
+
+            //          alert(1)
+
+            $('.l_spxz').removeClass("on");
+
+            console.log(
+
+                $(this).find("span").text()
+
+
+
+            )
+
+            var guige = $(this).find("span").text();
+
+            $('.van-stepper__input').val(guige)
+
+            $("#yuanqian1s").text(guige * {$binfo.borrow_min});
+
+            $(this).addClass("on");
+
+        });
+
+
+
+        $('.l-qurena').click(function() {
+
+            if(parseInt($('.van-stepper__input').val())>0){
+                if({$binfo.bespeak_able} == 1 && {$binfo.borrow_status} == 1){
+                    window.location.href = "/wap/invest/bespeak_order?id={$binfo.id}&guige=" + {$binfo.borrow_min}+ "&num=" + $('.van-stepper__input').val();
+                } else{
+                    window.location.href = "/wap/invest/is_order?id={$binfo.id}&guige=" + {$binfo.borrow_min}+ "&num=" + $('.van-stepper__input').val();
+                }
+            }else{
+                alert("不能小于等于零");
+
+            }
+
+
+
+        })
+
+        //加值
+
+        $('.van-stepper__plus').click(function() {
+
+            $jia = $('.van-stepper__input').val();
+
+            console.log($jia)
+
+            num = parseInt($jia) + 1;
+
+
+
+            $('.van-stepper__input').val(parseInt($jia) + 1)
+
+            $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+        })
+
+
+
+        $('.van-stepper__input').blur(function() {
+
+            //  alert(1);
+
+            num = $('.van-stepper__input').val();
+
+            $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+        })
+
+        //减值
+
+        $('.van-stepper__minus').click(function() {
+
+
+
+            $jia = $('.van-stepper__input').val();
+
+            if($jia <= 1) {
+
+                $('.van-stepper__input').val(1)
+
+                num = 1;
+
+                $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+            } else {
+
+                $('.van-stepper__input').val(parseInt($jia) - 1)
+
+                num = parseInt($jia) - 1;
+
+                $("#yuanqian1s").text(num * {$binfo.borrow_min});
+
+            }
+
+
+
+            console.log($jia)
+
+
+
+        })
+
+    })
+$(".zc").click(function() {
+
+        var uid = {$uid};
+
+        console.log({$uid});
+
+        if(uid >= 1) {
+
+            $('#lsp').show()
+
+            $('#lpz').show()
+
+
+
+            //  $("p").slideToggle();
+
+        } else {
+
+            alert("您还没登录哦");
+
+            window.location.href="/Wapmember/common/login.html" ;
+
+        }
+
+
+
+    });
+
+    $("#lpz").click(function() {
+
+
+
+
+
+
+
+        $('#lsp').hide()
+
+        $('#lpz').hide()
+
+
+
+
+
+    });
+
+    $(".l-tc3").click(function() {
+
+
+
+
+
+
+
+        $('#lsp').hide()
+
+        $('#lpz').hide()
+
+
+
+
+
+    });
+
+    $(function() {
+
+
+
+        var a = "#00a0e9";
+
+        var b = "#dedede";
+
+        var w = "100%";
+
+        var h = "5px";
+
+        var wq0div = $(".wq-div");
+
+        var barb = function() {
+
+            wq0div.each(function() {
+
+                var width = $(this).attr('w');
+
+                // width = parseFloat($('.w-porper-div2 .first>span').text())
+
+                var barbox = '<dl class="barbox"><dd class="barline"><div w="' + width + '" class="charts" style="width:0px"><d></d></div></dd></dl>';
+
+                $(this).append(barbox);
+
+            })
+
+        }
+
+
+
+        var amimeat = function() {
+
+            $(".charts").each(function(i, item) {
+
+                var wi = parseInt($(this).attr("w"));
+
+                $(item).animate({
+
+                    width: wi + "%"
+
+                }, 1000, function() {
+
+
+
+                });
+
+            });
+
+        }
+
+        var barbCss = function(a, b) {
+
+            $(".barbox").css({
+
+                "height": h,
+
+                "line-height": h,
+
+                "text-align": "center",
+
+                "color": "#fff",
+
+            })
+
+            $(".barbox>dd").css({
+
+                "float": "left"
+
+            })
+
+            $(".barline").css({
+
+                "width": w,
+
+                "background": b,
+
+                "height": h,
+
+                "overflow": "hidden",
+
+                "display": "inline",
+
+                "position": "relative",
+
+                "border-radius": "8px",
+
+            })
+
+            $(".barline>d").css({
+
+                "position": "absolute",
+
+                "top": "0px",
+
+            })
+
+            $(".charts").css({
+
+                "background": a,
+
+                "height": h,
+
+                "width": "0px",
+
+                "overflow": "hidden",
+
+                // "border-radius": "2px"
+
+            })
+
+        }
+
+        barb();
+
+        amimeat();
+
+        barbCss(a, b);
+
+    })
+
+
+</script>

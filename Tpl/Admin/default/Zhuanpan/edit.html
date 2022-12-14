@@ -1,0 +1,60 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+  <div class="page_tit">奖品设置</div>
+
+  <div class="page_tab"><span data="tab_1" class="active">奖品设置</span>    
+
+  </div>
+
+  <div class="form2">
+
+    <form method="post" action="" enctype="multipart/form-data">
+      <div id="tab_1">
+        <dl class="lineD">
+          <dt>奖品名：</dt>                    
+            <dd>
+              <input type="text" name="title" value="{$zhuanpan.title}" class="input" style="" />
+            </dd>
+        </dl>  
+        <dl class="lineD">
+          <dt>奖品金额：</dt>                    
+            <dd>
+              <input type="text" name="prize" value="{$zhuanpan.prize}" class="input" style="" />元或%
+            </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>奖品数量：</dt>                    
+            <dd>
+              <input type="text" name="rate" value="{$zhuanpan.rate}" class="input" style="" />数量越大中奖概率越大
+            </dd>
+        </dl>
+
+        <dl class="lineD">
+          <dt>奖品类型：</dt>                    
+            <dd>
+              <select name="jp_type" id="jp_type" class="input">
+                  <option value="0">请选择</option>
+                  <option value="1" <if condition="$zhuanpan.jp_type eq 1"> selected </if> >红包</option>
+                  <option value="2" <if condition="$zhuanpan.jp_type eq 2"> selected </if> >体验金</option>
+                  <option value="3" <if condition="$zhuanpan.jp_type eq 3"> selected </if> >加息券</option>
+                  <option value="4" <if condition="$zhuanpan.jp_type eq 4"> selected </if> >谢谢惠顾</option>
+              </select>
+            </dd>
+        </dl>  
+        <input name="lid" type="hidden" value="{$zhuanpan.id}">    
+      </div>
+      <!--tab2-->
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<include file="Public:_footer" />

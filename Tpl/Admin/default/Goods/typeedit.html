@@ -1,0 +1,61 @@
+<include file="Public:_header" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+
+<script type="text/javascript" src="__ROOT__/Style/A20141030/js/calendar/calendar.js"></script>
+
+<link href="__ROOT__/Style/A20141030/js/calendar/calendar-blue.css" rel="stylesheet" type="text/css">
+<tagLib name="htmlA" />
+
+<div class="so_main">
+
+
+
+<div class="page_tit">编辑类型</div>
+
+<div class="form2">
+
+	<form method="post" action="__URL__/dotypeedit" onsubmit="return subcheck();" enctype="multipart/form-data">
+
+	<input type="hidden" name="id" value="{$vo.id}" />
+
+	<div id="tab_1">
+    <dl class="lineD"><dt>类别类型：</dt><dd>
+
+ <select name="type" class="select">
+    <option value="1" <if condition='$vo.type eq 1'>selected</if> >类别</option>
+
+    <option value="2" <if condition='$vo.type eq 2'>selected</if>>类型</option>
+
+  </select> 
+
+
+    </dd></dl>
+
+	<dl class="lineD"><dt>类型名称：</dt><dd><htmlA:input id="name" value="{$vo.name}" tip="*"/></dd></dl>
+
+
+    <dl class="lineD"><dt>类型状态:</dt><dd><htmlA:radio id="status" value="key|vo.status" default="1|启用,2|关闭" tip="类型状态" /></dd></dl>
+
+	
+	
+
+	</div><!--tab1-->
+
+	
+
+
+	<div class="page_btm">
+
+	  <input type="submit" class="btn_b" value="确定" />
+
+	</div>
+
+	</form>
+
+</div>
+
+
+
+</div>
+
+<include file="Public:_footer" />

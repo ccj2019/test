@@ -1,0 +1,87 @@
+ 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/wap/css/ldy.css" />
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/Public/wap/js/ldy.js"></script>
+<script type="text/javascript">var bankimg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Member/";</script>
+<script type="text/javascript">var Himg = "__PUBLIC__/{:C('DEFAULT_THEME')}/Home/";</script>
+<script  type="text/javascript" src="/Public/wap/js/recharge.js"></script>
+
+        <link rel="stylesheet" href="/Public/wap/css/layer.css">
+        <script type="text/javascript" src="/Public/wap/js/layer.js"></script>
+
+	<body>
+		<div class="l-fh l-on">
+			<a href="javascript:history.back();"  class="l-fanhui on">&lt;返回</a><span>线上充值</span>
+			<div class="l-fanhui1">
+					 <a href="/Wapmember/Memberinfo#chip-1" ><img src="/Public/wap/img/huiyuan/shezhi.png" /></a><!--<a href="##">会员中心</a>-->
+			</div>
+		</div>
+                    <form id="form" action="/Wapmember/charge/paydemo" method="POST">
+ <!--		url="/member/charge/paydemo";
+ http://www.rzgthy.com/llp/hllp/index.php
+ -->
+ 
+		
+		
+		<div class="l-tixian clearfix" style="border-top:0 ;">
+			<p class="l-yhp1">充值金额</p>
+			    <?php $u_id = session("u_id") ;?>
+				 
+			<input  name="user_id" type="hidden" class="je2-1" value="{$u_id}" />
+			<p class="l-yhp2">¥ <input  id="t_money" name="money_order" type="text" class="je2-1" placeholder="50元" onkeydown="if(event.keyCode==13)return false;"/>
+</p>
+	
+			<!--<p class="l-yhp1">可用金额 0.00       <span>全部提现</span></p>--> 
+		</div>	
+		
+
+		<div class="l-qurena">
+		<style>
+		.l-qurena button{
+		    width: 100%;
+    /* margin: 0 auto; */
+    /* margin-top: 1rem; */
+    text-align: center;
+    background: #00a0ea;
+    color: #FFFFFF;
+    height: .7rem;
+    font-size: .32rem;
+    border-radius: 5px;
+    margin-bottom: .2rem;
+    border: 0px;
+		}
+		</style>
+		                  <button type="button" onclick="verification()">确认充值</button>
+		             </div>
+					      </form>
+	</body>
+        <script>
+            function verification() {
+                let money = $("#t_money").val();
+                money = $.trim(money);
+                if(money == ""){
+                    return false;
+                }
+                money = parseFloat(money).toString();
+                if(money == "NaN"){
+                    return false;
+                }
+                $.post("/Wapmember/Charge/verification",{"money":money},function (data) {
+                    let d = JSON.parse(data);
+                    if(d.status == 0){
+                        layer.open({
+                            content: d.message
+                            ,btn: "确定"
+                            ,shade: 'background-color: rgba(0,0,0,.3)' //自定义遮罩的透明度
+                            ,skin: "footer"
+                        });
+                        return false;
+                    }
+                    $("#form").submit();
+                });
+            }
+        </script>
+
+</html>

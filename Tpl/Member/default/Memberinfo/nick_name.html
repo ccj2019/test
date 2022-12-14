@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/all.css" />
+	<link rel="stylesheet" type="text/css" href="/public/wap/css/ldy.css" />
+	<script type="text/javascript" src="/public/wap/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/public/wap/js/ldy.js"></script>
+
+	<body>
+
+		<div class="l-fh l-on">
+			<a href="/Wapmember/Memberinfo" class="l-fanhui on">&lt;返回</a><span>修改会员名</span>
+			<div class="l-fanhui1">
+				<a href="/Wapmember">会员中心</a>
+			</div>
+		</div>
+  <div class="l-inptu">
+  	<form action="/Wapmember/Memberinfo/nick_name" method="post" id="shiminglc"  >
+  		<input type="text" name="nick_name" value="{$member_info.nick_name}" placeholder="修改会员名"/>
+  	</form>
+  </div>
+		<div class="l-qurena"onclick="Verification()">
+		  <a href="">确认修改</a>  	
+		</div>
+
+		
+
+	</body>
+
+</html>
+
+<script type="text/javascript" src="__ROOT__/Style/Js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+
+	
+	function Verification() {
+ 		$("#shiminglc").submit()
+	}
+</script>

@@ -1,0 +1,112 @@
+<div style="clear:both;"></div>
+<div class="lc">
+  <div class="lc_sx" style="padding-top:15px; margin-bottom:4px;">
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">贷款类型：</td>
+            <td width="91%">
+              <a  href="{$strUrl}&borrow_type=0" class="borrow_type0">不限</a>
+              <a  href="{$strUrl}&borrow_type=1" class="borrow_type1">推荐标</a>
+              <a  href="{$strUrl}&borrow_type=3" class="borrow_type3">秒标</a>
+              <a  href="{$strUrl}&borrow_type=4" class="borrow_type4">净值标</a>
+              <a  href="{$strUrl}&borrow_type=5" class="borrow_type5">抵押标</a>
+            </td>
+          </tr>
+    </table>
+      
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">项目收益：</td>
+            <td width="91%">
+              <a href="{$strUrl}&borrow_interest_rate=0" class="borrow_interest_rate0">不限</a> 
+              <a href="{$strUrl}&borrow_interest_rate=1" class="borrow_interest_rate1">10%以下</a>
+              <a href="{$strUrl}&borrow_interest_rate=2" class="borrow_interest_rate2">10%-15%</a>
+              <a href="{$strUrl}&borrow_interest_rate=3" class="borrow_interest_rate3">15%-20%</a>
+              <a href="{$strUrl}&borrow_interest_rate=4" class="borrow_interest_rate4">20%-25%</a>
+              <a href="{$strUrl}&borrow_interest_rate=5" class="borrow_interest_rate5">25%以上</a>
+            </td>
+          </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">项目期限：</td>
+            <td width="91%">
+              <a href="{$strUrl}&borrow_duration=0" class="borrow_duration0">不限</a>
+              <a href="{$strUrl}&borrow_duration=1" class="borrow_duration1">1-3个月</a>
+              <a href="{$strUrl}&borrow_duration=2" class="borrow_duration2">4-6个月</a>
+              <a href="{$strUrl}&borrow_duration=3" class="borrow_duration3">7-9个月</a>
+              <a href="{$strUrl}&borrow_duration=4" class="borrow_duration4">10-12个月</a>
+              <a href="{$strUrl}&borrow_duration=5" class="borrow_duration5">13-24个月</a>
+              <a href="{$strUrl}&borrow_duration=6" class="borrow_duration6">24个月以上</a>              
+            </td>
+          </tr>
+    </table>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5 hide">
+          <tr valign="top">
+            <td width="9%" class="px_spec1">项目状态：</td>
+            <td width="91%">
+              <a href="{$strUrl}&borrow_status=0" class="borrow_status0">全部</a>          
+              <a href="{$strUrl}&borrow_status=2" class="borrow_status2">正在投标</a>
+              <a href="{$strUrl}&borrow_status=6" class="borrow_status6">正在还款</a>
+              <a href="{$strUrl}&borrow_status=7" class="borrow_status7">还款完成</a>
+            </td>
+          </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="px_spec5 hide">
+          <tr valign="top">
+            <td width="9%" class="px_spec1" style="border-bottom:0px;">贷款额度：</td>
+            <td width="91%" style="border-bottom:0px;">
+              <a href="{$strUrl}&borrow_money=0" class="borrow_money0">不限</a> 
+              <a href="{$strUrl}&borrow_money=1" class="borrow_money1">1万以下</a>
+              <a href="{$strUrl}&borrow_money=2" class="borrow_money2">1万-5万</a>
+              <a href="{$strUrl}&borrow_money=3" class="borrow_money3">5万-10万</a>
+              <a href="{$strUrl}&borrow_money=4" class="borrow_money4">10万-20万</a>
+              <a href="{$strUrl}&borrow_money=5" class="borrow_money5">20万以上</a>
+            </td>
+          </tr>
+    </table>
+
+    </div>
+    <div class="px_more"><a href="javascript:;" class="btn_moreselect">更多筛选条件</a></div>
+    <div class="lc_list2">
+      <ul>
+        <!-- <volist name="list.list" id="vb"> -->
+          <li>
+              <table border="0" cellspacing="0" cellpadding="0" width="100%" height="100">
+                  <tr>
+                    <td colspan="4"class="px_spec7"><span><if condition="getIco($vb,'new_ac png') neq ''">{:getIco($vb)}</if></span><a href="{:U('invest/detail',array('id'=>$vb['id']))}">{$vb.borrow_name|cnsubstr=###,46}</a></td>
+                    <td width="8%" rowspan="2"class="px_spec10">
+                      <span class="def_progress" data-drive="{$vb.progress}"><span style="margin-left:-8px;">{$vb.progress}%</span></span>
+                    </td>
+                    <!-- <if condition="$vb.borrow_status gt 2"> -->
+                    <td width="14%" rowspan="2" align="center"class="px_spec12"><a>已售磬</a><div class="px_spec15"><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/images/pc_sq.png" class="png" /></div></td>
+                    <!-- <else/> -->
+                    <td width="14%" rowspan="2" align="center"class="px_spec11"><a href="{:U('invest/detail',array('id'=>$vb['id']))}">立即投资</a></td>
+                    <!-- </if> -->
+                  </tr>
+                  <tr class="px_spec8">
+                    <td width="14%">年化收益率<span><b>{$vb.borrow_interest_rate}%</b></span></td>
+                    <td width="28%">项目总额<span>{$vb.borrow_money|Fmoney=###,false}元</td>
+                    <td width="19%">起投金额<span>{$vb.borrow_min|default=50}元</span></td>
+                    <td width="17%">理财期限<span class="px_spec9">{$vb.borrow_duration}<if condition="$vb.repayment_type eq 1">天<else/>个月</if></span></td>
+                  </tr>
+                  <tr class="px_spec8">
+                    <td colspan="4">担保方：<if condition="$vb['title'] eq ''">暂无<else /><a href="{:U('guarantee/detail',array('id'=>$vb['danbao']))}" target="_blank">{$vb.title}</a></if></td>
+                    <td colspan="2" class="px_spec14">剩余可认购：<span>{$vb.need|Fmoney=###,false}</span>元</td>
+                  </tr>
+                </table>
+          </li>
+          <!-- </volist> -->      
+        </ul>
+    </div>
+    <div class="px_page">{$list.page}</div>
+</div>
+<script type="text/javascript">
+    $(function(){
+      $(".borrow_type{$borrow_type}").addClass("sel");
+      $(".borrow_interest_rate{$borrow_interest_rate}").addClass("sel");
+      $(".borrow_money{$borrow_money}").addClass("sel");
+      $(".borrow_duration{$borrow_duration}").addClass("sel");
+      $(".borrow_status{$borrow_status|default=0}").addClass("sel");
+    });
+</script>

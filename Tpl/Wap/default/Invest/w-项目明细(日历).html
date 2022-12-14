@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./css/FlexoCalendar.css">
+<link rel="stylesheet" type="text/css" href="css/all.css" />
+
+<link rel="stylesheet" href="css/index.css">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+
+<script src="./js/FlexoCalendar.js"></script>
+
+<body>
+    <div class="header ">
+        <div class="w-header w-content flex">
+            <a href="##" class="w-header-left">
+                < 返回 </a>
+                    <h3>项目明细</h3>
+                    <a href="##" class="w-header-right">会员中心</a>
+        </div>
+    </div>
+
+
+    <!-- 项目明细 start -->
+    <div class="w-prodet">
+        <div>
+            <label for="">项目名称</label>
+            <input type="text" placeholder="第122期海鲜项目（梭子蟹）体验标">
+            <span>></span>
+        </div>
+        <div>
+            <label for="">已支付预约款</label>
+            <span>￥</span>
+            <input type="number" placeholder="0.00">
+
+        </div>
+        <div>
+            <label for="">应支付总额</label>
+            <span>￥</span>
+            <input type="number" placeholder="100000.00">
+
+        </div>
+        <div>
+            <label for="">已支付总额</label>
+            <span>￥</span>
+            <input type="number" placeholder="100000.00">
+
+        </div>
+        <div>
+            <label for="">收款情况</label>
+
+            <input type="text" placeholder="支付成功" readonly="readonly">
+
+        </div>
+        <div>
+            <label for="">支付时间</label>
+            <input type="text" id="start" value="" placeholder="2018-09-09">
+
+
+
+            <div class="w-deta-warpper">
+                <div class="calendar-wrapper-b">
+
+                    <div class="calendar-wrapper" id="0" style="display:none">
+
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="number">
+            <label for="">分红金额</label>
+            <span>￥</span>
+            <input type="number"  placeholder="0.00">
+            <span>(未发放)</span>
+
+        </div>
+        <div>
+            <label for="">支付数量</label>
+            <span>￥</span>
+            <input  type="number" placeholder="1">
+          
+
+        </div>
+        <div>
+            <label for="">汇报情况</label>
+            <span>￥</span>
+            <input type="text" readonly="readonly" placeholder="项目成功，回报未发放">
+
+        </div>
+    </div>
+
+    <!-- 项目明细 end -->
+
+    <div class="footer">
+        <ul>
+            <li class="home on">
+                <a href="##">
+                    <img src="img/zhuye.png">
+                    <img src="img/zhuye1.png">
+                    <span>主页</span>
+                </a>
+            </li>
+            <li class="home">
+                <a href="##">
+                    <img src="img/faqi.png">
+                    <img src="img/faqi1.png">
+                    <span>发起</span>
+                </a>
+            </li>
+            <li class="home">
+                <a href="##">
+                    <img src="img/shangcheng.png">
+                    <img src="img/shangcheng1.png">
+                    <span>商城</span>
+                </a>
+            </li>
+
+            <li class="home">
+                <a href="##">
+                    <img src="img/wode.png">
+                    <img src="img/wode1.png">
+                    <span>我的</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $('#start').click(function () {
+
+            $('.calendar-wrapper-b').attr('id', '1');
+            times('a');
+
+        })
+
+        $('#end').click(function () {
+
+            $('.calendar-wrapper-b').attr('id', '2');
+            times('b');
+
+        })
+        // $('.calendar-wrapper-b').click(function(){
+        //     $('.calendar-wrapper-b').hide();
+        // })
+        // $(".calendar-wrapper-b th").bind("click",function(event){    event.stopPropagation(); })
+        function times(jud) {
+            console.log(jud + '2')
+            $('.calendar-wrapper').show();
+            $('.calendar-wrapper-b').show();
+            $("#calendar").flexoCalendar({
+                setYear: 2018,
+                setMonth: 5,
+                selectDate: 'each-each-each',
+                onselect: function (res) {
+                    var id = $('.calendar-wrapper-b').attr('id');
+                    if (id == 1) {
+                        
+                        $('#start').val(res);
+                    } else {
+                     
+                        $('#end').val(res);
+                    }
+
+                    $('.calendar-wrapper-b').hide();
+                    console.log(res)
+
+                }
+            });
+
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

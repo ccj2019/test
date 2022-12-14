@@ -1,0 +1,91 @@
+{__NOLAYOUT__}<div class="page_info">
+  <div class="page_tips">
+    <p>复审通过，已经完成的项目</p>
+  </div>
+  <div class="m_page_right_box">
+    <table border="0" cellspacing="0" cellpadding="0" width="850" style=" border:none">
+      <tr>
+        <td>时间从：</td>
+        <td><input type="text" id="start_time" value="<php>if($search['start_time']){echo date('Y-m-d',$search['start_time']);}</php>" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\\'end_time\\\')||\\\'2020-10-01\\\'}',startDate:'%y-%M-%d'})"/></td>
+        <td>至：</td>
+        <td><input type="text" value="<php>if($search['end_time']){echo date('Y-m-d',$search['end_time']);}</php>" id="end_time" readonly="readonly" class="text_input Wdate timeInput_Day" onfocus="WdatePicker({minDate:'#F{$dp.$D(\\\'start_time\\\')||\\\'2020-10-01\\\'}',startDate:'%y-%M-%d'})"/></td>
+        <td><a href="javascript:void(0)"  id="btn_search" onclick="sdetail()" class="button_input" >查看</a></td>
+      </tr>
+    </table>
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>项目标题</td>
+        <td>众筹金额</td>
+        <td>众筹进度</td>
+        <td>众筹时间</td>
+        <td>详情</td>
+      </tr>
+      <volist name="list" id="vo">
+      <tr>
+        <td><a href="/invest/{$vo.id}.html" title="{$vo.borrow_name}">{$vo.borrow_name|cnsubstr=###,8}</a></td>
+		<td>{$vo.borrow_money}</td>
+		<td>{$vo.progress}%</td>
+		<td>{$vo.add_time|date="Y-m-d H:i",###}</td>		
+    <td style="padding:0; text-align:left"><a href="__APP__/member/borrowdetail/borrowdetail?id={$vo.id}" class="xiangqing">详情</a>  </td>
+        </tr>
+      </volist>
+    </table>
+    <div data="chip-3" id="pager" class="yahoo2 ajaxpagebar">{$pagebar}</div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".xiangqing").click(function(event) {
+    /* Act on the event */
+    var obj = $(this);
+    var url = $(this).attr('href');
+    var x = makevar(['start_time','end_time']);  
+    $.ajax({
+      url: url,
+      data: x,
+      timeout: 5000,
+      cache: false,
+      type: "get",
+      dataType: "json",
+      success: function (d, s, r) {              
+        obj.parents(".ui-tabs-panel").html(d.html);//更新客户端竞拍信息 作个判断，避免报错        
+      }
+    });    
+    return false;
+  });
+});
+function sdetail(){
+	x = makevar(['start_time','end_time']);
+	$.ajax({
+		url: "__URL__/borrowpaying",
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d) $("#chip-3").html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+		}
+	});
+}
+
+$('.ajaxpagebar a').click(function(){
+	try{	
+		var geturl = $(this).attr('href');
+		var id = $(this).parent().attr('data');
+		var x={};
+        $.ajax({
+            url: geturl,
+            data: x,
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+            }
+        });
+	}catch(e){};
+	return false;
+})
+</script>

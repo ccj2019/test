@@ -1,0 +1,166 @@
+{__NOLAYOUT__}
+<style type="text/css">
+
+.tip{border:1px solid #CCC; background:#FC0; color:#BA0001; text-indent:15px; font-size:14px; text-align:left; padding:10px 0px;width:700px;margin-right:20px;}
+.ax{position:relative; z-index:10; height:35px; overflow:hidden; margin-top:20px;width:740px;}
+.mn_dk{position:relative; z-index:15; margin-left:0px}
+.borrowtable{width:700px;}
+.borrowtable th{text-align:right;font-weight:normal; color:#333333; border-bottom:1px dashed #CCC; height:30px}
+.borrowtable td{text-align:left;border-bottom:1px dashed #CCC; height:30px; }
+.col_1{width:20%}
+.col_2{width:20%}
+.col_3{width:20%}
+.col_4{width:40%}
+.sel_fs{width:120px}
+.x_input{border:1px solid #CCCCCC; width:150px; height:22px; line-height:25px; padding-left:10px; margin-right:5px;vertical-align:middle}
+.x_checkbox{border:1px solid #CCCCCC;height:22px;vertical-align:middle; padding:0px 3px}
+.x_select{border:1px solid #CCC;vertical-align:middle}
+.title_cw {	
+	POSITION: relative; 
+	PADDING-LEFT: 10px; 
+	HEIGHT: 40px;  
+	FONT-WEIGHT: bold; 
+	text-align:left;
+	width:730px; overflow:hidden
+}
+.title_vip_bg{
+POSITION: relative; 
+	PADDING-LEFT: 10px; 
+
+	FONT-WEIGHT: bold; 
+	text-align:left;
+	width:740px;
+}
+.zi_bg1{
+line-height:30px;
+padding-left:15px;
+width:700px;
+BACKGROUND: url(__ROOT__/Style/H/images/cw_zi_bg.jpg) no-repeat; 
+float:left;
+height:30px;
+margin-bottom:10px;
+}
+.inputsss{background: #4ca2ff;
+color: #fff;
+font-size: 16px;
+font-family: 微软雅黑;
+padding: 10px 30px;
+border-radius: 5px;
+margin-left: 10px; border:none}
+</style>
+
+<tagLib name="htmlA" />
+<!--中部开始-->
+<center>
+  <div style="width:740px; overflow:hidden">
+    <div class="wrap2" style="border:none">
+	<div class="title_vip_bg"><br>
+      <div class="tip">
+        <if condition="$vipTime gt 0">您已经是VIP会员，将于{$vipTime|date="Y年m月d日",###}到期
+          <else/>
+          您正在申请VIP会员</if>
+      </div>
+      <form method="post" action="__URL__/save" onsubmit="return cksubmit();" name="postBorrow" id="postBorrow">
+        <input type="hidden" name="vkey" value="{$vkey}" />
+        <div class="borrow_block">
+		
+          <ul class="ax clearfix">
+            <li class="mn_dk">
+              <div class="mn_ll"></div>
+              <div class="mn_rr"></div>
+              <span>您的用户申请信息</span> </li>
+          </ul>
+          <ul>
+            <div class="axbody">
+              <htmlA:select id="_day_option" datakey="borrow_day_time" style="display:none"/>
+              <htmlA:select id="_month_option" datakey="borrow_month_time" style="display:none"/>
+              <table class="borrowtable">
+                <tr>
+                  <th class="col_1">VIP费用：</th>
+                  <td class="col_2" style="width:60%" colspan="3">{$glo.fee_vip}元/年</td>
+                </tr>
+                <tr>
+                  <th class="col_1">您的业务指导客服信息：</th>
+                  <td class="col_2" style="width:60%; overflow:hidden; padding:10px" colspan="3" id="kftable"> 请先选择您的当前居住城市 </td>
+                </tr>
+                <if condition="$vipTime gt 0">
+                
+                <else/>
+                <tr>
+                  <th class="col_1">备注：</th>
+                  <td class="col_2" style="width:60%" colspan="3"><textarea style="width:80%; height:100px; padding:10px" id="des" class="text_input"></textarea></td>
+                </tr>
+                <tr>
+                  <th class="col_1">&nbsp;</th>
+                  <td class="col_2" style="width:60%" colspan="3"><input type="button" id="subd" class="button_input" onclick="cksubmit()" value="提交申请" /></td>
+                </tr>
+                </if>
+              </table>
+            </div>
+          </ul>
+        </div>
+      </form>
+	  
+	  </div>
+	  <img src="__ROOT__/Style/H/images/sscw_bg3.jpg" complete="complete" style="width:980px" />
+    </div>
+  </div>
+</center>
+<!--中部结束-->
+<script type="text/javascript">
+getkf();
+<if condition="$vipTime gt 0">
+var tipS = '您的已经是VIP会员，将于{$vipTime|date="Y年m月d日",###}到期，你现在申请可延长VIP会员时间\\r\\n确定要申请延长VIP权限吗？';
+</if>
+function setError(tip){
+	layer.msg(tip)
+	return false;
+}
+function getkf(){
+ var p="";
+  var waitHtml = '数据载入中......';
+  $("#kftable").html(waitHtml);
+  $("#gkf").attr("disabled",true);
+	$.ajax({
+		url: "__URL__/getkf",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				$("#kftable").html(d.html);
+			}else{
+				$("#gkf").removeAttr('disabled');
+			}
+		}
+	});
+}
+
+function cksubmit(){
+	var p=makevar(['kfid','des']);
+	if(typeof p.kfid == "undefined") 					return setError("必须选择一位专有客服！");
+	if(typeof p.des == "undefined") 					return setError("请填写申请说明！");
+	$("#subd").attr('disabled',true);
+	$.ajax({
+		url: "__URL__/apply",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert("已提交申请，客服会尽快处理,点击确定后页面将跳转至会员中心");
+				}else{
+					layer.msg(d.message)
+				}
+			}else{
+				$("#subd").removeAttr('disabled');
+			}
+		}
+	});
+}
+</script>

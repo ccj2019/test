@@ -1,0 +1,2 @@
+<?php
+return array ( 0 => 'id', 1 => 'content', 2 => 'start_time', 3 => 'end_time', 4 => 'add_time', 5 => 'title', 6 => 'ad_type', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(10) unsigned', 'content' => 'varchar(5000)', 'start_time' => 'int(10)', 'end_time' => 'int(10)', 'add_time' => 'int(10)', 'title' => 'varchar(100)', 'ad_type' => 'tinyint(4)', ), ); ?>

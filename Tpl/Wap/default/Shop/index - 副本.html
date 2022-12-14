@@ -1,0 +1,184 @@
+ 
+<link rel="stylesheet" type="text/css" href="/Public/wap/css/all.css" />
+
+<link rel="stylesheet" href="/Public/wap/css/index.css">
+
+
+<style type="text/css" >
+    .van-stepper__input{ 
+        width: .5rem !important;
+        height: .3rem !important;
+        background: #ccc !important;
+        border: none !important;
+    }
+</style>
+<body>
+    <div class="header "> 
+        <div class="w-header w-content flex">
+            <a href="javascript:window.history.back();" class="w-header-left">
+                < 返回 </a>
+                    <h3>积分商城</h3>
+                    <if condition="$UID gt '0'">
+				   <a href="/wapmember" class="w-header-right">会员中心</a>
+                    <!--   <a href="/Wapmember">铭万众筹</a>-->
+                    <else />
+                    <!--未登录状态-->
+                    	 
+                       <a href="/Wapmember/common/login.html" style="text-align: right;">登录</a>
+                   
+                    </if>
+                 
+        </div>
+    </div>
+
+
+    <!-- 积分明细1  start -->
+
+    <div class="w-int">
+        <div class="w-shang-top">
+             	 <volist name=":get_ad(33)" id='vo' offset="0" length='1'>  
+                 
+                        <a href="{$vo.url}" class="img_1" style="background:url() no-repeat center center;"><img src="/{$vo.img}" /></a>
+                    
+              </volist> 
+            <div class="clear">
+                <a href="/wapmember/Credit/index" class="left fl">
+              
+                    <img src="/Public/wap//img/w-zuanshi.jpg" class="fl" alt="">
+                    <span class="fl">总积分：
+                        <span>  {$meinfo['credits']}</span>
+                    </span>
+                </a>	   
+                <a href="/Wapmember/shoporder" class="right fr">
+                    <img src="/Public/wap/img/w-shang.png" class="fl" alt="">
+                    <span class="fl">总订单：
+                        <span>
+                         {$uidcount}
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="w-porper w-shang">
+            <div class="porper-top flex">
+                <a href="/wap/shop/index?type_id=0" <if condition="$type_id eq 0">class="w-porpertop-active"</if>>全部</a>
+                <a href="/wap/shop/index?type_id=56"<if condition="$type_id eq 56">class="w-porpertop-active"</if>>自养海鲜</a>
+                <a href="/wap/shop/index?type_id=57"<if condition="$type_id eq 57">class="w-porpertop-active"</if>>海鲜干货</a>
+                <a href="/wap/shop/index?type_id=58"<if condition="$type_id eq 58">class="w-porpertop-active"</if>>旅游船票</a>
+            </div>
+            <div class="int-list-warpper">
+    
+                <div class="int-list">
+                    <volist id="vo" name="list.list">
+                    	<a class="clear" onclick="wqredict('{$vo['id']}')">
+                        <div class="int-list-left fl">
+                            <img   src="{$vo.art_img}" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> {$vo.title}</h6>
+                            <div class="red">
+                           		         所属类别：<if condition="$type_id eq 56">自养海鲜<elseif condition="$type_id eq 57"/>海鲜干货<elseif condition="$type_id eq 58"/> 旅游船票 </if>
+                                </div>
+                                <div class="red">
+                                    所需积分：<span>{$vo.art_jifen}积分/份</span>
+                                </div>
+                                <div class="con flex">
+                                    <div class="red">
+                                        兑换人数：<span>{:getbuynum($vo["id"])}人</span>
+                                    </div>
+                                    <!-- 由于a标签嵌套问题 改用了span 用以下方法做跳转（不做跳转将onclick scirpt删除） -->
+                                    <span class="tiaozhaun" onclick="wqredict('{$vo['id']}')" >
+                                       立即兑换 
+                                    </span>
+                                    
+                                    <script>
+                                    function wqredict(canshu) {   
+                                        window.location.href = "/wap/Shop/shop_show?id="+canshu;
+    
+                                            }     
+                                    </script>
+                                </div>
+                        </div>
+                    </a>
+                    	
+<!--        <li><img onclick="location.href='{:U('maket/detail',array('id'=>$vo['id']))}'" src="/{$vo.art_img}" width="228px" height="193px" /><h1></h1><p><span>所需积分：<i></i></span><span>购买人数：人</span></p><a href="{:U('maket/detail',array('id'=>$vo['id']))}">兑换</a></li>-->
+    </volist>	
+           	
+<!--                	
+                    <a class="clear">
+                        <div class="int-list-left fl">
+                            <img src="/Public/wap/img/l-s1.png" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6> 积分兑换一斤龙利鱼（一条）保鲜</h6>
+                            <div class="red">
+                                    所属类别：鲜活海鲜
+                                </div>
+                                <div class="red">
+                                    所需积分：<span>160000积分</span>
+                                </div>
+                                <div class="con flex">
+                                    <div class="red">
+                                        兑换人数：<span>10人</span>
+                                    </div>
+                                    <!-- 由于a标签嵌套问题 改用了span 用以下方法做跳转（不做跳转将onclick scirpt删除） -->
+                                    <!--<span class="tiaozhaun" onclick="wqredict()">
+                                       立即兑换
+                                    </span>
+                                    <script>
+                                    function wqredict(canshu) {         
+                                            window.location.href = "/wap/Shop/shop_show";  
+    
+                                            }     
+                                    </script>
+                                </div>
+                        </div>
+                    </a>
+                    <a class="clear">
+                        <div class="int-list-left fl">
+                            <img src="/public/wap/img/l-s1.png" alt="">
+                        </div>
+                        <div class="int-list-right fr">
+                            <h6>积分兑换日照绿茶一斤装</h6>
+                            <div class="red">
+                                    所属类别：鲜活海鲜
+                                </div>
+                                <div class="red">
+                                    所需积分：<span>160000积分</span>
+                                </div>
+                                <div class="con flex">
+                                    <div class="red">
+                                        兑换人数：<span>10人</span>
+                                    </div>
+                                    <!-- 由于a标签嵌套问题 改用了span 用以下方法做跳转  
+                                    <span class="tiaozhaun" onclick="wqredict()">
+                                       立即兑换
+                                    </span>
+                                   <script>
+                                    function wqredict(canshu) {         
+                                            window.location.href = "https://www.baidu.com/";  
+    
+                                            }     
+                                    </script>  
+                                </div>
+                        </div>
+                    </a>-->
+ 
+                </div>
+            </div>
+        </div>
+        <div class="navslis">
+        	    {$list.page} 
+        </div>
+         
+        <!-- 积分明细1 end -->
+
+
+        <script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+       
+        <script src="/Public/wap/js/index.js"></script>
+   <script>
+// 	alert(1);
+$zindex=2;
+ 	
+ </script>

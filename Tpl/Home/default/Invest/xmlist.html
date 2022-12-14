@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" /> 
+    <title>{$glo.web_name}</title>
+    <meta name="keywords" content="{$glo.web_keywords}" />
+    <meta name="description" content="{$glo.web_descript}" />
+        <link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico" />
+        <link rel="bookmark"href="__PUBLIC__/images/favicon.ico" />
+
+
+<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/shop/css/tfindex.css" />
+        <script type="text/javascript">
+               function jisuanFontsize(){
+                var winWidth;
+                if (window.innerWidth)
+                winWidth = window.innerWidth;
+                else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+                // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+                if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+                {
+                winWidth = document.documentElement.clientWidth;
+                }
+                if(winWidth<1300){
+                    winWidth=1300
+                }
+                if(winWidth>1920){
+                    winWidth=1920
+                }
+                document.getElementsByTagName('html')[0].style="font-size: calc("+winWidth+"px / 1920 * 100);"
+            }
+            jisuanFontsize();
+            window.onresize = function(){
+                jisuanFontsize()
+            }
+        </script>
+    <script type="text/javascript" src="/Public/new/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/web/js/cui-timer.js"></script>
+		<style>
+			.tfShenglue2{
+				height: 0.2rem !important;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+			.tfShenglue3{
+				font-size: 14px;
+				color: #999999;
+				padding-left: 0.15rem;
+				margin-top: 5px;
+			}
+			.tfShenglue4{
+				background: rgba(255, 154, 20, 0.1);
+				height: 20px;
+				line-height: 20px;
+				padding: 0 9px;
+				font-size: 14px;
+				color: #FF9A14;
+				margin-top: 9px;
+				margin-left: 0.15rem;
+			}
+			.toQiangGou{
+				width: 70px;
+				height: 25px;
+				background: linear-gradient(90deg, #FF8058 0%, #FF1A1A 100%);
+				text-align: center;
+				line-height: 25px;
+				color: #fff;
+				font-size: 18px;
+				font-weight: normal;
+			}
+			.tfIndexChaoZhiTuanGou{
+				position: relative;
+			}
+			.tfIndexChaoZhiTuanGou:hover{
+				border-color: rgb(73,105,242) !important;
+			}
+			.fenleifenlei{
+				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAA4CAYAAAAB8vOKAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEDSURBVHgB7di9jcJAEAXgN6e7iy3dBYSmBHdACVCCA/6qwHQAERIEUAJUgOiAEpyDpS0AM4wRSAgZsBGC5D1pZWu93m92wgU+ENHJfw2KJd4VQfSFD4QoUaJEiRIlSpQoUaJEiRIlSpQoUaJEi0c1tvvTur3M8UTKos6uaSP8poE0k4W0kobBoY24zCbFUcUc6S6Q9rYvoXPnaYNn+EmDYzEvQ/V4ipphDem6OG9JVkRWjBVVtR9mj7b8vvMta+VA2kkfBXMqKtTx38qePZvx89bln/SilXgiWcttVG+1/Bpd40ErS+E3Wn5ur8NeIulshnhxclpuNYwqvk49D2+Kjjz/ABaxXqZD+efZAAAAAElFTkSuQmCC);
+				position: absolute;
+				top: 0;
+				left: 20px;
+				background-size: 100% 100%;
+				font-size: 16px;
+				line-height: 119%;
+				color: #FFFFFF;
+				width: 28px;
+				height: 55px;
+				text-align: center;
+				box-sizing: border-box;
+				padding-top: 3px;
+				z-index: 1;
+			}
+			.suolue{position: relative;}
+			.suolueBeiBottomBox{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 30px;
+				background: rgba(51, 51, 51, 0.4);
+				font-size: 14px;
+				line-height: 30px;
+				text-align: center;
+				color: #FFFFFF;
+			}
+			.jindutiaoaBox{
+				position: absolute;
+				top: -2px;
+				height: 2px;
+				left: 0;
+				width: 100%;
+				background-color: #C4C4C4;
+			}
+			.jindud{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 2px;
+				background: #FF1A1A;
+			}
+			.tftoast{
+				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAXCAYAAABj7u2bAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMOSURBVHgB3VbLcRRBDNUbmyqOPsPFIZAAlCEFOFAccJkIIII1ITgDh2ASoEwCfCJgL8B1OVHsekZI3VJLPQsH797o8qyn1Wrp6bWkaZAMXjw/ps14QtNINE7yiFDf1/LIlNb6Y7LRdIp8NBmZzNdVV+Zr3SSTTZKNpjNR8vV7heWPK9U+5MWLBzTdfBJY5U8UmZhRNgBcdh4Qymae6UBnQLVu7zzonrJC+jpSVaFJN8sL9F/drzqsgRwS3793iW/fzwbCeCqLXClQ/bLb5ioglF8yw/oM6rjs8ZWq5RKurigP2IpG1fugagun+jqI+KhX6Oxw8TAZYK72EtiqgyThBK7DBQ8KM4GDRQWk6120yM5gJ4G2BJhTZEgBGIk1toAyT+yKMwZtPjTU/1S0sD36yWjqmUIDSYmlYpezP2MTcGqSTwSgbQQz4KjRorlv8YeTeRzo//spcDY8JykDymnW58pfcgsBK6CxVSFH4GassocZeD/cyiQcUOeHavVoHKXkG1RKSVOPAc1yBseR0G0ZXSoY9OLHJRxkHVIebAapr8qsEJopymgL6PaxZ1OrBGpFEoXt7cAYIo5zDkK4PW0tzrA6AChHXAuDwwRyieegPBjz4aVLBgjeZ7qmiJbCDUdb41SR85HSPedQOR7u2UlNNypPc8ho44nTUUezo1QlLX4O/rsq4ij5RGdrfv2JcthliqT2XG2ZPqsgZ2LI8tRtmfMebp8OTg4dIOdjz4kaQGuVNUpngUXJc9eH3AgyaESDReJoK4vsFCLbOg1hiJYRPVOi0r2iy3oGdZ8QsoTeBoBURRSbmqto4UXEX3Ui3/27F8S/jkVyUv3zDDOnj4M6LteQI8m5I0pt3HIhkrq6+ynLq64VuIZSMTpuvZoMr/p4bjn42aOFADivlywxOMkdaGS7dOkdZzrH9ee3dMuxM6AC6unDS3H+UtoG6EZvgsJSBXOB9x/f0A5joH3GePBafr+knqPPu13B7A0IV9eSH3ceC46loVkKU2e0x9iPIQe1YQX1gbB5Inmzov9p/AEGStGihON/NwAAAABJRU5ErkJggg==);
+				width: 34.63px;
+				height: 22.78px;
+				line-height: 15px;
+				text-align: center;
+				color: #fff;
+				font-size: 12px;
+				position: absolute;
+				top: -25px;
+				right: 0;
+				transform: translateX(50%);
+			}
+			.xpage{
+				width:1130px;
+				margin: 0 auto;
+				margin-top:20px;
+				text-align:center;
+				margin-top:65px;
+				font-size:0
+			}
+			.xpage a{
+				display:inline-block;
+				height: 50px;
+				text-align: center;
+				line-height:50px;
+				color: #3f3f3f;
+				padding:0 16px;
+				font-size:16px;
+				margin-left:10px;
+				background: #FFFFFF;
+				border: 1px solid #C4C4C4;
+				box-sizing: border-box;
+				border-radius: 2px;
+			}
+			.xpage span{
+				display:inline-block;
+				height: 50px;
+				text-align: center;
+				line-height:50px;
+				background: #4969f2;
+				color: #fff;
+				border:1px solid #4969f2;
+				box-sizing: border-box;
+				font-size:16px;
+				padding:0 20px;
+				margin-left:10px;	
+				border-radius: 2px;
+			}
+			.gong{
+				display: inline-block;
+				font-size:16px;
+				line-height:50px;
+				padding-right: 10px;
+			}
+		</style>
+
+
+</head>
+
+<body>
+   <a href="/shop/car_list">
+            <div class="car_n">
+                <span id="carnum">{$carnum}</span>
+            </div>
+        </a>
+        <div class="tfggHeaderBox">
+            <div class="tfggHeaderBoxMain">
+                <img src="__PUBLIC__/shop/img/logo.png" class="tfggHeaderBoxMainLogo">
+                <div class="tfggHeaderBoxMainRight">
+                    <div class="tfggHeaderBoxMainRightMenuBox">
+                        <a href="/"  <if condition="$dh eq 1">class="active"</if> >首页</a>
+                        <a href="__APP__/invest">渔业养殖</a>
+                        <!--<a href="__APP__/zhongzhi">联合种植</a>-->
+                        <a href="__APP__/article/video">视频直播</a>
+                        <a href="__APP__/article/active">活动公告</a>
+                        <a href="__APP__/article/about">关于我们</a>
+
+                    </div>
+                    <div class="wechatAppBox">
+                        <div class="wechatAppBoxLi">
+                            微信
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-w.png" />
+                                微信公众号
+                            </div>
+                        </div>
+                        <div class="wechatAppBoxLi">
+                            APP下载
+                            <div class="tfErweimaBox">
+                                <img src="/Public/web/img/shouye/erwei-app.png" />
+                                APP下载
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tfggHeaderBoxMainRightImgBox" style="margin-left: 20px;">
+                        <a href="__APP__/member/index"><img src="__PUBLIC__/shop/img/tfUser.png"></a>
+                        <a href="__APP__/shop/car_list"><img src="__PUBLIC__/shop/img/tfCart.png" class="tfgouwuche"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tfFenLeiReMaiBox">
+            <div class="tfFenLeiReMaiBoxMain">
+                <img src="__PUBLIC__/shop/img/tfremaituijian.png" class="tfFenLeiReMaiBoxMainRemai">
+
+
+                <volist name="tjgoods" id="vo">
+                    <a href="__APP__/Shop/shop_show/id/{$vo.id}.hmtl"> <div class="tfFenLeiReMaiBoxMainRightDiv">
+                        <img src="{$vo.art_img}" >
+                        <div class="tfFenLeiReMaiBoxMainRightDivRight">
+                            <div class="tfFenLeiReMaiBoxMainRightDivRightTitle1">{$vo.title|cnsubstr=###,20}</div>
+                            <div class="tfFenLeiReMaiBoxMainRightDivRightJiage">￥{$vo.art_jiage}</div>
+                            <div class="tfFenLeiReMaiBoxMainRightDivRightAnNiu">立即购买</div>
+                        </div>  </div>
+                    </a>
+
+            </volist>
+
+               
+            </div>
+        </div>
+
+
+
+   <div class="tfFenleiMenuFenLeiBox">
+            <div class="tfFenleiMenuFenLeiBoxMain" style="overflow: hidden;">
+				
+                <div class="tfFenleiMenuFenLeiBoxMainDiv1" style="float: left;">
+                    <div  class="tfFenleiMenuFenLeiBoxMainDiv1QuanBuShangPin fls" data="0">全部商品</div>
+					<div  class="tfFenleiMenuFenLeiBoxMainDiv1Menu1 fls <if condition='$status eq 1'>active</if> " data="1">销售中</div>
+					<div  class="tfFenleiMenuFenLeiBoxMainDiv1Menu1 fls <if condition='$status eq 2'>active</if> " data="2">养殖中</div>
+					<div  class="tfFenleiMenuFenLeiBoxMainDiv1Menu1 fls <if condition='$status eq 3'>active</if> " data="3">售卖中</div>
+					<div  class="tfFenleiMenuFenLeiBoxMainDiv1Menu1 fls <if condition='$status eq 4'>active</if> " data="4">已完成</div>
+                </div>
+				<div class="tfFenleiMenuFenLeiBoxMainBottomRight">
+				    <div class="tfFenleiMenuFenLeiBoxMainBottomRightDiv">
+				            <div class="tfFenleitfggSousuonaliRightBox">
+				                <input type="text" name="search" placeholder="" autocomplete="off" value="{$name}"/>
+				                <div class="tfFenleitfggGoSouguo" > 
+								<img  src="__PUBLIC__/shop/img/sousuo222.png" >搜索</div>
+				            </div>
+				    </div>
+				</div>
+				
+            </div>
+        </div>
+        <div class="tfFenLeiYeShangPinBox">
+            <div class="tfIndexChaoZhiTuanGouBox">
+                <if condition="$list">
+                    <volist name="list" id="vo">
+
+                    <div class="tfIndexChaoZhiTuanGou">
+							 <a href="__APP__/invest/detail/id/{$vo.id}.hmtl">
+								<!--<div class="fenleifenlei">分类</div>-->
+								<div class="suolue tfImg" style="background-image: url({$vo.borrow_img});">
+									<div class="suolueBeiBottomBox">
+
+										<div class="jindutiaoaBox">
+											<div class="jindud" style="width: {$vo.progress}%;">
+												<div class="tftoast">{$vo.progress}%</div>
+											</div>
+										</div>
+                                        <if condition="$vo.borrow_status eq 1">
+                                            <span class="cui-timer" data-config = '["endtime":"{$vo.start_time|date="Y-m-d H:i:s",###}","msec":false]'></span>
+                                        <else/>
+                                            <span>{$vo.zhuangtai}</span>
+                                        </if>
+
+                                    </div>
+								</div>
+								<div class="tfShenglue2">{$vo.borrow_name}</div>
+								<!--<div class="tfShenglue3">收购时间 {$vo.sg_time|date="Y-m-d H:i:s",###}</div>-->
+								<div style="display: flex;">
+									<div class="tfShenglue4">还剩 {$vo.fenshu} 份</div>
+								</div>
+								<div class="tfIndexChaoZhiTuanGouBottom" style="display: flex;justify-content: space-between;align-items: center;">
+									<span>￥{$vo.borrow_min}</span>
+									<div class="toQiangGou">
+                                        <if condition="$vo.borrow_status eq 2">
+                                            去抢购<else/>
+                                            查看
+                                        </if>
+
+                                    </div>
+								</div>
+							</a>
+						</div>
+                    </volist>
+                    <else/>
+                    <div style="    text-align: center;
+    line-height: 250px;
+    color: #ccc;
+    font-size: 18px;
+    margin-top: 100px;">暂时没有记录~~~</div>
+                </if>
+
+
+            </div>
+        </div>
+       <div class="xpage">
+		   <!--<div class="gong">共27页</div>-->
+		   {:str_replace('&nbsp;','',$page)}
+       </div>
+
+
+<!--底部-->
+<include file="default:Public:footern" />
+
+    <script type="text/javascript">
+        $(function(){
+            $('.cui-timer').Cuitimer();
+        });
+
+            //点击全部商品
+        $('.fls').on('click',function(){
+            //页面取消分类高亮
+            $('.tfFenleiMenuFenLeiBoxMainBottomLeftDiv,.tfFenleiMenuFenLeiBoxMainBottomLeft,.tfFenleiMenuFenLeiBoxMainDiv1Menu1').removeClass('active');
+            //携带参数跳转当前页面
+            var search = $('input[name="search"]').val();//搜索的文字
+            var fenlei = $(this).attr("data");//二级分类的ID
+            //alert("1");
+            location.href = '?type_id='+fenlei+'&name='+search;
+         })    
+       
+        
+
+        // $('.tfFenleiMenuFenLeiBoxMainDiv1Menu1').on('click',function(){
+        //     $('.tfFenleiMenuFenLeiBoxMainBottomLeft').removeClass('active').eq($(this).index()-1).addClass('active');
+        // })
+        //点击二级分类
+        $('.tfFenleiMenuFenLeiBoxMainBottomLeftDiv').on('click',function(){
+            //携带参数跳转当前页面
+            var key =  $(this).attr("data-id");//二级分类的ID
+            
+            var search = $('input[name="search"]').val();//搜索的文字
+
+            var fenlei =$(this).parent(".tfFenleiMenuFenLeiBoxMainBottomLeft").attr("data");
+            location.href = '?type_id='+fenlei+'&name='+search+'&keys='+key;
+        })
+
+        
+        $('.tfFenleitfggGoSouguo').on('click',function(){
+             var search = $('input[name="search"]').val();//搜索的文字
+             location.href = '?type_id={$status}&name='+search;
+        })
+    </script>

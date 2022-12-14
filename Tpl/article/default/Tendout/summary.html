@@ -1,0 +1,43 @@
+{__NOLAYOUT__}
+<div class="page_info">
+  <div class="page_tips">
+    尊敬的{$glo.web_name}用户，以下是您在{$glo.web_name}的投资总表，敬请仔细审阅
+  </div>
+  <div class="m_page_right_box">
+    <table border="1" class="table_list" cellspacing="0" cellpadding="0" width="850" style="border-collapse:collapse;" bordercolor="#ccc">
+      <tr class="tr_header">
+        <td>项目</td>
+        <td>金额</td>
+        <td>说明</td>
+      </tr>
+        <tr>
+          <td class="lt">投资中项目：</td>
+          <td class="rt">￥{$mx.invest.1.investor_capital|default="0.00"}/{$mx.invest.1.num|default="0"}标
+				<span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx2').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">投资中的金额总计及标数</td>
+        </tr>
+        <tr>
+          <td class="lt">出售中的项目：</td>
+          <td class="rt">￥{$mx.invest.4.investor_capital|default="0.00"}/{$mx.invest.4.num|default="0"}标
+				<span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx3').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">出售中的金额总计及标数</td>
+        </tr>
+        <tr>
+          <td class="lt">已回款的项目：</td>
+          <td class="rt">￥{$mx.invest.5.investor_capital|default="0.00"}/{$mx.invest.5.num|default="0"}标
+          <span style="color:#666;">[</span><a href="javascript:;" onclick="$('#mx4').click();" class="ctl">列表</a><span style="color:#666;">]</span></td>
+          <td class="rt">已回款的金额总计及标数</td>
+        </tr>
+        <tr>
+          <td class="lt">累计投资金额：</td>
+          <td class="rt">￥{$mx.tj.borrowOut|default="0.00"}</td>
+          <td class="rt">累计投资金额</td>
+        </tr>
+        <tr>
+          <td class="lt">累计收益金额：</td>
+          <td class="rt">￥{$mx.tj.earnInterest|default="0.00"}</td>
+          <td class="rt">累计收益金额</td>
+        </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>帐号绑定-- {$glo.web_name}</title>
+<include file="default:Public:_header_common" group="Home"/>
+<script type="text/javascript" src="__ROOT__/Style/Js/ajaxfileupload.js"></script>
+</head>
+<body>
+<include file="default:Public:_header_main" group="Home"/>
+<div style="clear:both;"></div>
+<div class="login_bg"></div>
+<div class="login2">
+  <div class="yhdl"><span class="spec32">帐号绑定</span></div>
+  <div class="yhdl2">
+    <div style="height:300px; width:100%">
+
+	</div>
+  </div>
+</div>
+<div style="clear:both;"></div>
+<include file="default:Public:_footer" group="Home"/>
+<script type="text/javascript">
+var mbTest = /^(13|14|15|18)[0-9]{9}$/;
+var timer = null;
+var leftsecond = 60; //倒计时
+var msg = "";
+var closeAction = function (){
+	window.location.href="__APP__/index";
+}
+
+var apppath = "__APP__";
+
+function jfun_bindOld(){
+	var uname = $("#uname").val();
+	var pass= $("#pass").val();
+	if(uname=="" || pass==""){
+		layer.msg("用户名和密码都不能为空")
+		return;
+	}
+	$.ajax({
+		url: "__URL__/appbindold/",
+		data: {"uname":uname,"pass":pass},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert("绑定成功，现在转向会员中心", 1,!1);
+					window.location.href="/member/";
+				}
+				else layer.msg(d.message);
+			}
+		}
+	});
+}
+
+function jfun_bind(){
+	var uname = $("#uname").val();
+	var pass= $("#pass").val();
+	var email= $("#email").val();
+	if(uname=="" || pass=="" || email==""){
+		layer.msg("用户名,密码和邮箱都不能为空")
+		return;
+	}
+	$.ajax({
+		url: "__URL__/appbind/",
+		data: {"uname":uname,"pass":pass,"email":email},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					layer.alert("绑定成功，现在转向会员中心", 1,!1);
+					window.location.href="/member/";
+				}
+				else layer.msg(d.message);
+			}
+		}
+	});
+}
+	
+	
+$(function(){
+	$.ajax({
+		  url: "__URL__/appbind/",
+		  timeout: 5000,
+		  cache: false,
+		  type: "get",
+		  dataType: "json",
+		  success: function (d, s, r) {
+				var obj_html=d.content;
+				$.layer({
+					type: 1,
+					title: "第三方登陆绑定",
+					area: ['450px', '300px'],
+					shade: [0],
+					page: {
+						html: '<div class="jiedai_con">'+obj_html+'</div>'
+					}, success: function(){
+						layer.shift('left');
+					}
+				});
+		  }
+	  });	
+})	
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<include file="default:Public:mheader" />
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+	
+	.bgxmlis.hb4 span:nth-child(1) {
+		width: 400px;
+	}
+	
+	.tou1.hb4 span:nth-child(1) {
+		width: 400px;
+	}
+	.bgxmlis .yqs a{
+		color: #333333;
+		
+	}
+	.bgbx{
+		font-size: 18px !important;
+	}
+	.bgxmlis.hb4 span{
+		font-size: 18px !important;
+		
+	}
+</style>
+<!--header-->
+<!--内容部分-->
+<div class="box navls">
+<span><a href="{:U('/member/index/index')}">会员中心</a></span>
+<span>&gt;</span>
+<span><a href="{:U('/Member/agreement/index')}">合同</a></span>
+</div>
+
+<div class="box clearfix">
+	<include file="default:Public:_left" />
+	<div class="tabvbox">
+		<div class="tabv clearfix">
+			<div <if condition="$is_hetong eq 3">class="on"</if>>
+				<a href="/member/Agreement?p=0&is_hetong=3"> <span>全部</span></a> </div>
+			<div  <if condition="$is_hetong eq 1">class="on"</if>>
+				<a href="/member/Agreement?p=0&is_hetong=1"> <span>已签署</span></a></div>
+			<div <if condition="$is_hetong eq 0">class="on"</if>>
+				<a href="/member/Agreement?p=0&is_hetong=0"> <span>未签署</span></a> </div>
+		</div>
+		<div class="tabv2box">
+			<div class="tabv2 show">
+				<!--充值记录-->
+				<div class="bgbx">
+					<div class="tou1 hb4">
+						<span>合同名称</span>
+						<span>时间</span>
+						<span>状态</span>
+						<span>操作</span>
+
+					</div>
+					<volist name="list" id="vo">
+ 						<div class="bgxmlis hb4">
+							<span>{$vo.borrow_name}</span>
+
+							<span>{$vo.add_time|date='Y-m-d',###}</span>
+							<span><if condition="$vo.is_hetong eq 0">未签署<else/>已签署</if></span>
+							<span><if condition="$vo.is_hetong eq 0">	<a href="/member/Agreement/qianshu?id={$vo.id}">签署</a><else/><a href="/member/Agreement/xiazai?id={$vo.id}">下载</a></if> </span>
+
+						</div>
+ 					</volist>
+
+				</div>
+
+				<!--分页-->
+				<div class="aFye clearfix">
+					<p>
+						{$srt}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--底部-->
+<include file="default:Public:footer" group="Home" />

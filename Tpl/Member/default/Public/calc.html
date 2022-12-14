@@ -1,0 +1,283 @@
+<!-- 计算器 -->
+<div class="jisuanqi_div">
+    
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/jisuanqi/js/js1.js"></script>
+    <link href="__PUBLIC__/{:C('DEFAULT_THEME')}/Home/jisuanqi/css/global.css" rel="stylesheet" type="text/css" />
+    
+<div class="float_box">
+     <div class="tab blue3">
+         <div class="calculator"><!--计算器--></div>
+     </div>
+</div>
+        
+       <div class="calculator_box">
+          <div class="calculator_title">
+            <div class="calculator_title_left"> <i class="calculator_icon calculator"></i><span class="calculator_title_span">收益计算器</span></div>
+            <div class="calculator_title_right"><a class="calculator error_calculator_a"></a></div>
+            <div class="cl"></div>
+          </div>
+          <ul class="calculator_ul">
+              <li style=" height:30px;" id="error"> <i class="" style=" float:left;"></i><span style=" color:red;float:left; line-height:40px" class="register_ul_right01_span"></span></li>
+             <li><span class="calculator_ul_span">投入金额</span><input type="text" class="calculator_input" id="txt_money" onkeyup ="check(1)" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" /><span class="calculator_ul_span"> 元</span></li>
+             
+            
+             <li><span class="calculator_ul_span">还款方式</span>             
+                 <select class="calculator_select" id="dl_repayment_type" onchange="check(3)" style="margin-left:6px;width:237px;">
+                    <option value="">--请选择--</option>
+                    <option value="1">按天到期还款</option>
+                    <option value="2" >按月分期还款</option>
+                    <option value="3">每月还息到期还本</option>
+                </select>
+             </li>
+              <li><span class="calculator_ul_span">投资期限</span><input type="text" class="calculator_input" id="txt_duration" onkeyup="check(2)" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" /><span class="calculator_ul_span" id="duration_type"> 月</span></li>    
+             <li><span class="calculator_ul_span">&emsp;年利率</span><input type="text" class="calculator_input" id="txt_lilv"  onkeyup="check(4)" onkeyup="this.value=this.value.replace(/[^\d\.]/g,'')"  /><span class="calculator_ul_span"> %</span></li>         
+             <li class="calculator_lifive"><p class="calculator_li_p">本息合计：<span style=" color:#ea6872" id="txt_sum"></span>元</p></li>
+             <li class="calculator_lifive"><input type="submit" value="开始计算" onclick="calculator()"  class="login_icon login_btn" /></li>
+          </ul>
+          <div class="calculator_line"></div>
+          <p style=" padding-left:0" class="calculator_title_span">参数设置</p>
+          <p class="calculator_detail_p">使用分期还款利息计算器，帮您计算一下借款的总成本，包括每月需要偿还的金额及月利率等；同时，一份完整的还款计划时间表让您更好地了解还款的情况。 分期还款采用的是通用的"等额本息还款法"，即借款人每月以相等的金额偿还贷款本息。也是银行房贷等采用的方法。</p>
+       </div>
+<div class="pop_mask"></div>
+<script type="text/javascript">
+    //<!--
+    var repayWay = 3;
+    var status = 0;
+    $(document).ready(function () {
+        var scrollUP = function () {
+            var st = $(document).scrollTop(), winh = $(window).height(), winw = $(window).width();
+            (st > 0) ? $(".gotop").parent().show("normal", function () {
+                $(".div_bold").css("margin-bottom", "241px"); //投资排行榜
+                $(".float_con_QQ").css("margin-bottom", "123px");
+                $(".float_con_weixin").css("margin-bottom", "64px");
+            }) : $(".gotop").parent().hide("normal", function () {
+                $(".div_bold").css("margin-bottom", "182px"); //投资排行榜
+                $(".float_con_QQ").css("margin-bottom", "64px");
+                $(".float_con_weixin").css("margin-bottom", "5px");
+            });
+            status = st;
+            //IE6下的定位
+            if (!window.XMLHttpRequest) {
+                $(".gotop").css("top", st + winh - 166);
+            }
+        }
+        scrollUP();
+        $(window).bind("scroll", scrollUP);
+        $(".count_link").click(function () {
+            $(".count_main,.count_bg,.fixed").show();
+            if (scroll == "off") {
+            } else {
+                //$("html,body").animate({scrollTop: 0}, 600);
+            }
+        });
+        /*右侧浮动窗口js*/
+        $(".float_box .tab").hover(function () {
+            showMargin();
+            $(this).addClass("blue2").removeClass("blue1");
+        }, function () {
+            showMargin();
+            $(this).addClass("blue1").removeClass("blue2");
+        });
+        //投资排行榜
+        $(".imperialcrown").hover(function () {
+            showMargin();
+            $(".div_bold").stop().show();
+        }, function () {
+            showMargin();
+            $(".div_bold").stop().hide();
+        });
+        $(".div_bold").hover(function () {
+            showMargin();
+            $(".div_bold").stop().show();
+        }, function () {
+            showMargin();
+            $(".div_bold").stop().hide();
+        });
+        $(".customer_services").hover(function () {
+            showMargin();
+            $(".twodimen_con").stop().hide();
+            $(".services_con").stop().show();
+        }, function () {
+            showMargin();
+            $(".twodimen_con").stop().hide();
+            $(".services_con").stop().hide();
+        });
+        $(".twodimen_code").hover(function () {
+            showMargin();
+            $(".services_con").stop().hide();
+            $(".twodimen_con").stop().show();
+        }, function () {
+            showMargin();
+            $(".services_con").stop().hide();
+            $(".twodimen_con").stop().hide();
+        });
+        $(".twodimen_con").hover(function () {
+            showMargin();
+            $(".twodimen_con").stop().show();
+        }, function () {
+            showMargin();
+            $(".twodimen_con").stop().hide();
+        });
+        $(".services_con").hover(function () {
+            showMargin();
+            $(".services_con").stop().show();
+        }, function () {
+            showMargin();
+            $(".services_con").stop().hide();
+        });
+        $(".gotop").mouseover(function () {
+            $(".services_con").stop().hide();
+            $(".twodimen_con").stop().hide();
+        });
+        $(".count_link").mouseover(function () {
+            $(".services_con").stop().hide();
+            $(".twodimen_con").stop().hide();
+        });
+        // backToTop
+        $(".gotop").click(function () {
+            if (scroll == "off") return;
+            $("html,body").animate({ scrollTop: 0 }, 600);
+        });
+    });
+    BizQQWPA.addCustom({ aty: '0', a: '0', nameAccount: 4008650760, selector: 'BizQQWPA' });
+    function showMargin() {
+        if (status > 0) {
+            $(".float_con_QQ").css("margin-bottom", "123px");
+            $(".float_con_weixin").css("margin-bottom", "64px");
+        } else {
+            $(".float_con_QQ").css("margin-bottom", "64px");
+            $(".float_con_weixin").css("margin-bottom", "5px");
+        }
+    }
+    function cube(a, b) {
+        var c = 1;
+        for (i = 0; i < b; i++) {
+            c = c * a;
+        }
+        return c;
+    }
+    //设贷款额为a，月利率为i，年利率为I，还款月数为n，每月还款额为b，还款利息总和为Y
+    function get_lixi(a, i, b, n) {
+        return (a * i - b) * cube((1 + i), (n - 1)) + b;
+    }
+    function get_repay_money_month(a, i, n) {
+        var b = a * i * cube((1 + i), n) / (cube((1 + i), n) - 1); //月均还款
+        return b;
+    }
+    function calculator() {
+        if (check()) {
+            $(".funframe .row").remove();
+            var duration = parseInt($("#txt_duration").val());
+            var repay_type = $("#dl_repayment_type").val();
+            var borrow_money = parseFloat($("#txt_money").val());
+            var lilv = parseFloat($("#txt_lilv").val());
+            if ($("#dl_repayment_type").val() == "1") {
+                lilv = (lilv / 365 / 100);
+            } else {
+                lilv = (lilv / 12 / 100);
+            }
+            var _repay_money = get_repay_money_month(borrow_money, lilv, duration);
+                var repay_money = 0;
+                var repay_lixi = 0;
+                var repay_benjin = 0;
+                for (k = 1; k <= duration; k++) {
+                    if (repay_type == "2") {
+                        repay_money += _repay_money;
+                        repay_lixi += get_lixi(borrow_money, lilv, _repay_money, k);
+                        repay_benjin += (repay_money - repay_lixi);
+                    } else {
+                        repay_lixi = (lilv * duration * borrow_money) / duration;
+                        if (k == duration) {
+                            repay_benjin += borrow_money;
+                            repay_money += repay_benjin + repay_lixi;
+                        } else {
+                            repay_money += repay_lixi;
+                        }
+                    }
+                }
+            var total_repay_money = 0;
+            var total_repay_lixi = 0;
+            total_repay_money = parseFloat(repay_money);
+            total_repay_lixi = total_repay_money;  //total_repay_money - borrow_money;
+            $("#txt_sum").html("￥" + total_repay_lixi.toFixed(2));
+        }
+    }
+    $("#dl_repayment_type").change(function () {
+        if ($(this).val() == "1") {
+            $("#duration_type").html(" 天");
+        } else {
+            $("#duration_type").html(" 月");
+        }
+    });
+    function check(number) {
+        if (number == 1 || number == "") {
+            if ($("#txt_money").val() == "") {
+                $("#error").show();
+                $("#error").find("span").html("请输入借款金额");
+                return false;
+            }
+        }
+        if (number == 2 || number == "") {
+            if ($("#txt_duration").val() == "") {
+                $("#error").show();
+                $("#error").find("span").html("请输入借款期限");
+                return false;
+            }
+        }
+        if (number == 3 || number == "") {
+            if ($("#dl_repayment_type").val() == "") {
+                $("#error").show();
+                $("#error").find("span").html("请选择还款方式");
+                return false;
+            }
+        }
+        if (number == 4 || number == "") {
+            if ($("#txt_lilv").val() == "") {
+                $("#error").show();
+                $("#error").find("span").html("请输入利率");
+                return false;
+            }
+        }
+        $("#error").find("span").html("");
+        return true;
+    }
+    $(function () {
+        $("#help").addClass("nav_on");
+    });
+    //弹出登录
+    $(".top_ui03").on('click', function () {
+        $('.pop_mask').show();
+        $('.pop_mask').height($(document).height());
+        var top = ($(window).height() - $(".two_code_bg").height()) / 2;
+        var left = ($(window).width() - $(".two_code_bg").width()) / 2;
+        var scrollTop = $(document).scrollTop();
+        var scrollLeft = $(document).scrollLeft();
+        $('.two_code_bg').css({ top: top + scrollTop, left: left + scrollLeft });
+        $('.two_code_bg').show(400);
+    });
+    //关闭
+    $(".two_code_error_icon").on('click', function () {
+        $('.two_code_bg').hide(400);
+        $('.pop_mask').hide();
+    });
+    $(function ($) {
+        $(".calc_btn").on('click', function () {
+            $('.pop_mask').show();
+            $('.pop_mask').height($(document).height());
+            var top = ($(window).height() - $(".calculator_box").height()) / 2;
+            var left = ($(window).width() - $(".calculator_box").width()) / 2;
+            var scrollTop = $(document).scrollTop();
+            var scrollLeft = $(document).scrollLeft();
+            $('.calculator_box').css({ top: top + scrollTop-100, left: left + scrollLeft });
+            $('.calculator_box').slideDown(400);
+        });
+        //关闭
+        $(".error_calculator_a").on('click', function () {
+            $('.calculator_box').slideUp(400);
+            $('.pop_mask').hide();
+        });
+    });
+</script>                      
+</div>
+</div>
+<!-- 计算器 -->

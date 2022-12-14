@@ -1,0 +1,53 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  var delUrl = '__URL__/doDel';
+  var addUrl = '__URL__/add';
+  var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">申请中的众筹</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+
+    <th class="line_l">编号</th>
+  <th class="line_l">投资人</th>
+    <th class="line_l">投资金额</th>
+    <th class="line_l">支持比例</th>
+    <th class="line_l">本金收益</th>
+    <th class="line_l">销售差价</th>
+    <th>回报开始时间</th>
+    <th>回报结束时间</th>
+    <th class="line_l">最终收益（<if condition="$vo['has_capital'] eq 1">不</if>含本金）</th>  
+  </tr>     
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td>{$vo.id}</td>
+        <td>{:get_user_name($vo['investor_uid'])}</td>
+        <td>{$vo.capital} </td>
+        <td>{$vo["interest"]/$vo["income"]*100}%</td>
+        <td>{$vo.interest}</td>
+        <td>{$vo.chajia}</td>
+        <td>{$vo.starttime|date="Y-m-d H:i:s",###}</td>
+        <td>{$vo.endtime|date="Y-m-d H:i:s",###}</td>
+        <td>
+           	<if condition="$vo['has_capital'] neq 1">
+	          	  {$vo.interest} 
+	          	  <else/> 
+	          	  {$vo['interest']+$vo['capital']+$vo['chajia']}
+	          	</if>
+        </td>      
+      </tr>
+  </volist>
+
+  </table>
+  </div> 
+ 
+</div>
+<include file="Public:_footer" />

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/public/web/css/all.css" />
+		<link rel="stylesheet" type="text/css" href="/public/web/css/ldy.css" />
+		<script src="/public/web/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/public/web/js/ldy.js">
+		</script>
+	</head>
+	<style type="text/css">
+		body {
+			background: #f8f8f8;
+		}
+	</style>
+
+	<body>
+		<!--header-->
+		<div class="topbox">
+			<div class="mytop">
+				<div class="my1 clearfix">
+					<div class="mytime fl">
+						客服热线：400-1100-216 在线时间：周一~周六 9:00~18：00
+					</div>
+					<div class="login fr">
+						 <if condition="$UID gt '0'"> 
+                       <span> <a href="{:U('/member/index')}" ><img src="__PUBLIC__/{:C('DEFAULT_THEME')}/home/images/yh.png" alt=""> {$UNAME}/</a></span>
+                       	<span><a href="{:U('/member/common/actlogout')}">退出</a></span>
+                    <else />
+                    <!--未登录状态-->
+                         
+                       <span> <a href="{:U('/member/common/login')}">登录 /</a></span>
+                       <span> <a href="{:U('/member/common/register')}" >注册</a></span>
+                    </if>
+					</div>
+
+				</div>
+			</div>
+			<div class="mynav">
+				<div class="box clearfix">
+					<div class="navlogo fl">
+						<img src="/public/web/img/guanyu/logo2.png" />
+					</div>
+					<div class="navbox fl">
+						<span><a href="/">首页</a></span>
+						<span>		<a href="/invest/index.html">项目浏览</a></span>
+						<span><a href="/article/news_list.html">最新资讯</a></span>
+						<span>  	<a href="/shop">积分商城</a></span>
+						<span><a href="{:U('/article/video')}">视频直播</a></span>
+						<span ><a href="/article/index/cid/39.html">活动公告</a></span>
+						<span><a href="/article/index/cid/21.html">关于我们</a></span>
+						<span   class="on"><a href="{:U('/member/index/index')}">会员中心</a></span>
+					</div>
+					<div class="l_myxm fr">
+							<a href="/Borrow/index">发起项目</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--内容部分-->
+		<div class="box navls">
+			<span><a href="##">会员中心</a></span>
+			<span>&gt;</span>
+			<span><a href="##">我的充值</a></span>
+
+		</div>
+
+		<div class="box clearfix">
+			<div class="Lxlbox">
+				<div class="lst1">
+					<p class="p1">
+						<span>账户安全级别</span>
+						<span class="bfb">75%</span>
+					</p>
+					<div class="p2">
+						<p class="p3"></p>
+					</div>
+
+				</div>
+				<div class="list2box">
+					<div class="lst2">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/zhanghu.png" />
+							<span>账户中心</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>账户信息</li>
+								</a>
+								<a href="##">
+									<li>我的充值</li>
+								</a>
+								<a href="##">
+									<li>我的提现</li>
+								</a>
+								<a href="##">
+									<li>我的红包</li>
+								</a>
+								<a href="##">
+									<li>收支明细</li>
+								</a>
+								<a href="##">
+									<li>积分明细</li>
+								</a>
+							</ul>
+						</div>
+					</div>
+					<div class="lst2 ">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/wode.png" />
+							<span>我的项目</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>联合养殖</li>
+								</a>
+								<a href="##">
+									<li>联合销售</li>
+								</a>
+								<a href="##">
+									<li>共建项目</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+
+					<div class="lst2">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/faqi.png" />
+							<span>发起管理</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>发起项目</li>
+								</a>
+								<a href="##">
+									<li>项目收益</li>
+								</a>
+								<a href="##">
+									<li>债权转让</li>
+								</a>
+								<a href="##">
+									<li>放款记录</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+					<div class="lst2 ">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/Settings.png" />
+							<span>个人设置</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>个人资料</li>
+								</a>
+								<a href="##">
+									<li>安全信息</li>
+								</a>
+								<a href="##">
+									<li>收货地址</li>
+								</a>
+								<a href="##">
+									<li>银行卡</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+					<div class="lst2">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/xiaoxi.png" />
+							<span>消息中心</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>站内通知</li>
+								</a>
+								<a href="##">
+									<li>项目动态</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+					<div class="lst2">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/yaoqing.png" />
+							<span>我的邀请</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>邀请记录</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+					<div class="lst2">
+						<div class="p1" data-a="1">
+							<img src="/public/web/img/huiyuan/jifen.png" />
+							<span>积分兑换</span>
+							<span class="smp1">&gt;</span>
+						</div>
+						<div class="p2">
+							<ul>
+								<a href="##">
+									<li>兑换记录</li>
+								</a>
+
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="tabvbox">
+				<div class="tabv clearfix">
+					
+					<div class="on"><span>个人资料</span></div>
+					
+					
+				</div>
+				<div class="tabv2box">
+				
+					<div class="tabv2 show">
+					   <div class="myzil">
+					   	<ul>
+					   		<li>
+					   			<span>会员名称： </span><input type="text" name="" id="" value="" />
+					   		</li>
+					   		<li>
+					   			<span>真实姓名： </span><input type="text" name="" id="" value="" />
+					   		</li>
+					   		<li>
+					   			<span>身份证号： </span><input type="text" name="" id="" value="" />
+					   		</li>
+					   		<li>
+					   			<span>性别： </span><label><input name="sex" type="radio" value="" />男 </label> 
+                <label><input name="sex" type="radio" value="" />女 </label> 
+					   		</li>
+					   		<li>
+					   			<span>类型： </span><label><input name="leix" type="radio" value="" />投资者 </label> 
+                <label><input name="leix" type="radio" value="" />创业者</label> 
+					   		</li>
+					   		
+				<!--投资类型-->
+				<div class="touzilei oz clearfix">
+					<p>符合下列条件之一的自然人投资者</p>
+					<div>
+				<label><input name="toz" type="radio" value="" />我的金融资产超过100万元 </label> 
+                <label><input name="toz" type="radio" value="" />我的年收入超过100万元</label> 
+                <label><input name="toz" type="radio" value="" />我是专业的风险投资人 </label> 
+                <label><input name="toz" type="radio" value="" />我不符合上述任一条件</label> 
+
+					</div>
+                <button class="bcxsz">保存新设置</button>
+					
+				</div>
+					   	</ul>
+					   </div>
+					   
+                    <!--头像上传-->
+					   <div class="myziltou">
+					   	<h3>个人头像</h3>
+					   	<p>
+                        <div id="localImag"><img id="preview" src='/public/web/img/huiyuan/tu.png'   /></div>
+                        </p>
+                        
+                        <p class="p2"><input type=file  name="doc" id="doc" onchange="javascript:setImagePreview();"><button class="bcxsz">选择图片</button> </p>
+
+					   	<p class="p1">
+					   		
+					   		支持jpg，jpeg，png，gif格式，<br />
+大小不超过20.00MB。<br />
+推荐尺寸：760*530px
+					   	</p>	   
+        
+					   </div>
+						
+					</div>
+                      
+                      	
+				</div>
+			</div>
+		</div>
+
+		<!--底部-->
+		<div id="addd">
+			<div class="l_banquan clearfix">
+				<div class="btm_logo">
+					<img src="/public/web/img/shouye/logo1.png" />
+				</div>
+				<div class="btm_text">
+					<div class="btm_text1">
+						<span><a href="##">服务条款</a></span>
+						<span>|</span>
+						<span><a href="##">服务介绍</a></span>
+						<span>|</span>
+						<span><a href="##">隐私策略</a></span>
+						<span>|</span>
+						<span><a href="##">关于我们</a></span>
+						<span>|</span>
+						<span><a href="##">撰写指南</a></span>
+
+					</div>
+					<div>铭万众筹-日照铭万网络科技有限公司版权所有</div>
+					<div>鲁ICP备17003630号-1</div>
+					<div class="btm_bot"><img src="/public/web/img/shouye/btmico.png" /> 鲁公网安备 37110302000118号</div>
+				</div>
+				<div class="btm_erwei fr">
+					<div class="erw">
+						<img src="/public/web/img/shouye/erwei-w.png" alt="" />
+						<div>
+							扫码关注铭万网
+						</div>
+					</div>
+					<div class="erw">
+						<img src="/public/web/img/shouye/erwei-app.png" alt="" />
+						<div>
+							扫码下载铭万app
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</body>
+	<script>
+		 function setImagePreview() {
+                var docObj=document.getElementById("doc");
+       
+                var imgObjPreview=document.getElementById("preview");
+                        if(docObj.files &&    docObj.files[0]){
+                                //火狐下，直接设img属性
+                                imgObjPreview.style.display = 'block';
+                                imgObjPreview.style.width = '100px';
+                                imgObjPreview.style.height = '100px';                    
+                                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+         
+              //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+              imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+         
+                        }else{
+                                //IE下，使用滤镜
+                                docObj.select();
+                                var imgSrc = document.selection.createRange().text;
+                                var localImagId = document.getElementById("localImag");
+                                //必须设置初始大小
+                                localImagId.style.width = "300px";
+                                localImagId.style.height = "120px";
+                                //图片异常的捕捉，防止用户修改后缀来伪造图片
+        try{
+                                        localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                                        localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                                }catch(e){
+                                        alert("您上传的图片格式不正确，请重新选择!");
+                                        return false;
+                                }
+                                imgObjPreview.style.display = 'none';
+                                document.selection.empty();
+                        }
+                        return true;
+                }
+	</script>
+
+</html>

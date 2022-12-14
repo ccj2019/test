@@ -1,0 +1,100 @@
+<include file="Public:header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/web/css/G.css" />
+<style type="text/css">
+	body {
+		background: #f8f8f8;
+	}
+</style>
+<!--内容部分-->
+<div class="wqiji">	
+	<div class="box">
+		<div class="aist">	
+			<h3>我有一个梦想</h3>
+			<h4>有创意项目，有创意产品</h4>
+			<button type="button" id="str">我有一个梦想>></button>
+			<p>
+			<script>
+				$("#str").click(function(){
+		  			if($("#male").is(':checked')){
+		  				window.location.href="/Borrow/post";  
+		  			}else{
+		  				layer.alert("你未同意协议")
+		  			}
+				});
+			</script>
+			<input type="checkbox" name="sex" id="male" />
+			<!--<label for="male"><a  href="/article/index/cid/22/id/1721.html">同意《日照铭万网络科技有限公司服务条款》</a></label>-->
+            <label><a href="javascript:void (0);" id="fengxian">同意《日照铭万网络科技有限公司服务条款》</a></label>
+			</p>
+		</div>		
+	</div>
+
+</div>
+<div class="box fZzc">
+	<h3>什么人可以发起众筹？</h3>
+	<p>	已满18周岁有完全民事行为能力的人、未满18周岁请由监护人协助提供相关资料。 中华人民共和国公民，或能提供长期在中国居住证明的非中华人民共和国公民，并在网站需要时，按照网站要求，提供必要的身份认证和资质认证，根据项目内容，包括但不限于：身份证、护照、学历证明等。 拥有能够在中国地区接收人民币汇款的银行卡或者支付宝账户。</p>
+		
+</div>
+
+<div class="fengxianbox">
+    <div class="f-close"><img src="__PUBLIC__/web/img/close.png" alt=""></div>
+    <div class="f-title">《日照铭万网络科技有限公司服务条款》</div>
+    <div class="f-content">
+        {$article.type_content}
+    </div>
+</div>
+<style>
+    body>div{
+        min-width: auto;
+    }
+</style>
+<style type="text/css">
+    .fengxianbox {
+        display: none;
+        position: relative;
+    }
+    .fengxianbox .f-close {
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        cursor: pointer;
+    }
+    .fengxianbox .f-title {
+        font-size: 20px;
+        color: #ff7800;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .fengxianbox .f-content {
+        width: 1000px;
+        height: 415px;
+        padding: 0 20px 20px 20px;
+        font-size: 14px;
+        overflow: auto;
+    }
+    .company{
+        display: none;
+    }
+    .layui-layer-page .layui-layer-content {
+        overflow: inherit!important;
+    }
+</style>
+<script type="text/javascript">
+    $('#fengxian').click(function(){
+        var fengxian = layer.open({
+            type: 1,
+            title: '',
+            area: ['1040px', '505px'],
+            closeBtn: 0,
+            shadeClose: true,
+            shade: 0.8,
+            content: $('.fengxianbox')
+        })
+        $('.f-close').on('click', function() {
+            layer.close(fengxian)
+        })
+    })
+</script>
+
+	<!--底部-->
+<include file="Public:footer"/>

@@ -1,0 +1,89 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+  var delUrl = '__URL__/doDel';
+  var addUrl = '__URL__/add';
+  var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">还款中的众筹</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选众筹" style="search_action" />
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+  <th class="line_l">用户名</th>
+    <th class="line_l">标题</th>
+    <th class="line_l">众筹金额</th>
+    <th class="line_l">众筹手续费</th>
+
+      <th class="line_l">赠品管理</th>
+
+
+    <th class="line_l">操作</th>
+  </tr>
+<if condition="$isindex neq 1">
+  <volist id="vo" name="list">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+    <td><htmlA:user id="vo.mid" uname="vo.user_name" /></td>
+        <td>
+    <a href="/invest/detail/id/{$vo.id}.html" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,22}</a>
+    </td>
+        <td>{$vo.borrow_money}</td>
+        <td>{$vo.borrow_fee}</td>
+
+          <if condition="$vo.is_huodong eq 1" >
+              <td><a href="__URL__/../zporder/index?id={$vo['id']}">自提</a>/<a href="__URL__/../zporder/zindex?id={$vo['id']}">折现</a></td>
+              <else/>
+              <td> ----- </td>
+          </if>
+
+
+
+          <td><a href="__URL__/view?id={$vo['id']}">投标记录</a>
+         | <!-- <a href="__URL__/vote?id={$vo['id']}">投票管理</a> | --> <a href="__URL__/edit?id={$vo['id']}">项目跟踪</a>&nbsp;<!-- |&nbsp;<a href="__URL__/dorepayment?id={$vo['id']}">回报计划</a> --></td>
+      </tr>
+  </volist>
+  <else/>
+   <volist id="vo" name="list1">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$vo.id}</td>
+    <td><htmlA:user id="vo.mid" uname="vo.user_name" /></td>
+        <td>
+    <a href="/invest/detail/id/{$vo.id}.html" title="{$vo.borrow_name}" target="_blank">{$vo.borrow_name|cnsubstr=###,22}</a>
+    </td>
+         <td>{$vo.borrow_money}</td>
+      
+        <td>{$vo.borrow_fee}</td>
+         <td>{$vo.deadline|date="Y-m-d H:i",###}</td>
+          <td><a href="__URL__/view?id={$vo['id']}">投标记录</a>&nbsp;|&nbsp;
+          <!-- <a href="__URL__/vote?id={$vo['id']}">投票管理</a> |  -->
+          <a href="__URL__/edit?id={$vo['id']}">项目跟踪</a> | 
+        <!-- <a href="__URL__/dorepayment?id={$vo['id']}">回报计划</a> --></td>
+      </tr>
+  </volist>
+  </if>
+  </table>
+  </div>
+  
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+  <htmlA:commonBtn type="href" action="__URL__/doWeek_1?time=' '" value="一周内到期标"/>
+    <htmlA:commonBtn type="jsfun" action="dosearch();" value="搜索/筛选众筹" style="search_action" />
+  </div>
+</div>
+<include file="Public:_footer" />

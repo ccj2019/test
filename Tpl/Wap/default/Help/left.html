@@ -1,0 +1,9 @@
+<div class="box_left">
+  <ul>
+    <volist name="leftlist" id="vl">
+      <li><a 
+        <if condition="$vl.id eq $cid">class="sel"</if>
+        href="{$vl.turl}">{$vl.type_name}</a></li>
+    </volist>
+  </ul>
+</div>

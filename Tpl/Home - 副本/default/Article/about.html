@@ -1,0 +1,266 @@
+<include file="default:Public:header" />
+<style type="text/css">
+  	.swiper-container {
+    width: 1060px;
+	}  
+  	.swiper-button-prev{
+  		background: url(__PUBLIC__/web/img/guanyu/le.png) no-repeat;
+  		width: 50px;
+  		height: 50px;
+  		outline: none;
+  	}
+  	.swiper-button-next{
+  		background: url(__PUBLIC__/web/img/guanyu/le1.png) no-repeat;
+  		width: 50px;
+  		height: 50px;
+  		outline: none;
+  	}
+</style>
+<!--图片-->
+<div class="l_banner">
+	<img src="__PUBLIC__/web/img/guanyu/11.png" alt="" />
+</div>
+<!--公司简介-->
+<div class="gsjj">
+	<div class="box">
+		<div class="tabme">
+			<span class="on">公司简介</span>
+			<span><a href="#div1">资质证件</a></span>
+			<span><a href="#div2">法律保障条例</a></span>
+			<span><a href="#div3">联系我们</a></span>
+		</div>
+	</div>
+</div>
+		
+<!--背景-->
+<div class="l_usbeij">
+	<div class="box clearfix" >
+		<div class="l_gstop clearfix">
+			<span>公司简介</span>
+			<span>company profile</span>
+			<span></span>
+		</div>
+		<div class="l_tab1 clearfix">
+	<!--	<style>
+		.l_tab1 >.fl>img{
+			width: 500px; height: 250px;  
+			/*margin-left: 32px;margin-top: 65px;*/
+		}
+		</style>
+		<volist name=":get_ad(38)" id='voa' >  
+                     <img src="/{$voa.img}" style="  width: 500px; height: 250px;  margin-left: 32px;margin-top: 65px;"/> 
+	        	</volist> 
+		-->
+		<div class="fl " style="background:none; text-align:center;">
+<img src="/Style/upload/image/20181218/20181218102344_75166.jpg"  style="height: 100%;" /> <!-- style="    width: 80%;  height: 66%;  margin-left: 7%; margin-top: 10%;" -->
+				</div> 
+			<div class="fl">
+				{$about.type_content}
+			</div>
+		</div>
+		<div class="l_gstop clearfix">
+			<span>资质证件  </span>
+			<span>Credentials</span>
+			<span></span>
+		</div>
+		<!--轮播-->
+		<div class="l_lunbo" id="div1">
+			<div class="swiper-container tz-gallery">
+			    <div class="swiper-wrapper ">
+				
+			    	<volist name=":getArtList(521,20)" id="vo">
+				        <div class="swiper-slide" style="margin-right: 10px;">
+				              <a class="lightbox" href="/{$vo.art_img}">
+				        	<div class="l_huihui" style="width: 260px;">
+				        	  
+		                      <img src="/{$vo.art_img}" alt="Park">
+		                
+				        	 
+				        	</div>
+				        	</a>
+				        </div>
+			        </volist>
+			    </div>
+			</div>
+		   	<!-- 如果需要导航按钮 -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
+		</div>
+		<div class="l_gstop clearfix" id="div2"style="margin-top:60px">
+			<span>法律保障条例</span>
+			<span>Regulations</span>
+			<span></span>
+		</div>
+		
+		<!--法律保障条例-->
+		<div class="l_bztl clearfix">
+			<volist name=":getArtList(517,3)" id="vo">
+			<div>
+			<p class="p1">{$vo.title}		<!--<a href="/article/index/cid/{$vo.type_id}/id/{$vo.id}.html"></a> --></p>
+				<p class="p2">{$vo.art_content|trim=###|clearHtml=###|ReStrLen=###,60}	<!--<a href="/article/index/cid/{$vo.type_id}/id/{$vo.id}.html"></a> --></p>
+			<p class="p3"></p>	<!--	<a href="/article/index/cid/{$vo.type_id}/id/{$vo.id}.html"></a> -->
+			
+			</div>
+			</volist>
+		</div>
+		<div id="" style="height: 160px;"></div>
+		<div class="l_gstop clearfix" id="div3">
+			<span>联系我们</span>
+			<span>Contact</span>
+			<span></span>
+		</div>
+		<div class="mapbox clearfix">
+		<style>
+		#allmap #BMapLib_SearchInfoWindow0 img{
+		    width: 23px !important;
+			height: 39px !important;
+		}
+		</style>
+			<div class="map" id="allmap">
+				 
+			</div>
+			<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=DD279b2a90afdf0ae7a3796787a0742e"></script>
+	<script type="text/javascript" src="https://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="https://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+ 
+
+	 
+<script type="text/javascript">
+	// 百度地图API功能
+    var map = new BMap.Map('allmap');
+    var poi = new BMap.Point(119.555763,35.392227);
+    map.centerAndZoom(poi, 16);
+    map.enableScrollWheelZoom();
+
+    var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+                    '<img src="../img/baidu.jpg" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+                    '地址：山东省日照市海滨二路156号<br/>电话：400-110-0216<br/>简介：日照铭万网络科技有限公司。' +
+                  '</div>';
+
+    //创建检索信息窗口对象
+    var searchInfoWindow = null;
+	searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+			title  : "日照铭万网络科技有限公司",      //标题
+			width  : 290,             //宽度
+			height : 105,              //高度
+			panel  : "panel",         //检索结果面板
+			enableAutoPan : true,     //自动平移
+			searchTypes   :[
+				BMAPLIB_TAB_SEARCH,   //周边检索
+				BMAPLIB_TAB_TO_HERE,  //到这里去
+				BMAPLIB_TAB_FROM_HERE //从这里出发
+			]
+		});
+    var marker = new BMap.Marker(poi); //创建marker对象
+    marker.enableDragging(); //marker可拖拽
+    marker.addEventListener("click", function(e){
+	    searchInfoWindow.open(marker);
+    })
+    map.addOverlay(marker); //在地图中添加marker
+	//样式1
+	var searchInfoWindow1 = new BMapLib.SearchInfoWindow(map, "信息框1内容", {
+		title: "信息框1", //标题
+		panel : "panel", //检索结果面板
+		enableAutoPan : true, //自动平移
+		searchTypes :[
+			BMAPLIB_TAB_FROM_HERE, //从这里出发
+			BMAPLIB_TAB_SEARCH   //周边检索
+		]
+	});
+	function openInfoWindow1() {
+		searchInfoWindow1.open(new BMap.Point(116.319852,40.057031));
+	}
+	 
+	function openInfoWindow3() {
+		searchInfoWindow3.open(new BMap.Point(116.328852,40.057031)); 
+	}
+</script>
+			
+			<div class="map1">	
+			    <img src="__PUBLIC__/web/img/guanyu/logo3.png" alt="" />
+			    <p class="p1">{$glo.web_name}</p>
+			    <p>服务电话：{$glo.botttom_phone}</p>
+			    <p>公司地址：{$glo.botttom_addr}</p>
+			</div>
+		</div>	
+	</div>
+	<!--联系我们-->
+</div>
+<include file="default:Public:footer" />
+<script>
+baguetteBox.run('.tz-gallery');
+	var mySwiper = new Swiper ('.swiper-container', {
+   
+    autoplay:{
+    delay: 2500,
+    disableOnInteraction: false,
+   },
+	slidesPerView: 4,//一行显示3个   
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })      
+  
+</script>
+   <script type="text/javascript" charset="utf-8">
+    window.onload = function() {
+            var oImg = document.getElementsByTagName("img")[0];
+            function fnWheel(obj, fncc) {
+                obj.onmousewheel = fn;
+                if (obj.addEventListener) {
+                    obj.addEventListener('DOMMouseScroll', fn, false);
+                }
+
+                function fn(ev) {
+                    var oEvent = ev || window.event;
+                    var down = true;
+
+                    if (oEvent.detail) {
+                        down = oEvent.detail > 0
+                    } else {
+                        down = oEvent.wheelDelta < 0
+                    }
+
+                    if (fncc) {
+                        fncc.call(this, down, oEvent);
+                    }
+
+                    if (oEvent.preventDefault) {
+                        oEvent.preventDefault();
+                    }
+
+                    return false;
+                }
+
+
+            };
+            fnWheel(oImg, function(down, oEvent) {
+
+                var oldWidth = this.offsetWidth;
+                var oldHeight = this.offsetHeight;
+                var oldLeft = this.offsetLeft;
+                var oldTop = this.offsetTop;
+
+                var scaleX = (oEvent.clientX - oldLeft) / oldWidth; //比例
+                var scaleY = (oEvent.clientY - oldTop) / oldHeight;
+
+                if (down) {
+                    this.style.width = this.offsetWidth * 0.9 + "px";
+                    this.style.height = this.offsetHeight * 0.9 + "px";
+                } else {
+                    this.style.width = this.offsetWidth * 1.1 + "px";
+                    this.style.height = this.offsetHeight * 1.1 + "px";
+                }
+
+                var newWidth = this.offsetWidth;
+                var newHeight = this.offsetHeight;
+
+                this.style.left = oldLeft - scaleX * (newWidth - oldWidth) + "px";
+                this.style.top = oldTop - scaleY * (newHeight - oldHeight) + "px";
+            });
+        }
+     
+    </script> 
+</html>

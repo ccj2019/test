@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html style="height: 100vh;">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+	  <script type="text/javascript">document.documentElement.style.fontSize = document.documentElement.clientWidth / 750*100 + 'px';</script>	 
+	</head>
+
+	<script type="text/javascript" src="/Public/wap/js/jquery-1.11.3.min.js"></script>
+
+<?php $times= time();?>
+	
+<style>
+
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, header, hgroup, nav, section, article, aside, footer, figure, figcaption, menu, button { margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 {font-size:inherit;font-weight: normal;}
+    table {border-collapse: collapse;border-spacing: 0;}
+    fieldset,img { border: 0; }
+    li {list-style: none;}
+    input,textarea,select {font-family:inherit;font-size:inherit; font-weight:inherit;}
+    button,input[type="text"]{border: none; background: none;-webkit-appearance:none;outline:none;font-size: .32rem}
+    button,input{border: none; background: none;-webkit-appearance:none;outline:none;font-size: .32rem}
+    a { -webkit-touch-callout:none;text-decoration: none;color: #0079ff; outline:none;}
+    em,i {font-style: normal;}
+    ::-webkit-input-placeholder {color:#999;}
+    body{ width:7.5rem;background:#f7f7f7 url("/Public/zpublic/img/log.png")no-repeat;background-size:100%;}
+    .all{width: 5.9rem;margin:  5rem 0.4rem .28rem ;height:9.6rem;border-radius: .1rem;background: #ffffff;padding: 0 .4rem;}
+    .l-loginform{border-bottom: .01rem #d2d2d2 solid ;overflow: auto;padding-top: .6rem;padding-bottom: .3rem}
+    .l-loginform>span{height: .43rem;float: left;margin: 0;}
+
+    .l-loginform>span.aaa{margin-top: -.05rem;padding: .05rem 0;float: right;color:#3575ea;width: 1.6rem;height: .43rem;line-height: .43rem;font-size: .26rem;text-align: center;border-radius: .1rem;border: 1px solid;}
+    .l-loginform>input.yanzheng{width: 2.22rem}
+    .l-loginform>input{height: .43rem;line-height: .43rem;float: left;margin-left: .3rem}
+    .l-loginform>span>img{width: .35rem;height: .43rem;float:left;}
+    .l-loginform:last-of-type{border-bottom:0;padding-bottom:0;padding-top: .3rem}
+    .l-loginbtn{margin-top: .7rem;margin-bottom:.3rem;width: 5.9rem ;height:.9rem;text-align: center;color:#ffffff;font-size: .36rem; background: linear-gradient(to right, #0976ff , #1ebbff);border-radius: .5rem}
+    .clearfix{margin-bottom: 1rem}
+    .clearfix>p{width: 5rem;text-align: center;font-size:.25rem;color: #477bff;}
+    .clearfix>p>a{color: #477bff;font-size: .3rem;padding: 0 .4rem}
+    .dl{font-size: .22rem;color:#737373;text-align: center;letter-spacing: -.035rem;margin-bottom:.4rem}
+    .dl span{letter-spacing:.015rem;padding:0 .25rem;background: #ffffff;text-align: center}
+    .d2{border-bottom: 1px solid #d2d2d2;margin-top: -.55rem;}
+    .mass{margin-left: 2.17rem ;width: .65rem;height: .65rem}
+    button,input[type="text"]{border: none; background: none;-webkit-appearance:none;outline:none;font-size: .32rem}
+    button,input{border: none; background: none;-webkit-appearance:none;outline:none;font-size: .32rem}
+    #color-input-red +label{
+        display: block;
+        width: .25rem;
+        height: .25rem;
+        margin-top: -.018rem;
+        cursor: pointer;
+        position: absolute;
+        border-radius: .5rem;
+        background: #bbb;
+    }
+    #color-input-red:checked +label::before{
+        display: block;
+        content: "\2713";
+        text-align: center;
+        font-size: .16rem;
+        line-height: .25rem;
+        font-weight: 600;
+        color: white;
+        background: #2c86f0;
+        border-radius: .5rem;
+    }
+    .htong{font-size: .22rem; margin-top: -.05rem;color: #737373;    margin-left: .1rem;}
+
+.fengxianbox{
+    font-size: 0.28rem;
+    display: none;
+    padding: 0.2rem;
+    position: relative;
+    color: #737373;
+}
+.f-close{
+    position: absolute;
+    top:0.1rem;
+    right: -0.1rem;
+    color: #000;
+    cursor: pointer;
+}
+.f-close img{
+  width:0.3rem;
+  height:0.3rem;
+}
+.f-title{
+  text-align: center;
+  font-size: 0.32rem;
+  padding: 0.2rem 0rem;
+}
+.f-content{
+  line-height: 0.36rem;
+}
+
+</style>
+<body>
+<div class="all">
+    <form action="" method="post">
+
+        <div class="l-loginform">
+            <span><img src="/Public/zpublic/img/shouji.png"></span>
+            <input id="txtPhone" name="txtPhone" placeholder="输入手机号码"  datatype="m" bakajaxurl="/member/common/ckphone/" sucmsg="手机验证通过" nullmsg="输入手机号码" errormsg="手机格式不正确"  class="mem_spec109" /> 
+        </div>
+         <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <div class="l-loginform">
+            <span><img src="/Public/zpublic/img/dunpai.png"></span>
+            <input class="yanzheng mem_spec110" type="" id="codeid" name="codeid"  placeholder="请输入验证码">
+              <input id="mobile" name="mobile"class="mem_spec114" type="hidden" />
+            <span class="aaa" id="TencentCaptcha"  data-appid="2024559842"  data-cbfn="callback">获取验证码</span>
+        </div>
+
+        <div class="l-loginform">
+            <span><img src="/Public/zpublic/img/mima.png"></span>
+            <input  type="password" class="mem_spec109" id="txtPwd" name="txtPwd" placeholder="密码范围在4~16位之间"  nullmsg="密码范围在4~16位之间" datatype="*6-15" errormsg="密码范围在4~16位之间！" />
+        </div>
+        <div class="l-loginform">
+            <span><img src="/Public/zpublic/img/mima.png"></span>
+            <input type="password" id="txtRepwd" name="txtRepwd"  placeholder="确认您输入的密码"  class="mem_spec109"  nullmsg="您两次输入的账号密码不一致"   datatype="*" recheck="txtPwd" errormsg="您两次输入的账号密码不一致"/>
+        </div>
+ <input type="hidden" value="{$invite}" id="txtIncode" name="txtIncode"  />
+        <div class="l-loginform">
+            <span><img src="/Public/zpublic/img/duihua.png"></span>
+            <input  placeholder="邀请码（选填）" placeholder="请输入邀请码" name="invite" id="invite" value="{$invite}" />
+        </div>
+        <div class="l-loginform" style="position: relative;">
+            <input id="color-input-red" class="chat-button-location-radio-input" type="checkbox" name="zcchecked" value=""  checked="checked"/>
+            <label  for="color-input-red"></label ><a  href="javascript:;" id="fengxian"><p class="htong" style="float: left" >注册表示同意《铭万众筹注册协议》</p></a>
+        </div>
+        <button style="display: block;border: 0px;" class="l-loginbtn" onclick="return false;" id="Img12">注册</button>
+    </form>
+<script src="/Style/file/layer/layer.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/web/js/layer.js"></script>
+
+<div class="fengxianbox">
+  <div class="f-close">关闭<img src="__PUBLIC__/web/img/close.png" alt=""></div>
+  <div class="f-title">《日照铭万网络科技有限公司服务条款》</div>
+  <div class="f-content">
+  {$article.type_content}
+  </div>
+</div> 
+
+</body>
+	
+</html>
+<?php
+	//var_dump(isset($reg_code_time),empty($reg_code_time));
+if(isset($reg_code_time)&&!empty($reg_code_time)){
+echo "<script type='text/javascript'>var zz=".$reg_code_time." </script>";
+echo "<script type='text/javascript'>var aa=".time()." </script>";
+}else{
+echo "<script type='text/javascript'>var zz=0 </script>";
+echo "<script type='text/javascript'>var aa=60 </script>";
+}
+?>
+<!--<div style="clear:both;"></div>-->
+<!--< script type="text/javascript" src="/Public/default/Member/js/Validform_min.js">< /script>
+< script type="text/javascript" src="/Public/default/Member/js/reg.js">< /script> -->
+<script type="text/javascript">
+$('#fengxian').click(function(){
+    var fengxian = layer.open({
+      type: 1,
+      title: '',
+      area: ['96%', '80%'],
+      closeBtn: 0,
+      shadeClose: true,
+      shade: 0.8,
+      content: $('.fengxianbox')
+    })
+    $('.f-close').on('click', function() {
+      layer.close(fengxian)
+    })
+  })
+
+// alert(aa-zz);
+
+    	var vazvcode;
+            window.callback = function(res){ 
+              res=res; 
+                if(res.ret === 0){ 
+                     
+         $.ajax({
+
+             type: "POST",
+
+             url: "/wapmember/Common/curl",
+
+             data: {ticket:res.ticket, randstr:res.randstr},
+
+             dataType: "json",
+
+             success: function(data){ 
+                       
+                          //   $("#TencentCaptcha").val("验证通过");
+                            // $("#TencentCaptcha").css({"color":"#0af934"});
+                           vazvcode=1;
+                           zmembersuser()
+                        
+                          //    console.log(data);
+             }
+
+         }); 
+                }
+            }
+
+
+  $("#Img12").click(function() {
+    var user = $("#txtUser").val();
+    
+    var phone = $("#txtPhone").val();
+//        alert(phone)
+    var pass = $("#txtPwd").val();
+    var txtRepwd = $("#txtRepwd").val();
+    var codeid = $("#codeid").val();
+    var txtIncode = $("#txtIncode").val();
+    var invite = $("#invite").val();
+    if (phone=="") {
+         alert('手机号不能为空');
+        return false;
+    }
+    if (codeid=="") {
+       alert('验证码不能为空');
+        return false;
+    }
+    if (pass=="") {
+       alert('密码不能为空');
+        return false;
+    } 
+    var strlen = strLength(pass);
+    if (strlen < 4 || strlen>16) {
+       alert('密码长度请输入4-16位字符');
+        return false;
+    }
+    
+    if (txtRepwd=="") {
+       alert('确认密码不能为空');
+        return false;
+    }if (txtRepwd!=pass) {
+       alert('密码不一致');
+        return false;
+    }
+
+    if($('#color-input-red').is(':checked')===false){
+       alert('请勾选同意注册协议');
+        return false;
+    }
+   
+
+    $.ajax({
+      url: "/Wapmember/common/regaction/",
+      type: "post",
+      dataType: "json",
+      data: {"txtUser":phone,"txtPhone":phone,"txtPwd":pass,"code":codeid,'txtIncode':txtIncode,"invite":invite},
+      success: function(d) {
+        if(d.status == "c"){
+             alert(d.info);
+             return false;
+          }else if(d.status == "n"){
+             alert(d.info);
+             return false;
+          }
+          else{
+           alert(d.info,{icon: 1});
+           ///Wapmember/verify/index.html
+            window.location.href='/Wapmember/verify/index?show=1';
+            return false;
+          }
+      }
+    }); 
+  });   
+	
+	
+ function zmembersuser() { 
+    var phone = $("#txtPhone").val();
+
+    var user = $("#txtUser").val(); 
+    var pass = $("#txtPwd").val();
+    var txtRepwd = $("#txtRepwd").val();
+    var codeid = $("#codeid").val();
+    var txtIncode = $("#txtIncode").val();
+
+    if (phone=="") {
+         alert('手机号不能为空');
+        return false;
+    }
+
+ 
+   //  if (pass=="") {
+   //     alert('密码不能为空');
+   //      return false;
+   //  } 
+   //  var strlen = strLength(pass);
+   //  if (strlen < 4 || strlen>16) {
+   //     alert('密码长度请输入4-16位字符');
+   //      return false;
+   //  } 
+   // if (vazvcode==""||vazvcode==undefined||vazvcode==null) {
+   //       alert('图形验证码不能为空');
+   //      return false;
+  	// }
+      
+   //  if (txtRepwd=="") {
+   //     alert('确认密码不能为空');
+   //      return false;
+   //  }if (txtRepwd!=pass) {
+   //     alert('密码不一致');
+   //      return false;
+   //  } 
+     
+   	 settime() 
+     
+
+	  };
+  var zc=aa-zz;
+ var countdown=60
+  if(zc>=60){
+   countdown=60; 
+  }else{
+   countdown=60-(aa-zz); 
+        settime();
+  }
+ 
+//alert(countdown);
+//     var countdown=60; 
+     function settime() 
+        { 
+        	   var vazvcodez = $("#vazvcode{$times}").val(); 
+            var phone = $("#txtPhone").val();
+ 
+      if (countdown == 60)
+            {
+            	//alert(1);return;
+    $.ajax({
+      url: "/wapmember/common/sendcode/",
+      type: "post",
+      dataType: "json",
+      data: {"phone":phone,"vcode":vazvcodez},
+      success: function(d) {
+        if(d.status == "p"){
+            alert(d.info);
+            countdown=0;
+             return false;
+          }else if(d.status == "m"){
+            alert(d.info);
+            countdown=0;
+             return false;
+          }
+          else if(d.status == "f"){
+            alert(d.info);
+            countdown=0;
+             return false;
+          }
+          else if(d.status == "n"){
+            alert(d.info);
+            countdown=0;
+             return false;
+          } else if(d.status == "vfa"){
+			    alert(d.info);
+			     return false;
+		    }else{
+           alert(d.info,{icon: 1});
+            return false;
+          }
+      }
+    });
+      }
+            if (countdown == 0) 
+            { 
+                $("#TencentCaptcha").removeAttr("disabled");    
+                $("#TencentCaptcha").html("获取验证码"); 
+                countdown = 60; 
+            } 
+            else 
+            { 
+                $("#TencentCaptcha").attr("disabled","disabled");
+                $("#TencentCaptcha").html("重新发送(" + countdown + ")"); 
+                countdown--; 
+            } 
+            var dxtimer = setTimeout(function() { if (countdown == 60){clearTimeout(dxtimer);}else{settime();} },1000) 
+            }
+function strLength(as_str){
+    return as_str.replace(/[^\x00-\xff]/g, 'xx').length;
+}; 
+</script>
+
+
+
+
+
+
+
+
+
+
+
